@@ -80,6 +80,8 @@ class PlaneCandidate:
     semantic_confidence: float
     semantic_reason: str
     color: np.ndarray
+    source_pass: str = "plane_extraction"
+    extraction_details: Dict[str, Any] = field(default_factory=dict)
     inlier_indices: Optional[np.ndarray] = field(default=None, repr=False)
 
     def to_dict(self) -> Dict[str, Any]:
@@ -106,6 +108,8 @@ class PlaneCandidate:
             "semantic_confidence": float(self.semantic_confidence),
             "semantic_reason": self.semantic_reason,
             "preview_color": _float_list(self.color),
+            "source_pass": self.source_pass,
+            "extraction_details": self.extraction_details,
         }
 
     @classmethod
@@ -136,4 +140,6 @@ class PlaneCandidate:
             semantic_confidence=float(data["semantic_confidence"]),
             semantic_reason=str(data["semantic_reason"]),
             color=np.asarray(data["preview_color"], dtype=float),
+            source_pass=str(data.get("source_pass", "plane_extraction")),
+            extraction_details=dict(data.get("extraction_details", {})),
         )

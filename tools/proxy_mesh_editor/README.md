@@ -1,6 +1,6 @@
 # PGSR 평면 Proxy Mesh 기술 검증 도구
 
-PGSR의 삼각형 메시에서 큰 평면 후보를 찾고, 사람이 선택한 후보를 구멍 없는 사각형 OBJ로 바꾸는 **비화면 방식 Phase 1 도구**다. 자동 분류 결과는 제안일 뿐이며 최종 의미는 `selection`에서 사람이 지정한다.
+PGSR의 삼각형 메시에서 큰 평면 후보를 찾고, 사람이 선택한 후보를 구멍 없는 사각형 OBJ로 바꾸는 도구다. Phase 1의 일반 평면 추출과 Phase 1.5-A의 법선 분석·벽 전용 추출을 제공한다. 자동 분류 결과는 제안일 뿐이며 최종 의미는 `selection`에서 사람이 지정한다.
 
 ## 이번 단계에서 하는 일
 
@@ -105,6 +105,53 @@ objects/wall_000.obj
 
 통합 OBJ와 객체별 OBJ는 같은 좌표 문자열을 사용한다. 각 사각형은 꼭짓점 4개와 삼각형 2개이며, 삼각형 감김 방향은 저장된 법선과 일치한다.
 
+## Phase 1.5-A: 법선 분석
+
+일반 평면 추출과 같은 장면 로드·전처리를 거친 뒤, 점 법선과 높이 방향의 절댓값 내적을 분석한다.
+
+```bash
+conda run -n pgsr python -m tools.proxy_mesh_editor.main analyze-normals \
+  --mesh PGSR/output/pnu_classroom/mesh/tsdf_fusion_post.ply \
+  --reference-point-cloud PGSR/output/pnu_classroom/point_cloud/iteration_30000/point_cloud.ply \
+  --config tools/proxy_mesh_editor/configs/pnu_classroom.yaml \
+  --output outputs/proxy_mesh/pnu_classroom/normal_analysis
+```
+
+`abs(normal · up)`이 0에 가까울수록 벽과 같은 수직면이고, 1에 가까울수록 바닥·천장·책상 상판과 같은 수평면이다. 기준값별 PLY, 수평점 PLY, 히스토그램 CSV, 분석 JSON이 생성된다. 유효하지 않은 법선은 통계에 기록하되 미리보기에서는 제외한다.
+
+## Phase 1.5-A: 벽 전용 평면 추출
+
+벽 추출은 일반 RANSAC의 잔여점을 사용하지 않는다. 전처리 직후 원본 점구름에서 수직면 가능 점을 고른 뒤 별도 RANSAC을 실행한다.
+
+```bash
+conda run -n pgsr python -m tools.proxy_mesh_editor.main extract-walls \
+  --mesh PGSR/output/pnu_classroom/mesh/tsdf_fusion_post.ply \
+  --reference-point-cloud PGSR/output/pnu_classroom/point_cloud/iteration_30000/point_cloud.ply \
+  --config tools/proxy_mesh_editor/configs/pnu_classroom.yaml \
+  --output outputs/proxy_mesh/pnu_classroom/wall_extraction
+```
+
+검출된 평면의 법선도 다시 검사한다. 같은 RANSAC 평면에 속한 끊어진 연결 묶음은 설정에 따라 합칠 수 있지만, 서로 다른 벽 후보끼리는 합치지 않는다. 결과는 다음과 같다.
+
+```text
+wall_candidates.json
+wall_candidates_colored.ply
+wall_residual_points.ply
+wall_candidate_meshes/wall_000.ply ...
+```
+
+일반 후보와 벽 후보를 함께 내보내려면 선택 설정에 `wall_*` 후보를 넣고 다음처럼 실행한다.
+
+```bash
+conda run -n pgsr python -m tools.proxy_mesh_editor.main export \
+  --candidates outputs/proxy_mesh/pnu_classroom/phase1/plane_candidates.json \
+  --wall-candidates outputs/proxy_mesh/pnu_classroom/wall_extraction/wall_candidates.json \
+  --config path/to/selection.yaml \
+  --output outputs/proxy_mesh/pnu_classroom/phase1_5
+```
+
+기존 `--candidates`만 사용하는 방식도 그대로 동작한다.
+
 ## 설정할 때 주의할 값
 
 현재 PGSR 장면은 실제 미터로 보정되지 않았다. `*_ratio` 값은 **메시 경계 상자의 대각선 길이**를 기준으로 계산한다.
@@ -118,12 +165,17 @@ objects/wall_000.obj
 | `min_area_ratio` | 장면 대각선 제곱에 대한 최소 사각형 면적 비율 |
 | `lower/upper_percentile` | 소수 이상점 때문에 사각형이 과도하게 커지는 것을 막는 범위 |
 | `margin_ratio` | 잘린 경계 바깥으로 추가할 여유 비율 |
+| `normal_analysis.thresholds` | 수직면 가능 점 미리보기를 만들 절댓값 내적 기준 목록 |
+| `wall_extraction.normal_filter.point_normal_max_up_dot` | 벽 RANSAC에 보낼 점 법선의 최대 절댓값 내적 |
+| `wall_extraction.ransac.plane_normal_max_up_dot` | 검출된 평면을 벽으로 승인할 최대 절댓값 내적 |
+| `wall_extraction.components.min_vertical_span_ratio` | 연결 묶음이 가져야 할 최소 수직 길이의 장면 높이 비율 |
 
 `pnu_classroom.yaml`은 넓은 바닥 후보의 법선과 카메라 높이 변화가 가장 작아지는 방향을 함께 확인해, `-Y`에서 약 7도 기울어진 방향을 위쪽으로 설정했다. 이는 장면별 설정이며 다른 장소에 그대로 적용하면 안 된다.
 
 ## 현재 한계
 
 - 같은 평면 위에 떨어져 있는 여러 물체가 있으면 하나의 큰 사각형으로 합쳐질 수 있다.
+- 벽 전용 추출에서도 같은 방향의 평행한 표면이 여러 후보로 나뉠 수 있다. 후보끼리 합치거나 모서리를 맞추는 일은 이후 단계다.
 - `floor`, `wall`, `ceiling`은 법선과 장면 높이만 사용한 제안이다.
 - 사각형은 의도적으로 구멍을 막으므로, 문처럼 실제로 통과 가능한 구간은 이후 편집 단계에서 별도 처리해야 한다.
 - 좌표와 크기는 원본 장면 단위를 유지한다. Sionna RT 전에 실제 미터 크기와 축 방향을 다시 검증해야 한다.
@@ -133,5 +185,6 @@ objects/wall_000.obj
 Open3D 없이도 핵심 계산과 OBJ 형식을 검사할 수 있다.
 
 ```bash
-python -m pytest -q tools/proxy_mesh_editor/tests
+conda run -n pgsr python -m pip install -r tools/proxy_mesh_editor/requirements-test.txt
+conda run -n pgsr python -m pytest -q tools/proxy_mesh_editor/tests
 ```

@@ -4,6 +4,7 @@
 |---|---|
 | 고정 ESP32 노드 | 실제 AP RSSI 측정 및 MQTT 전송 |
 | PGSR | Gaussian Scene, Surface Mesh, Unbiased Depth 후보 생성 |
+| Proxy Mesh Editor | 일반 평면과 벽 전용 후보를 분리 추출하고 선택 후보를 단순 OBJ로 변환 |
 | Blender 등 Mesh 도구 | Mesh 정리 및 주요 재질 그룹 수동 분리 |
 | Sionna RT | Mesh 기반 단일 높이 Radio Map 사전 계산 |
 | SIBR | Fork하여 확장할 3DGS 실시간 Viewer 기반 |
@@ -48,6 +49,8 @@
 Sionna RT는 실제 RSSI 측정 파이프라인을 대체하는 것이 아니라, 실제 공간의 기하 구조를 반영한 전파 분포를 계산하는 모듈로 사용한다.
 
 PGSR은 실시간 화면용 Gaussian Scene과 전파 계산·가림 판정용 Surface Mesh를 함께 생성한다. 추출된 Mesh는 Blender 등에서 정리하고, 한 개의 고정 실내 공간에 필요한 주요 구조만 3~5개 재질 그룹으로 수동 분리한다. 자동 Material Segmentation은 최소 구현 범위에 포함하지 않는다.
+
+Proxy Mesh Editor의 벽 추출은 일반 평면 추출 잔여점이 아니라 전처리 원본에서 독립적으로 실행한다. 점 법선 필터와 벽 평면 재검사로 후보를 만들되, 후보 사이의 병합·모서리 맞춤·방수 처리는 이 단계에서 수행하지 않는다.
 
 실시간 Viewer는 공식 SIBR Real-time Viewer를 Fork하여 확장하는 방식을 우선 검증한다. 기존 Gaussian Renderer와 Camera 구조를 유지한 채 Heatmap Plane, PGSR Mesh Depth-only Pass, UDP Pose Receiver, Offscreen Framebuffer, JPEG Streaming 모듈을 추가한다.
 

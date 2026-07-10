@@ -52,6 +52,46 @@ DEFAULT_CONFIG: Dict[str, Any] = {
             "max_nn": 30,
         },
     },
+    "normal_analysis": {
+        "thresholds": [0.25, 0.35, 0.50],
+        "histogram_bins": 50,
+        "horizontal_min_up_dot": 0.85,
+    },
+    "wall_extraction": {
+        "enabled": True,
+        "normal_filter": {
+            "enabled": True,
+            "point_normal_max_up_dot": 0.35,
+        },
+        "ransac": {
+            "distance_threshold": None,
+            "distance_threshold_ratio": 0.001,
+            "ransac_n": 3,
+            "num_iterations": 3000,
+            "max_planes": 12,
+            "max_attempts": 60,
+            "min_inliers": 300,
+            "min_inlier_ratio": 0.002,
+            "plane_normal_max_up_dot": 0.25,
+            "max_consecutive_small_planes": 5,
+        },
+        "components": {
+            "enabled": True,
+            "eps": None,
+            "eps_ratio": 0.015,
+            "min_points": 10,
+            "merge_valid_components": True,
+            "min_vertical_span": None,
+            "min_vertical_span_ratio": 0.20,
+        },
+        "meshing": {
+            "lower_percentile": 1.0,
+            "upper_percentile": 99.0,
+            "margin_ratio": 0.02,
+            "min_area": None,
+            "min_area_ratio": 0.00075,
+        },
+    },
     "plane_extraction": {
         "distance_threshold": None,
         "distance_threshold_ratio": 0.001,
@@ -59,8 +99,8 @@ DEFAULT_CONFIG: Dict[str, Any] = {
         "num_iterations": 1000,
         "max_planes": 20,
         "max_attempts": 40,
-        "min_inliers": 1000,
-        "min_inlier_ratio": 0.01,
+        "min_inliers": 800,
+        "min_inlier_ratio": 0.005,
         "min_area": None,
         "min_area_ratio": 0.002,
         "stop_remaining_ratio": 0.05,
@@ -131,6 +171,68 @@ def _require_positive(config: Dict[str, Any], path: str, allow_zero: bool = Fals
         raise ConfigError("{} 값은 {} 수여야 합니다.".format(path, relation))
 
 
+def _value_at(config: Dict[str, Any], path: str) -> Any:
+    value: Any = config
+    for part in path.split("."):
+        value = value[part]
+    return value
+
+
+def _require_positive_integer(config: Dict[str, Any], path: str) -> None:
+    value = _value_at(config, path)
+    if isinstance(value, bool) or not isinstance(value, (int, np.integer)) or int(value) <= 0:
+        raise ConfigError("{} 값은 양의 정수여야 합니다.".format(path))
+
+
+def _require_boolean(config: Dict[str, Any], path: str) -> None:
+    if not isinstance(_value_at(config, path), bool):
+        raise ConfigError("{} 값은 true 또는 false여야 합니다.".format(path))
+
+
+def _require_probability(config: Dict[str, Any], path: str) -> None:
+    value = float(_value_at(config, path))
+    if not np.isfinite(value) or not 0.0 <= value <= 1.0:
+        raise ConfigError("{} 값은 0과 1 사이여야 합니다.".format(path))
+
+
+def _validate_absolute_ratio(
+    config: Dict[str, Any], absolute_path: str, ratio_path: str
+) -> None:
+    """절대값을 우선하며, 계산에 쓰일 값이 양수가 되도록 검사한다."""
+
+    absolute = _value_at(config, absolute_path)
+    ratio = float(_value_at(config, ratio_path))
+    if not np.isfinite(ratio) or ratio < 0.0:
+        raise ConfigError("{} 값은 0 이상이어야 합니다.".format(ratio_path))
+    if absolute is not None:
+        absolute_value = float(absolute)
+        if not np.isfinite(absolute_value) or absolute_value <= 0.0:
+            raise ConfigError("{} 값은 0보다 커야 합니다.".format(absolute_path))
+    elif ratio <= 0.0:
+        raise ConfigError(
+            "{}가 null이면 {} 값은 0보다 커야 합니다.".format(
+                absolute_path, ratio_path
+            )
+        )
+
+
+def format_threshold_token(value: float) -> str:
+    """법선 기준값을 충돌 없이 파일명에 쓸 문자열로 바꾼다."""
+
+    number = float(value)
+    if not np.isfinite(number) or not 0.0 <= number <= 1.0:
+        raise ConfigError("법선 기준값은 0과 1 사이여야 합니다.")
+    if number == 0.0:
+        number = 0.0
+    text = np.format_float_positional(number, unique=True, trim="-")
+    if "." not in text:
+        text = text + ".00"
+    else:
+        integer, fraction = text.split(".", 1)
+        text = integer + "." + fraction.ljust(2, "0")
+    return text.replace(".", "_")
+
+
 def validate_config(config: Dict[str, Any]) -> Dict[str, Any]:
     normalize_vector(config["scene"]["up_vector"], "scene.up_vector")
 
@@ -155,14 +257,66 @@ def validate_config(config: Dict[str, Any]) -> Dict[str, Any]:
         _require_positive(config, path)
 
     for path in (
+        "normal_analysis.histogram_bins",
+        "wall_extraction.ransac.ransac_n",
+        "wall_extraction.ransac.num_iterations",
+        "wall_extraction.ransac.max_planes",
+        "wall_extraction.ransac.max_attempts",
+        "wall_extraction.ransac.min_inliers",
+        "wall_extraction.ransac.max_consecutive_small_planes",
+        "wall_extraction.components.min_points",
+    ):
+        _require_positive_integer(config, path)
+
+    for path in (
+        "wall_extraction.enabled",
+        "wall_extraction.normal_filter.enabled",
+        "wall_extraction.components.enabled",
+        "wall_extraction.components.merge_valid_components",
+    ):
+        _require_boolean(config, path)
+
+    for path in (
         "plane_extraction.min_inlier_ratio",
         "plane_extraction.stop_remaining_ratio",
+        "normal_analysis.horizontal_min_up_dot",
+        "wall_extraction.normal_filter.point_normal_max_up_dot",
+        "wall_extraction.ransac.min_inlier_ratio",
+        "wall_extraction.ransac.plane_normal_max_up_dot",
     ):
-        value: Any = config
-        for part in path.split("."):
-            value = value[part]
-        if not 0.0 <= float(value) <= 1.0:
-            raise ConfigError("{} 값은 0과 1 사이여야 합니다.".format(path))
+        _require_probability(config, path)
+
+    thresholds = config["normal_analysis"]["thresholds"]
+    if not isinstance(thresholds, list) or not thresholds:
+        raise ConfigError("normal_analysis.thresholds는 하나 이상의 기준값 목록이어야 합니다.")
+    threshold_values = [float(value) for value in thresholds]
+    for value in threshold_values:
+        if not np.isfinite(value) or not 0.0 <= value <= 1.0:
+            raise ConfigError("normal_analysis.thresholds 값은 0과 1 사이여야 합니다.")
+    tokens = [format_threshold_token(value) for value in threshold_values]
+    if len(set(threshold_values)) != len(threshold_values) or len(set(tokens)) != len(tokens):
+        raise ConfigError("normal_analysis.thresholds에 중복되거나 파일명이 충돌하는 값이 있습니다.")
+
+    for absolute_path, ratio_path in (
+        (
+            "wall_extraction.ransac.distance_threshold",
+            "wall_extraction.ransac.distance_threshold_ratio",
+        ),
+        ("wall_extraction.components.eps", "wall_extraction.components.eps_ratio"),
+        (
+            "wall_extraction.components.min_vertical_span",
+            "wall_extraction.components.min_vertical_span_ratio",
+        ),
+        ("wall_extraction.meshing.min_area", "wall_extraction.meshing.min_area_ratio"),
+    ):
+        _validate_absolute_ratio(config, absolute_path, ratio_path)
+
+    for path in (
+        "wall_extraction.meshing.margin_ratio",
+    ):
+        value = float(_value_at(config, path))
+        if not np.isfinite(value) or value < 0.0:
+            raise ConfigError("{} 값은 0 이상이어야 합니다.".format(path))
 
     lower = float(config["plane_meshing"]["lower_percentile"])
     upper = float(config["plane_meshing"]["upper_percentile"])
@@ -178,8 +332,17 @@ def validate_config(config: Dict[str, Any]) -> Dict[str, Any]:
             "classification의 높이 하한 백분위수는 상한보다 작고 0~100 범위여야 합니다."
         )
 
+    wall_lower = float(config["wall_extraction"]["meshing"]["lower_percentile"])
+    wall_upper = float(config["wall_extraction"]["meshing"]["upper_percentile"])
+    if not 0.0 <= wall_lower < wall_upper <= 100.0:
+        raise ConfigError(
+            "wall_extraction.meshing의 하한 백분위수는 상한보다 작고 0~100 범위여야 합니다."
+        )
+
     if int(config["plane_extraction"]["ransac_n"]) < 3:
         raise ConfigError("plane_extraction.ransac_n은 3 이상이어야 합니다.")
+    if int(config["wall_extraction"]["ransac"]["ransac_n"]) < 3:
+        raise ConfigError("wall_extraction.ransac.ransac_n은 3 이상이어야 합니다.")
 
     return config
 

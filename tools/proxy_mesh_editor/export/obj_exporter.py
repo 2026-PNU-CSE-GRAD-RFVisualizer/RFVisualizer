@@ -180,6 +180,7 @@ def export_obj_bundle(
         exported.append(
             {
                 "candidate_id": item["candidate_id"],
+                "source_pass": candidate.source_pass,
                 "semantic": semantic,
                 "obj_object_name": object_name,
                 "obj_material_name": semantic,

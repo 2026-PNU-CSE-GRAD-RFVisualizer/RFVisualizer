@@ -7,14 +7,20 @@ import logging
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 from . import __version__
 from .config import ConfigError, load_config, normalize_vector
 from .export.obj_exporter import ObjExportError, export_obj_bundle
-from .export.preview_exporter import PreviewExportError, write_preview
+from .export.preview_exporter import (
+    PreviewExportError,
+    write_preview,
+    write_wall_preview,
+)
+from .geometry.normal_analyzer import write_normal_analysis_outputs
 from .geometry.plane_extractor import extract_planes
 from .geometry.preprocessing import preprocess_point_cloud
+from .geometry.wall_extractor import extract_wall_planes
 from .io.metadata_io import MetadataError, read_json, write_json
 from .io.scene_loader import SceneLoadError, load_scene
 from .models import PlaneCandidate
@@ -61,8 +67,11 @@ def _log_scene_stats(input_stats: Dict[str, Any], preprocessing: Dict[str, Any])
     )
 
 
-def run_extract(args: argparse.Namespace) -> int:
-    config = load_config(args.config)
+def _load_preprocessed_scene(
+    args: argparse.Namespace, config: Dict[str, Any]
+) -> Tuple[Any, Any, Dict[str, Any], float]:
+    """모든 분석 명령이 동일한 장면 로드와 전처리를 거치게 한다."""
+
     _set_open3d_seed(int(config["scene"]["random_seed"]))
     scene = load_scene(args.mesh, args.reference_point_cloud, config)
     scene_extent = float(scene.input_stats["filtered_mesh"]["bounds"]["diagonal"])
@@ -70,12 +79,41 @@ def run_extract(args: argparse.Namespace) -> int:
         scene.point_cloud, config, scene_extent
     )
     _log_scene_stats(scene.input_stats, preprocessing_stats)
+    return scene, point_cloud, preprocessing_stats, scene_extent
+
+
+def _input_metadata(scene: Any) -> Dict[str, Any]:
+    return {
+        "source_mesh_path": str(scene.source_mesh),
+        "reference_point_cloud_path": (
+            str(scene.reference_point_cloud)
+            if scene.reference_point_cloud is not None
+            else None
+        ),
+        "point_source": scene.point_source,
+    }
+
+
+def _scene_metadata(scene: Any, config: Dict[str, Any], scene_extent: float) -> Dict[str, Any]:
+    up_vector = normalize_vector(config["scene"]["up_vector"], "scene.up_vector")
+    return {
+        "up_vector": up_vector.tolist(),
+        "bounds": scene.input_stats["filtered_mesh"]["bounds"],
+        "estimated_extent": scene_extent,
+        "scale_status": "scene_unit_not_metric_calibrated",
+    }
+
+
+def run_extract(args: argparse.Namespace) -> int:
+    config = load_config(args.config)
+    scene, point_cloud, preprocessing_stats, scene_extent = _load_preprocessed_scene(
+        args, config
+    )
 
     candidates, extraction_stats = extract_planes(point_cloud, config, scene_extent)
     output = Path(args.output).expanduser().resolve()
     preview = write_preview(point_cloud, candidates, output, config["preview"])
 
-    up_vector = normalize_vector(config["scene"]["up_vector"], "scene.up_vector")
     candidate_document: Dict[str, Any] = {
         "schema_version": "1.0",
         "algorithm": {
@@ -83,21 +121,8 @@ def run_extract(args: argparse.Namespace) -> int:
             "version": __version__,
         },
         "created_at": _utc_now(),
-        "input": {
-            "source_mesh_path": str(scene.source_mesh),
-            "reference_point_cloud_path": (
-                str(scene.reference_point_cloud)
-                if scene.reference_point_cloud is not None
-                else None
-            ),
-            "point_source": scene.point_source,
-        },
-        "scene": {
-            "up_vector": up_vector.tolist(),
-            "bounds": scene.input_stats["filtered_mesh"]["bounds"],
-            "estimated_extent": scene_extent,
-            "scale_status": "scene_unit_not_metric_calibrated",
-        },
+        "input": _input_metadata(scene),
+        "scene": _scene_metadata(scene, config, scene_extent),
         "config": config,
         "input_stats": scene.input_stats,
         "mesh_component_filter": scene.mesh_filter_stats,
@@ -124,15 +149,166 @@ def run_extract(args: argparse.Namespace) -> int:
     return 0
 
 
+def run_analyze_normals(args: argparse.Namespace) -> int:
+    config = load_config(args.config)
+    scene, point_cloud, preprocessing_stats, scene_extent = _load_preprocessed_scene(
+        args, config
+    )
+    output = Path(args.output).expanduser().resolve()
+    up_vector = normalize_vector(config["scene"]["up_vector"], "scene.up_vector")
+    analysis = write_normal_analysis_outputs(
+        point_cloud, output, config["normal_analysis"], up_vector
+    )
+    analysis_path = output / "normal_analysis.json"
+    analysis["files"]["analysis_json"] = str(analysis_path.resolve())
+    document: Dict[str, Any] = {
+        "schema_version": "1.0",
+        "algorithm": {
+            "name": "rfvisualizer_normal_analysis",
+            "version": __version__,
+        },
+        "created_at": _utc_now(),
+        "input": _input_metadata(scene),
+        "scene": _scene_metadata(scene, config, scene_extent),
+        "preprocessing_settings": config["preprocessing"],
+        "input_stats": scene.input_stats,
+        "mesh_component_filter": scene.mesh_filter_stats,
+        "preprocessing_stats": preprocessing_stats,
+        "normal_analysis_settings": config["normal_analysis"],
+        "normal_analysis": analysis,
+        "files": analysis["files"],
+    }
+    write_json(analysis_path, document)
+    LOGGER.info(
+        "법선 분석 완료: 유효 %d개, 무효 %d개, 결과 %s",
+        analysis["valid_normal_count"],
+        analysis["invalid_normal_count"],
+        analysis_path,
+    )
+    for result in analysis["threshold_results"]:
+        LOGGER.info(
+            "법선 기준 %.6g 이하: %d개 (유효 법선의 %.2f%%)",
+            result["threshold"],
+            result["point_count"],
+            100.0 * result["ratio_of_valid_normals"],
+        )
+    return 0
+
+
+def run_extract_walls(args: argparse.Namespace) -> int:
+    config = load_config(args.config)
+    scene, point_cloud, preprocessing_stats, scene_extent = _load_preprocessed_scene(
+        args, config
+    )
+    wall_cloud, candidates, extraction_stats, assigned = extract_wall_planes(
+        point_cloud, config, scene_extent
+    )
+    output = Path(args.output).expanduser().resolve()
+    preview = write_wall_preview(
+        wall_cloud, candidates, assigned, output, config["preview"]
+    )
+    preview["color_mapping"] = {
+        candidate.candidate_id: candidate.color.tolist() for candidate in candidates
+    }
+    document: Dict[str, Any] = {
+        "schema_version": "1.0",
+        "algorithm": {
+            "name": "rfvisualizer_wall_plane_extraction",
+            "version": __version__,
+        },
+        "created_at": _utc_now(),
+        "input": _input_metadata(scene),
+        "scene": _scene_metadata(scene, config, scene_extent),
+        "config": {
+            "preprocessing": config["preprocessing"],
+            "wall_extraction": config["wall_extraction"],
+            "plane_meshing_shared_settings": {
+                "min_extent": config["plane_meshing"]["min_extent"],
+                "min_extent_ratio": config["plane_meshing"]["min_extent_ratio"],
+                "vertical_alignment_max_dot": config["plane_meshing"][
+                    "vertical_alignment_max_dot"
+                ],
+            },
+        },
+        "input_stats": scene.input_stats,
+        "mesh_component_filter": scene.mesh_filter_stats,
+        "preprocessing_stats": preprocessing_stats,
+        "normal_filter_settings": config["wall_extraction"]["normal_filter"],
+        "normal_filter_stats": extraction_stats["normal_filter"],
+        "wall_ransac_settings": config["wall_extraction"]["ransac"],
+        "component_settings": config["wall_extraction"]["components"],
+        "wall_meshing_settings": config["wall_extraction"]["meshing"],
+        "resolved_scene_unit_thresholds": extraction_stats["resolved_thresholds"],
+        "wall_extraction_stats": extraction_stats,
+        "candidate_ids": [candidate.candidate_id for candidate in candidates],
+        "wall_candidates": [candidate.to_dict() for candidate in candidates],
+        "preview": preview,
+    }
+    path = output / "wall_candidates.json"
+    write_json(path, document)
+    LOGGER.info(
+        "벽 후보 %d개를 저장했습니다: %s (법선 필터 %d점, 잔여 %d점)",
+        len(candidates),
+        path,
+        extraction_stats["normal_filtered_point_count"],
+        extraction_stats["residual_wall_point_count"],
+    )
+    if not candidates:
+        LOGGER.warning("조건을 만족하는 벽 후보가 없습니다. 벽 전용 설정을 확인해 주세요.")
+    return 0
+
+
 def run_export(args: argparse.Namespace) -> int:
     config = load_config(args.config)
-    document = read_json(args.candidates)
+    document_path = Path(args.candidates).expanduser().resolve()
+    document = read_json(document_path)
     raw_candidates = document.get("plane_candidates")
     if not isinstance(raw_candidates, list):
         raise MetadataError("plane_candidates.json에 plane_candidates 목록이 없습니다.")
     candidates = [PlaneCandidate.from_dict(item) for item in raw_candidates]
+    source_documents = {
+        candidate.candidate_id: str(document_path) for candidate in candidates
+    }
+    candidate_documents = [
+        {
+            "path": str(document_path),
+            "source_pass": "plane_extraction",
+            "input": document.get("input", {}),
+        }
+    ]
+    wall_document = None
+    if args.wall_candidates is not None:
+        wall_path = Path(args.wall_candidates).expanduser().resolve()
+        wall_document = read_json(wall_path)
+        raw_walls = wall_document.get("wall_candidates")
+        if not isinstance(raw_walls, list):
+            raise MetadataError("wall_candidates.json에 wall_candidates 목록이 없습니다.")
+        wall_candidates = [PlaneCandidate.from_dict(item) for item in raw_walls]
+        existing_ids = {candidate.candidate_id for candidate in candidates}
+        duplicate_ids = sorted(
+            existing_ids.intersection(candidate.candidate_id for candidate in wall_candidates)
+        )
+        if duplicate_ids:
+            raise MetadataError(
+                "일반 후보와 벽 후보 문서의 candidate_id가 충돌합니다: {}".format(
+                    ", ".join(duplicate_ids)
+                )
+            )
+        candidates.extend(wall_candidates)
+        source_documents.update(
+            {candidate.candidate_id: str(wall_path) for candidate in wall_candidates}
+        )
+        candidate_documents.append(
+            {
+                "path": str(wall_path),
+                "source_pass": "wall_extraction",
+                "input": wall_document.get("input", {}),
+            }
+        )
     output = Path(args.output).expanduser().resolve()
     exported = export_obj_bundle(candidates, config["selection"], output)
+    for item in exported:
+        item["candidate_source_document"] = source_documents[item["candidate_id"]]
 
     metadata = {
         "schema_version": "1.0",
@@ -142,6 +318,7 @@ def run_export(args: argparse.Namespace) -> int:
         },
         "created_at": _utc_now(),
         "source": document.get("input", {}),
+        "candidate_documents": candidate_documents,
         "input_scene_bounds": document.get("scene", {}).get("bounds"),
         "up_vector": document.get("scene", {}).get("up_vector"),
         "scale_status": document.get("scene", {}).get("scale_status"),
@@ -151,7 +328,17 @@ def run_export(args: argparse.Namespace) -> int:
             "plane_extraction"
         ),
         "plane_extraction_stats": document.get("plane_extraction_stats"),
-        "candidate_ids": document.get("candidate_ids", []),
+        "candidate_ids": [candidate.candidate_id for candidate in candidates],
+        "wall_extraction_settings": (
+            wall_document.get("config", {}).get("wall_extraction")
+            if wall_document is not None
+            else None
+        ),
+        "wall_extraction_stats": (
+            wall_document.get("wall_extraction_stats")
+            if wall_document is not None
+            else None
+        ),
         "selected_candidates": exported,
         "files": {
             "combined_obj": str((output / "proxy_scene.obj").resolve()),
@@ -180,9 +367,42 @@ def build_parser() -> argparse.ArgumentParser:
     extract.add_argument("--output", type=Path, required=True, help="결과 폴더")
     extract.set_defaults(handler=run_extract)
 
+    analyze_normals = subparsers.add_parser(
+        "analyze-normals", help="점 법선의 높이 방향 내적 분포와 미리보기를 만듭니다."
+    )
+    analyze_normals.add_argument(
+        "--mesh", type=Path, required=True, help="입력 삼각형 PLY"
+    )
+    analyze_normals.add_argument(
+        "--reference-point-cloud", type=Path, help="선택적 참고 PLY 점구름"
+    )
+    analyze_normals.add_argument(
+        "--config", type=Path, required=True, help="YAML 설정 파일"
+    )
+    analyze_normals.add_argument("--output", type=Path, required=True, help="결과 폴더")
+    analyze_normals.set_defaults(handler=run_analyze_normals)
+
+    extract_walls = subparsers.add_parser(
+        "extract-walls", help="법선 필터를 거친 점에서 벽 평면만 추출합니다."
+    )
+    extract_walls.add_argument(
+        "--mesh", type=Path, required=True, help="입력 삼각형 PLY"
+    )
+    extract_walls.add_argument(
+        "--reference-point-cloud", type=Path, help="선택적 참고 PLY 점구름"
+    )
+    extract_walls.add_argument(
+        "--config", type=Path, required=True, help="YAML 설정 파일"
+    )
+    extract_walls.add_argument("--output", type=Path, required=True, help="결과 폴더")
+    extract_walls.set_defaults(handler=run_extract_walls)
+
     export = subparsers.add_parser("export", help="선택한 후보를 OBJ/MTL로 내보냅니다.")
     export.add_argument(
         "--candidates", type=Path, required=True, help="plane_candidates.json"
+    )
+    export.add_argument(
+        "--wall-candidates", type=Path, help="선택적으로 함께 읽을 wall_candidates.json"
     )
     export.add_argument("--config", type=Path, required=True, help="선택 항목이 든 YAML")
     export.add_argument("--output", type=Path, required=True, help="결과 폴더")
@@ -216,4 +436,3 @@ def main(argv: Optional[List[str]] = None) -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
-
