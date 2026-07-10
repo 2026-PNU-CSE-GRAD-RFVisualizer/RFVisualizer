@@ -11,6 +11,11 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from . import __version__
 from .config import ConfigError, load_config, normalize_vector
+from .envelope.builder import build_room_envelope
+from .envelope.candidate_loader import load_envelope_candidates
+from .envelope.config import load_envelope_config
+from .envelope.exporter import EnvelopeExportError, export_envelope_geometry
+from .envelope.validator import validate_envelope
 from .export.obj_exporter import ObjExportError, export_obj_bundle
 from .export.preview_exporter import (
     PreviewExportError,
@@ -258,6 +263,115 @@ def run_extract_walls(args: argparse.Namespace) -> int:
     return 0
 
 
+def run_build_envelope(args: argparse.Namespace) -> int:
+    envelope_config = load_envelope_config(args.envelope_config)
+    selected = load_envelope_candidates(
+        args.plane_candidates, args.wall_candidates, envelope_config
+    )
+    mesh = build_room_envelope(selected, envelope_config)
+    validation_settings = envelope_config["room_envelope"]["validation"]
+    topology, geometry, warnings = validate_envelope(mesh, validation_settings)
+
+    output = Path(args.output).expanduser().resolve()
+    files = export_envelope_geometry(
+        mesh, output, envelope_config["room_envelope"]["output"]
+    )
+    envelope_path = output / "room_envelope.json"
+    topology_path = output / "topology_report.json"
+    files["envelope_metadata"] = str(envelope_path.resolve())
+    files["topology_report"] = str(topology_path.resolve())
+
+    topology_document: Dict[str, Any] = {
+        "schema_version": "1.0",
+        "algorithm": {
+            "name": "rfvisualizer_room_envelope_validation",
+            "version": __version__,
+        },
+        "created_at": _utc_now(),
+        "topology": topology,
+        "geometry": geometry,
+        "validation_warnings": warnings,
+        "success": bool(
+            topology["closed_manifold_success"] and geometry["geometry_success"]
+        ),
+    }
+    write_json(topology_path, topology_document)
+
+    wall_objects = []
+    for index, (candidate, equation, rectangle_diagnostic) in enumerate(
+        zip(
+            mesh.wall_candidates,
+            mesh.normalized_wall_equations,
+            mesh.candidate_rectangle_diagnostics,
+        )
+    ):
+        wall_objects.append(
+            {
+                "object_name": "wall_{:03d}".format(index),
+                "candidate_id": candidate.candidate_id,
+                "normalized_plane_equation": equation.tolist(),
+                "candidate_rectangle_comparison": rectangle_diagnostic,
+            }
+        )
+    document: Dict[str, Any] = {
+        "schema_version": "1.0",
+        "algorithm": {
+            "name": "rfvisualizer_room_envelope_builder",
+            "version": __version__,
+        },
+        "created_at": _utc_now(),
+        "source_candidate_documents": {
+            "plane_candidates": str(selected.plane_document_path),
+            "wall_candidates": str(selected.wall_document_path),
+        },
+        "envelope_config_path": str(Path(args.envelope_config).expanduser().resolve()),
+        "envelope_config": envelope_config,
+        "up_vector": selected.up_vector.tolist(),
+        "selected_candidates": {
+            "floor": mesh.floor_candidate.candidate_id,
+            "ceiling": mesh.ceiling_candidate.candidate_id,
+            "input_ordered_walls": mesh.input_wall_ids,
+            "normalized_ordered_walls": mesh.normalized_wall_ids,
+        },
+        "normalized_plane_equations": {
+            "floor": mesh.normalized_floor_equation.tolist(),
+            "ceiling": mesh.normalized_ceiling_equation.tolist(),
+            "walls": [value.tolist() for value in mesh.normalized_wall_equations],
+        },
+        "interior_point": mesh.interior_point.tolist(),
+        "bottom_corners": mesh.bottom_corners.tolist(),
+        "top_corners": mesh.top_corners.tolist(),
+        "polygon": {
+            "coordinates_2d": mesh.polygon_2d.tolist(),
+            "ceiling_coordinates_2d": mesh.top_polygon_2d.tolist(),
+            "winding": mesh.polygon_winding,
+            "signed_area": mesh.polygon_signed_area,
+            "edge_lengths": mesh.polygon_edge_lengths.tolist(),
+        },
+        "floor_ceiling_height": mesh.height_statistics,
+        "wall_intersection_diagnostics": mesh.intersection_diagnostics,
+        "wall_objects": wall_objects,
+        "mesh_summary": {
+            "vertex_count": int(len(mesh.vertices)),
+            "triangle_count": int(len(mesh.faces)),
+            "orientation_flip_count": int(mesh.orientation_flip_count),
+        },
+        "topology_summary": topology,
+        "geometry_validation": geometry,
+        "validation_warnings": warnings,
+        "output_files": files,
+    }
+    write_json(envelope_path, document)
+    LOGGER.info(
+        "닫힌 Room Envelope 생성 완료: 벽 %d개, 꼭짓점 %d개, 삼각형 %d개, 부피 %.6g",
+        len(mesh.wall_candidates),
+        len(mesh.vertices),
+        len(mesh.faces),
+        topology["absolute_volume"],
+    )
+    return 0
+
+
 def run_export(args: argparse.Namespace) -> int:
     config = load_config(args.config)
     document_path = Path(args.candidates).expanduser().resolve()
@@ -397,6 +511,21 @@ def build_parser() -> argparse.ArgumentParser:
     extract_walls.add_argument("--output", type=Path, required=True, help="결과 폴더")
     extract_walls.set_defaults(handler=run_extract_walls)
 
+    build_envelope = subparsers.add_parser(
+        "build-envelope", help="선택된 평면으로 닫힌 Room Envelope를 만듭니다."
+    )
+    build_envelope.add_argument(
+        "--plane-candidates", type=Path, required=True, help="plane_candidates.json"
+    )
+    build_envelope.add_argument(
+        "--wall-candidates", type=Path, required=True, help="wall_candidates.json"
+    )
+    build_envelope.add_argument(
+        "--envelope-config", type=Path, required=True, help="Room Envelope 선택 YAML"
+    )
+    build_envelope.add_argument("--output", type=Path, required=True, help="결과 폴더")
+    build_envelope.set_defaults(handler=run_build_envelope)
+
     export = subparsers.add_parser("export", help="선택한 후보를 OBJ/MTL로 내보냅니다.")
     export.add_argument(
         "--candidates", type=Path, required=True, help="plane_candidates.json"
@@ -424,6 +553,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         MetadataError,
         ObjExportError,
         PreviewExportError,
+        EnvelopeExportError,
         SceneLoadError,
         ValueError,
     ) as exc:

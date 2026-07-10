@@ -1,6 +1,6 @@
 # PGSR 평면 Proxy Mesh 기술 검증 도구
 
-PGSR의 삼각형 메시에서 큰 평면 후보를 찾고, 사람이 선택한 후보를 구멍 없는 사각형 OBJ로 바꾸는 도구다. Phase 1의 일반 평면 추출과 Phase 1.5-A의 법선 분석·벽 전용 추출을 제공한다. 자동 분류 결과는 제안일 뿐이며 최종 의미는 `selection`에서 사람이 지정한다.
+PGSR의 삼각형 메시에서 큰 평면 후보를 찾고, 사람이 선택한 후보를 단순 메시로 바꾸는 도구다. Phase 1의 일반 평면 추출, Phase 1.5-A의 법선 분석·벽 전용 추출, Phase 1.5-B의 닫힌 Room Envelope 생성을 제공한다. 자동 분류 결과는 제안일 뿐이며 최종 의미와 방 둘레 순서는 설정에서 사람이 지정한다.
 
 ## 이번 단계에서 하는 일
 
@@ -152,6 +152,48 @@ conda run -n pgsr python -m tools.proxy_mesh_editor.main export \
 
 기존 `--candidates`만 사용하는 방식도 그대로 동작한다.
 
+## Phase 1.5-B: 닫힌 Room Envelope 생성
+
+Room Envelope는 후보 사각형의 크기를 이어 붙이지 않는다. 별도 설정에서 고른 바닥·천장·벽의 **무한 평면식**을 사용해 인접 벽 두 개와 바닥 또는 천장의 세 평면 교점을 계산한다.
+
+```yaml
+room_envelope:
+  floor:
+    candidate_id: plane_006
+  ceiling:
+    candidate_id: plane_005
+  ordered_walls:
+    - candidate_id: wall_008
+    - candidate_id: wall_000
+    - candidate_id: wall_001
+    - candidate_id: wall_006
+```
+
+벽은 실제 방 둘레의 연속 순서로 3개 이상 지정해야 한다. 시계·반시계 방향은 모두 받을 수 있으며 내부에서는 높이 방향에서 보았을 때 반시계 방향으로 정규화한다. 외곽 벽 후보는 코드가 자동 선택하지 않는다.
+
+```bash
+conda run -n pgsr python -m tools.proxy_mesh_editor.main build-envelope \
+  --plane-candidates outputs/proxy_mesh/pnu_classroom/phase1/plane_candidates.json \
+  --wall-candidates outputs/proxy_mesh/pnu_classroom/wall_extraction/wall_candidates.json \
+  --envelope-config tools/proxy_mesh_editor/configs/pnu_classroom_envelope.yaml \
+  --output outputs/proxy_mesh/pnu_classroom/room_envelope
+```
+
+바닥과 천장은 NumPy 기반의 결정적인 ear clipping으로 삼각분할하므로 볼록·오목 단순 다각형을 모두 지원한다. 서로 교차하는 벽 순서는 오류 처리한다. 출력은 다음과 같다.
+
+```text
+room_envelope.obj
+room_envelope.mtl
+room_envelope.ply
+room_envelope.json
+topology_report.json
+objects/floor_000.obj
+objects/ceiling_000.obj
+objects/wall_000.obj ...
+```
+
+통합 OBJ는 아래쪽 `N`개와 위쪽 `N`개, 총 `2N`개의 전역 꼭짓점을 모든 객체가 공유한다. 모든 삼각형 법선은 계산된 내부점 반대 방향으로 맞추며 경계 모서리, 비다양체 모서리, 연결 요소, 부피와 Euler 값을 검사한다.
+
 ## 설정할 때 주의할 값
 
 현재 PGSR 장면은 실제 미터로 보정되지 않았다. `*_ratio` 값은 **메시 경계 상자의 대각선 길이**를 기준으로 계산한다.
@@ -169,6 +211,9 @@ conda run -n pgsr python -m tools.proxy_mesh_editor.main export \
 | `wall_extraction.normal_filter.point_normal_max_up_dot` | 벽 RANSAC에 보낼 점 법선의 최대 절댓값 내적 |
 | `wall_extraction.ransac.plane_normal_max_up_dot` | 검출된 평면을 벽으로 승인할 최대 절댓값 내적 |
 | `wall_extraction.components.min_vertical_span_ratio` | 연결 묶음이 가져야 할 최소 수직 길이의 장면 높이 비율 |
+| `room_envelope.ordered_walls` | 사용자가 확인한 외곽 벽 후보의 연속 순서 |
+| `room_envelope.validation.plane_residual_tolerance` | 교점이 선택 평면 위에 있다고 볼 최대 오차 |
+| `room_envelope.validation.minimum_height_ratio` | 최소 방 높이의 장면 대각선 비율 |
 
 `pnu_classroom.yaml`은 넓은 바닥 후보의 법선과 카메라 높이 변화가 가장 작아지는 방향을 함께 확인해, `-Y`에서 약 7도 기울어진 방향을 위쪽으로 설정했다. 이는 장면별 설정이며 다른 장소에 그대로 적용하면 안 된다.
 
@@ -176,6 +221,8 @@ conda run -n pgsr python -m tools.proxy_mesh_editor.main export \
 
 - 같은 평면 위에 떨어져 있는 여러 물체가 있으면 하나의 큰 사각형으로 합쳐질 수 있다.
 - 벽 전용 추출에서도 같은 방향의 평행한 표면이 여러 후보로 나뉠 수 있다. 후보끼리 합치거나 모서리를 맞추는 일은 이후 단계다.
+- Room Envelope는 외곽 후보를 자동으로 고르지 않으며 잘못된 벽 순서는 오류 또는 잘못된 방 범위를 만든다.
+- Room Envelope는 완전히 닫힌 껍질만 만들며 문·창문 구멍과 비평면 구조를 지원하지 않는다.
 - `floor`, `wall`, `ceiling`은 법선과 장면 높이만 사용한 제안이다.
 - 사각형은 의도적으로 구멍을 막으므로, 문처럼 실제로 통과 가능한 구간은 이후 편집 단계에서 별도 처리해야 한다.
 - 좌표와 크기는 원본 장면 단위를 유지한다. Sionna RT 전에 실제 미터 크기와 축 방향을 다시 검증해야 한다.
