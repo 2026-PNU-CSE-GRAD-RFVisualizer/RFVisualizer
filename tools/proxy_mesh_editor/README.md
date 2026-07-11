@@ -1,6 +1,6 @@
 # PGSR 평면 Proxy Mesh 기술 검증 도구
 
-PGSR의 삼각형 메시에서 큰 평면 후보를 찾고, 사람이 선택한 후보를 단순 메시로 바꾸는 도구다. Phase 1의 일반 평면 추출, Phase 1.5-A의 법선 분석·벽 전용 추출, Phase 1.5-B의 닫힌 Room Envelope 생성을 제공한다. 자동 분류 결과는 제안일 뿐이며 최종 의미와 방 둘레 순서는 설정에서 사람이 지정한다.
+PGSR의 삼각형 메시에서 큰 평면 후보를 찾고, 사람이 선택한 후보를 단순 메시로 바꾸는 도구다. Phase 1의 일반 평면 추출, Phase 1.5-A의 법선 분석·벽 전용 추출, Phase 1.5-B의 닫힌 Room Envelope 생성, Phase 1.5-C 사전 좌표 진단을 제공한다. 자동 분류 결과는 제안일 뿐이며 최종 의미와 방 둘레 순서는 설정에서 사람이 지정한다.
 
 ## 이번 단계에서 하는 일
 
@@ -194,6 +194,34 @@ objects/wall_000.obj ...
 
 통합 OBJ는 아래쪽 `N`개와 위쪽 `N`개, 총 `2N`개의 전역 꼭짓점을 모든 객체가 공유한다. 모든 삼각형 법선은 계산된 내부점 반대 방향으로 맞추며 경계 모서리, 비다양체 모서리, 연결 요소, 부피와 Euler 값을 검사한다.
 
+## Phase 1.5-C 사전 준비: 실제 크기와 좌표계 진단
+
+이 명령은 실제 미터 단위 변환을 적용하기 전에 입력이 안전한지 확인한다. Room Envelope의 위쪽 방향과 바닥·천장 관계를 검사하고, 장면의 위쪽을 `+Z`에 맞추는 순수 회전, 단일 배율 후보, 원점과 X축 후보를 계산한다.
+
+```bash
+conda run -n pgsr python -m tools.proxy_mesh_editor.main calibration-preflight \
+  --envelope-json outputs/proxy_mesh/pnu_classroom/room_envelope/room_envelope.json \
+  --envelope-obj outputs/proxy_mesh/pnu_classroom/room_envelope/room_envelope.obj \
+  --config tools/proxy_mesh_editor/configs/pnu_classroom_calibration_preflight.yaml \
+  --output outputs/proxy_mesh/pnu_classroom/calibration_preflight
+```
+
+주요 결과:
+
+```text
+calibration_preflight.json
+calibration_preflight_report.md
+scale_analysis.csv
+room_envelope_up_aligned.obj
+room_envelope_up_aligned.ply
+coordinate_axes.ply
+pnu_classroom_metric_calibration_draft.yaml
+```
+
+`room_envelope_up_aligned.*`에는 위쪽 정렬 회전만 적용된다. 실제 배율, 원점 이동, 바닥 평탄화는 적용하지 않는다. 배율 기준값은 모두 양수여야 하며, 두 기준의 상대 차이가 5%를 넘으면 경고하고 20%를 넘으면 사전 진단을 실패 처리한다. 현재 강의실 기준값은 사진 기반 추정치이므로 생성된 설정 초안도 `provisional` 상태다.
+
+좌표축 PLY의 색은 X축 빨강, Y축 초록, Z축 파랑, 원래 장면 위쪽 노랑, 목표 위쪽 청록, 바닥점 어두운색, 천장점 밝은 분홍색이다. 실제 결과와 수치는 [Phase 1.5-C 사전 진단 결과](PHASE1_5C_PREFLIGHT_VALIDATION.md)에 기록했다.
+
 ## 설정할 때 주의할 값
 
 현재 PGSR 장면은 실제 미터로 보정되지 않았다. `*_ratio` 값은 **메시 경계 상자의 대각선 길이**를 기준으로 계산한다.
@@ -214,6 +242,10 @@ objects/wall_000.obj ...
 | `room_envelope.ordered_walls` | 사용자가 확인한 외곽 벽 후보의 연속 순서 |
 | `room_envelope.validation.plane_residual_tolerance` | 교점이 선택 평면 위에 있다고 볼 최대 오차 |
 | `room_envelope.validation.minimum_height_ratio` | 최소 방 높이의 장면 대각선 비율 |
+| `calibration_preflight.scale_references` | 임시 배율을 계산할 장면 길이와 추정 실제 길이 목록 |
+| `calibration_preflight.scale_analysis.warning_relative_spread` | 기준 배율 차이를 경고할 상대 범위 |
+| `calibration_preflight.orientation.target_up` | 순수 회전으로 맞출 목표 위쪽 방향. 현재는 `+Z` |
+| `calibration_preflight.validation.*` | 양의 높이, 위쪽 정렬, 직교성, 왕복 변환의 허용 오차 |
 
 `pnu_classroom.yaml`은 넓은 바닥 후보의 법선과 카메라 높이 변화가 가장 작아지는 방향을 함께 확인해, `-Y`에서 약 7도 기울어진 방향을 위쪽으로 설정했다. 이는 장면별 설정이며 다른 장소에 그대로 적용하면 안 된다.
 
@@ -226,6 +258,7 @@ objects/wall_000.obj ...
 - `floor`, `wall`, `ceiling`은 법선과 장면 높이만 사용한 제안이다.
 - 사각형은 의도적으로 구멍을 막으므로, 문처럼 실제로 통과 가능한 구간은 이후 편집 단계에서 별도 처리해야 한다.
 - 좌표와 크기는 원본 장면 단위를 유지한다. Sionna RT 전에 실제 미터 크기와 축 방향을 다시 검증해야 한다.
+- 사전 진단은 배율과 좌표 프레임을 추천할 뿐 확정하지 않는다. 현장 실측 뒤 설정 초안을 수정하고 본 변환을 별도 구현해야 한다.
 
 ## 테스트
 

@@ -54,6 +54,8 @@ Proxy Mesh Editor의 벽 추출은 일반 평면 추출 잔여점이 아니라 �
 
 Room Envelope Builder는 사람이 순서대로 선택한 바닥·천장·벽의 무한 평면 교점으로 공통 꼭짓점을 만들고 닫힌 단일 메시를 출력한다. 외곽 후보 자동 선택, 문 구멍, 실제 크기 보정은 후속 단계다.
 
+실제 크기 보정 전 사전 진단은 Room Envelope를 바꾸지 않고 장면 위쪽을 `+Z`에 맞추는 순수 회전과 단일 배율·원점·X축 후보만 계산한다. 현재 사진 기반 문 크기로 얻은 배율은 임시값이므로 현장 실측 전에는 Sionna RT용 미터 좌표로 확정하지 않는다.
+
 실시간 Viewer는 공식 SIBR Real-time Viewer를 Fork하여 확장하는 방식을 우선 검증한다. 기존 Gaussian Renderer와 Camera 구조를 유지한 채 Heatmap Plane, PGSR Mesh Depth-only Pass, UDP Pose Receiver, Offscreen Framebuffer, JPEG Streaming 모듈을 추가한다.
 
 히트맵 가림 판정은 PGSR Mesh Depth를 우선 사용한다. Gaussian Color와 Mesh 경계가 일치하지 않는 문제는 Occlusion Boundary Mismatch로 정의하고, Camera·Projection·Scale·Mesh 오류를 먼저 확인한다. 이후 필요할 경우 PGSR Unbiased Depth 비교와 작은 후처리 보정을 수행한다.

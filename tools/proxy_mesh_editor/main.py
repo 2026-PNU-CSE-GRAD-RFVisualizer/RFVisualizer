@@ -10,6 +10,10 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 from . import __version__
+from .calibration.preflight import run_preflight
+from .calibration.preflight_config import load_preflight_config
+from .calibration.preview_exporter import CalibrationPreviewError
+from .calibration.report import CalibrationReportError
 from .config import ConfigError, load_config, normalize_vector
 from .envelope.builder import build_room_envelope
 from .envelope.candidate_loader import load_envelope_candidates
@@ -372,6 +376,36 @@ def run_build_envelope(args: argparse.Namespace) -> int:
     return 0
 
 
+def run_calibration_preflight(args: argparse.Namespace) -> int:
+    config = load_preflight_config(args.config)
+    document = run_preflight(
+        envelope_json_path=args.envelope_json,
+        envelope_obj_path=args.envelope_obj,
+        config_path=args.config,
+        config=config,
+        output_directory=args.output,
+        algorithm_version=__version__,
+        created_at=_utc_now(),
+    )
+    orientation = document["orientation_analysis"]
+    rotation = document["rotation_analysis"]
+    scale = document["scale_analysis"]
+    LOGGER.info(
+        "Calibration Preflight %s: 중심 높이 %.6g, 회전 %.6g도, det %.9g",
+        "통과" if document["preflight_success"] else "실패",
+        orientation["vertical_center_offset"],
+        rotation["rotation_angle_deg"],
+        rotation["determinant"],
+    )
+    LOGGER.info(
+        "추천 provisional scale %.9g m/scene unit, reference spread %.2f%% (%s)",
+        scale["recommended_meters_per_scene_unit"],
+        100.0 * scale["relative_spread"],
+        scale["spread_status"],
+    )
+    return 0 if document["preflight_success"] else 2
+
+
 def run_export(args: argparse.Namespace) -> int:
     config = load_config(args.config)
     document_path = Path(args.candidates).expanduser().resolve()
@@ -526,6 +560,24 @@ def build_parser() -> argparse.ArgumentParser:
     build_envelope.add_argument("--output", type=Path, required=True, help="결과 폴더")
     build_envelope.set_defaults(handler=run_build_envelope)
 
+    calibration_preflight = subparsers.add_parser(
+        "calibration-preflight",
+        help="Metric Calibration 전 상하 방향·회전·축척·좌표 프레임을 진단합니다.",
+    )
+    calibration_preflight.add_argument(
+        "--envelope-json", type=Path, required=True, help="room_envelope.json"
+    )
+    calibration_preflight.add_argument(
+        "--envelope-obj", type=Path, required=True, help="room_envelope.obj"
+    )
+    calibration_preflight.add_argument(
+        "--config", type=Path, required=True, help="Calibration Preflight YAML"
+    )
+    calibration_preflight.add_argument(
+        "--output", type=Path, required=True, help="진단 결과 폴더"
+    )
+    calibration_preflight.set_defaults(handler=run_calibration_preflight)
+
     export = subparsers.add_parser("export", help="선택한 후보를 OBJ/MTL로 내보냅니다.")
     export.add_argument(
         "--candidates", type=Path, required=True, help="plane_candidates.json"
@@ -554,6 +606,8 @@ def main(argv: Optional[List[str]] = None) -> int:
         ObjExportError,
         PreviewExportError,
         EnvelopeExportError,
+        CalibrationPreviewError,
+        CalibrationReportError,
         SceneLoadError,
         ValueError,
     ) as exc:
