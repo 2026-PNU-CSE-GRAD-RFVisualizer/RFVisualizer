@@ -14,6 +14,15 @@ from .calibration.preflight import run_preflight
 from .calibration.preflight_config import load_preflight_config
 from .calibration.preview_exporter import CalibrationPreviewError
 from .calibration.report import CalibrationReportError
+from .calibration.metric_calibration import run_metric_calibration
+from .calibration.metric_config import (
+    MetricCalibrationConfigError,
+    load_metric_config,
+)
+from .calibration.metric_exporter import MetricExportError
+from .calibration.metric_metadata import MetricMetadataError
+from .calibration.metric_transform import MetricTransformError
+from .calibration.metric_validator import MetricValidationError
 from .config import ConfigError, load_config, normalize_vector
 from .envelope.builder import build_room_envelope
 from .envelope.candidate_loader import load_envelope_candidates
@@ -406,6 +415,36 @@ def run_calibration_preflight(args: argparse.Namespace) -> int:
     return 0 if document["preflight_success"] else 2
 
 
+def run_calibrate_metric(args: argparse.Namespace) -> int:
+    config = load_metric_config(args.config)
+    result = run_metric_calibration(
+        envelope_json_path=args.envelope_json,
+        envelope_obj_path=args.envelope_obj,
+        config_path=args.config,
+        config=config,
+        output_directory=args.output,
+        algorithm_version=__version__,
+        created_at=_utc_now(),
+    )
+    calibration = result["calibration"]
+    geometry = calibration["geometry"]
+    LOGGER.info(
+        "Metric Calibration 완료: scale %.9g m/scene unit, det %.9g, round-trip %.3g",
+        calibration["scale"]["resolved_meters_per_scene_unit"],
+        calibration["transform"]["rotation_determinant"],
+        calibration["round_trip_error"],
+    )
+    LOGGER.info(
+        "Metric bounds extent=%s, surface area %.6g m^2, volume %.6g m^3",
+        geometry["metric_bounds"]["extent"],
+        geometry["metric_surface_area"],
+        geometry["metric_absolute_volume"],
+    )
+    if calibration["is_provisional"]:
+        LOGGER.warning("PROVISIONAL METRIC CALIBRATION - 현장 실측 전 임시 결과입니다.")
+    return 0
+
+
 def run_export(args: argparse.Namespace) -> int:
     config = load_config(args.config)
     document_path = Path(args.candidates).expanduser().resolve()
@@ -578,6 +617,24 @@ def build_parser() -> argparse.ArgumentParser:
     )
     calibration_preflight.set_defaults(handler=run_calibration_preflight)
 
+    calibrate_metric = subparsers.add_parser(
+        "calibrate-metric",
+        help="Room Envelope를 미터 단위 표준 좌표계 사본으로 변환합니다.",
+    )
+    calibrate_metric.add_argument(
+        "--envelope-json", type=Path, required=True, help="room_envelope.json"
+    )
+    calibrate_metric.add_argument(
+        "--envelope-obj", type=Path, required=True, help="room_envelope.obj"
+    )
+    calibrate_metric.add_argument(
+        "--config", type=Path, required=True, help="Metric Calibration YAML"
+    )
+    calibrate_metric.add_argument(
+        "--output", type=Path, required=True, help="실제 크기 결과 폴더"
+    )
+    calibrate_metric.set_defaults(handler=run_calibrate_metric)
+
     export = subparsers.add_parser("export", help="선택한 후보를 OBJ/MTL로 내보냅니다.")
     export.add_argument(
         "--candidates", type=Path, required=True, help="plane_candidates.json"
@@ -608,6 +665,11 @@ def main(argv: Optional[List[str]] = None) -> int:
         EnvelopeExportError,
         CalibrationPreviewError,
         CalibrationReportError,
+        MetricCalibrationConfigError,
+        MetricExportError,
+        MetricMetadataError,
+        MetricTransformError,
+        MetricValidationError,
         SceneLoadError,
         ValueError,
     ) as exc:

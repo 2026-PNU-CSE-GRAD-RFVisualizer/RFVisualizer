@@ -1,6 +1,6 @@
 # PGSR 평면 Proxy Mesh 기술 검증 도구
 
-PGSR의 삼각형 메시에서 큰 평면 후보를 찾고, 사람이 선택한 후보를 단순 메시로 바꾸는 도구다. Phase 1의 일반 평면 추출, Phase 1.5-A의 법선 분석·벽 전용 추출, Phase 1.5-B의 닫힌 Room Envelope 생성, Phase 1.5-C 사전 좌표 진단을 제공한다. 자동 분류 결과는 제안일 뿐이며 최종 의미와 방 둘레 순서는 설정에서 사람이 지정한다.
+PGSR의 삼각형 메시에서 큰 평면 후보를 찾고, 사람이 선택한 후보를 단순 메시로 바꾸는 도구다. Phase 1의 일반 평면 추출, Phase 1.5-A의 법선 분석·벽 전용 추출, Phase 1.5-B의 닫힌 Room Envelope 생성, Phase 1.5-C의 사전 진단과 실제 크기 표준 좌표 사본 생성을 제공한다. 자동 분류 결과는 제안일 뿐이며 최종 의미와 방 둘레 순서는 설정에서 사람이 지정한다.
 
 ## 이번 단계에서 하는 일
 
@@ -222,6 +222,41 @@ pnu_classroom_metric_calibration_draft.yaml
 
 좌표축 PLY의 색은 X축 빨강, Y축 초록, Z축 파랑, 원래 장면 위쪽 노랑, 목표 위쪽 청록, 바닥점 어두운색, 천장점 밝은 분홍색이다. 실제 결과와 수치는 [Phase 1.5-C 사전 진단 결과](PHASE1_5C_PREFLIGHT_VALIDATION.md)에 기록했다.
 
+## Phase 1.5-C: 실제 크기와 표준 좌표계 생성
+
+사전 진단에서 확인한 원점과 X축 모서리를 설정에 명시한 뒤, Room Envelope의 실제 미터 단위 사본을 만든다. 원본 OBJ와 JSON은 읽기만 하며 수정하지 않는다.
+
+```bash
+conda run -n pgsr python -m tools.proxy_mesh_editor.main calibrate-metric \
+  --envelope-json outputs/proxy_mesh/pnu_classroom/room_envelope/room_envelope.json \
+  --envelope-obj outputs/proxy_mesh/pnu_classroom/room_envelope/room_envelope.obj \
+  --config tools/proxy_mesh_editor/configs/pnu_classroom_metric_calibration.yaml \
+  --output outputs/proxy_mesh/pnu_classroom/metric_calibration
+```
+
+변환은 하나의 양수 배율 `s`, 오른손 좌표계 회전 `R`, 설정에 고정한 원점 `o`를 사용한다.
+
+```text
+p_metric = s · R · (p_scene - o)
+```
+
+현재 강의실 설정은 바닥점 `0`을 원점, 바닥 모서리 `2→3`의 위쪽 성분을 제거한 방향을 `+X`, 기존 `scene.up_vector`를 `+Z`로 사용한다. 실제 모서리 자체의 높이 차이는 그대로 보존되므로 변환된 모서리에 작은 Z 성분이 있을 수 있지만, 그 수평 투영은 정확히 `+X`다.
+
+주요 결과:
+
+```text
+room_envelope_metric.obj
+room_envelope_metric.mtl
+room_envelope_metric.ply
+room_envelope_metric.json
+calibration.json
+calibration_report.md
+calibration_validation.json
+metric_coordinate_axes.ply
+```
+
+`calibration.json`의 `T_metric_from_scene`과 `T_scene_from_metric`은 이후 전파 시뮬레이션 좌표와 원본 장면 좌표를 오갈 때 사용한다. OBJ의 객체·그룹·재질·면 순서와 감김 방향은 유지한다. 면적은 `s²`, 부피는 `s³`, 평면식과 모든 기하 메타데이터는 미터 좌표로 다시 계산한다. 실제 결과는 [Phase 1.5-C 검증 결과](PHASE1_5C_VALIDATION.md)에 기록했다.
+
 ## 설정할 때 주의할 값
 
 현재 PGSR 장면은 실제 미터로 보정되지 않았다. `*_ratio` 값은 **메시 경계 상자의 대각선 길이**를 기준으로 계산한다.
@@ -246,6 +281,10 @@ pnu_classroom_metric_calibration_draft.yaml
 | `calibration_preflight.scale_analysis.warning_relative_spread` | 기준 배율 차이를 경고할 상대 범위 |
 | `calibration_preflight.orientation.target_up` | 순수 회전으로 맞출 목표 위쪽 방향. 현재는 `+Z` |
 | `calibration_preflight.validation.*` | 양의 높이, 위쪽 정렬, 직교성, 왕복 변환의 허용 오차 |
+| `metric_calibration.scale.references` | 단일 배율을 다시 계산할 장면 길이와 실제 미터 길이 |
+| `metric_calibration.coordinate_frame.origin` | 미터 좌표 원점으로 사용할 바닥점의 고정 번호 |
+| `metric_calibration.coordinate_frame.x_axis` | 수평 투영을 `+X`로 사용할 방향성 바닥 모서리 |
+| `metric_calibration.validation.*` | 기준 길이 오차, 회전, 왕복 변환, 평면, 위상 허용 조건 |
 
 `pnu_classroom.yaml`은 넓은 바닥 후보의 법선과 카메라 높이 변화가 가장 작아지는 방향을 함께 확인해, `-Y`에서 약 7도 기울어진 방향을 위쪽으로 설정했다. 이는 장면별 설정이며 다른 장소에 그대로 적용하면 안 된다.
 
@@ -257,8 +296,8 @@ pnu_classroom_metric_calibration_draft.yaml
 - Room Envelope는 완전히 닫힌 껍질만 만들며 문·창문 구멍과 비평면 구조를 지원하지 않는다.
 - `floor`, `wall`, `ceiling`은 법선과 장면 높이만 사용한 제안이다.
 - 사각형은 의도적으로 구멍을 막으므로, 문처럼 실제로 통과 가능한 구간은 이후 편집 단계에서 별도 처리해야 한다.
-- 좌표와 크기는 원본 장면 단위를 유지한다. Sionna RT 전에 실제 미터 크기와 축 방향을 다시 검증해야 한다.
-- 사전 진단은 배율과 좌표 프레임을 추천할 뿐 확정하지 않는다. 현장 실측 뒤 설정 초안을 수정하고 본 변환을 별도 구현해야 한다.
+- 일반 추출·Room Envelope·사전 진단 결과는 원본 장면 단위를 유지한다. 미터 단위 결과는 `calibrate-metric`의 별도 출력만 사용한다.
+- 현재 실제 크기 결과는 사진 기반 문 규격을 사용한 임시값이다. 현장 실측 뒤 `pnu_classroom_metric_calibration.yaml`의 기준 길이만 바꾸고 다시 실행해야 한다.
 
 ## 테스트
 
