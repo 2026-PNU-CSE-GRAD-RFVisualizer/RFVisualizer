@@ -1,0 +1,48 @@
+schema_version: "1.0"
+
+scenario:
+  id: pnu_classroom_synthetic_blocker
+  status: provisional
+  physically_validated: false
+  synthetic_validation: true
+
+  base_scene:
+    phase2a_config: configs/sionna/pnu_classroom_smoke_test.yaml
+
+  obstacles:
+    - id: blocker_panel_000
+      enabled: true
+      semantic_class: validation_blocker
+      purpose: validation_only
+      physical_object: false
+      confidence: synthetic
+
+      geometry:
+        type: box
+        anchor:
+          mode: floor_at_xy
+        position_m:
+          x: -5.0
+          y: -5.0
+        size_m:
+          x: 0.15
+          y: 2.5
+          z: 2.0
+        rotation_deg:
+          roll: 0.0
+          pitch: 0.0
+          yaw: 0.0
+        # The floor is sloped. This clearance keeps every box corner above it.
+        floor_clearance_m: 0.05
+
+      material:
+        source: sionna_preset
+        category: wood
+        preset: wood
+        thickness_m: 0.1
+        scattering_coefficient: 0.0
+
+      export:
+        object_name: blocker_panel_000
+        group_name: obstacle_validation
+

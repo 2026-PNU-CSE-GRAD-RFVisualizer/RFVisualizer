@@ -26,11 +26,17 @@ def _local_mesh(vertices: np.ndarray, faces: np.ndarray) -> Tuple[np.ndarray, np
     return vertices[np.asarray(used, dtype=int)], local_faces
 
 
-def write_ascii_ply(path: Path, vertices: np.ndarray, faces: np.ndarray) -> None:
+def write_ascii_ply(
+    path: Path,
+    vertices: np.ndarray,
+    faces: np.ndarray,
+    comment: str = "RFVisualizer Phase 2-A metric mesh",
+) -> None:
+    safe_comment = str(comment).replace("\n", " ").replace("\r", " ")
     lines = [
         "ply\n",
         "format ascii 1.0\n",
-        "comment RFVisualizer Phase 2-A metric mesh\n",
+        "comment {}\n".format(safe_comment),
         "element vertex {}\n".format(len(vertices)),
         "property float x\nproperty float y\nproperty float z\n",
         "element face {}\n".format(len(faces)),

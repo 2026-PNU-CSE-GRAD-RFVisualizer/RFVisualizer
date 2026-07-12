@@ -1,0 +1,36 @@
+schema_version: "1.0"
+
+experiment:
+  id: pnu_classroom_phase2b_ab
+  status: provisional
+  physically_validated: false
+
+  baseline:
+    scenario: configs/sionna/scenarios/pnu_classroom_empty.yaml
+
+  variants:
+    - scenario: configs/sionna/scenarios/pnu_classroom_synthetic_blocker.yaml
+
+  solver:
+    reuse_phase2a_settings: true
+    carrier_frequency_hz: 2.4e+9
+    max_depth: 2
+    enable_los: true
+    enable_reflection: true
+    enable_refraction: false
+    enable_diffraction: false
+    enable_scattering: false
+    path_samples: 200000
+    coverage_samples: 200000
+    path_seed: 42
+    coverage_seed: 43
+
+  comparison:
+    coverage_delta_unit: dB
+    changed_cell_threshold_db: 1.0
+    require_common_grid: true
+    require_common_valid_mask: true
+
+  reproducibility:
+    rerun_baseline: true
+    baseline_repeat_count: 2

@@ -4,6 +4,8 @@ Phase 1.5-C에서 만든 미터 단위 Room Envelope를 Sionna RT 장면으로 �
 
 현재 결과는 사진 기반 임시 배율과 단일 concrete 재질을 사용한다. 실제 전파 세기와 정량 비교하는 단계가 아니다.
 
+다음 단계의 독립 obstacle layer와 Empty/Variant A/B 비교는 [Phase 2-B 도구](../sionna_scenario/README.md)에서 다룬다.
+
 ## 환경
 
 현재 검증 환경:

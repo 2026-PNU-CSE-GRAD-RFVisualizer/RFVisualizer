@@ -73,7 +73,7 @@ def command_validate_scene(args: argparse.Namespace) -> int:
     return 0
 
 
-def _configure_sionna_scene(scene_xml: str, settings, positions):
+def configure_sionna_scene(scene_xml: str, settings, positions):
     from sionna.rt import PlanarArray, Receiver, Transmitter, load_scene
 
     start = time.perf_counter()
@@ -110,6 +110,10 @@ def _configure_sionna_scene(scene_xml: str, settings, positions):
     if scene.receivers:
         tx.look_at(next(iter(scene.receivers.values())))
     return scene, load_time
+
+
+# Backwards-compatible private name used by the original Phase 2-A implementation.
+_configure_sionna_scene = configure_sionna_scene
 
 
 def command_run(args: argparse.Namespace) -> int:
@@ -152,7 +156,7 @@ def command_run(args: argparse.Namespace) -> int:
         placement_warnings,
         output,
     )
-    scene, scene_load_time = _configure_sionna_scene(
+    scene, scene_load_time = configure_sionna_scene(
         manifest["scene_xml"], settings, positions
     )
     materials = resolve_materials(scene, manifest)
