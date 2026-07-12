@@ -1,0 +1,5 @@
+# 실제 Phase 2-A solver 실행 환경
+sionna-rt==1.2.2
+PyYAML==6.0.3
+matplotlib>=3.7
+pytest==9.1.1

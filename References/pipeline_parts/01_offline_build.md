@@ -214,6 +214,8 @@ MVP 연결 시험에서는 전체 Mesh에 하나의 근사 재질을 적용해�
 
 실제 RSSI와의 오차가 발생하더라도 초기에는 Geometry, Scale, AP 위치, 송신 전력, 재질 설정 중 어느 요소가 원인인지 분리해 검증한다.
 
+Phase 2-A 연결 시험에서는 미터 단위 Room Envelope를 객체별 PLY와 Mitsuba XML로 변환하고, Sionna RT의 공식 ITU concrete preset으로 빈 방을 구성했다. 2.4GHz에서 LoS 거리, 최대 2회 정반사, 높이 1.5m의 1m 격자 path-gain 지도가 실제 solver로 계산되는 것을 확인했다. 이 결과는 좌표·장면·API 연결 검증이며 실제 재질이나 RSSI 정확도를 입증하지 않는다.
+
 ## 3.7 Radio Map 계산
 
 Sionna RT의 RadioMapSolver를 이용하여 공간의 RSS 또는 Path Gain을 계산한다.

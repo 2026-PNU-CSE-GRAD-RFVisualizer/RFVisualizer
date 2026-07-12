@@ -21,6 +21,8 @@
 - Radio Map 출력 형식
 - Material Group 적용 가능 여부
 
+현재 Phase 2-A에서 이 연결 검증을 완료했다. 미터 단위 닫힌 Room Envelope를 Sionna/Mitsuba 장면으로 변환해 LoS·정반사·저해상도 path-gain 지도를 생성했다. 현재 배율과 concrete 재질은 임시값이므로 다음 단계에서는 실제 재질 정확도가 아니라 문과 큰 차폐 구조의 영향부터 분리해 확인한다.
+
 ## 2단계: SIBR Fork 확장 가능성 검증
 
 ```text
@@ -175,4 +177,3 @@ PC Test Frame
 - 여러 높이의 Radio Map Slice
 - 자동 Semantic/Material Assignment
 - GaussianRT-RF 기반 직접 RF Ray Tracing
-

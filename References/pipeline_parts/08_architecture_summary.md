@@ -56,6 +56,8 @@ Room Envelope Builder는 사람이 순서대로 선택한 바닥·천장·벽의
 
 실제 크기 보정은 Room Envelope 원본을 유지한 채 미터 단위 표준 좌표 사본과 양방향 4×4 변환 행렬을 만든다. 설정에 고정한 바닥점·바닥 모서리·장면 위쪽으로 오른손 좌표계를 구성하고 하나의 양수 배율만 적용한다. 현재 사진 기반 문 크기로 얻은 결과는 임시값이므로 현장 실측 뒤 보정 설정만 갱신해 다시 실행해야 한다.
 
+Phase 2-A에서는 이 미터 단위 사본을 객체별 PLY와 Mitsuba XML로 변환하고 Sionna RT의 빈 방 연결 시험을 완료했다. ITU concrete 단일 근사 재질에서 LoS, 최대 2회 정반사, 높이 1.5m의 저해상도 path-gain 지도를 계산하고 Coverage 점을 원본 PGSR 좌표로 역변환한다. 이는 물리 정확도가 아니라 장면·좌표·solver 연결 성공을 의미한다.
+
 실시간 Viewer는 공식 SIBR Real-time Viewer를 Fork하여 확장하는 방식을 우선 검증한다. 기존 Gaussian Renderer와 Camera 구조를 유지한 채 Heatmap Plane, PGSR Mesh Depth-only Pass, UDP Pose Receiver, Offscreen Framebuffer, JPEG Streaming 모듈을 추가한다.
 
 히트맵 가림 판정은 PGSR Mesh Depth를 우선 사용한다. Gaussian Color와 Mesh 경계가 일치하지 않는 문제는 Occlusion Boundary Mismatch로 정의하고, Camera·Projection·Scale·Mesh 오류를 먼저 확인한다. 이후 필요할 경우 PGSR Unbiased Depth 비교와 작은 후처리 보정을 수행한다.
