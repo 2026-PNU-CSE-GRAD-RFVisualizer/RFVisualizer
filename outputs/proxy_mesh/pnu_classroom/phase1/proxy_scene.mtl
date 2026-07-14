@@ -1,0 +1,22 @@
+# RFVisualizer Phase 1 proxy materials
+
+newmtl floor
+Ka 0 0 0
+Kd 0.550000 0.550000 0.550000
+Ks 0 0 0
+d 1.0
+illum 1
+
+newmtl ceiling
+Ka 0 0 0
+Kd 0.920000 0.920000 0.880000
+Ks 0 0 0
+d 1.0
+illum 1
+
+newmtl wall
+Ka 0 0 0
+Kd 0.820000 0.800000 0.740000
+Ks 0 0 0
+d 1.0
+illum 1

@@ -1,0 +1,5 @@
+# Preview-only Wavefront materials; RF values live in scene.xml
+
+newmtl itu_wood_blocker_panel_000
+Kd 0.53 0.28 0.12
+d 1.0

@@ -1,0 +1,403 @@
+{
+  "validation_success": true,
+  "scale_validation": {
+    "maximum_reference_relative_error": 0.043071922958781705,
+    "allowed_maximum_reference_relative_error": 0.1,
+    "reference_spread": 0.08151200331786516,
+    "spread_status": "warning",
+    "success": true
+  },
+  "rotation_validation": {
+    "determinant": 1.0,
+    "determinant_error": 0.0,
+    "orthogonality_error": 1.0763881994967726e-16,
+    "success": true
+  },
+  "coordinate_frame_validation": {
+    "origin_metric_coordinate": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "origin_error": 0.0,
+    "up_alignment_error": 1.110804513799279e-16,
+    "projected_x_edge_metric_vector": [
+      15.381533429525506,
+      -9.645053607371535e-16,
+      -2.3610032824127724e-17
+    ],
+    "projected_x_edge_alignment_error": 9.647942913080813e-16,
+    "actual_selected_edge_metric_vector": [
+      15.381533429525504,
+      0.0,
+      -0.1825295269238415
+    ],
+    "actual_edge_z_note": "실제 edge의 경사는 유지되므로 Z 성분이 있을 수 있습니다.",
+    "right_handed_axis_error": 1.1274368112207335e-16,
+    "success": true
+  },
+  "round_trip_validation": {
+    "group_maximum_errors": {
+      "vertices": 2.8491067950505684e-15,
+      "bottom_corners": 2.914203267236168e-15,
+      "top_corners": 1.2588308695936154e-15,
+      "interior_point": 3.188872858294072e-16,
+      "plane_reference_points": 2.8570721860483087e-15
+    },
+    "maximum_error": 2.914203267236168e-15,
+    "success": true
+  },
+  "topology_validation": {
+    "source": {
+      "vertex_count": 8,
+      "triangle_count": 12,
+      "edge_count": 18,
+      "degenerate_triangle_count": 0,
+      "degenerate_triangle_indices": [],
+      "duplicate_face_count": 0,
+      "duplicate_vertex_count": 0,
+      "duplicate_vertex_pairs": [],
+      "boundary_edge_count": 0,
+      "boundary_edges": [],
+      "non_manifold_edge_count": 0,
+      "non_manifold_edges": [],
+      "connected_component_count": 1,
+      "signed_volume": 100.63834831604264,
+      "absolute_volume": 100.63834831604264,
+      "surface_area": 185.30380792199395,
+      "euler_characteristic": 2,
+      "inward_or_ambiguous_face_count": 0,
+      "inward_or_ambiguous_face_indices": [],
+      "closed_manifold_success": true
+    },
+    "metric": {
+      "vertex_count": 8,
+      "triangle_count": 12,
+      "edge_count": 18,
+      "degenerate_triangle_count": 0,
+      "degenerate_triangle_indices": [],
+      "duplicate_face_count": 0,
+      "duplicate_vertex_count": 0,
+      "duplicate_vertex_pairs": [],
+      "boundary_edge_count": 0,
+      "boundary_edges": [],
+      "non_manifold_edge_count": 0,
+      "non_manifold_edges": [],
+      "connected_component_count": 1,
+      "signed_volume": 370.159238704453,
+      "absolute_volume": 370.159238704453,
+      "surface_area": 441.53764728806505,
+      "euler_characteristic": 2,
+      "inward_or_ambiguous_face_count": 0,
+      "inward_or_ambiguous_face_indices": [],
+      "closed_manifold_success": true
+    },
+    "field_comparison": {
+      "vertex_count": {
+        "source": 8,
+        "metric": 8,
+        "match": true
+      },
+      "triangle_count": {
+        "source": 12,
+        "metric": 12,
+        "match": true
+      },
+      "boundary_edge_count": {
+        "source": 0,
+        "metric": 0,
+        "match": true
+      },
+      "non_manifold_edge_count": {
+        "source": 0,
+        "metric": 0,
+        "match": true
+      },
+      "connected_component_count": {
+        "source": 1,
+        "metric": 1,
+        "match": true
+      },
+      "euler_characteristic": {
+        "source": 2,
+        "metric": 2,
+        "match": true
+      },
+      "degenerate_triangle_count": {
+        "source": 0,
+        "metric": 0,
+        "match": true
+      },
+      "duplicate_face_count": {
+        "source": 0,
+        "metric": 0,
+        "match": true
+      }
+    },
+    "face_indices_unchanged": true,
+    "signed_volume_sign_preserved": true,
+    "source_json_topology": {
+      "vertex_count": 8,
+      "triangle_count": 12,
+      "edge_count": 18,
+      "degenerate_triangle_count": 0,
+      "degenerate_triangle_indices": [],
+      "duplicate_face_count": 0,
+      "duplicate_vertex_count": 0,
+      "duplicate_vertex_pairs": [],
+      "boundary_edge_count": 0,
+      "boundary_edges": [],
+      "non_manifold_edge_count": 0,
+      "non_manifold_edges": [],
+      "connected_component_count": 1,
+      "signed_volume": 100.63834831594538,
+      "absolute_volume": 100.63834831594538,
+      "surface_area": 185.30380792193472,
+      "euler_characteristic": 2,
+      "inward_or_ambiguous_face_count": 0,
+      "inward_or_ambiguous_face_indices": [],
+      "closed_manifold_success": true
+    },
+    "success": true
+  },
+  "scale_geometry_validation": {
+    "source_surface_area": 185.30380792199395,
+    "metric_surface_area": 441.53764728806505,
+    "expected_metric_surface_area": 441.53764728806493,
+    "surface_area_absolute_error": 1.1368683772161603e-13,
+    "surface_area_relative_error": 2.574793755863931e-16,
+    "source_signed_volume": 100.63834831604264,
+    "metric_signed_volume": 370.159238704453,
+    "source_absolute_volume": 100.63834831604264,
+    "metric_absolute_volume": 370.159238704453,
+    "expected_metric_absolute_volume": 370.1592387044529,
+    "absolute_volume_error": 1.1368683772161603e-13,
+    "volume_relative_error": 3.071295427327893e-16,
+    "success": true
+  },
+  "plane_validation": {
+    "metric_plane_equations": {
+      "floor": [
+        0.011860592064489837,
+        0.03007875286920963,
+        0.9994771608104474,
+        7.74257473280752e-17
+      ],
+      "ceiling": [
+        0.012479301931633732,
+        0.06524836895721371,
+        0.9977910188870827,
+        -2.089823204820794
+      ],
+      "walls": [
+        [
+          0.05448828465384758,
+          -0.9950162592716518,
+          0.08350850627648991,
+          1.826763201762051e-15
+        ],
+        [
+          0.9990441921628792,
+          -0.018416433753022855,
+          -0.03964261688436683,
+          15.11856164252189
+        ],
+        [
+          0.0006741543345064722,
+          -0.998384772444404,
+          0.056810137009771854,
+          -10.91933739042708
+        ],
+        [
+          -0.9969108658954583,
+          -0.0038069806291338533,
+          0.07844891559516336,
+          8.765362596511765e-16
+        ]
+      ]
+    },
+    "plane_centroids": {
+      "floor": [
+        -7.596612920649373,
+        -5.66214050461741,
+        0.2605466758856445
+      ],
+      "ceiling": [
+        -7.460323453454127,
+        -5.500156207822327,
+        2.547426271795343
+      ],
+      "walls": [
+        [
+          -7.507324414401288,
+          -0.3144187955474541,
+          1.1520912081915236
+        ],
+        [
+          -15.17985567094734,
+          -5.784169742250929,
+          1.5069331986801213
+        ],
+        [
+          -7.549611959702212,
+          -10.847877916892283,
+          1.6558817394894638
+        ],
+        [
+          0.1229192968438394,
+          -5.378126970188808,
+          1.301039749000866
+        ]
+      ]
+    },
+    "floor_vertex_residuals": [
+      7.74257473280752e-17,
+      1.1345368714652496e-16,
+      4.979940464222727e-17,
+      4.2724203486688154e-17
+    ],
+    "ceiling_vertex_residuals": [
+      0.0,
+      4.440892098500626e-16,
+      0.0,
+      8.881784197001252e-16
+    ],
+    "wall_validation": [
+      {
+        "wall_index": 0,
+        "metric_equation": [
+          0.05448828465384758,
+          -0.9950162592716518,
+          0.08350850627648991,
+          1.826763201762051e-15
+        ],
+        "vertex_residuals": [
+          1.826763201762051e-15,
+          1.9789968840568416e-15,
+          8.252033723518118e-16,
+          2.071351111791861e-15
+        ],
+        "maximum_vertex_residual": 2.071351111791861e-15,
+        "metric_centroid": [
+          -7.507324414401288,
+          -0.3144187955474541,
+          1.1520912081915236
+        ]
+      },
+      {
+        "wall_index": 1,
+        "metric_equation": [
+          0.9990441921628792,
+          -0.018416433753022855,
+          -0.03964261688436683,
+          15.11856164252189
+        ],
+        "vertex_residuals": [
+          1.7763568394002505e-15,
+          0.0,
+          0.0,
+          1.7763568394002505e-15
+        ],
+        "maximum_vertex_residual": 1.7763568394002505e-15,
+        "metric_centroid": [
+          -15.17985567094734,
+          -5.784169742250929,
+          1.5069331986801213
+        ]
+      },
+      {
+        "wall_index": 2,
+        "metric_equation": [
+          0.0006741543345064722,
+          -0.998384772444404,
+          0.056810137009771854,
+          -10.91933739042708
+        ],
+        "vertex_residuals": [
+          0.0,
+          1.7763568394002505e-15,
+          1.7763568394002505e-15,
+          3.552713678800501e-15
+        ],
+        "maximum_vertex_residual": 3.552713678800501e-15,
+        "metric_centroid": [
+          -7.549611959702212,
+          -10.847877916892283,
+          1.6558817394894638
+        ]
+      },
+      {
+        "wall_index": 3,
+        "metric_equation": [
+          -0.9969108658954583,
+          -0.0038069806291338533,
+          0.07844891559516336,
+          8.765362596511765e-16
+        ],
+        "vertex_residuals": [
+          4.446221051833723e-16,
+          8.765362596511765e-16,
+          1.736026680775269e-15,
+          4.659020993621501e-16
+        ],
+        "maximum_vertex_residual": 1.736026680775269e-15,
+        "metric_centroid": [
+          0.1229192968438394,
+          -5.378126970188808,
+          1.301039749000866
+        ]
+      }
+    ],
+    "maximum_plane_residual": 3.552713678800501e-15,
+    "success": true
+  },
+  "obj_preservation_validation": {
+    "object_group_material_face_directives_unchanged": true,
+    "face_indices_unchanged": true,
+    "source_material_library": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/room_envelope/room_envelope.mtl",
+    "metric_material_library": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/metric_calibration/room_envelope_metric.mtl",
+    "material_library_copied": true,
+    "obj_structure_preserved": true,
+    "success": true
+  },
+  "source_bounds": {
+    "min": [
+      -5.4294933817,
+      -1.38321014738,
+      -5.51449114563
+    ],
+    "max": [
+      6.62832788173,
+      1.53206493662,
+      6.18299480959
+    ],
+    "extent": [
+      12.05782126343,
+      2.915275084,
+      11.69748595522
+    ],
+    "diagonal": 17.050544276027818
+  },
+  "metric_bounds": {
+    "min": [
+      -15.314045186589079,
+      -10.918306217554669,
+      -6.613381096140029e-13
+    ],
+    "max": [
+      0.2611781972069167,
+      0.18352873204145628,
+      2.9894680544053616
+    ],
+    "extent": [
+      15.575223383795995,
+      11.101834949596125,
+      2.989468054406023
+    ],
+    "diagonal": 19.359112633370717
+  },
+  "warnings": [
+    "PROVISIONAL METRIC CALIBRATION - NOT VALIDATED BY ON-SITE MEASUREMENT",
+    "Scale reference spread가 warning 기준을 넘었습니다: 8.15%"
+  ]
+}

@@ -1,0 +1,1312 @@
+{
+  "schema_version": "1.0",
+  "baseline": {
+    "total_path_count": 53,
+    "los_path_exists": true,
+    "los_path_count": 2,
+    "specular_reflection_path_count": 51,
+    "other_path_count": 0,
+    "path_counts_by_type": {
+      "specular_reflection": 51,
+      "los": 2
+    },
+    "maximum_interaction_count": 2,
+    "interaction_object_ids": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "interaction_object_id_count": 6,
+    "interaction_object_names": [
+      "ceiling_000",
+      "floor_000",
+      "wall_000",
+      "wall_001",
+      "wall_002",
+      "wall_003"
+    ],
+    "endpoints": {
+      "transmitters": [
+        "tx_test"
+      ],
+      "receivers": [
+        "rx_los",
+        "rx_reflection"
+      ]
+    },
+    "distributions": {
+      "path_distance_m": {
+        "count": 53,
+        "finite_count": 53,
+        "minimum": 3.99999990723561,
+        "maximum": 34.536006682834156,
+        "mean": 14.723876514745402,
+        "median": 12.89258171408322,
+        "percentile_05": 4.637739490622876,
+        "percentile_25": 10.24734214613187,
+        "percentile_75": 20.312671193510738,
+        "percentile_95": 27.056227745236825
+      },
+      "delay_s": {
+        "count": 53,
+        "finite_count": 53,
+        "minimum": 1.3342563498497384e-08,
+        "maximum": 1.1519971820916908e-07,
+        "mean": 4.91135654745037e-08,
+        "median": 4.30050235422641e-08,
+        "percentile_05": 1.5469833769543583e-08,
+        "percentile_25": 3.418145411160367e-08,
+        "percentile_75": 6.775577787720977e-08,
+        "percentile_95": 9.024986127315059e-08
+      },
+      "amplitude_magnitude": {
+        "count": 53,
+        "finite_count": 53,
+        "minimum": 5.506702129399614e-05,
+        "maximum": 0.0024850754998624325,
+        "mean": 0.00026448889400050265,
+        "median": 0.00016353736930072542,
+        "percentile_05": 7.077231044776879e-05,
+        "percentile_25": 0.00010740404220600707,
+        "percentile_75": 0.00021404312465254154,
+        "percentile_95": 0.0004761707749583868
+      },
+      "path_gain_linear": {
+        "count": 0,
+        "finite_count": 0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "percentile_05": null,
+        "percentile_25": null,
+        "percentile_75": null,
+        "percentile_95": null
+      },
+      "path_gain_db": {
+        "count": 0,
+        "finite_count": 0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "percentile_05": null,
+        "percentile_25": null,
+        "percentile_75": null,
+        "percentile_95": null
+      }
+    }
+  },
+  "variant": {
+    "total_path_count": 35,
+    "los_path_exists": true,
+    "los_path_count": 1,
+    "specular_reflection_path_count": 34,
+    "other_path_count": 0,
+    "path_counts_by_type": {
+      "specular_reflection": 34,
+      "los": 1
+    },
+    "maximum_interaction_count": 2,
+    "interaction_object_ids": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "interaction_object_id_count": 7,
+    "interaction_object_names": [
+      "blocker_panel_000",
+      "ceiling_000",
+      "floor_000",
+      "wall_000",
+      "wall_001",
+      "wall_002",
+      "wall_003"
+    ],
+    "endpoints": {
+      "transmitters": [
+        "tx_test"
+      ],
+      "receivers": [
+        "rx_los",
+        "rx_reflection"
+      ]
+    },
+    "distributions": {
+      "path_distance_m": {
+        "count": 35,
+        "finite_count": 35,
+        "minimum": 4.242640370758862,
+        "maximum": 33.701101526316066,
+        "mean": 12.447696615422746,
+        "median": 12.527309376760599,
+        "percentile_05": 4.693277758842047,
+        "percentile_25": 8.53672048783235,
+        "percentile_75": 14.121294212109273,
+        "percentile_95": 22.33215472954975
+      },
+      "delay_s": {
+        "count": 35,
+        "finite_count": 35,
+        "minimum": 1.415192496523332e-08,
+        "maximum": 1.124147743780668e-07,
+        "mean": 4.152104658824588e-08,
+        "median": 4.178660617526475e-08,
+        "percentile_05": 1.5655089491417585e-08,
+        "percentile_25": 2.8475434454833248e-08,
+        "percentile_75": 4.710356726889131e-08,
+        "percentile_95": 7.449204986187394e-08
+      },
+      "amplitude_magnitude": {
+        "count": 35,
+        "finite_count": 35,
+        "minimum": 2.2969566636364647e-05,
+        "maximum": 0.0023429517168551683,
+        "mean": 0.0002428506605031451,
+        "median": 0.00016387883974960436,
+        "percentile_05": 4.6381002866311e-05,
+        "percentile_25": 0.00010760909050638526,
+        "percentile_75": 0.00022345152731525973,
+        "percentile_95": 0.00047120894334092613
+      },
+      "path_gain_linear": {
+        "count": 0,
+        "finite_count": 0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "percentile_05": null,
+        "percentile_25": null,
+        "percentile_75": null,
+        "percentile_95": null
+      },
+      "path_gain_db": {
+        "count": 0,
+        "finite_count": 0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "percentile_05": null,
+        "percentile_25": null,
+        "percentile_75": null,
+        "percentile_95": null
+      }
+    }
+  },
+  "endpoint_validation": {
+    "matches": true,
+    "required": true,
+    "metadata_available": true
+  },
+  "changes": {
+    "los_path_exists_changed": false,
+    "los_path_count_delta": -1,
+    "specular_reflection_path_count_delta": -17,
+    "total_path_count_delta": -18,
+    "maximum_interaction_count_delta": 0,
+    "distribution_changes": {
+      "path_distance_m": {
+        "baseline": {
+          "count": 53,
+          "finite_count": 53,
+          "minimum": 3.99999990723561,
+          "maximum": 34.536006682834156,
+          "mean": 14.723876514745402,
+          "median": 12.89258171408322,
+          "percentile_05": 4.637739490622876,
+          "percentile_25": 10.24734214613187,
+          "percentile_75": 20.312671193510738,
+          "percentile_95": 27.056227745236825
+        },
+        "variant": {
+          "count": 35,
+          "finite_count": 35,
+          "minimum": 4.242640370758862,
+          "maximum": 33.701101526316066,
+          "mean": 12.447696615422746,
+          "median": 12.527309376760599,
+          "percentile_05": 4.693277758842047,
+          "percentile_25": 8.53672048783235,
+          "percentile_75": 14.121294212109273,
+          "percentile_95": 22.33215472954975
+        },
+        "mean_delta": -2.2761798993226563,
+        "median_delta": -0.3652723373226223,
+        "equal_finite_value_count": false,
+        "absolute_sorted_delta": {
+          "matched_count": 31,
+          "mean_absolute_delta": 3.951091229962898e-07,
+          "maximum_absolute_delta": 2.1301535326756493e-06,
+          "percentile_95_absolute_delta": 2.1301535326756493e-06
+        },
+        "noise_floor": 2.1301535326756493e-06,
+        "numeric_availability_changed": true,
+        "change_exceeds_noise_floor": true
+      },
+      "delay_s": {
+        "baseline": {
+          "count": 53,
+          "finite_count": 53,
+          "minimum": 1.3342563498497384e-08,
+          "maximum": 1.1519971820916908e-07,
+          "mean": 4.91135654745037e-08,
+          "median": 4.30050235422641e-08,
+          "percentile_05": 1.5469833769543583e-08,
+          "percentile_25": 3.418145411160367e-08,
+          "percentile_75": 6.775577787720977e-08,
+          "percentile_95": 9.024986127315059e-08
+        },
+        "variant": {
+          "count": 35,
+          "finite_count": 35,
+          "minimum": 1.415192496523332e-08,
+          "maximum": 1.124147743780668e-07,
+          "mean": 4.152104658824588e-08,
+          "median": 4.178660617526475e-08,
+          "percentile_05": 1.5655089491417585e-08,
+          "percentile_25": 2.8475434454833248e-08,
+          "percentile_75": 4.710356726889131e-08,
+          "percentile_95": 7.449204986187394e-08
+        },
+        "mean_delta": -7.592518886257818e-09,
+        "median_delta": -1.218417366999347e-09,
+        "equal_finite_value_count": false,
+        "absolute_sorted_delta": {
+          "matched_count": 31,
+          "mean_absolute_delta": 1.3179421711679278e-15,
+          "maximum_absolute_delta": 7.105427357601002e-15,
+          "percentile_95_absolute_delta": 7.105427357601002e-15
+        },
+        "noise_floor": 7.105427357601002e-15,
+        "numeric_availability_changed": true,
+        "change_exceeds_noise_floor": true
+      },
+      "amplitude_magnitude": {
+        "baseline": {
+          "count": 53,
+          "finite_count": 53,
+          "minimum": 5.506702129399614e-05,
+          "maximum": 0.0024850754998624325,
+          "mean": 0.00026448889400050265,
+          "median": 0.00016353736930072542,
+          "percentile_05": 7.077231044776879e-05,
+          "percentile_25": 0.00010740404220600707,
+          "percentile_75": 0.00021404312465254154,
+          "percentile_95": 0.0004761707749583868
+        },
+        "variant": {
+          "count": 35,
+          "finite_count": 35,
+          "minimum": 2.2969566636364647e-05,
+          "maximum": 0.0023429517168551683,
+          "mean": 0.0002428506605031451,
+          "median": 0.00016387883974960436,
+          "percentile_05": 4.6381002866311e-05,
+          "percentile_25": 0.00010760909050638526,
+          "percentile_75": 0.00022345152731525973,
+          "percentile_95": 0.00047120894334092613
+        },
+        "mean_delta": -2.1638233497357556e-05,
+        "median_delta": 3.4147044887893854e-07,
+        "equal_finite_value_count": false,
+        "absolute_sorted_delta": {
+          "matched_count": 31,
+          "mean_absolute_delta": 5.5636686012824163e-11,
+          "maximum_absolute_delta": 3.9369244314775044e-10,
+          "percentile_95_absolute_delta": 2.584407052784194e-10
+        },
+        "noise_floor": 3.733702915527555e-10,
+        "numeric_availability_changed": true,
+        "change_exceeds_noise_floor": true
+      },
+      "path_gain_linear": {
+        "baseline": {
+          "count": 0,
+          "finite_count": 0,
+          "minimum": null,
+          "maximum": null,
+          "mean": null,
+          "median": null,
+          "percentile_05": null,
+          "percentile_25": null,
+          "percentile_75": null,
+          "percentile_95": null
+        },
+        "variant": {
+          "count": 0,
+          "finite_count": 0,
+          "minimum": null,
+          "maximum": null,
+          "mean": null,
+          "median": null,
+          "percentile_05": null,
+          "percentile_25": null,
+          "percentile_75": null,
+          "percentile_95": null
+        },
+        "mean_delta": null,
+        "median_delta": null,
+        "equal_finite_value_count": true,
+        "absolute_sorted_delta": {
+          "matched_count": 0,
+          "mean_absolute_delta": null,
+          "maximum_absolute_delta": null,
+          "percentile_95_absolute_delta": null
+        },
+        "noise_floor": 0.0,
+        "numeric_availability_changed": false,
+        "change_exceeds_noise_floor": false
+      },
+      "path_gain_db": {
+        "baseline": {
+          "count": 0,
+          "finite_count": 0,
+          "minimum": null,
+          "maximum": null,
+          "mean": null,
+          "median": null,
+          "percentile_05": null,
+          "percentile_25": null,
+          "percentile_75": null,
+          "percentile_95": null
+        },
+        "variant": {
+          "count": 0,
+          "finite_count": 0,
+          "minimum": null,
+          "maximum": null,
+          "mean": null,
+          "median": null,
+          "percentile_05": null,
+          "percentile_25": null,
+          "percentile_75": null,
+          "percentile_95": null
+        },
+        "mean_delta": null,
+        "median_delta": null,
+        "equal_finite_value_count": true,
+        "absolute_sorted_delta": {
+          "matched_count": 0,
+          "mean_absolute_delta": null,
+          "maximum_absolute_delta": null,
+          "percentile_95_absolute_delta": null
+        },
+        "noise_floor": 0.0,
+        "numeric_availability_changed": false,
+        "change_exceeds_noise_floor": false
+      }
+    },
+    "added_interaction_object_ids": [
+      7
+    ],
+    "removed_interaction_object_ids": [],
+    "common_interaction_object_ids": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  "canonical_matching": {
+    "identity_fields": [
+      "transmitter",
+      "receiver",
+      "path_type",
+      "ordered_interaction_object_ids"
+    ],
+    "within_group_order": [
+      "distance_m",
+      "delay_s",
+      "amplitude_magnitude",
+      "path_gain_linear",
+      "path_gain_db"
+    ],
+    "matched_path_count": 31,
+    "unmatched_baseline_path_count": 22,
+    "unmatched_variant_path_count": 4,
+    "unmatched_baseline_structures": [
+      {
+        "transmitter": "tx_test",
+        "receiver": "rx_los",
+        "path_type": "los",
+        "ordered_interaction_object_ids": [],
+        "count": 1
+      },
+      {
+        "transmitter": "tx_test",
+        "receiver": "rx_los",
+        "path_type": "specular_reflection",
+        "ordered_interaction_object_ids": [
+          "1"
+        ],
+        "count": 1
+      },
+      {
+        "transmitter": "tx_test",
+        "receiver": "rx_los",
+        "path_type": "specular_reflection",
+        "ordered_interaction_object_ids": [
+          "1",
+          "2"
+        ],
+        "count": 1
+      },
+      {
+        "transmitter": "tx_test",
+        "receiver": "rx_los",
+        "path_type": "specular_reflection",
+        "ordered_interaction_object_ids": [
+          "1",
+          "4"
+        ],
+        "count": 1
+      },
+      {
+        "transmitter": "tx_test",
+        "receiver": "rx_los",
+        "path_type": "specular_reflection",
+        "ordered_interaction_object_ids": [
+          "1",
+          "6"
+        ],
+        "count": 1
+      },
+      {
+        "transmitter": "tx_test",
+        "receiver": "rx_los",
+        "path_type": "specular_reflection",
+        "ordered_interaction_object_ids": [
+          "2",
+          "1"
+        ],
+        "count": 1
+      },
+      {
+        "transmitter": "tx_test",
+        "receiver": "rx_los",
+        "path_type": "specular_reflection",
+        "ordered_interaction_object_ids": [
+          "2",
+          "6"
+        ],
+        "count": 1
+      },
+      {
+        "transmitter": "tx_test",
+        "receiver": "rx_los",
+        "path_type": "specular_reflection",
+        "ordered_interaction_object_ids": [
+          "4"
+        ],
+        "count": 1
+      },
+      {
+        "transmitter": "tx_test",
+        "receiver": "rx_los",
+        "path_type": "specular_reflection",
+        "ordered_interaction_object_ids": [
+          "4",
+          "1"
+        ],
+        "count": 1
+      },
+      {
+        "transmitter": "tx_test",
+        "receiver": "rx_los",
+        "path_type": "specular_reflection",
+        "ordered_interaction_object_ids": [
+          "4",
+          "3"
+        ],
+        "count": 1
+      },
+      {
+        "transmitter": "tx_test",
+        "receiver": "rx_los",
+        "path_type": "specular_reflection",
+        "ordered_interaction_object_ids": [
+          "4",
+          "5"
+        ],
+        "count": 1
+      },
+      {
+        "transmitter": "tx_test",
+        "receiver": "rx_los",
+        "path_type": "specular_reflection",
+        "ordered_interaction_object_ids": [
+          "4",
+          "6"
+        ],
+        "count": 1
+      },
+      {
+        "transmitter": "tx_test",
+        "receiver": "rx_los",
+        "path_type": "specular_reflection",
+        "ordered_interaction_object_ids": [
+          "5",
+          "3"
+        ],
+        "count": 1
+      },
+      {
+        "transmitter": "tx_test",
+        "receiver": "rx_los",
+        "path_type": "specular_reflection",
+        "ordered_interaction_object_ids": [
+          "6"
+        ],
+        "count": 1
+      },
+      {
+        "transmitter": "tx_test",
+        "receiver": "rx_los",
+        "path_type": "specular_reflection",
+        "ordered_interaction_object_ids": [
+          "6",
+          "4"
+        ],
+        "count": 1
+      },
+      {
+        "transmitter": "tx_test",
+        "receiver": "rx_reflection",
+        "path_type": "specular_reflection",
+        "ordered_interaction_object_ids": [
+          "2",
+          "6"
+        ],
+        "count": 1
+      },
+      {
+        "transmitter": "tx_test",
+        "receiver": "rx_reflection",
+        "path_type": "specular_reflection",
+        "ordered_interaction_object_ids": [
+          "3",
+          "6"
+        ],
+        "count": 1
+      },
+      {
+        "transmitter": "tx_test",
+        "receiver": "rx_reflection",
+        "path_type": "specular_reflection",
+        "ordered_interaction_object_ids": [
+          "6"
+        ],
+        "count": 1
+      },
+      {
+        "transmitter": "tx_test",
+        "receiver": "rx_reflection",
+        "path_type": "specular_reflection",
+        "ordered_interaction_object_ids": [
+          "6",
+          "2"
+        ],
+        "count": 1
+      },
+      {
+        "transmitter": "tx_test",
+        "receiver": "rx_reflection",
+        "path_type": "specular_reflection",
+        "ordered_interaction_object_ids": [
+          "6",
+          "3"
+        ],
+        "count": 1
+      },
+      {
+        "transmitter": "tx_test",
+        "receiver": "rx_reflection",
+        "path_type": "specular_reflection",
+        "ordered_interaction_object_ids": [
+          "6",
+          "4"
+        ],
+        "count": 1
+      },
+      {
+        "transmitter": "tx_test",
+        "receiver": "rx_reflection",
+        "path_type": "specular_reflection",
+        "ordered_interaction_object_ids": [
+          "6",
+          "5"
+        ],
+        "count": 1
+      }
+    ],
+    "unmatched_variant_structures": [
+      {
+        "transmitter": "tx_test",
+        "receiver": "rx_reflection",
+        "path_type": "specular_reflection",
+        "ordered_interaction_object_ids": [
+          "7"
+        ],
+        "count": 1
+      },
+      {
+        "transmitter": "tx_test",
+        "receiver": "rx_reflection",
+        "path_type": "specular_reflection",
+        "ordered_interaction_object_ids": [
+          "7",
+          "1"
+        ],
+        "count": 1
+      },
+      {
+        "transmitter": "tx_test",
+        "receiver": "rx_reflection",
+        "path_type": "specular_reflection",
+        "ordered_interaction_object_ids": [
+          "7",
+          "2"
+        ],
+        "count": 1
+      },
+      {
+        "transmitter": "tx_test",
+        "receiver": "rx_reflection",
+        "path_type": "specular_reflection",
+        "ordered_interaction_object_ids": [
+          "7",
+          "4"
+        ],
+        "count": 1
+      }
+    ],
+    "structure_changed": true
+  },
+  "obstacle_evidence": {
+    "requested_obstacle_object_ids": [
+      7
+    ],
+    "baseline_interacting_obstacle_ids": [],
+    "variant_interacting_obstacle_ids": [
+      7
+    ],
+    "baseline_obstacle_interaction_path_count": 0,
+    "variant_obstacle_interaction_path_count": 4,
+    "has_obstacle_interaction_evidence": true,
+    "los_change_evidence": true,
+    "blocker_related_change": true,
+    "evidence_basis": [
+      "los_presence_or_count_changed",
+      "variant_path_interacts_with_requested_obstacle"
+    ]
+  },
+  "path_configuration_changed": true,
+  "change_exceeds_numerical_noise": true,
+  "rx_los": {
+    "schema_version": "1.0",
+    "baseline": {
+      "total_path_count": 27,
+      "los_path_exists": true,
+      "los_path_count": 1,
+      "specular_reflection_path_count": 26,
+      "other_path_count": 0,
+      "path_counts_by_type": {
+        "specular_reflection": 26,
+        "los": 1
+      },
+      "maximum_interaction_count": 2,
+      "interaction_object_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "interaction_object_id_count": 6,
+      "interaction_object_names": [
+        "ceiling_000",
+        "floor_000",
+        "wall_000",
+        "wall_001",
+        "wall_002",
+        "wall_003"
+      ],
+      "endpoints": {
+        "transmitters": [
+          "tx_test"
+        ],
+        "receivers": [
+          "rx_los"
+        ]
+      },
+      "distributions": {
+        "path_distance_m": {
+          "count": 27,
+          "finite_count": 27,
+          "minimum": 3.99999990723561,
+          "maximum": 34.536006682834156,
+          "mean": 14.534609371465793,
+          "median": 12.527307246607066,
+          "percentile_05": 4.546707059880953,
+          "percentile_25": 10.4579887686711,
+          "percentile_75": 20.547765588144486,
+          "percentile_95": 25.66503491079867
+        },
+        "delay_s": {
+          "count": 27,
+          "finite_count": 27,
+          "minimum": 1.3342563498497384e-08,
+          "maximum": 1.1519971820916908e-07,
+          "mean": 4.848223824051569e-08,
+          "median": 4.1786599069837393e-08,
+          "percentile_05": 1.51661822656024e-08,
+          "percentile_25": 3.488409561214212e-08,
+          "percentile_75": 6.85399683675314e-08,
+          "percentile_95": 8.560934148249543e-08
+        },
+        "amplitude_magnitude": {
+          "count": 27,
+          "finite_count": 27,
+          "minimum": 5.506702129399614e-05,
+          "maximum": 0.0024850754998624325,
+          "mean": 0.0002672849626850104,
+          "median": 0.00015781586821179744,
+          "percentile_05": 7.750373447953675e-05,
+          "percentile_25": 0.00010714707857660782,
+          "percentile_75": 0.00021512310380704774,
+          "percentile_95": 0.0004466922411935126
+        },
+        "path_gain_linear": {
+          "count": 0,
+          "finite_count": 0,
+          "minimum": null,
+          "maximum": null,
+          "mean": null,
+          "median": null,
+          "percentile_05": null,
+          "percentile_25": null,
+          "percentile_75": null,
+          "percentile_95": null
+        },
+        "path_gain_db": {
+          "count": 0,
+          "finite_count": 0,
+          "minimum": null,
+          "maximum": null,
+          "mean": null,
+          "median": null,
+          "percentile_05": null,
+          "percentile_25": null,
+          "percentile_75": null,
+          "percentile_95": null
+        }
+      }
+    },
+    "variant": {
+      "total_path_count": 12,
+      "los_path_exists": false,
+      "los_path_count": 0,
+      "specular_reflection_path_count": 12,
+      "other_path_count": 0,
+      "path_counts_by_type": {
+        "specular_reflection": 12
+      },
+      "maximum_interaction_count": 2,
+      "interaction_object_ids": [
+        1,
+        2,
+        3,
+        5,
+        6
+      ],
+      "interaction_object_id_count": 5,
+      "interaction_object_names": [
+        "ceiling_000",
+        "floor_000",
+        "wall_000",
+        "wall_002",
+        "wall_003"
+      ],
+      "endpoints": {
+        "transmitters": [
+          "tx_test"
+        ],
+        "receivers": [
+          "rx_los"
+        ]
+      },
+      "distributions": {
+        "path_distance_m": {
+          "count": 12,
+          "finite_count": 12,
+          "minimum": 4.455674629139029,
+          "maximum": 21.589302027792712,
+          "mean": 12.537743623193018,
+          "median": 12.526918493587353,
+          "percentile_05": 7.752147424418814,
+          "percentile_25": 10.666837009090369,
+          "percentile_75": 13.081062757769002,
+          "percentile_95": 18.285315568584036
+        },
+        "delay_s": {
+          "count": 12,
+          "finite_count": 12,
+          "minimum": 1.4862530761661219e-08,
+          "maximum": 7.201415996860305e-08,
+          "mean": 4.1821411074967805e-08,
+          "median": 4.178530232934463e-08,
+          "percentile_05": 2.5858380414689465e-08,
+          "percentile_25": 3.558073835563391e-08,
+          "percentile_75": 4.363372863025461e-08,
+          "percentile_95": 6.099324743047417e-08
+        },
+        "amplitude_magnitude": {
+          "count": 12,
+          "finite_count": 12,
+          "minimum": 9.217178419158544e-05,
+          "maximum": 0.00045632345004182283,
+          "mean": 0.00019687405056597156,
+          "median": 0.0001606764799627005,
+          "percentile_05": 0.00010026693374066823,
+          "percentile_25": 0.0001253598128354637,
+          "percentile_75": 0.0002206762295292749,
+          "percentile_95": 0.0004124643686653254
+        },
+        "path_gain_linear": {
+          "count": 0,
+          "finite_count": 0,
+          "minimum": null,
+          "maximum": null,
+          "mean": null,
+          "median": null,
+          "percentile_05": null,
+          "percentile_25": null,
+          "percentile_75": null,
+          "percentile_95": null
+        },
+        "path_gain_db": {
+          "count": 0,
+          "finite_count": 0,
+          "minimum": null,
+          "maximum": null,
+          "mean": null,
+          "median": null,
+          "percentile_05": null,
+          "percentile_25": null,
+          "percentile_75": null,
+          "percentile_95": null
+        }
+      }
+    },
+    "endpoint_validation": {
+      "matches": true,
+      "required": true,
+      "metadata_available": true
+    },
+    "changes": {
+      "los_path_exists_changed": true,
+      "los_path_count_delta": -1,
+      "specular_reflection_path_count_delta": -14,
+      "total_path_count_delta": -15,
+      "maximum_interaction_count_delta": 0,
+      "distribution_changes": {
+        "path_distance_m": {
+          "baseline": {
+            "count": 27,
+            "finite_count": 27,
+            "minimum": 3.99999990723561,
+            "maximum": 34.536006682834156,
+            "mean": 14.534609371465793,
+            "median": 12.527307246607066,
+            "percentile_05": 4.546707059880953,
+            "percentile_25": 10.4579887686711,
+            "percentile_75": 20.547765588144486,
+            "percentile_95": 25.66503491079867
+          },
+          "variant": {
+            "count": 12,
+            "finite_count": 12,
+            "minimum": 4.455674629139029,
+            "maximum": 21.589302027792712,
+            "mean": 12.537743623193018,
+            "median": 12.526918493587353,
+            "percentile_05": 7.752147424418814,
+            "percentile_25": 10.666837009090369,
+            "percentile_75": 13.081062757769002,
+            "percentile_95": 18.285315568584036
+          },
+          "mean_delta": -1.996865748272775,
+          "median_delta": -0.000388753019713306,
+          "equal_finite_value_count": false,
+          "absolute_sorted_delta": {
+            "matched_count": 12,
+            "mean_absolute_delta": 3.5502558877927487e-07,
+            "maximum_absolute_delta": 2.1301535326756493e-06,
+            "percentile_95_absolute_delta": 1.544361311189845e-06
+          },
+          "noise_floor": 2.1301535326756493e-06,
+          "numeric_availability_changed": true,
+          "change_exceeds_noise_floor": true
+        },
+        "delay_s": {
+          "baseline": {
+            "count": 27,
+            "finite_count": 27,
+            "minimum": 1.3342563498497384e-08,
+            "maximum": 1.1519971820916908e-07,
+            "mean": 4.848223824051569e-08,
+            "median": 4.1786599069837393e-08,
+            "percentile_05": 1.51661822656024e-08,
+            "percentile_25": 3.488409561214212e-08,
+            "percentile_75": 6.85399683675314e-08,
+            "percentile_95": 8.560934148249543e-08
+          },
+          "variant": {
+            "count": 12,
+            "finite_count": 12,
+            "minimum": 1.4862530761661219e-08,
+            "maximum": 7.201415996860305e-08,
+            "mean": 4.1821411074967805e-08,
+            "median": 4.178530232934463e-08,
+            "percentile_05": 2.5858380414689465e-08,
+            "percentile_25": 3.558073835563391e-08,
+            "percentile_75": 4.363372863025461e-08,
+            "percentile_95": 6.099324743047417e-08
+          },
+          "mean_delta": -6.6608271655478816e-09,
+          "median_delta": -1.2967404927621828e-12,
+          "equal_finite_value_count": false,
+          "absolute_sorted_delta": {
+            "matched_count": 12,
+            "mean_absolute_delta": 1.1842378929335002e-15,
+            "maximum_absolute_delta": 7.105427357601002e-15,
+            "percentile_95_absolute_delta": 5.151434834260724e-15
+          },
+          "noise_floor": 7.105427357601002e-15,
+          "numeric_availability_changed": true,
+          "change_exceeds_noise_floor": true
+        },
+        "amplitude_magnitude": {
+          "baseline": {
+            "count": 27,
+            "finite_count": 27,
+            "minimum": 5.506702129399614e-05,
+            "maximum": 0.0024850754998624325,
+            "mean": 0.0002672849626850104,
+            "median": 0.00015781586821179744,
+            "percentile_05": 7.750373447953675e-05,
+            "percentile_25": 0.00010714707857660782,
+            "percentile_75": 0.00021512310380704774,
+            "percentile_95": 0.0004466922411935126
+          },
+          "variant": {
+            "count": 12,
+            "finite_count": 12,
+            "minimum": 9.217178419158544e-05,
+            "maximum": 0.00045632345004182283,
+            "mean": 0.00019687405056597156,
+            "median": 0.0001606764799627005,
+            "percentile_05": 0.00010026693374066823,
+            "percentile_25": 0.0001253598128354637,
+            "percentile_75": 0.0002206762295292749,
+            "percentile_95": 0.0004124643686653254
+          },
+          "mean_delta": -7.041091211903883e-05,
+          "median_delta": 2.860611750903064e-06,
+          "equal_finite_value_count": false,
+          "absolute_sorted_delta": {
+            "matched_count": 12,
+            "mean_absolute_delta": 6.362596127159309e-11,
+            "maximum_absolute_delta": 3.9369244314775044e-10,
+            "percentile_95_absolute_delta": 2.447950894806292e-10
+          },
+          "noise_floor": 3.733702915527555e-10,
+          "numeric_availability_changed": true,
+          "change_exceeds_noise_floor": true
+        },
+        "path_gain_linear": {
+          "baseline": {
+            "count": 0,
+            "finite_count": 0,
+            "minimum": null,
+            "maximum": null,
+            "mean": null,
+            "median": null,
+            "percentile_05": null,
+            "percentile_25": null,
+            "percentile_75": null,
+            "percentile_95": null
+          },
+          "variant": {
+            "count": 0,
+            "finite_count": 0,
+            "minimum": null,
+            "maximum": null,
+            "mean": null,
+            "median": null,
+            "percentile_05": null,
+            "percentile_25": null,
+            "percentile_75": null,
+            "percentile_95": null
+          },
+          "mean_delta": null,
+          "median_delta": null,
+          "equal_finite_value_count": true,
+          "absolute_sorted_delta": {
+            "matched_count": 0,
+            "mean_absolute_delta": null,
+            "maximum_absolute_delta": null,
+            "percentile_95_absolute_delta": null
+          },
+          "noise_floor": 0.0,
+          "numeric_availability_changed": false,
+          "change_exceeds_noise_floor": false
+        },
+        "path_gain_db": {
+          "baseline": {
+            "count": 0,
+            "finite_count": 0,
+            "minimum": null,
+            "maximum": null,
+            "mean": null,
+            "median": null,
+            "percentile_05": null,
+            "percentile_25": null,
+            "percentile_75": null,
+            "percentile_95": null
+          },
+          "variant": {
+            "count": 0,
+            "finite_count": 0,
+            "minimum": null,
+            "maximum": null,
+            "mean": null,
+            "median": null,
+            "percentile_05": null,
+            "percentile_25": null,
+            "percentile_75": null,
+            "percentile_95": null
+          },
+          "mean_delta": null,
+          "median_delta": null,
+          "equal_finite_value_count": true,
+          "absolute_sorted_delta": {
+            "matched_count": 0,
+            "mean_absolute_delta": null,
+            "maximum_absolute_delta": null,
+            "percentile_95_absolute_delta": null
+          },
+          "noise_floor": 0.0,
+          "numeric_availability_changed": false,
+          "change_exceeds_noise_floor": false
+        }
+      },
+      "added_interaction_object_ids": [],
+      "removed_interaction_object_ids": [
+        4
+      ],
+      "common_interaction_object_ids": [
+        1,
+        2,
+        3,
+        5,
+        6
+      ]
+    },
+    "canonical_matching": {
+      "identity_fields": [
+        "transmitter",
+        "receiver",
+        "path_type",
+        "ordered_interaction_object_ids"
+      ],
+      "within_group_order": [
+        "distance_m",
+        "delay_s",
+        "amplitude_magnitude",
+        "path_gain_linear",
+        "path_gain_db"
+      ],
+      "matched_path_count": 12,
+      "unmatched_baseline_path_count": 15,
+      "unmatched_variant_path_count": 0,
+      "unmatched_baseline_structures": [
+        {
+          "transmitter": "tx_test",
+          "receiver": "rx_los",
+          "path_type": "los",
+          "ordered_interaction_object_ids": [],
+          "count": 1
+        },
+        {
+          "transmitter": "tx_test",
+          "receiver": "rx_los",
+          "path_type": "specular_reflection",
+          "ordered_interaction_object_ids": [
+            "1"
+          ],
+          "count": 1
+        },
+        {
+          "transmitter": "tx_test",
+          "receiver": "rx_los",
+          "path_type": "specular_reflection",
+          "ordered_interaction_object_ids": [
+            "1",
+            "2"
+          ],
+          "count": 1
+        },
+        {
+          "transmitter": "tx_test",
+          "receiver": "rx_los",
+          "path_type": "specular_reflection",
+          "ordered_interaction_object_ids": [
+            "1",
+            "4"
+          ],
+          "count": 1
+        },
+        {
+          "transmitter": "tx_test",
+          "receiver": "rx_los",
+          "path_type": "specular_reflection",
+          "ordered_interaction_object_ids": [
+            "1",
+            "6"
+          ],
+          "count": 1
+        },
+        {
+          "transmitter": "tx_test",
+          "receiver": "rx_los",
+          "path_type": "specular_reflection",
+          "ordered_interaction_object_ids": [
+            "2",
+            "1"
+          ],
+          "count": 1
+        },
+        {
+          "transmitter": "tx_test",
+          "receiver": "rx_los",
+          "path_type": "specular_reflection",
+          "ordered_interaction_object_ids": [
+            "2",
+            "6"
+          ],
+          "count": 1
+        },
+        {
+          "transmitter": "tx_test",
+          "receiver": "rx_los",
+          "path_type": "specular_reflection",
+          "ordered_interaction_object_ids": [
+            "4"
+          ],
+          "count": 1
+        },
+        {
+          "transmitter": "tx_test",
+          "receiver": "rx_los",
+          "path_type": "specular_reflection",
+          "ordered_interaction_object_ids": [
+            "4",
+            "1"
+          ],
+          "count": 1
+        },
+        {
+          "transmitter": "tx_test",
+          "receiver": "rx_los",
+          "path_type": "specular_reflection",
+          "ordered_interaction_object_ids": [
+            "4",
+            "3"
+          ],
+          "count": 1
+        },
+        {
+          "transmitter": "tx_test",
+          "receiver": "rx_los",
+          "path_type": "specular_reflection",
+          "ordered_interaction_object_ids": [
+            "4",
+            "5"
+          ],
+          "count": 1
+        },
+        {
+          "transmitter": "tx_test",
+          "receiver": "rx_los",
+          "path_type": "specular_reflection",
+          "ordered_interaction_object_ids": [
+            "4",
+            "6"
+          ],
+          "count": 1
+        },
+        {
+          "transmitter": "tx_test",
+          "receiver": "rx_los",
+          "path_type": "specular_reflection",
+          "ordered_interaction_object_ids": [
+            "5",
+            "3"
+          ],
+          "count": 1
+        },
+        {
+          "transmitter": "tx_test",
+          "receiver": "rx_los",
+          "path_type": "specular_reflection",
+          "ordered_interaction_object_ids": [
+            "6"
+          ],
+          "count": 1
+        },
+        {
+          "transmitter": "tx_test",
+          "receiver": "rx_los",
+          "path_type": "specular_reflection",
+          "ordered_interaction_object_ids": [
+            "6",
+            "4"
+          ],
+          "count": 1
+        }
+      ],
+      "unmatched_variant_structures": [],
+      "structure_changed": true
+    },
+    "obstacle_evidence": {
+      "requested_obstacle_object_ids": [
+        7
+      ],
+      "baseline_interacting_obstacle_ids": [],
+      "variant_interacting_obstacle_ids": [],
+      "baseline_obstacle_interaction_path_count": 0,
+      "variant_obstacle_interaction_path_count": 0,
+      "has_obstacle_interaction_evidence": false,
+      "los_change_evidence": true,
+      "blocker_related_change": true,
+      "evidence_basis": [
+        "los_presence_or_count_changed"
+      ]
+    },
+    "path_configuration_changed": true,
+    "change_exceeds_numerical_noise": true
+  }
+}

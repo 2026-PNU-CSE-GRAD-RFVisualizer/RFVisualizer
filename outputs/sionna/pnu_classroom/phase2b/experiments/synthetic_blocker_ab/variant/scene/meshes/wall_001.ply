@@ -1,0 +1,16 @@
+ply
+format ascii 1.0
+comment RFVisualizer Phase 2-A metric mesh
+element vertex 4
+property float x
+property float y
+property float z
+element face 2
+property list uchar int vertex_indices
+end_header
+-15.1398947389 -0.811949583359 0.204097256298
+-15.3140451866 -10.9183062176 0.510309487082
+-15.2130690924 -10.7771688372 2.98946805441
+-15.0524136659 -0.629254330875 2.32385799693
+3 0 1 2
+3 0 2 3

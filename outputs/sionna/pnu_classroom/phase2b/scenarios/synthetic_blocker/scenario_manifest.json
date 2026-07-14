@@ -1,0 +1,731 @@
+{
+  "schema_version": "1.0",
+  "scenario_id": "pnu_classroom_synthetic_blocker",
+  "status": "provisional",
+  "physically_validated": false,
+  "synthetic_validation": true,
+  "base_scene": {
+    "phase2a_config": "configs/sionna/pnu_classroom_smoke_test.yaml",
+    "metric_room_envelope": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/metric_calibration/room_envelope_metric.obj",
+    "room_envelope_modified": false
+  },
+  "scene_xml": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/scenarios/synthetic_blocker/scene/scene.xml",
+  "enabled_obstacles": [
+    "blocker_panel_000"
+  ],
+  "disabled_obstacles": [],
+  "materials": [
+    {
+      "obstacle_id": "blocker_panel_000",
+      "object_name": "blocker_panel_000",
+      "category": "wood",
+      "actual_sionna_material_name": "itu_wood_blocker_panel_000",
+      "itu_type": "wood",
+      "thickness_m": 0.1,
+      "scattering_coefficient": 0.0,
+      "source": "sionna_preset",
+      "availability_verified_against_installed_sionna": true,
+      "fallback_used": false,
+      "warning": null
+    }
+  ],
+  "objects": [
+    {
+      "object_name": "floor_000",
+      "semantic": "floor",
+      "source_material": "floor",
+      "resolved_radio_material": "itu_concrete_floor",
+      "mesh_file": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/scenarios/synthetic_blocker/scene/meshes/floor_000.ply",
+      "vertex_count": 4,
+      "triangle_count": 2,
+      "bounds": {
+        "min": [
+          -15.3140451866,
+          -10.9183062176,
+          -6.61338109614e-13
+        ],
+        "max": [
+          0.0674882429365,
+          -4.63480959272e-12,
+          0.510309487082
+        ],
+        "extent": [
+          15.3815334295365,
+          10.918306217595365,
+          0.5103094870826613
+        ]
+      },
+      "layer": "room_envelope",
+      "runtime_object_id": 1
+    },
+    {
+      "object_name": "ceiling_000",
+      "semantic": "ceiling",
+      "source_material": "ceiling",
+      "resolved_radio_material": "itu_concrete_ceiling",
+      "mesh_file": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/scenarios/synthetic_blocker/scene/meshes/ceiling_000.ply",
+      "vertex_count": 4,
+      "triangle_count": 2,
+      "bounds": {
+        "min": [
+          -15.2130690924,
+          -10.7777303953,
+          2.08040957953
+        ],
+        "max": [
+          0.261178197207,
+          0.183528732041,
+          2.98946805441
+        ],
+        "extent": [
+          15.474247289607,
+          10.961259127341,
+          0.9090584748800001
+        ]
+      },
+      "layer": "room_envelope",
+      "runtime_object_id": 2
+    },
+    {
+      "object_name": "wall_000",
+      "semantic": "wall",
+      "source_material": "wall",
+      "resolved_radio_material": "itu_concrete_walls",
+      "mesh_file": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/scenarios/synthetic_blocker/scene/meshes/wall_000.ply",
+      "vertex_count": 4,
+      "triangle_count": 2,
+      "bounds": {
+        "min": [
+          -15.1398947389,
+          -0.811949583359,
+          -6.61338109614e-13
+        ],
+        "max": [
+          0.163010747246,
+          0.183528732041,
+          2.32385799693
+        ],
+        "extent": [
+          15.302905486146,
+          0.9954783154,
+          2.3238579969306614
+        ]
+      },
+      "layer": "room_envelope",
+      "runtime_object_id": 3
+    },
+    {
+      "object_name": "wall_001",
+      "semantic": "wall",
+      "source_material": "wall",
+      "resolved_radio_material": "itu_concrete_walls",
+      "mesh_file": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/scenarios/synthetic_blocker/scene/meshes/wall_001.ply",
+      "vertex_count": 4,
+      "triangle_count": 2,
+      "bounds": {
+        "min": [
+          -15.3140451866,
+          -10.9183062176,
+          0.204097256298
+        ],
+        "max": [
+          -15.0524136659,
+          -0.629254330875,
+          2.98946805441
+        ],
+        "extent": [
+          0.26163152069999995,
+          10.289051886725,
+          2.785370798112
+        ]
+      },
+      "layer": "room_envelope",
+      "runtime_object_id": 4
+    },
+    {
+      "object_name": "wall_002",
+      "semantic": "wall",
+      "source_material": "wall",
+      "resolved_radio_material": "itu_concrete_walls",
+      "mesh_file": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/scenarios/synthetic_blocker/scene/meshes/wall_002.ply",
+      "vertex_count": 4,
+      "triangle_count": 2,
+      "bounds": {
+        "min": [
+          -15.3140451866,
+          -10.9183062176,
+          0.327779960159
+        ],
+        "max": [
+          0.261178197207,
+          -10.7771688372,
+          2.98946805441
+        ],
+        "extent": [
+          15.575223383807,
+          0.1411373804,
+          2.661688094251
+        ]
+      },
+      "layer": "room_envelope",
+      "runtime_object_id": 5
+    },
+    {
+      "object_name": "wall_003",
+      "semantic": "wall",
+      "source_material": "wall",
+      "resolved_radio_material": "itu_concrete_walls",
+      "mesh_file": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/scenarios/synthetic_blocker/scene/meshes/wall_003.ply",
+      "vertex_count": 4,
+      "triangle_count": 2,
+      "bounds": {
+        "min": [
+          5.58873921624e-12,
+          -10.9183062176,
+          -6.61338109614e-13
+        ],
+        "max": [
+          0.261178197207,
+          0.183528732041,
+          2.79596945632
+        ],
+        "extent": [
+          0.2611781972014112,
+          11.101834949640999,
+          2.795969456320661
+        ]
+      },
+      "layer": "room_envelope",
+      "runtime_object_id": 6
+    },
+    {
+      "object_name": "blocker_panel_000",
+      "obstacle_id": "blocker_panel_000",
+      "layer": "proxy_obstacle",
+      "semantic": "validation_blocker",
+      "semantic_class": "validation_blocker",
+      "purpose": "validation_only",
+      "physical_object": false,
+      "confidence": "synthetic",
+      "geometry_type": "box",
+      "source_material": "wood",
+      "resolved_radio_material": "itu_wood_blocker_panel_000",
+      "mesh_file": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/scenarios/synthetic_blocker/scene/meshes/blocker_panel_000.ply",
+      "vertex_count": 8,
+      "triangle_count": 12,
+      "bounds": {
+        "min": [
+          -5.075,
+          -6.25,
+          0.2598064196869294
+        ],
+        "max": [
+          -4.925,
+          -3.75,
+          2.2598064196869294
+        ],
+        "extent": [
+          0.15000000000000036,
+          2.5,
+          2.0
+        ]
+      },
+      "signed_volume": 0.7499999999999977,
+      "metric_transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          1.2598064196869294
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "scene_space_transform": [
+        [
+          -0.45426422657021065,
+          -0.4577059548962373,
+          0.06186807746712714,
+          -0.7623594696605274
+        ],
+        [
+          -0.0836483569045165,
+          -0.0038126426111036887,
+          -0.6423914724230709,
+          0.02166837807940203
+        ],
+        [
+          0.45423050595939657,
+          -0.4584420468360534,
+          -0.05642627798310757,
+          1.1153958607864252
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_config": {
+        "id": "blocker_panel_000",
+        "enabled": true,
+        "semantic_class": "validation_blocker",
+        "purpose": "validation_only",
+        "physical_object": false,
+        "confidence": "synthetic",
+        "geometry": {
+          "type": "box",
+          "anchor": {
+            "mode": "floor_at_xy"
+          },
+          "position_m": [
+            -5.0,
+            -5.0
+          ],
+          "size_m": [
+            0.15,
+            2.5,
+            2.0
+          ],
+          "rotation_deg": {
+            "roll": 0.0,
+            "pitch": 0.0,
+            "yaw": 0.0
+          },
+          "floor_clearance_m": 0.05
+        },
+        "material": {
+          "source": "sionna_preset",
+          "category": "wood",
+          "preset": "wood",
+          "thickness_m": 0.1,
+          "scattering_coefficient": 0.0
+        },
+        "export": {
+          "object_name": "blocker_panel_000",
+          "group_name": "obstacle_validation"
+        }
+      },
+      "validation": {
+        "schema_version": "1.0",
+        "obstacle_id": "blocker_panel_000",
+        "success": true,
+        "checks": {
+          "finite_geometry": true,
+          "nondegenerate_triangles": true,
+          "closed_manifold": true,
+          "positive_signed_volume": true,
+          "room_containment": true,
+          "on_or_above_floor": true,
+          "on_or_below_ceiling": true,
+          "inside_walls": true,
+          "devices_outside_obstacle": true,
+          "required_los_intersection": true
+        },
+        "errors": [],
+        "mesh_statistics": {
+          "vertex_count": 8,
+          "triangle_count": 12,
+          "bounds": {
+            "min": [
+              -5.075,
+              -6.25,
+              0.2598064196869294
+            ],
+            "max": [
+              -4.925,
+              -3.75,
+              2.2598064196869294
+            ],
+            "extent": [
+              0.15000000000000036,
+              2.5,
+              2.0
+            ]
+          },
+          "surface_area": 11.350000000000003,
+          "signed_volume": 0.7499999999999977,
+          "absolute_volume": 0.7499999999999977,
+          "degenerate_triangle_count": 0,
+          "boundary_edge_count": 0,
+          "non_manifold_edge_count": 0,
+          "closed_manifold": true,
+          "outward_or_tangent_face_count": 12,
+          "strictly_outward_face_count": 12
+        },
+        "bounds": {
+          "min": [
+            -5.075,
+            -6.25,
+            0.2598064196869294
+          ],
+          "max": [
+            -4.925,
+            -3.75,
+            2.2598064196869294
+          ]
+        },
+        "containment": {
+          "fully_inside": true,
+          "outside_vertex_indices": [],
+          "floor_failure_vertex_indices": [],
+          "ceiling_failure_vertex_indices": [],
+          "wall_failure_vertex_indices": [],
+          "minimum_floor_clearance_m": 0.011491880954898559,
+          "minimum_ceiling_clearance_m": 0.1414630897300384,
+          "minimum_wall_clearance_m": 3.476478973679518,
+          "vertex_inspections": [
+            {
+              "position_m": [
+                -5.075,
+                -6.25,
+                0.2598064196869294
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.24831453873203085,
+              "ceiling_z_m": 2.5666275999987103,
+              "floor_clearance_m": 0.011491880954898559,
+              "ceiling_clearance_m": 2.306821180311781,
+              "minimum_wall_clearance_m": 4.668094257598742,
+              "oriented_plane_distances_m": [
+                0.01148587254917369,
+                2.3017254558935947,
+                5.964019621858648,
+                10.153215671891921,
+                4.668094257598742,
+                5.1034978052406395
+              ]
+            },
+            {
+              "position_m": [
+                -4.925,
+                -6.25,
+                0.2598064196869294
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.24653451925841838,
+              "ceiling_z_m": 2.5647515605733076,
+              "floor_clearance_m": 0.013271900428511035,
+              "ceiling_clearance_m": 2.304945140886378,
+              "minimum_wall_clearance_m": 4.667993134448566,
+              "oriented_plane_distances_m": [
+                0.01326496135884717,
+                2.2998535606038497,
+                5.972192864556725,
+                10.303072300716355,
+                4.667993134448566,
+                4.95396117535632
+              ]
+            },
+            {
+              "position_m": [
+                -4.925,
+                -3.75,
+                0.2598064196869294
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.1712983006418278,
+              "ceiling_z_m": 2.401269509416968,
+              "floor_clearance_m": 0.08850811904510161,
+              "ceiling_clearance_m": 2.1414630897300384,
+              "minimum_wall_clearance_m": 3.484652216377595,
+              "oriented_plane_distances_m": [
+                0.08846184353187124,
+                2.136732638210815,
+                3.484652216377595,
+                10.257031216333797,
+                7.163955065559576,
+                4.944443723783486
+              ]
+            },
+            {
+              "position_m": [
+                -5.075,
+                -3.75,
+                0.2598064196869294
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.17307832011544025,
+              "ceiling_z_m": 2.403145548842371,
+              "floor_clearance_m": 0.08672809957148916,
+              "ceiling_clearance_m": 2.1433391291554416,
+              "minimum_wall_clearance_m": 3.476478973679518,
+              "oriented_plane_distances_m": [
+                0.08668275472219776,
+                2.1386045335005606,
+                3.476478973679518,
+                10.107174587509366,
+                7.164056188709752,
+                5.093980353667805
+              ]
+            },
+            {
+              "position_m": [
+                -5.075,
+                -6.25,
+                2.2598064196869294
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.24831453873203085,
+              "ceiling_z_m": 2.5666275999987103,
+              "floor_clearance_m": 2.0114918809548987,
+              "ceiling_clearance_m": 0.30682118031178085,
+              "minimum_wall_clearance_m": 4.554473983579198,
+              "oriented_plane_distances_m": [
+                2.0104401941700685,
+                0.30614341811942936,
+                6.131036634411627,
+                10.073930438123188,
+                4.554473983579198,
+                5.2603956364309665
+              ]
+            },
+            {
+              "position_m": [
+                -4.925,
+                -6.25,
+                2.2598064196869294
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.24653451925841838,
+              "ceiling_z_m": 2.5647515605733076,
+              "floor_clearance_m": 2.013271900428511,
+              "ceiling_clearance_m": 0.30494514088637814,
+              "minimum_wall_clearance_m": 4.554372860429022,
+              "oriented_plane_distances_m": [
+                2.012219282979742,
+                0.3042715228296844,
+                6.139209877109704,
+                10.223787066947622,
+                4.554372860429022,
+                5.110859006546647
+              ]
+            },
+            {
+              "position_m": [
+                -4.925,
+                -3.75,
+                2.2598064196869294
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.1712983006418278,
+              "ceiling_z_m": 2.401269509416968,
+              "floor_clearance_m": 2.088508119045102,
+              "ceiling_clearance_m": 0.1414630897300384,
+              "minimum_wall_clearance_m": 3.651669228930575,
+              "oriented_plane_distances_m": [
+                2.087416165152766,
+                0.14115060043665006,
+                3.651669228930575,
+                10.177745982565064,
+                7.050334791540033,
+                5.101341554973813
+              ]
+            },
+            {
+              "position_m": [
+                -5.075,
+                -3.75,
+                2.2598064196869294
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.17307832011544025,
+              "ceiling_z_m": 2.403145548842371,
+              "floor_clearance_m": 2.086728099571489,
+              "ceiling_clearance_m": 0.14333912915544156,
+              "minimum_wall_clearance_m": 3.643495986232498,
+              "oriented_plane_distances_m": [
+                2.0856370763430925,
+                0.14302249572639503,
+                3.643495986232498,
+                10.027889353740633,
+                7.050435914690208,
+                5.2508781848581325
+              ]
+            }
+          ]
+        },
+        "los": {
+          "required": true,
+          "any_intersection": true,
+          "segments": [
+            {
+              "name": "rx_los",
+              "start_m": [
+                -7.0,
+                -5.0,
+                1.5
+              ],
+              "end_m": [
+                -3.0,
+                -5.0,
+                1.5
+              ],
+              "length_m": 4.0,
+              "aabb_intersection": true,
+              "mesh_intersection": true,
+              "intersection_count": 2,
+              "intersections": [
+                {
+                  "face_index": 11,
+                  "segment_parameter": 0.48125,
+                  "distance_from_start_m": 1.925,
+                  "point_m": [
+                    -5.075,
+                    -5.0,
+                    1.5
+                  ]
+                },
+                {
+                  "face_index": 7,
+                  "segment_parameter": 0.51875,
+                  "distance_from_start_m": 2.075,
+                  "point_m": [
+                    -4.925,
+                    -5.0,
+                    1.5
+                  ]
+                }
+              ],
+              "start_inside_obstacle": false,
+              "end_inside_obstacle": false
+            },
+            {
+              "name": "rx_reflection",
+              "start_m": [
+                -7.0,
+                -5.0,
+                1.5
+              ],
+              "end_m": [
+                -10.0,
+                -8.0,
+                1.5
+              ],
+              "length_m": 4.242640687119285,
+              "aabb_intersection": false,
+              "mesh_intersection": false,
+              "intersection_count": 0,
+              "intersections": [],
+              "start_inside_obstacle": false,
+              "end_inside_obstacle": false
+            }
+          ],
+          "required_receiver": "rx_los",
+          "required_target_intersection": true,
+          "required_target_validation": {
+            "success": true,
+            "transmitter_inside_obstacle": false,
+            "receiver_inside_obstacle": false,
+            "intersection_count": 2,
+            "intersections": [
+              {
+                "face_index": 11,
+                "segment_parameter": 0.48125,
+                "distance_from_start_m": 1.925,
+                "point_m": [
+                  -5.075,
+                  -5.0,
+                  1.5
+                ]
+              },
+              {
+                "face_index": 7,
+                "segment_parameter": 0.51875,
+                "distance_from_start_m": 2.075,
+                "point_m": [
+                  -4.925,
+                  -5.0,
+                  1.5
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "runtime_object_id": 7
+    }
+  ],
+  "room_object_count": 6,
+  "obstacle_object_count": 1,
+  "total_object_count": 7,
+  "room_triangle_count": 12,
+  "obstacle_triangle_count": 12,
+  "total_triangle_count": 24,
+  "object_layers_independent": true,
+  "merge_shapes": false,
+  "conversion_validation": {
+    "triangle_count_match": true,
+    "bounds_match": true,
+    "surface_area_match": true,
+    "volume_match": true,
+    "success": true,
+    "obstacle_ply_round_trip": true,
+    "unique_object_names": true,
+    "room_envelope_unchanged": true
+  },
+  "coordinate_bridge_validation": {
+    "metric_to_scene_to_metric_max_error": 1.9860273225978185e-15,
+    "scene_to_metric_to_scene_max_error": 1.4261072965499199e-15,
+    "maximum_error": 1.9860273225978185e-15,
+    "success": true,
+    "point_maximum_error": 1.9860273225978185e-15,
+    "transform_metric_to_scene_to_metric_max_error": 8.881784197001252e-16,
+    "transform_scene_to_metric_to_scene_max_error": 8.881784197001252e-16,
+    "transform_maximum_error": 8.881784197001252e-16
+  },
+  "files": {
+    "obstacles_metric_json": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/scenarios/synthetic_blocker/obstacles_metric.json",
+    "obstacles_scene_json": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/scenarios/synthetic_blocker/obstacles_scene.json",
+    "obstacle_vertices_metric_csv": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/scenarios/synthetic_blocker/obstacle_vertices_metric.csv",
+    "obstacle_vertices_scene_csv": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/scenarios/synthetic_blocker/obstacle_vertices_scene.csv",
+    "obstacles_combined_obj": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/scenarios/synthetic_blocker/obstacles_combined.obj",
+    "obstacles_combined_mtl": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/scenarios/synthetic_blocker/obstacles_combined.mtl",
+    "scene_xml": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/scenarios/synthetic_blocker/scene/scene.xml",
+    "scenario_preview_png": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/scenarios/synthetic_blocker/scenario_preview.png",
+    "resolved_scenario_yaml": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/scenarios/synthetic_blocker/resolved_scenario.yaml"
+  },
+  "warnings": [
+    "PROVISIONAL SCALE — NOT PHYSICALLY VALIDATED",
+    "Synthetic validation objects are not measured classroom objects."
+  ],
+  "runtime_object_mapping": {
+    "floor_000": 1,
+    "ceiling_000": 2,
+    "wall_000": 3,
+    "wall_001": 4,
+    "wall_002": 5,
+    "wall_003": 6,
+    "blocker_panel_000": 7
+  },
+  "runtime_object_id_validation": {
+    "all_manifest_objects_loaded": true,
+    "runtime_object_count": 7,
+    "success": true
+  }
+}

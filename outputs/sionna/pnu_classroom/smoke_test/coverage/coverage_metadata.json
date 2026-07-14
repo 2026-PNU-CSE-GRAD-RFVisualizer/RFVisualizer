@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "status": "provisional",
+  "confidence": "low",
+  "physically_validated": false,
+  "metric": "path_gain",
+  "value_unit": "unitless_linear",
+  "display_unit": "dB",
+  "grid_shape_yx": [
+    11,
+    15
+  ],
+  "cell_size_m": [
+    1.0,
+    1.0
+  ],
+  "center_m": [
+    -7.526433494691081,
+    -5.3673887427566065,
+    1.5
+  ],
+  "size_m": [
+    14.575223383795995,
+    10.101834949596125
+  ],
+  "z_height_m": 1.5,
+  "total_cell_count": 165,
+  "inside_cell_count": 151,
+  "valid_cell_count": 151,
+  "valid_ratio_of_inside": 1.0,
+  "nan_count": 0,
+  "inf_count": 0,
+  "zero_or_negative_count": 0,
+  "value_min_linear": 7.827949843886017e-07,
+  "value_mean_linear": 5.694320681630789e-05,
+  "value_max_linear": 0.008371123112738132,
+  "value_min_db": -61.06351965665201,
+  "value_mean_db": -58.66372368102895,
+  "value_max_db": -20.772162709263384,
+  "solver_options": {
+    "samples_per_tx": 200000,
+    "max_depth": 2,
+    "los": true,
+    "specular_reflection": true,
+    "refraction": false,
+    "diffraction": false,
+    "diffuse_reflection": false,
+    "seed": 43
+  },
+  "solve_time_seconds": 0.004395073003252037,
+  "success": true
+}

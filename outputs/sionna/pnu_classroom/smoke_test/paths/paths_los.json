@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "status": "provisional",
+  "receiver": "rx_los",
+  "solver_options": {
+    "scene": "Scene",
+    "samples_per_src": 200000,
+    "synthetic_array": true,
+    "los": true,
+    "specular_reflection": true,
+    "diffuse_reflection": false,
+    "refraction": false,
+    "diffraction": false,
+    "edge_diffraction": false,
+    "seed": 42,
+    "max_depth": 0
+  },
+  "validation": {
+    "path_count": 1,
+    "los_path_count": 1,
+    "euclidean_distance_m": 4.0,
+    "sionna_los_distance_m": 3.99999990723561,
+    "distance_error_m": 9.276438994731961e-08,
+    "matched_path_index": 0,
+    "success": true
+  },
+  "paths": [
+    {
+      "path_index": 0,
+      "transmitter": "tx_test",
+      "receiver": "rx_los",
+      "path_type": "los",
+      "interaction_count": 0,
+      "interaction_types": [],
+      "interaction_object_ids": [],
+      "interaction_points_m": [],
+      "delay_s": 1.3342563498497384e-08,
+      "distance_m": 3.99999990723561,
+      "theta_t_rad": 1.5707963705062866,
+      "phi_t_rad": 0.0,
+      "theta_r_rad": 1.5707963705062866,
+      "phi_r_rad": 3.1415927410125732,
+      "amplitude_real": 0.0024850754998624325,
+      "amplitude_imag": 0.0,
+      "amplitude_magnitude": 0.0024850754998624325
+    }
+  ],
+  "solve_time_seconds": 0.0718093870091252
+}

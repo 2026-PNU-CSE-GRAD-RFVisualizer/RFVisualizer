@@ -1,0 +1,3793 @@
+{
+  "schema_version": "1.0",
+  "algorithm": {
+    "name": "rfvisualizer_wall_plane_extraction",
+    "version": "0.2.0"
+  },
+  "created_at": "2026-07-10T17:20:29.475152Z",
+  "input": {
+    "source_mesh_path": "/data/RFVisualizer/PGSR/output/pnu_classroom/mesh/tsdf_fusion_post.ply",
+    "reference_point_cloud_path": "/data/RFVisualizer/PGSR/output/pnu_classroom/point_cloud/iteration_30000/point_cloud.ply",
+    "point_source": "mesh_uniform"
+  },
+  "scene": {
+    "up_vector": [
+      0.09550108776358447,
+      -0.9916112945169672,
+      -0.0871009920859498
+    ],
+    "bounds": {
+      "min": [
+        -5.3950000000000005,
+        -1.4769186502849407,
+        -5.8709093934241805
+      ],
+      "max": [
+        6.56739675729803,
+        1.805,
+        6.422247753021855
+      ],
+      "extent": [
+        11.96239675729803,
+        3.2819186502849407,
+        12.293157146446035
+      ],
+      "diagonal": 17.46400981542669
+    },
+    "estimated_extent": 17.46400981542669,
+    "scale_status": "scene_unit_not_metric_calibrated"
+  },
+  "config": {
+    "preprocessing": {
+      "mesh_components": {
+        "enabled": false,
+        "keep_largest": 0,
+        "min_triangles": 1000,
+        "min_area_ratio": 0.0
+      },
+      "sampling": {
+        "number_of_points": 500000
+      },
+      "voxel_downsampling": {
+        "enabled": true,
+        "voxel_size": null,
+        "voxel_size_ratio": 0.002
+      },
+      "statistical_outlier_removal": {
+        "enabled": false,
+        "nb_neighbors": 30,
+        "std_ratio": 2.5
+      },
+      "radius_outlier_removal": {
+        "enabled": false,
+        "nb_points": 12,
+        "radius": null,
+        "radius_ratio": 0.006
+      },
+      "normal_estimation": {
+        "enabled": true,
+        "search_radius": null,
+        "search_radius_ratio": 0.006,
+        "max_nn": 30
+      }
+    },
+    "wall_extraction": {
+      "enabled": true,
+      "normal_filter": {
+        "enabled": true,
+        "point_normal_max_up_dot": 0.25
+      },
+      "ransac": {
+        "distance_threshold": null,
+        "distance_threshold_ratio": 0.001,
+        "ransac_n": 3,
+        "num_iterations": 3000,
+        "max_planes": 12,
+        "max_attempts": 60,
+        "min_inliers": 300,
+        "min_inlier_ratio": 0.002,
+        "plane_normal_max_up_dot": 0.25,
+        "max_consecutive_small_planes": 5
+      },
+      "components": {
+        "enabled": true,
+        "eps": null,
+        "eps_ratio": 0.015,
+        "min_points": 10,
+        "merge_valid_components": true,
+        "min_vertical_span": null,
+        "min_vertical_span_ratio": 0.2
+      },
+      "meshing": {
+        "lower_percentile": 1.0,
+        "upper_percentile": 99.0,
+        "margin_ratio": 0.02,
+        "min_area": null,
+        "min_area_ratio": 0.00075
+      }
+    },
+    "plane_meshing_shared_settings": {
+      "min_extent": null,
+      "min_extent_ratio": 0.002,
+      "vertical_alignment_max_dot": 0.3
+    }
+  },
+  "input_stats": {
+    "original_mesh": {
+      "vertex_count": 3666424,
+      "triangle_count": 6933784,
+      "bounds": {
+        "min": [
+          -5.3950000000000005,
+          -1.4769186502849407,
+          -5.8709093934241805
+        ],
+        "max": [
+          6.56739675729803,
+          1.805,
+          6.422247753021855
+        ],
+        "extent": [
+          11.96239675729803,
+          3.2819186502849407,
+          12.293157146446035
+        ],
+        "diagonal": 17.46400981542669
+      },
+      "surface_area": 240.52937590300877
+    },
+    "filtered_mesh": {
+      "vertex_count": 3666424,
+      "triangle_count": 6933784,
+      "bounds": {
+        "min": [
+          -5.3950000000000005,
+          -1.4769186502849407,
+          -5.8709093934241805
+        ],
+        "max": [
+          6.56739675729803,
+          1.805,
+          6.422247753021855
+        ],
+        "extent": [
+          11.96239675729803,
+          3.2819186502849407,
+          12.293157146446035
+        ],
+        "diagonal": 17.46400981542669
+      },
+      "surface_area": 240.52937590300877
+    },
+    "detection_points_before_preprocessing": 500000,
+    "detection_point_bounds": {
+      "min": [
+        -5.3605096394427365,
+        -1.4744386869834056,
+        -5.869600457421832
+      ],
+      "max": [
+        6.565481399711954,
+        1.8012891680601606,
+        6.407383415503238
+      ],
+      "extent": [
+        11.925991039154692,
+        3.2757278550435664,
+        12.27698387292507
+      ],
+      "diagonal": 17.426531159768103
+    }
+  },
+  "mesh_component_filter": {
+    "enabled": false,
+    "before_vertices": 3666424,
+    "before_triangles": 6933784,
+    "after_vertices": 3666424,
+    "after_triangles": 6933784,
+    "removed_triangles": 0,
+    "component_count": null
+  },
+  "preprocessing_stats": {
+    "before_point_count": 500000,
+    "after_point_count": 194388,
+    "removed_point_count": 305612,
+    "bounds_after": {
+      "min": [
+        -5.3605096394427365,
+        -1.4744386869834056,
+        -5.865494499738872
+      ],
+      "max": [
+        6.562270063943017,
+        1.8012891680601606,
+        6.407383415503238
+      ],
+      "extent": [
+        11.922779703385753,
+        3.2757278550435664,
+        12.272877915242109
+      ],
+      "diagonal": 17.42144084621628
+    },
+    "scene_extent": 17.46400981542669,
+    "stages": {
+      "initial": 500000,
+      "voxel_downsampling": {
+        "before": 500000,
+        "after": 194388,
+        "removed": 305612
+      },
+      "statistical_outlier_removal": {
+        "enabled": false
+      },
+      "radius_outlier_removal": {
+        "enabled": false
+      },
+      "normal_estimation": {
+        "enabled": true,
+        "point_count": 194388
+      }
+    },
+    "used_values": {
+      "voxel_size": 0.03492801963085338,
+      "radius_outlier_radius": null,
+      "normal_search_radius": 0.10478405889256014
+    }
+  },
+  "normal_filter_settings": {
+    "enabled": true,
+    "point_normal_max_up_dot": 0.25
+  },
+  "normal_filter_stats": {
+    "enabled": true,
+    "point_normal_max_up_dot": 0.25,
+    "preprocessed_point_count": 194388,
+    "valid_normal_count": 194388,
+    "invalid_normal_count": 0,
+    "normal_filtered_point_count": 49920,
+    "normal_filtered_ratio": 0.25680597567751096
+  },
+  "wall_ransac_settings": {
+    "distance_threshold": null,
+    "distance_threshold_ratio": 0.001,
+    "ransac_n": 3,
+    "num_iterations": 3000,
+    "max_planes": 12,
+    "max_attempts": 60,
+    "min_inliers": 300,
+    "min_inlier_ratio": 0.002,
+    "plane_normal_max_up_dot": 0.25,
+    "max_consecutive_small_planes": 5
+  },
+  "component_settings": {
+    "enabled": true,
+    "eps": null,
+    "eps_ratio": 0.015,
+    "min_points": 10,
+    "merge_valid_components": true,
+    "min_vertical_span": null,
+    "min_vertical_span_ratio": 0.2
+  },
+  "wall_meshing_settings": {
+    "lower_percentile": 1.0,
+    "upper_percentile": 99.0,
+    "margin_ratio": 0.02,
+    "min_area": null,
+    "min_area_ratio": 0.00075
+  },
+  "resolved_scene_unit_thresholds": {
+    "distance_threshold": 0.01746400981542669,
+    "component_eps": 0.2619601472314003,
+    "min_vertical_span": 0.39108686549541133,
+    "min_area": 0.22874372912498978
+  },
+  "wall_extraction_stats": {
+    "initial_preprocessed_point_count": 194388,
+    "valid_normal_count": 194388,
+    "invalid_normal_count": 0,
+    "normal_filtered_point_count": 49920,
+    "normal_filtered_ratio": 0.25680597567751096,
+    "attempt_count": 36,
+    "accepted_wall_count": 12,
+    "assigned_wall_point_count": 13632,
+    "residual_wall_point_count": 36288,
+    "rejections": {
+      "too_few_inliers": 0,
+      "too_small_ratio": 0,
+      "consecutive_small_plane_stop": 0,
+      "non_vertical_plane": 24,
+      "component_rejection": 0,
+      "too_small_area": 0,
+      "degenerate_rectangle": 0
+    },
+    "stop_reason": "max_planes",
+    "normal_filter": {
+      "enabled": true,
+      "point_normal_max_up_dot": 0.25,
+      "preprocessed_point_count": 194388,
+      "valid_normal_count": 194388,
+      "invalid_normal_count": 0,
+      "normal_filtered_point_count": 49920,
+      "normal_filtered_ratio": 0.25680597567751096
+    },
+    "resolved_thresholds": {
+      "distance_threshold": 0.01746400981542669,
+      "component_eps": 0.2619601472314003,
+      "min_vertical_span": 0.39108686549541133,
+      "min_area": 0.22874372912498978
+    },
+    "scene_height_range_along_up_vector": {
+      "min": -1.0118874837863598,
+      "max": 0.9435468436906966,
+      "lower_percentile": 5.0,
+      "upper_percentile": 95.0,
+      "raw_min": -1.3816537930017787,
+      "raw_max": 1.483350894050364
+    }
+  },
+  "candidate_ids": [
+    "wall_000",
+    "wall_001",
+    "wall_002",
+    "wall_003",
+    "wall_004",
+    "wall_005",
+    "wall_006",
+    "wall_007",
+    "wall_008",
+    "wall_009",
+    "wall_010",
+    "wall_011"
+  ],
+  "wall_candidates": [
+    {
+      "candidate_id": "wall_000",
+      "plane_equation": [
+        0.71033768536678,
+        -0.05054483849832413,
+        0.7020438676100974,
+        -4.036179820172274
+      ],
+      "normalized_normal": [
+        0.71033768536678,
+        -0.05054483849832413,
+        0.7020438676100974
+      ],
+      "centroid": [
+        2.5361407823803166,
+        -0.10510645656081902,
+        3.175515036929408
+      ],
+      "inlier_count": 3872,
+      "raw_ransac_inlier_count": 3880,
+      "inlier_ratio": 0.07756410256410257,
+      "remaining_inlier_ratio": 0.07756410256410257,
+      "fitting_rmse": 0.008527979924254466,
+      "mean_absolute_distance": 0.007031473487484419,
+      "estimated_width": 9.708699589566637,
+      "estimated_height": 1.7864199341772076,
+      "estimated_area": 17.343814481739912,
+      "projected_bounds": {
+        "origin": [
+          2.5361407823803166,
+          -0.10510645656081902,
+          3.175515036929408
+        ],
+        "basis_u": [
+          -0.7016903638462585,
+          -0.1291256079759035,
+          0.700683388307557
+        ],
+        "basis_v": [
+          0.055235912530444534,
+          -0.9903392331247065,
+          -0.12718961160762093
+        ],
+        "bounds_2d": {
+          "u_min": -5.874609594335969,
+          "u_max": 3.834089995230667,
+          "v_min": -0.9867301940841102,
+          "v_max": 0.7996897400930973
+        },
+        "corners": [
+          [
+            6.603794783393066,
+            1.6306537026391394,
+            -0.8152244884669321
+          ],
+          [
+            -0.20870616408396808,
+            0.37701196548094273,
+            5.987500036010807
+          ],
+          [
+            -0.11003162885711337,
+            -1.3921497821708018,
+            5.7602859784146965
+          ],
+          [
+            6.7024693186199205,
+            -0.13850804501260505,
+            -1.0424385460630428
+          ]
+        ],
+        "width": 9.708699589566637,
+        "height": 1.7864199341772076,
+        "area": 17.343814481739912
+      },
+      "corners_3d": [
+        [
+          6.603794783393066,
+          1.6306537026391394,
+          -0.8152244884669321
+        ],
+        [
+          -0.20870616408396808,
+          0.37701196548094273,
+          5.987500036010807
+        ],
+        [
+          -0.11003162885711337,
+          -1.3921497821708018,
+          5.7602859784146965
+        ],
+        [
+          6.7024693186199205,
+          -0.13850804501260505,
+          -1.0424385460630428
+        ]
+      ],
+      "orientation": "vertical",
+      "suggested_semantic": "wall",
+      "semantic_confidence": 0.9431898629902281,
+      "semantic_reason": "벽 전용 추출에서 법선과 높이 방향의 절댓값 내적이 0.056810로 기준 0.250000 이하입니다.",
+      "preview_color": [
+        0.894,
+        0.102,
+        0.11
+      ],
+      "source_pass": "wall_extraction",
+      "extraction_details": {
+        "normal_up_absolute_dot": 0.05681013700977184,
+        "raw_ransac_inlier_count": 3880,
+        "final_support_point_count": 3872,
+        "vertical_span": 1.9044513342852618,
+        "component_count": 5,
+        "valid_component_count": 5,
+        "used_component_count": 5,
+        "merged_component_count": 5,
+        "excluded_component_count": 0,
+        "noise_point_count": 8,
+        "merge_valid_components": true,
+        "components": [
+          {
+            "component_id": 0,
+            "point_count": 2822,
+            "centroid": [
+              2.4651975715626286,
+              -0.10497936350679235,
+              3.247998922651691
+            ],
+            "vertical_span": 1.743455290485041,
+            "horizontal_span": 4.651348151180404,
+            "bounds_2d": {
+              "u_min": -2.458128704103055,
+              "u_max": 2.193219447077349,
+              "v_min": -1.1466475826783769,
+              "v_max": 0.6000786492323736
+            },
+            "estimated_area": 8.109417542063289,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 1,
+            "point_count": 148,
+            "centroid": [
+              5.96040375629394,
+              -0.062197004326582005,
+              -0.2881773581132555
+            ],
+            "vertical_span": 0.7981471158257849,
+            "horizontal_span": 0.7803679312519054,
+            "bounds_2d": {
+              "u_min": 3.970250422507297,
+              "u_max": 4.750618353759203,
+              "v_min": -0.05971985860207393,
+              "v_max": 0.7395876106326764
+            },
+            "estimated_area": 0.6228484136116427,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 2,
+            "point_count": 554,
+            "centroid": [
+              0.20865994173324803,
+              -0.4234868208626354,
+              5.507318555341135
+            ],
+            "vertical_span": 1.7379815255467683,
+            "horizontal_span": 1.0310371637760642,
+            "bounds_2d": {
+              "u_min": -4.185546673858696,
+              "u_max": -3.154509510082632,
+              "v_min": -1.1694591454702443,
+              "v_max": 0.572685158770548
+            },
+            "estimated_area": 1.7919235427949374,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 3,
+            "point_count": 294,
+            "centroid": [
+              5.147696845701854,
+              0.3028616345990774,
+              0.55784549827479
+            ],
+            "vertical_span": 1.153174046043673,
+            "horizontal_span": 0.7548623224505238,
+            "bounds_2d": {
+              "u_min": 2.9282684203242044,
+              "u_max": 3.683130742774728,
+              "v_min": -0.6656359706329794,
+              "v_max": 0.4893436291913228
+            },
+            "estimated_area": 0.8704876385861943,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 4,
+            "point_count": 54,
+            "centroid": [
+              6.518336736083226,
+              0.8158340336045148,
+              -0.7901610423523143
+            ],
+            "vertical_span": 1.305309229116565,
+            "horizontal_span": 0.10024010777446346,
+            "bounds_2d": {
+              "u_min": 5.159246978471745,
+              "u_max": 5.259487086246208,
+              "v_min": -1.0064002949856725,
+              "v_max": 0.3006615856046177
+            },
+            "estimated_area": 0.1308443378056463,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          }
+        ],
+        "enabled": true
+      }
+    },
+    {
+      "candidate_id": "wall_001",
+      "plane_equation": [
+        -0.6913174406376108,
+        -0.08957979522184815,
+        0.716976747571548,
+        5.260657450060145
+      ],
+      "normalized_normal": [
+        -0.6913174406376108,
+        -0.08957979522184815,
+        0.716976747571548
+      ],
+      "centroid": [
+        5.035228621931451,
+        0.8045985196920604,
+        -2.3817234258646987
+      ],
+      "inlier_count": 2028,
+      "raw_ransac_inlier_count": 2060,
+      "inlier_ratio": 0.040625,
+      "remaining_inlier_ratio": 0.045783948526921775,
+      "fitting_rmse": 0.00919004205677161,
+      "mean_absolute_distance": 0.00769147872965977,
+      "estimated_width": 6.239035831865369,
+      "estimated_height": 1.4293631360924,
+      "estimated_area": 8.91784782282794,
+      "projected_bounds": {
+        "origin": [
+          5.035228621931451,
+          0.8045985196920604,
+          -2.3817234258646987
+        ],
+        "basis_u": [
+          -0.7193301790983869,
+          -0.008264120607655023,
+          -0.6946191746193483
+        ],
+        "basis_v": [
+          0.06814902573438593,
+          -0.9959453622556781,
+          -0.058724319432924256
+        ],
+        "bounds_2d": {
+          "u_min": -2.14380445073583,
+          "u_max": 4.0952313811295395,
+          "v_min": -0.7797326550216004,
+          "v_max": 0.6496304810707995
+        },
+        "corners": [
+          [
+            6.5241938406581665,
+            1.5988862998002384,
+            -0.8468064782435206
+          ],
+          [
+            2.036267078321197,
+            1.5473261552102218,
+            -5.180560398194383
+          ],
+          [
+            2.1336767834665404,
+            0.12375856883976444,
+            -5.264498775583919
+          ],
+          [
+            6.62160354580351,
+            0.17531871342978111,
+            -0.9307448556330571
+          ]
+        ],
+        "width": 6.239035831865369,
+        "height": 1.4293631360924,
+        "area": 8.91784782282794
+      },
+      "corners_3d": [
+        [
+          6.5241938406581665,
+          1.5988862998002384,
+          -0.8468064782435206
+        ],
+        [
+          2.036267078321197,
+          1.5473261552102218,
+          -5.180560398194383
+        ],
+        [
+          2.1336767834665404,
+          0.12375856883976444,
+          -5.264498775583919
+        ],
+        [
+          6.62160354580351,
+          0.17531871342978111,
+          -0.9307448556330571
+        ]
+      ],
+      "orientation": "vertical",
+      "suggested_semantic": "wall",
+      "semantic_confidence": 0.9603573831156332,
+      "semantic_reason": "벽 전용 추출에서 법선과 높이 방향의 절댓값 내적이 0.039643로 기준 0.250000 이하입니다.",
+      "preview_color": [
+        0.216,
+        0.494,
+        0.722
+      ],
+      "source_pass": "wall_extraction",
+      "extraction_details": {
+        "normal_up_absolute_dot": 0.039642616884366814,
+        "raw_ransac_inlier_count": 2060,
+        "final_support_point_count": 2028,
+        "vertical_span": 1.5521930890440419,
+        "component_count": 4,
+        "valid_component_count": 4,
+        "used_component_count": 4,
+        "merged_component_count": 4,
+        "excluded_component_count": 0,
+        "noise_point_count": 32,
+        "merge_valid_components": true,
+        "components": [
+          {
+            "component_id": 0,
+            "point_count": 1312,
+            "centroid": [
+              5.913631510914523,
+              0.8236296638945282,
+              -1.5320318461163536
+            ],
+            "vertical_span": 1.5415837008566515,
+            "horizontal_span": 1.792096646470617,
+            "bounds_2d": {
+              "u_min": 2.2793148585584,
+              "u_max": 4.071411505029017,
+              "v_min": -1.1707755020688675,
+              "v_max": 0.37185397590026376
+            },
+            "estimated_area": 2.762666980558968,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 1,
+            "point_count": 515,
+            "centroid": [
+              3.143932039519363,
+              0.7976652466139299,
+              -4.207496062476417
+            ],
+            "vertical_span": 1.4260368122501768,
+            "horizontal_span": 2.7408880538464633,
+            "bounds_2d": {
+              "u_min": -2.0916540944436934,
+              "u_max": 0.6492339594027697,
+              "v_min": -1.0453581303603714,
+              "v_max": 0.38178500939871013
+            },
+            "estimated_area": 3.908607263041801,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 2,
+            "point_count": 190,
+            "centroid": [
+              4.279336494333271,
+              0.6726185022314488,
+              -3.1258640964035753
+            ],
+            "vertical_span": 0.9054832065537761,
+            "horizontal_span": 0.6765902625353711,
+            "bounds_2d": {
+              "u_min": 0.5647076262526559,
+              "u_max": 1.241297888788027,
+              "v_min": -0.6643191361474332,
+              "v_max": 0.24225998884480174
+            },
+            "estimated_area": 0.6126411204435891,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 3,
+            "point_count": 11,
+            "centroid": [
+              1.874683938213795,
+              1.139682882778626,
+              -5.399846087952981
+            ],
+            "vertical_span": 0.4946712378650916,
+            "horizontal_span": 0.17824026390242187,
+            "bounds_2d": {
+              "u_min": -2.5051160829206367,
+              "u_max": -2.326875819018215,
+              "v_min": -1.0409587358211525,
+              "v_max": -0.5460437980257
+            },
+            "estimated_area": 0.08817033198201163,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          }
+        ],
+        "enabled": true
+      }
+    },
+    {
+      "candidate_id": "wall_002",
+      "plane_equation": [
+        0.7111010702043562,
+        -0.05104472077912357,
+        0.7012344147535834,
+        -3.9059110593165345
+      ],
+      "normalized_normal": [
+        0.7111010702043562,
+        -0.05104472077912357,
+        0.7012344147535834
+      ],
+      "centroid": [
+        1.6110634118832405,
+        -0.17008156357568122,
+        3.9239380143711386
+      ],
+      "inlier_count": 1379,
+      "raw_ransac_inlier_count": 1416,
+      "inlier_ratio": 0.027624198717948717,
+      "remaining_inlier_ratio": 0.03387290904178232,
+      "fitting_rmse": 0.008668971172191519,
+      "mean_absolute_distance": 0.007187179415101499,
+      "estimated_width": 10.404780754608288,
+      "estimated_height": 1.7756636094500367,
+      "estimated_area": 18.475390550264027,
+      "projected_bounds": {
+        "origin": [
+          1.6110634118832405,
+          -0.17008156357568122,
+          3.9239380143711386
+        ],
+        "basis_u": [
+          -0.700955689751041,
+          -0.12911950812195377,
+          0.701419470522445
+        ],
+        "basis_v": [
+          0.0547392816893099,
+          -0.9903143890214491,
+          -0.12759710787166123
+        ],
+        "bounds_2d": {
+          "u_min": -7.1654641810218624,
+          "u_max": 3.2393165735864256,
+          "v_min": -0.9198230889372,
+          "v_max": 0.8558405205128367
+        },
+        "corners": [
+          [
+            6.583385844108133,
+            1.6660336872720052,
+            -0.984691311626797
+          ],
+          [
+            -0.7099044264466756,
+            0.32257351412021207,
+            6.313424496172675
+          ],
+          [
+            -0.6127058759435333,
+            -1.4358917083799219,
+            6.086854955053895
+          ],
+          [
+            6.680584394611276,
+            -0.09243153522812864,
+            -1.2112608527455768
+          ]
+        ],
+        "width": 10.404780754608288,
+        "height": 1.7756636094500367,
+        "area": 18.475390550264027
+      },
+      "corners_3d": [
+        [
+          6.583385844108133,
+          1.6660336872720052,
+          -0.984691311626797
+        ],
+        [
+          -0.7099044264466756,
+          0.32257351412021207,
+          6.313424496172675
+        ],
+        [
+          -0.6127058759435333,
+          -1.4358917083799219,
+          6.086854955053895
+        ],
+        [
+          6.680584394611276,
+          -0.09243153522812864,
+          -1.2112608527455768
+        ]
+      ],
+      "orientation": "vertical",
+      "suggested_semantic": "wall",
+      "semantic_confidence": 0.9425507658454386,
+      "semantic_reason": "벽 전용 추출에서 법선과 높이 방향의 절댓값 내적이 0.057449로 기준 0.250000 이하입니다.",
+      "preview_color": [
+        0.302,
+        0.686,
+        0.29
+      ],
+      "source_pass": "wall_extraction",
+      "extraction_details": {
+        "normal_up_absolute_dot": 0.05744923415456142,
+        "raw_ransac_inlier_count": 1416,
+        "final_support_point_count": 1379,
+        "vertical_span": 1.808242863443274,
+        "component_count": 6,
+        "valid_component_count": 6,
+        "used_component_count": 6,
+        "merged_component_count": 6,
+        "excluded_component_count": 0,
+        "noise_point_count": 37,
+        "merge_valid_components": true,
+        "components": [
+          {
+            "component_id": 0,
+            "point_count": 354,
+            "centroid": [
+              -0.40112793001839625,
+              -0.5226962422698184,
+              5.935083685005458
+            ],
+            "vertical_span": 1.6735254125326557,
+            "horizontal_span": 0.5717133756958894,
+            "bounds_2d": {
+              "u_min": 4.2508390769483375,
+              "u_max": 4.822552452644227,
+              "v_min": -1.1801623915464097,
+              "v_max": 0.49663202181959215
+            },
+            "estimated_area": 0.9567768629119006,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 1,
+            "point_count": 639,
+            "centroid": [
+              0.8701114675192384,
+              -0.358532127390986,
+              4.664381450083532
+            ],
+            "vertical_span": 1.788684343460476,
+            "horizontal_span": 0.6092259989719961,
+            "bounds_2d": {
+              "u_min": 2.4547424681193544,
+              "u_max": 3.0639684670913505,
+              "v_min": -1.1598059428614633,
+              "v_max": 0.6319278187908198
+            },
+            "estimated_area": 1.0897130059902775,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 2,
+            "point_count": 106,
+            "centroid": [
+              5.368465891246589,
+              0.7985837311893702,
+              0.17865100149566562
+            ],
+            "vertical_span": 0.8063368847715117,
+            "horizontal_span": 0.41212293746902384,
+            "bounds_2d": {
+              "u_min": -3.8941166771985705,
+              "u_max": -3.4819937397295466,
+              "v_min": -0.913751402719593,
+              "v_max": -0.10765650469862398
+            },
+            "estimated_area": 0.33230992554165717,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 3,
+            "point_count": 31,
+            "centroid": [
+              0.02993930988913171,
+              -0.0265234154282463,
+              5.53336920663766
+            ],
+            "vertical_span": 0.9716969119621237,
+            "horizontal_span": 0.017949031635750234,
+            "bounds_2d": {
+              "u_min": 3.8566315160729716,
+              "u_max": 3.874580547708722,
+              "v_min": -1.143138563530237,
+              "v_max": -0.17009835053562428
+            },
+            "estimated_area": 0.01744101861316897,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 4,
+            "point_count": 192,
+            "centroid": [
+              4.530689352329657,
+              0.28219442445278836,
+              0.9973195332465559
+            ],
+            "vertical_span": 1.3722838570702183,
+            "horizontal_span": 0.681394079861144,
+            "bounds_2d": {
+              "u_min": -2.886330328333427,
+              "u_max": -2.204936248472283,
+              "v_min": -0.758606885258105,
+              "v_max": 0.6151255701048037
+            },
+            "estimated_area": 0.935066096096663,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 5,
+            "point_count": 57,
+            "centroid": [
+              6.452356668275463,
+              0.7295524959615356,
+              -0.9192644473314783
+            ],
+            "vertical_span": 1.279664031525405,
+            "horizontal_span": 0.24061857665488784,
+            "bounds_2d": {
+              "u_min": -5.345582766313293,
+              "u_max": -5.104964189658405,
+              "v_min": -0.9849091016008836,
+              "v_max": 0.29684562668154524
+            },
+            "estimated_area": 0.3079109378620985,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          }
+        ],
+        "enabled": true
+      }
+    },
+    {
+      "candidate_id": "wall_003",
+      "plane_equation": [
+        0.7059628408784843,
+        0.008178515481502648,
+        0.7082016514971556,
+        -3.9669184812844103
+      ],
+      "normalized_normal": [
+        0.7059628408784843,
+        0.008178515481502648,
+        0.7082016514971556
+      ],
+      "centroid": [
+        3.5815801018623112,
+        -0.005023510198268638,
+        2.031197046144624
+      ],
+      "inlier_count": 1044,
+      "raw_ransac_inlier_count": 1248,
+      "inlier_ratio": 0.020913461538461537,
+      "remaining_inlier_ratio": 0.026568265682656828,
+      "fitting_rmse": 0.009537775016787516,
+      "mean_absolute_distance": 0.008157425842013006,
+      "estimated_width": 9.929822826034492,
+      "estimated_height": 1.6407598539758648,
+      "estimated_area": 16.292454650050562,
+      "projected_bounds": {
+        "origin": [
+          3.5815801018623112,
+          -0.005023510198268638,
+          2.031197046144624
+        ],
+        "basis_u": [
+          -0.7015503777947171,
+          -0.1291244559871431,
+          0.7008237597870911
+        ],
+        "basis_v": [
+          0.09717785094799013,
+          -0.9915946685771073,
+          -0.08541942714972421
+        ],
+        "bounds_2d": {
+          "u_min": -4.394001164930708,
+          "u_max": 5.5358216611037845,
+          "v_min": -0.8823909252551839,
+          "v_max": 0.758368928720681
+        },
+        "corners": [
+          [
+            6.578444425337568,
+            1.437323636914143,
+            -0.9728500434135599
+          ],
+          [
+            -0.3878265297015343,
+            0.1551406664537236,
+            5.986205723547611
+          ],
+          [
+            -0.22838101317042167,
+            -1.4718280571640971,
+            5.846052956730728
+          ],
+          [
+            6.737889941868681,
+            -0.18964508670367763,
+            -1.1130028102304432
+          ]
+        ],
+        "width": 9.929822826034492,
+        "height": 1.6407598539758648,
+        "area": 16.292454650050562
+      },
+      "corners_3d": [
+        [
+          6.578444425337568,
+          1.437323636914143,
+          -0.9728500434135599
+        ],
+        [
+          -0.3878265297015343,
+          0.1551406664537236,
+          5.986205723547611
+        ],
+        [
+          -0.22838101317042167,
+          -1.4718280571640971,
+          5.846052956730728
+        ],
+        [
+          6.737889941868681,
+          -0.18964508670367763,
+          -1.1130028102304432
+        ]
+      ],
+      "orientation": "vertical",
+      "suggested_semantic": "wall",
+      "semantic_confidence": 0.9976252444584153,
+      "semantic_reason": "벽 전용 추출에서 법선과 높이 방향의 절댓값 내적이 0.002375로 기준 0.250000 이하입니다.",
+      "preview_color": [
+        0.596,
+        0.306,
+        0.639
+      ],
+      "source_pass": "wall_extraction",
+      "extraction_details": {
+        "normal_up_absolute_dot": 0.002374755541584683,
+        "raw_ransac_inlier_count": 1248,
+        "final_support_point_count": 1044,
+        "vertical_span": 1.7519030796615427,
+        "component_count": 10,
+        "valid_component_count": 7,
+        "used_component_count": 7,
+        "merged_component_count": 7,
+        "excluded_component_count": 3,
+        "noise_point_count": 24,
+        "merge_valid_components": true,
+        "components": [
+          {
+            "component_id": 0,
+            "point_count": 391,
+            "centroid": [
+              5.546383454590081,
+              0.16521851083427205,
+              0.07070767831827979
+            ],
+            "vertical_span": 1.6464973855645577,
+            "horizontal_span": 1.0738315991291092,
+            "bounds_2d": {
+              "u_min": 3.3663289065624706,
+              "u_max": 4.44016050569158,
+              "v_min": -0.6771300834005746,
+              "v_max": 0.9693079667763578
+            },
+            "estimated_area": 1.7680609205026865,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 1,
+            "point_count": 333,
+            "centroid": [
+              0.6305135706408668,
+              -0.4938132829515059,
+              4.978028246549272
+            ],
+            "vertical_span": 1.5770327009831275,
+            "horizontal_span": 1.3243899397636483,
+            "bounds_2d": {
+              "u_min": -3.6700247965061776,
+              "u_max": -2.3456348567425294,
+              "v_min": -0.7718468445373082,
+              "v_max": 0.8051649918601148
+            },
+            "estimated_area": 2.088606243860348,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 2,
+            "point_count": 59,
+            "centroid": [
+              4.3268218135759176,
+              0.29069835170498964,
+              1.28094527543324
+            ],
+            "vertical_span": 1.3829933980903564,
+            "horizontal_span": 0.3645106892342631,
+            "bounds_2d": {
+              "u_min": 1.8877757072899621,
+              "u_max": 2.2522863965242252,
+              "v_min": -0.5718233429369012,
+              "v_max": 0.8111042057895174
+            },
+            "estimated_area": 0.5041158767443514,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 3,
+            "point_count": 81,
+            "centroid": [
+              1.8617181384167332,
+              -0.845741227453072,
+              3.7523581307369254
+            ],
+            "vertical_span": 0.22099668471431455,
+            "horizontal_span": 0.5915436541906895,
+            "bounds_2d": {
+              "u_min": -1.672499738280565,
+              "u_max": -1.0809560840898755,
+              "v_min": 0.5941071740292225,
+              "v_max": 0.815085216703184
+            },
+            "estimated_area": 0.13072918643993334,
+            "valid": false,
+            "used": false,
+            "rejection_reasons": [
+              "too_short_vertical_span"
+            ]
+          },
+          {
+            "component_id": 4,
+            "point_count": 155,
+            "centroid": [
+              4.759304455846772,
+              0.46949764107537717,
+              0.8508210599548596
+            ],
+            "vertical_span": 1.10968235551935,
+            "horizontal_span": 0.5256632522405376,
+            "bounds_2d": {
+              "u_min": 2.506973921728302,
+              "u_max": 3.0326371739688396,
+              "v_min": -0.5750672521116738,
+              "v_max": 0.5345541860264188
+            },
+            "estimated_area": 0.5833192359562419,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 5,
+            "point_count": 31,
+            "centroid": [
+              -0.11924247185150383,
+              -1.0428851784316584,
+              5.73363598222537
+            ],
+            "vertical_span": 0.572361647678569,
+            "horizontal_span": 0.08849612385744443,
+            "bounds_2d": {
+              "u_min": -4.270457968514201,
+              "u_max": -4.181961844656756,
+              "v_min": 0.19214770433982994,
+              "v_max": 0.7645673264365157
+            },
+            "estimated_area": 0.05065178726421361,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 6,
+            "point_count": 13,
+            "centroid": [
+              -0.5051908347411354,
+              -0.02884478506602598,
+              6.105766093669599
+            ],
+            "vertical_span": 0.27477351209854534,
+            "horizontal_span": 0.316432690132431,
+            "bounds_2d": {
+              "u_min": -4.85194486309952,
+              "u_max": -4.535512172967089,
+              "v_min": -0.6556182167808416,
+              "v_max": -0.38088424117109726
+            },
+            "estimated_area": 0.08694732161047879,
+            "valid": false,
+            "used": false,
+            "rejection_reasons": [
+              "too_short_vertical_span"
+            ]
+          },
+          {
+            "component_id": 7,
+            "point_count": 18,
+            "centroid": [
+              0.072730758227465,
+              -0.25171652354012797,
+              5.532010908407175
+            ],
+            "vertical_span": 0.5900383676283177,
+            "horizontal_span": 0.0063060107346943894,
+            "bounds_2d": {
+              "u_min": -3.8612258523391465,
+              "u_max": -3.854919841604452,
+              "v_min": -0.5310241391668148,
+              "v_max": 0.059018804660473094
+            },
+            "estimated_area": 0.003720788280145726,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 8,
+            "point_count": 57,
+            "centroid": [
+              6.485412636596883,
+              0.7285644051955216,
+              -0.8745646649129245
+            ],
+            "vertical_span": 1.3011367438165917,
+            "horizontal_span": 0.18213458755496248,
+            "bounds_2d": {
+              "u_min": 5.13654265687342,
+              "u_max": 5.3186772444283825,
+              "v_min": -0.7825576866523408,
+              "v_max": 0.5186184484185099
+            },
+            "estimated_area": 0.23698200418764181,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 9,
+            "point_count": 86,
+            "centroid": [
+              3.6475983699534753,
+              -0.5921489550654226,
+              1.9825546843611288
+            ],
+            "vertical_span": 0.14399919043779474,
+            "horizontal_span": 1.2220930130792764,
+            "bounds_2d": {
+              "u_min": 0.29152932853735636,
+              "u_max": 1.5136223416166328,
+              "v_min": 0.6871474296933753,
+              "v_max": 0.8311223554623501
+            },
+            "estimated_area": 0.1759804045231011,
+            "valid": false,
+            "used": false,
+            "rejection_reasons": [
+              "too_short_vertical_span"
+            ]
+          }
+        ],
+        "enabled": true
+      }
+    },
+    {
+      "candidate_id": "wall_004",
+      "plane_equation": [
+        0.7246848458149344,
+        0.06392408342544705,
+        -0.6861090188916055,
+        -5.291825386040382
+      ],
+      "normalized_normal": [
+        0.7246848458149344,
+        0.06392408342544705,
+        -0.6861090188916055
+      ],
+      "centroid": [
+        4.282610028013034,
+        0.7059098822302409,
+        -3.123640845683622
+      ],
+      "inlier_count": 1016,
+      "raw_ransac_inlier_count": 1048,
+      "inlier_ratio": 0.020352564102564103,
+      "remaining_inlier_ratio": 0.0312394305568367,
+      "fitting_rmse": 0.009143872134416257,
+      "mean_absolute_distance": 0.007723351271600758,
+      "estimated_width": 5.821955523259206,
+      "estimated_height": 1.4370983405977296,
+      "estimated_area": 8.366722621509592,
+      "projected_bounds": {
+        "origin": [
+          4.282610028013034,
+          0.7059098822302409,
+          -3.123640845683622
+        ],
+        "basis_u": [
+          0.6874011124942501,
+          0.002408573687366196,
+          0.7262739905259309
+        ],
+        "basis_v": [
+          0.048078943289678905,
+          -0.9979518577221094,
+          -0.04219602921056467
+        ],
+        "bounds_2d": {
+          "u_min": -2.439852762728044,
+          "u_max": 3.3821027605311613,
+          "v_min": -0.8718887833256427,
+          "v_max": 0.5652095572720869
+        },
+        "corners": [
+          [
+            2.563533033223186,
+            1.5701363481117812,
+            -4.858852203396263
+          ],
+          [
+            6.565551736803608,
+            1.5841589569941195,
+            -0.6305173328543163
+          ],
+          [
+            6.6346459064228975,
+            0.15000399826525468,
+            -0.6911571764126321
+          ],
+          [
+            2.632627202842476,
+            0.13598138938291626,
+            -4.919492046954579
+          ]
+        ],
+        "width": 5.821955523259206,
+        "height": 1.4370983405977296,
+        "area": 8.366722621509592
+      },
+      "corners_3d": [
+        [
+          2.563533033223186,
+          1.5701363481117812,
+          -4.858852203396263
+        ],
+        [
+          6.565551736803608,
+          1.5841589569941195,
+          -0.6305173328543163
+        ],
+        [
+          6.6346459064228975,
+          0.15000399826525468,
+          -0.6911571764126321
+        ],
+        [
+          2.632627202842476,
+          0.13598138938291626,
+          -4.919492046954579
+        ]
+      ],
+      "orientation": "vertical",
+      "suggested_semantic": "wall",
+      "semantic_confidence": 0.9344188758306299,
+      "semantic_reason": "벽 전용 추출에서 법선과 높이 방향의 절댓값 내적이 0.065581로 기준 0.250000 이하입니다.",
+      "preview_color": [
+        1.0,
+        0.498,
+        0.0
+      ],
+      "source_pass": "wall_extraction",
+      "extraction_details": {
+        "normal_up_absolute_dot": 0.06558112416937009,
+        "raw_ransac_inlier_count": 1048,
+        "final_support_point_count": 1016,
+        "vertical_span": 1.5236104012068883,
+        "component_count": 5,
+        "valid_component_count": 4,
+        "used_component_count": 4,
+        "merged_component_count": 4,
+        "excluded_component_count": 1,
+        "noise_point_count": 14,
+        "merge_valid_components": true,
+        "components": [
+          {
+            "component_id": 0,
+            "point_count": 42,
+            "centroid": [
+              6.501790487727778,
+              0.5502157428022465,
+              -0.7872711546006267
+            ],
+            "vertical_span": 1.0421262904207707,
+            "horizontal_span": 0.1959646585469037,
+            "bounds_2d": {
+              "u_min": 3.766460481547873,
+              "u_max": 3.9624251400947768,
+              "v_min": -0.872895741338918,
+              "v_max": 0.17057863581795732
+            },
+            "estimated_area": 0.20421992266505773,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 1,
+            "point_count": 335,
+            "centroid": [
+              5.064162703747793,
+              0.9372823473076608,
+              -2.2756844578353292
+            ],
+            "vertical_span": 1.4488821765889188,
+            "horizontal_span": 1.0378965701203173,
+            "bounds_2d": {
+              "u_min": 1.3543294616077686,
+              "u_max": 2.392226031728086,
+              "v_min": -1.2810674904355264,
+              "v_max": 0.17246900175011945
+            },
+            "estimated_area": 1.5037898415900988,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 2,
+            "point_count": 568,
+            "centroid": [
+              3.8462039022700436,
+              0.6168370052387782,
+              -3.594049784891686
+            ],
+            "vertical_span": 0.9775839359261234,
+            "horizontal_span": 1.7191430764740536,
+            "bounds_2d": {
+              "u_min": -0.6805080227330157,
+              "u_max": 1.038635053741038,
+              "v_min": -0.8451866810008611,
+              "v_max": 0.13465453316867132
+            },
+            "estimated_area": 1.68060665511965,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 3,
+            "point_count": 18,
+            "centroid": [
+              6.248510005638133,
+              1.6734815175711868,
+              -0.9601289005425239
+            ],
+            "vertical_span": 0.09065460603449116,
+            "horizontal_span": 0.19801381267061213,
+            "bounds_2d": {
+              "u_min": 3.4962602842005563,
+              "u_max": 3.6942740968711685,
+              "v_min": -1.378199042321932,
+              "v_max": -1.2865833394585113
+            },
+            "estimated_area": 0.017950864177041878,
+            "valid": false,
+            "used": false,
+            "rejection_reasons": [
+              "too_short_vertical_span"
+            ]
+          },
+          {
+            "component_id": 4,
+            "point_count": 71,
+            "centroid": [
+              2.7726963746576536,
+              0.4188360772522279,
+              -4.742610438859858
+            ],
+            "vertical_span": 0.7035174870827446,
+            "horizontal_span": 0.4422723842720322,
+            "bounds_2d": {
+              "u_min": -1.7410978680441724,
+              "u_max": -1.2988254837721402,
+              "v_min": -0.45732766038699535,
+              "v_max": 0.24776108624093682
+            },
+            "estimated_area": 0.31114635638915406,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          }
+        ],
+        "enabled": true
+      }
+    },
+    {
+      "candidate_id": "wall_005",
+      "plane_equation": [
+        0.7021800029872034,
+        -0.10397542084416339,
+        0.7043666341225784,
+        -4.020249210492014
+      ],
+      "normalized_normal": [
+        0.7021800029872034,
+        -0.10397542084416339,
+        0.7043666341225784
+      ],
+      "centroid": [
+        4.845561320916366,
+        0.28942044404612705,
+        0.919812962142857
+      ],
+      "inlier_count": 1043,
+      "raw_ransac_inlier_count": 1208,
+      "inlier_ratio": 0.020893429487179486,
+      "remaining_inlier_ratio": 0.03403824815612558,
+      "fitting_rmse": 0.008140473496595321,
+      "mean_absolute_distance": 0.006726612333125772,
+      "estimated_width": 9.33966216754723,
+      "estimated_height": 1.6969358840359816,
+      "estimated_area": 15.848807876884171,
+      "projected_bounds": {
+        "origin": [
+          4.845561320916366,
+          0.28942044404612705,
+          0.919812962142857
+        ],
+        "basis_u": [
+          -0.7117402710068484,
+          -0.12919546010615318,
+          0.6904594989679391
+        ],
+        "basis_v": [
+          0.019210154397847304,
+          -0.986152952106436,
+          -0.16472196277294773
+        ],
+        "bounds_2d": {
+          "u_min": -2.5180008036534063,
+          "u_max": 6.821661363893823,
+          "v_min": -0.8374395396221058,
+          "v_max": 0.8594963444138759
+        },
+        "corners": [
+          [
+            6.621636552449101,
+            1.4405781906307866,
+            -0.680819926478315
+          ],
+          [
+            -0.025777129793374008,
+            0.23393623965849053,
+            5.767838534256162
+          ],
+          [
+            0.0068212705422047056,
+            -1.4395020919189379,
+            5.488315924737908
+          ],
+          [
+            6.65423495278468,
+            -0.23286014094664154,
+            -0.9603425359965692
+          ]
+        ],
+        "width": 9.33966216754723,
+        "height": 1.6969358840359816,
+        "area": 15.848807876884171
+      },
+      "corners_3d": [
+        [
+          6.621636552449101,
+          1.4405781906307866,
+          -0.680819926478315
+        ],
+        [
+          -0.025777129793374008,
+          0.23393623965849053,
+          5.767838534256162
+        ],
+        [
+          0.0068212705422047056,
+          -1.4395020919189379,
+          5.488315924737908
+        ],
+        [
+          6.65423495278468,
+          -0.23286014094664154,
+          -0.9603425359965692
+        ]
+      ],
+      "orientation": "vertical",
+      "suggested_semantic": "wall",
+      "semantic_confidence": 0.8911888768719756,
+      "semantic_reason": "벽 전용 추출에서 법선과 높이 방향의 절댓값 내적이 0.108811로 기준 0.250000 이하입니다.",
+      "preview_color": [
+        1.0,
+        1.0,
+        0.2
+      ],
+      "source_pass": "wall_extraction",
+      "extraction_details": {
+        "normal_up_absolute_dot": 0.10881112312802442,
+        "raw_ransac_inlier_count": 1208,
+        "final_support_point_count": 1043,
+        "vertical_span": 1.880517536658045,
+        "component_count": 11,
+        "valid_component_count": 6,
+        "used_component_count": 6,
+        "merged_component_count": 6,
+        "excluded_component_count": 5,
+        "noise_point_count": 48,
+        "merge_valid_components": true,
+        "components": [
+          {
+            "component_id": 0,
+            "point_count": 750,
+            "centroid": [
+              6.2752761756492355,
+              0.5305701819870032,
+              -0.46999877570390086
+            ],
+            "vertical_span": 1.6792816348471795,
+            "horizontal_span": 0.8659867336156024,
+            "bounds_2d": {
+              "u_min": 4.349409844218131,
+              "u_max": 5.215396577833733,
+              "v_min": -1.1598267895363408,
+              "v_max": 0.5267193132819313
+            },
+            "estimated_area": 1.4542356177819777,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 1,
+            "point_count": 27,
+            "centroid": [
+              2.2155665907039075,
+              -0.2120883526542243,
+              3.463312268860555
+            ],
+            "vertical_span": 0.4775256039838174,
+            "horizontal_span": 0.42380968412264164,
+            "bounds_2d": {
+              "u_min": -0.9999892857635508,
+              "u_max": -0.5761796016409092,
+              "v_min": -0.5912121218980273,
+              "v_max": -0.11338262326498526
+            },
+            "estimated_area": 0.2023799753848553,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 2,
+            "point_count": 177,
+            "centroid": [
+              0.497265539006255,
+              -0.4953967234064258,
+              5.138518086556067
+            ],
+            "vertical_span": 1.7418962958790334,
+            "horizontal_span": 0.4715770331124811,
+            "bounds_2d": {
+              "u_min": -3.4431091075378055,
+              "u_max": -2.9715320744253244,
+              "v_min": -1.365529636741394,
+              "v_max": 0.3888292673463898
+            },
+            "estimated_area": 0.8214382872002551,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 3,
+            "point_count": 41,
+            "centroid": [
+              5.258296681283729,
+              0.03312600318211048,
+              0.4656281978505111
+            ],
+            "vertical_span": 0.24827132386266487,
+            "horizontal_span": 0.2103919216517518,
+            "bounds_2d": {
+              "u_min": 3.3244643368283233,
+              "u_max": 3.534856258480075,
+              "v_min": -0.1340231171301086,
+              "v_max": 0.11417936441419493
+            },
+            "estimated_area": 0.052234280918490486,
+            "valid": false,
+            "used": false,
+            "rejection_reasons": [
+              "too_short_vertical_span"
+            ]
+          },
+          {
+            "component_id": 4,
+            "point_count": 33,
+            "centroid": [
+              1.2183598025888946,
+              -0.10412908987446097,
+              4.4725138363498385
+            ],
+            "vertical_span": 0.7827807103535398,
+            "horizontal_span": 0.7116034081020901,
+            "bounds_2d": {
+              "u_min": -2.402483982562787,
+              "u_max": -1.6908805744606967,
+              "v_min": -0.927771098700997,
+              "v_max": -0.14262412767828309
+            },
+            "estimated_area": 0.557029421284154,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 5,
+            "point_count": 43,
+            "centroid": [
+              3.6740625075251945,
+              0.10419005312460483,
+              2.069308075734109
+            ],
+            "vertical_span": 0.4815633045203185,
+            "horizontal_span": 0.5083624328169318,
+            "bounds_2d": {
+              "u_min": 0.789803162031675,
+              "u_max": 1.2981655948486068,
+              "v_min": -0.6677070987871865,
+              "v_max": -0.18583430037194884
+            },
+            "estimated_area": 0.2448086930413101,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 6,
+            "point_count": 13,
+            "centroid": [
+              -0.1715249161918417,
+              -1.0633559972565345,
+              5.721164703157182
+            ],
+            "vertical_span": 0.3800147201294255,
+            "horizontal_span": 0.005299660943592244,
+            "bounds_2d": {
+              "u_min": -4.211926776336368,
+              "u_max": -4.2066271153927755,
+              "v_min": -0.10588614130995043,
+              "v_max": 0.2754096243691209
+            },
+            "estimated_area": 0.0020139491702600536,
+            "valid": false,
+            "used": false,
+            "rejection_reasons": [
+              "too_short_vertical_span"
+            ]
+          },
+          {
+            "component_id": 7,
+            "point_count": 27,
+            "centroid": [
+              2.0140116559606622,
+              -0.8462552270261192,
+              3.566313280994375
+            ],
+            "vertical_span": 0.15236971208280625,
+            "horizontal_span": 0.3335812796200345,
+            "bounds_2d": {
+              "u_min": -1.2878291331449123,
+              "u_max": -0.9542478535248778,
+              "v_min": 0.19514740743658368,
+              "v_max": 0.34682350840528403
+            },
+            "estimated_area": 0.05082768353191874,
+            "valid": false,
+            "used": false,
+            "rejection_reasons": [
+              "too_short_vertical_span"
+            ]
+          },
+          {
+            "component_id": 8,
+            "point_count": 26,
+            "centroid": [
+              3.585402538848815,
+              -0.5413975241929787,
+              2.058994567934951
+            ],
+            "vertical_span": 0.11767995466316838,
+            "horizontal_span": 1.0422334634840371,
+            "bounds_2d": {
+              "u_min": 0.4971640498417986,
+              "u_max": 1.5393975133258357,
+              "v_min": 0.20754939710779408,
+              "v_max": 0.3243022201060425
+            },
+            "estimated_area": 0.12264998673123845,
+            "valid": false,
+            "used": false,
+            "rejection_reasons": [
+              "too_short_vertical_span"
+            ]
+          },
+          {
+            "component_id": 9,
+            "point_count": 10,
+            "centroid": [
+              1.11680522299744,
+              -0.9741446392238886,
+              4.445580227388321
+            ],
+            "vertical_span": 0.274294411119115,
+            "horizontal_span": 0.008881346775805543,
+            "bounds_2d": {
+              "u_min": -2.4046136814289083,
+              "u_max": -2.3957323346531028,
+              "v_min": 0.08793050011550078,
+              "v_max": 0.36134766156062703
+            },
+            "estimated_area": 0.002436103783814232,
+            "valid": false,
+            "used": false,
+            "rejection_reasons": [
+              "too_short_vertical_span"
+            ]
+          },
+          {
+            "component_id": 10,
+            "point_count": 13,
+            "centroid": [
+              0.11199089156558154,
+              -0.2844073095321255,
+              5.560241583933185
+            ],
+            "vertical_span": 0.47533047169123493,
+            "horizontal_span": 0.011489049669409113,
+            "bounds_2d": {
+              "u_min": -3.800606249522258,
+              "u_max": -3.789117199852849,
+              "v_min": -0.8605340117635992,
+              "v_max": -0.38474718391744694
+            },
+            "estimated_area": 0.00546109539864426,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          }
+        ],
+        "enabled": true
+      }
+    },
+    {
+      "candidate_id": "wall_006",
+      "plane_equation": [
+        0.672772274182014,
+        -0.08398763770330116,
+        0.7350670335452272,
+        2.809469571916919
+      ],
+      "normalized_normal": [
+        0.672772274182014,
+        -0.08398763770330116,
+        0.7350670335452272
+      ],
+      "centroid": [
+        -1.2757265102543491,
+        0.005332012390267056,
+        -2.653837315823422
+      ],
+      "inlier_count": 758,
+      "raw_ransac_inlier_count": 896,
+      "inlier_ratio": 0.015184294871794872,
+      "remaining_inlier_ratio": 0.025752531086498606,
+      "fitting_rmse": 0.008853826192366425,
+      "mean_absolute_distance": 0.007403238677651986,
+      "estimated_width": 8.16858759698656,
+      "estimated_height": 1.991416765658985,
+      "estimated_area": 16.267062292393074,
+      "projected_bounds": {
+        "origin": [
+          -1.2757265102543491,
+          0.005332012390267056,
+          -2.653837315823422
+        ],
+        "basis_u": [
+          -0.7387967487295232,
+          -0.1292502967760877,
+          0.6614179653214594
+        ],
+        "basis_v": [
+          0.039456699794165696,
+          -0.9880488031956278,
+          -0.1490058097694208
+        ],
+        "bounds_2d": {
+          "u_min": -3.21182065345955,
+          "u_max": 4.95676694352701,
+          "v_min": -1.0250987357160528,
+          "v_max": 0.9663180299429321
+        },
+        "corners": [
+          [
+            1.0567091329493716,
+            1.433308364023079,
+            -4.625447530203098
+          ],
+          [
+            -4.978216825416607,
+            0.37751599287109694,
+            0.7774030577458624
+          ],
+          [
+            -4.899642091928932,
+            -1.5901009591019712,
+            0.4806703899904444
+          ],
+          [
+            1.1352838664370466,
+            -0.5343085879499891,
+            -4.922180197958515
+          ]
+        ],
+        "width": 8.16858759698656,
+        "height": 1.991416765658985,
+        "area": 16.267062292393074
+      },
+      "corners_3d": [
+        [
+          1.0567091329493716,
+          1.433308364023079,
+          -4.625447530203098
+        ],
+        [
+          -4.978216825416607,
+          0.37751599287109694,
+          0.7774030577458624
+        ],
+        [
+          -4.899642091928932,
+          -1.5901009591019712,
+          0.4806703899904444
+        ],
+        [
+          1.1352838664370466,
+          -0.5343085879499891,
+          -4.922180197958515
+        ]
+      ],
+      "orientation": "vertical",
+      "suggested_semantic": "wall",
+      "semantic_confidence": 0.9164914937235101,
+      "semantic_reason": "벽 전용 추출에서 법선과 높이 방향의 절댓값 내적이 0.083509로 기준 0.250000 이하입니다.",
+      "preview_color": [
+        0.651,
+        0.337,
+        0.157
+      ],
+      "source_pass": "wall_extraction",
+      "extraction_details": {
+        "normal_up_absolute_dot": 0.08350850627648991,
+        "raw_ransac_inlier_count": 896,
+        "final_support_point_count": 758,
+        "vertical_span": 1.9569844235722385,
+        "component_count": 8,
+        "valid_component_count": 6,
+        "used_component_count": 6,
+        "merged_component_count": 6,
+        "excluded_component_count": 2,
+        "noise_point_count": 41,
+        "merge_valid_components": true,
+        "components": [
+          {
+            "component_id": 0,
+            "point_count": 198,
+            "centroid": [
+              -0.1768432386146529,
+              0.5999329592235283,
+              -3.5880818036788313
+            ],
+            "vertical_span": 1.3330493496169074,
+            "horizontal_span": 0.6427669930643578,
+            "bounds_2d": {
+              "u_min": 2.0008074709637063,
+              "u_max": 2.643574464028064,
+              "v_min": -0.6637628603601243,
+              "v_max": 0.6732990111401326
+            },
+            "estimated_area": 0.8568401220596574,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 1,
+            "point_count": 236,
+            "centroid": [
+              -1.007121092727264,
+              -0.5331907866378841,
+              -2.959605294371873
+            ],
+            "vertical_span": 0.7047469557950123,
+            "horizontal_span": 0.7840391129980911,
+            "bounds_2d": {
+              "u_min": 0.8265380480161008,
+              "u_max": 1.610577161014192,
+              "v_min": 0.5939288791381787,
+              "v_max": 1.3020058588148369
+            },
+            "estimated_area": 0.5525491781096264,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 2,
+            "point_count": 219,
+            "centroid": [
+              -2.4460403824541554,
+              -0.007489111373196277,
+              -1.5846453021240097
+            ],
+            "vertical_span": 0.5946451652923899,
+            "horizontal_span": 1.783874479931296,
+            "bounds_2d": {
+              "u_min": -1.7108877249848526,
+              "u_max": 0.07298675494644341,
+              "v_min": -0.15210757152609972,
+              "v_max": 0.4448313143865492
+            },
+            "estimated_area": 1.0607723349796214,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 3,
+            "point_count": 76,
+            "centroid": [
+              -1.340001693477654,
+              0.05066696829581605,
+              -2.5975561985232885
+            ],
+            "vertical_span": 0.35691346207724234,
+            "horizontal_span": 0.5064200196895348,
+            "bounds_2d": {
+              "u_min": 0.45553969886337414,
+              "u_max": 0.9619597185529088,
+              "v_min": 0.13795712643448724,
+              "v_max": 0.4955341689169745
+            },
+            "estimated_area": 0.1807481224926171,
+            "valid": false,
+            "used": false,
+            "rejection_reasons": [
+              "too_short_vertical_span"
+            ]
+          },
+          {
+            "component_id": 4,
+            "point_count": 21,
+            "centroid": [
+              0.3090722908516245,
+              0.3108419898622656,
+              -4.077058373412399
+            ],
+            "vertical_span": 0.35600971032130024,
+            "horizontal_span": 0.068015896817613,
+            "bounds_2d": {
+              "u_min": 2.939136111010619,
+              "u_max": 3.007152007828232,
+              "v_min": 0.13836259927776554,
+              "v_max": 0.495226920674744
+            },
+            "estimated_area": 0.02421431972328185,
+            "valid": false,
+            "used": false,
+            "rejection_reasons": [
+              "too_short_vertical_span"
+            ]
+          },
+          {
+            "component_id": 5,
+            "point_count": 37,
+            "centroid": [
+              -4.794214161799707,
+              -0.3003608124126933,
+              0.5302376112695875
+            ],
+            "vertical_span": 0.509890014626816,
+            "horizontal_span": 0.32026121569592325,
+            "bounds_2d": {
+              "u_min": -4.172662368698206,
+              "u_max": -3.852401153002283,
+              "v_min": -0.23334352941779873,
+              "v_max": 0.2776707183893094
+            },
+            "estimated_area": 0.1632979959555962,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 6,
+            "point_count": 58,
+            "centroid": [
+              0.9651410111078905,
+              0.4477299136638828,
+              -4.658065686844394
+            ],
+            "vertical_span": 0.8089797227278752,
+            "horizontal_span": 0.3230339877989201,
+            "bounds_2d": {
+              "u_min": 3.7801259662098565,
+              "u_max": 4.103159954008777,
+              "v_min": -0.13543617788527762,
+              "v_max": 0.676386645916398
+            },
+            "estimated_area": 0.26132794588125025,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 7,
+            "point_count": 10,
+            "centroid": [
+              -3.6850752326278524,
+              -0.21723223197139738,
+              -0.47177981326853047
+            ],
+            "vertical_span": 0.45465748987532434,
+            "horizontal_span": 0.022308805525950604,
+            "bounds_2d": {
+              "u_min": -2.453146049839564,
+              "u_max": -2.4308372443136133,
+              "v_min": -0.10840385888534732,
+              "v_max": 0.34822776434832753
+            },
+            "estimated_area": 0.010142865522545466,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          }
+        ],
+        "enabled": true
+      }
+    },
+    {
+      "candidate_id": "wall_007",
+      "plane_equation": [
+        0.6536126523694482,
+        0.08148750847080637,
+        0.752429589148244,
+        2.842823044352618
+      ],
+      "normalized_normal": [
+        0.6536126523694482,
+        0.08148750847080637,
+        0.752429589148244
+      ],
+      "centroid": [
+        -1.817861714482882,
+        0.0835742884838633,
+        -2.2081214136330543
+      ],
+      "inlier_count": 595,
+      "raw_ransac_inlier_count": 771,
+      "inlier_ratio": 0.011919070512820512,
+      "remaining_inlier_ratio": 0.022864389194174384,
+      "fitting_rmse": 0.009922111195502785,
+      "mean_absolute_distance": 0.008503531333775814,
+      "estimated_width": 8.359847204487005,
+      "estimated_height": 1.6432032905044696,
+      "estimated_area": 13.736928434527638,
+      "projected_bounds": {
+        "origin": [
+          -1.817861714482882,
+          0.0835742884838633,
+          -2.2081214136330543
+        ],
+        "basis_u": [
+          -0.741636197489741,
+          -0.1292440700670394,
+          0.6582337889575893
+        ],
+        "basis_v": [
+          0.1508848939938418,
+          -0.9882589520544331,
+          -0.024041473514338524
+        ],
+        "bounds_2d": {
+          "u_min": -3.974667774775852,
+          "u_max": 4.385179429711154,
+          "v_min": -0.6936105560972247,
+          "v_max": 0.9495927344072448
+        },
+        "corners": [
+          [
+            1.0252404250571516,
+            1.2827433701627329,
+            -4.807706623057716
+          ],
+          [
+            -5.174724867273832,
+            0.20228269231627094,
+            0.6950272774582761
+          ],
+          [
+            -4.926790312975733,
+            -1.4216276695700722,
+            0.6555222490709389
+          ],
+          [
+            1.2731749793552505,
+            -0.3411669917236104,
+            -4.847211651445053
+          ]
+        ],
+        "width": 8.359847204487005,
+        "height": 1.6432032905044696,
+        "area": 13.736928434527638
+      },
+      "corners_3d": [
+        [
+          1.0252404250571516,
+          1.2827433701627329,
+          -4.807706623057716
+        ],
+        [
+          -5.174724867273832,
+          0.20228269231627094,
+          0.6950272774582761
+        ],
+        [
+          -4.926790312975733,
+          -1.4216276695700722,
+          0.6555222490709389
+        ],
+        [
+          1.2731749793552505,
+          -0.3411669917236104,
+          -4.847211651445053
+        ]
+      ],
+      "orientation": "vertical",
+      "suggested_semantic": "wall",
+      "semantic_confidence": 0.9160794218259896,
+      "semantic_reason": "벽 전용 추출에서 법선과 높이 방향의 절댓값 내적이 0.083921로 기준 0.250000 이하입니다.",
+      "preview_color": [
+        0.969,
+        0.506,
+        0.749
+      ],
+      "source_pass": "wall_extraction",
+      "extraction_details": {
+        "normal_up_absolute_dot": 0.08392057817401039,
+        "raw_ransac_inlier_count": 771,
+        "final_support_point_count": 595,
+        "vertical_span": 1.7483200176485263,
+        "component_count": 13,
+        "valid_component_count": 7,
+        "used_component_count": 7,
+        "merged_component_count": 7,
+        "excluded_component_count": 6,
+        "noise_point_count": 46,
+        "merge_valid_components": true,
+        "components": [
+          {
+            "component_id": 0,
+            "point_count": 62,
+            "centroid": [
+              -1.4049906547476392,
+              -0.432709538456119,
+              -2.5082026642678037
+            ],
+            "vertical_span": 0.35284812595339254,
+            "horizontal_span": 0.4791592879436535,
+            "bounds_2d": {
+              "u_min": 0.31264506306628836,
+              "u_max": 0.7918043510099418,
+              "v_min": 0.15316102054833047,
+              "v_max": 0.5048304641703221
+            },
+            "estimated_area": 0.16907045678408011,
+            "valid": false,
+            "used": false,
+            "rejection_reasons": [
+              "too_short_vertical_span"
+            ]
+          },
+          {
+            "component_id": 1,
+            "point_count": 150,
+            "centroid": [
+              -1.3968394005116769,
+              0.33277440600958846,
+              -2.600579633763869
+            ],
+            "vertical_span": 0.8841818336410051,
+            "horizontal_span": 1.0032666936938748,
+            "bounds_2d": {
+              "u_min": 0.06139449419754054,
+              "u_max": 1.0646611878914154,
+              "v_min": -0.9252911999980622,
+              "v_max": -0.03809517153010408
+            },
+            "estimated_area": 0.8870701848611988,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 2,
+            "point_count": 19,
+            "centroid": [
+              -3.752506959382304,
+              -0.06260818963868871,
+              -0.5057390473123005
+            ],
+            "vertical_span": 0.6279768674226631,
+            "horizontal_span": 0.04116888113700412,
+            "bounds_2d": {
+              "u_min": -2.4751119484081787,
+              "u_max": -2.4339430672711746,
+              "v_min": -0.8309227689645079,
+              "v_max": -0.2004869537471388
+            },
+            "estimated_area": 0.025853105011711813,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 3,
+            "point_count": 211,
+            "centroid": [
+              -3.080598304550073,
+              0.12523480186163646,
+              -1.115234646316428
+            ],
+            "vertical_span": 0.9242584487721252,
+            "horizontal_span": 0.6350493612159949,
+            "bounds_2d": {
+              "u_min": -1.8045606918121864,
+              "u_max": -1.1695113305961915,
+              "v_min": -1.0987763497415268,
+              "v_max": -0.17035585573090076
+            },
+            "estimated_area": 0.5869497374912244,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 4,
+            "point_count": 17,
+            "centroid": [
+              -1.7473029068410508,
+              0.7985278147486681,
+              -2.350434030652618
+            ],
+            "vertical_span": 0.24775308151125597,
+            "horizontal_span": 0.37151971164786696,
+            "bounds_2d": {
+              "u_min": 0.18655146912660353,
+              "u_max": 0.5580711807744705,
+              "v_min": -1.09522092957539,
+              "v_max": -0.8478782635900262
+            },
+            "estimated_area": 0.09204515340293229,
+            "valid": false,
+            "used": false,
+            "rejection_reasons": [
+              "too_short_vertical_span"
+            ]
+          },
+          {
+            "component_id": 5,
+            "point_count": 27,
+            "centroid": [
+              -4.871913413486147,
+              -0.3064956699705359,
+              0.47965836333433426
+            ],
+            "vertical_span": 0.4412709309962729,
+            "horizontal_span": 0.3143045148950341,
+            "bounds_2d": {
+              "u_min": -4.146080531744929,
+              "u_max": -3.8317760168498953,
+              "v_min": -0.6930604666284541,
+              "v_max": -0.2475636835445914
+            },
+            "estimated_area": 0.1386934459040636,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 6,
+            "point_count": 13,
+            "centroid": [
+              -0.2354519285113758,
+              -0.05497113145518876,
+              -3.578258725147059
+            ],
+            "vertical_span": 0.17324301642447718,
+            "horizontal_span": 0.1064016305390525,
+            "bounds_2d": {
+              "u_min": 2.128238732313774,
+              "u_max": 2.2346403628528266,
+              "v_min": 0.005713206853225139,
+              "v_max": 0.17826656595112025
+            },
+            "estimated_area": 0.018433339427068225,
+            "valid": false,
+            "used": false,
+            "rejection_reasons": [
+              "too_short_vertical_span"
+            ]
+          },
+          {
+            "component_id": 7,
+            "point_count": 131,
+            "centroid": [
+              -0.4410133616943649,
+              -0.322397907854283,
+              -3.361692581815735
+            ],
+            "vertical_span": 0.6292788603644609,
+            "horizontal_span": 0.7116457069474473,
+            "bounds_2d": {
+              "u_min": 1.5221728633766192,
+              "u_max": 2.2338185703240665,
+              "v_min": 0.025489233396243715,
+              "v_max": 0.6564219337223556
+            },
+            "estimated_area": 0.4478235994511508,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 8,
+            "point_count": 25,
+            "centroid": [
+              0.28213486308076197,
+              0.5253299230376891,
+              -4.081179602322557
+            ],
+            "vertical_span": 0.6498837015081254,
+            "horizontal_span": 0.08903640138337865,
+            "bounds_2d": {
+              "u_min": 2.924424718606205,
+              "u_max": 3.0134611199895835,
+              "v_min": -0.6536003304382944,
+              "v_max": -0.0018811042475360858
+            },
+            "estimated_area": 0.05786330609999329,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 9,
+            "point_count": 32,
+            "centroid": [
+              0.9806705858835592,
+              0.37317609395445117,
+              -4.670477868533961
+            ],
+            "vertical_span": 0.6140129451565699,
+            "horizontal_span": 0.3533320119310184,
+            "bounds_2d": {
+              "u_min": 3.705616398363192,
+              "u_max": 4.05894841029421,
+              "v_min": -0.4487392706428034,
+              "v_max": 0.16837269362125667
+            },
+            "estimated_area": 0.21695042926386088,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 10,
+            "point_count": 11,
+            "centroid": [
+              -0.07468374558458829,
+              0.4893309337978774,
+              -3.7695400127171284
+            ],
+            "vertical_span": 0.37331465260346747,
+            "horizontal_span": 0.03616312137699085,
+            "bounds_2d": {
+              "u_min": 2.472069397298301,
+              "u_max": 2.508232518675292,
+              "v_min": -0.6084615762367018,
+              "v_max": -0.23464926369814215
+            },
+            "estimated_area": 0.013500223093908366,
+            "valid": false,
+            "used": false,
+            "rejection_reasons": [
+              "too_short_vertical_span"
+            ]
+          },
+          {
+            "component_id": 11,
+            "point_count": 14,
+            "centroid": [
+              -3.638190088720282,
+              0.65809355408668,
+              -0.681925123317561
+            ],
+            "vertical_span": 0.22203734330380664,
+            "horizontal_span": 0.28866701456080346,
+            "bounds_2d": {
+              "u_min": -2.3194694606359536,
+              "u_max": -2.03080244607515,
+              "v_min": -1.2589501002860053,
+              "v_max": -1.036551707126389
+            },
+            "estimated_area": 0.06409485701252207,
+            "valid": false,
+            "used": false,
+            "rejection_reasons": [
+              "too_short_vertical_span"
+            ]
+          },
+          {
+            "component_id": 12,
+            "point_count": 13,
+            "centroid": [
+              -2.4327321301969267,
+              0.5059148842832255,
+              -1.7192673743323588
+            ],
+            "vertical_span": 0.2511308434624261,
+            "horizontal_span": 0.3064365933912069,
+            "bounds_2d": {
+              "u_min": -0.7613097748644616,
+              "u_max": -0.45487318147325473,
+              "v_min": -0.9772817192880358,
+              "v_max": -0.724966404372255
+            },
+            "estimated_area": 0.07695568016608628,
+            "valid": false,
+            "used": false,
+            "rejection_reasons": [
+              "too_short_vertical_span"
+            ]
+          }
+        ],
+        "enabled": true
+      }
+    },
+    {
+      "candidate_id": "wall_008",
+      "plane_equation": [
+        0.7092289914314135,
+        0.050954363702104814,
+        -0.7031343332058916,
+        4.629336050143962
+      ],
+      "normalized_normal": [
+        0.7092289914314135,
+        0.050954363702104814,
+        -0.7031343332058916
+      ],
+      "centroid": [
+        -2.1109598006795505,
+        -0.5623164990851686,
+        4.413850289738149
+      ],
+      "inlier_count": 693,
+      "raw_ransac_inlier_count": 727,
+      "inlier_ratio": 0.013882211538461538,
+      "remaining_inlier_ratio": 0.0290553855184269,
+      "fitting_rmse": 0.010113965778232288,
+      "mean_absolute_distance": 0.00880856404653086,
+      "estimated_width": 6.07797014262851,
+      "estimated_height": 1.6122887517949929,
+      "estimated_area": 9.799442894705756,
+      "projected_bounds": {
+        "origin": [
+          -2.1109598006795505,
+          -0.5623164990851686,
+          4.413850289738149
+        ],
+        "basis_u": [
+          0.7038432720329738,
+          0.0053921628138177205,
+          0.710334831606973
+        ],
+        "basis_v": [
+          0.0399860741646064,
+          -0.9986864259615742,
+          -0.03203960787836972
+        ],
+        "bounds_2d": {
+          "u_min": -3.717105967067812,
+          "u_max": 2.3608641755606983,
+          "v_min": -0.9593012931015699,
+          "v_max": 0.652987458693423
+        },
+        "corners": [
+          [
+            -4.765578519686013,
+            0.3756814401721118,
+            1.8041960858239474
+          ],
+          [
+            -0.48764012717964156,
+            0.40845484475868765,
+            6.12158998360018
+          ],
+          [
+            -0.4231710295756063,
+            -1.2017160463895014,
+            6.069932884205962
+          ],
+          [
+            -4.701109422081978,
+            -1.2344894509760773,
+            1.7525389864297296
+          ]
+        ],
+        "width": 6.07797014262851,
+        "height": 1.6122887517949929,
+        "area": 9.799442894705756
+      },
+      "corners_3d": [
+        [
+          -4.765578519686013,
+          0.3756814401721118,
+          1.8041960858239474
+        ],
+        [
+          -0.48764012717964156,
+          0.40845484475868765,
+          6.12158998360018
+        ],
+        [
+          -0.4231710295756063,
+          -1.2017160463895014,
+          6.069932884205962
+        ],
+        [
+          -4.701109422081978,
+          -1.2344894509760773,
+          1.7525389864297296
+        ]
+      ],
+      "orientation": "vertical",
+      "suggested_semantic": "wall",
+      "semantic_confidence": 0.9215510844048367,
+      "semantic_reason": "벽 전용 추출에서 법선과 높이 방향의 절댓값 내적이 0.078449로 기준 0.250000 이하입니다.",
+      "preview_color": [
+        0.121,
+        0.466,
+        0.705
+      ],
+      "source_pass": "wall_extraction",
+      "extraction_details": {
+        "normal_up_absolute_dot": 0.07844891559516336,
+        "raw_ransac_inlier_count": 727,
+        "final_support_point_count": 693,
+        "vertical_span": 1.6599289030895532,
+        "component_count": 5,
+        "valid_component_count": 4,
+        "used_component_count": 4,
+        "merged_component_count": 4,
+        "excluded_component_count": 1,
+        "noise_point_count": 15,
+        "merge_valid_components": true,
+        "components": [
+          {
+            "component_id": 0,
+            "point_count": 185,
+            "centroid": [
+              -0.7305112992409517,
+              -0.821144543665808,
+              5.788121080405796
+            ],
+            "vertical_span": 1.1193118248472165,
+            "horizontal_span": 0.7309275358718361,
+            "bounds_2d": {
+              "u_min": 3.1951508271543596,
+              "u_max": 3.9260783630261957,
+              "v_min": -0.13149474761537533,
+              "v_max": 0.9909055977256914
+            },
+            "estimated_area": 0.8181358340077841,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 1,
+            "point_count": 440,
+            "centroid": [
+              -2.687103938652866,
+              -0.5532719891748048,
+              3.833854747945598
+            ],
+            "vertical_span": 1.3222743936173735,
+            "horizontal_span": 4.494999503361315,
+            "bounds_2d": {
+              "u_min": -1.6288630228275471,
+              "u_max": 2.866136480533768,
+              "v_min": -0.4060717918929018,
+              "v_max": 0.9202773325063334
+            },
+            "estimated_area": 5.943622742617478,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 2,
+            "point_count": 58,
+            "centroid": [
+              -1.7053334147440233,
+              0.18567894439573365,
+              4.8711349333448215
+            ],
+            "vertical_span": 0.4060919694856918,
+            "horizontal_span": 1.061317571121119,
+            "bounds_2d": {
+              "u_min": 1.719949842871505,
+              "u_max": 2.781267413992624,
+              "v_min": -0.6738048627766481,
+              "v_max": -0.2675985491407518
+            },
+            "estimated_area": 0.43099254270634596,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 3,
+            "point_count": 10,
+            "centroid": [
+              -4.650219063870289,
+              -0.5102342023088939,
+              1.856076007725823
+            ],
+            "vertical_span": 0.4297533527538446,
+            "horizontal_span": 0.0906020456310952,
+            "bounds_2d": {
+              "u_min": -1.9964947886894204,
+              "u_max": -1.9058927430583252,
+              "v_min": 0.004686495803993747,
+              "v_max": 0.4346707634916737
+            },
+            "estimated_area": 0.03893653287631998,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 4,
+            "point_count": 19,
+            "centroid": [
+              -2.631395052253849,
+              0.2170272838522912,
+              3.950402326573181
+            ],
+            "vertical_span": 0.10116865553822296,
+            "horizontal_span": 0.4763313500163454,
+            "bounds_2d": {
+              "u_min": 0.7626837462172483,
+              "u_max": 1.2390150962335937,
+              "v_min": -0.49461081617131225,
+              "v_max": -0.39361322214578487
+            },
+            "estimated_area": 0.048189802271860364,
+            "valid": false,
+            "used": false,
+            "rejection_reasons": [
+              "too_short_vertical_span"
+            ]
+          }
+        ],
+        "enabled": true
+      }
+    },
+    {
+      "candidate_id": "wall_009",
+      "plane_equation": [
+        0.7165607744429379,
+        -0.07695283054049291,
+        0.6932668450182393,
+        -3.981817241028112
+      ],
+      "normalized_normal": [
+        0.7165607744429379,
+        -0.07695283054049291,
+        0.6932668450182393
+      ],
+      "centroid": [
+        2.821069863824081,
+        0.008096826506199483,
+        2.8285966975892975
+      ],
+      "inlier_count": 517,
+      "raw_ransac_inlier_count": 566,
+      "inlier_ratio": 0.010356570512820512,
+      "remaining_inlier_ratio": 0.023642932272373896,
+      "fitting_rmse": 0.009105901218749502,
+      "mean_absolute_distance": 0.007704078493780498,
+      "estimated_width": 9.889930697817784,
+      "estimated_height": 1.4999590344939846,
+      "estimated_area": 14.834490900711183,
+      "projected_bounds": {
+        "origin": [
+          2.821069863824081,
+          0.008096826506199483,
+          2.8285966975892975
+        ],
+        "basis_u": [
+          -0.6966369026283826,
+          -0.12908097142027217,
+          0.7057160397167777
+        ],
+        "basis_v": [
+          0.03518071099438864,
+          -0.9886436995647143,
+          -0.1461025423629727
+        ],
+        "bounds_2d": {
+          "u_min": -5.454628290937227,
+          "u_max": 4.435302406880557,
+          "v_min": -0.6936814847976707,
+          "v_max": 0.8062775496963138
+        },
+        "corners": [
+          [
+            6.596561013572914,
+            1.397989374486789,
+            -0.919473349498956
+          ],
+          [
+            -0.2931296749642257,
+            0.12138751273329917,
+            6.060009375638398
+          ],
+          [
+            -0.24036004966827063,
+            -1.3615375363243505,
+            5.840861547258517
+          ],
+          [
+            6.649330638868869,
+            -0.08493567457086082,
+            -1.1386211778788369
+          ]
+        ],
+        "width": 9.889930697817784,
+        "height": 1.4999590344939846,
+        "area": 14.834490900711183
+      },
+      "corners_3d": [
+        [
+          6.596561013572914,
+          1.397989374486789,
+          -0.919473349498956
+        ],
+        [
+          -0.2931296749642257,
+          0.12138751273329917,
+          6.060009375638398
+        ],
+        [
+          -0.24036004966827063,
+          -1.3615375363243505,
+          5.840861547258517
+        ],
+        [
+          6.649330638868869,
+          -0.08493567457086082,
+          -1.1386211778788369
+        ]
+      ],
+      "orientation": "vertical",
+      "suggested_semantic": "wall",
+      "semantic_confidence": 0.915644600664365,
+      "semantic_reason": "벽 전용 추출에서 법선과 높이 방향의 절댓값 내적이 0.084355로 기준 0.250000 이하입니다.",
+      "preview_color": [
+        0.682,
+        0.78,
+        0.91
+      ],
+      "source_pass": "wall_extraction",
+      "extraction_details": {
+        "normal_up_absolute_dot": 0.084355399335635,
+        "raw_ransac_inlier_count": 566,
+        "final_support_point_count": 517,
+        "vertical_span": 1.5313307049122533,
+        "component_count": 7,
+        "valid_component_count": 7,
+        "used_component_count": 7,
+        "merged_component_count": 7,
+        "excluded_component_count": 0,
+        "noise_point_count": 49,
+        "merge_valid_components": true,
+        "components": [
+          {
+            "component_id": 0,
+            "point_count": 99,
+            "centroid": [
+              1.831101744129876,
+              0.19693240119434208,
+              3.869277684899689
+            ],
+            "vertical_span": 0.7460639421701942,
+            "horizontal_span": 1.855183476762325,
+            "bounds_2d": {
+              "u_min": 0.6323075664995041,
+              "u_max": 2.487491043261829,
+              "v_min": -0.9723933092017367,
+              "v_max": -0.22505099366325101
+            },
+            "estimated_area": 1.3840854981223072,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 1,
+            "point_count": 145,
+            "centroid": [
+              0.2249747736697603,
+              -0.6771888335891444,
+              5.436948345236833
+            ],
+            "vertical_span": 0.8482473360973846,
+            "horizontal_span": 0.8784694038680252,
+            "bounds_2d": {
+              "u_min": 3.416945890340103,
+              "u_max": 4.295415294208128,
+              "v_min": -0.5044482124653134,
+              "v_max": 0.3449871601763209
+            },
+            "estimated_area": 0.7451593316741099,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 2,
+            "point_count": 70,
+            "centroid": [
+              5.153346144575809,
+              0.7495064532688885,
+              0.5006561192584283
+            ],
+            "vertical_span": 0.9709992684852043,
+            "horizontal_span": 1.0162279076152272,
+            "bounds_2d": {
+              "u_min": -3.9055080700482967,
+              "u_max": -2.8892801624330695,
+              "v_min": -1.0242968083606163,
+              "v_max": -0.0498178761340468
+            },
+            "estimated_area": 0.9867565549086355,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 3,
+            "point_count": 103,
+            "centroid": [
+              4.758291245509525,
+              -0.21465589861218543,
+              0.7995131108344886
+            ],
+            "vertical_span": 0.811902749297941,
+            "horizontal_span": 0.8429150699000232,
+            "bounds_2d": {
+              "u_min": -2.9818864577784545,
+              "u_max": -2.1389713878784313,
+              "v_min": -0.3035006482548118,
+              "v_max": 0.5136448215362401
+            },
+            "estimated_area": 0.684365062676495,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 4,
+            "point_count": 16,
+            "centroid": [
+              6.465836156066191,
+              0.3583172550287127,
+              -0.9040627550253721
+            ],
+            "vertical_span": 0.4469695301255773,
+            "horizontal_span": 0.1578824557464884,
+            "bounds_2d": {
+              "u_min": -5.248058433479697,
+              "u_max": -5.0901759777332085,
+              "v_min": -0.2852404765108645,
+              "v_max": 0.16206715854234538
+            },
+            "estimated_area": 0.07056864706008018,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 5,
+            "point_count": 67,
+            "centroid": [
+              3.2361772629139636,
+              0.5586058508630893,
+              2.4637530701466828
+            ],
+            "vertical_span": 0.4633075688740528,
+            "horizontal_span": 0.9684853307453756,
+            "bounds_2d": {
+              "u_min": -1.057175182484128,
+              "u_max": -0.0886898517387524,
+              "v_min": -0.9869822326215515,
+              "v_max": -0.5223670851659837
+            },
+            "estimated_area": 0.4487065840778229,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 6,
+            "point_count": 17,
+            "centroid": [
+              4.31809234924563,
+              0.551414716518306,
+              1.3469926081368486
+            ],
+            "vertical_span": 0.7575382124712722,
+            "horizontal_span": 0.2433570163756602,
+            "bounds_2d": {
+              "u_min": -2.1530487402438565,
+              "u_max": -1.9096917238681963,
+              "v_min": -1.0213368409660748,
+              "v_max": -0.26144706607226925
+            },
+            "estimated_area": 0.18435223917755975,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          }
+        ],
+        "enabled": true
+      }
+    },
+    {
+      "candidate_id": "wall_010",
+      "plane_equation": [
+        -0.6901836758864167,
+        0.001417802301160786,
+        0.7236328374089644,
+        5.140454700127061
+      ],
+      "normalized_normal": [
+        -0.6901836758864167,
+        0.001417802301160786,
+        0.7236328374089644
+      ],
+      "centroid": [
+        4.709217848047515,
+        0.698062462299293,
+        -2.6135065077322874
+      ],
+      "inlier_count": 358,
+      "raw_ransac_inlier_count": 482,
+      "inlier_ratio": 0.007171474358974359,
+      "remaining_inlier_ratio": 0.0216733260685313,
+      "fitting_rmse": 0.009090079255806655,
+      "mean_absolute_distance": 0.007602619660750802,
+      "estimated_width": 6.510801793858944,
+      "estimated_height": 1.0244043722493323,
+      "estimated_area": 6.669693824477898,
+      "projected_bounds": {
+        "origin": [
+          4.709217848047515,
+          0.698062462299293,
+          -2.6135065077322874
+        ],
+        "basis_u": [
+          -0.7236126778883172,
+          -0.009069418140153251,
+          -0.6901466786516455
+        ],
+        "basis_v": [
+          0.005584437233276654,
+          -0.9999578668580162,
+          0.007285504069981095
+        ],
+        "bounds_2d": {
+          "u_min": -1.9754908025513593,
+          "u_max": 4.535310991307584,
+          "v_min": -0.5210414531360263,
+          "v_max": 0.5033629191133061
+        },
+        "corners": [
+          [
+            6.135798314534471,
+            1.2369985144421602,
+            -1.2539241412720445
+          ],
+          [
+            1.4244995932801416,
+            1.1779493305459936,
+            -5.74733237466297
+          ],
+          [
+            1.4302203151984623,
+            0.15358811967152586,
+            -5.7398690724396415
+          ],
+          [
+            6.141519036452792,
+            0.2126373035676925,
+            -1.2464608390487155
+          ]
+        ],
+        "width": 6.510801793858944,
+        "height": 1.0244043722493323,
+        "area": 6.669693824477898
+      },
+      "corners_3d": [
+        [
+          6.135798314534471,
+          1.2369985144421602,
+          -1.2539241412720445
+        ],
+        [
+          1.4244995932801416,
+          1.1779493305459936,
+          -5.74733237466297
+        ],
+        [
+          1.4302203151984623,
+          0.15358811967152586,
+          -5.7398690724396415
+        ],
+        [
+          6.141519036452792,
+          0.2126373035676925,
+          -1.2464608390487155
+        ]
+      ],
+      "orientation": "vertical",
+      "suggested_semantic": "wall",
+      "semantic_confidence": 0.8696516613766632,
+      "semantic_reason": "벽 전용 추출에서 법선과 높이 방향의 절댓값 내적이 0.130348로 기준 0.250000 이하입니다.",
+      "preview_color": [
+        1.0,
+        0.733,
+        0.47
+      ],
+      "source_pass": "wall_extraction",
+      "extraction_details": {
+        "normal_up_absolute_dot": 0.13034833862333683,
+        "raw_ransac_inlier_count": 482,
+        "final_support_point_count": 358,
+        "vertical_span": 1.0586438085650962,
+        "component_count": 6,
+        "valid_component_count": 3,
+        "used_component_count": 3,
+        "merged_component_count": 3,
+        "excluded_component_count": 3,
+        "noise_point_count": 39,
+        "merge_valid_components": true,
+        "components": [
+          {
+            "component_id": 0,
+            "point_count": 29,
+            "centroid": [
+              3.5219505064807834,
+              1.1154670033906475,
+              -3.7442315825397077
+            ],
+            "vertical_span": 0.346583143956632,
+            "horizontal_span": 0.5355564827112449,
+            "bounds_2d": {
+              "u_min": -0.24460849161217982,
+              "u_max": 0.2909479910990651,
+              "v_min": -1.3693686700751697,
+              "v_max": -1.0228244297345606
+            },
+            "estimated_area": 0.18561484954441887,
+            "valid": false,
+            "used": false,
+            "rejection_reasons": [
+              "too_short_vertical_span"
+            ]
+          },
+          {
+            "component_id": 1,
+            "point_count": 311,
+            "centroid": [
+              4.718443506381149,
+              0.6571169809240195,
+              -2.603933528741437
+            ],
+            "vertical_span": 0.9913681109164192,
+            "horizontal_span": 0.9054584560082184,
+            "bounds_2d": {
+              "u_min": 1.2032791276515853,
+              "u_max": 2.1087375836598037,
+              "v_min": -1.1909449442946654,
+              "v_max": -0.19162209661200835
+            },
+            "estimated_area": 0.8976426390461651,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 2,
+            "point_count": 33,
+            "centroid": [
+              5.967476209089126,
+              1.0669793567414614,
+              -1.4125490624763493
+            ],
+            "vertical_span": 0.4873102499112999,
+            "horizontal_span": 0.4319521006433513,
+            "bounds_2d": {
+              "u_min": 3.2423217078596434,
+              "u_max": 3.6742738085029947,
+              "v_min": -1.2583876604792636,
+              "v_max": -0.7700720772003726
+            },
+            "estimated_area": 0.2104946861142225,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 3,
+            "point_count": 43,
+            "centroid": [
+              5.358238531359876,
+              1.0883275022180359,
+              -1.996669308783354
+            ],
+            "vertical_span": 0.38031248906473203,
+            "horizontal_span": 0.4354721549153684,
+            "bounds_2d": {
+              "u_min": 2.2475885358685277,
+              "u_max": 2.683060690783896,
+              "v_min": -1.264516336060806,
+              "v_max": -0.8844252797186896
+            },
+            "estimated_area": 0.16561549915424634,
+            "valid": false,
+            "used": false,
+            "rejection_reasons": [
+              "too_short_vertical_span"
+            ]
+          },
+          {
+            "component_id": 4,
+            "point_count": 14,
+            "centroid": [
+              1.52818089922096,
+              0.7380682166099487,
+              -5.646296456931659
+            ],
+            "vertical_span": 0.4634088438567113,
+            "horizontal_span": 0.12684467560234536,
+            "bounds_2d": {
+              "u_min": -2.8137313741575736,
+              "u_max": -2.686886698555228,
+              "v_min": -0.9954169350137257,
+              "v_max": -0.5293560419930731
+            },
+            "estimated_area": 0.05878094447026246,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 5,
+            "point_count": 13,
+            "centroid": [
+              2.927693253918596,
+              0.7340662383744475,
+              -4.3266231926373555
+            ],
+            "vertical_span": 0.08759440362464282,
+            "horizontal_span": 0.21627321827669088,
+            "bounds_2d": {
+              "u_min": -0.9626598488377297,
+              "u_max": -0.7463866305610388,
+              "v_min": -0.7838041150927393,
+              "v_max": -0.695333833746506
+            },
+            "estimated_area": 0.01894432357492894,
+            "valid": false,
+            "used": false,
+            "rejection_reasons": [
+              "too_short_vertical_span"
+            ]
+          }
+        ],
+        "enabled": true
+      }
+    },
+    {
+      "candidate_id": "wall_011",
+      "plane_equation": [
+        0.6775475755344033,
+        -0.09833894364239905,
+        0.7288749790264099,
+        -3.808125445219462
+      ],
+      "normalized_normal": [
+        0.6775475755344033,
+        -0.09833894364239905,
+        0.7288749790264099
+      ],
+      "centroid": [
+        2.6478070689529445,
+        0.06682494527922486,
+        2.7723296008793885
+      ],
+      "inlier_count": 329,
+      "raw_ransac_inlier_count": 426,
+      "inlier_ratio": 0.006590544871794872,
+      "remaining_inlier_ratio": 0.020516338238962335,
+      "fitting_rmse": 0.008753913958293644,
+      "mean_absolute_distance": 0.0071406866138918,
+      "estimated_width": 9.890610169653705,
+      "estimated_height": 1.471895731791764,
+      "estimated_area": 14.557946893529504,
+      "projected_bounds": {
+        "origin": [
+          2.6478070689529445,
+          0.06682494527922486,
+          2.7723296008793885
+        ],
+        "basis_u": [
+          -0.7349170461767393,
+          -0.12925498744216718,
+          0.6657252312029204
+        ],
+        "basis_v": [
+          0.028744010268381408,
+          -0.9867231629918405,
+          -0.15984736935298283
+        ],
+        "bounds_2d": {
+          "u_min": -5.46549276408427,
+          "u_max": 4.425117405569435,
+          "v_min": -0.7746026024897805,
+          "v_max": 0.6972931293019834
+        },
+        "corners": [
+          [
+            6.642225681874217,
+            1.5375854738566201,
+            -0.7423686448265346
+          ],
+          [
+            -0.6265523288933017,
+            0.25917478058265964,
+            5.8420600971041345
+          ],
+          [
+            -0.5842441428646925,
+            -1.1931788314850993,
+            5.606781436415337
+          ],
+          [
+            6.684533867902827,
+            0.08523186178886133,
+            -0.9776473055153316
+          ]
+        ],
+        "width": 9.890610169653705,
+        "height": 1.471895731791764,
+        "area": 14.557946893529504
+      },
+      "corners_3d": [
+        [
+          6.642225681874217,
+          1.5375854738566201,
+          -0.7423686448265346
+        ],
+        [
+          -0.6265523288933017,
+          0.25917478058265964,
+          5.8420600971041345
+        ],
+        [
+          -0.5842441428646925,
+          -1.1931788314850993,
+          5.606781436415337
+        ],
+        [
+          6.684533867902827,
+          0.08523186178886133,
+          -0.9776473055153316
+        ]
+      ],
+      "orientation": "vertical",
+      "suggested_semantic": "wall",
+      "semantic_confidence": 0.9012651960980408,
+      "semantic_reason": "벽 전용 추출에서 법선과 높이 방향의 절댓값 내적이 0.098735로 기준 0.250000 이하입니다.",
+      "preview_color": [
+        0.173,
+        0.627,
+        0.173
+      ],
+      "source_pass": "wall_extraction",
+      "extraction_details": {
+        "normal_up_absolute_dot": 0.09873480390195917,
+        "raw_ransac_inlier_count": 426,
+        "final_support_point_count": 329,
+        "vertical_span": 1.6411068484767246,
+        "component_count": 7,
+        "valid_component_count": 4,
+        "used_component_count": 4,
+        "merged_component_count": 4,
+        "excluded_component_count": 3,
+        "noise_point_count": 49,
+        "merge_valid_components": true,
+        "components": [
+          {
+            "component_id": 0,
+            "point_count": 115,
+            "centroid": [
+              4.612510629047346,
+              -0.027303160905331764,
+              0.9332559198220112
+            ],
+            "vertical_span": 0.7225566350983298,
+            "horizontal_span": 0.6171368500949703,
+            "bounds_2d": {
+              "u_min": 2.3724690167552827,
+              "u_max": 2.989605866850253,
+              "v_min": -0.3795390547116741,
+              "v_max": 0.3445723376905161
+            },
+            "estimated_area": 0.4459163257998041,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 1,
+            "point_count": 145,
+            "centroid": [
+              -0.30827027829337056,
+              -0.19288663883374363,
+              5.4861863701580615
+            ],
+            "vertical_span": 0.989996768636001,
+            "horizontal_span": 0.48703157462531843,
+            "bounds_2d": {
+              "u_min": -4.162281641655687,
+              "u_max": -3.6752500670303685,
+              "v_min": -1.305784829379608,
+              "v_max": -0.30904542298954585
+            },
+            "estimated_area": 0.4821596851027686,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 2,
+            "point_count": 47,
+            "centroid": [
+              5.1621006851543205,
+              0.6188885529307908,
+              0.5142186311836511
+            ],
+            "vertical_span": 1.0063829090567775,
+            "horizontal_span": 0.726748987798493,
+            "bounds_2d": {
+              "u_min": 3.155136075518072,
+              "u_max": 3.881885063316565,
+              "v_min": -1.0195039963883084,
+              "v_max": -0.008175984359119471
+            },
+            "estimated_area": 0.7313877604947159,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 3,
+            "point_count": 22,
+            "centroid": [
+              6.495759157005421,
+              1.0902849232377876,
+              -0.6702961592653933
+            ],
+            "vertical_span": 0.7476501090505406,
+            "horizontal_span": 0.11683795850986645,
+            "bounds_2d": {
+              "u_min": 5.291563890347756,
+              "u_max": 5.408401848857623,
+              "v_min": -1.1006410944466476,
+              "v_max": -0.3479444074076423
+            },
+            "estimated_area": 0.0873539124211442,
+            "valid": true,
+            "used": true,
+            "rejection_reasons": []
+          },
+          {
+            "component_id": 4,
+            "point_count": 18,
+            "centroid": [
+              5.942150246241436,
+              0.01790177260014221,
+              -0.2912166651026221
+            ],
+            "vertical_span": 0.14125722027836374,
+            "horizontal_span": 0.24335747236851635,
+            "bounds_2d": {
+              "u_min": 4.396859368162577,
+              "u_max": 4.640216840531093,
+              "v_min": 0.12472561144158616,
+              "v_max": 0.26631412085368134
+            },
+            "estimated_area": 0.03437600008074533,
+            "valid": false,
+            "used": false,
+            "rejection_reasons": [
+              "too_short_vertical_span"
+            ]
+          },
+          {
+            "component_id": 5,
+            "point_count": 20,
+            "centroid": [
+              0.7675870240090774,
+              -0.9527994649252678,
+              4.377985062017113
+            ],
+            "vertical_span": 0.21092730155686845,
+            "horizontal_span": 0.21250361877070167,
+            "bounds_2d": {
+              "u_min": -2.5684217963035416,
+              "u_max": -2.35591817753284,
+              "v_min": 0.13769098719560635,
+              "v_max": 0.3522840178974695
+            },
+            "estimated_area": 0.044822814878373606,
+            "valid": false,
+            "used": false,
+            "rejection_reasons": [
+              "too_short_vertical_span"
+            ]
+          },
+          {
+            "component_id": 6,
+            "point_count": 10,
+            "centroid": [
+              5.628878893955933,
+              0.2522754414162568,
+              0.02585299101373336
+            ],
+            "vertical_span": 0.31667221566932274,
+            "horizontal_span": 0.02530940510009927,
+            "bounds_2d": {
+              "u_min": 4.139654760146307,
+              "u_max": 4.164964165246406,
+              "v_min": -0.24799303596438288,
+              "v_max": 0.06852192566765518
+            },
+            "estimated_area": 0.008014785390320892,
+            "valid": false,
+            "used": false,
+            "rejection_reasons": [
+              "too_short_vertical_span"
+            ]
+          }
+        ],
+        "enabled": true
+      }
+    }
+  ],
+  "preview": {
+    "colored_point_cloud": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/wall_extraction/wall_candidates_colored.ply",
+    "residual_point_cloud": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/wall_extraction/wall_residual_points.ply",
+    "candidate_meshes": {
+      "wall_000": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/wall_extraction/wall_candidate_meshes/wall_000.ply",
+      "wall_001": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/wall_extraction/wall_candidate_meshes/wall_001.ply",
+      "wall_002": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/wall_extraction/wall_candidate_meshes/wall_002.ply",
+      "wall_003": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/wall_extraction/wall_candidate_meshes/wall_003.ply",
+      "wall_004": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/wall_extraction/wall_candidate_meshes/wall_004.ply",
+      "wall_005": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/wall_extraction/wall_candidate_meshes/wall_005.ply",
+      "wall_006": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/wall_extraction/wall_candidate_meshes/wall_006.ply",
+      "wall_007": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/wall_extraction/wall_candidate_meshes/wall_007.ply",
+      "wall_008": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/wall_extraction/wall_candidate_meshes/wall_008.ply",
+      "wall_009": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/wall_extraction/wall_candidate_meshes/wall_009.ply",
+      "wall_010": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/wall_extraction/wall_candidate_meshes/wall_010.ply",
+      "wall_011": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/wall_extraction/wall_candidate_meshes/wall_011.ply"
+    },
+    "residual_color": [
+      0.45,
+      0.45,
+      0.45
+    ],
+    "color_mapping": {
+      "wall_000": [
+        0.894,
+        0.102,
+        0.11
+      ],
+      "wall_001": [
+        0.216,
+        0.494,
+        0.722
+      ],
+      "wall_002": [
+        0.302,
+        0.686,
+        0.29
+      ],
+      "wall_003": [
+        0.596,
+        0.306,
+        0.639
+      ],
+      "wall_004": [
+        1.0,
+        0.498,
+        0.0
+      ],
+      "wall_005": [
+        1.0,
+        1.0,
+        0.2
+      ],
+      "wall_006": [
+        0.651,
+        0.337,
+        0.157
+      ],
+      "wall_007": [
+        0.969,
+        0.506,
+        0.749
+      ],
+      "wall_008": [
+        0.121,
+        0.466,
+        0.705
+      ],
+      "wall_009": [
+        0.682,
+        0.78,
+        0.91
+      ],
+      "wall_010": [
+        1.0,
+        0.733,
+        0.47
+      ],
+      "wall_011": [
+        0.173,
+        0.627,
+        0.173
+      ]
+    }
+  }
+}

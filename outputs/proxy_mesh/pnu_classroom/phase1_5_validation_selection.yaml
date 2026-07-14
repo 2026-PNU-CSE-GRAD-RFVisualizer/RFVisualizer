@@ -1,0 +1,29 @@
+selection:
+  - candidate_id: plane_006
+    semantic: floor
+  - candidate_id: plane_005
+    semantic: ceiling
+  - candidate_id: wall_000
+    semantic: wall
+  - candidate_id: wall_001
+    semantic: wall
+  - candidate_id: wall_002
+    semantic: wall
+  - candidate_id: wall_003
+    semantic: wall
+  - candidate_id: wall_004
+    semantic: wall
+  - candidate_id: wall_005
+    semantic: wall
+  - candidate_id: wall_006
+    semantic: wall
+  - candidate_id: wall_007
+    semantic: wall
+  - candidate_id: wall_008
+    semantic: wall
+  - candidate_id: wall_009
+    semantic: wall
+  - candidate_id: wall_010
+    semantic: wall
+  - candidate_id: wall_011
+    semantic: wall

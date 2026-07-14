@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "pnu_classroom_phase2b_ab",
+  "status": "provisional",
+  "physically_validated": false,
+  "synthetic_validation": true,
+  "checks": {
+    "environment_available": true,
+    "room_envelope_unmodified": true,
+    "independent_obstacle_layer": true,
+    "scene_object_count_increased_by_obstacles": true,
+    "runtime_obstacle_shape_loaded": true,
+    "strict_material_resolution": true,
+    "baseline_repeated": true,
+    "baseline_reproducible_within_tolerance": true,
+    "synthetic_blocker_geometry_valid": true,
+    "synthetic_blocker_intersects_configured_los": true,
+    "baseline_rx_los_exists": true,
+    "variant_rx_los_blocked": true,
+    "blocker_related_path_evidence": true,
+    "path_configuration_changed": true,
+    "coverage_grid_matches": true,
+    "coverage_valid_mask_matches": true,
+    "coverage_delta_finite": true,
+    "coverage_change_exceeds_repeat_noise": true,
+    "coverage_has_nonzero_change": true,
+    "coordinate_bridge_round_trip": true,
+    "provisional_marking": true,
+    "physically_validated_false": true
+  },
+  "overall_success": true,
+  "warnings": [
+    "SYNTHETIC BLOCKER — VALIDATION ONLY",
+    "PROVISIONAL SCALE — NOT PHYSICALLY VALIDATED",
+    "Coverage values are solver A/B evidence, not measured RSSI accuracy."
+  ],
+  "performance": {
+    "baseline_runs": [
+      {
+        "scene_load_seconds": 0.1658732600044459,
+        "path_solve_seconds": 0.08767802300280891,
+        "coverage_solve_seconds": 0.004644861997803673
+      },
+      {
+        "scene_load_seconds": 0.02160482999170199,
+        "path_solve_seconds": 0.05210681800963357,
+        "coverage_solve_seconds": 0.0022738550032954663
+      }
+    ],
+    "variant": {
+      "scene_load_seconds": 0.03153846101486124,
+      "path_solve_seconds": 0.05984065300435759,
+      "coverage_solve_seconds": 0.0028329430206213146
+    },
+    "comparison_compute_seconds": 0.01071933499770239,
+    "comparison_export_seconds": 1.1673094959987793,
+    "total_seconds_before_report": 2.2041849689849187,
+    "gpu_snapshot": {
+      "nvidia_smi_available": true,
+      "gpus": [
+        {
+          "name": "NVIDIA GeForce RTX 4090",
+          "driver_version": "595.71.05",
+          "memory_total_mib": 24564,
+          "memory_used_mib": 12358
+        }
+      ]
+    }
+  },
+  "files": {
+    "environment_json": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/experiments/synthetic_blocker_ab/environment.json",
+    "reproducibility_json": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/experiments/synthetic_blocker_ab/reproducibility.json",
+    "path_comparison_json": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/experiments/synthetic_blocker_ab/path_comparison.json",
+    "coverage_comparison_json": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/experiments/synthetic_blocker_ab/coverage/coverage_comparison.json",
+    "coverage_delta_npy": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/experiments/synthetic_blocker_ab/coverage/coverage_delta.npy",
+    "coverage_delta_csv": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/experiments/synthetic_blocker_ab/coverage/coverage_delta.csv",
+    "coverage_baseline_png": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/experiments/synthetic_blocker_ab/coverage/coverage_baseline.png",
+    "coverage_variant_png": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/experiments/synthetic_blocker_ab/coverage/coverage_variant.png",
+    "coverage_delta_png": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/experiments/synthetic_blocker_ab/coverage/coverage_delta.png",
+    "paths_baseline_top_png": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/experiments/synthetic_blocker_ab/previews/paths_baseline_top.png",
+    "paths_variant_top_png": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/experiments/synthetic_blocker_ab/previews/paths_variant_top.png",
+    "paths_overlay_top_png": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/experiments/synthetic_blocker_ab/previews/paths_overlay_top.png",
+    "report_markdown": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/experiments/synthetic_blocker_ab/PHASE2B_AB_REPORT.md",
+    "phase2b_validation_markdown": "/data/RFVisualizer/outputs/sionna/pnu_classroom/phase2b/PHASE2B_VALIDATION.md"
+  }
+}

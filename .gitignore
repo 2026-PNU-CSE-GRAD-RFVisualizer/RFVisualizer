@@ -1,6 +1,6 @@
 **/datasets
 **/data
-**/output
+PGSR/output
 
 ### CMake ###
 **/CMakeLists.txt.user

@@ -1,0 +1,571 @@
+{
+  "schema_version": "1.0",
+  "algorithm": {
+    "name": "rfvisualizer_normal_analysis",
+    "version": "0.2.0"
+  },
+  "created_at": "2026-07-10T17:14:42.669956Z",
+  "input": {
+    "source_mesh_path": "/data/RFVisualizer/PGSR/output/pnu_classroom/mesh/tsdf_fusion_post.ply",
+    "reference_point_cloud_path": "/data/RFVisualizer/PGSR/output/pnu_classroom/point_cloud/iteration_30000/point_cloud.ply",
+    "point_source": "mesh_uniform"
+  },
+  "scene": {
+    "up_vector": [
+      0.09550108776358447,
+      -0.9916112945169672,
+      -0.0871009920859498
+    ],
+    "bounds": {
+      "min": [
+        -5.3950000000000005,
+        -1.4769186502849407,
+        -5.8709093934241805
+      ],
+      "max": [
+        6.56739675729803,
+        1.805,
+        6.422247753021855
+      ],
+      "extent": [
+        11.96239675729803,
+        3.2819186502849407,
+        12.293157146446035
+      ],
+      "diagonal": 17.46400981542669
+    },
+    "estimated_extent": 17.46400981542669,
+    "scale_status": "scene_unit_not_metric_calibrated"
+  },
+  "preprocessing_settings": {
+    "mesh_components": {
+      "enabled": false,
+      "keep_largest": 0,
+      "min_triangles": 1000,
+      "min_area_ratio": 0.0
+    },
+    "sampling": {
+      "number_of_points": 500000
+    },
+    "voxel_downsampling": {
+      "enabled": true,
+      "voxel_size": null,
+      "voxel_size_ratio": 0.002
+    },
+    "statistical_outlier_removal": {
+      "enabled": false,
+      "nb_neighbors": 30,
+      "std_ratio": 2.5
+    },
+    "radius_outlier_removal": {
+      "enabled": false,
+      "nb_points": 12,
+      "radius": null,
+      "radius_ratio": 0.006
+    },
+    "normal_estimation": {
+      "enabled": true,
+      "search_radius": null,
+      "search_radius_ratio": 0.006,
+      "max_nn": 30
+    }
+  },
+  "input_stats": {
+    "original_mesh": {
+      "vertex_count": 3666424,
+      "triangle_count": 6933784,
+      "bounds": {
+        "min": [
+          -5.3950000000000005,
+          -1.4769186502849407,
+          -5.8709093934241805
+        ],
+        "max": [
+          6.56739675729803,
+          1.805,
+          6.422247753021855
+        ],
+        "extent": [
+          11.96239675729803,
+          3.2819186502849407,
+          12.293157146446035
+        ],
+        "diagonal": 17.46400981542669
+      },
+      "surface_area": 240.52937590300877
+    },
+    "filtered_mesh": {
+      "vertex_count": 3666424,
+      "triangle_count": 6933784,
+      "bounds": {
+        "min": [
+          -5.3950000000000005,
+          -1.4769186502849407,
+          -5.8709093934241805
+        ],
+        "max": [
+          6.56739675729803,
+          1.805,
+          6.422247753021855
+        ],
+        "extent": [
+          11.96239675729803,
+          3.2819186502849407,
+          12.293157146446035
+        ],
+        "diagonal": 17.46400981542669
+      },
+      "surface_area": 240.52937590300877
+    },
+    "detection_points_before_preprocessing": 500000,
+    "detection_point_bounds": {
+      "min": [
+        -5.3605096394427365,
+        -1.4744386869834056,
+        -5.869600457421832
+      ],
+      "max": [
+        6.565481399711954,
+        1.8012891680601606,
+        6.407383415503238
+      ],
+      "extent": [
+        11.925991039154692,
+        3.2757278550435664,
+        12.27698387292507
+      ],
+      "diagonal": 17.426531159768103
+    }
+  },
+  "mesh_component_filter": {
+    "enabled": false,
+    "before_vertices": 3666424,
+    "before_triangles": 6933784,
+    "after_vertices": 3666424,
+    "after_triangles": 6933784,
+    "removed_triangles": 0,
+    "component_count": null
+  },
+  "preprocessing_stats": {
+    "before_point_count": 500000,
+    "after_point_count": 194388,
+    "removed_point_count": 305612,
+    "bounds_after": {
+      "min": [
+        -5.3605096394427365,
+        -1.4744386869834056,
+        -5.865494499738872
+      ],
+      "max": [
+        6.562270063943017,
+        1.8012891680601606,
+        6.407383415503238
+      ],
+      "extent": [
+        11.922779703385753,
+        3.2757278550435664,
+        12.272877915242109
+      ],
+      "diagonal": 17.42144084621628
+    },
+    "scene_extent": 17.46400981542669,
+    "stages": {
+      "initial": 500000,
+      "voxel_downsampling": {
+        "before": 500000,
+        "after": 194388,
+        "removed": 305612
+      },
+      "statistical_outlier_removal": {
+        "enabled": false
+      },
+      "radius_outlier_removal": {
+        "enabled": false
+      },
+      "normal_estimation": {
+        "enabled": true,
+        "point_count": 194388
+      }
+    },
+    "used_values": {
+      "voxel_size": 0.03492801963085338,
+      "radius_outlier_radius": null,
+      "normal_search_radius": 0.10478405889256014
+    }
+  },
+  "normal_analysis_settings": {
+    "thresholds": [
+      0.25,
+      0.35,
+      0.5
+    ],
+    "histogram_bins": 50,
+    "horizontal_min_up_dot": 0.85
+  },
+  "normal_analysis": {
+    "preprocessed_point_count": 194388,
+    "valid_normal_count": 194388,
+    "invalid_normal_count": 0,
+    "threshold_results": [
+      {
+        "threshold": 0.25,
+        "point_count": 49920,
+        "ratio_of_valid_normals": 0.25680597567751096,
+        "ratio_of_preprocessed_points": 0.25680597567751096,
+        "preview_path": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/normal_analysis/vertical_points_dot_0_25.ply"
+      },
+      {
+        "threshold": 0.35,
+        "point_count": 61391,
+        "ratio_of_valid_normals": 0.3158168199683108,
+        "ratio_of_preprocessed_points": 0.3158168199683108,
+        "preview_path": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/normal_analysis/vertical_points_dot_0_35.ply"
+      },
+      {
+        "threshold": 0.5,
+        "point_count": 76891,
+        "ratio_of_valid_normals": 0.39555425232010205,
+        "ratio_of_preprocessed_points": 0.39555425232010205,
+        "preview_path": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/normal_analysis/vertical_points_dot_0_50.ply"
+      }
+    ],
+    "horizontal_result": {
+      "minimum_up_dot": 0.85,
+      "point_count": 73771,
+      "ratio_of_valid_normals": 0.3795038788402576,
+      "ratio_of_preprocessed_points": 0.3795038788402576,
+      "preview_path": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/normal_analysis/horizontal_points.ply"
+    },
+    "histogram": {
+      "range": [
+        0.0,
+        1.0
+      ],
+      "bin_count": 50,
+      "sample_count": 194388,
+      "bins": [
+        {
+          "bin_start": 0.0,
+          "bin_end": 0.02,
+          "count": 5159,
+          "ratio": 0.026539704096960718
+        },
+        {
+          "bin_start": 0.02,
+          "bin_end": 0.04,
+          "count": 5178,
+          "ratio": 0.026637446755972592
+        },
+        {
+          "bin_start": 0.04,
+          "bin_end": 0.06,
+          "count": 5613,
+          "ratio": 0.028875239212297055
+        },
+        {
+          "bin_start": 0.06,
+          "bin_end": 0.08,
+          "count": 4985,
+          "ratio": 0.025644587114430933
+        },
+        {
+          "bin_start": 0.08,
+          "bin_end": 0.1,
+          "count": 4530,
+          "ratio": 0.023303907648620285
+        },
+        {
+          "bin_start": 0.1,
+          "bin_end": 0.12,
+          "count": 4167,
+          "ratio": 0.021436508426446076
+        },
+        {
+          "bin_start": 0.12,
+          "bin_end": 0.14,
+          "count": 3807,
+          "ratio": 0.019584542255694795
+        },
+        {
+          "bin_start": 0.14,
+          "bin_end": 0.16,
+          "count": 3609,
+          "ratio": 0.01856596086178159
+        },
+        {
+          "bin_start": 0.16,
+          "bin_end": 0.18,
+          "count": 3175,
+          "ratio": 0.016333312755931435
+        },
+        {
+          "bin_start": 0.18,
+          "bin_end": 0.2,
+          "count": 2954,
+          "ratio": 0.015196411301109122
+        },
+        {
+          "bin_start": 0.2,
+          "bin_end": 0.22,
+          "count": 2782,
+          "ratio": 0.014311583019527955
+        },
+        {
+          "bin_start": 0.22,
+          "bin_end": 0.24,
+          "count": 2663,
+          "ratio": 0.01369940531308517
+        },
+        {
+          "bin_start": 0.24,
+          "bin_end": 0.26,
+          "count": 2540,
+          "ratio": 0.013066650204745149
+        },
+        {
+          "bin_start": 0.26,
+          "bin_end": 0.28,
+          "count": 2303,
+          "ratio": 0.011847439142333889
+        },
+        {
+          "bin_start": 0.28,
+          "bin_end": 0.3,
+          "count": 2408,
+          "ratio": 0.012387595942136346
+        },
+        {
+          "bin_start": 0.3,
+          "bin_end": 0.32,
+          "count": 2263,
+          "ratio": 0.011641665123361525
+        },
+        {
+          "bin_start": 0.32,
+          "bin_end": 0.34,
+          "count": 2247,
+          "ratio": 0.011559355515772578
+        },
+        {
+          "bin_start": 0.34,
+          "bin_end": 0.36,
+          "count": 2066,
+          "ratio": 0.01062822807992263
+        },
+        {
+          "bin_start": 0.36,
+          "bin_end": 0.38,
+          "count": 2033,
+          "ratio": 0.010458464514270429
+        },
+        {
+          "bin_start": 0.38,
+          "bin_end": 0.4,
+          "count": 2036,
+          "ratio": 0.010473897565693356
+        },
+        {
+          "bin_start": 0.4,
+          "bin_end": 0.42,
+          "count": 2023,
+          "ratio": 0.010407021009527338
+        },
+        {
+          "bin_start": 0.42,
+          "bin_end": 0.44,
+          "count": 2044,
+          "ratio": 0.010515052369487828
+        },
+        {
+          "bin_start": 0.44,
+          "bin_end": 0.46,
+          "count": 2097,
+          "ratio": 0.010787702944626212
+        },
+        {
+          "bin_start": 0.46,
+          "bin_end": 0.48,
+          "count": 2118,
+          "ratio": 0.010895734304586704
+        },
+        {
+          "bin_start": 0.48,
+          "bin_end": 0.5,
+          "count": 2091,
+          "ratio": 0.010756836841780356
+        },
+        {
+          "bin_start": 0.5,
+          "bin_end": 0.52,
+          "count": 2069,
+          "ratio": 0.010643661131345556
+        },
+        {
+          "bin_start": 0.52,
+          "bin_end": 0.54,
+          "count": 2188,
+          "ratio": 0.011255838837788341
+        },
+        {
+          "bin_start": 0.54,
+          "bin_end": 0.56,
+          "count": 2254,
+          "ratio": 0.011595365969092742
+        },
+        {
+          "bin_start": 0.56,
+          "bin_end": 0.58,
+          "count": 2273,
+          "ratio": 0.011693108628104616
+        },
+        {
+          "bin_start": 0.58,
+          "bin_end": 0.6,
+          "count": 2252,
+          "ratio": 0.011585077268144124
+        },
+        {
+          "bin_start": 0.6,
+          "bin_end": 0.62,
+          "count": 2241,
+          "ratio": 0.011528489412926723
+        },
+        {
+          "bin_start": 0.62,
+          "bin_end": 0.64,
+          "count": 2095,
+          "ratio": 0.010777414243677593
+        },
+        {
+          "bin_start": 0.64,
+          "bin_end": 0.66,
+          "count": 2219,
+          "ratio": 0.011415313702491924
+        },
+        {
+          "bin_start": 0.66,
+          "bin_end": 0.68,
+          "count": 2267,
+          "ratio": 0.011662242525258762
+        },
+        {
+          "bin_start": 0.68,
+          "bin_end": 0.7000000000000001,
+          "count": 2299,
+          "ratio": 0.011826861740436652
+        },
+        {
+          "bin_start": 0.7000000000000001,
+          "bin_end": 0.72,
+          "count": 2416,
+          "ratio": 0.01242875074593082
+        },
+        {
+          "bin_start": 0.72,
+          "bin_end": 0.74,
+          "count": 2509,
+          "ratio": 0.012907175340041566
+        },
+        {
+          "bin_start": 0.74,
+          "bin_end": 0.76,
+          "count": 2470,
+          "ratio": 0.012706545671543511
+        },
+        {
+          "bin_start": 0.76,
+          "bin_end": 0.78,
+          "count": 2709,
+          "ratio": 0.013936045434903389
+        },
+        {
+          "bin_start": 0.78,
+          "bin_end": 0.8,
+          "count": 2879,
+          "ratio": 0.014810585015535938
+        },
+        {
+          "bin_start": 0.8,
+          "bin_end": 0.8200000000000001,
+          "count": 3216,
+          "ratio": 0.01654423112537811
+        },
+        {
+          "bin_start": 0.8200000000000001,
+          "bin_end": 0.84,
+          "count": 3425,
+          "ratio": 0.017619400374508716
+        },
+        {
+          "bin_start": 0.84,
+          "bin_end": 0.86,
+          "count": 3920,
+          "ratio": 0.020165853859291726
+        },
+        {
+          "bin_start": 0.86,
+          "bin_end": 0.88,
+          "count": 4202,
+          "ratio": 0.021616560693046898
+        },
+        {
+          "bin_start": 0.88,
+          "bin_end": 0.9,
+          "count": 4437,
+          "ratio": 0.022825483054509536
+        },
+        {
+          "bin_start": 0.9,
+          "bin_end": 0.92,
+          "count": 4951,
+          "ratio": 0.025469679198304424
+        },
+        {
+          "bin_start": 0.92,
+          "bin_end": 0.9400000000000001,
+          "count": 5740,
+          "ratio": 0.029528571722534314
+        },
+        {
+          "bin_start": 0.9400000000000001,
+          "bin_end": 0.96,
+          "count": 7146,
+          "ratio": 0.03676152848941293
+        },
+        {
+          "bin_start": 0.96,
+          "bin_end": 0.98,
+          "count": 10131,
+          "ratio": 0.05211741465522563
+        },
+        {
+          "bin_start": 0.98,
+          "bin_end": 1.0,
+          "count": 35189,
+          "ratio": 0.1810245488404634
+        }
+      ],
+      "csv_path": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/normal_analysis/normal_up_dot_histogram.csv"
+    },
+    "files": {
+      "histogram_csv": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/normal_analysis/normal_up_dot_histogram.csv",
+      "vertical_previews": {
+        "0_25": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/normal_analysis/vertical_points_dot_0_25.ply",
+        "0_35": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/normal_analysis/vertical_points_dot_0_35.ply",
+        "0_50": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/normal_analysis/vertical_points_dot_0_50.ply"
+      },
+      "horizontal_preview": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/normal_analysis/horizontal_points.ply",
+      "analysis_json": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/normal_analysis/normal_analysis.json"
+    }
+  },
+  "files": {
+    "histogram_csv": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/normal_analysis/normal_up_dot_histogram.csv",
+    "vertical_previews": {
+      "0_25": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/normal_analysis/vertical_points_dot_0_25.ply",
+      "0_35": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/normal_analysis/vertical_points_dot_0_35.ply",
+      "0_50": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/normal_analysis/vertical_points_dot_0_50.ply"
+    },
+    "horizontal_preview": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/normal_analysis/horizontal_points.ply",
+    "analysis_json": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/normal_analysis/normal_analysis.json"
+  }
+}
