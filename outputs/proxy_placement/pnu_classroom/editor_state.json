@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "camera": {},
+  "selected_object": null,
+  "viewport_mode": "select",
+  "axis_constraint": null,
+  "reference_visibility": true,
+  "grid_visibility": true,
+  "show_disabled": true,
+  "object_visibility": {
+    "blackboard_example": true,
+    "desk_block_example": true,
+    "door_example": true,
+    "large_metal_object_example": true
+  },
+  "snap_settings": {
+    "enabled": true,
+    "translation_m": 0.05,
+    "rotation_deg": 5.0,
+    "size_m": 0.05
+  },
+  "panel_sizes": {
+    "side_panel_width": 410.0
+  },
+  "last_opened_scenario": "/data/RFVisualizer/configs/sionna/scenarios/pnu_classroom_proxy_draft.yaml"
+}

@@ -1,0 +1,374 @@
+{
+  "schema_version": "1.0",
+  "scenario": {
+    "id": "pnu_classroom_proxy_draft",
+    "status": "provisional",
+    "physically_validated": false,
+    "synthetic_validation": false,
+    "base_scene": {
+      "phase2a_config": "configs/sionna/pnu_classroom_smoke_test.yaml"
+    },
+    "obstacles": [
+      {
+        "id": "desk_block_example",
+        "enabled": false,
+        "semantic_class": "desk_cluster",
+        "purpose": "classroom_proxy",
+        "physical_object": true,
+        "confidence": "unset",
+        "geometry": {
+          "type": "box",
+          "anchor": {
+            "mode": "floor_at_xy"
+          },
+          "position_m": null,
+          "size_m": null,
+          "rotation_deg": null
+        },
+        "material": {
+          "source": "sionna_preset",
+          "category": "wood"
+        }
+      },
+      {
+        "id": "blackboard_example",
+        "enabled": false,
+        "semantic_class": "blackboard",
+        "purpose": "classroom_proxy",
+        "physical_object": true,
+        "confidence": "unset",
+        "geometry": {
+          "type": "thin_panel",
+          "anchor": {
+            "mode": "center"
+          },
+          "position_m": null,
+          "size_m": null,
+          "rotation_deg": null
+        },
+        "material": {
+          "source": "sionna_preset",
+          "category": "metal"
+        }
+      },
+      {
+        "id": "door_example",
+        "enabled": false,
+        "semantic_class": "door",
+        "purpose": "classroom_proxy",
+        "physical_object": true,
+        "confidence": "unset",
+        "state": "closed",
+        "geometry": {
+          "type": "thin_panel",
+          "anchor": {
+            "mode": "bottom_center"
+          },
+          "position_m": null,
+          "size_m": null,
+          "rotation_deg": null
+        },
+        "material": {
+          "source": "sionna_preset",
+          "category": "wood"
+        }
+      },
+      {
+        "id": "large_metal_object_example",
+        "enabled": false,
+        "semantic_class": "large_equipment",
+        "purpose": "classroom_proxy",
+        "physical_object": true,
+        "confidence": "unset",
+        "geometry": {
+          "type": "box",
+          "anchor": {
+            "mode": "floor_at_xy"
+          },
+          "position_m": null,
+          "size_m": null,
+          "rotation_deg": null
+        },
+        "material": {
+          "source": "sionna_preset",
+          "category": "metal"
+        }
+      }
+    ],
+    "confidence": "low",
+    "provenance": {
+      "authoring_method": "interactive_proxy_placement",
+      "metric_calibration_status": "provisional",
+      "on_site_measurement_complete": false
+    }
+  },
+  "authoring_resolution": {
+    "status": "provisional",
+    "physically_validated": false,
+    "placement_validation": {
+      "schema_version": "1.0",
+      "status": "provisional",
+      "physically_validated": false,
+      "warning_banner": "PROVISIONAL GEOMETRY - DO NOT INTERPRET AS REAL RSSI ACCURACY",
+      "scenario_id": "pnu_classroom_proxy_draft",
+      "room_inputs": {
+        "room_obj": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/metric_calibration/room_envelope_metric.obj",
+        "room_json": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/metric_calibration/room_envelope_metric.json",
+        "calibration": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/metric_calibration/calibration.json",
+        "room_obj_sha256": "dd3da1aba1d057b3a24fbf8cba063e649952d95c2194551ea1266e86c241fe50",
+        "room_json_sha256": "bbebc55117e6498353ba7bfad35db7e2df19ca5cebea6b47994f2790b1ad820b",
+        "calibration_sha256": "829c435f5dbe9728108433f510f5d0052a2f246d601bbf7525755c7cffd39515"
+      },
+      "resolved_positions": [
+        {
+          "kind": "transmitter",
+          "name": "tx_test",
+          "requested_position_m": [
+            -7.0,
+            -5.0,
+            1.5
+          ],
+          "resolved_position_m": [
+            -7.0,
+            -5.0,
+            1.5
+          ],
+          "used_fallback": false,
+          "validation": {
+            "position_m": [
+              -7.0,
+              -5.0,
+              1.5
+            ],
+            "inside_room": true,
+            "safe_with_clearance": true,
+            "floor_z_m": 0.2335400126684286,
+            "ceiling_z_m": 2.5089624137132107,
+            "floor_clearance_m": 1.2664599873315714,
+            "ceiling_clearance_m": 1.0089624137132107,
+            "minimum_wall_clearance_m": 4.718926063196062,
+            "oriented_plane_distances_m": [
+              1.265797832418194,
+              1.0067336347976747,
+              4.718926063196062,
+              8.157870540820298,
+              5.846917403031947,
+              7.115084337806623
+            ]
+          }
+        },
+        {
+          "kind": "receiver",
+          "name": "rx_los",
+          "requested_position_m": [
+            -3.0,
+            -5.0,
+            1.5
+          ],
+          "resolved_position_m": [
+            -3.0,
+            -5.0,
+            1.5
+          ],
+          "used_fallback": false,
+          "validation": {
+            "position_m": [
+              -3.0,
+              -5.0,
+              1.5
+            ],
+            "inside_room": true,
+            "safe_with_clearance": true,
+            "floor_z_m": 0.18607282670543,
+            "ceiling_z_m": 2.458934695702468,
+            "floor_clearance_m": 1.31392717329457,
+            "ceiling_clearance_m": 0.9589346957024678,
+            "minimum_wall_clearance_m": 3.1274408742247903,
+            "oriented_plane_distances_m": [
+              1.3132402006761534,
+              0.9568164270711399,
+              4.936879201811453,
+              12.154047309471816,
+              5.8442207856939214,
+              3.1274408742247903
+            ]
+          }
+        },
+        {
+          "kind": "receiver",
+          "name": "rx_reflection",
+          "requested_position_m": [
+            -10.0,
+            -8.0,
+            1.5
+          ],
+          "resolved_position_m": [
+            -10.0,
+            -8.0,
+            1.5
+          ],
+          "used_fallback": false,
+          "validation": {
+            "position_m": [
+              -10.0,
+              -8.0,
+              1.5
+            ],
+            "inside_room": true,
+            "safe_with_clearance": true,
+            "floor_z_m": 0.3594238644805863,
+            "ceiling_z_m": 2.7426616636088754,
+            "floor_clearance_m": 1.1405761355194137,
+            "ceiling_clearance_m": 1.2426616636088754,
+            "minimum_wall_clearance_m": 2.8537855487022536,
+            "oriented_plane_distances_m": [
+              1.1399797976170956,
+              1.2399166474642171,
+              7.540509987049475,
+              5.21598726559073,
+              2.8537855487022536,
+              10.117237877380399
+            ]
+          }
+        }
+      ],
+      "placement_warnings": [],
+      "enabled_obstacle_count": 0,
+      "renderable_obstacle_count": 0,
+      "maximum_coordinate_round_trip_error": 0.0,
+      "objects": [
+        {
+          "id": "desk_block_example",
+          "enabled": false,
+          "renderable": false,
+          "status": "DISABLED_INCOMPLETE",
+          "errors": [
+            "활성 box에는 size_m이 필요합니다."
+          ],
+          "warnings": [],
+          "collision_warnings": [],
+          "source": {
+            "id": "desk_block_example",
+            "enabled": false,
+            "semantic_class": "desk_cluster",
+            "purpose": "classroom_proxy",
+            "physical_object": true,
+            "confidence": "unset",
+            "geometry": {
+              "type": "box",
+              "anchor": {
+                "mode": "floor_at_xy"
+              },
+              "position_m": null,
+              "size_m": null,
+              "rotation_deg": null
+            },
+            "material": {
+              "source": "sionna_preset",
+              "category": "wood"
+            }
+          }
+        },
+        {
+          "id": "blackboard_example",
+          "enabled": false,
+          "renderable": false,
+          "status": "DISABLED_INCOMPLETE",
+          "errors": [
+            "활성 thin_panel에는 size_m 또는 thickness/width/height가 필요합니다."
+          ],
+          "warnings": [],
+          "collision_warnings": [],
+          "source": {
+            "id": "blackboard_example",
+            "enabled": false,
+            "semantic_class": "blackboard",
+            "purpose": "classroom_proxy",
+            "physical_object": true,
+            "confidence": "unset",
+            "geometry": {
+              "type": "thin_panel",
+              "anchor": {
+                "mode": "center"
+              },
+              "position_m": null,
+              "size_m": null,
+              "rotation_deg": null
+            },
+            "material": {
+              "source": "sionna_preset",
+              "category": "metal"
+            }
+          }
+        },
+        {
+          "id": "door_example",
+          "enabled": false,
+          "renderable": false,
+          "status": "DISABLED_INCOMPLETE",
+          "errors": [
+            "활성 thin_panel에는 size_m 또는 thickness/width/height가 필요합니다."
+          ],
+          "warnings": [],
+          "collision_warnings": [],
+          "source": {
+            "id": "door_example",
+            "enabled": false,
+            "semantic_class": "door",
+            "purpose": "classroom_proxy",
+            "physical_object": true,
+            "confidence": "unset",
+            "state": "closed",
+            "geometry": {
+              "type": "thin_panel",
+              "anchor": {
+                "mode": "bottom_center"
+              },
+              "position_m": null,
+              "size_m": null,
+              "rotation_deg": null
+            },
+            "material": {
+              "source": "sionna_preset",
+              "category": "wood"
+            }
+          }
+        },
+        {
+          "id": "large_metal_object_example",
+          "enabled": false,
+          "renderable": false,
+          "status": "DISABLED_INCOMPLETE",
+          "errors": [
+            "활성 box에는 size_m이 필요합니다."
+          ],
+          "warnings": [],
+          "collision_warnings": [],
+          "source": {
+            "id": "large_metal_object_example",
+            "enabled": false,
+            "semantic_class": "large_equipment",
+            "purpose": "classroom_proxy",
+            "physical_object": true,
+            "confidence": "unset",
+            "geometry": {
+              "type": "box",
+              "anchor": {
+                "mode": "floor_at_xy"
+              },
+              "position_m": null,
+              "size_m": null,
+              "rotation_deg": null
+            },
+            "material": {
+              "source": "sionna_preset",
+              "category": "metal"
+            }
+          }
+        }
+      ],
+      "enabled_errors": [],
+      "success": true
+    }
+  }
+}

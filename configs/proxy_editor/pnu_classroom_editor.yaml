@@ -1,0 +1,20 @@
+schema_version: "1.0"
+autosave:
+  interval_seconds: 60
+  command_interval: 10
+reference:
+  opacity: 0.12
+  wireframe: false
+  point_size: 2.0
+  visible: true
+navigation:
+  fps:
+    enabled: true
+    movement_speed_mps: 1.5
+    sprint_multiplier: 3.0
+    max_frame_delta_seconds: 0.05
+    horizontal_only: true
+external_commands:
+  sionna_environment:
+    type: conda
+    name: sionna

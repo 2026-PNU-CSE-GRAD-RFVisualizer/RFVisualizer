@@ -8,7 +8,7 @@ scenario:
     phase2a_config: configs/sionna/pnu_classroom_smoke_test.yaml
   obstacles:
   - id: desk_block_example
-    enabled: false
+    enabled: true
     semantic_class: desk_cluster
     purpose: classroom_proxy
     physical_object: true
@@ -23,8 +23,9 @@ scenario:
     material:
       source: sionna_preset
       category: wood
+    display_name: Desk
   - id: blackboard_example
-    enabled: false
+    enabled: true
     semantic_class: blackboard
     purpose: classroom_proxy
     physical_object: true
@@ -40,7 +41,7 @@ scenario:
       source: sionna_preset
       category: metal
   - id: door_example
-    enabled: false
+    enabled: true
     semantic_class: door
     purpose: classroom_proxy
     physical_object: true
@@ -57,7 +58,7 @@ scenario:
       source: sionna_preset
       category: wood
   - id: large_metal_object_example
-    enabled: false
+    enabled: true
     semantic_class: large_equipment
     purpose: classroom_proxy
     physical_object: true
@@ -72,6 +73,27 @@ scenario:
     material:
       source: sionna_preset
       category: metal
+  - id: desk_block_example_copy
+    enabled: true
+    semantic_class: desk_cluster
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    geometry:
+      type: box
+      anchor:
+        mode: floor_at_xy
+      position_m: null
+      size_m: null
+      rotation_deg: null
+    material:
+      source: sionna_preset
+      category: concrete
+      preset: concrete
+    display_name: Desk
+    placement_status: provisional_unconfirmed
+    export:
+      object_name: desk_block_example_copy
   confidence: low
   provenance:
     authoring_method: interactive_proxy_placement

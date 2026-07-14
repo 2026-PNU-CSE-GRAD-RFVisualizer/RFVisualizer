@@ -1,0 +1,7 @@
+{
+  "status": "failure",
+  "success": false,
+  "exception_type": "RuntimeError",
+  "reason": "Unable to cast Python instance of type <class 'open3d.cpu.pybind.visualization.gui.Widget.EventCallbackResult'> to C++ type '?' (#define PYBIND11_DETAILED_ERROR_MESSAGES or compile in debug mode for details)",
+  "reproduction_command": "/data/RFVisualizer/tools/proxy_placement_editor/main.py edit --room-obj outputs/proxy_mesh/pnu_classroom/metric_calibration/room_envelope_metric.obj --room-json outputs/proxy_mesh/pnu_classroom/metric_calibration/room_envelope_metric.json --calibration outputs/proxy_mesh/pnu_classroom/metric_calibration/calibration.json --scenario configs/sionna/scenarios/pnu_classroom_proxy_draft.yaml --reference-mesh PGSR/output/pnu_classroom/mesh/tsdf_fusion_post.ply --reference-coordinate-space scene --output outputs/proxy_placement/pnu_classroom"
+}

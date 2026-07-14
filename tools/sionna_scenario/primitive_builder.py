@@ -292,6 +292,20 @@ def resolve_anchor_transform(geometry: GeometrySpec, local_vertices: np.ndarray,
     rotation = rotation_matrix_xyz(geometry.rotation_deg)
     translate_to_reference = np.eye(4, dtype=float)
     translate_to_reference[:3, 3] = -reference
+    policy = geometry.anchor.floor_contact_policy
+    if geometry.anchor.mode == "floor_at_xy" and policy.type == "minimum_bottom_vertex_clearance":
+        bottom_mask = np.isclose(local_vertices[:, 2], minimum[2], atol=1.0e-12)
+        bottom_vertices = local_vertices[bottom_mask]
+        if len(bottom_vertices) == 0:
+            raise PrimitiveBuildError("minimum_bottom_vertex_clearance에 사용할 bottom vertex가 없습니다.")
+        relative = (rotation @ (bottom_vertices - reference).T).T
+        required_target_z = max(
+            _floor_z(room, target[0] + item[0], target[1] + item[1])
+            + policy.clearance_m
+            - item[2]
+            for item in relative
+        )
+        target[2] = float(required_target_z)
     return _affine(rotation, target) @ translate_to_reference
 
 

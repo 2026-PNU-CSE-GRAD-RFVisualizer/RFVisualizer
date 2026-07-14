@@ -8,6 +8,8 @@ Phase 2-B 도구는 Phase 2-A의 미터 단위 Room Envelope를 그대로 두고
 
 실제 Sionna 1.2.2 실행 결과는 [PHASE2B_VALIDATION.md](PHASE2B_VALIDATION.md)에 기록한다. 기반 Empty-Room 도구와 결과는 [Phase 2-A README](../sionna_smoke_test/README.md)와 [검증 문서](../sionna_smoke_test/PHASE2A_SMOKE_TEST_VALIDATION.md)를 참고한다.
 
+Phase 2-C의 대화형 배치 UI는 이 schema를 새로 만들지 않고 그대로 편집한다. 사용법과 검증 상태는 [Proxy Placement Editor README](../proxy_placement_editor/README.md)를 참고한다.
+
 ## 보존하는 기준
 
 - `room_envelope_metric.obj`와 Phase 2-A 설정을 수정하지 않는다.
@@ -175,6 +177,16 @@ geometry:
 | `explicit_transform` | 없음 | 유한하고 가역인 4×4 affine matrix를 직접 사용한다. 마지막 행은 `[0,0,0,1]`이어야 한다. |
 
 `explicit_transform`은 `position_m` 또는 0이 아닌 `rotation_deg`와 함께 사용할 수 없다. `floor_at_xy`는 중심점의 floor Z를 해결하지만, 경사진 바닥에서 회전하거나 넓은 장애물의 모서리가 바닥 아래로 들어갈 수 있다. 그래서 anchor 계산 뒤 모든 vertex의 floor, ceiling, wall clearance를 다시 검사한다.
+
+Phase 2-C는 backward compatibility를 유지하면서 선택적 `floor_contact_policy`를 추가한다. 기존 설정은 `anchor_point`로 해석한다. `minimum_bottom_vertex_clearance`는 회전된 모든 bottom vertex 위치에서 경사진 바닥을 계산해 최소 여유가 `clearance_m`가 되도록 배치한다.
+
+```yaml
+anchor:
+  mode: floor_at_xy
+  floor_contact_policy:
+    type: minimum_bottom_vertex_clearance
+    clearance_m: 0.02
+```
 
 ### Material
 

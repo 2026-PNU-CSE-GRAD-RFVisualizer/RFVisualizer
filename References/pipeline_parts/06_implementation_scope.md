@@ -21,7 +21,7 @@
 - Radio Map 출력 형식
 - Material Group 적용 가능 여부
 
-Phase 2-A에서 미터 단위 닫힌 Room Envelope를 Sionna/Mitsuba 장면으로 변환해 LoS·정반사·저해상도 path-gain 지도를 생성했다. 이어 Phase 2-B에서 Room Envelope와 분리된 synthetic blocker를 추가하고 같은 설정의 empty/variant A/B 실험을 수행해 LoS 차단, 다중 재질 등록, 재현성 noise floor, Coverage delta 계산까지 검증했다. 현재 배율과 재질은 임시값이며, 다음 입력은 실제 책상 군집·칠판·문 등의 측정 위치·크기·방향이다.
+Phase 2-A에서 미터 단위 닫힌 Room Envelope를 Sionna/Mitsuba 장면으로 변환해 LoS·정반사·저해상도 path-gain 지도를 생성했다. 이어 Phase 2-B에서 Room Envelope와 분리된 synthetic blocker를 추가하고 같은 설정의 empty/variant A/B 실험을 수행해 LoS 차단, 다중 재질 등록, 재현성 noise floor, Coverage delta 계산까지 검증했다. Phase 2-C에서는 Open3D 기반 편집기로 Metric Room과 PGSR reference를 보면서 기존 scenario schema의 box·thin panel을 배치하고 검증·미리보기·저장하는 경로를 추가했다. 현재 배율과 재질은 임시값이며, 다음 입력은 실제 책상 군집·칠판·문 등의 측정 위치·크기·방향이다.
 
 ## 2단계: SIBR Fork 확장 가능성 검증
 

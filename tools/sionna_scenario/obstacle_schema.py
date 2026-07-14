@@ -19,6 +19,7 @@ import re
 
 SUPPORTED_GEOMETRY_TYPES = ("box", "thin_panel", "mesh")
 SUPPORTED_ANCHOR_MODES = ("center", "bottom_center", "floor_at_xy", "explicit_transform")
+SUPPORTED_FLOOR_CONTACT_POLICIES = ("anchor_point", "minimum_bottom_vertex_clearance")
 _SAFE_NAME = re.compile(r"^[A-Za-z0-9_][A-Za-z0-9_.-]*$")
 
 
@@ -178,8 +179,25 @@ def _size_vector(data: Mapping[str, Any], geometry_type: str, enabled: bool) -> 
 
 
 @dataclass(frozen=True)
+class FloorContactPolicy:
+    type: str = "anchor_point"
+    clearance_m: float = 0.0
+
+    def __post_init__(self) -> None:
+        if self.type not in SUPPORTED_FLOOR_CONTACT_POLICIES:
+            raise ObstacleSchemaError(
+                "지원하지 않는 floor contact policy '{}': {}".format(
+                    self.type, ", ".join(SUPPORTED_FLOOR_CONTACT_POLICIES)
+                )
+            )
+        if not math.isfinite(self.clearance_m) or self.clearance_m < 0.0:
+            raise ObstacleSchemaError("floor contact clearance_m은 유한한 0 이상 값이어야 합니다.")
+
+
+@dataclass(frozen=True)
 class AnchorSpec:
     mode: str = "center"
+    floor_contact_policy: FloorContactPolicy = field(default_factory=FloorContactPolicy)
 
     def __post_init__(self) -> None:
         if self.mode not in SUPPORTED_ANCHOR_MODES:
@@ -212,9 +230,15 @@ class GeometrySpec:
         return self.size_m[2] if self.type == "thin_panel" and self.size_m else None
 
     def to_dict(self) -> Dict[str, Any]:
+        anchor: Dict[str, Any] = {"mode": self.anchor.mode}
+        if self.anchor.floor_contact_policy.type != "anchor_point":
+            anchor["floor_contact_policy"] = {
+                "type": self.anchor.floor_contact_policy.type,
+                "clearance_m": self.anchor.floor_contact_policy.clearance_m,
+            }
         result: Dict[str, Any] = {
             "type": self.type,
-            "anchor": {"mode": self.anchor.mode},
+            "anchor": anchor,
             "position_m": list(self.position_m) if self.position_m is not None else None,
             "size_m": list(self.size_m) if self.size_m is not None else None,
             "rotation_deg": {
@@ -264,6 +288,20 @@ class ObstacleSpec:
         return result
 
 
+def _parse_floor_contact_policy(value: Any) -> FloorContactPolicy:
+    if value is None:
+        return FloorContactPolicy()
+    if isinstance(value, str):
+        return FloorContactPolicy(type=_required_text(value, "geometry.anchor.floor_contact_policy"))
+    if not isinstance(value, Mapping):
+        raise ObstacleSchemaError("geometry.anchor.floor_contact_policy는 문자열 또는 mapping이어야 합니다.")
+    policy_type = _required_text(value.get("type"), "geometry.anchor.floor_contact_policy.type")
+    clearance = _finite_number(
+        value.get("clearance_m", 0.0), "geometry.anchor.floor_contact_policy.clearance_m"
+    )
+    return FloorContactPolicy(type=policy_type, clearance_m=clearance)
+
+
 def _parse_anchor(value: Any) -> AnchorSpec:
     if value is None:
         return AnchorSpec("center")
@@ -271,7 +309,10 @@ def _parse_anchor(value: Any) -> AnchorSpec:
         return AnchorSpec(_required_text(value, "geometry.anchor"))
     if not isinstance(value, Mapping):
         raise ObstacleSchemaError("geometry.anchor는 문자열 또는 mapping이어야 합니다.")
-    return AnchorSpec(_required_text(value.get("mode"), "geometry.anchor.mode"))
+    return AnchorSpec(
+        _required_text(value.get("mode"), "geometry.anchor.mode"),
+        _parse_floor_contact_policy(value.get("floor_contact_policy")),
+    )
 
 
 def _parse_geometry(
