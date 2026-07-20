@@ -1,0 +1,3734 @@
+{
+  "file name" : "2025중간보고서_38_응답하라 지휘본부_마이크로 컨트롤러에서의 안전한 로봇 어플리케이션 수행을 위한 원격 증명 기술 개발.pdf",
+  "number of pages" : 11,
+  "author" : "202055506 강승민",
+  "title" : "마이크로 컨트롤로에서의 안전한 로봇 어플리케이션 수행을 위한 원격 증명 기술 개발",
+  "creation date" : "D:20250718133944+09'00'",
+  "modification date" : "D:20250718133944+09'00'",
+  "kids" : [ {
+    "type" : "paragraph",
+    "id" : 74,
+    "page number" : 1,
+    "bounding box" : [ 77.424, 652.28, 239.42, 668.241 ],
+    "font" : "MalgunGothic",
+    "font size" : 12.0,
+    "text color" : "[0.349]",
+    "content" : "부산대학교 정보컴퓨터공학부"
+  }, {
+    "type" : "heading",
+    "id" : 75,
+    "level" : "Doctitle",
+    "page number" : 1,
+    "bounding box" : [ 78.864, 529.242, 507.94, 634.681 ],
+    "heading level" : 1,
+    "font" : "MalgunGothic",
+    "font size" : 21.96,
+    "text color" : "[0.051]",
+    "content" : "마이크로 컨트롤러에서의 안전한 로봇 어플리케이션 수행을 위한 원격 증명 기술 개발"
+  }, {
+    "type" : "paragraph",
+    "id" : 76,
+    "page number" : 1,
+    "bounding box" : [ 282.05, 489.652, 517.172, 510.881 ],
+    "font" : "MalgunGothic",
+    "font size" : 15.96,
+    "text color" : "[0.051]",
+    "content" : "2025 전기 졸업과제 중간보고서"
+  }, {
+    "type" : "image",
+    "id" : 77,
+    "page number" : 1,
+    "bounding box" : [ 182.9, 257.48, 412.25, 486.83 ],
+    "source" : "2025중간보고서_38_응답하라 지휘본부_마이크로 컨트롤러에서의 안전한 로봇 어플리케이션 수행을 위한 원격 증명 기술 개발_images/imageFile1.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 71,
+    "page number" : 1,
+    "bounding box" : [ 238.13, 179.747, 356.59, 246.811 ],
+    "font" : "MalgunGothic",
+    "font size" : 14.04,
+    "text color" : "[0.149]",
+    "content" : "202055506 강승민 202055523 김의준 202055543 박재선"
+  }, {
+    "type" : "paragraph",
+    "id" : 72,
+    "page number" : 1,
+    "bounding box" : [ 264.53, 131.267, 330.006, 149.941 ],
+    "font" : "MalgunGothic",
+    "font size" : 14.04,
+    "text color" : "[0.149]",
+    "content" : "2025-7-17"
+  }, {
+    "type" : "paragraph",
+    "id" : 73,
+    "page number" : 1,
+    "bounding box" : [ 405.31, 85.431, 517.414, 104.105 ],
+    "font" : "MalgunGothic",
+    "font size" : 14.04,
+    "text color" : "[0.149]",
+    "content" : "지도 교수 권동현"
+  }, {
+    "type" : "header",
+    "id" : 78,
+    "page number" : 2,
+    "bounding box" : [ 72.024, 784.073, 218.89, 797.32 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 31,
+      "page number" : 2,
+      "bounding box" : [ 72.024, 784.073, 218.89, 797.32 ],
+      "heading level" : 7,
+      "font" : "MalgunGothic",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 79,
+    "level" : "Subtitle",
+    "page number" : 2,
+    "bounding box" : [ 72.024, 732.442, 103.944, 753.671 ],
+    "heading level" : 4,
+    "font" : "MalgunGothic",
+    "font size" : 15.96,
+    "text color" : "[0.184, 0.329, 0.588]",
+    "content" : "목차"
+  }, {
+    "type" : "list",
+    "id" : 80,
+    "level" : "1",
+    "page number" : 2,
+    "bounding box" : [ 72.024, 201.592, 523.023, 726.956 ],
+    "numbering style" : "roman numbers in upper case",
+    "number of list items" : 6,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 72.024, 712.272, 523.023, 726.956 ],
+      "font" : "MalgunGothic",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "Ⅰ. 요구조건 및 제약사항 분석에 대한 수정사항...................................................................................3",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 68,
+        "level" : "2",
+        "page number" : 2,
+        "bounding box" : [ 83.064, 610.152, 523.023, 701.396 ],
+        "numbering style" : "arabic numbers",
+        "number of list items" : 4,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 83.064, 686.712, 523.023, 701.396 ],
+          "font" : "MalgunGothic",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "1. 기존 요구 조건...........................................................................................................................................3",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 83.064, 661.152, 523.023, 675.836 ],
+          "font" : "MalgunGothic",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "2. 요구 조건 수정사항..................................................................................................................................3",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 83.064, 635.592, 523.023, 650.276 ],
+          "font" : "MalgunGothic",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "3. 제약 사항 분석...........................................................................................................................................4",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 83.064, 610.152, 523.023, 624.836 ],
+          "font" : "MalgunGothic",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "4. 유스케이스 (Use cases)...........................................................................................................................5",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 72.024, 584.592, 523.023, 599.276 ],
+      "font" : "MalgunGothic",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "Ⅱ. 설계 상세화 및 변경 내역..........................................................................................................................5",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 69,
+        "level" : "2",
+        "page number" : 2,
+        "bounding box" : [ 83.064, 431.322, 523.023, 573.686 ],
+        "numbering style" : "arabic numbers",
+        "number of list items" : 6,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 83.064, 559.002, 523.023, 573.686 ],
+          "font" : "MalgunGothic",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "1. 핵심 변경 개요...........................................................................................................................................5",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 83.064, 533.442, 523.023, 548.126 ],
+          "font" : "MalgunGothic",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "2. 설계 구조 변경 요약...................................................................................................................................6",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 83.064, 508.002, 523.023, 522.686 ],
+          "font" : "MalgunGothic",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "3. 세부 구성 요소별 변경 사항...................................................................................................................6",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 83.064, 482.442, 523.023, 497.126 ],
+          "font" : "MalgunGothic",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "4. 설계 시나리오별 적응 전략.....................................................................................................................7",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 83.064, 456.882, 523.023, 471.566 ],
+          "font" : "MalgunGothic",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "5. 핵심 설계 목표..............................................................................................................................................7",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 83.064, 431.322, 523.023, 446.006 ],
+          "font" : "MalgunGothic",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "6. Control-Flow Integrity(CFI) 적용 방향.................................................................................................7",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 72.024, 405.882, 523.023, 420.566 ],
+      "font" : "MalgunGothic",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "Ⅲ. 갱신된 과제 추진 계획.................................................................................................................................8",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 70,
+        "level" : "2",
+        "page number" : 2,
+        "bounding box" : [ 83.064, 278.182, 523.023, 394.986 ],
+        "numbering style" : "arabic numbers",
+        "number of list items" : 5,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 83.064, 380.302, 523.023, 394.986 ],
+          "font" : "MalgunGothic",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "1. 추진 방향의 명확화.....................................................................................................................................8",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 83.064, 354.742, 523.023, 369.426 ],
+          "font" : "MalgunGothic",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "2. 추후 CFI(Control-Flow Integrity) 적용 방향.....................................................................................8",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 83.064, 329.182, 523.023, 343.866 ],
+          "font" : "MalgunGothic",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "3. 재정비된 과제 수행 일정 .........................................................................................................................9",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 83.064, 303.742, 523.023, 318.426 ],
+          "font" : "MalgunGothic",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "4. 핵심 실험 및 평가 항목............................................................................................................................9",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 83.064, 278.182, 523.023, 292.866 ],
+          "font" : "MalgunGothic",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "5. 최종 산출 목표..............................................................................................................................................9",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 72.024, 252.622, 523.023, 267.306 ],
+      "font" : "MalgunGothic",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "Ⅳ. 구성원별 진척도 ........................................................................................................................................... 10",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 72.024, 227.062, 523.023, 241.746 ],
+      "font" : "MalgunGothic",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "Ⅴ. 보고 시점까지의 과제 수행 내용 및 중간 결과........................................................................... 10",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 72.024, 201.592, 523.023, 216.276 ],
+      "font" : "MalgunGothic",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "Ⅵ. Reference.......................................................................................................................................................... 11",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 81,
+    "page number" : 2,
+    "bounding box" : [ 282.05, 54.977, 313.267, 68.224 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 21,
+      "page number" : 2,
+      "bounding box" : [ 282.05, 54.977, 313.267, 68.224 ],
+      "heading level" : 6,
+      "font" : "MalgunGothicBold",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "2 / 11"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 82,
+    "page number" : 3,
+    "bounding box" : [ 72.024, 784.073, 218.89, 797.32 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 32,
+      "page number" : 3,
+      "bounding box" : [ 72.024, 784.073, 218.89, 797.32 ],
+      "heading level" : 7,
+      "font" : "MalgunGothic",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 83,
+    "level" : "Subtitle",
+    "page number" : 3,
+    "bounding box" : [ 72.024, 726.176, 515.59, 752.831 ],
+    "heading level" : 2,
+    "font" : "MalgunGothic",
+    "font size" : 20.04,
+    "text color" : "[0.0]",
+    "content" : "Ⅰ. 요구조건 및 제약사항 분석에 대한 수정사항"
+  }, {
+    "type" : "heading",
+    "id" : 84,
+    "level" : "Subtitle",
+    "page number" : 3,
+    "bounding box" : [ 93.984, 692.827, 210.14, 711.501 ],
+    "heading level" : 5,
+    "font" : "MalgunGothic",
+    "font size" : 14.04,
+    "text color" : "[0.0]",
+    "content" : "1. 기존 요구 조건"
+  }, {
+    "type" : "list",
+    "id" : 85,
+    "level" : "3",
+    "page number" : 3,
+    "bounding box" : [ 72.024, 450.783, 352.63, 680.06 ],
+    "numbering style" : "circled arabic numbers",
+    "number of list items" : 4,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 3,
+      "bounding box" : [ 72.024, 666.813, 253.25, 680.06 ],
+      "font" : "MalgunGothicBold",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "① Remote Attestation 구조 적용 필요",
+      "kids" : [ {
+        "type" : "paragraph",
+        "id" : 62,
+        "page number" : 3,
+        "bounding box" : [ 72.024, 621.453, 523.3, 653.3 ],
+        "font" : "MalgunGothic",
+        "font size" : 9.96,
+        "text color" : "[0.0]",
+        "content" : "MCU에서 실행 중인 Micro-ROS 노드의 무결성을 원격지에서 검증하고, DDS 통신 연결 여부를 제 어할 수 있는 구조가 필요하다[5]."
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 3,
+      "bounding box" : [ 72.024, 594.813, 228.41, 608.06 ],
+      "font" : "MalgunGothicBold",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "② TF-M 기반 Root-of-Trust 사용",
+      "kids" : [ {
+        "type" : "paragraph",
+        "id" : 63,
+        "page number" : 3,
+        "bounding box" : [ 72.024, 549.423, 523.3, 581.27 ],
+        "font" : "MalgunGothic",
+        "font size" : 9.96,
+        "text color" : "[0.0]",
+        "content" : "ARM Cortex-M 계열 MCU에서 사용 가능한 TF-M을 신뢰 기반으로 사용하여 부트 시점 및 런타 임의 무결성을 증명한다."
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 3,
+      "bounding box" : [ 72.024, 522.783, 244.61, 536.03 ],
+      "font" : "MalgunGothicBold",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "③ Flash 영역 중심의 정적 증거 활용",
+      "kids" : [ {
+        "type" : "paragraph",
+        "id" : 64,
+        "level" : "4",
+        "page number" : 3,
+        "bounding box" : [ 72.024, 477.423, 523.3, 509.27 ],
+        "font" : "MalgunGothic",
+        "font size" : 9.96,
+        "text color" : "[0.0]",
+        "content" : ".text, .rodata 등 변경되지 않는 실행 코드 및 데이터 영역의 해시 값을 이용한 무결성 증명을 위 주로 한다."
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 3,
+      "bounding box" : [ 72.024, 450.783, 352.63, 464.03 ],
+      "font" : "MalgunGothicBold",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "④ 암호화 및 인증 구조 미비한 DDS (XRCE-DDS) 보완 필요",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 86,
+    "page number" : 3,
+    "bounding box" : [ 72.024, 424.143, 414.331, 437.39 ],
+    "font" : "MalgunGothic",
+    "font size" : 9.96,
+    "text color" : "[0.0]",
+    "content" : "MITM 방지, 인증 토큰 기반 세션 통제를 통해 안전한 통신이 필요하다[2]."
+  }, {
+    "type" : "heading",
+    "id" : 87,
+    "level" : "Subtitle",
+    "page number" : 3,
+    "bounding box" : [ 92.064, 391.337, 236.047, 410.011 ],
+    "heading level" : 5,
+    "font" : "MalgunGothic",
+    "font size" : 14.04,
+    "text color" : "[0.0]",
+    "content" : "2. 요구 조건 수정사항"
+  }, {
+    "type" : "heading",
+    "id" : 88,
+    "level" : "Subtitle",
+    "page number" : 3,
+    "bounding box" : [ 72.024, 365.203, 242.06, 378.45 ],
+    "heading level" : 6,
+    "font" : "MalgunGothicBold",
+    "font size" : 9.96,
+    "text color" : "[0.0]",
+    "content" : "① Hybrid Root-of-Trust 구조 도입 :"
+  }, {
+    "type" : "paragraph",
+    "id" : 89,
+    "page number" : 3,
+    "bounding box" : [ 72.024, 319.963, 523.3, 351.69 ],
+    "font" : "MalgunGothic",
+    "font size" : 9.96,
+    "text color" : "[0.0]",
+    "content" : "기존 TF-M 단일 구조에서 → DICE + TF-M, TF-M + MPU, TF-M + TrustZone-M 등의 복수 구성안 으로 확장하여, 다양한 MCU 보드를 포괄할 수 있도록 설계 유연성 확보하였다."
+  }, {
+    "type" : "paragraph",
+    "id" : 90,
+    "page number" : 3,
+    "bounding box" : [ 72.024, 293.203, 482.761, 306.45 ],
+    "font" : "MalgunGothic",
+    "font size" : 9.96,
+    "text color" : "[0.0]",
+    "content" : "기존 TF-M 중심에서 다음과 같이 복수 구조로 확장하며 아래와 같은 구조에서 진행한다."
+  }, {
+    "type" : "list",
+    "id" : 91,
+    "level" : "5",
+    "page number" : 3,
+    "bounding box" : [ 90.024, 213.253, 307.768, 279.81 ],
+    "numbering style" : "unordered",
+    "number of list items" : 3,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 3,
+      "bounding box" : [ 90.024, 266.563, 307.768, 279.81 ],
+      "font" : "SymbolMT",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "• DICE (Device Identifier Composition Engine)",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 3,
+      "bounding box" : [ 90.024, 239.923, 247.648, 253.17 ],
+      "font" : "SymbolMT",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "• TF-M + MPU (ARMv7-M 기반)",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 3,
+      "bounding box" : [ 90.024, 213.253, 283.408, 226.5 ],
+      "font" : "SymbolMT",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "• TF-M + TrustZone-M (ARMv8-M 기반)",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 92,
+    "level" : "Subtitle",
+    "page number" : 3,
+    "bounding box" : [ 72.024, 159.853, 241.97, 173.1 ],
+    "heading level" : 6,
+    "font" : "MalgunGothicBold",
+    "font size" : 9.96,
+    "text color" : "[0.0]",
+    "content" : "② 증거 수집 방식의 세분화 및 확장"
+  }, {
+    "type" : "paragraph",
+    "id" : 93,
+    "page number" : 3,
+    "bounding box" : [ 72.024, 95.897, 523.41, 146.34 ],
+    "font" : "MalgunGothic",
+    "font size" : 9.96,
+    "text color" : "[0.0]",
+    "content" : "기존에는 flash 기반 정적 무결성 정보만을 사용했으나, 향후 ROP/DOP 등 동적 공격에 대응하 기 위해 dynamic 및 continuous evidence 구조로 확장을 계획하였다. 가장 주된 목적은 3가지에 서의 레이턴시와 메모리 사용량, 그리고 각각의 장단점을 분석하는 것이다."
+  }, {
+    "type" : "footer",
+    "id" : 94,
+    "page number" : 3,
+    "bounding box" : [ 282.05, 54.977, 313.267, 68.224 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 22,
+      "page number" : 3,
+      "bounding box" : [ 282.05, 54.977, 313.267, 68.224 ],
+      "heading level" : 6,
+      "font" : "MalgunGothicBold",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "3 / 11"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 95,
+    "page number" : 4,
+    "bounding box" : [ 72.024, 784.073, 218.89, 797.32 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 33,
+      "page number" : 4,
+      "bounding box" : [ 72.024, 784.073, 218.89, 797.32 ],
+      "heading level" : 7,
+      "font" : "MalgunGothic",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 96,
+    "page number" : 4,
+    "bounding box" : [ 72.024, 741.573, 316.891, 754.82 ],
+    "font" : "MalgunGothic",
+    "font size" : 9.96,
+    "text color" : "[0.0]",
+    "content" : "기존 Flash 기반 정적 증거에서 다음으로 확장하였다."
+  }, {
+    "type" : "list",
+    "id" : 97,
+    "level" : "5",
+    "page number" : 4,
+    "bounding box" : [ 90.024, 688.293, 437.268, 728.18 ],
+    "numbering style" : "unordered",
+    "number of list items" : 2,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 90.024, 714.933, 307.048, 728.18 ],
+      "font" : "SymbolMT",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "• Discrete Evidence: .text, .rodata (정적/불변)",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 90.024, 688.293, 437.268, 701.54 ],
+      "font" : "SymbolMT",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "• Continuous Evidence: control-flow, data-flow 추적 (예: ROP, DOP 대응)",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 98,
+    "level" : "Subtitle",
+    "page number" : 4,
+    "bounding box" : [ 72.024, 634.893, 242.09, 648.14 ],
+    "heading level" : 6,
+    "font" : "MalgunGothicBold",
+    "font size" : 9.96,
+    "text color" : "[0.0]",
+    "content" : "③ TPM 없이 동작 가능한 구조 설계"
+  }, {
+    "type" : "paragraph",
+    "id" : 99,
+    "page number" : 4,
+    "bounding box" : [ 72.024, 608.253, 371.611, 621.5 ],
+    "font" : "MalgunGothic",
+    "font size" : 9.96,
+    "text color" : "[0.0]",
+    "content" : "TPM 기반이 아닌 lightweight 구조를 아래와 같이 도입하였다[3]."
+  }, {
+    "type" : "list",
+    "id" : 100,
+    "level" : "5",
+    "page number" : 4,
+    "bounding box" : [ 90.024, 554.943, 389.506, 594.86 ],
+    "numbering style" : "unordered",
+    "number of list items" : 2,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 90.024, 581.613, 304.01, 594.86 ],
+      "font" : "SymbolMT",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "• DICE: TPM 없이도 Root-of-Trust 기능 제공",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 90.024, 554.943, 389.506, 568.19 ],
+      "font" : "SymbolMT",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "• TF-M PSA API를 통한 토큰 생성 (psa_initial_attest_get_token)",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 101,
+    "level" : "Subtitle",
+    "page number" : 4,
+    "bounding box" : [ 72.024, 501.543, 194.42, 514.79 ],
+    "heading level" : 6,
+    "font" : "MalgunGothicBold",
+    "font size" : 9.96,
+    "text color" : "[0.0]",
+    "content" : "④ Micro-ROS 특성 반영 :"
+  }, {
+    "type" : "paragraph",
+    "id" : 102,
+    "page number" : 4,
+    "bounding box" : [ 72.024, 400.263, 523.42, 488.03 ],
+    "font" : "MalgunGothic",
+    "font size" : 9.96,
+    "text color" : "[0.0]",
+    "content" : "네트워크 연결이 불가능한 MCU 보드에서 serial 통신 기반 구조로 대응. 추후 다양한 물리 인터 페이스에서도 확장 가능한 추상화 구조 설계 고려하여 DDS Agent와의 통신 handshake에 remote attestation token을 포함시키는 구조로 변경한다. 인증과정에 Nonce 기반의 freshness 보장 및, 키-채널-플랫폼 바인딩 추가하였고, 인증된 노드만 DDS 세션 연결이 가능하도록 attestation token 기반 handshake 구조 도입한다."
+  }, {
+    "type" : "paragraph",
+    "id" : 103,
+    "page number" : 4,
+    "bounding box" : [ 72.024, 373.603, 174.86, 386.85 ],
+    "font" : "MalgunGothic",
+    "font size" : 9.96,
+    "text color" : "[0.0]",
+    "content" : "[Client] → Nonce 요청"
+  }, {
+    "type" : "paragraph",
+    "id" : 104,
+    "page number" : 4,
+    "bounding box" : [ 72.024, 346.963, 290.848, 360.21 ],
+    "font" : "MalgunGothic",
+    "font size" : 9.96,
+    "text color" : "[0.0]",
+    "content" : "[MCU] → Token 생성 (TF-M 또는 DICE 기반)"
+  }, {
+    "type" : "paragraph",
+    "id" : 105,
+    "page number" : 4,
+    "bounding box" : [ 72.024, 320.323, 261.41, 333.57 ],
+    "font" : "MalgunGothic",
+    "font size" : 9.96,
+    "text color" : "[0.0]",
+    "content" : "[Client] → Token 검증 후 DDS 세션 허용"
+  }, {
+    "type" : "heading",
+    "id" : 106,
+    "level" : "Subtitle",
+    "page number" : 4,
+    "bounding box" : [ 92.064, 260.777, 208.22, 279.451 ],
+    "heading level" : 5,
+    "font" : "MalgunGothic",
+    "font size" : 14.04,
+    "text color" : "[0.0]",
+    "content" : "3. 제약 사항 분석"
+  }, {
+    "type" : "table",
+    "id" : 107,
+    "level" : "6",
+    "page number" : 4,
+    "bounding box" : [ 72.024, 82.344, 523.42, 250.01 ],
+    "number of rows" : 5,
+    "number of columns" : 3,
+    "next table id" : 110,
+    "rows" : [ {
+      "type" : "table row",
+      "row number" : 1,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 4,
+        "bounding box" : [ 72.504, 231.887, 222.527, 249.53 ],
+        "row number" : 1,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 1,
+          "page number" : 4,
+          "bounding box" : [ 77.664, 234.163, 97.584, 247.41 ],
+          "font" : "MalgunGothicBold",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "구분"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 4,
+        "bounding box" : [ 222.527, 231.887, 372.79, 249.53 ],
+        "row number" : 1,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 2,
+          "page number" : 4,
+          "bounding box" : [ 227.93, 234.163, 272.81, 247.41 ],
+          "font" : "MalgunGothicBold",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "제약 내용"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 4,
+        "bounding box" : [ 372.79, 231.887, 522.935, 249.53 ],
+        "row number" : 1,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 3,
+          "page number" : 4,
+          "bounding box" : [ 378.19, 234.163, 423.07, 247.41 ],
+          "font" : "MalgunGothicBold",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "대응 방안"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 2,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 4,
+        "bounding box" : [ 72.504, 196.82, 222.527, 231.887 ],
+        "row number" : 2,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 4,
+          "page number" : 4,
+          "bounding box" : [ 77.664, 216.373, 117.504, 229.62 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "하드웨어"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 4,
+        "bounding box" : [ 222.527, 196.82, 372.79, 231.887 ],
+        "row number" : 2,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 5,
+          "page number" : 4,
+          "bounding box" : [ 227.93, 216.373, 355.62, 229.62 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "TPM 미탑재 MCU가 대부분"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 4,
+        "bounding box" : [ 372.79, 196.82, 522.935, 231.887 ],
+        "row number" : 2,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 6,
+          "page number" : 4,
+          "bounding box" : [ 378.19, 199.093, 517.54, 229.62 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "DICE, TF-M 등 소프트웨어 기 반 Root-of-Trust 도입"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 3,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 4,
+        "bounding box" : [ 72.504, 161.78, 222.527, 196.82 ],
+        "row number" : 3,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 7,
+          "page number" : 4,
+          "bounding box" : [ 77.664, 181.333, 132.5, 194.58 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "리소스 제한"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 4,
+        "bounding box" : [ 222.527, 161.78, 372.79, 196.82 ],
+        "row number" : 3,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 8,
+          "page number" : 4,
+          "bounding box" : [ 227.93, 181.333, 350.35, 194.58 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "Flash/RAM/연산 성능 부족"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 4,
+        "bounding box" : [ 372.79, 161.78, 522.935, 196.82 ],
+        "row number" : 3,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 9,
+          "page number" : 4,
+          "bounding box" : [ 378.19, 164.053, 517.65, 194.58 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "경량 암호화 및 서명 알고리 즘 사용, 토큰 크기 최적화"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 4,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 4,
+        "bounding box" : [ 72.504, 117.622, 222.527, 161.78 ],
+        "row number" : 4,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 10,
+          "page number" : 4,
+          "bounding box" : [ 77.664, 146.173, 122.54, 159.42 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "통신 구조"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 4,
+        "bounding box" : [ 222.527, 117.622, 372.79, 161.78 ],
+        "row number" : 4,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 11,
+          "page number" : 4,
+          "bounding box" : [ 230.21, 122.173, 365.1, 152.7 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "Micro-ROS 네트워크 미지원 보드 존재"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 4,
+        "bounding box" : [ 372.79, 117.622, 522.935, 161.78 ],
+        "row number" : 4,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 12,
+          "page number" : 4,
+          "bounding box" : [ 378.19, 146.173, 477.58, 159.42 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "Serial 통신 대체 적용"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 5,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 4,
+        "bounding box" : [ 72.504, 82.824, 222.527, 117.622 ],
+        "row number" : 5,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 13,
+          "page number" : 4,
+          "bounding box" : [ 77.664, 102.133, 122.54, 115.38 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "보안 요구"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 4,
+        "bounding box" : [ 222.527, 82.824, 372.79, 117.622 ],
+        "row number" : 5,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 14,
+          "page number" : 4,
+          "bounding box" : [ 227.93, 84.857, 367.27, 115.38 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "MITM 및 replay 공격에 취약 한 XRCE-DDS"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 4,
+        "bounding box" : [ 372.79, 82.824, 522.935, 117.622 ],
+        "row number" : 5,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 15,
+          "page number" : 4,
+          "bounding box" : [ 378.19, 84.857, 517.54, 115.38 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "인증 토큰 바인딩, 키 채널 플 랫폼 통합 검증 적용"
+        } ]
+      } ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 108,
+    "page number" : 4,
+    "bounding box" : [ 282.05, 54.977, 313.267, 68.224 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 23,
+      "page number" : 4,
+      "bounding box" : [ 282.05, 54.977, 313.267, 68.224 ],
+      "heading level" : 6,
+      "font" : "MalgunGothicBold",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "4 / 11"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 109,
+    "page number" : 5,
+    "bounding box" : [ 72.024, 784.073, 218.89, 797.32 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 34,
+      "page number" : 5,
+      "bounding box" : [ 72.024, 784.073, 218.89, 797.32 ],
+      "heading level" : 7,
+      "font" : "MalgunGothic",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "table",
+    "id" : 110,
+    "level" : "6",
+    "page number" : 5,
+    "bounding box" : [ 72.024, 712.3, 523.42, 756.82 ],
+    "number of rows" : 1,
+    "number of columns" : 3,
+    "previous table id" : 107,
+    "rows" : [ {
+      "type" : "table row",
+      "row number" : 1,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 72.504, 712.78, 222.527, 756.34 ],
+        "row number" : 1,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 1,
+          "page number" : 5,
+          "bounding box" : [ 77.664, 741.093, 142.57, 754.34 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "검증 오버헤드"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 222.527, 712.78, 372.79, 756.34 ],
+        "row number" : 1,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 2,
+          "page number" : 5,
+          "bounding box" : [ 230.21, 717.093, 365.11, 747.62 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "실시간 제어 시스템과 보안 검증의 충돌"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 372.79, 712.78, 522.935, 756.34 ],
+        "row number" : 1,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 3,
+          "page number" : 5,
+          "bounding box" : [ 378.19, 723.813, 517.66, 754.34 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "검증 주기 최적화 및 증거 수 집 최소화 설계"
+        } ]
+      } ]
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 111,
+    "level" : "7",
+    "page number" : 5,
+    "bounding box" : [ 92.064, 664.147, 257.456, 682.821 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 92.064, 664.147, 257.456, 682.821 ],
+      "font" : "MalgunGothic",
+      "font size" : 14.04,
+      "text color" : "[0.0]",
+      "content" : "4. 유스케이스 (Use cases)",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "table",
+    "id" : 112,
+    "level" : "8",
+    "page number" : 5,
+    "bounding box" : [ 72.024, 459.55, 523.42, 653.38 ],
+    "number of rows" : 6,
+    "number of columns" : 2,
+    "rows" : [ {
+      "type" : "table row",
+      "row number" : 1,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 72.504, 635.38, 297.647, 652.9 ],
+        "row number" : 1,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 4,
+          "page number" : 5,
+          "bounding box" : [ 77.664, 637.653, 120.432, 650.9 ],
+          "font" : "MalgunGothicBold",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "Use Case"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 297.647, 635.38, 522.94, 652.9 ],
+        "row number" : 1,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 5,
+          "page number" : 5,
+          "bounding box" : [ 303.05, 637.653, 322.97, 650.9 ],
+          "font" : "MalgunGothicBold",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "설명"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 2,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 72.504, 600.217, 297.647, 635.38 ],
+        "row number" : 2,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 6,
+          "page number" : 5,
+          "bounding box" : [ 77.664, 619.893, 282.489, 633.14 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "부팅 시점 무결성 검증 (Discrete Attestation)"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 297.647, 600.217, 522.94, 635.38 ],
+        "row number" : 2,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 7,
+          "page number" : 5,
+          "bounding box" : [ 303.05, 602.493, 517.54, 633.14 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "부트 시점에 .text, .rodata 영역 해시 생성 후 토큰화 -> DDS handshake 시 전달"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 3,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 72.504, 565.15, 297.647, 600.217 ],
+        "row number" : 3,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 8,
+          "page number" : 5,
+          "bounding box" : [ 77.664, 584.733, 273.086, 597.98 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "연속 무결성 검증 (Continuous Attestation)"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 297.647, 565.15, 522.94, 600.217 ],
+        "row number" : 3,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 9,
+          "page number" : 5,
+          "bounding box" : [ 303.05, 567.423, 517.54, 597.98 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "런타임 중 control-flow, data-flow trace 기반 증거 수집 → 주기적 토큰 전송"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 4,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 72.504, 529.99, 297.647, 565.15 ],
+        "row number" : 4,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 10,
+          "page number" : 5,
+          "bounding box" : [ 77.664, 549.663, 185.06, 562.91 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "다양한 MCU 구조 적용"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 297.647, 529.99, 522.94, 565.15 ],
+        "row number" : 4,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 11,
+          "page number" : 5,
+          "bounding box" : [ 303.05, 532.383, 517.65, 562.91 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "DICE만 사용 가능한 저사양 보드부터 TrustZone 지원 보드까지 범용 적용 가능"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 5,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 72.504, 494.95, 297.647, 529.99 ],
+        "row number" : 5,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 12,
+          "page number" : 5,
+          "bounding box" : [ 77.664, 514.503, 224.93, 527.75 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "XRCE-DDS 기반 보안 세션 연결"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 297.647, 494.95, 522.94, 529.99 ],
+        "row number" : 5,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 13,
+          "page number" : 5,
+          "bounding box" : [ 303.05, 497.223, 517.54, 527.75 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "Nonce 기반 handshake → 인증 성공 시 세션 연결 허용, 실패 시 차단"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 6,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 72.504, 460.03, 297.647, 494.95 ],
+        "row number" : 6,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 14,
+          "page number" : 5,
+          "bounding box" : [ 77.664, 479.463, 197.54, 492.71 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "공식 검증 기반 보안 증명"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 297.647, 460.03, 522.94, 494.95 ],
+        "row number" : 6,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 15,
+          "page number" : 5,
+          "bounding box" : [ 303.05, 462.183, 517.66, 492.71 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "Tamarin Prover 등을 활용하여 handshake 프 로토콜의 기계적 증명 수행 계획"
+        } ]
+      } ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 113,
+    "level" : "Subtitle",
+    "page number" : 5,
+    "bounding box" : [ 72.024, 402.266, 345.65, 428.921 ],
+    "heading level" : 2,
+    "font" : "MalgunGothic",
+    "font size" : 20.04,
+    "text color" : "[0.0]",
+    "content" : "Ⅱ. 설계 상세화 및 변경 내역"
+  }, {
+    "type" : "list",
+    "id" : 114,
+    "level" : "7",
+    "page number" : 5,
+    "bounding box" : [ 93.984, 368.897, 210.14, 387.571 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 93.984, 368.897, 210.14, 387.571 ],
+      "font" : "MalgunGothic",
+      "font size" : 14.04,
+      "text color" : "[0.0]",
+      "content" : "1. 핵심 변경 개요",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "table",
+    "id" : 115,
+    "level" : "8",
+    "page number" : 5,
+    "bounding box" : [ 72.024, 146.54, 523.42, 358.13 ],
+    "number of rows" : 7,
+    "number of columns" : 3,
+    "rows" : [ {
+      "type" : "table row",
+      "row number" : 1,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 72.504, 340.13, 222.527, 357.65 ],
+        "row number" : 1,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 16,
+          "page number" : 5,
+          "bounding box" : [ 77.664, 342.403, 97.584, 355.65 ],
+          "font" : "MalgunGothicBold",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "항목"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 222.527, 340.13, 372.79, 357.65 ],
+        "row number" : 1,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 17,
+          "page number" : 5,
+          "bounding box" : [ 227.93, 342.403, 334.956, 355.65 ],
+          "font" : "MalgunGothicBold",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "착수 보고서(기존 설계)"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 372.79, 340.13, 522.935, 357.65 ],
+        "row number" : 1,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 18,
+          "page number" : 5,
+          "bounding box" : [ 378.19, 342.403, 500.226, 355.65 ],
+          "font" : "MalgunGothicBold",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "중간 보고서(변경 후 설계)"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 2,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 72.504, 304.97, 222.527, 340.13 ],
+        "row number" : 2,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 19,
+          "page number" : 5,
+          "bounding box" : [ 77.664, 324.523, 163.22, 337.77 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "Root-Of-Trust 방식"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 222.527, 304.97, 372.79, 340.13 ],
+        "row number" : 2,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 20,
+          "page number" : 5,
+          "bounding box" : [ 227.93, 324.523, 326.45, 337.77 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "TF-M 기반 단일 구조"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 372.79, 304.97, 522.935, 340.13 ],
+        "row number" : 2,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 21,
+          "page number" : 5,
+          "bounding box" : [ 378.19, 307.243, 517.553, 337.77 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "DICE, TF-M+MPU, TF-M+TZ-M 의 복수 구성안 제안"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 3,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 72.504, 269.93, 222.527, 304.97 ],
+        "row number" : 3,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 22,
+          "page number" : 5,
+          "bounding box" : [ 77.664, 289.483, 122.54, 302.73 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "증거 유형"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 222.527, 269.93, 372.79, 304.97 ],
+        "row number" : 3,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 23,
+          "page number" : 5,
+          "bounding box" : [ 227.93, 289.483, 303.928, 302.73 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "정적 (부팅 시점)"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 372.79, 269.93, 522.935, 304.97 ],
+        "row number" : 3,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 24,
+          "page number" : 5,
+          "bounding box" : [ 378.19, 272.203, 517.66, 302.73 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "정적 + 연속(런타임) 증거 수 집"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 4,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 72.504, 234.767, 222.527, 269.93 ],
+        "row number" : 4,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 25,
+          "page number" : 5,
+          "bounding box" : [ 77.664, 254.443, 122.54, 267.69 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "인증 구조"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 222.527, 234.767, 372.79, 269.93 ],
+        "row number" : 4,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 26,
+          "page number" : 5,
+          "bounding box" : [ 227.93, 254.443, 307.85, 267.69 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "단순 무결성 검증"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 372.79, 234.767, 522.935, 269.93 ],
+        "row number" : 4,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 27,
+          "page number" : 5,
+          "bounding box" : [ 378.19, 237.163, 517.54, 267.69 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "Nonce 기반 handshake + 인 증된 DDS 세션 연결"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 5,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 72.504, 216.98, 222.527, 234.767 ],
+        "row number" : 5,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 28,
+          "page number" : 5,
+          "bounding box" : [ 77.664, 219.253, 122.54, 232.5 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "통신 방식"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 222.527, 216.98, 372.79, 234.767 ],
+        "row number" : 5,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 29,
+          "page number" : 5,
+          "bounding box" : [ 227.93, 219.253, 346.87, 232.5 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "Micro-ROS 네트워크 기반"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 372.79, 216.98, 522.935, 234.767 ],
+        "row number" : 5,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 30,
+          "page number" : 5,
+          "bounding box" : [ 378.19, 219.253, 501.58, 232.5 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "serial 기반 대체 통신 적용"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 6,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 72.504, 181.94, 222.527, 216.98 ],
+        "row number" : 6,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 31,
+          "page number" : 5,
+          "bounding box" : [ 77.664, 201.493, 172.58, 214.74 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "증명 기법 적용 방식"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 222.527, 181.94, 372.79, 216.98 ],
+        "row number" : 6,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 32,
+          "page number" : 5,
+          "bounding box" : [ 227.93, 201.493, 366.43, 214.74 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "TF-M 직접 호출 및 구조 통합"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 372.79, 181.94, 522.935, 216.98 ],
+        "row number" : 6,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 33,
+          "page number" : 5,
+          "bounding box" : [ 378.19, 184.213, 517.65, 214.74 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "DICE/TF-M 통합 구현 시나리 오 세분화"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 7,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 72.504, 147.02, 222.527, 181.94 ],
+        "row number" : 7,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 34,
+          "page number" : 5,
+          "bounding box" : [ 77.664, 166.453, 147.5, 179.7 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "검증 대상 확장"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 222.527, 147.02, 372.79, 181.94 ],
+        "row number" : 7,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 35,
+          "level" : "1",
+          "page number" : 5,
+          "bounding box" : [ 227.93, 166.453, 308.93, 179.7 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : ".text, .rodata 중심"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 5,
+        "bounding box" : [ 372.79, 147.02, 522.935, 181.94 ],
+        "row number" : 7,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 36,
+          "page number" : 5,
+          "bounding box" : [ 378.19, 149.053, 517.664, 179.7 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "향후 .data, .bss, control/dataflow 포함 고려"
+        } ]
+      } ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 116,
+    "page number" : 5,
+    "bounding box" : [ 282.05, 54.977, 313.267, 68.224 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 24,
+      "page number" : 5,
+      "bounding box" : [ 282.05, 54.977, 313.267, 68.224 ],
+      "heading level" : 6,
+      "font" : "MalgunGothicBold",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "5 / 11"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 117,
+    "page number" : 6,
+    "bounding box" : [ 72.024, 784.073, 218.89, 797.32 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 35,
+      "page number" : 6,
+      "bounding box" : [ 72.024, 784.073, 218.89, 797.32 ],
+      "heading level" : 7,
+      "font" : "MalgunGothic",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 118,
+    "level" : "Subtitle",
+    "page number" : 6,
+    "bounding box" : [ 93.984, 735.427, 244.85, 754.101 ],
+    "heading level" : 5,
+    "font" : "MalgunGothic",
+    "font size" : 14.04,
+    "text color" : "[0.0]",
+    "content" : "2. 설계 구조 변경 요약"
+  }, {
+    "type" : "list",
+    "id" : 119,
+    "level" : "9",
+    "page number" : 6,
+    "bounding box" : [ 72.024, 268.003, 425.611, 722.66 ],
+    "numbering style" : "unordered",
+    "number of list items" : 4,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 72.024, 709.413, 324.531, 722.66 ],
+      "font" : "MalgunGothicBold",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "- 기존 설계 흐름 (부트 시점 단일 무결성 검증 구조) :",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 72.024, 621.453, 328.531, 634.7 ],
+      "font" : "MalgunGothic",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "- 변경된 설계 흐름 (XRCE-DDS 통합 handshake 구조) :",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 72.024, 286.603, 425.611, 299.85 ],
+      "font" : "MalgunGothic",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "-> 토큰에는 디바이스 식별 정보, 부트 해시, 인증 서명 등이 포함되어 있다.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 72.024, 268.003, 318.451, 281.25 ],
+      "font" : "MalgunGothic",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "-> 키-채널-플랫폼 바인딩을 통해 보안성을 강화한다.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 124,
+    "page number" : 6,
+    "bounding box" : [ 72.0, 667.49, 523.3, 698.04 ],
+    "source" : "2025중간보고서_38_응답하라 지휘본부_마이크로 컨트롤러에서의 안전한 로봇 어플리케이션 수행을 위한 원격 증명 기술 개발_images/imageFile2.png"
+  }, {
+    "type" : "image",
+    "id" : 122,
+    "page number" : 6,
+    "bounding box" : [ 217.9, 370.75, 377.4, 610.07 ],
+    "source" : "2025중간보고서_38_응답하라 지휘본부_마이크로 컨트롤러에서의 안전한 로봇 어플리케이션 수행을 위한 원격 증명 기술 개발_images/imageFile3.png"
+  }, {
+    "type" : "image",
+    "id" : 123,
+    "page number" : 6,
+    "bounding box" : [ 72.0, 311.36, 523.3, 368.71 ],
+    "source" : "2025중간보고서_38_응답하라 지휘본부_마이크로 컨트롤러에서의 안전한 로봇 어플리케이션 수행을 위한 원격 증명 기술 개발_images/imageFile4.png"
+  }, {
+    "type" : "heading",
+    "id" : 120,
+    "level" : "Subtitle",
+    "page number" : 6,
+    "bounding box" : [ 93.984, 235.217, 293.93, 253.891 ],
+    "heading level" : 5,
+    "font" : "MalgunGothic",
+    "font size" : 14.04,
+    "text color" : "[0.0]",
+    "content" : "3. 세부 구성 요소별 변경 사항"
+  }, {
+    "type" : "table",
+    "id" : 121,
+    "level" : "10",
+    "page number" : 6,
+    "bounding box" : [ 72.024, 83.544, 523.42, 224.324 ],
+    "number of rows" : 4,
+    "number of columns" : 3,
+    "rows" : [ {
+      "type" : "table row",
+      "row number" : 1,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 6,
+        "bounding box" : [ 72.51, 206.3, 222.527, 223.832 ],
+        "row number" : 1,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 1,
+          "page number" : 6,
+          "bounding box" : [ 77.664, 208.573, 97.584, 221.82 ],
+          "font" : "MalgunGothicBold",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "항목"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 6,
+        "bounding box" : [ 222.527, 206.3, 372.79, 223.832 ],
+        "row number" : 1,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 2,
+          "page number" : 6,
+          "bounding box" : [ 227.93, 208.573, 262.85, 221.82 ],
+          "font" : "MalgunGothicBold",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "변경 전"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 6,
+        "bounding box" : [ 372.79, 206.3, 522.923, 223.832 ],
+        "row number" : 1,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 3,
+          "page number" : 6,
+          "bounding box" : [ 378.19, 208.573, 413.11, 221.82 ],
+          "font" : "MalgunGothicBold",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "변경 후"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 2,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 6,
+        "bounding box" : [ 72.51, 153.98, 222.527, 206.3 ],
+        "row number" : 2,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 4,
+          "page number" : 6,
+          "bounding box" : [ 77.664, 190.813, 128.78, 204.06 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "Token 생성"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 6,
+        "bounding box" : [ 222.527, 153.98, 372.79, 206.3 ],
+        "row number" : 2,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 5,
+          "page number" : 6,
+          "bounding box" : [ 227.93, 190.813, 351.55, 204.06 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "TF-M 내부 구조 직접 구현"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 6,
+        "bounding box" : [ 372.79, 153.98, 522.923, 206.3 ],
+        "row number" : 2,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 6,
+          "page number" : 6,
+          "bounding box" : [ 378.19, 156.253, 517.65, 204.06 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "psa_initial_attest_get_token() API 활용, DICE 사용 가능성 열림"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 3,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 6,
+        "bounding box" : [ 72.51, 118.822, 222.527, 153.98 ],
+        "row number" : 3,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 7,
+          "page number" : 6,
+          "bounding box" : [ 77.664, 138.373, 122.54, 151.62 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "통신 모듈"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 6,
+        "bounding box" : [ 222.527, 118.822, 372.79, 153.98 ],
+        "row number" : 3,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 8,
+          "page number" : 6,
+          "bounding box" : [ 227.93, 121.093, 367.189, 151.62 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "micro-ROS WiFi 또는 Ethernet 기반"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 6,
+        "bounding box" : [ 372.79, 118.822, 522.923, 153.98 ],
+        "row number" : 3,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 9,
+          "page number" : 6,
+          "bounding box" : [ 378.19, 121.093, 517.66, 151.62 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "보드에 따라 Serial (UART) 통 신 기반으로 전환"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 4,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 6,
+        "bounding box" : [ 72.51, 84.024, 222.527, 118.822 ],
+        "row number" : 4,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 10,
+          "page number" : 6,
+          "bounding box" : [ 77.664, 103.333, 167.54, 116.58 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "보안 프로토콜 적용"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 6,
+        "bounding box" : [ 222.527, 84.024, 372.79, 118.822 ],
+        "row number" : 4,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 11,
+          "page number" : 6,
+          "bounding box" : [ 227.93, 86.057, 367.27, 116.58 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "DDS Security 외부 연계 미고 려"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 6,
+        "bounding box" : [ 372.79, 84.024, 522.923, 118.822 ],
+        "row number" : 4,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 12,
+          "page number" : 6,
+          "bounding box" : [ 378.19, 86.057, 517.686, 116.58 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "XRCE-DDS 내부 handshake 구조 통합 설계"
+        } ]
+      } ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 125,
+    "page number" : 6,
+    "bounding box" : [ 282.05, 54.977, 313.267, 68.224 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 25,
+      "page number" : 6,
+      "bounding box" : [ 282.05, 54.977, 313.267, 68.224 ],
+      "heading level" : 6,
+      "font" : "MalgunGothicBold",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "6 / 11"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 126,
+    "page number" : 7,
+    "bounding box" : [ 72.024, 784.073, 218.89, 797.32 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 36,
+      "page number" : 7,
+      "bounding box" : [ 72.024, 784.073, 218.89, 797.32 ],
+      "heading level" : 7,
+      "font" : "MalgunGothic",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "table",
+    "id" : 127,
+    "level" : "11",
+    "page number" : 7,
+    "bounding box" : [ 72.024, 668.86, 523.42, 756.82 ],
+    "number of rows" : 2,
+    "number of columns" : 3,
+    "rows" : [ {
+      "type" : "table row",
+      "row number" : 1,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 7,
+        "bounding box" : [ 72.504, 704.26, 222.527, 756.34 ],
+        "row number" : 1,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 1,
+          "page number" : 7,
+          "bounding box" : [ 77.664, 741.093, 147.5, 754.34 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "실험 비교 대상"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 7,
+        "bounding box" : [ 222.527, 704.26, 372.79, 756.34 ],
+        "row number" : 1,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 2,
+          "page number" : 7,
+          "bounding box" : [ 227.93, 741.093, 326.45, 754.34 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "TF-M 기반 단일 방식"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 7,
+        "bounding box" : [ 372.79, 704.26, 522.935, 756.34 ],
+        "row number" : 1,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 3,
+          "page number" : 7,
+          "bounding box" : [ 378.19, 706.533, 517.67, 754.34 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "DICE / TF-M + MPU / TF-M + TZ-M 성능 비교 실험 계획 포 함"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 2,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 7,
+        "bounding box" : [ 72.504, 669.34, 222.527, 704.26 ],
+        "row number" : 2,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 4,
+          "page number" : 7,
+          "bounding box" : [ 77.664, 688.773, 162.195, 702.02 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "Formal Verification"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 7,
+        "bounding box" : [ 222.527, 669.34, 372.79, 704.26 ],
+        "row number" : 2,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 5,
+          "page number" : 7,
+          "bounding box" : [ 227.93, 688.773, 297.77, 702.02 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "적용 고려 없음"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 7,
+        "bounding box" : [ 372.79, 669.34, 522.935, 704.26 ],
+        "row number" : 2,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 6,
+          "page number" : 7,
+          "bounding box" : [ 378.19, 671.373, 517.66, 702.02 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "Tamarin Prover 등 모델링 검 증 도구 활용 계획 포함"
+        } ]
+      } ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 128,
+    "level" : "Subtitle",
+    "page number" : 7,
+    "bounding box" : [ 93.984, 594.187, 286.85, 612.861 ],
+    "heading level" : 5,
+    "font" : "MalgunGothic",
+    "font size" : 14.04,
+    "text color" : "[0.0]",
+    "content" : "4. 설계 시나리오별 적응 전략"
+  }, {
+    "type" : "table",
+    "id" : 129,
+    "level" : "12",
+    "page number" : 7,
+    "bounding box" : [ 72.024, 477.07, 523.42, 583.3 ],
+    "number of rows" : 4,
+    "number of columns" : 3,
+    "rows" : [ {
+      "type" : "table row",
+      "row number" : 1,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 7,
+        "bounding box" : [ 72.504, 565.27, 222.527, 582.817 ],
+        "row number" : 1,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 7,
+          "page number" : 7,
+          "bounding box" : [ 77.664, 567.543, 132.5, 580.79 ],
+          "font" : "MalgunGothicBold",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "적용 설계안"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 7,
+        "bounding box" : [ 222.527, 565.27, 372.79, 582.817 ],
+        "row number" : 1,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 8,
+          "page number" : 7,
+          "bounding box" : [ 227.93, 567.543, 272.81, 580.79 ],
+          "font" : "MalgunGothicBold",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "보드 종류"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 7,
+        "bounding box" : [ 372.79, 565.27, 522.935, 582.817 ],
+        "row number" : 1,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 9,
+          "page number" : 7,
+          "bounding box" : [ 378.19, 567.543, 398.11, 580.79 ],
+          "font" : "MalgunGothicBold",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "특징"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 2,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 7,
+        "bounding box" : [ 72.504, 547.51, 222.527, 565.27 ],
+        "row number" : 2,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 10,
+          "page number" : 7,
+          "bounding box" : [ 77.664, 549.783, 98.998, 563.03 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "DICE"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 7,
+        "bounding box" : [ 222.527, 547.51, 372.79, 565.27 ],
+        "row number" : 2,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 11,
+          "page number" : 7,
+          "bounding box" : [ 227.93, 549.783, 358.39, 563.03 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "TrustZone MCU가 아닌 보드"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 7,
+        "bounding box" : [ 372.79, 547.51, 522.935, 565.27 ],
+        "row number" : 2,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 12,
+          "page number" : 7,
+          "bounding box" : [ 378.19, 549.783, 509.039, 563.03 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "경량 MCU (ARM Cortex-M3)"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 3,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 7,
+        "bounding box" : [ 72.504, 512.35, 222.527, 547.51 ],
+        "row number" : 3,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 13,
+          "page number" : 7,
+          "bounding box" : [ 77.664, 532.023, 137.083, 545.27 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "TF-M + MPU"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 7,
+        "bounding box" : [ 222.527, 512.35, 372.79, 547.51 ],
+        "row number" : 3,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 14,
+          "page number" : 7,
+          "bounding box" : [ 227.93, 532.023, 326.388, 545.27 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "ARMv7-M(MPU 지원)"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 7,
+        "bounding box" : [ 372.79, 512.35, 522.935, 547.51 ],
+        "row number" : 3,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 15,
+          "page number" : 7,
+          "bounding box" : [ 378.19, 514.623, 517.66, 545.27 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "보안 격리는 없지만 접근 제 어 가능"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 4,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 7,
+        "bounding box" : [ 72.504, 477.55, 222.527, 512.35 ],
+        "row number" : 4,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 16,
+          "page number" : 7,
+          "bounding box" : [ 77.664, 496.863, 139.593, 510.11 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "TF-M + TZ-M"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 7,
+        "bounding box" : [ 222.527, 477.55, 372.79, 512.35 ],
+        "row number" : 4,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 17,
+          "page number" : 7,
+          "bounding box" : [ 227.93, 496.863, 339.108, 510.11 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "ARMv8 (TrustZone 지원)"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 7,
+        "bounding box" : [ 372.79, 477.55, 522.935, 512.35 ],
+        "row number" : 4,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 18,
+          "page number" : 7,
+          "bounding box" : [ 378.19, 479.583, 517.66, 510.11 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "Secure/Non-Secure 분리, 고 보안"
+        } ]
+      } ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 130,
+    "level" : "Subtitle",
+    "page number" : 7,
+    "bounding box" : [ 93.984, 429.037, 209.9, 447.711 ],
+    "heading level" : 5,
+    "font" : "MalgunGothic",
+    "font size" : 14.04,
+    "text color" : "[0.0]",
+    "content" : "5. 핵심 설계 목표"
+  }, {
+    "type" : "paragraph",
+    "id" : 131,
+    "page number" : 7,
+    "bounding box" : [ 72.024, 384.283, 523.3, 416.03 ],
+    "font" : "MalgunGothic",
+    "font size" : 9.96,
+    "text color" : "[0.0]",
+    "content" : "과제의 설계 방향은 다음의 세 가지 Root-of-Trust 구조에 대한 독립적 실현과, 그 구조들이 부팅 시점 Remote Attestation에 어떻게 적용될 수 있는지를 정량적으로 비교하는 것이다."
+  }, {
+    "type" : "table",
+    "id" : 132,
+    "level" : "13",
+    "page number" : 7,
+    "bounding box" : [ 72.024, 240.29, 523.42, 372.77 ],
+    "number of rows" : 4,
+    "number of columns" : 2,
+    "rows" : [ {
+      "type" : "table row",
+      "row number" : 1,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 7,
+        "bounding box" : [ 72.504, 354.77, 297.647, 372.29 ],
+        "row number" : 1,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 19,
+          "page number" : 7,
+          "bounding box" : [ 77.664, 357.043, 122.54, 370.29 ],
+          "font" : "MalgunGothicBold",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "구조 유형"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 7,
+        "bounding box" : [ 297.647, 354.77, 522.94, 372.29 ],
+        "row number" : 1,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 20,
+          "page number" : 7,
+          "bounding box" : [ 303.05, 357.043, 322.97, 370.29 ],
+          "font" : "MalgunGothicBold",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "설명"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 2,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 7,
+        "bounding box" : [ 72.504, 319.73, 297.647, 354.77 ],
+        "row number" : 2,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 21,
+          "page number" : 7,
+          "bounding box" : [ 77.664, 339.283, 123.98, 352.53 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "DICE 기반"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 7,
+        "bounding box" : [ 297.647, 319.73, 522.94, 354.77 ],
+        "row number" : 2,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 22,
+          "page number" : 7,
+          "bounding box" : [ 303.05, 322.003, 517.54, 352.53 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "TPM이 없는 MCU 환경에서 디바이스 고유 정 보 기반으로 증명 수행"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 3,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 7,
+        "bounding box" : [ 72.504, 275.57, 297.647, 319.73 ],
+        "row number" : 3,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 23,
+          "page number" : 7,
+          "bounding box" : [ 77.664, 304.123, 137.083, 317.37 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "TF-M + MPU"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 7,
+        "bounding box" : [ 297.647, 275.57, 522.94, 319.73 ],
+        "row number" : 3,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 24,
+          "page number" : 7,
+          "bounding box" : [ 305.33, 280.123, 515.38, 310.65 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "ARMv7-M 기반, Memory Protection Unit을 활 용한 영역 보호 가능"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 4,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 7,
+        "bounding box" : [ 72.504, 240.77, 297.647, 275.57 ],
+        "row number" : 4,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 25,
+          "page number" : 7,
+          "bounding box" : [ 77.664, 260.083, 172.953, 273.33 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "TF-M + TrustZone-M"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 7,
+        "bounding box" : [ 297.647, 240.77, 522.94, 275.57 ],
+        "row number" : 4,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 26,
+          "page number" : 7,
+          "bounding box" : [ 303.05, 242.803, 517.66, 273.33 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "ARMv8-M 기반, Secure/Non-secure 실행 환경 분리로 높은 보안성 제공"
+        } ]
+      } ]
+    } ]
+  }, {
+    "type" : "caption",
+    "id" : 133,
+    "page number" : 7,
+    "bounding box" : [ 72.024, 206.293, 523.3, 238.17 ],
+    "linked content id" : 132,
+    "font" : "MalgunGothic",
+    "font size" : 9.96,
+    "text color" : "[0.0]",
+    "content" : "각 구조는 동일한 attestation 시나리오를 바탕으로 설계되며, 부팅 시점 단일 펌웨어 무결성 검증 을 수행한 뒤, DDS (XRCE-DDS) handshake에 통합되어 신뢰 기반 세션 연결을 제어하게 된다."
+  }, {
+    "type" : "heading",
+    "id" : 134,
+    "level" : "Subtitle",
+    "page number" : 7,
+    "bounding box" : [ 93.984, 146.867, 347.11, 165.541 ],
+    "heading level" : 5,
+    "font" : "MalgunGothic",
+    "font size" : 14.04,
+    "text color" : "[0.0]",
+    "content" : "6. Control-Flow Integrity(CFI) 적용 방향"
+  }, {
+    "type" : "paragraph",
+    "id" : 135,
+    "page number" : 7,
+    "bounding box" : [ 72.024, 83.417, 523.424, 133.86 ],
+    "font" : "MalgunGothic",
+    "font size" : 9.96,
+    "text color" : "[0.0]",
+    "content" : "본 과제는 부팅 시점 무결성 검증에 중점을 두어 향후 런타임 CFI 확장 가능성을 고려하여 코드 구조를 유연하게 설계하였다. 현재는 lightweight firmware attestation을 중심으로, 추후 dataflow/control-flow trace 수집 기반 구조로의 확장 가능성을 기술적 옵션으로 남긴다[1]."
+  }, {
+    "type" : "footer",
+    "id" : 136,
+    "page number" : 7,
+    "bounding box" : [ 282.05, 54.977, 313.267, 68.224 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 26,
+      "page number" : 7,
+      "bounding box" : [ 282.05, 54.977, 313.267, 68.224 ],
+      "heading level" : 6,
+      "font" : "MalgunGothicBold",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "7 / 11"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 137,
+    "page number" : 8,
+    "bounding box" : [ 72.024, 784.073, 218.89, 797.32 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 37,
+      "page number" : 8,
+      "bounding box" : [ 72.024, 784.073, 218.89, 797.32 ],
+      "heading level" : 7,
+      "font" : "MalgunGothic",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 138,
+    "level" : "Subtitle",
+    "page number" : 8,
+    "bounding box" : [ 72.024, 726.176, 315.53, 752.831 ],
+    "heading level" : 2,
+    "font" : "MalgunGothic",
+    "font size" : 20.04,
+    "text color" : "[0.0]",
+    "content" : "Ⅲ. 갱신된 과제 추진 계획"
+  }, {
+    "type" : "heading",
+    "id" : 139,
+    "level" : "Subtitle",
+    "page number" : 8,
+    "bounding box" : [ 78.984, 692.827, 222.854, 711.501 ],
+    "heading level" : 5,
+    "font" : "MalgunGothic",
+    "font size" : 14.04,
+    "text color" : "[0.0]",
+    "content" : "1. 추진 방향의 명확화"
+  }, {
+    "type" : "paragraph",
+    "id" : 140,
+    "page number" : 8,
+    "bounding box" : [ 72.024, 664.893, 424.171, 678.14 ],
+    "font" : "MalgunGothic",
+    "font size" : 9.96,
+    "text color" : "[0.0]",
+    "content" : "본 과제의 추진 계획은 다음의 세 가지 핵심 흐름을 중심으로 재정비되었다:"
+  }, {
+    "type" : "list",
+    "id" : 141,
+    "level" : "3",
+    "page number" : 8,
+    "bounding box" : [ 72.024, 430.143, 305.69, 651.38 ],
+    "numbering style" : "circled arabic numbers",
+    "number of list items" : 3,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 8,
+      "bounding box" : [ 72.024, 638.133, 301.97, 651.38 ],
+      "font" : "MalgunGothic",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "① 부팅 시점 단일 펌웨어 무결성 검증 구조 구현",
+      "kids" : [ {
+        "type" : "paragraph",
+        "id" : 41,
+        "level" : "9",
+        "page number" : 8,
+        "bounding box" : [ 72.024, 600.933, 523.18, 632.66 ],
+        "font" : "MalgunGothic",
+        "font size" : 9.96,
+        "text color" : "[0.0]",
+        "content" : "→ 시스템이 ROS 네트워크에 연결되기 전, 단 한 번의 attestation 으로 신뢰를 검증하는 구조 설계를 한다."
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 8,
+      "bounding box" : [ 72.024, 574.023, 305.69, 587.27 ],
+      "font" : "MalgunGothic",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "② 세 가지 Root-of-Trust 구조에 대한 독립적 구현",
+      "kids" : [ {
+        "type" : "paragraph",
+        "id" : 42,
+        "level" : "9",
+        "page number" : 8,
+        "bounding box" : [ 72.024, 555.423, 399.211, 568.67 ],
+        "font" : "MalgunGothic",
+        "font size" : 9.96,
+        "text color" : "[0.0]",
+        "content" : "→ 각 구조마다 개별 MCU 보드에 적합한 attestation 환경을 구축한다."
+      }, {
+        "type" : "paragraph",
+        "id" : 43,
+        "level" : "9",
+        "page number" : 8,
+        "bounding box" : [ 72.024, 536.823, 133.601, 550.07 ],
+        "font" : "MalgunGothic",
+        "font size" : 9.96,
+        "text color" : "[0.0]",
+        "content" : "→ 비교 대상:"
+      }, {
+        "type" : "paragraph",
+        "id" : 44,
+        "page number" : 8,
+        "bounding box" : [ 72.024, 510.183, 143.3, 523.43 ],
+        "font" : "MalgunGothic",
+        "font size" : 9.96,
+        "text color" : "[0.0]",
+        "content" : "DICE 기반 구조"
+      }, {
+        "type" : "paragraph",
+        "id" : 45,
+        "page number" : 8,
+        "bounding box" : [ 72.024, 483.543, 186.538, 496.79 ],
+        "font" : "MalgunGothic",
+        "font size" : 9.96,
+        "text color" : "[0.0]",
+        "content" : "TF-M + MPU (ARMv7-M)"
+      }, {
+        "type" : "paragraph",
+        "id" : 46,
+        "page number" : 8,
+        "bounding box" : [ 72.024, 456.903, 222.448, 470.15 ],
+        "font" : "MalgunGothic",
+        "font size" : 9.96,
+        "text color" : "[0.0]",
+        "content" : "TF-M + TrustZone-M (ARMv8-M)"
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 8,
+      "bounding box" : [ 72.024, 430.143, 241.85, 443.39 ],
+      "font" : "MalgunGothic",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "③ 구조별 비교 실험 및 정량적 분석",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 142,
+    "level" : "9",
+    "page number" : 8,
+    "bounding box" : [ 72.024, 411.423, 260.111, 424.67 ],
+    "font" : "MalgunGothic",
+    "font size" : 9.96,
+    "text color" : "[0.0]",
+    "content" : "→ latency, flash 메모리 소비량 측정한다."
+  }, {
+    "type" : "paragraph",
+    "id" : 143,
+    "level" : "9",
+    "page number" : 8,
+    "bounding box" : [ 72.024, 392.923, 288.671, 406.17 ],
+    "font" : "MalgunGothic",
+    "font size" : 9.96,
+    "text color" : "[0.0]",
+    "content" : "→ 각 구조의 장단점 기술 및 적합성 비교한다."
+  }, {
+    "type" : "heading",
+    "id" : 144,
+    "level" : "Subtitle",
+    "page number" : 8,
+    "bounding box" : [ 72.024, 360.017, 362.23, 378.691 ],
+    "heading level" : 5,
+    "font" : "MalgunGothic",
+    "font size" : 14.04,
+    "text color" : "[0.0]",
+    "content" : "2. 추후 CFI(Control-Flow Integrity) 적용 방향"
+  }, {
+    "type" : "list",
+    "id" : 145,
+    "level" : "5",
+    "page number" : 8,
+    "bounding box" : [ 90.024, 249.403, 523.29, 345.21 ],
+    "numbering style" : "unordered",
+    "number of list items" : 2,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 8,
+      "bounding box" : [ 90.024, 294.763, 523.29, 345.21 ],
+      "font" : "SymbolMT",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "• 기존에는 런타임 연속 무결성 검증을 목표로 했으나, 현시점에서 자원 제약과 현실적 구현 범위를 고려해 Control-Flow Integrity (CFI)를 제외한 부팅 시점 무결성 검증으로 방향을 수정함.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 8,
+      "bounding box" : [ 90.024, 249.403, 407.71, 281.25 ],
+      "font" : "SymbolMT",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "• 향후 확장 계획으로 CFI 기반 lightweight runtime extension 또는 event-driven integrity checks 에 대한 가능성은 남겨둠.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 146,
+    "page number" : 8,
+    "bounding box" : [ 282.05, 54.977, 313.267, 68.224 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 27,
+      "page number" : 8,
+      "bounding box" : [ 282.05, 54.977, 313.267, 68.224 ],
+      "heading level" : 6,
+      "font" : "MalgunGothicBold",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "8 / 11"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 147,
+    "page number" : 9,
+    "bounding box" : [ 72.024, 784.073, 218.89, 797.32 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 38,
+      "page number" : 9,
+      "bounding box" : [ 72.024, 784.073, 218.89, 797.32 ],
+      "heading level" : 7,
+      "font" : "MalgunGothic",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 148,
+    "level" : "8",
+    "page number" : 9,
+    "bounding box" : [ 72.024, 319.817, 250.97, 754.101 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 3,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 72.024, 735.427, 250.97, 754.101 ],
+      "font" : "MalgunGothic",
+      "font size" : 14.04,
+      "text color" : "[0.0]",
+      "content" : "3. 재정비된 과제 수행 일정",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 72.024, 460.237, 243.89, 478.911 ],
+      "font" : "MalgunGothic",
+      "font size" : 14.04,
+      "text color" : "[0.0]",
+      "content" : "4. 핵심 실험 및 평가 항목",
+      "kids" : [ {
+        "type" : "table",
+        "id" : 51,
+        "level" : "9",
+        "page number" : 9,
+        "bounding box" : [ 72.024, 341.21, 523.42, 447.55 ],
+        "number of rows" : 4,
+        "number of columns" : 2,
+        "rows" : [ {
+          "type" : "table row",
+          "row number" : 1,
+          "cells" : [ {
+            "type" : "table cell",
+            "page number" : 9,
+            "bounding box" : [ 72.504, 429.432, 297.647, 447.07 ],
+            "row number" : 1,
+            "column number" : 1,
+            "row span" : 1,
+            "column span" : 1,
+            "kids" : [ {
+              "type" : "paragraph",
+              "id" : 1,
+              "page number" : 9,
+              "bounding box" : [ 77.664, 431.703, 122.54, 444.95 ],
+              "font" : "MalgunGothicBold",
+              "font size" : 9.96,
+              "text color" : "[0.0]",
+              "content" : "평가 요소"
+            } ]
+          }, {
+            "type" : "table cell",
+            "page number" : 9,
+            "bounding box" : [ 297.647, 429.432, 522.94, 447.07 ],
+            "row number" : 1,
+            "column number" : 2,
+            "row span" : 1,
+            "column span" : 1,
+            "kids" : [ {
+              "type" : "paragraph",
+              "id" : 2,
+              "page number" : 9,
+              "bounding box" : [ 303.05, 431.703, 322.97, 444.95 ],
+              "font" : "MalgunGothicBold",
+              "font size" : 9.96,
+              "text color" : "[0.0]",
+              "content" : "목적"
+            } ]
+          } ]
+        }, {
+          "type" : "table row",
+          "row number" : 2,
+          "cells" : [ {
+            "type" : "table cell",
+            "page number" : 9,
+            "bounding box" : [ 72.504, 394.37, 297.647, 429.432 ],
+            "row number" : 2,
+            "column number" : 1,
+            "row span" : 1,
+            "column span" : 1,
+            "kids" : [ {
+              "type" : "paragraph",
+              "id" : 3,
+              "page number" : 9,
+              "bounding box" : [ 77.664, 413.943, 111.717, 427.19 ],
+              "font" : "MalgunGothic",
+              "font size" : 9.96,
+              "text color" : "[0.0]",
+              "content" : "Latency"
+            } ]
+          }, {
+            "type" : "table cell",
+            "page number" : 9,
+            "bounding box" : [ 297.647, 394.37, 522.94, 429.432 ],
+            "row number" : 2,
+            "column number" : 2,
+            "row span" : 1,
+            "column span" : 1,
+            "kids" : [ {
+              "type" : "paragraph",
+              "id" : 4,
+              "page number" : 9,
+              "bounding box" : [ 303.05, 396.643, 517.54, 427.19 ],
+              "font" : "MalgunGothic",
+              "font size" : 9.96,
+              "text color" : "[0.0]",
+              "content" : "각 구조에서 attestation token 생성 및 검증까지 걸리는 시간 측정"
+            } ]
+          } ]
+        }, {
+          "type" : "table row",
+          "row number" : 3,
+          "cells" : [ {
+            "type" : "table cell",
+            "page number" : 9,
+            "bounding box" : [ 72.504, 376.61, 297.647, 394.37 ],
+            "row number" : 3,
+            "column number" : 1,
+            "row span" : 1,
+            "column span" : 1,
+            "kids" : [ {
+              "type" : "paragraph",
+              "id" : 5,
+              "page number" : 9,
+              "bounding box" : [ 77.664, 378.883, 212.413, 392.13 ],
+              "font" : "MalgunGothic",
+              "font size" : 9.96,
+              "text color" : "[0.0]",
+              "content" : "Memory Usage (Flash / RAM)"
+            } ]
+          }, {
+            "type" : "table cell",
+            "page number" : 9,
+            "bounding box" : [ 297.647, 376.61, 522.94, 394.37 ],
+            "row number" : 3,
+            "column number" : 2,
+            "row span" : 1,
+            "column span" : 1,
+            "kids" : [ {
+              "type" : "paragraph",
+              "id" : 6,
+              "page number" : 9,
+              "bounding box" : [ 303.05, 378.883, 505.54, 392.13 ],
+              "font" : "MalgunGothic",
+              "font size" : 9.96,
+              "text color" : "[0.0]",
+              "content" : "보안 모듈이 MCU 자원에 미치는 영향 평가"
+            } ]
+          } ]
+        }, {
+          "type" : "table row",
+          "row number" : 4,
+          "cells" : [ {
+            "type" : "table cell",
+            "page number" : 9,
+            "bounding box" : [ 72.504, 341.69, 297.647, 376.61 ],
+            "row number" : 4,
+            "column number" : 1,
+            "row span" : 1,
+            "column span" : 1,
+            "kids" : [ {
+              "type" : "paragraph",
+              "id" : 7,
+              "page number" : 9,
+              "bounding box" : [ 77.664, 361.003, 167.54, 374.25 ],
+              "font" : "MalgunGothic",
+              "font size" : 9.96,
+              "text color" : "[0.0]",
+              "content" : "구조별 장단점 분석"
+            } ]
+          }, {
+            "type" : "table cell",
+            "page number" : 9,
+            "bounding box" : [ 297.647, 341.69, 522.94, 376.61 ],
+            "row number" : 4,
+            "column number" : 2,
+            "row span" : 1,
+            "column span" : 1,
+            "kids" : [ {
+              "type" : "paragraph",
+              "id" : 8,
+              "page number" : 9,
+              "bounding box" : [ 303.05, 343.723, 517.54, 374.25 ],
+              "font" : "MalgunGothic",
+              "font size" : 9.96,
+              "text color" : "[0.0]",
+              "content" : "기능성, 이식성, 보안성, 개발 난이도 등 종합적인 비교"
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 72.024, 319.817, 187.94, 338.491 ],
+      "font" : "MalgunGothic",
+      "font size" : 14.04,
+      "text color" : "[0.0]",
+      "content" : "5. 최종 산출 목표",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 150,
+    "page number" : 9,
+    "bounding box" : [ 72.0, 491.04, 523.3, 722.74 ],
+    "source" : "2025중간보고서_38_응답하라 지휘본부_마이크로 컨트롤러에서의 안전한 로봇 어플리케이션 수행을 위한 원격 증명 기술 개발_images/imageFile5.png"
+  }, {
+    "type" : "list",
+    "id" : 149,
+    "level" : "10",
+    "page number" : 9,
+    "bounding box" : [ 72.024, 238.483, 491.02, 305.13 ],
+    "numbering style" : "unordered",
+    "number of list items" : 3,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 72.024, 291.883, 356.23, 305.13 ],
+      "font" : "MalgunGothic",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "- XRCE-DDS handshake에 부팅 시점 Remote Attestation 통합",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 72.024, 265.123, 326.09, 278.37 ],
+      "font" : "MalgunGothic",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "- 세 가지 구조에 대한 성능 및 보안 분석 보고서 작성",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 72.024, 238.483, 491.02, 251.73 ],
+      "font" : "MalgunGothic",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "- 최종적으로 세가지 구조와 관련해서 속도와 보안성을 비교한 논문을 작성해 학회에 투고",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 151,
+    "page number" : 9,
+    "bounding box" : [ 282.05, 54.977, 313.267, 68.224 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 28,
+      "page number" : 9,
+      "bounding box" : [ 282.05, 54.977, 313.267, 68.224 ],
+      "heading level" : 6,
+      "font" : "MalgunGothicBold",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "9 / 11"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 152,
+    "page number" : 10,
+    "bounding box" : [ 72.024, 784.073, 218.89, 797.32 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 39,
+      "page number" : 10,
+      "bounding box" : [ 72.024, 784.073, 218.89, 797.32 ],
+      "heading level" : 7,
+      "font" : "MalgunGothic",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 153,
+    "level" : "Subtitle",
+    "page number" : 10,
+    "bounding box" : [ 72.024, 726.176, 255.53, 752.831 ],
+    "heading level" : 2,
+    "font" : "MalgunGothic",
+    "font size" : 20.04,
+    "text color" : "[0.0]",
+    "content" : "Ⅳ. 구성원별 진척도"
+  }, {
+    "type" : "table",
+    "id" : 154,
+    "level" : "11",
+    "page number" : 10,
+    "bounding box" : [ 72.024, 590.74, 523.42, 714.22 ],
+    "number of rows" : 4,
+    "number of columns" : 2,
+    "rows" : [ {
+      "type" : "table row",
+      "row number" : 1,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 10,
+        "bounding box" : [ 72.504, 696.22, 297.647, 713.74 ],
+        "row number" : 1,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 1,
+          "page number" : 10,
+          "bounding box" : [ 77.664, 698.493, 97.584, 711.74 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "이름"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 10,
+        "bounding box" : [ 297.647, 696.22, 522.94, 713.74 ],
+        "row number" : 1,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 2,
+          "page number" : 10,
+          "bounding box" : [ 303.05, 698.493, 377.94, 711.74 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "구성원별 진척도"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 2,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 10,
+        "bounding box" : [ 72.504, 661.18, 297.647, 696.22 ],
+        "row number" : 2,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 3,
+          "page number" : 10,
+          "bounding box" : [ 77.664, 672.093, 107.544, 685.34 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "강승민"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 10,
+        "bounding box" : [ 297.647, 661.18, 522.94, 696.22 ],
+        "row number" : 2,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 4,
+          "page number" : 10,
+          "bounding box" : [ 303.05, 663.453, 517.54, 693.98 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "zephyr RTOS와 Micro-ROS 개발 환경 구축 및 TF-M 기반 검증 token 생성 개발"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 3,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 10,
+        "bounding box" : [ 72.504, 626.02, 297.647, 661.18 ],
+        "row number" : 3,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 5,
+          "page number" : 10,
+          "bounding box" : [ 77.664, 636.933, 107.544, 650.18 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "김의준"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 10,
+        "bounding box" : [ 297.647, 626.02, 522.94, 661.18 ],
+        "row number" : 3,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 6,
+          "page number" : 10,
+          "bounding box" : [ 303.05, 628.293, 517.54, 658.82 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "ROS2 와 Micro-ROS 통합 개발 환경 구축 및 서버측 검증 코드 개발"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 4,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 10,
+        "bounding box" : [ 72.504, 591.22, 297.647, 626.02 ],
+        "row number" : 4,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 7,
+          "page number" : 10,
+          "bounding box" : [ 77.664, 601.893, 107.544, 615.14 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "박재선"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 10,
+        "bounding box" : [ 297.647, 591.22, 522.94, 626.02 ],
+        "row number" : 4,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 8,
+          "page number" : 10,
+          "bounding box" : [ 303.05, 593.253, 517.54, 623.78 ],
+          "font" : "MalgunGothic",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "zephyr RTOS와 Micro-ROS 통합 개발 환경 구 축 및 DICE 기반 검증 token 생성 개발"
+        } ]
+      } ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 155,
+    "level" : "Subtitle",
+    "page number" : 10,
+    "bounding box" : [ 72.024, 533.306, 492.46, 559.961 ],
+    "heading level" : 2,
+    "font" : "MalgunGothic",
+    "font size" : 18.0,
+    "text color" : "[0.0]",
+    "content" : "Ⅴ. 보고 시점까지의 과제 수행 내용 및 중간 결과"
+  }, {
+    "type" : "list",
+    "id" : 156,
+    "level" : "5",
+    "page number" : 10,
+    "bounding box" : [ 90.024, 362.203, 523.41, 519.47 ],
+    "numbering style" : "unordered",
+    "number of list items" : 5,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 90.024, 506.223, 505.177, 519.47 ],
+      "font" : "SymbolMT",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "• Tytan, DDS Security+, SMART 등 관련 선행 연구를 분석하여 기반 지식을 구축함[1-5].",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 90.024, 479.463, 501.82, 492.71 ],
+      "font" : "SymbolMT",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "• MCU 기반 RTOS 를 조사하고 실습 환경을 구축하여 관련 기술에 대한 이해도를 높임",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 90.024, 434.223, 523.41, 465.95 ],
+      "font" : "SymbolMT",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "• DICE, Trusted Firmware-M, TrustZone-M 을 조사하고 실제 코드를 분석하여 동작 원리를 파악함. 라이브러리 기반의 구현도 가능함.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 90.024, 407.463, 484.561, 420.71 ],
+      "font" : "SymbolMT",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "• ROS2 의 통신 구조를 이해하고, 이를 검증하기 위한 코드를 직접 구현할 수 있음.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 90.024, 362.203, 523.41, 393.93 ],
+      "font" : "SymbolMT",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "• 실험을 위한 개발 환경 구성을 마치고, 세 가지 방식의 차이를 비교할 수 있는 템플릿을 완성함.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 159,
+    "page number" : 10,
+    "bounding box" : [ 90.0, 275.66, 540.8, 350.81 ],
+    "source" : "2025중간보고서_38_응답하라 지휘본부_마이크로 컨트롤러에서의 안전한 로봇 어플리케이션 수행을 위한 원격 증명 기술 개발_images/imageFile6.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 157,
+    "page number" : 10,
+    "bounding box" : [ 90.024, 250.963, 437.971, 264.21 ],
+    "font" : "MalgunGothic",
+    "font size" : 9.96,
+    "text color" : "[0.0]",
+    "content" : "그림은 같이 Micro-ROS 와 zephyr 를 통합하여 ROS2 agent 와 연결한 모습."
+  }, {
+    "type" : "paragraph",
+    "id" : 158,
+    "level" : "9",
+    "page number" : 10,
+    "bounding box" : [ 90.024, 186.973, 523.3, 237.45 ],
+    "font" : "MalgunGothic",
+    "font size" : 9.96,
+    "text color" : "[0.0]",
+    "content" : "• 자문의견서를 바탕으로 검토한 결과 런타임 무결성을 확보하기 위해 성능을 희생하는 접근보다는 다양한 무결성 검증 방식을 비교·분석하는 것이 보다 실용적이고 의미 있는 방향이라고 판단하였습니다. 이에 따라 과제의 목표를 일부 조정하였음."
+  }, {
+    "type" : "footer",
+    "id" : 160,
+    "page number" : 10,
+    "bounding box" : [ 279.05, 54.977, 316.147, 68.224 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 29,
+      "page number" : 10,
+      "bounding box" : [ 279.05, 54.977, 316.147, 68.224 ],
+      "heading level" : 6,
+      "font" : "MalgunGothicBold",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "10 / 11"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 161,
+    "page number" : 11,
+    "bounding box" : [ 72.024, 784.073, 218.89, 797.32 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 40,
+      "page number" : 11,
+      "bounding box" : [ 72.024, 784.073, 218.89, 797.32 ],
+      "heading level" : 7,
+      "font" : "MalgunGothic",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 162,
+    "level" : "Subtitle",
+    "page number" : 11,
+    "bounding box" : [ 72.024, 729.189, 179.208, 753.131 ],
+    "heading level" : 3,
+    "font" : "MalgunGothic",
+    "font size" : 18.0,
+    "text color" : "[0.0]",
+    "content" : "Ⅵ. Reference"
+  }, {
+    "type" : "list",
+    "id" : 163,
+    "level" : "10",
+    "page number" : 11,
+    "bounding box" : [ 82.464, 462.663, 526.87, 713.18 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 5,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 82.464, 681.333, 526.704, 713.18 ],
+      "font" : "MalgunGothic",
+      "font size" : 10.499,
+      "text color" : "[0.0]",
+      "content" : "[1] BRASSER, Ferdinand, et al. TyTAN: Tiny trust anchor for tiny devices. In: Proceedings of the 52nd annual design automation conference. 2015. p. 1-6.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 82.464, 617.373, 526.722, 667.82 ],
+      "font" : "MalgunGothic",
+      "font size" : 10.499,
+      "text color" : "[0.0]",
+      "content" : "[2] WAGNER, Paul Georg; BIRNSTILL, Pascal; BEYERER, Jürgen. Dds security+: Enhancing the data distribution service with tpm-based remote attestation. In: Proceedings of the 19th International Conference on Availability, Reliability and Security. 2024. p. 1-11.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 82.464, 571.983, 522.986, 603.86 ],
+      "font" : "MalgunGothic",
+      "font size" : 10.499,
+      "text color" : "[0.0]",
+      "content" : "[3] ELDEFRAWY, Karim, et al. Smart: secure and minimal architecture for (establishing dynamic) root of trust. In: Ndss. 2012. p. 1-15.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 82.464, 508.023, 526.507, 558.47 ],
+      "font" : "MalgunGothic",
+      "font size" : 10.499,
+      "text color" : "[0.0]",
+      "content" : "[4] WANG, Qian; LEE, Brian; QIAO, Yuansong. Support Remote Attestation for Decentralized Robot Operating System (ROS) using Trusted Execution Environment. In: 2024 IEEE International Conference on Blockchain and Cryptocurrency (ICBC). IEEE, 2024. p. 693-695.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 82.464, 462.663, 526.87, 494.51 ],
+      "font" : "MalgunGothic",
+      "font size" : 10.499,
+      "text color" : "[0.0]",
+      "content" : "[5] DENG, Gelei, et al. On the (in) security of secure ros2. In: Proceedings of the 2022 ACM SIGSAC Conference on Computer and Communications Security. 2022. p. 739-753.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 164,
+    "page number" : 11,
+    "bounding box" : [ 279.05, 54.977, 316.147, 68.224 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 30,
+      "page number" : 11,
+      "bounding box" : [ 279.05, 54.977, 316.147, 68.224 ],
+      "heading level" : 6,
+      "font" : "MalgunGothicBold",
+      "font size" : 9.96,
+      "text color" : "[0.0]",
+      "content" : "11 / 11"
+    } ]
+  } ]
+}

@@ -5,7 +5,7 @@ from __future__ import annotations
 from copy import deepcopy
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 import numpy as np
 import yaml
@@ -145,3 +145,57 @@ def instantiate_candidate(
             "group_name": metadata.get("semantic_class", template.id),
         },
     }
+
+
+def _template_for_draft(
+    obstacle: Dict[str, Any], templates: List[CandidateTemplate]
+) -> Optional[CandidateTemplate]:
+    semantic_class = str(obstacle.get("semantic_class", ""))
+    matches = [
+        value
+        for value in templates
+        if str(value.source.get("metadata", {}).get("semantic_class", value.id))
+        == semantic_class
+    ]
+    return matches[0] if len(matches) == 1 else None
+
+
+def materialize_draft_placeholders(
+    obstacles: List[Dict[str, Any]],
+    templates: List[CandidateTemplate],
+    room: Any,
+) -> List[str]:
+    """Fill null disabled drafts with visible, explicitly provisional geometry.
+
+    This mutates only the editor's in-memory document. The source YAML is still
+    untouched until the user explicitly saves, and all generated values remain
+    disabled and unconfirmed.
+    """
+
+    changed: List[str] = []
+    for obstacle in obstacles:
+        if obstacle.get("enabled") is True:
+            continue
+        geometry = obstacle.get("geometry")
+        if not isinstance(geometry, dict) or not any(
+            geometry.get(key) is None
+            for key in ("position_m", "size_m", "rotation_deg")
+        ):
+            continue
+        template = _template_for_draft(obstacle, templates)
+        if template is None:
+            continue
+        object_id = str(obstacle.get("id", template.id))
+        placeholder = instantiate_candidate(template, object_id, room)
+        placeholder_geometry = placeholder["geometry"]
+        for key in ("position_m", "size_m", "rotation_deg"):
+            if geometry.get(key) is None:
+                geometry[key] = deepcopy(placeholder_geometry[key])
+        obstacle.setdefault("display_name", placeholder["display_name"])
+        obstacle.setdefault("measurement_source", "unset")
+        obstacle.setdefault(
+            "notes", "Visible editor placeholder; not an on-site measurement."
+        )
+        obstacle["placement_status"] = "provisional_placeholder"
+        changed.append(object_id)
+    return changed

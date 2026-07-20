@@ -5,6 +5,7 @@ from tools.proxy_placement_editor.transform_controller import (
     TransformError,
     resize_obstacle,
     rotate_obstacle,
+    rotate_obstacle_in_space,
     translate_obstacle,
 )
 
@@ -59,3 +60,15 @@ def test_floor_at_xy_z_translation_changes_clearance_not_position_dimension():
     assert np.isclose(
         result["geometry"]["anchor"]["floor_contact_policy"]["clearance_m"], 0.12
     )
+
+
+def test_world_and_local_rotation_composition_are_distinct_and_valid():
+    value = obstacle()
+    value["geometry"]["rotation_deg"] = [0.0, 0.0, 90.0]
+    world = rotate_obstacle_in_space(value, 90.0, axis="x", space="world")
+    local = rotate_obstacle_in_space(value, 90.0, axis="x", space="local")
+    world_rotation = list(world["geometry"]["rotation_deg"].values())
+    local_rotation = list(local["geometry"]["rotation_deg"].values())
+    assert not np.allclose(world_rotation, local_rotation)
+    assert np.all(np.isfinite(world_rotation))
+    assert np.all(np.isfinite(local_rotation))

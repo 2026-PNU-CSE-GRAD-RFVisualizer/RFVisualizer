@@ -36,6 +36,9 @@ class EditorState:
     object_visibility: Dict[str, bool] = field(default_factory=dict)
     viewport_mode: str = "select"
     axis_constraint: Optional[str] = None
+    transform_space: str = "world"
+    scene_display_mode: str = "both"
+    reference_point_size: float = 2.0
     reference_visible: bool = True
     grid_visible: bool = True
     show_disabled: bool = True
@@ -144,6 +147,9 @@ class EditorState:
             "selected_object": self.selected_object_id,
             "viewport_mode": self.viewport_mode,
             "axis_constraint": self.axis_constraint,
+            "transform_space": self.transform_space,
+            "scene_display_mode": self.scene_display_mode,
+            "reference_point_size": self.reference_point_size,
             "reference_visibility": self.reference_visible,
             "grid_visibility": self.grid_visible,
             "show_disabled": self.show_disabled,

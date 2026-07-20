@@ -42,3 +42,11 @@ def test_core_rename_reorder_and_visibility_state(draft_core):
     )
     draft_core.state.object_visibility["renamed_box"] = False
     assert draft_core.state.ui_document()["object_visibility"]["renamed_box"] is False
+
+
+def test_single_object_drag_preview_builds_without_full_validation(draft_core):
+    draft_core.materialize_draft_placeholders()
+    mesh = draft_core.preview_mesh("desk_block_example")
+    assert mesh.obstacle_id == "desk_block_example"
+    assert mesh.vertex_count == 8
+    assert mesh.triangle_count == 12

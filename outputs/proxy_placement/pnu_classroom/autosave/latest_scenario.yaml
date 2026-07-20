@@ -8,7 +8,7 @@ scenario:
     phase2a_config: configs/sionna/pnu_classroom_smoke_test.yaml
   obstacles:
   - id: desk_block_example
-    enabled: true
+    enabled: false
     semantic_class: desk_cluster
     purpose: classroom_proxy
     physical_object: true
@@ -17,15 +17,26 @@ scenario:
       type: box
       anchor:
         mode: floor_at_xy
-      position_m: null
-      size_m: null
-      rotation_deg: null
+      position_m:
+        x: -7.429328907
+        y: -5.593058274
+      size_m:
+      - 2.000000000
+      - 0.800000000
+      - 0.750000000
+      rotation_deg:
+        roll: 0.000000000
+        pitch: 0.000000000
+        yaw: 0.000000000
     material:
       source: sionna_preset
       category: wood
-    display_name: Desk
+    display_name: Desk Cluster
+    measurement_source: unset
+    notes: Visible editor placeholder; not an on-site measurement.
+    placement_status: provisional_placeholder
   - id: blackboard_example
-    enabled: true
+    enabled: false
     semantic_class: blackboard
     purpose: classroom_proxy
     physical_object: true
@@ -34,14 +45,27 @@ scenario:
       type: thin_panel
       anchor:
         mode: center
-      position_m: null
-      size_m: null
-      rotation_deg: null
+      position_m:
+        x: -7.429328907
+        y: -5.593058274
+        z: 1.404798155
+      size_m:
+      - 0.050000000
+      - 3.000000000
+      - 1.200000000
+      rotation_deg:
+        roll: 0.000000000
+        pitch: 0.000000000
+        yaw: 0.000000000
     material:
       source: sionna_preset
       category: metal
+    display_name: Blackboard Panel
+    measurement_source: unset
+    notes: Visible editor placeholder; not an on-site measurement.
+    placement_status: provisional_placeholder
   - id: door_example
-    enabled: true
+    enabled: false
     semantic_class: door
     purpose: classroom_proxy
     physical_object: true
@@ -51,14 +75,27 @@ scenario:
       type: thin_panel
       anchor:
         mode: bottom_center
-      position_m: null
-      size_m: null
-      rotation_deg: null
+      position_m:
+        x: -5.829328907
+        y: -5.593058274
+        z: 0.256482556
+      size_m:
+      - 0.050000000
+      - 0.900000000
+      - 2.000000000
+      rotation_deg:
+        roll: 0.000000000
+        pitch: 0.000000000
+        yaw: 0.000000000
     material:
       source: sionna_preset
       category: wood
+    display_name: Door Panel
+    measurement_source: unset
+    notes: Visible editor placeholder; not an on-site measurement.
+    placement_status: provisional_placeholder
   - id: large_metal_object_example
-    enabled: true
+    enabled: false
     semantic_class: large_equipment
     purpose: classroom_proxy
     physical_object: true
@@ -67,33 +104,24 @@ scenario:
       type: box
       anchor:
         mode: floor_at_xy
-      position_m: null
-      size_m: null
-      rotation_deg: null
+      position_m:
+        x: -10.079328907
+        y: -5.593058274
+      size_m:
+      - 1.000000000
+      - 0.800000000
+      - 1.800000000
+      rotation_deg:
+        roll: 0.000000000
+        pitch: 0.000000000
+        yaw: 0.000000000
     material:
       source: sionna_preset
       category: metal
-  - id: desk_block_example_copy
-    enabled: true
-    semantic_class: desk_cluster
-    purpose: classroom_proxy
-    physical_object: true
-    confidence: unset
-    geometry:
-      type: box
-      anchor:
-        mode: floor_at_xy
-      position_m: null
-      size_m: null
-      rotation_deg: null
-    material:
-      source: sionna_preset
-      category: concrete
-      preset: concrete
-    display_name: Desk
-    placement_status: provisional_unconfirmed
-    export:
-      object_name: desk_block_example_copy
+    display_name: Large Metal Object
+    measurement_source: unset
+    notes: Visible editor placeholder; not an on-site measurement.
+    placement_status: provisional_placeholder
   confidence: low
   provenance:
     authoring_method: interactive_proxy_placement

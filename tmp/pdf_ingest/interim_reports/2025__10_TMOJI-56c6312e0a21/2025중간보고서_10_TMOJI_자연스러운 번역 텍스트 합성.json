@@ -1,0 +1,1624 @@
+{
+  "file name" : "2025중간보고서_10_TMOJI_자연스러운 번역 텍스트 합성.pdf",
+  "number of pages" : 11,
+  "author" : "",
+  "title" : "MSc UoR Computer Science Report",
+  "creation date" : "D:20250716152230Z",
+  "modification date" : "D:20250717042327+09'00'",
+  "kids" : [ {
+    "type" : "image",
+    "id" : 36,
+    "page number" : 1,
+    "bounding box" : [ 255.118, 669.767, 340.16, 755.49 ],
+    "source" : "2025중간보고서_10_TMOJI_자연스러운 번역 텍스트 합성_images/imageFile1.png"
+  }, {
+    "type" : "caption",
+    "id" : 37,
+    "page number" : 1,
+    "bounding box" : [ 232.908, 599.57, 362.367, 647.242 ],
+    "linked content id" : 36,
+    "font" : "nanumgtmbd",
+    "font size" : 17.215,
+    "text color" : "[0.0]",
+    "content" : "부산대학교 정보컴퓨터공학부"
+  }, {
+    "type" : "heading",
+    "id" : 38,
+    "level" : "Subtitle",
+    "page number" : 1,
+    "bounding box" : [ 119.591, 512.389, 475.685, 532.349 ],
+    "heading level" : 2,
+    "font" : "nanumgtmc2",
+    "font size" : 20.663,
+    "text color" : "[0.0]",
+    "content" : "자연스러운 번역 텍스트 합성 착수보고서"
+  }, {
+    "type" : "heading",
+    "id" : 39,
+    "level" : "Subtitle",
+    "page number" : 1,
+    "bounding box" : [ 228.369, 395.097, 366.906, 416.072 ],
+    "heading level" : 5,
+    "font" : "nanumgtmc7",
+    "font size" : 14.346,
+    "text color" : "[0.0]",
+    "content" : "이동훈, 이승재, 문경환"
+  }, {
+    "type" : "paragraph",
+    "id" : 40,
+    "page number" : 1,
+    "bounding box" : [ 251.987, 337.599, 343.289, 355.077 ],
+    "font" : "LMSans12-Oblique",
+    "font size" : 11.955,
+    "text color" : "[0.0]",
+    "content" : "Supervisor: 전상률"
+  }, {
+    "type" : "heading",
+    "id" : 41,
+    "level" : "Subtitle",
+    "page number" : 1,
+    "bounding box" : [ 242.982, 92.053, 352.295, 122.303 ],
+    "heading level" : 3,
+    "font" : "LMSans17-Regular",
+    "font size" : 20.663,
+    "text color" : "[0.0]",
+    "content" : "July 16, 2025"
+  }, {
+    "type" : "heading",
+    "id" : 42,
+    "level" : "Doctitle",
+    "page number" : 2,
+    "bounding box" : [ 86.4, 657.468, 188.428, 692.938 ],
+    "heading level" : 1,
+    "font" : "LMSans10-Bold",
+    "font size" : 24.787,
+    "text color" : "[0.0]",
+    "content" : "Contents"
+  }, {
+    "type" : "heading",
+    "id" : 43,
+    "level" : "Subtitle",
+    "page number" : 2,
+    "bounding box" : [ 86.4, 597.281, 508.877, 612.892 ],
+    "heading level" : 10,
+    "font" : "LMSans10-Bold",
+    "font size" : 10.909,
+    "text color" : "[0.0, 0.0, 1.0]",
+    "content" : "1 Inroduction 1"
+  }, {
+    "type" : "list",
+    "id" : 44,
+    "level" : "1",
+    "page number" : 2,
+    "bounding box" : [ 102.763, 570.052, 508.88, 599.561 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 2,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 102.763, 583.601, 508.88, 599.561 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0, 0.0, 1.0]",
+      "content" : "1.1 Research Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 102.763, 570.052, 508.876, 586.012 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0, 0.0, 1.0]",
+      "content" : "1.2 자문 개요 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 45,
+    "level" : "Subtitle",
+    "page number" : 2,
+    "bounding box" : [ 86.4, 545.724, 508.877, 561.335 ],
+    "heading level" : 10,
+    "font" : "LMSans10-Bold",
+    "font size" : 10.909,
+    "text color" : "[0.0, 0.0, 1.0]",
+    "content" : "2 Modifications According to Requirements 3"
+  }, {
+    "type" : "list",
+    "id" : 46,
+    "level" : "2",
+    "page number" : 2,
+    "bounding box" : [ 102.763, 437.2, 508.883, 548.004 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 6,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 102.763, 532.044, 508.873, 548.004 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0, 0.0, 1.0]",
+      "content" : "2.1 기술 구현의 세부 사항 추가 . . . . . . . . . . . . . . . . . . . . . . . . . . . 3",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 102.763, 518.495, 508.872, 534.455 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0, 0.0, 1.0]",
+      "content" : "2.2 기술적 한계 및 해결 방안 고도화 . . . . . . . . . . . . . . . . . . . . . . . . 4",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 102.763, 504.946, 508.873, 520.906 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0, 0.0, 1.0]",
+      "content" : "2.3 테스트 및 검증 시나리오 강화 . . . . . . . . . . . . . . . . . . . . . . . . . 4",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 102.763, 491.397, 508.883, 507.357 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0, 0.0, 1.0]",
+      "content" : "2.4 Details of design and changes . . . . . . . . . . . . . . . . . . . . . . . . . . 5",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 102.763, 477.848, 508.869, 493.808 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0, 0.0, 1.0]",
+      "content" : "2.5 Progress . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 34,
+        "level" : "3",
+        "page number" : 2,
+        "bounding box" : [ 127.854, 450.749, 508.893, 480.258 ],
+        "numbering style" : "arabic numbers",
+        "number of list items" : 2,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 127.854, 464.298, 508.893, 480.258 ],
+          "font" : "LMSans10-Regular",
+          "font size" : 10.909,
+          "text color" : "[0.0, 0.0, 1.0]",
+          "content" : "2.5.1 Time Table . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 127.854, 450.749, 508.872, 466.709 ],
+          "font" : "LMSans10-Regular",
+          "font size" : 10.909,
+          "text color" : "[0.0, 0.0, 1.0]",
+          "content" : "2.5.2 Personalized Progress . . . . . . . . . . . . . . . . . . . . . . . . . . 5",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 102.763, 437.2, 508.877, 453.16 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0, 0.0, 1.0]",
+      "content" : "2.6 Result . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 47,
+    "level" : "4",
+    "page number" : 2,
+    "bounding box" : [ 127.854, 383.003, 508.903, 439.611 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 4,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 127.854, 423.651, 508.889, 439.611 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0, 0.0, 1.0]",
+      "content" : "2.6.1 Textctrl: Dataset . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 127.854, 410.102, 508.903, 426.062 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0, 0.0, 1.0]",
+      "content" : "2.6.2 Textctrl: Text Style Encoder . . . . . . . . . . . . . . . . . . . . . . 7",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 127.854, 396.552, 508.885, 412.512 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0, 0.0, 1.0]",
+      "content" : "2.6.3 Textctrl: Glpyh Encoder . . . . . . . . . . . . . . . . . . . . . . . . . 8",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 127.854, 383.003, 508.884, 398.963 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0, 0.0, 1.0]",
+      "content" : "2.6.4 Links . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 50,
+    "page number" : 2,
+    "bounding box" : [ 103.156, 368.994, 508.104, 384.022 ],
+    "font" : "GillSansMT",
+    "font size" : 10.909,
+    "text color" : "[0.0, 0.0, 1.0]",
+    "content" : "2.7 UI/UX 구체화 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8"
+  }, {
+    "type" : "heading",
+    "id" : 48,
+    "level" : "Subtitle",
+    "page number" : 2,
+    "bounding box" : [ 86.4, 333.542, 508.876, 349.153 ],
+    "heading level" : 10,
+    "font" : "LMSans10-Bold",
+    "font size" : 10.909,
+    "text color" : "[0.0, 0.0, 1.0]",
+    "content" : "References 9"
+  }, {
+    "type" : "paragraph",
+    "id" : 49,
+    "page number" : 2,
+    "bounding box" : [ 296.335, 55.669, 298.941, 71.629 ],
+    "font" : "LMSans10-Regular",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "i"
+  }, {
+    "type" : "list",
+    "id" : 51,
+    "level" : "5",
+    "page number" : 3,
+    "bounding box" : [ 86.4, 663.674, 180.51, 693.243 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "next list id" : 62,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 3,
+      "bounding box" : [ 86.4, 663.674, 180.51, 693.243 ],
+      "font" : "LMSans10-Bold",
+      "font size" : 20.663,
+      "text color" : "[0.0]",
+      "content" : "Chapter 1",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 52,
+    "level" : "Doctitle",
+    "page number" : 3,
+    "bounding box" : [ 86.4, 612.636, 215.954, 648.106 ],
+    "heading level" : 1,
+    "font" : "LMSans10-Bold",
+    "font size" : 24.787,
+    "text color" : "[0.0]",
+    "content" : "Inroduction"
+  }, {
+    "type" : "heading",
+    "id" : 53,
+    "level" : "Subtitle",
+    "page number" : 3,
+    "bounding box" : [ 86.4, 557.954, 239.133, 578.483 ],
+    "heading level" : 6,
+    "font" : "LMSans10-Bold",
+    "font size" : 14.346,
+    "text color" : "[0.0]",
+    "content" : "1.1 Research Purpose"
+  }, {
+    "type" : "paragraph",
+    "id" : 54,
+    "page number" : 3,
+    "bounding box" : [ 86.4, 493.495, 508.876, 550.103 ],
+    "font" : "nanumgtmc7",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "본 연구는 기존의 기계 번역 및 OCR 기반 텍스트 삽입 방식이 갖는 한계를 분석하고, 보다 자연스러운 번역 텍스트 합성을 실현하기 위한 기술적 요구 사항과 구현 방안을 탐구한다. 나아가, 사용자가 입력한 이미지에 적절하게 번역 텍스트를 자연스럽게 삽입할 수 있는 애플 리케이션 서비스를 제안하고 구현하는 것을 궁극적인 목표로 한다."
+  }, {
+    "type" : "heading",
+    "id" : 55,
+    "level" : "Subtitle",
+    "page number" : 3,
+    "bounding box" : [ 86.4, 405.19, 463.587, 478.232 ],
+    "heading level" : 7,
+    "font" : "nanumgtmc7",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "1.2 자문 개요 본 자문은 현대자동차 책임연구원 조재훈 박사가 참여하였다. 내용은 아래와 같다. 중간 보고서 보완 제안"
+  }, {
+    "type" : "list",
+    "id" : 56,
+    "level" : "6",
+    "page number" : 3,
+    "bounding box" : [ 99.733, 172.953, 266.981, 399.324 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 3,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 3,
+      "bounding box" : [ 99.733, 383.364, 242.472, 399.324 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "1. 기술 구현의 세부 사항 추가",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 31,
+        "level" : "7",
+        "page number" : 3,
+        "bounding box" : [ 123.733, 285.133, 508.88, 376.809 ],
+        "numbering style" : "unordered",
+        "number of list items" : 3,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 3,
+          "bounding box" : [ 123.733, 347.3, 508.876, 376.809 ],
+          "font" : "LMSans10-Regular",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "• “자연스러움”의 기준은 주관적이므로 SSIM, PSNR 등의 지표나 사용자 테스트를 통해 정량적 평가 체계를 마련할 필요가 있음.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 3,
+          "bounding box" : [ 123.733, 316.216, 508.875, 345.725 ],
+          "font" : "LMSans10-Regular",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "• PaddleOCR의 구성(예: detection model, recognition model, 전처리 과정 등)을 구체적으로 명시할 것.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 3,
+          "bounding box" : [ 123.733, 285.133, 508.88, 314.642 ],
+          "font" : "LMSans10-Regular",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "• GaRNet, TextCtrl의 주요 하이퍼파라미터 설정 및 선택 근거(예: ROI 방식, attention 조절 등)를 기술할 것.",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 3,
+      "bounding box" : [ 99.733, 262.617, 266.981, 278.577 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "2. 기술적 한계 및 해결 방안 고도화",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 32,
+        "level" : "7",
+        "page number" : 3,
+        "bounding box" : [ 123.733, 195.469, 508.876, 256.062 ],
+        "numbering style" : "unordered",
+        "number of list items" : 2,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 3,
+          "bounding box" : [ 123.733, 226.552, 508.876, 256.062 ],
+          "font" : "LMSans10-Regular",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "• 곡면/곡률 이미지 대응을 위해 depth estimation, normal map 보정 등 3D 변형 처리 기술을 검토할 필요 있음.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 3,
+          "bounding box" : [ 123.733, 195.469, 508.876, 224.978 ],
+          "font" : "LMSans10-Regular",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "• 연산 비용을 줄이기 위해 PP-OCR Tiny, TextCtrl-Lite 등 경량 모델의 적용 가능 성을 고려해야 함.",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 3,
+      "bounding box" : [ 99.733, 172.953, 252.727, 188.913 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "3. 테스트 및 검증 시나리오 강화",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 57,
+    "level" : "7",
+    "page number" : 3,
+    "bounding box" : [ 123.733, 119.354, 508.876, 166.398 ],
+    "numbering style" : "unordered",
+    "number of list items" : 2,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 3,
+      "bounding box" : [ 123.733, 136.889, 508.876, 166.398 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• 예시 이미지를 통한 사용자 평가(MOS 방식)를 설계하고, 자연스러움 및 가독성에 대한 정성적·정량적 평가를 수행할 것.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 3,
+      "bounding box" : [ 123.733, 119.354, 494.957, 135.314 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• 다국어 폰트 및 다양한 타이포그래피 실험을 통해 모델의 범용성을 검증할 것.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 58,
+    "page number" : 3,
+    "bounding box" : [ 294.911, 55.668, 300.365, 71.628 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 8,
+      "page number" : 3,
+      "bounding box" : [ 294.911, 55.668, 300.365, 71.628 ],
+      "heading level" : 11,
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "1"
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 59,
+    "page number" : 4,
+    "bounding box" : [ 86.4, 771.919, 508.876, 787.879 ],
+    "font" : "LMSans10-Oblique",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "CHAPTER 1. INRODUCTION 2"
+  }, {
+    "type" : "heading",
+    "id" : 60,
+    "level" : "Subtitle",
+    "page number" : 4,
+    "bounding box" : [ 86.4, 742.164, 108.875, 754.107 ],
+    "heading level" : 9,
+    "font" : "nanumgtbb8",
+    "font size" : 11.955,
+    "text color" : "[0.0]",
+    "content" : "결론"
+  }, {
+    "type" : "paragraph",
+    "id" : 61,
+    "page number" : 4,
+    "bounding box" : [ 86.4, 693.24, 508.876, 736.298 ],
+    "font" : "nanumgtmac",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "본 보고서는 시각 언어 합성 문제를 기술적으로 잘 분석하고 있으며, 단계별 프레임워크 구성 또한 타당하다. 최종 결과물에서는 각 모듈의 성능 지표를 보완하고, 예시 이미지를 통해 기술 성과를 시각적으로 제시하는 것이 중요하다."
+  }, {
+    "type" : "list",
+    "id" : 62,
+    "level" : "5",
+    "page number" : 5,
+    "bounding box" : [ 86.4, 663.674, 180.51, 693.243 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "previous list id" : 51,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 86.4, 663.674, 180.51, 693.243 ],
+      "font" : "LMSans10-Bold",
+      "font size" : 20.663,
+      "text color" : "[0.0]",
+      "content" : "Chapter 2",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 63,
+    "level" : "Doctitle",
+    "page number" : 5,
+    "bounding box" : [ 86.4, 582.748, 392.646, 648.106 ],
+    "heading level" : 1,
+    "font" : "LMSans10-Bold",
+    "font size" : 24.787,
+    "text color" : "[0.0]",
+    "content" : "Modifications According to Requirements"
+  }, {
+    "type" : "heading",
+    "id" : 64,
+    "level" : "Subtitle",
+    "page number" : 5,
+    "bounding box" : [ 86.4, 528.066, 291.725, 548.595 ],
+    "heading level" : 7,
+    "font" : "LMSans10-Bold",
+    "font size" : 14.346,
+    "text color" : "[0.0]",
+    "content" : "2.1 기술 구현의 세부 사항 추가"
+  }, {
+    "type" : "list",
+    "id" : 65,
+    "level" : "7",
+    "page number" : 5,
+    "bounding box" : [ 99.733, 408.706, 508.879, 520.215 ],
+    "numbering style" : "unordered",
+    "number of list items" : 3,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 99.733, 490.706, 508.875, 520.215 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• 본 모델의 기존 평가지표가 불명확 하였기에, 기존 연구에서 널리 사용되는 PSNR과 User study를 추가한다.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 99.733, 429.382, 508.879, 485.99 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• TextCtrl의 주요 하이퍼파라미터 설정은 기존 논문에서 구현된 파라미터를 따르며, 이 는 사전에 기존 논문에서 최적의 파라미터를 구성하였기에 선택하였다. 한 편 TextCtrl 모델에서 기존 배경을 기반으로 이미지를 생성하기에, GarNet은 사용하지 않는다 Zeng et al. (2024).",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 99.733, 408.706, 345.069, 424.666 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• PaddleOCR의 구조는 아래 섹션 2.1에서 기술한다.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 66,
+    "level" : "Subtitle",
+    "page number" : 5,
+    "bounding box" : [ 86.4, 379.716, 149.601, 396.824 ],
+    "heading level" : 8,
+    "font" : "LMSans10-Bold",
+    "font size" : 11.955,
+    "text color" : "[0.0]",
+    "content" : "PaddleOCR"
+  }, {
+    "type" : "paragraph",
+    "id" : 67,
+    "page number" : 5,
+    "bounding box" : [ 86.4, 345.525, 508.875, 375.034 ],
+    "font" : "LMSans10-Regular",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "PaddleOCR는 입력 이미지로부터 텍스트를 검출하고 인식하는 End-to-End OCR 파이프라인 으로, 다음과 같은 구성요소로 구성된다 Cui et al. (2025)."
+  }, {
+    "type" : "list",
+    "id" : 68,
+    "level" : "8",
+    "page number" : 5,
+    "bounding box" : [ 86.4, 185.029, 463.583, 332.855 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 2,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 86.4, 317.244, 212.333, 332.855 ],
+      "font" : "LMSans10-Bold",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "1. 전처리 (Preprocessing)",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 25,
+        "level" : "7",
+        "page number" : 5,
+        "bounding box" : [ 99.733, 234.263, 324.969, 312.251 ],
+        "numbering style" : "unordered",
+        "number of list items" : 4,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 5,
+          "bounding box" : [ 99.733, 296.291, 324.969, 312.251 ],
+          "font" : "LMSans10-Regular",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "• 입력 이미지 크기 조정 (비율 유지, 패딩 포함)",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 5,
+          "bounding box" : [ 99.733, 275.615, 308.678, 291.575 ],
+          "font" : "LMSans10-Regular",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "• 픽셀 정규화 및 데이터 타입 변환 (float32)",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 5,
+          "bounding box" : [ 99.733, 247.837, 255.959, 270.899 ],
+          "font" : "LMSans10-Regular",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "• 채널 순서 변경 (BGR → RGB)",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 5,
+          "bounding box" : [ 99.733, 234.263, 253.993, 250.223 ],
+          "font" : "LMSans10-Regular",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "• 입력 텐서로 변환 (CHW 형식)",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 86.4, 185.029, 463.583, 221.593 ],
+      "font" : "LMSans10-Bold",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "2. 텍스트 검출 모델 (Text Detection) 이미지 내에서 텍스트가 존재하는 영역을 검출한다. 대표적인 모델은 다음과 같다:",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 69,
+    "level" : "7",
+    "page number" : 5,
+    "bounding box" : [ 99.733, 83.029, 449.885, 181.003 ],
+    "numbering style" : "unordered",
+    "number of list items" : 4,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 99.733, 165.043, 418.529, 181.003 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• DB (Differentiable Binarization): 정확하고 빠른 검출 성능 제공",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 99.733, 144.367, 333.795, 160.327 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• EAST: 초기 OCR 분야에서 널리 사용된 검출기",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 99.733, 123.691, 352.435, 139.651 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• SAST: 방향 인식이 가능하며 회전된 텍스트에 강건",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 99.733, 83.029, 449.885, 118.975 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• PSE (Progressive Scale Expansion): 텍스트 인스턴스 클러스터링 기반 출력은 각 텍스트 영역의 다각형 좌표들이다.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 70,
+    "page number" : 5,
+    "bounding box" : [ 294.911, 55.669, 300.365, 71.629 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 9,
+      "page number" : 5,
+      "bounding box" : [ 294.911, 55.669, 300.365, 71.629 ],
+      "heading level" : 11,
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "3"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 71,
+    "page number" : 6,
+    "bounding box" : [ 86.4, 771.919, 508.876, 787.879 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 10,
+      "page number" : 6,
+      "bounding box" : [ 86.4, 771.919, 508.876, 787.879 ],
+      "heading level" : 11,
+      "font" : "LMSans10-Oblique",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "CHAPTER 2. MODIFICATIONS ACCORDING TO REQUIREMENTS 4"
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 72,
+    "level" : "Subtitle",
+    "page number" : 6,
+    "bounding box" : [ 86.4, 741.291, 278.089, 756.902 ],
+    "heading level" : 10,
+    "font" : "LMSans10-Bold",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "3. 텍스트 인식 모델 (Text Recognition)"
+  }, {
+    "type" : "paragraph",
+    "id" : 73,
+    "page number" : 6,
+    "bounding box" : [ 86.4, 706.789, 508.875, 736.298 ],
+    "font" : "nanumgtmc7",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "검출된 각 텍스트 영역을 자른 후 해당 영역 내의 문자를 인식한다. 주요 인식 모델은 다음과 같다:"
+  }, {
+    "type" : "list",
+    "id" : 74,
+    "level" : "7",
+    "page number" : 6,
+    "bounding box" : [ 99.733, 613.738, 412.4, 697.245 ],
+    "numbering style" : "unordered",
+    "number of list items" : 4,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 99.733, 681.285, 380.578, 697.245 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• CRNN: CNN + BiLSTM + CTC 구조의 고전적인 인식기",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 99.733, 658.769, 388.314, 674.729 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• SVTR: Vision Transformer 기반 인식기로 고정도 성능 제공",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 99.733, 636.253, 412.4, 652.213 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• RARE: Spatial Transformer를 통해 왜곡된 문자를 보정하여 인식",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 99.733, 613.738, 330.942, 629.698 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Rosetta: Facebook에서 제안한 경량 OCR 모델",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 75,
+    "level" : "Subtitle",
+    "page number" : 6,
+    "bounding box" : [ 86.4, 584.562, 217.368, 600.173 ],
+    "heading level" : 10,
+    "font" : "LMSans10-Bold",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "4. 후처리 (Postprocessing)"
+  }, {
+    "type" : "list",
+    "id" : 76,
+    "level" : "7",
+    "page number" : 6,
+    "bounding box" : [ 99.733, 496.062, 327.927, 579.569 ],
+    "numbering style" : "unordered",
+    "number of list items" : 4,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 99.733, 563.609, 179.098, 579.569 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• CTC decoding",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 99.733, 541.093, 327.927, 557.053 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Direction classifier를 통한 좌우 반전 여부 판단",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 99.733, 518.578, 288.302, 534.538 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Character dictionary 기반 문자 필터링",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 99.733, 496.062, 292.993, 512.022 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Confidence score를 활용한 결과 필터링",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 77,
+    "level" : "Subtitle",
+    "page number" : 6,
+    "bounding box" : [ 86.4, 460.269, 323.956, 480.798 ],
+    "heading level" : 7,
+    "font" : "nanumgtbac",
+    "font size" : 14.346,
+    "text color" : "[0.0]",
+    "content" : "2.2 기술적 한계 및 해결 방안 고도화"
+  }, {
+    "type" : "list",
+    "id" : 78,
+    "level" : "7",
+    "page number" : 6,
+    "bounding box" : [ 99.733, 359.746, 508.879, 452.419 ],
+    "numbering style" : "unordered",
+    "number of list items" : 2,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 99.733, 422.909, 508.879, 452.419 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• 곡면/곡률 이미지 대응은 현재 모든 구현을 완료하고 보완이 필요하여 Future study로 지정한다.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 99.733, 359.746, 508.876, 416.354 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• 연산 비용을 줄이기 위해 PP-OCR Tiny, TextCtrl-Lite 등 경량 모델의 적용 가능성을 제안하였으나, 리서치 결과 해당 모델들은 사용할 수 없거나 존재하지 않음을 확인하 였다. 한 편 TextCtrl에서 텍스트를 지우는 프로세스가 내포되기에 GarNet을 사용하지 않음에 따른 전체 파이프라인 경량화가 진행되었다.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 79,
+    "level" : "Subtitle",
+    "page number" : 6,
+    "bounding box" : [ 86.4, 323.954, 305.21, 344.483 ],
+    "heading level" : 7,
+    "font" : "nanumgtbc2",
+    "font size" : 14.346,
+    "text color" : "[0.0]",
+    "content" : "2.3 테스트 및 검증 시나리오 강화"
+  }, {
+    "type" : "list",
+    "id" : 80,
+    "level" : "7",
+    "page number" : 6,
+    "bounding box" : [ 99.733, 209.881, 508.876, 316.103 ],
+    "numbering style" : "unordered",
+    "number of list items" : 2,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 99.733, 286.594, 508.876, 316.103 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• 예시 이미지를 통한 사용자 평가를 계획해 구현 이후 구글 폼을 이용한 사용자 평가 수행 예정이다.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 99.733, 209.881, 508.876, 280.038 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• 다국어 폰트(한글, 영어, 일본어)를 적용하기 위해 TextCtrl 모델을 재학습한다. 본 보 고서에서 뉴스기사 크롤링을 통한 6만자의 한글 데이터를 수집하였으며, 이를 통해 TextCtrl 모델을 재학습 하였다. TextCtrl 재학습 데이터는 입력한 배경 이미지 및, 그레 이 스케일 배경과 폰트에 따라 생성된 한글 이미지를 합친 데이터이다. 이를 통해 PSNR 을 기반으로 모델을 추가 언어에 대해 학습한다.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 81,
+    "page number" : 7,
+    "bounding box" : [ 86.4, 771.919, 508.876, 787.879 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 11,
+      "page number" : 7,
+      "bounding box" : [ 86.4, 771.919, 508.876, 787.879 ],
+      "heading level" : 11,
+      "font" : "LMSans10-Oblique",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "CHAPTER 2. MODIFICATIONS ACCORDING TO REQUIREMENTS 5"
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 82,
+    "page number" : 7,
+    "bounding box" : [ 107.525, 610.37, 487.723, 755.487 ],
+    "source" : "2025중간보고서_10_TMOJI_자연스러운 번역 텍스트 합성_images/imageFile2.png"
+  }, {
+    "type" : "caption",
+    "id" : 83,
+    "page number" : 7,
+    "bounding box" : [ 188.035, 588.96, 407.247, 603.536 ],
+    "linked content id" : 82,
+    "font" : "LMSans10-Regular",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Figure 2.1: Overall architecture of proposed pipeline."
+  }, {
+    "type" : "heading",
+    "id" : 84,
+    "level" : "Subtitle",
+    "page number" : 7,
+    "bounding box" : [ 86.4, 549.289, 318.125, 569.818 ],
+    "heading level" : 6,
+    "font" : "LMSans10-Bold",
+    "font size" : 14.346,
+    "text color" : "[0.0]",
+    "content" : "2.4 Details of design and changes"
+  }, {
+    "type" : "paragraph",
+    "id" : 85,
+    "page number" : 7,
+    "bounding box" : [ 86.4, 471.281, 508.879, 541.438 ],
+    "font" : "LMSans10-Regular",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "본 모델의 전체 구조는 그림 2.1와 같다. 프레임워크는 총 3단계로 구성되며, 기존의 텍스트 추출, 번역, 삭제 및 합성 단계에서 텍스트 추출, 번역, 합성 단계로 축소한다. 텍스트 추출 단계에서는 PaddleOCR 모델을 사용해 텍스트의 내용과 바운딩 박스를 추출한다. 이후 번역 단게에서 해당 텍스트를 번역하고, 원본 텍스트, 번역된 텍스트, 바운딩 박스 정보가 TextCtrl 에 입력되어 최종 출력을 생성한다. Key modification과 수정 사항은 다음과 같다."
+  }, {
+    "type" : "list",
+    "id" : 86,
+    "level" : "7",
+    "page number" : 7,
+    "bounding box" : [ 99.733, 373.647, 508.88, 461.737 ],
+    "numbering style" : "unordered",
+    "number of list items" : 3,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 7,
+      "bounding box" : [ 99.733, 432.228, 508.88, 461.737 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• 본 모델은 TextCtrl 모델의 이점을 사용해 GarNet의 이미지 삭제 단게를 제거하며 모델의 코스트를 완화아였다.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 7,
+      "bounding box" : [ 99.733, 396.163, 508.876, 425.672 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• 본 모델의 Pipeline 다양한 폰트와 추가 언어(한글)을 추가 학습하여, 모델의 언어 지원 다양성을 추가하였다.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 7,
+      "bounding box" : [ 99.733, 373.647, 378.012, 389.607 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• 모델의 추가 보완 가능성과 평가 지표를 추가 탐색하였다.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 87,
+    "level" : "Subtitle",
+    "page number" : 7,
+    "bounding box" : [ 86.4, 337.855, 178.318, 358.384 ],
+    "heading level" : 6,
+    "font" : "LMSans10-Bold",
+    "font size" : 14.346,
+    "text color" : "[0.0]",
+    "content" : "2.5 Progress"
+  }, {
+    "type" : "list",
+    "id" : 88,
+    "level" : "8",
+    "page number" : 7,
+    "bounding box" : [ 86.4, 243.736, 245.428, 330.573 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 2,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 7,
+      "bounding box" : [ 86.4, 292.823, 230.711, 330.573 ],
+      "font" : "LMSans10-Bold",
+      "font size" : 11.955,
+      "text color" : "[0.0]",
+      "content" : "2.5.1 Time Table 타임 테이블은 그림 2.2과 같다.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 7,
+      "bounding box" : [ 86.4, 243.736, 245.428, 280.046 ],
+      "font" : "LMSans10-Bold",
+      "font size" : 11.955,
+      "text color" : "[0.0]",
+      "content" : "2.5.2 Personalized Progress 이동훈",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 89,
+    "level" : "7",
+    "page number" : 7,
+    "bounding box" : [ 99.733, 174.749, 223.484, 235.74 ],
+    "numbering style" : "unordered",
+    "number of list items" : 3,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 7,
+      "bounding box" : [ 99.733, 219.78, 223.484, 235.74 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• 프로젝트 UI/UX 구체화",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 7,
+      "bounding box" : [ 99.733, 197.265, 213.233, 213.225 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• 학습용 데이터셋 서치",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 7,
+      "bounding box" : [ 99.733, 174.749, 192.727, 190.709 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• 학습용 폰트 수집",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 90,
+    "page number" : 7,
+    "bounding box" : [ 86.4, 153.707, 117.163, 164.245 ],
+    "font" : "nanumgtmc7",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "이승재"
+  }, {
+    "type" : "list",
+    "id" : 91,
+    "level" : "7",
+    "page number" : 7,
+    "bounding box" : [ 99.733, 84.687, 364.106, 145.678 ],
+    "numbering style" : "unordered",
+    "number of list items" : 3,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 7,
+      "bounding box" : [ 99.733, 129.718, 243.699, 145.678 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• SRnet gen-ko 데이터셋 생성",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 7,
+      "bounding box" : [ 99.733, 107.202, 236.969, 123.162 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• style & glyph encoder 학습",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 7,
+      "bounding box" : [ 99.733, 84.687, 364.106, 100.647 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• ko-to-ko textctrl ocr_loss 수정 후 본 학습에 반영 예정",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 92,
+    "page number" : 8,
+    "bounding box" : [ 86.4, 771.919, 508.876, 787.879 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 12,
+      "page number" : 8,
+      "bounding box" : [ 86.4, 771.919, 508.876, 787.879 ],
+      "heading level" : 11,
+      "font" : "LMSans10-Oblique",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "CHAPTER 2. MODIFICATIONS ACCORDING TO REQUIREMENTS 6"
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 93,
+    "page number" : 8,
+    "bounding box" : [ 170.079, 551.36, 425.178, 666.891 ],
+    "source" : "2025중간보고서_10_TMOJI_자연스러운 번역 텍스트 합성_images/imageFile3.png"
+  }, {
+    "type" : "list",
+    "id" : 94,
+    "level" : "8",
+    "page number" : 8,
+    "bounding box" : [ 289.874, 201.334, 301.801, 548.167 ],
+    "numbering style" : "english letters",
+    "number of list items" : 3,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 8,
+      "bounding box" : [ 290.04, 535.005, 301.635, 548.167 ],
+      "font" : "LMSans9-Regular",
+      "font size" : 8.966,
+      "text color" : "[0.0]",
+      "content" : "(a)",
+      "kids" : [ {
+        "type" : "image",
+        "id" : 23,
+        "page number" : 8,
+        "bounding box" : [ 170.079, 401.531, 425.203, 524.612 ],
+        "source" : "2025중간보고서_10_TMOJI_자연스러운 번역 텍스트 합성_images/imageFile4.png"
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 8,
+      "bounding box" : [ 289.874, 385.176, 301.801, 398.338 ],
+      "font" : "LMSans9-Regular",
+      "font size" : 8.966,
+      "text color" : "[0.0]",
+      "content" : "(b)",
+      "kids" : [ {
+        "type" : "image",
+        "id" : 24,
+        "page number" : 8,
+        "bounding box" : [ 170.079, 217.689, 425.198, 374.783 ],
+        "source" : "2025중간보고서_10_TMOJI_자연스러운 번역 텍스트 합성_images/imageFile5.png"
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 8,
+      "bounding box" : [ 290.206, 201.334, 301.469, 214.496 ],
+      "font" : "LMSans9-Regular",
+      "font size" : 8.966,
+      "text color" : "[0.0]",
+      "content" : "(c)",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 95,
+    "page number" : 8,
+    "bounding box" : [ 222.835, 175.506, 372.44, 190.082 ],
+    "font" : "LMSans10-Regular",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Figure 2.2: The progress time table."
+  }, {
+    "type" : "header",
+    "id" : 96,
+    "page number" : 9,
+    "bounding box" : [ 86.4, 771.919, 508.876, 787.879 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 13,
+      "page number" : 9,
+      "bounding box" : [ 86.4, 771.919, 508.876, 787.879 ],
+      "heading level" : 11,
+      "font" : "LMSans10-Oblique",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "CHAPTER 2. MODIFICATIONS ACCORDING TO REQUIREMENTS 7"
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 97,
+    "page number" : 9,
+    "bounding box" : [ 86.4, 742.6, 117.163, 753.084 ],
+    "font" : "nanumgtmbb",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "문경환"
+  }, {
+    "type" : "list",
+    "id" : 98,
+    "level" : "7",
+    "page number" : 9,
+    "bounding box" : [ 99.733, 673.613, 241.018, 734.605 ],
+    "numbering style" : "unordered",
+    "number of list items" : 3,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 99.733, 718.645, 241.018, 734.605 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• 모델 평가지표 탐색 및 정리",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 99.733, 696.129, 206.618, 712.089 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• 보고서 및 문서 작성",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 99.733, 673.613, 237.381, 689.573 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• 학습용 한글 데이터 크롤링",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 99,
+    "level" : "Subtitle",
+    "page number" : 9,
+    "bounding box" : [ 86.4, 637.821, 163.322, 658.35 ],
+    "heading level" : 6,
+    "font" : "LMSans10-Bold",
+    "font size" : 14.346,
+    "text color" : "[0.0]",
+    "content" : "2.6 Result"
+  }, {
+    "type" : "heading",
+    "id" : 100,
+    "level" : "Subtitle",
+    "page number" : 9,
+    "bounding box" : [ 86.4, 613.431, 220.254, 630.539 ],
+    "heading level" : 8,
+    "font" : "LMSans10-Bold",
+    "font size" : 11.955,
+    "text color" : "[0.0]",
+    "content" : "2.6.1 Textctrl: Dataset"
+  }, {
+    "type" : "paragraph",
+    "id" : 101,
+    "page number" : 9,
+    "bounding box" : [ 86.4, 565.691, 508.875, 608.749 ],
+    "font" : "nanumgtmc7",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "기존 TextCtrl은 영문 텍스트 기반으로만 학습되어 있어, 한글 텍스트에 직접 적용하기 어 려운 한계가 있었다. 이에 따라 본 연구에서는 데이터셋 생성을 위한 전처리 단계부터 새롭게 접근하였다."
+  }, {
+    "type" : "paragraph",
+    "id" : 102,
+    "page number" : 9,
+    "bounding box" : [ 97.309, 536.384, 508.876, 552.344 ],
+    "font" : "LMSans10-Regular",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "SRNet-Datagen 기반의 기존 데이터 생성 코드를 한국어 환경에 맞게 수정하고, 한글 폰트"
+  }, {
+    "type" : "list",
+    "id" : 103,
+    "level" : "8",
+    "page number" : 9,
+    "bounding box" : [ 86.4, 482.187, 508.875, 538.795 ],
+    "numbering style" : "korean letters",
+    "number of list items" : 2,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 86.4, 522.835, 508.875, 538.795 ],
+      "font" : "nanumgtmac",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "가 바운딩 박스 안에 안정적으로 들어가도록 레이아웃을 조정했다. 특히 한글은 글자 구조상",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 86.4, 482.187, 508.875, 525.246 ],
+      "font" : "nanumgtmc7",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "자간 및 글자 크기의 변동 폭이 크기 때문에, 영문 대비 더 넓은 바운딩 박스를 적용하는 방 식으로 데이터 생성을 진행했다. 이렇게 하여 총 20만 장 규모의 한글 텍스트 렌더링 이미지 데이터를 생성하였으며, 예시는 그림 2.3과 같다.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 104,
+    "page number" : 9,
+    "bounding box" : [ 107.525, 389.763, 487.768, 471.036 ],
+    "source" : "2025중간보고서_10_TMOJI_자연스러운 번역 텍스트 합성_images/imageFile6.png"
+  }, {
+    "type" : "caption",
+    "id" : 105,
+    "page number" : 9,
+    "bounding box" : [ 128.919, 368.284, 466.357, 382.929 ],
+    "linked content id" : 104,
+    "font" : "LMSans10-Regular",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Figure 2.3: 왼쪽 위부터 오른쪽 아래 순서로 각각 i_s (배경 위 스타일 텍스트"
+  }, {
+    "type" : "list",
+    "id" : 106,
+    "level" : "9",
+    "page number" : 9,
+    "bounding box" : [ 128.919, 332.418, 466.357, 370.973 ],
+    "numbering style" : "english letters",
+    "number of list items" : 2,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 128.919, 344.373, 466.357, 370.973 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 9.963,
+      "text color" : "[0.0]",
+      "content" : "a), i_t (회색 배경 위 일반 텍스트 b), t_sk (스타일 텍스트 b의 스켈레톤), t_t (회색 배경 위 스타일 텍스트 b), t_b (배경 이미지), t_f (배경 위 스타일 텍스트",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 128.919, 332.418, 410.986, 347.063 ],
+      "font" : "LMSans10-Regular",
+      "font size" : 9.963,
+      "text color" : "[0.0]",
+      "content" : "b), mask_t (스타일 텍스트 b의 바이너리 마스크) 예시를 나타낸다.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 107,
+    "level" : "Subtitle",
+    "page number" : 9,
+    "bounding box" : [ 86.399, 298.723, 282.096, 315.831 ],
+    "heading level" : 8,
+    "font" : "LMSans10-Bold",
+    "font size" : 11.955,
+    "text color" : "[0.0]",
+    "content" : "2.6.2 Textctrl: Text Style Encoder"
+  }, {
+    "type" : "paragraph",
+    "id" : 108,
+    "page number" : 9,
+    "bounding box" : [ 86.399, 250.983, 508.879, 294.041 ],
+    "font" : "LMSans10-Regular",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "장면 텍스트 편집은, 텍스트 스타일(폰트, 색상, 공간 변환, 입체 효과 등)이 시각적으로 혼합되어 있어 스타일 특징 분리에 어려움이 있음. TextCtrl에서는 다중 작업 사전 학습(Text Style Disentanglement Pretraining)을 통해 세분화된 스타일 분리를 실현함."
+  }, {
+    "type" : "paragraph",
+    "id" : 109,
+    "page number" : 9,
+    "bounding box" : [ 97.308, 221.676, 492.988, 237.636 ],
+    "font" : "LMSans10-Regular",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "앞서 생성한 Dataset을 바탕으로, 해당 인코더 학습을 실시함. 예시는 그림 2.4과 같다."
+  }, {
+    "type" : "header",
+    "id" : 110,
+    "page number" : 10,
+    "bounding box" : [ 86.4, 771.919, 508.876, 787.879 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 14,
+      "page number" : 10,
+      "bounding box" : [ 86.4, 771.919, 508.876, 787.879 ],
+      "heading level" : 11,
+      "font" : "LMSans10-Oblique",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "CHAPTER 2. MODIFICATIONS ACCORDING TO REQUIREMENTS 8"
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 111,
+    "page number" : 10,
+    "bounding box" : [ 107.525, 694.85, 487.754, 755.49 ],
+    "source" : "2025중간보고서_10_TMOJI_자연스러운 번역 텍스트 합성_images/imageFile7.png"
+  }, {
+    "type" : "image",
+    "id" : 112,
+    "page number" : 10,
+    "bounding box" : [ 107.525, 623.161, 487.754, 693.855 ],
+    "source" : "2025중간보고서_10_TMOJI_자연스러운 번역 텍스트 합성_images/imageFile8.png"
+  }, {
+    "type" : "caption",
+    "id" : 113,
+    "page number" : 10,
+    "bounding box" : [ 128.919, 553.93, 466.358, 616.326 ],
+    "linked content id" : 112,
+    "font" : "LMMono10-Regular",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Figure 2.4: 왼쪽부터 순서대로 각각 source_image (입력 텍스트 이미지), removal_image (텍스트 제거 결과), seg_image (텍스트 분할 결과), color_gt (색상 전송 대상 텍스트), color_image (색상 전송 결과), font_gt (폰트 전송 대상 텍스트), font_image (폰트 전송 결과)를 나타낸다. 위의 그림은 첫 에폭시, 아래의 그림은 에폭 50이후의 이미지이다."
+  }, {
+    "type" : "list",
+    "id" : 114,
+    "level" : "10",
+    "page number" : 10,
+    "bounding box" : [ 86.4, 351.943, 347.923, 537.274 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 2,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 86.4, 520.166, 257.058, 537.274 ],
+      "font" : "LMSans10-Bold",
+      "font size" : 11.955,
+      "text color" : "[0.0]",
+      "content" : "2.6.3 Textctrl: Glpyh Encoder",
+      "kids" : [ {
+        "type" : "paragraph",
+        "id" : 21,
+        "page number" : 10,
+        "bounding box" : [ 86.4, 438.225, 508.875, 515.484 ],
+        "font" : "LMSans10-Regular",
+        "font size" : 10.909,
+        "text color" : "[0.0]",
+        "content" : "TextCtrl은 문자 수준 텍스트 인코더 T를 사용하여 대상 텍스트 임베딩을 시각적 글리프 구조와 정렬되도록 처리한다. 이 인코더는 입력 텍스트를 Transformer 기반 인코더에 통 과시켜 글리프 구조 특징 Cstruct를 생성한다. 이후 생성된 Cstruct는 고정된(frozen) 상태의 사전 학습된 장면 텍스트 인식기(recognizer)로부터 추출된 시각적 특징과 의미적으로 정렬되 며, 이 과정에서 CLIP 손실 Lclip이 사용된다."
+      }, {
+        "type" : "paragraph",
+        "id" : 22,
+        "page number" : 10,
+        "bounding box" : [ 86.4, 402.471, 508.875, 431.98 ],
+        "font" : "nanumgtmd5",
+        "font size" : 10.909,
+        "text color" : "[0.0]",
+        "content" : "본 모델에서 한국어 내용을 반영하기 위해, 기존의 영문 글리프를 인식하던 부분을, 유니코 드를 사용하여 한글 ’가’-’힇’까지 총 11,172자로 수정하여, 해당 인코더를 재학습했다."
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 86.4, 351.943, 347.923, 389.693 ],
+      "font" : "LMSans10-Bold",
+      "font size" : 11.955,
+      "text color" : "[0.0]",
+      "content" : "2.6.4 Links Github : https://github.com/Ea3124/SRNet-Datagen_kr",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 115,
+    "level" : "Subtitle",
+    "page number" : 10,
+    "bounding box" : [ 86.052, 319.218, 209.548, 333.568 ],
+    "heading level" : 4,
+    "font" : "Dotum",
+    "font size" : 14.35,
+    "text color" : "[0.0]",
+    "content" : "2.7 UI/UX 구체화"
+  }, {
+    "type" : "caption",
+    "id" : 116,
+    "page number" : 10,
+    "bounding box" : [ 96.983, 292.347, 483.641, 303.256 ],
+    "linked content id" : 117,
+    "font" : "Dotum",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "본 모델을 이용한 웹 어플리케이션 제작을 위해 UI/UX를 설계 및 구체화하였다."
+  }, {
+    "type" : "image",
+    "id" : 117,
+    "page number" : 10,
+    "bounding box" : [ 107.343, 138.877, 302.511, 277.674 ],
+    "source" : "2025중간보고서_10_TMOJI_자연스러운 번역 텍스트 합성_images/imageFile9.png"
+  }, {
+    "type" : "image",
+    "id" : 118,
+    "page number" : 10,
+    "bounding box" : [ 305.173, 139.27, 498.568, 276.787 ],
+    "source" : "2025중간보고서_10_TMOJI_자연스러운 번역 텍스트 합성_images/imageFile10.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 119,
+    "page number" : 10,
+    "bounding box" : [ 149.892, 124.563, 456.726, 134.523 ],
+    "font" : "Dotum",
+    "font size" : 9.96,
+    "text color" : "[0.0]",
+    "content" : "Figure 2.5: 설계된 UI/UX 화면 중, 2가지 화면을 발췌한 이미지이다."
+  }, {
+    "type" : "paragraph",
+    "id" : 120,
+    "page number" : 10,
+    "bounding box" : [ 86.4, 92.603, 472.319, 116.605 ],
+    "font" : "Dotum",
+    "font size" : 10.91,
+    "text color" : "[0.0]",
+    "content" : "Figma(UI/UX): https://www.figma.com/design/JvbYnuSH3OT1lQWxcJpusq/ TMOJI?node-id=67-2&t=Cm33fTZ9oVOoKKpk-1"
+  }, {
+    "type" : "heading",
+    "id" : 121,
+    "level" : "Doctitle",
+    "page number" : 11,
+    "bounding box" : [ 86.4, 657.468, 208.531, 692.938 ],
+    "heading level" : 1,
+    "font" : "LMSans10-Bold",
+    "font size" : 24.787,
+    "text color" : "[0.0]",
+    "content" : "References"
+  }, {
+    "type" : "paragraph",
+    "id" : 122,
+    "page number" : 11,
+    "bounding box" : [ 86.4, 594.51, 508.878, 624.019 ],
+    "font" : "LMSans10-Regular",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "Cui, C., Sun, T., Lin, M., Gao, T., Zhang, Y., Liu, J., Wang, X., Zhang, Z., Zhou, C., Liu, H. et al. (2025), ‘Paddleocr 3.0 technical report’, arXiv preprint arXiv:2507.05595 ."
+  }, {
+    "type" : "paragraph",
+    "id" : 123,
+    "page number" : 11,
+    "bounding box" : [ 86.4, 544.896, 508.878, 587.954 ],
+    "font" : "LMSans10-Regular",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "Zeng, W., Shu, Y., Li, Z., Yang, D. and Zhou, Y. (2024), ‘Textctrl: Diffusion-based scene text editing with prior guidance control’, Advances in Neural Information Processing Systems 37, 138569–138594."
+  }, {
+    "type" : "paragraph",
+    "id" : 124,
+    "page number" : 11,
+    "bounding box" : [ 294.911, 55.668, 300.366, 71.628 ],
+    "font" : "LMSans10-Regular",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "9"
+  } ]
+}

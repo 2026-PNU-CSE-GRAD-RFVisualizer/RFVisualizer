@@ -1,0 +1,44 @@
+{
+  "tool": "research-pdf-ingest",
+  "created_at": "2026-07-16T10:36:37.594396+00:00",
+  "input_pdf": "/data/RFVisualizer/Documents/중간보고서/Ref/2026전기_착수보고서_16_이거왜됨연구회_3DGS 기반 공간 데이터 시각화.pdf",
+  "input_sha256": "dba0f89b6f4f683735ae83773e6f14a947efdafd93791c98578f2a27cfd51088",
+  "output_dir": "/data/RFVisualizer/tmp/pdf_ingest/interim_reports/2026____16___3DGS-dba0f89b6f4f",
+  "opendataloader_pdf_version": "2.4.1",
+  "options": {
+    "formats": [
+      "markdown",
+      "json",
+      "html"
+    ],
+    "pages": null,
+    "password_present": false,
+    "table_method": "cluster",
+    "reading_order": "xycut",
+    "image_output": "external",
+    "image_dir": null,
+    "include_header_footer": false,
+    "use_struct_tree": false,
+    "sanitize": false,
+    "hybrid": "off",
+    "hybrid_url": null,
+    "hybrid_timeout": "60000",
+    "hybrid_fallback": false,
+    "threads": "1"
+  },
+  "artifacts": {
+    "markdown": [
+      "2026전기_착수보고서_16_이거왜됨연구회_3DGS 기반 공간 데이터 시각화.md"
+    ],
+    "json": [
+      "2026전기_착수보고서_16_이거왜됨연구회_3DGS 기반 공간 데이터 시각화.json"
+    ],
+    "html": [
+      "2026전기_착수보고서_16_이거왜됨연구회_3DGS 기반 공간 데이터 시각화.html"
+    ],
+    "images": [
+      "2026전기_착수보고서_16_이거왜됨연구회_3DGS 기반 공간 데이터 시각화_images/imageFile1.png",
+      "2026전기_착수보고서_16_이거왜됨연구회_3DGS 기반 공간 데이터 시각화_images/imageFile2.png"
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "tool": "research-pdf-ingest",
+  "created_at": "2026-07-16T10:36:38.583826+00:00",
+  "input_pdf": "/data/RFVisualizer/Documents/중간보고서/Ref/2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현.pdf",
+  "input_sha256": "4e7ca819660f0946641e44889e922eb2fd42badefdf6212bee8271d0f2953642",
+  "output_dir": "/data/RFVisualizer/tmp/pdf_ingest/interim_reports/2025__46_KGL__Policy_Engine-4e7ca819660f",
+  "opendataloader_pdf_version": "2.4.1",
+  "options": {
+    "formats": [
+      "markdown",
+      "json",
+      "html"
+    ],
+    "pages": null,
+    "password_present": false,
+    "table_method": "cluster",
+    "reading_order": "xycut",
+    "image_output": "external",
+    "image_dir": null,
+    "include_header_footer": false,
+    "use_struct_tree": false,
+    "sanitize": false,
+    "hybrid": "off",
+    "hybrid_url": null,
+    "hybrid_timeout": "60000",
+    "hybrid_fallback": false,
+    "threads": "1"
+  },
+  "artifacts": {
+    "markdown": [
+      "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현.md"
+    ],
+    "json": [
+      "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현.json"
+    ],
+    "html": [
+      "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현.html"
+    ],
+    "images": [
+      "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile1.png",
+      "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile10.png",
+      "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile11.png",
+      "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile12.png",
+      "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile13.png",
+      "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile14.png",
+      "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile15.png",
+      "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile16.png",
+      "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile17.png",
+      "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile18.png",
+      "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile19.png",
+      "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile2.png",
+      "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile20.png",
+      "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile21.png",
+      "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile22.png",
+      "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile23.png",
+      "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile3.png",
+      "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile4.png",
+      "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile5.png",
+      "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile6.png",
+      "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile7.png",
+      "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile8.png",
+      "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile9.png"
+    ]
+  }
+}

@@ -1,0 +1,3523 @@
+{
+  "file name" : "2025중간보고서_25_UmiZoomi_AI_기반_스마트_알림_시스템.pdf",
+  "number of pages" : 22,
+  "author" : "",
+  "title" : "",
+  "creation date" : "D:20250718052127Z",
+  "modification date" : "D:20250718052127Z",
+  "kids" : [ {
+    "type" : "heading",
+    "id" : 74,
+    "level" : "Subtitle",
+    "page number" : 1,
+    "bounding box" : [ 137.286, 617.902, 457.997, 671.781 ],
+    "heading level" : 2,
+    "font" : "SFSX1728",
+    "font size" : 17.215,
+    "text color" : "[0.0]",
+    "content" : "AI-powered Smart Notification System UmiDo"
+  }, {
+    "type" : "image",
+    "id" : 75,
+    "page number" : 1,
+    "bounding box" : [ 218.977, 394.253, 376.309, 551.585 ],
+    "source" : "2025중간보고서_25_UmiZoomi_AI_기반_스마트_알림_시스템_images/imageFile1.png"
+  }, {
+    "type" : "heading",
+    "id" : 76,
+    "level" : "Subtitle",
+    "page number" : 1,
+    "bounding box" : [ 248.352, 320.258, 346.928, 338.377 ],
+    "heading level" : 4,
+    "font" : "SFRM1440",
+    "font size" : 14.346,
+    "text color" : "[0.0]",
+    "content" : "팀명: UmiZoomi"
+  }, {
+    "type" : "paragraph",
+    "id" : 77,
+    "page number" : 1,
+    "bounding box" : [ 221.569, 276.33, 373.704, 312.34 ],
+    "font" : "SFRM1200",
+    "font size" : 11.955,
+    "text color" : "[0.0]",
+    "content" : "202255636 Kadyrov Adilet 202255634 Yegizbayev Zholan"
+  }, {
+    "type" : "paragraph",
+    "id" : 78,
+    "page number" : 1,
+    "bounding box" : [ 254.311, 235.566, 340.964, 250.654 ],
+    "font" : "nanummjmad",
+    "font size" : 11.955,
+    "text color" : "[0.0]",
+    "content" : "지도교수: 조환규"
+  }, {
+    "type" : "paragraph",
+    "id" : 79,
+    "page number" : 1,
+    "bounding box" : [ 235.608, 194.802, 359.667, 209.89 ],
+    "font" : "SFRM1200",
+    "font size" : 11.955,
+    "text color" : "[0.0]",
+    "content" : "제출일: 2025년 7월 16일"
+  }, {
+    "type" : "paragraph",
+    "id" : 80,
+    "page number" : 1,
+    "bounding box" : [ 269.244, 82.863, 326.031, 94.233 ],
+    "font" : "nanummjmc0",
+    "font size" : 11.955,
+    "text color" : "[0.0]",
+    "content" : "부산대학교"
+  }, {
+    "type" : "heading",
+    "id" : 81,
+    "level" : "Doctitle",
+    "page number" : 2,
+    "bounding box" : [ 85.039, 671.044, 132.135, 694.989 ],
+    "heading level" : 1,
+    "font" : "nanummjbba",
+    "font size" : 24.787,
+    "text color" : "[0.0]",
+    "content" : "목차"
+  }, {
+    "type" : "list",
+    "id" : 82,
+    "level" : "1",
+    "page number" : 2,
+    "bounding box" : [ 85.039, 110.42, 510.239, 614.816 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 5,
+    "next list id" : 88,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 85.039, 601.224, 510.231, 614.816 ],
+      "font" : "SFBX1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "1 Project Overview 1",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 69,
+        "level" : "2",
+        "page number" : 2,
+        "bounding box" : [ 101.403, 560.532, 510.242, 594.623 ],
+        "numbering style" : "arabic numbers",
+        "number of list items" : 2,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 101.403, 580.856, 510.234, 594.623 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "1.1 Introduction and Problem Background . . . . . . . . . . . . . . . . . . . . . 1",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 101.403, 560.532, 510.242, 574.299 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "1.2 Project Objectives . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 85.039, 529.343, 510.236, 542.935 ],
+      "font" : "SFBX1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "2 Modifications to Requirements and Constraints 4",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 70,
+        "level" : "3",
+        "page number" : 2,
+        "bounding box" : [ 126.494, 488.652, 510.242, 522.743 ],
+        "numbering style" : "arabic numbers",
+        "number of list items" : 2,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 126.494, 508.976, 510.241, 522.743 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "2.0.1 Initial Requirements . . . . . . . . . . . . . . . . . . . . . . . . . . . 4",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 126.494, 488.652, 510.242, 502.419 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "2.0.2 Modified Requirements . . . . . . . . . . . . . . . . . . . . . . . . . . 5",
+          "kids" : [ ]
+        } ]
+      }, {
+        "type" : "paragraph",
+        "id" : 71,
+        "page number" : 2,
+        "bounding box" : [ 101.403, 468.328, 510.242, 482.095 ],
+        "font" : "SFRM1095",
+        "font size" : 10.909,
+        "text color" : "[0.0]",
+        "content" : "2.1 Realistic Constraints and Countermeasures . . . . . . . . . . . . . . . . . . 6"
+      }, {
+        "type" : "list",
+        "id" : 72,
+        "level" : "4",
+        "page number" : 2,
+        "bounding box" : [ 126.494, 387.033, 510.242, 461.771 ],
+        "numbering style" : "arabic numbers",
+        "number of list items" : 4,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 126.494, 448.004, 510.242, 461.771 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "2.1.1 Initial Constraints . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 126.494, 427.68, 510.234, 441.447 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "2.1.2 Countermeasures for Initial Constraints . . . . . . . . . . . . . . . . 7",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 126.494, 407.357, 510.239, 421.124 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "2.1.3 Evolving Constraints . . . . . . . . . . . . . . . . . . . . . . . . . . . 8",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 126.494, 387.033, 510.241, 400.8 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "2.1.4 Countermeasures for Evolving Constraints . . . . . . . . . . . . . . . 8",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 85.039, 355.844, 510.233, 369.436 ],
+      "font" : "SFBX1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "3 Team Member Progress 10",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 85.039, 304.243, 510.236, 338.203 ],
+      "font" : "SFBX1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "4 Design 12 4.1 Design Details and Changes . . . . . . . . . . . . . . . . . . . . . . . . . . . 12",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 73,
+        "level" : "5",
+        "page number" : 2,
+        "bounding box" : [ 126.494, 161.977, 510.241, 297.686 ],
+        "numbering style" : "arabic numbers",
+        "number of list items" : 7,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 126.494, 283.919, 510.236, 297.686 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "4.1.1 System Design Approach . . . . . . . . . . . . . . . . . . . . . . . . 12",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 126.494, 263.596, 510.24, 277.363 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "4.1.2 Data Handling and Storage . . . . . . . . . . . . . . . . . . . . . . . 13",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 126.494, 243.272, 510.235, 257.039 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "4.1.3 Frontend and User Interface Design . . . . . . . . . . . . . . . . . . . 14",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 126.494, 222.948, 510.236, 236.715 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "4.1.4 AI/NLP System Design . . . . . . . . . . . . . . . . . . . . . . . . . 14",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 126.494, 202.624, 510.241, 216.391 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "4.1.5 Notification System and Conflict Detection . . . . . . . . . . . . . . 15",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 126.494, 182.3, 510.238, 196.067 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "4.1.6 Offline Mode Handling . . . . . . . . . . . . . . . . . . . . . . . . . . 15",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 126.494, 161.977, 510.239, 175.744 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "4.1.7 Key Design Changes from Initial Plan . . . . . . . . . . . . . . . . . 15",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 85.039, 110.42, 510.239, 144.38 ],
+      "font" : "SFBX1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "5 Project Activities and Interim Results 17 5.1 Task Performance and Interim Results . . . . . . . . . . . . . . . . . . . . . 17",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 83,
+    "page number" : 2,
+    "bounding box" : [ 126.494, 90.096, 510.242, 103.863 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "5.1.1 Development Progress by Module . . . . . . . . . . . . . . . . . . . . 17"
+  }, {
+    "type" : "paragraph",
+    "id" : 84,
+    "page number" : 2,
+    "bounding box" : [ 296.13, 51.66, 299.145, 65.427 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "i"
+  }, {
+    "type" : "paragraph",
+    "id" : 85,
+    "page number" : 3,
+    "bounding box" : [ 85.039, 780.737, 510.237, 794.504 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "UmiZoomi 목차"
+  }, {
+    "type" : "paragraph",
+    "id" : 87,
+    "page number" : 3,
+    "bounding box" : [ 126.494, 742.4, 510.236, 756.167 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "5.1.2 Interim Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18"
+  }, {
+    "type" : "list",
+    "id" : 88,
+    "level" : "1",
+    "page number" : 3,
+    "bounding box" : [ 85.039, 690.844, 510.24, 724.804 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "previous list id" : 82,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 3,
+      "bounding box" : [ 85.039, 690.844, 510.24, 724.804 ],
+      "font" : "SFBX1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "6 Development Plan 19 6.1 Detailed Development plan . . . . . . . . . . . . . . . . . . . . . . . . . . . 19",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 89,
+    "page number" : 3,
+    "bounding box" : [ 294.623, 51.66, 300.654, 65.427 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "ii"
+  }, {
+    "type" : "heading",
+    "id" : 90,
+    "level" : "Subtitle",
+    "page number" : 4,
+    "bounding box" : [ 85.039, 657.762, 287.812, 679.006 ],
+    "heading level" : 2,
+    "font" : "SFBX1728",
+    "font size" : 17.215,
+    "text color" : "[0.0]",
+    "content" : "제1장 Project Overview"
+  }, {
+    "type" : "heading",
+    "id" : 91,
+    "level" : "Subtitle",
+    "page number" : 4,
+    "bounding box" : [ 85.039, 589.129, 389.896, 606.789 ],
+    "heading level" : 3,
+    "font" : "SFBX1440",
+    "font size" : 14.346,
+    "text color" : "[0.0]",
+    "content" : "1.1 Introduction and Problem Background"
+  }, {
+    "type" : "paragraph",
+    "id" : 92,
+    "page number" : 4,
+    "bounding box" : [ 85.039, 91.597, 510.243, 572.812 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "In today’s connected world, individuals face increasing challenges when managing multiple responsibilities across healthcare, work, and personal domains. Overlapping schedules, conflicting priorities, and critical tasks such as medication intake or work deadlines are often difficult to coordinate effectively. Traditional task management tools, including simple reminder applications and manual scheduling methods, provide limited support for integrated life management and do not adapt well to individual behavior patterns. As a result, users frequently experience inefficiencies, missed commitments, and decreased overall productivity. Our project addresses these issues by developing an AI-powered Smart Notification System that can intelligently coordinate and prioritize tasks across different domains. Using Natural Language Processing (NLP), the system extracts structured information from unstructured user input, automatically resolves scheduling conflicts, and delivers timely alerts. Additionally, we plan to integrate an AI-based chatbot assistant that enables real-time user interaction, providing an accessible and dynamic management experience. While existing solutions such as medication reminder apps and task management platforms partially address these needs, they often lack holistic integration, cross-domain adaptability, and AI-driven prioritization capabilities. However, we have identified several technical and practical challenges that must be addressed. Accurate interpretation of natural language instructions across multiple domains, effective conflict detection algorithms, and seamless handling of multi-role interactions (e.g., doctor to patient, supervisor to employee) require robust backend logic and advanced AI models. Furthermore, ensuring usability for users with varying degrees of digital literacy—particularly elderly individuals—introduces additional design constraints that we are actively working to address. This project aims to create a practical and intelligent system that enhances users’ daily lives by offering reliable, adaptive, and privacy-conscious task management. Our goal extends be-"
+  }, {
+    "type" : "footer",
+    "id" : 93,
+    "page number" : 4,
+    "bounding box" : [ 294.926, 51.66, 300.35, 65.427 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 31,
+      "page number" : 4,
+      "bounding box" : [ 294.926, 51.66, 300.35, 65.427 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "1"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 94,
+    "page number" : 5,
+    "bounding box" : [ 85.039, 780.737, 510.235, 794.504 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 50,
+      "page number" : 5,
+      "bounding box" : [ 85.039, 780.737, 510.235, 794.504 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "UmiZoomi 1. PROJECT OVERVIEW"
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 96,
+    "page number" : 5,
+    "bounding box" : [ 85.039, 722.077, 510.24, 756.167 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "yond providing simple reminders to delivering a proactive assistant capable of intelligently supporting users in managing the complex realities of modern life."
+  }, {
+    "type" : "heading",
+    "id" : 97,
+    "level" : "Subtitle",
+    "page number" : 5,
+    "bounding box" : [ 85.039, 677.696, 249.62, 695.356 ],
+    "heading level" : 3,
+    "font" : "SFBX1440",
+    "font size" : 14.346,
+    "text color" : "[0.0]",
+    "content" : "1.2 Project Objectives"
+  }, {
+    "type" : "paragraph",
+    "id" : 98,
+    "page number" : 5,
+    "bounding box" : [ 101.976, 647.611, 448.526, 661.378 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "The primary objectives for our project in its current stage are as follows:"
+  }, {
+    "type" : "list",
+    "id" : 99,
+    "level" : "1",
+    "page number" : 5,
+    "bounding box" : [ 98.419, 103.053, 510.241, 629.099 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 6,
+    "next list id" : 103,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 98.419, 534.037, 510.237, 629.099 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "1. We aim to conduct a thorough analysis of existing task management and notification systems in both medical and non-medical domains, identifying their strengths, limitations, and gaps. This analysis will help establish a solid foundation for understanding the challenges involved in developing an AI-based cross-domain notification system.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 98.419, 443.776, 510.235, 518.514 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "2. We will design and implement a secure authentication system that allows various stakeholders such as doctors, supervisors, patients, and agents to interact with the system according to their assigned roles. This involves careful consideration of privacy requirements and access control mechanisms.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 98.419, 353.514, 510.239, 428.252 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "3. Our system will incorporate NLP techniques for extracting structured task information from unstructured text input. This functionality aims to simplify task registration and enhance automation, though we recognize that achieving high accuracy across different languages and writing styles presents significant challenges.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 98.419, 263.253, 510.241, 337.991 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "4. We plan to develop a system capable of analyzing overlapping schedules and identifying potential task conflicts across healthcare, work, and personal life domains. This includes both scheduling conflicts and drug interaction conflicts, which require integration with medical databases.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 98.419, 172.991, 510.237, 247.729 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "5. The system will include a smart chatbot assistant capable of answering user queries regarding tasks, schedules, and reminders. This feature aims to enhance user engagement and accessibility, though we are still evaluating the best framework for implementation.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 98.419, 103.053, 510.233, 157.468 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "6. We will implement a notification system that delivers timely alerts for upcoming tasks, missed critical tasks, and escalates notifications when necessary. This system must balance being informative without becoming intrusive to users.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 100,
+    "page number" : 5,
+    "bounding box" : [ 294.926, 51.66, 300.35, 65.427 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 32,
+      "page number" : 5,
+      "bounding box" : [ 294.926, 51.66, 300.35, 65.427 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "2"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 101,
+    "page number" : 6,
+    "bounding box" : [ 85.039, 780.737, 510.235, 794.504 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 51,
+      "page number" : 6,
+      "bounding box" : [ 85.039, 780.737, 510.235, 794.504 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "UmiZoomi 1. PROJECT OVERVIEW"
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 103,
+    "level" : "1",
+    "page number" : 6,
+    "bounding box" : [ 98.419, 561.877, 510.243, 756.167 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 3,
+    "previous list id" : 99,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 98.419, 701.753, 510.243, 756.167 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "7. While emphasizing automated task processing, the system will also support manual task addition, ensuring consistency between automated and manual task management workflows.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 98.419, 631.815, 510.233, 686.23 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "8. Our team will develop mechanisms to monitor user performance in task completion and generate actionable reports for both users and task assigners. This is particularly important for medical compliance monitoring.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 98.419, 561.877, 510.242, 616.292 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "9. The system design will prioritize non-functional requirements including multi-domain adaptability, data privacy compliance, and ease of use for users with varying levels of digital literacy.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 104,
+    "page number" : 6,
+    "bounding box" : [ 294.926, 51.66, 300.35, 65.427 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 33,
+      "page number" : 6,
+      "bounding box" : [ 294.926, 51.66, 300.35, 65.427 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "3"
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 105,
+    "level" : "Subtitle",
+    "page number" : 7,
+    "bounding box" : [ 85.039, 657.762, 524.112, 679.006 ],
+    "heading level" : 2,
+    "font" : "SFBX1728",
+    "font size" : 17.215,
+    "text color" : "[0.0]",
+    "content" : "제2장 Modifications to Requirements and Constraints"
+  }, {
+    "type" : "heading",
+    "id" : 106,
+    "level" : "Subtitle",
+    "page number" : 7,
+    "bounding box" : [ 85.039, 594.069, 247.113, 608.906 ],
+    "heading level" : 5,
+    "font" : "SFBX1200",
+    "font size" : 11.955,
+    "text color" : "[0.0]",
+    "content" : "2.0.1 Initial Requirements"
+  }, {
+    "type" : "paragraph",
+    "id" : 107,
+    "page number" : 7,
+    "bounding box" : [ 85.039, 546.663, 510.234, 580.753 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "The initial requirements for the project were focused on the development of a reliable and intelligent AI-based smart notification system. These requirements included:"
+  }, {
+    "type" : "list",
+    "id" : 108,
+    "level" : "2",
+    "page number" : 7,
+    "bounding box" : [ 101.434, 101.332, 510.24, 528.151 ],
+    "numbering style" : "unordered",
+    "number of list items" : 4,
+    "next list id" : 113,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 7,
+      "bounding box" : [ 101.434, 392.441, 510.24, 528.151 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Data Requirements: To ensure realistic and practical performance of the system, we required access to diverse user scenarios and task input data reflecting various roles (e.g., doctors, supervisors, patients). Since real-world deployment was not feasible at this stage, we planned to use simulated task data and user interactions across healthcare, work, and personal domains. These simulated datasets would allow testing task parsing, conflict detection, and notification logic under controlled yet realistic conditions.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 7,
+      "bounding box" : [ 101.434, 281.856, 510.238, 376.918 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Functional Requirements: The system needed to support core functionalities, including secure user authentication with role management, intelligent task input with natural language parsing, conflict detection, chatbot interaction, and a robust notification system. Each function had to operate seamlessly within the integrated system to ensure user engagement and task adherence.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 7,
+      "bounding box" : [ 101.434, 150.946, 510.24, 266.332 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• System Requirements: For backend implementation, we selected Node.js with Express for the API server and MongoDB for data storage. Firebase services were required for authentication and push notifications. The frontend would be developed using Flutter to ensure cross-platform compatibility. The system architecture also needed to support scalability for future deployment and integration with external platforms.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 7,
+      "bounding box" : [ 101.434, 101.332, 510.233, 135.423 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• AI Requirements: Incorporating basic NLP capabilities was essential for extracting structured task details from unstructured input. Initially, we planned to use",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 109,
+    "page number" : 7,
+    "bounding box" : [ 294.926, 51.66, 300.35, 65.427 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 34,
+      "page number" : 7,
+      "bounding box" : [ 294.926, 51.66, 300.35, 65.427 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "4"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 110,
+    "page number" : 8,
+    "bounding box" : [ 85.039, 780.737, 510.235, 794.504 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 52,
+      "page number" : 8,
+      "bounding box" : [ 85.039, 780.737, 510.235, 794.504 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "UmiZoomi 2. MODIFICATIONS TO REQUIREMENTS AND CONSTRAINTS"
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 113,
+    "level" : "2",
+    "page number" : 8,
+    "bounding box" : [ 101.434, 591.471, 510.241, 756.167 ],
+    "numbering style" : "unordered",
+    "number of list items" : 2,
+    "previous list id" : 108,
+    "list items" : [ {
+      "type" : "list item",
+      "id" : 112,
+      "page number" : 8,
+      "bounding box" : [ 112.312, 681.429, 510.241, 756.167 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "rule-based parsing (e.g., regular expressions, keyword matching) with a view to integrating advanced models like BERT for Korean-language support in later stages. The AI assistant (chatbot) also needed to support predefined query-answering based on stored task data.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 8,
+      "bounding box" : [ 101.434, 591.471, 510.241, 666.209 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Usability and Accessibility Requirements: Given the diversity of target users, including elderly patients, the system required a user-friendly interface with simple navigation and support for both mobile and web access. Basic offline functionality and critical alerts needed to be available even with limited connectivity.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 114,
+    "level" : "Subtitle",
+    "page number" : 8,
+    "bounding box" : [ 85.039, 555.14, 263.806, 569.977 ],
+    "heading level" : 5,
+    "font" : "SFBX1200",
+    "font size" : 11.955,
+    "text color" : "[0.0]",
+    "content" : "2.0.2 Modified Requirements"
+  }, {
+    "type" : "paragraph",
+    "id" : 115,
+    "page number" : 8,
+    "bounding box" : [ 85.039, 467.086, 510.24, 541.825 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "As the project progressed, several initial assumptions were revisited, leading to adjustments in the technical and functional requirements. These modifications were made to align the system design with practical development considerations and anticipated deployment scenarios."
+  }, {
+    "type" : "list",
+    "id" : 116,
+    "level" : "2",
+    "page number" : 8,
+    "bounding box" : [ 101.434, 81.548, 510.242, 449.483 ],
+    "numbering style" : "unordered",
+    "number of list items" : 2,
+    "next list id" : 121,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 8,
+      "bounding box" : [ 101.434, 313.773, 510.242, 449.483 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Data Requirements: Initially, synthetic datasets were created to develop and test the system’s task parsing module—particularly for recognizing medication instructions and usage rules. However, the system is ultimately intended to handle real user-provided data, such as manually entered tasks or doctor-uploaded instructions, requiring attention to data privacy and security. All user data will be stored and managed via Firebase services, eliminating the need for a separate database like MongoDB.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 8,
+      "bounding box" : [ 101.434, 81.548, 510.242, 298.553 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Functional Requirements: The role-based access model was revised to simplify user management into three categories: receiver, administrator, and mixed, where mixed-role users can both assign and receive tasks. A drug interaction conflict detection system is planned, which will initially rely on established Drug-Drug Interaction (DDI) databases, with potential future development of AI-based models to detect new or rare interactions. The chatbot feature remains a core component and is planned as an AI-integrated assistant. We are currently evaluating lightweight rule-based frameworks such as Rasa and spaCy for this purpose. However, if these approaches prove insufficient in terms of flexibility, natural language understanding, or integration ease, we are also considering incorporating a large language model (LLM) such as OpenAI’s ChatGPT or open-source models from HuggingFace. This would allow us to",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 117,
+    "page number" : 8,
+    "bounding box" : [ 294.926, 51.66, 300.35, 65.427 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 35,
+      "page number" : 8,
+      "bounding box" : [ 294.926, 51.66, 300.35, 65.427 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "5"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 118,
+    "page number" : 9,
+    "bounding box" : [ 85.039, 780.737, 510.235, 794.504 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 53,
+      "page number" : 9,
+      "bounding box" : [ 85.039, 780.737, 510.235, 794.504 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "UmiZoomi 2. MODIFICATIONS TO REQUIREMENTS AND CONSTRAINTS"
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 121,
+    "level" : "2",
+    "page number" : 9,
+    "bounding box" : [ 101.434, 237.675, 510.241, 756.167 ],
+    "numbering style" : "unordered",
+    "number of list items" : 3,
+    "previous list id" : 116,
+    "list items" : [ {
+      "type" : "list item",
+      "id" : 120,
+      "page number" : 9,
+      "bounding box" : [ 112.312, 620.458, 510.239, 756.167 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "provide a more dynamic and context-aware conversational experience, especially for complex user queries or multilingual support. The AI/NLP module for task parsing is currently in development, with ongoing testing on synthetic data. Instead of periodic static reports, the project aims to implement a real-time dashboard—potentially delivered via a web-based platform—that will visualize task adherence and other analytics by leveraging Firestore’s real-time database features. Task history tracking is also included as part of the system’s core functionality.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 101.434, 368.095, 510.241, 605.424 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• System Requirements: The decision was made to currently unify the backend and database infrastructure under Firebase services. Authentication, data storage (using Firestore), backend logic (via Cloud Functions), and push notifications (via Firebase Cloud Messaging) are fully integrated within the Firebase ecosystem. However, we are also considering the future integration of MongoDB and Node.js to support more advanced server-side logic and flexible data modeling if required. Flutter will be used to develop the application for Android, iOS, and web platforms, enabling a consistent user experience across devices. The system will likely be hosted on Firebase, although previous options such as AWS EC2 or Heroku remain under consideration based on scalability and cost factors. The deployment of AI/NLP components—whether client-side or server-side—remains under evaluation and will be determined based on performance and security considerations.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 101.434, 237.675, 510.24, 353.061 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Usability and Accessibility Requirements: Simplified user interface features are planned to ensure accessibility, particularly for users with limited technical proficiency. An offline mode is under development, allowing basic functionalities like task viewing and input even without an active internet connection. Offline data will be locally stored and synchronized with the server when connectivity is restored. Certain features may remain limited in offline mode to ensure data consistency.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 122,
+    "level" : "Subtitle",
+    "page number" : 9,
+    "bounding box" : [ 85.039, 193.525, 420.331, 211.185 ],
+    "heading level" : 3,
+    "font" : "SFBX1440",
+    "font size" : 14.346,
+    "text color" : "[0.0]",
+    "content" : "2.1 Realistic Constraints and Countermeasures"
+  }, {
+    "type" : "heading",
+    "id" : 123,
+    "level" : "Subtitle",
+    "page number" : 9,
+    "bounding box" : [ 85.039, 159.766, 233.891, 174.603 ],
+    "heading level" : 5,
+    "font" : "SFBX1200",
+    "font size" : 11.955,
+    "text color" : "[0.0]",
+    "content" : "2.1.1 Initial Constraints"
+  }, {
+    "type" : "paragraph",
+    "id" : 124,
+    "page number" : 9,
+    "bounding box" : [ 85.039, 112.36, 510.239, 146.451 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "At the beginning of the project, several realistic constraints were identified based on the system’s intended functionality and the anticipated technical environment. These included:"
+  }, {
+    "type" : "list",
+    "id" : 125,
+    "level" : "2",
+    "page number" : 9,
+    "bounding box" : [ 101.434, 81.548, 510.233, 95.315 ],
+    "numbering style" : "unordered",
+    "number of list items" : 1,
+    "next list id" : 130,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 101.434, 81.548, 510.233, 95.315 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Limited Access to Real User Data: The system’s ability to process real user in-",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 126,
+    "page number" : 9,
+    "bounding box" : [ 294.926, 51.66, 300.35, 65.427 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 36,
+      "page number" : 9,
+      "bounding box" : [ 294.926, 51.66, 300.35, 65.427 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "6"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 127,
+    "page number" : 10,
+    "bounding box" : [ 85.039, 780.737, 510.235, 794.504 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 54,
+      "page number" : 10,
+      "bounding box" : [ 85.039, 780.737, 510.235, 794.504 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "UmiZoomi 2. MODIFICATIONS TO REQUIREMENTS AND CONSTRAINTS"
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 130,
+    "level" : "2",
+    "page number" : 10,
+    "bounding box" : [ 101.434, 401.678, 510.241, 756.167 ],
+    "numbering style" : "unordered",
+    "number of list items" : 5,
+    "previous list id" : 125,
+    "list items" : [ {
+      "type" : "list item",
+      "id" : 129,
+      "page number" : 10,
+      "bounding box" : [ 112.312, 701.753, 510.241, 756.167 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "put—especially medical instructions and task data—was initially constrained by the lack of real-world datasets. As a result, synthetic data was used for early development and testing of the AI/NLP modules.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 101.434, 611.491, 510.24, 686.23 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Challenges in Multi-Domain Task Management: Ensuring seamless handling of tasks across different life domains (healthcare, work, personal) posed a risk of creating overly complex conflict detection mechanisms, potentially affecting system performance.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 101.434, 541.554, 510.236, 595.968 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Integration Complexity with Multiple Services: The initial plan to integrate various services (Node.js backend, MongoDB, Firebase) increased the system’s complexity and risked introducing inconsistencies in data flow and user management.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 101.434, 471.616, 510.241, 526.03 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Varying User Digital Literacy: Considering that users may include elderly individuals or people with low technical proficiency, there was a concern about usability and the need for a simple, intuitive user interface.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 101.434, 401.678, 510.24, 456.093 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Network Dependency and Offline Access: As the system was initially planned to be cloud-based, ensuring uninterrupted functionality in environments with unstable or no internet connection was identified as a significant challenge.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 131,
+    "level" : "Subtitle",
+    "page number" : 10,
+    "bounding box" : [ 85.039, 365.204, 360.611, 380.041 ],
+    "heading level" : 5,
+    "font" : "SFBX1200",
+    "font size" : 11.955,
+    "text color" : "[0.0]",
+    "content" : "2.1.2 Countermeasures for Initial Constraints"
+  }, {
+    "type" : "list",
+    "id" : 132,
+    "level" : "2",
+    "page number" : 10,
+    "bounding box" : [ 101.434, 99.019, 510.242, 351.889 ],
+    "numbering style" : "unordered",
+    "number of list items" : 5,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 101.434, 317.798, 510.239, 351.889 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Synthetic datasets were generated to support early development of AI parsing logic, with plans to gradually incorporate anonymized real user data after deployment.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 101.434, 268.184, 510.238, 302.275 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• A modular design for conflict detection was adopted, allowing flexible handling of domain-specific constraints and reducing system complexity.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 101.434, 198.247, 510.242, 252.661 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• The backend architecture was simplified by transitioning fully to Firebase services, reducing integration complexity while ensuring consistency in user management, data storage, and notification handling.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 101.434, 148.633, 510.233, 182.723 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• The user interface was designed with simplification in mind, incorporating clear navigation, user guidance, and support for varying levels of digital literacy.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 101.434, 99.019, 510.237, 133.109 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Offline mode functionality was planned, with features allowing task viewing and input during offline periods, and automatic synchronization when the device reconnects.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 133,
+    "page number" : 10,
+    "bounding box" : [ 294.926, 51.66, 300.35, 65.427 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 37,
+      "page number" : 10,
+      "bounding box" : [ 294.926, 51.66, 300.35, 65.427 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "7"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 134,
+    "page number" : 11,
+    "bounding box" : [ 85.039, 780.737, 510.235, 794.504 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 55,
+      "page number" : 11,
+      "bounding box" : [ 85.039, 780.737, 510.235, 794.504 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "UmiZoomi 2. MODIFICATIONS TO REQUIREMENTS AND CONSTRAINTS"
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 136,
+    "level" : "Subtitle",
+    "page number" : 11,
+    "bounding box" : [ 85.039, 738.427, 249.466, 753.264 ],
+    "heading level" : 5,
+    "font" : "SFBX1200",
+    "font size" : 11.955,
+    "text color" : "[0.0]",
+    "content" : "2.1.3 Evolving Constraints"
+  }, {
+    "type" : "paragraph",
+    "id" : 137,
+    "page number" : 11,
+    "bounding box" : [ 85.039, 691.021, 510.243, 725.112 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "As the project progressed, new constraints emerged, some stemming from practical development considerations:"
+  }, {
+    "type" : "list",
+    "id" : 138,
+    "level" : "2",
+    "page number" : 11,
+    "bounding box" : [ 101.434, 338.344, 510.242, 672.509 ],
+    "numbering style" : "unordered",
+    "number of list items" : 5,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 101.434, 618.095, 510.236, 672.509 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Firebase Usage Limits and Pricing: While Firebase’s free plan suffices for early development, scaling to handle real users may require a transition to a pay-as-you-go model, necessitating cost management planning.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 101.434, 548.157, 510.233, 602.572 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Uncertainty in AI/NLP Deployment Model: Deciding between client-side and server-side AI/NLP deployment presents trade-offs between performance, data privacy, and system resource utilization. This choice remains under evaluation.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 101.434, 478.219, 510.242, 532.634 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Database Schema Flexibility: The evolving nature of feature implementation has required continuous adjustments to the Firestore database schema, emphasizing the need for flexible design and rigorous testing.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 101.434, 408.281, 510.238, 462.696 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Chatbot Framework Selection: Multiple chatbot frameworks (e.g., Rasa, spaCy) are under evaluation to find the best fit for the system’s requirements, leading to potential integration and maintenance challenges.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 101.434, 338.344, 510.241, 392.758 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• User Experience with Offline Features: Ensuring a seamless offline experience without compromising data consistency remains a technical challenge, particularly when syncing changes after reconnection.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 139,
+    "level" : "Subtitle",
+    "page number" : 11,
+    "bounding box" : [ 85.039, 301.87, 376.198, 316.707 ],
+    "heading level" : 5,
+    "font" : "SFBX1200",
+    "font size" : 11.955,
+    "text color" : "[0.0]",
+    "content" : "2.1.4 Countermeasures for Evolving Constraints"
+  }, {
+    "type" : "list",
+    "id" : 140,
+    "level" : "2",
+    "page number" : 11,
+    "bounding box" : [ 101.434, 85.298, 510.242, 288.555 ],
+    "numbering style" : "unordered",
+    "number of list items" : 4,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 101.434, 254.464, 510.24, 288.555 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Monitor Firebase usage closely during development and conduct scaling tests to anticipate potential costs and optimize system resource usage.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 101.434, 184.526, 510.242, 238.941 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Conduct comparative evaluations of AI/NLP deployment options to select the most suitable model based on system constraints, user privacy considerations, and performance.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 101.434, 134.912, 510.232, 169.003 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Apply iterative schema design practices with regular database reviews to minimize disruption from structural changes.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 101.434, 85.298, 510.235, 119.389 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Test multiple chatbot solutions with realistic use cases to determine the most compatible framework, focusing on ease of integration and long-term maintenance.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 141,
+    "page number" : 11,
+    "bounding box" : [ 294.926, 51.66, 300.35, 65.427 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 38,
+      "page number" : 11,
+      "bounding box" : [ 294.926, 51.66, 300.35, 65.427 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "8"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 142,
+    "page number" : 12,
+    "bounding box" : [ 85.039, 780.737, 510.235, 794.504 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 56,
+      "page number" : 12,
+      "bounding box" : [ 85.039, 780.737, 510.235, 794.504 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "UmiZoomi 2. MODIFICATIONS TO REQUIREMENTS AND CONSTRAINTS"
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 144,
+    "level" : "Subtitle",
+    "page number" : 12,
+    "bounding box" : [ 101.434, 722.077, 510.232, 756.167 ],
+    "heading level" : 7,
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "• Implement robust local data caching strategies and conflict resolution mechanisms to ensure reliable offline operation and smooth synchronization."
+  }, {
+    "type" : "footer",
+    "id" : 145,
+    "page number" : 12,
+    "bounding box" : [ 294.926, 51.66, 300.35, 65.427 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 39,
+      "page number" : 12,
+      "bounding box" : [ 294.926, 51.66, 300.35, 65.427 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "9"
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 146,
+    "level" : "Subtitle",
+    "page number" : 13,
+    "bounding box" : [ 85.039, 657.762, 339.615, 679.006 ],
+    "heading level" : 2,
+    "font" : "SFBX1728",
+    "font size" : 17.215,
+    "text color" : "[0.0]",
+    "content" : "제3장 Team Member Progress"
+  }, {
+    "type" : "caption",
+    "id" : 147,
+    "page number" : 13,
+    "bounding box" : [ 164.382, 563.491, 452.389, 597.582 ],
+    "linked content id" : 148,
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "표 3.1: Team Progress by Members (Grouped by Task Category)"
+  }, {
+    "type" : "table",
+    "id" : 148,
+    "level" : "3",
+    "page number" : 13,
+    "bounding box" : [ 85.039, 165.352, 535.342, 543.932 ],
+    "number of rows" : 2,
+    "number of columns" : 2,
+    "rows" : [ {
+      "type" : "table row",
+      "row number" : 1,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 13,
+        "bounding box" : [ 85.239, 522.811, 182.632, 543.534 ],
+        "row number" : 1,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 1,
+          "page number" : 13,
+          "bounding box" : [ 91.415, 525.86, 123.297, 539.452 ],
+          "font" : "SFBX1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "Name"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 13,
+        "bounding box" : [ 182.632, 522.811, 535.143, 543.534 ],
+        "row number" : 1,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 3,
+          "page number" : 13,
+          "bounding box" : [ 188.808, 525.86, 282.931, 539.452 ],
+          "font" : "SFBX1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "Current Progress"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 2,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 13,
+        "bounding box" : [ 85.239, 165.949, 182.632, 522.811 ],
+        "row number" : 2,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 4,
+          "page number" : 13,
+          "bounding box" : [ 91.415, 504.739, 175.901, 518.331 ],
+          "font" : "SFBX1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "Kadyrov Adilet"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 13,
+        "bounding box" : [ 182.632, 165.949, 535.143, 522.811 ],
+        "row number" : 2,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "heading",
+          "id" : 6,
+          "level" : "Subtitle",
+          "page number" : 13,
+          "bounding box" : [ 188.808, 504.739, 355.855, 518.331 ],
+          "heading level" : 6,
+          "font" : "SFBX1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "AI/NLP Module Development"
+        }, {
+          "type" : "list",
+          "id" : 7,
+          "level" : "1",
+          "page number" : 13,
+          "bounding box" : [ 205.203, 376.177, 528.969, 489.172 ],
+          "numbering style" : "unordered",
+          "number of list items" : 3,
+          "list items" : [ {
+            "type" : "list item",
+            "page number" : 13,
+            "bounding box" : [ 205.203, 455.081, 528.968, 489.172 ],
+            "font" : "SFRM1095",
+            "font size" : 10.909,
+            "text color" : "[0.0]",
+            "content" : "• Created synthetic datasets for medication/task parsing (Completed).",
+            "kids" : [ ]
+          }, {
+            "type" : "list item",
+            "page number" : 13,
+            "bounding box" : [ 205.203, 425.791, 490.413, 439.558 ],
+            "font" : "SFRM1095",
+            "font size" : 10.909,
+            "text color" : "[0.0]",
+            "content" : "• Implemented initial rule-based parsing logic (Completed).",
+            "kids" : [ ]
+          }, {
+            "type" : "list item",
+            "page number" : 13,
+            "bounding box" : [ 205.203, 376.177, 528.969, 410.268 ],
+            "font" : "SFRM1095",
+            "font size" : 10.909,
+            "text color" : "[0.0]",
+            "content" : "• Researched and tested chatbot frameworks (Rasa, spaCy) (In Progress).",
+            "kids" : [ ]
+          } ]
+        }, {
+          "type" : "heading",
+          "id" : 8,
+          "level" : "Subtitle",
+          "page number" : 13,
+          "bounding box" : [ 188.808, 346.931, 321.361, 360.523 ],
+          "heading level" : 6,
+          "font" : "SFBX1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "Flutter UI Development"
+        }, {
+          "type" : "list",
+          "id" : 9,
+          "level" : "1",
+          "page number" : 13,
+          "bounding box" : [ 205.203, 267.983, 528.965, 331.364 ],
+          "numbering style" : "unordered",
+          "number of list items" : 2,
+          "list items" : [ {
+            "type" : "list item",
+            "page number" : 13,
+            "bounding box" : [ 205.203, 317.597, 483.931, 331.364 ],
+            "font" : "SFRM1095",
+            "font size" : 10.909,
+            "text color" : "[0.0]",
+            "content" : "• Designed UI structure and navigation flow (Completed).",
+            "kids" : [ ]
+          }, {
+            "type" : "list item",
+            "page number" : 13,
+            "bounding box" : [ 205.203, 267.983, 528.965, 302.073 ],
+            "font" : "SFRM1095",
+            "font size" : 10.909,
+            "text color" : "[0.0]",
+            "content" : "• Developed core Flutter UI components for mobile and web (In Progress).",
+            "kids" : [ ]
+          } ]
+        }, {
+          "type" : "heading",
+          "id" : 10,
+          "level" : "Subtitle",
+          "page number" : 13,
+          "bounding box" : [ 188.808, 238.736, 355.717, 252.328 ],
+          "heading level" : 6,
+          "font" : "SFBX1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "Documentation and Reporting"
+        }, {
+          "type" : "paragraph",
+          "id" : 11,
+          "level" : "2",
+          "page number" : 13,
+          "bounding box" : [ 205.203, 189.078, 528.965, 223.169 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "• Wrote and compiled project documentation, requirements, and design reports (Completed)."
+        } ]
+      } ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 149,
+    "page number" : 13,
+    "bounding box" : [ 292.214, 51.66, 303.062, 65.427 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 40,
+      "page number" : 13,
+      "bounding box" : [ 292.214, 51.66, 303.062, 65.427 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "10"
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 150,
+    "level" : "Subtitle",
+    "page number" : 14,
+    "bounding box" : [ 85.039, 780.737, 510.235, 794.504 ],
+    "heading level" : 7,
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "UmiZoomi 3. TEAM MEMBER PROGRESS"
+  }, {
+    "type" : "table",
+    "id" : 151,
+    "level" : "4",
+    "page number" : 14,
+    "bounding box" : [ 85.039, 109.877, 535.342, 756.85 ],
+    "number of rows" : 3,
+    "number of columns" : 2,
+    "rows" : [ {
+      "type" : "table row",
+      "row number" : 1,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 14,
+        "bounding box" : [ 85.239, 735.929, 182.632, 756.452 ],
+        "row number" : 1,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 1,
+          "page number" : 14,
+          "bounding box" : [ 91.415, 738.778, 123.297, 752.37 ],
+          "font" : "SFBX1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "Name"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 14,
+        "bounding box" : [ 182.632, 735.929, 535.143, 756.452 ],
+        "row number" : 1,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 3,
+          "level" : "1",
+          "page number" : 14,
+          "bounding box" : [ 188.808, 738.778, 282.931, 752.37 ],
+          "font" : "SFBX1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "Current Progress"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 2,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 14,
+        "bounding box" : [ 85.239, 309.329, 182.632, 735.929 ],
+        "row number" : 2,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 4,
+          "page number" : 14,
+          "bounding box" : [ 91.415, 697.732, 151.854, 731.648 ],
+          "font" : "SFBX1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "Yegizbayev Zholan"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 14,
+        "bounding box" : [ 182.632, 309.329, 535.143, 735.929 ],
+        "row number" : 2,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "heading",
+          "id" : 6,
+          "level" : "Subtitle",
+          "page number" : 14,
+          "bounding box" : [ 188.808, 718.056, 399.047, 731.648 ],
+          "heading level" : 6,
+          "font" : "SFBX1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "Firebase Integration & Authentication"
+        }, {
+          "type" : "list",
+          "id" : 7,
+          "level" : "1",
+          "page number" : 14,
+          "bounding box" : [ 205.203, 569.17, 528.971, 702.489 ],
+          "numbering style" : "unordered",
+          "number of list items" : 3,
+          "list items" : [ {
+            "type" : "list item",
+            "page number" : 14,
+            "bounding box" : [ 205.203, 668.398, 528.967, 702.489 ],
+            "font" : "SFRM1095",
+            "font size" : 10.909,
+            "text color" : "[0.0]",
+            "content" : "• Implemented Firebase Authentication with role-based access (Completed).",
+            "kids" : [ ]
+          }, {
+            "type" : "list item",
+            "page number" : 14,
+            "bounding box" : [ 205.203, 618.784, 528.971, 652.875 ],
+            "font" : "SFRM1095",
+            "font size" : 10.909,
+            "text color" : "[0.0]",
+            "content" : "• Integrated Firebase Cloud Messaging for notifications (In Progress).",
+            "kids" : [ ]
+          }, {
+            "type" : "list item",
+            "page number" : 14,
+            "bounding box" : [ 205.203, 569.17, 528.963, 603.261 ],
+            "font" : "SFRM1095",
+            "font size" : 10.909,
+            "text color" : "[0.0]",
+            "content" : "• Designed and implemented main Firestore database structure (Completed).",
+            "kids" : [ ]
+          } ]
+        }, {
+          "type" : "heading",
+          "id" : 8,
+          "level" : "Subtitle",
+          "page number" : 14,
+          "bounding box" : [ 188.808, 539.924, 439.448, 553.516 ],
+          "heading level" : 6,
+          "font" : "SFBX1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "Backend Logic with Firebase Cloud Functions"
+        }, {
+          "type" : "list",
+          "id" : 9,
+          "level" : "1",
+          "page number" : 14,
+          "bounding box" : [ 205.203, 460.976, 528.97, 524.357 ],
+          "numbering style" : "unordered",
+          "number of list items" : 2,
+          "list items" : [ {
+            "type" : "list item",
+            "page number" : 14,
+            "bounding box" : [ 205.203, 510.59, 508.259, 524.357 ],
+            "font" : "SFRM1095",
+            "font size" : 10.909,
+            "text color" : "[0.0]",
+            "content" : "• Developed core backend logic for task handling (In Progress).",
+            "kids" : [ ]
+          }, {
+            "type" : "list item",
+            "page number" : 14,
+            "bounding box" : [ 205.203, 460.976, 528.97, 495.067 ],
+            "font" : "SFRM1095",
+            "font size" : 10.909,
+            "text color" : "[0.0]",
+            "content" : "• Planned server-side/offline mode data synchronization logic (In Progress).",
+            "kids" : [ ]
+          } ]
+        }, {
+          "type" : "heading",
+          "id" : 10,
+          "level" : "Subtitle",
+          "page number" : 14,
+          "bounding box" : [ 188.808, 431.73, 350.124, 445.322 ],
+          "heading level" : 6,
+          "font" : "SFBX1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "Offline Mode Implementation"
+        }, {
+          "type" : "list",
+          "id" : 11,
+          "level" : "1",
+          "page number" : 14,
+          "bounding box" : [ 205.203, 332.458, 528.969, 416.162 ],
+          "numbering style" : "unordered",
+          "number of list items" : 2,
+          "list items" : [ {
+            "type" : "list item",
+            "page number" : 14,
+            "bounding box" : [ 205.203, 382.072, 528.965, 416.162 ],
+            "font" : "SFRM1095",
+            "font size" : 10.909,
+            "text color" : "[0.0]",
+            "content" : "• Designed offline mode strategy with local data caching (In Progress).",
+            "kids" : [ ]
+          }, {
+            "type" : "list item",
+            "page number" : 14,
+            "bounding box" : [ 205.203, 332.458, 528.969, 366.549 ],
+            "font" : "SFRM1095",
+            "font size" : 10.909,
+            "text color" : "[0.0]",
+            "content" : "• Started implementing data sync with Firestore upon reconnection (In Progress).",
+            "kids" : [ ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 3,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 14,
+        "bounding box" : [ 85.239, 110.474, 182.632, 309.329 ],
+        "row number" : 3,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 12,
+          "page number" : 14,
+          "bounding box" : [ 91.415, 291.456, 172.974, 305.048 ],
+          "font" : "SFBX1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "Both Members"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 14,
+        "bounding box" : [ 182.632, 110.474, 535.143, 309.329 ],
+        "row number" : 3,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "heading",
+          "id" : 14,
+          "level" : "Subtitle",
+          "page number" : 14,
+          "bounding box" : [ 188.808, 291.456, 341.996, 305.048 ],
+          "heading level" : 6,
+          "font" : "SFBX1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "System Architecture Design"
+        }, {
+          "type" : "list",
+          "id" : 15,
+          "level" : "1",
+          "page number" : 14,
+          "bounding box" : [ 205.203, 212.508, 528.969, 275.888 ],
+          "numbering style" : "unordered",
+          "number of list items" : 2,
+          "list items" : [ {
+            "type" : "list item",
+            "page number" : 14,
+            "bounding box" : [ 205.203, 241.798, 528.969, 275.888 ],
+            "font" : "SFRM1095",
+            "font size" : 10.909,
+            "text color" : "[0.0]",
+            "content" : "• Defined system structure using Firebase backend and Flutter frontend (Completed).",
+            "kids" : [ ]
+          }, {
+            "type" : "list item",
+            "page number" : 14,
+            "bounding box" : [ 205.203, 212.508, 513.71, 226.275 ],
+            "font" : "SFRM1095",
+            "font size" : 10.909,
+            "text color" : "[0.0]",
+            "content" : "• Evaluated AI/NLP deployment strategy options (In Progress).",
+            "kids" : [ ]
+          } ]
+        }, {
+          "type" : "heading",
+          "id" : 16,
+          "level" : "Subtitle",
+          "page number" : 14,
+          "bounding box" : [ 188.808, 183.261, 273.79, 196.853 ],
+          "heading level" : 6,
+          "font" : "SFBX1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "Feature Testing"
+        }, {
+          "type" : "paragraph",
+          "id" : 17,
+          "level" : "2",
+          "page number" : 14,
+          "bounding box" : [ 205.203, 133.603, 528.97, 167.694 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "• Tested authentication, task input flow, and Firebase service integration (In Progress)."
+        } ]
+      } ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 153,
+    "page number" : 14,
+    "bounding box" : [ 292.214, 51.66, 303.062, 65.427 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 41,
+      "page number" : 14,
+      "bounding box" : [ 292.214, 51.66, 303.062, 65.427 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "11"
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 154,
+    "level" : "Subtitle",
+    "page number" : 15,
+    "bounding box" : [ 85.039, 657.762, 200.354, 679.006 ],
+    "heading level" : 2,
+    "font" : "SFBX1728",
+    "font size" : 17.215,
+    "text color" : "[0.0]",
+    "content" : "제4장 Design"
+  }, {
+    "type" : "heading",
+    "id" : 155,
+    "level" : "Subtitle",
+    "page number" : 15,
+    "bounding box" : [ 85.039, 589.129, 315.07, 606.789 ],
+    "heading level" : 3,
+    "font" : "SFBX1440",
+    "font size" : 14.346,
+    "text color" : "[0.0]",
+    "content" : "4.1 Design Details and Changes"
+  }, {
+    "type" : "heading",
+    "id" : 156,
+    "level" : "Subtitle",
+    "page number" : 15,
+    "bounding box" : [ 85.039, 555.37, 274.116, 570.207 ],
+    "heading level" : 5,
+    "font" : "SFBX1200",
+    "font size" : 11.955,
+    "text color" : "[0.0]",
+    "content" : "4.1.1 System Design Approach"
+  }, {
+    "type" : "paragraph",
+    "id" : 157,
+    "page number" : 15,
+    "bounding box" : [ 85.039, 142.136, 510.243, 542.055 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "During the development process, we made several key design decisions to better align with practical development needs and system scalability requirements. Initially, we planned to use a Node.js and MongoDB-based server architecture. However, to simplify early development and ensure seamless integration of core services, we transitioned the system to operate fully within the Firebase ecosystem. Firebase currently handles authentication, real-time database operations through Firestore, backend logic via Cloud Functions, and push notifications. As the project continues to evolve, we are considering the possibility of extending the backend with additional MongoDB and Node.js components to support more complex server-side logic and increase system flexibility. Firebase’s compatibility with external services makes such integration feasible if future system demands or deployment scenarios require it. Additionally, while our original design focused on a mobile-first approach using Flutter for Android and iOS applications, we decided to extend this to include web platforms as well. Flutter’s cross-platform capabilities made it feasible to maintain a consistent user interface across devices, with platform-specific integrations being used only when necessary for optimal performance. Another significant addition to our system architecture is the development of an administrative web portal. This platform serves as a management dashboard where administrators can assign tasks, monitor user adherence, and review analytics through real-time dashboards connected to the Firestore database. This addition reflects our evolving understanding of stakeholder needs, particularly for institutional users such as hospitals or care organizations."
+  }, {
+    "type" : "footer",
+    "id" : 158,
+    "page number" : 15,
+    "bounding box" : [ 292.214, 51.66, 303.062, 65.427 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 42,
+      "page number" : 15,
+      "bounding box" : [ 292.214, 51.66, 303.062, 65.427 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "12"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 159,
+    "page number" : 16,
+    "bounding box" : [ 85.039, 780.737, 510.24, 794.504 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 57,
+      "page number" : 16,
+      "bounding box" : [ 85.039, 780.737, 510.24, 794.504 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "UmiZoomi 4. DESIGN"
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 161,
+    "level" : "Subtitle",
+    "page number" : 16,
+    "bounding box" : [ 85.039, 738.427, 287.622, 753.264 ],
+    "heading level" : 5,
+    "font" : "SFBX1200",
+    "font size" : 11.955,
+    "text color" : "[0.0]",
+    "content" : "4.1.2 Data Handling and Storage"
+  }, {
+    "type" : "paragraph",
+    "id" : 162,
+    "page number" : 16,
+    "bounding box" : [ 85.039, 325.193, 510.243, 725.112 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "Our system’s data handling strategy centers around Firebase’s Firestore real-time database, which serves as the central repository for all user data, task records, authentication details, and system logs. The adoption of Firestore provides several advantages including real-time synchronization, automatic scaling, and seamless integration with Firebase Authentication and Cloud Functions. Data is structured using a hierarchical documentcollection model, where each user document contains user-specific information with subcollections for tasks, notifications, and logs. This structure supports efficient querying and role-based data access control, though we have had to make several adjustments to the schema as our understanding of requirements has evolved. To support offline functionality, we implemented a local storage mechanism on the client-side using the sqflite database. This local database stores critical user data and tasks temporarily when the device is offline and synchronizes with Firestore when connectivity is restored. This design ensures that core features such as task viewing and management remain functional without constant internet connection, though we are still working to resolve synchronization conflicts that can occur when multiple changes are made offline. Given the potential handling of Personally Identifiable Information (PII) and Protected Health Information (PHI), particularly under the Korean Personal Information Protection Act (PIPA), we are trying to implemented additional encryption for any sensitive task data before storage. While Firebase provides built-in encryption for data in transit and at rest, this additional encryption step ensures compliance and enhanced protection of sensitive information."
+  }, {
+    "type" : "heading",
+    "id" : 163,
+    "level" : "Subtitle",
+    "page number" : 16,
+    "bounding box" : [ 85.039, 289.648, 293.282, 303.24 ],
+    "heading level" : 6,
+    "font" : "SFBX1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "Example Data Structures and Storage"
+  }, {
+    "type" : "paragraph",
+    "id" : 164,
+    "page number" : 16,
+    "bounding box" : [ 85.039, 201.263, 510.243, 276.002 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "To clarify the data handling approach, we present examples of the actual data structures used in the system. The following tables illustrate the format of user authentication data, task entries, and the medication reference list. These data structures are implemented in Firebase Firestore and are used both in the main system and in the local offline database."
+  }, {
+    "type" : "paragraph",
+    "id" : 165,
+    "page number" : 16,
+    "bounding box" : [ 85.039, 140.292, 510.24, 194.707 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "Additionally, the medication list was obtained from the official database of the Ministry of Food and Drug Safety in Korea1, ensuring medical accuracy and compliance with national standards."
+  }, {
+    "type" : "paragraph",
+    "id" : 167,
+    "page number" : 16,
+    "bounding box" : [ 97.473, 123.262, 466.663, 135.601 ],
+    "font" : "SFRM0900",
+    "font size" : 8.966,
+    "text color" : "[0.0]",
+    "content" : "1Official data source provided by the Ministry of Food and Drug Safety, Republic of Korea."
+  }, {
+    "type" : "footer",
+    "id" : 168,
+    "page number" : 16,
+    "bounding box" : [ 292.214, 51.66, 303.062, 65.427 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 43,
+      "page number" : 16,
+      "bounding box" : [ 292.214, 51.66, 303.062, 65.427 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "13"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 169,
+    "page number" : 17,
+    "bounding box" : [ 85.039, 780.737, 510.24, 794.504 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 58,
+      "page number" : 17,
+      "bounding box" : [ 85.039, 780.737, 510.24, 794.504 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "UmiZoomi 4. DESIGN"
+    } ]
+  }, {
+    "type" : "table",
+    "id" : 170,
+    "level" : "5",
+    "page number" : 17,
+    "bounding box" : [ 105.509, 672.766, 489.767, 756.85 ],
+    "number of rows" : 6,
+    "number of columns" : 5,
+    "rows" : [ {
+      "type" : "table row",
+      "row number" : 1,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 105.708, 742.704, 128.448, 756.452 ],
+        "row number" : 1,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 1,
+          "page number" : 17,
+          "bounding box" : [ 111.885, 743.521, 122.272, 757.113 ],
+          "font" : "SFBX1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "id"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 128.448, 742.704, 192.031, 756.452 ],
+        "row number" : 1,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 3,
+          "level" : "1",
+          "page number" : 17,
+          "bounding box" : [ 134.625, 743.521, 163.69, 757.113 ],
+          "font" : "SFBX1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "name"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 192.031, 742.704, 256.202, 756.452 ],
+        "row number" : 1,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 5,
+          "page number" : 17,
+          "bounding box" : [ 203.006, 743.521, 245.229, 757.113 ],
+          "font" : "SFBX1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "hangeul"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 256.202, 742.704, 418.823, 756.452 ],
+        "row number" : 1,
+        "column number" : 4,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 7,
+          "page number" : 17,
+          "bounding box" : [ 262.379, 743.521, 322.413, 757.113 ],
+          "font" : "SFBX1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "description"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 418.823, 742.704, 489.568, 756.452 ],
+        "row number" : 1,
+        "column number" : 5,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 9,
+          "level" : "1",
+          "page number" : 17,
+          "bounding box" : [ 425.0, 743.521, 483.396, 757.113 ],
+          "font" : "SFBX1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "ATC Code"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 2,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 105.708, 728.756, 128.448, 742.704 ],
+        "row number" : 2,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 10,
+          "page number" : 17,
+          "bounding box" : [ 114.366, 729.529, 119.79, 743.296 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "1"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 128.448, 728.756, 192.031, 742.704 ],
+        "row number" : 2,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 12,
+          "level" : "1",
+          "page number" : 17,
+          "bounding box" : [ 134.625, 729.529, 166.567, 743.296 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "tylenol"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 192.031, 728.756, 256.202, 742.704 ],
+        "row number" : 2,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 14,
+          "page number" : 17,
+          "bounding box" : [ 203.389, 731.035, 244.844, 741.409 ],
+          "font" : "nanummjmd0",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "타이레놀"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 256.202, 728.756, 418.823, 742.704 ],
+        "row number" : 2,
+        "column number" : 4,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 16,
+          "level" : "1",
+          "page number" : 17,
+          "bounding box" : [ 262.379, 729.529, 407.782, 743.296 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "Pain reliever and fever reducer"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 418.823, 728.756, 489.568, 742.704 ],
+        "row number" : 2,
+        "column number" : 5,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 18,
+          "page number" : 17,
+          "bounding box" : [ 425.0, 729.529, 469.885, 743.296 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "N02BE01"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 3,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 105.708, 714.808, 128.448, 728.756 ],
+        "row number" : 3,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 19,
+          "page number" : 17,
+          "bounding box" : [ 114.366, 715.581, 119.79, 729.348 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "2"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 128.448, 714.808, 192.031, 728.756 ],
+        "row number" : 3,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 21,
+          "level" : "1",
+          "page number" : 17,
+          "bounding box" : [ 134.625, 715.581, 166.631, 729.348 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "aspirin"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 192.031, 714.808, 256.202, 728.756 ],
+        "row number" : 3,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 23,
+          "level" : "1",
+          "page number" : 17,
+          "bounding box" : [ 203.389, 717.087, 244.844, 727.461 ],
+          "font" : "nanummjmc2",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "아스피린"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 256.202, 714.808, 418.823, 728.756 ],
+        "row number" : 3,
+        "column number" : 4,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 25,
+          "page number" : 17,
+          "bounding box" : [ 262.379, 715.581, 412.647, 729.348 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "Reduces pain and inflammation"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 418.823, 714.808, 489.568, 728.756 ],
+        "row number" : 3,
+        "column number" : 5,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 27,
+          "page number" : 17,
+          "bounding box" : [ 425.0, 715.581, 470.034, 729.348 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "B01AC06"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 4,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 105.708, 700.861, 128.448, 714.808 ],
+        "row number" : 4,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 28,
+          "page number" : 17,
+          "bounding box" : [ 114.366, 701.633, 119.79, 715.4 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "3"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 128.448, 700.861, 192.031, 714.808 ],
+        "row number" : 4,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 30,
+          "level" : "1",
+          "page number" : 17,
+          "bounding box" : [ 134.625, 701.633, 185.854, 715.4 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "amoxicillin"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 192.031, 700.861, 256.202, 714.808 ],
+        "row number" : 4,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 32,
+          "page number" : 17,
+          "bounding box" : [ 198.207, 703.139, 250.026, 713.513 ],
+          "font" : "nanummjmc2",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "아목시실린"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 256.202, 700.861, 418.823, 714.808 ],
+        "row number" : 4,
+        "column number" : 4,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 34,
+          "level" : "1",
+          "page number" : 17,
+          "bounding box" : [ 262.379, 701.633, 375.146, 715.4 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "Antibiotic for infections"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 418.823, 700.861, 489.568, 714.808 ],
+        "row number" : 4,
+        "column number" : 5,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 36,
+          "page number" : 17,
+          "bounding box" : [ 425.0, 701.633, 468.232, 715.4 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "J01CA04"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 5,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 105.708, 686.912, 128.448, 700.861 ],
+        "row number" : 5,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 37,
+          "page number" : 17,
+          "bounding box" : [ 114.366, 687.686, 119.79, 701.453 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "4"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 128.448, 686.912, 192.031, 700.861 ],
+        "row number" : 5,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 39,
+          "page number" : 17,
+          "bounding box" : [ 134.625, 687.686, 179.527, 701.453 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "ibuprofen"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 192.031, 686.912, 256.202, 700.861 ],
+        "row number" : 5,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 41,
+          "level" : "1",
+          "page number" : 17,
+          "bounding box" : [ 198.207, 689.192, 250.026, 699.566 ],
+          "font" : "nanummjmd3",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "이부프로펜"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 256.202, 686.912, 418.823, 700.861 ],
+        "row number" : 5,
+        "column number" : 4,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 43,
+          "level" : "1",
+          "page number" : 17,
+          "bounding box" : [ 262.379, 687.686, 401.599, 701.453 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "Anti-inflammatory pain relief"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 418.823, 686.912, 489.568, 700.861 ],
+        "row number" : 5,
+        "column number" : 5,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 45,
+          "page number" : 17,
+          "bounding box" : [ 425.0, 687.686, 472.143, 701.453 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "M01AE01"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 6,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 105.708, 673.164, 128.448, 686.912 ],
+        "row number" : 6,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 46,
+          "page number" : 17,
+          "bounding box" : [ 114.366, 673.738, 119.79, 687.505 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "5"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 128.448, 673.164, 192.031, 686.912 ],
+        "row number" : 6,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 48,
+          "level" : "1",
+          "page number" : 17,
+          "bounding box" : [ 134.625, 673.738, 183.742, 687.505 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "metformin"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 192.031, 673.164, 256.202, 686.912 ],
+        "row number" : 6,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 50,
+          "level" : "1",
+          "page number" : 17,
+          "bounding box" : [ 198.207, 675.244, 250.026, 685.618 ],
+          "font" : "nanummjmd2",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "메트포르민"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 256.202, 673.164, 418.823, 686.912 ],
+        "row number" : 6,
+        "column number" : 4,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 52,
+          "level" : "1",
+          "page number" : 17,
+          "bounding box" : [ 262.379, 673.738, 390.632, 687.505 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "Controls blood sugar levels"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 17,
+        "bounding box" : [ 418.823, 673.164, 489.568, 686.912 ],
+        "row number" : 6,
+        "column number" : 5,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 54,
+          "page number" : 17,
+          "bounding box" : [ 425.0, 673.738, 470.637, 687.505 ],
+          "font" : "SFRM1095",
+          "font size" : 10.909,
+          "text color" : "[0.0]",
+          "content" : "A10BA02"
+        } ]
+      } ]
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 172,
+    "level" : "6",
+    "page number" : 17,
+    "bounding box" : [ 167.406, 562.065, 427.875, 664.57 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 2,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 17,
+      "bounding box" : [ 167.406, 650.803, 427.875, 664.57 ],
+      "font" : "nanummjmd4",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "표 4.1: Basic Medications with Codes and Descriptions",
+      "kids" : [ {
+        "type" : "table",
+        "id" : 61,
+        "level" : "7",
+        "page number" : 17,
+        "bounding box" : [ 89.114, 584.029, 506.162, 640.218 ],
+        "number of rows" : 4,
+        "number of columns" : 4,
+        "rows" : [ {
+          "type" : "table row",
+          "row number" : 1,
+          "cells" : [ {
+            "type" : "table cell",
+            "page number" : 17,
+            "bounding box" : [ 89.313, 626.071, 112.053, 639.82 ],
+            "row number" : 1,
+            "column number" : 1,
+            "row span" : 1,
+            "column span" : 1,
+            "kids" : [ {
+              "type" : "paragraph",
+              "id" : 55,
+              "page number" : 17,
+              "bounding box" : [ 95.49, 626.888, 105.877, 640.48 ],
+              "font" : "SFBX1095",
+              "font size" : 10.909,
+              "text color" : "[0.0]",
+              "content" : "id"
+            } ]
+          }, {
+            "type" : "table cell",
+            "page number" : 17,
+            "bounding box" : [ 112.053, 626.071, 295.634, 639.82 ],
+            "row number" : 1,
+            "column number" : 2,
+            "row span" : 1,
+            "column span" : 1,
+            "kids" : [ {
+              "type" : "paragraph",
+              "id" : 57,
+              "page number" : 17,
+              "bounding box" : [ 118.23, 626.888, 178.264, 640.48 ],
+              "font" : "SFBX1095",
+              "font size" : 10.909,
+              "text color" : "[0.0]",
+              "content" : "description"
+            } ]
+          }, {
+            "type" : "table cell",
+            "page number" : 17,
+            "bounding box" : [ 295.634, 626.071, 400.798, 639.82 ],
+            "row number" : 1,
+            "column number" : 3,
+            "row span" : 1,
+            "column span" : 1,
+            "kids" : [ {
+              "type" : "paragraph",
+              "id" : 59,
+              "page number" : 17,
+              "bounding box" : [ 301.81, 626.888, 362.278, 640.48 ],
+              "font" : "SFBX1095",
+              "font size" : 10.909,
+              "text color" : "[0.0]",
+              "content" : "created_at"
+            } ]
+          }, {
+            "type" : "table cell",
+            "page number" : 17,
+            "bounding box" : [ 400.798, 626.071, 505.963, 639.82 ],
+            "row number" : 1,
+            "column number" : 4,
+            "row span" : 1,
+            "column span" : 1,
+            "kids" : [ {
+              "type" : "paragraph",
+              "id" : 61,
+              "page number" : 17,
+              "bounding box" : [ 406.975, 626.888, 453.36, 640.48 ],
+              "font" : "SFBX1095",
+              "font size" : 10.909,
+              "text color" : "[0.0]",
+              "content" : "valid_at"
+            } ]
+          } ]
+        }, {
+          "type" : "table row",
+          "row number" : 2,
+          "cells" : [ {
+            "type" : "table cell",
+            "page number" : 17,
+            "bounding box" : [ 89.313, 612.123, 112.053, 626.071 ],
+            "row number" : 2,
+            "column number" : 1,
+            "row span" : 1,
+            "column span" : 1,
+            "kids" : [ {
+              "type" : "paragraph",
+              "id" : 62,
+              "page number" : 17,
+              "bounding box" : [ 97.971, 612.896, 103.395, 626.663 ],
+              "font" : "SFRM1095",
+              "font size" : 10.909,
+              "text color" : "[0.0]",
+              "content" : "1"
+            } ]
+          }, {
+            "type" : "table cell",
+            "page number" : 17,
+            "bounding box" : [ 112.053, 612.123, 295.634, 626.071 ],
+            "row number" : 2,
+            "column number" : 2,
+            "row span" : 1,
+            "column span" : 1,
+            "kids" : [ {
+              "type" : "paragraph",
+              "id" : 64,
+              "level" : "1",
+              "page number" : 17,
+              "bounding box" : [ 118.23, 612.896, 289.459, 626.663 ],
+              "font" : "SFRM1095",
+              "font size" : 10.909,
+              "text color" : "[0.0]",
+              "content" : "U2FsdGVkX1+J7WV9K9Y+3Q=="
+            } ]
+          }, {
+            "type" : "table cell",
+            "page number" : 17,
+            "bounding box" : [ 295.634, 612.123, 400.798, 626.071 ],
+            "row number" : 2,
+            "column number" : 3,
+            "row span" : 1,
+            "column span" : 1,
+            "kids" : [ {
+              "type" : "paragraph",
+              "id" : 66,
+              "page number" : 17,
+              "bounding box" : [ 301.81, 612.896, 394.622, 626.663 ],
+              "font" : "SFRM1095",
+              "font size" : 10.909,
+              "text color" : "[0.0]",
+              "content" : "2025-07-14 09:00:00"
+            } ]
+          }, {
+            "type" : "table cell",
+            "page number" : 17,
+            "bounding box" : [ 400.798, 612.123, 505.963, 626.071 ],
+            "row number" : 2,
+            "column number" : 4,
+            "row span" : 1,
+            "column span" : 1,
+            "kids" : [ {
+              "type" : "paragraph",
+              "id" : 68,
+              "page number" : 17,
+              "bounding box" : [ 406.975, 612.896, 499.787, 626.663 ],
+              "font" : "SFRM1095",
+              "font size" : 10.909,
+              "text color" : "[0.0]",
+              "content" : "2025-07-21 09:00:00"
+            } ]
+          } ]
+        }, {
+          "type" : "table row",
+          "row number" : 3,
+          "cells" : [ {
+            "type" : "table cell",
+            "page number" : 17,
+            "bounding box" : [ 89.313, 598.176, 112.053, 612.123 ],
+            "row number" : 3,
+            "column number" : 1,
+            "row span" : 1,
+            "column span" : 1,
+            "kids" : [ {
+              "type" : "paragraph",
+              "id" : 69,
+              "page number" : 17,
+              "bounding box" : [ 97.971, 598.948, 103.395, 612.715 ],
+              "font" : "SFRM1095",
+              "font size" : 10.909,
+              "text color" : "[0.0]",
+              "content" : "2"
+            } ]
+          }, {
+            "type" : "table cell",
+            "page number" : 17,
+            "bounding box" : [ 112.053, 598.176, 295.634, 612.123 ],
+            "row number" : 3,
+            "column number" : 2,
+            "row span" : 1,
+            "column span" : 1,
+            "kids" : [ {
+              "type" : "paragraph",
+              "id" : 71,
+              "level" : "1",
+              "page number" : 17,
+              "bounding box" : [ 118.23, 598.948, 282.253, 612.715 ],
+              "font" : "SFRM1095",
+              "font size" : 10.909,
+              "text color" : "[0.0]",
+              "content" : "QWxkK09tdUxkRFl0aE4yZzA=="
+            } ]
+          }, {
+            "type" : "table cell",
+            "page number" : 17,
+            "bounding box" : [ 295.634, 598.176, 400.798, 612.123 ],
+            "row number" : 3,
+            "column number" : 3,
+            "row span" : 1,
+            "column span" : 1,
+            "kids" : [ {
+              "type" : "paragraph",
+              "id" : 73,
+              "page number" : 17,
+              "bounding box" : [ 301.81, 598.948, 394.622, 612.715 ],
+              "font" : "SFRM1095",
+              "font size" : 10.909,
+              "text color" : "[0.0]",
+              "content" : "2025-07-14 10:00:00"
+            } ]
+          }, {
+            "type" : "table cell",
+            "page number" : 17,
+            "bounding box" : [ 400.798, 598.176, 505.963, 612.123 ],
+            "row number" : 3,
+            "column number" : 4,
+            "row span" : 1,
+            "column span" : 1,
+            "kids" : [ {
+              "type" : "paragraph",
+              "id" : 75,
+              "page number" : 17,
+              "bounding box" : [ 406.975, 598.948, 499.787, 612.715 ],
+              "font" : "SFRM1095",
+              "font size" : 10.909,
+              "text color" : "[0.0]",
+              "content" : "2025-07-16 17:00:00"
+            } ]
+          } ]
+        }, {
+          "type" : "table row",
+          "row number" : 4,
+          "cells" : [ {
+            "type" : "table cell",
+            "page number" : 17,
+            "bounding box" : [ 89.313, 584.427, 112.053, 598.176 ],
+            "row number" : 4,
+            "column number" : 1,
+            "row span" : 1,
+            "column span" : 1,
+            "kids" : [ {
+              "type" : "paragraph",
+              "id" : 76,
+              "page number" : 17,
+              "bounding box" : [ 97.971, 585.001, 103.395, 598.768 ],
+              "font" : "SFRM1095",
+              "font size" : 10.909,
+              "text color" : "[0.0]",
+              "content" : "3"
+            } ]
+          }, {
+            "type" : "table cell",
+            "page number" : 17,
+            "bounding box" : [ 112.053, 584.427, 295.634, 598.176 ],
+            "row number" : 4,
+            "column number" : 2,
+            "row span" : 1,
+            "column span" : 1,
+            "kids" : [ {
+              "type" : "paragraph",
+              "id" : 78,
+              "page number" : 17,
+              "bounding box" : [ 118.23, 585.001, 281.721, 598.768 ],
+              "font" : "SFRM1095",
+              "font size" : 10.909,
+              "text color" : "[0.0]",
+              "content" : "Q2lwQW53MjMxY2dSZGFjQjY="
+            } ]
+          }, {
+            "type" : "table cell",
+            "page number" : 17,
+            "bounding box" : [ 295.634, 584.427, 400.798, 598.176 ],
+            "row number" : 4,
+            "column number" : 3,
+            "row span" : 1,
+            "column span" : 1,
+            "kids" : [ {
+              "type" : "paragraph",
+              "id" : 80,
+              "page number" : 17,
+              "bounding box" : [ 301.81, 585.001, 394.622, 598.768 ],
+              "font" : "SFRM1095",
+              "font size" : 10.909,
+              "text color" : "[0.0]",
+              "content" : "2025-07-14 08:30:00"
+            } ]
+          }, {
+            "type" : "table cell",
+            "page number" : 17,
+            "bounding box" : [ 400.798, 584.427, 505.963, 598.176 ],
+            "row number" : 4,
+            "column number" : 4,
+            "row span" : 1,
+            "column span" : 1,
+            "kids" : [ {
+              "type" : "paragraph",
+              "id" : 82,
+              "level" : "1",
+              "page number" : 17,
+              "bounding box" : [ 406.975, 585.001, 499.787, 598.768 ],
+              "font" : "SFRM1095",
+              "font size" : 10.909,
+              "text color" : "[0.0]",
+              "content" : "2025-07-28 13:00:00"
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 17,
+      "bounding box" : [ 175.423, 562.065, 419.854, 575.832 ],
+      "font" : "nanummjmd4",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "표 4.2: Working Tasks with Encrypted Descriptions",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 173,
+    "level" : "Subtitle",
+    "page number" : 17,
+    "bounding box" : [ 85.039, 525.087, 337.131, 539.924 ],
+    "heading level" : 5,
+    "font" : "SFBX1200",
+    "font size" : 11.955,
+    "text color" : "[0.0]",
+    "content" : "4.1.3 Frontend and User Interface Design"
+  }, {
+    "type" : "paragraph",
+    "id" : 174,
+    "page number" : 17,
+    "bounding box" : [ 85.039, 457.357, 510.236, 511.772 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "Our frontend is designed to deliver a consistent experience across mobile and web platforms using Flutter’s cross-platform capabilities. Although some platform-specific adjustments are necessary for optimal performance, the core user interface remains unified."
+  }, {
+    "type" : "paragraph",
+    "id" : 175,
+    "page number" : 17,
+    "bounding box" : [ 85.039, 376.062, 510.243, 450.801 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "For task input, we designed a simplified form that incorporates intuitive components like time pickers and medication suggestion fields. The system performs immediate validation checks for task conflicts, such as overlapping times or duplicate entries. Users are alerted with clear conflict messages and prompted to adjust or confirm their inputs."
+  }, {
+    "type" : "paragraph",
+    "id" : 176,
+    "page number" : 17,
+    "bounding box" : [ 85.039, 294.767, 510.241, 369.505 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "Furthermore, we have integrated an interaction flow that prepares for future drug-drug interaction (DDI) conflict detection. Although this feature is still under development, the system is designed to warn users about potentially harmful medication combinations before a task is saved, thereby supporting medication safety and adherence."
+  }, {
+    "type" : "heading",
+    "id" : 177,
+    "level" : "Subtitle",
+    "page number" : 17,
+    "bounding box" : [ 85.039, 258.293, 266.86, 273.13 ],
+    "heading level" : 5,
+    "font" : "SFBX1200",
+    "font size" : 11.955,
+    "text color" : "[0.0]",
+    "content" : "4.1.4 AI/NLP System Design"
+  }, {
+    "type" : "paragraph",
+    "id" : 178,
+    "page number" : 17,
+    "bounding box" : [ 85.039, 88.945, 510.243, 244.978 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "The AI/NLP component of our system represents one of our most challenging development areas. Our goal is to create a module capable of accurately extracting critical information from uploaded prescription documents or handwritten notes, identifying medication names, dosages, frequencies, and instructions even when presented in varying formats or layouts. We are currently evaluating different models and frameworks to determine the most effective solution for our needs. The parsing logic attempts to recognize typical document structures, as most prescriptions tend to follow loosely standardized formats. However, variations between institutions and writing styles present ongoing challenges that"
+  }, {
+    "type" : "footer",
+    "id" : 179,
+    "page number" : 17,
+    "bounding box" : [ 292.214, 51.66, 303.062, 65.427 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 44,
+      "page number" : 17,
+      "bounding box" : [ 292.214, 51.66, 303.062, 65.427 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "14"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 180,
+    "page number" : 18,
+    "bounding box" : [ 85.039, 780.737, 510.24, 794.504 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 59,
+      "page number" : 18,
+      "bounding box" : [ 85.039, 780.737, 510.24, 794.504 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "UmiZoomi 4. DESIGN"
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 182,
+    "page number" : 18,
+    "bounding box" : [ 85.039, 620.458, 510.242, 756.167 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "require flexible and adaptive models. Our current approach involves testing both traditional rule-based parsing combined with optical character recognition (OCR) and AI-based natural language understanding models. These models are being tested on synthetic datasets that simulate common prescription patterns. We are still deciding whether to deploy this AI/NLP component on the client-side to ensure user privacy and reduce server load, or on the server-side via Firebase Cloud Functions, depending on our performance evaluations and privacy considerations."
+  }, {
+    "type" : "heading",
+    "id" : 183,
+    "level" : "Subtitle",
+    "page number" : 18,
+    "bounding box" : [ 85.039, 583.984, 380.56, 598.821 ],
+    "heading level" : 5,
+    "font" : "SFBX1200",
+    "font size" : 11.955,
+    "text color" : "[0.0]",
+    "content" : "4.1.5 Notification System and Conflict Detection"
+  }, {
+    "type" : "paragraph",
+    "id" : 184,
+    "page number" : 18,
+    "bounding box" : [ 85.039, 475.607, 510.243, 570.669 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "The system’s notification logic is built upon Firebase Cloud Messaging (FCM) and Firebase Cloud Functions. Task reminders and critical alerts are sent based on both scheduled timings and event-driven triggers. The conflict detection logic is embedded within the task management flow, where the system checks for overlaps, excessive task loads, and planned drug-drug interaction (DDI) conflicts."
+  }, {
+    "type" : "heading",
+    "id" : 185,
+    "level" : "Subtitle",
+    "page number" : 18,
+    "bounding box" : [ 85.039, 439.133, 260.845, 453.97 ],
+    "heading level" : 5,
+    "font" : "SFBX1200",
+    "font size" : 11.955,
+    "text color" : "[0.0]",
+    "content" : "4.1.6 Offline Mode Handling"
+  }, {
+    "type" : "paragraph",
+    "id" : 186,
+    "page number" : 18,
+    "bounding box" : [ 85.039, 249.46, 510.243, 425.818 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "Recognizing the importance of system availability in low-connectivity environments, offline mode support represents a key feature of our design. The system employs a clientside local database (sqflite) for storing task data and essential information. When a device reconnects to the internet, a synchronization mechanism updates Firestore with locally stored data. While core functionalities such as task viewing and entry are supported offline, certain features including real-time notifications and conflict checks requiring server-side logic remain limited until synchronization occurs. We continue to refine this functionality to ensure seamless user experience and data consistency, particularly addressing challenges that arise when offline changes conflict with server-side updates."
+  }, {
+    "type" : "heading",
+    "id" : 187,
+    "level" : "Subtitle",
+    "page number" : 18,
+    "bounding box" : [ 85.039, 212.987, 351.218, 227.824 ],
+    "heading level" : 5,
+    "font" : "SFBX1200",
+    "font size" : 11.955,
+    "text color" : "[0.0]",
+    "content" : "4.1.7 Key Design Changes from Initial Plan"
+  }, {
+    "type" : "paragraph",
+    "id" : 188,
+    "page number" : 18,
+    "bounding box" : [ 101.976, 185.905, 446.657, 199.672 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "Several significant changes have been made since the project’s inception:"
+  }, {
+    "type" : "list",
+    "id" : 189,
+    "level" : "2",
+    "page number" : 18,
+    "bounding box" : [ 101.434, 86.677, 510.235, 170.381 ],
+    "numbering style" : "unordered",
+    "number of list items" : 2,
+    "next list id" : 194,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 18,
+      "bounding box" : [ 101.434, 136.291, 510.235, 170.381 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Backend Simplification: Transitioning from a custom Node.js backend to Firebase’s serverless architecture for ease of integration and maintenance.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 18,
+      "bounding box" : [ 101.434, 86.677, 510.235, 120.767 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Expanded Frontend Scope: Shifting from Flutter mobile-only to a unified mobile and web application using Flutter, with additional features for administrators via a",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 190,
+    "page number" : 18,
+    "bounding box" : [ 292.214, 51.66, 303.062, 65.427 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 45,
+      "page number" : 18,
+      "bounding box" : [ 292.214, 51.66, 303.062, 65.427 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "15"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 191,
+    "page number" : 19,
+    "bounding box" : [ 85.039, 780.737, 510.24, 794.504 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 60,
+      "page number" : 19,
+      "bounding box" : [ 85.039, 780.737, 510.24, 794.504 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "UmiZoomi 4. DESIGN"
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 194,
+    "level" : "2",
+    "page number" : 19,
+    "bounding box" : [ 101.434, 573.235, 510.242, 756.167 ],
+    "numbering style" : "unordered",
+    "number of list items" : 4,
+    "previous list id" : 189,
+    "list items" : [ {
+      "type" : "list item",
+      "id" : 193,
+      "page number" : 19,
+      "bounding box" : [ 112.312, 742.4, 226.519, 756.167 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "dedicated web interface.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 19,
+      "bounding box" : [ 101.434, 672.463, 510.242, 726.877 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Data Security Focus: Enhancing data protection measures for sensitive information, particularly with respect to encryption of PHI and secure handling of scanned documents.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 19,
+      "bounding box" : [ 101.434, 622.849, 510.236, 656.94 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• AI/NLP Integration Strategy: Moving from a fixed parsing logic to a flexible AI/NLP approach, still under evaluation for optimal deployment architecture.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 19,
+      "bounding box" : [ 101.434, 573.235, 510.241, 607.326 ],
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "• Offline Mode Implementation: Adding local data storage and sync mechanisms to support offline access and operation.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 195,
+    "page number" : 19,
+    "bounding box" : [ 85.039, 523.621, 510.235, 557.712 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "These changes reflect our adaptive design approach, responding both to technical realities and to emerging user and system requirements encountered during development."
+  }, {
+    "type" : "footer",
+    "id" : 196,
+    "page number" : 19,
+    "bounding box" : [ 292.214, 51.66, 303.062, 65.427 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 46,
+      "page number" : 19,
+      "bounding box" : [ 292.214, 51.66, 303.062, 65.427 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "16"
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 197,
+    "level" : "Subtitle",
+    "page number" : 20,
+    "bounding box" : [ 85.039, 657.762, 457.511, 679.006 ],
+    "heading level" : 2,
+    "font" : "SFBX1728",
+    "font size" : 17.215,
+    "text color" : "[0.0]",
+    "content" : "제5장 Project Activities and Interim Results"
+  }, {
+    "type" : "heading",
+    "id" : 198,
+    "level" : "Subtitle",
+    "page number" : 20,
+    "bounding box" : [ 85.039, 589.129, 388.541, 606.789 ],
+    "heading level" : 3,
+    "font" : "SFBX1440",
+    "font size" : 14.346,
+    "text color" : "[0.0]",
+    "content" : "5.1 Task Performance and Interim Results"
+  }, {
+    "type" : "paragraph",
+    "id" : 199,
+    "page number" : 20,
+    "bounding box" : [ 85.039, 498.073, 510.24, 572.812 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "As of the current reporting period, the project has made substantial progress across multiple core development areas. The collaborative efforts of team members have resulted in both backend and frontend modules approaching MVP (Minimum Viable Product) status, while AI components undergo active testing and refinement."
+  }, {
+    "type" : "heading",
+    "id" : 200,
+    "level" : "Subtitle",
+    "page number" : 20,
+    "bounding box" : [ 85.039, 461.6, 325.68, 476.437 ],
+    "heading level" : 5,
+    "font" : "SFBX1200",
+    "font size" : 11.955,
+    "text color" : "[0.0]",
+    "content" : "5.1.1 Development Progress by Module"
+  }, {
+    "type" : "heading",
+    "id" : 201,
+    "level" : "Subtitle",
+    "page number" : 20,
+    "bounding box" : [ 101.976, 434.561, 225.828, 448.153 ],
+    "heading level" : 6,
+    "font" : "SFBX1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "AI/NLP Task Parsing:"
+  }, {
+    "type" : "paragraph",
+    "id" : 202,
+    "page number" : 20,
+    "bounding box" : [ 85.039, 353.222, 510.243, 427.96 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "The synthetic dataset for testing prescription and task formats has been successfully created. Rule-based parsers have been implemented and are currently being evaluated for accuracy. Frameworks like Rasa and spaCy are under comparative testing for future integration of a chatbot assistant."
+  }, {
+    "type" : "heading",
+    "id" : 203,
+    "level" : "Subtitle",
+    "page number" : 20,
+    "bounding box" : [ 101.976, 332.942, 231.735, 346.534 ],
+    "heading level" : 6,
+    "font" : "SFBX1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "Firebase Infrastructure:"
+  }, {
+    "type" : "paragraph",
+    "id" : 204,
+    "page number" : 20,
+    "bounding box" : [ 85.039, 271.927, 510.243, 326.342 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "User authentication with role-based access (admin/user/mixed) is fully functional. Firebase Cloud Messaging has been partially implemented for real-time notifications, with additional serverless functions in development for task validation and syncing."
+  }, {
+    "type" : "heading",
+    "id" : 205,
+    "level" : "Subtitle",
+    "page number" : 20,
+    "bounding box" : [ 101.976, 251.647, 229.99, 265.239 ],
+    "heading level" : 6,
+    "font" : "SFBX1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "Frontend Development:"
+  }, {
+    "type" : "paragraph",
+    "id" : 206,
+    "page number" : 20,
+    "bounding box" : [ 85.039, 190.632, 510.242, 245.046 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "Core UI components using Flutter are built for Android, iOS, and web. The interface supports task input, time scheduling, and visual validation feedback. UI testing for older users and accessibility constraints is underway."
+  }, {
+    "type" : "paragraph",
+    "id" : 207,
+    "page number" : 20,
+    "bounding box" : [ 85.039, 129.66, 510.24, 183.944 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "Offline Mode: Local data storage (via sqflite) enables limited functionality offline. Synchronization with Firestore on reconnection has been partially implemented and is a current area of focus."
+  }, {
+    "type" : "heading",
+    "id" : 208,
+    "level" : "Subtitle",
+    "page number" : 20,
+    "bounding box" : [ 101.976, 109.381, 242.071, 122.973 ],
+    "heading level" : 6,
+    "font" : "SFBX1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "Security and Compliance:"
+  }, {
+    "type" : "paragraph",
+    "id" : 209,
+    "page number" : 20,
+    "bounding box" : [ 85.039, 89.013, 510.242, 102.78 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "Basic Firebase encryption is in place. For privacy-sensitive data, encryption-at-source is"
+  }, {
+    "type" : "footer",
+    "id" : 210,
+    "page number" : 20,
+    "bounding box" : [ 292.214, 51.66, 303.062, 65.427 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 47,
+      "page number" : 20,
+      "bounding box" : [ 292.214, 51.66, 303.062, 65.427 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "17"
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 211,
+    "page number" : 21,
+    "bounding box" : [ 85.039, 780.737, 510.233, 794.504 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "UmiZoomi 5. PROJECT ACTIVITIES AND INTERIM RESULTS"
+  }, {
+    "type" : "paragraph",
+    "id" : 213,
+    "page number" : 21,
+    "bounding box" : [ 85.039, 722.077, 510.239, 756.167 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "being considered to meet PIPA requirements. A client-side-first approach is tested for OCR and prescription scanning to enhance confidentiality."
+  }, {
+    "type" : "heading",
+    "id" : 214,
+    "level" : "Subtitle",
+    "page number" : 21,
+    "bounding box" : [ 85.039, 685.603, 217.709, 700.44 ],
+    "heading level" : 5,
+    "font" : "SFBX1200",
+    "font size" : 11.955,
+    "text color" : "[0.0]",
+    "content" : "5.1.2 Interim Results"
+  }, {
+    "type" : "paragraph",
+    "id" : 215,
+    "page number" : 21,
+    "bounding box" : [ 85.039, 617.873, 510.241, 672.157 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "System Stability: All implemented modules function correctly in isolated testing scenarios using synthetic data. No major performance or compatibility issues have been encountered so far."
+  }, {
+    "type" : "paragraph",
+    "id" : 216,
+    "page number" : 21,
+    "bounding box" : [ 85.039, 556.902, 510.233, 611.185 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "Usability Testing: Initial feedback from test users indicates that the UI is intuitive and responsive. Offline task creation, though still limited, has shown promising results."
+  }, {
+    "type" : "paragraph",
+    "id" : 217,
+    "page number" : 21,
+    "bounding box" : [ 85.039, 495.93, 510.241, 550.214 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "Conflict Detection: Basic schedule overlap detection is functional. The drug interaction check feature is planned for the next development sprint once the DDI dataset is integrated."
+  }, {
+    "type" : "paragraph",
+    "id" : 218,
+    "page number" : 21,
+    "bounding box" : [ 85.039, 434.959, 510.235, 489.243 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "Team Coordination: Members have effectively divided tasks by technical specialty, maintaining regular version control and documentation updates."
+  }, {
+    "type" : "paragraph",
+    "id" : 219,
+    "page number" : 21,
+    "bounding box" : [ 85.039, 313.016, 510.241, 428.271 ],
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "Additional Documentation: For a comprehensive overview of the development process including screenshots, user interface demonstrations, and detailed technical implementation examples, please refer to our project blog: Notion Blog The blog provides visual documentation of our progress and additional insights into the challenges and solutions encountered during development."
+  }, {
+    "type" : "footer",
+    "id" : 220,
+    "page number" : 21,
+    "bounding box" : [ 292.214, 51.66, 303.062, 65.427 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 48,
+      "page number" : 21,
+      "bounding box" : [ 292.214, 51.66, 303.062, 65.427 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "18"
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 221,
+    "level" : "Subtitle",
+    "page number" : 22,
+    "bounding box" : [ 85.039, 657.762, 295.306, 679.006 ],
+    "heading level" : 2,
+    "font" : "SFBX1728",
+    "font size" : 17.215,
+    "text color" : "[0.0]",
+    "content" : "제6장 Development Plan"
+  }, {
+    "type" : "heading",
+    "id" : 222,
+    "level" : "Subtitle",
+    "page number" : 22,
+    "bounding box" : [ 85.039, 589.129, 309.439, 606.789 ],
+    "heading level" : 3,
+    "font" : "SFBX1440",
+    "font size" : 14.346,
+    "text color" : "[0.0]",
+    "content" : "6.1 Detailed Development plan"
+  }, {
+    "type" : "image",
+    "id" : 223,
+    "page number" : 22,
+    "bounding box" : [ 85.039, 131.94, 510.266, 562.837 ],
+    "source" : "2025중간보고서_25_UmiZoomi_AI_기반_스마트_알림_시스템_images/imageFile2.png"
+  }, {
+    "type" : "caption",
+    "id" : 224,
+    "page number" : 22,
+    "bounding box" : [ 216.765, 104.937, 378.511, 118.704 ],
+    "linked content id" : 223,
+    "font" : "SFRM1095",
+    "font size" : 10.909,
+    "text color" : "[0.0]",
+    "content" : "그림 6.1: Development Plan Table"
+  }, {
+    "type" : "footer",
+    "id" : 225,
+    "page number" : 22,
+    "bounding box" : [ 292.214, 51.66, 303.062, 65.427 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 49,
+      "page number" : 22,
+      "bounding box" : [ 292.214, 51.66, 303.062, 65.427 ],
+      "heading level" : 7,
+      "font" : "SFRM1095",
+      "font size" : 10.909,
+      "text color" : "[0.0]",
+      "content" : "19"
+    } ]
+  } ]
+}

@@ -9,11 +9,14 @@ import re
 from typing import Any, Dict, Optional, Type
 
 from tools.sionna_smoke_test.io_utils import atomic_write_text, write_json
+from tools.sionna_scenario.obstacle_schema import parse_obstacle
+from tools.sionna_scenario.primitive_builder import build_obstacle_mesh
 
 from .candidate_library import (
     CandidateTemplate,
     instantiate_candidate,
     load_candidate_library,
+    materialize_draft_placeholders,
 )
 from .command_stack import (
     AddObjectCommand,
@@ -62,6 +65,16 @@ class EditorCore:
         self.commands = CommandStack()
         self.last_validation: Optional[Dict[str, Any]] = None
         self.commands_since_autosave = 0
+
+    def materialize_draft_placeholders(self) -> list:
+        """Make matching null drafts visible without touching the source file."""
+
+        changed = materialize_draft_placeholders(
+            self.state.obstacles, self.candidates, self.scene.containment
+        )
+        if changed:
+            self.last_validation = None
+        return changed
 
     @classmethod
     def from_paths(
@@ -259,6 +272,14 @@ class EditorCore:
     def validate(self) -> Dict[str, Any]:
         self.last_validation = validate_document(self.state.document, self.scene)
         return self.last_validation
+
+    def preview_mesh(self, object_id: str):
+        """Build one complete object for interactive drag without full validation."""
+
+        value = deepcopy(self.state.get_object(object_id))
+        value["enabled"] = True
+        spec = parse_obstacle(value, source_path=self.state.source_path)
+        return build_obstacle_mesh(spec, room=self.scene.containment)
 
     def save(self, path: Optional[Path] = None) -> Dict[str, Any]:
         report = self.validate()

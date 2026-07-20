@@ -23,7 +23,7 @@ navigation:
     fps = config["navigation"]["fps"]
     assert fps["movement_speed_mps"] == 2.25
     assert fps["sprint_multiplier"] == 3.0
-    assert fps["horizontal_only"] is True
+    assert fps["horizontal_only"] is False
 
 
 @pytest.mark.parametrize(
@@ -51,3 +51,30 @@ def test_fps_flags_must_be_boolean(tmp_path):
     )
     with pytest.raises(ValueError, match="enabled는 bool"):
         load_editor_config(path)
+
+
+def test_reference_display_defaults_and_overrides(tmp_path):
+    default = load_editor_config()
+    assert default["reference"]["display_mode"] == "both"
+    assert default["reference"]["point_size"] == 2.0
+    config = load_editor_config(
+        write_config(
+            tmp_path,
+            "reference:\n  display_mode: point_cloud\n  point_size: 4.5\n",
+        )
+    )
+    assert config["reference"]["display_mode"] == "point_cloud"
+    assert config["reference"]["point_size"] == 4.5
+
+
+@pytest.mark.parametrize(
+    "text",
+    (
+        "reference:\n  point_size: 0\n",
+        "reference:\n  display_mode: invalid\n",
+        "reference:\n  visible: maybe\n",
+    ),
+)
+def test_invalid_reference_display_config_is_rejected(tmp_path, text):
+    with pytest.raises(ValueError):
+        load_editor_config(write_config(tmp_path, text))

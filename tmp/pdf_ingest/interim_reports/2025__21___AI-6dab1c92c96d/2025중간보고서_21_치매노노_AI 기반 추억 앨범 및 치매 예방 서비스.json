@@ -1,0 +1,1117 @@
+{
+  "file name" : "2025중간보고서_21_치매노노_AI 기반 추억 앨범 및 치매 예방 서비스.pdf",
+  "number of pages" : 10,
+  "author" : null,
+  "title" : "2025전기_중간보고서_21_치매노노_AI 기반 추억 앨범 및 치매 예방 서비스",
+  "creation date" : null,
+  "modification date" : null,
+  "kids" : [ {
+    "type" : "heading",
+    "id" : 18,
+    "level" : "Doctitle",
+    "page number" : 1,
+    "bounding box" : [ 78.138, 707.549, 517.145, 769.149 ],
+    "heading level" : 1,
+    "font" : "Gulim",
+    "font size" : 26.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "AI 기반 추억 앨범 및 치매 예방 서비스 중간 보고서"
+  }, {
+    "type" : "image",
+    "id" : 20,
+    "page number" : 1,
+    "bounding box" : [ 140.138, 342.064, 455.138, 657.064 ],
+    "source" : "2025중간보고서_21_치매노노_AI 기반 추억 앨범 및 치매 예방 서비스_images/imageFile1.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 19,
+    "page number" : 1,
+    "bounding box" : [ 198.054, 282.355, 397.222, 297.355 ],
+    "font" : "Gulim",
+    "font size" : 15.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "부산대학교 정보컴퓨터공학부"
+  }, {
+    "type" : "image",
+    "id" : 21,
+    "page number" : 1,
+    "bounding box" : [ 360.75, 104.87, 543.0, 180.62 ],
+    "source" : "2025중간보고서_21_치매노노_AI 기반 추억 앨범 및 치매 예방 서비스_images/imageFile2.png"
+  }, {
+    "type" : "heading",
+    "id" : 23,
+    "level" : "Subtitle",
+    "page number" : 2,
+    "bounding box" : [ 277.646, 748.408, 317.638, 768.408 ],
+    "heading level" : 2,
+    "font" : "Gulim",
+    "font size" : 20.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "목차"
+  }, {
+    "type" : "list",
+    "id" : 25,
+    "level" : "1",
+    "page number" : 2,
+    "bounding box" : [ 90.0, 524.073, 347.338, 697.488 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 5,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 90.0, 684.082, 347.338, 697.488 ],
+      "font" : "ArialMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "1. 요구조건 및 제약 사항 분석에 대한 수정 사항",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 16,
+        "level" : "2",
+        "page number" : 2,
+        "bounding box" : [ 108.0, 640.271, 179.275, 681.652 ],
+        "numbering style" : "arabic numbers",
+        "number of list items" : 3,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 108.0, 669.363, 179.275, 681.652 ],
+          "font" : "ArialMT",
+          "font size" : 11.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "1. 음성 데이터",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 108.0, 654.817, 179.275, 667.106 ],
+          "font" : "ArialMT",
+          "font size" : 11.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "2. 표정 데이터",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 108.0, 640.271, 176.07, 652.56 ],
+          "font" : "ArialMT",
+          "font size" : 11.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "3. YOLO 모델",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 90.0, 611.35, 241.336, 624.757 ],
+      "font" : "ArialMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "2. 설계 상세화 및 변경 내역",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 90.0, 582.258, 226.002, 595.664 ],
+      "font" : "ArialMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "3. 갱신된 과제 추진 계획",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 90.0, 553.165, 195.334, 566.572 ],
+      "font" : "ArialMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "4. 구성원별 진척도",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 90.0, 524.073, 347.338, 537.479 ],
+      "font" : "ArialMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "5. 보고 시점까지의 과제 수행 내용 및 중간 결과",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 26,
+    "level" : "2",
+    "page number" : 2,
+    "bounding box" : [ 108.0, 480.262, 443.036, 521.643 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 3,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 108.65, 509.354, 443.036, 521.643 ],
+      "font" : "ArialMT",
+      "font size" : 11.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "1. 소셜 로그인 기반 사용자 인증 및 인가 기능 구현 (카카오, 네이버)",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 108.0, 494.808, 349.093, 507.097 ],
+      "font" : "ArialMT",
+      "font size" : 11.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "2. AI 대화 세션 종료 후 대화 내용 요약 기능 구현",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 108.0, 480.262, 244.687, 492.551 ],
+      "font" : "ArialMT",
+      "font size" : 11.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "3. 감정 일기 생성 기능 구현",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 28,
+    "level" : "Subtitle",
+    "page number" : 3,
+    "bounding box" : [ 72.0, 751.602, 404.644, 769.477 ],
+    "heading level" : 3,
+    "font" : "Gulim",
+    "font size" : 16.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "1. 요구조건 및 제약 사항 분석에 대한 수정 사항"
+  }, {
+    "type" : "heading",
+    "id" : 29,
+    "level" : "Subtitle",
+    "page number" : 3,
+    "bounding box" : [ 108.0, 720.304, 210.886, 735.944 ],
+    "heading level" : 4,
+    "font" : "Gulim",
+    "font size" : 14.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "1-1. 음성 데이터"
+  }, {
+    "type" : "paragraph",
+    "id" : 30,
+    "level" : "3",
+    "page number" : 3,
+    "bounding box" : [ 113.556, 700.755, 166.696, 711.927 ],
+    "font" : "Gulim",
+    "font size" : 10.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "1. 제약 사항"
+  }, {
+    "type" : "paragraph",
+    "id" : 31,
+    "page number" : 3,
+    "bounding box" : [ 108.0, 674.308, 505.055, 698.703 ],
+    "font" : "Gulim",
+    "font size" : 10.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "사용자의 감정 분석 시 사용하는 데이터 중 하나인 음성 데이터 수집 중, 50대 이상의 한국인 음성 데이터를 수집하기 어려운 점을 확인하였다."
+  }, {
+    "type" : "paragraph",
+    "id" : 32,
+    "level" : "3",
+    "page number" : 3,
+    "bounding box" : [ 113.556, 647.86, 166.696, 659.032 ],
+    "font" : "Gulim",
+    "font size" : 10.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "2. 수정 사항"
+  }, {
+    "type" : "paragraph",
+    "id" : 33,
+    "page number" : 3,
+    "bounding box" : [ 108.0, 621.412, 519.0, 645.808 ],
+    "font" : "Gulim",
+    "font size" : 10.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "음성 데이터 대신, 50대 이상 고령층의 텍스트 데이터를 활용하기로 결정하고, 텍스트 데이터를 확보하였다."
+  }, {
+    "type" : "image",
+    "id" : 39,
+    "page number" : 3,
+    "bounding box" : [ 109.5, 494.437, 561.0, 618.187 ],
+    "source" : "2025중간보고서_21_치매노노_AI 기반 추억 앨범 및 치매 예방 서비스_images/imageFile3.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 34,
+    "page number" : 3,
+    "bounding box" : [ 212.87, 474.994, 381.88, 485.049 ],
+    "font" : "Gulim",
+    "font size" : 9.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "그림 1. 음성 데이터 전처리 결과 데이터 수"
+  }, {
+    "type" : "heading",
+    "id" : 35,
+    "level" : "Subtitle",
+    "page number" : 3,
+    "bounding box" : [ 108.0, 427.198, 210.886, 442.838 ],
+    "heading level" : 4,
+    "font" : "Gulim",
+    "font size" : 14.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "1-2. 표정 데이터"
+  }, {
+    "type" : "list",
+    "id" : 36,
+    "level" : "2",
+    "page number" : 3,
+    "bounding box" : [ 108.0, 340.208, 519.0, 418.789 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 2,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 3,
+      "bounding box" : [ 110.777, 393.103, 519.0, 418.789 ],
+      "font" : "ArialMT",
+      "font size" : 11.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "1. 제약 사항 표정 데이터의 데이터 전처리 중, 50대 이상의 데이터를 분류하는 과정에서 표정 데이터의 수가",
+      "kids" : [ {
+        "type" : "paragraph",
+        "id" : 10,
+        "page number" : 3,
+        "bounding box" : [ 108.0, 379.879, 172.056, 391.051 ],
+        "font" : "Gulim",
+        "font size" : 10.0,
+        "text color" : "[0.0, 0.0, 0.0]",
+        "content" : "현저히 적었다."
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 3,
+      "bounding box" : [ 108.0, 340.208, 478.641, 364.604 ],
+      "font" : "ArialMT",
+      "font size" : 10.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "2. 수정 사항 연령의 기준점을 하향하여 표정 데이터에 한하여 40대 이상의 데이터까지 포함하도록",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 37,
+    "page number" : 3,
+    "bounding box" : [ 108.0, 326.984, 159.528, 338.156 ],
+    "font" : "Gulim",
+    "font size" : 10.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "수정하였다."
+  }, {
+    "type" : "image",
+    "id" : 40,
+    "page number" : 3,
+    "bounding box" : [ 109.5, 180.785, 561.0, 310.535 ],
+    "source" : "2025중간보고서_21_치매노노_AI 기반 추억 앨범 및 치매 예방 서비스_images/imageFile4.png"
+  }, {
+    "type" : "list",
+    "id" : 38,
+    "level" : "3",
+    "page number" : 3,
+    "bounding box" : [ 188.867, 146.796, 405.883, 156.85 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "next list id" : 42,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 3,
+      "bounding box" : [ 188.867, 146.796, 405.883, 156.85 ],
+      "font" : "Gulim",
+      "font size" : 9.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "그림 2. 표정 데이터 분류 결과 데이터 수 (40대 미포함)",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 46,
+    "page number" : 4,
+    "bounding box" : [ 109.5, 643.25, 561.0, 768.5 ],
+    "source" : "2025중간보고서_21_치매노노_AI 기반 추억 앨범 및 치매 예방 서비스_images/imageFile5.png"
+  }, {
+    "type" : "list",
+    "id" : 42,
+    "level" : "3",
+    "page number" : 4,
+    "bounding box" : [ 195.868, 609.261, 398.882, 619.315 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "previous list id" : 38,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 195.868, 609.261, 398.882, 619.315 ],
+      "font" : "Gulim",
+      "font size" : 9.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "그림 3. 표정 데이터 분류결과 데이터 수(40대 포함)",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 43,
+    "level" : "Subtitle",
+    "page number" : 4,
+    "bounding box" : [ 108.0, 506.667, 220.652, 524.542 ],
+    "heading level" : 3,
+    "font" : "ArialMT",
+    "font size" : 16.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "1-3. YOLO 모델"
+  }, {
+    "type" : "list",
+    "id" : 44,
+    "level" : "2",
+    "page number" : 4,
+    "bounding box" : [ 108.0, 347.903, 496.55, 491.108 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 2,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 108.0, 464.273, 493.239, 491.108 ],
+      "font" : "ArialMT",
+      "font size" : 11.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "1. 제약 사항 표정 데이터에 대해 감정 라벨(기쁨, 당황, 분노, 불안, 상처, 슬픔)을 부여하고",
+      "kids" : [ {
+        "type" : "paragraph",
+        "id" : 9,
+        "page number" : 4,
+        "bounding box" : [ 108.0, 406.088, 501.344, 462.016 ],
+        "font" : "Gulim",
+        "font size" : 11.0,
+        "text color" : "[0.0, 0.0, 0.0]",
+        "content" : "YOLO 학습용 라벨(txt 파일)을 생성하는 과정에서, json 파일에서 bounding box 좌표와 감정 라벨을 추출하고 변환하는 작업에 많은 시간이 소요되었다. 특히 한 감정 카테고리 기준으로 약 10시간 이상이 걸리는 경우도 발생하여, 전체 개발 일정에 지연이 발생하였다."
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 108.0, 347.903, 496.55, 374.738 ],
+      "font" : "ArialMT",
+      "font size" : 11.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "2. 수정 사항 기존에는 AI 모델 구현(데이터 라벨링 포함)을 완료한 후에 웹 개발을 시작하는",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 45,
+    "page number" : 4,
+    "bounding box" : [ 108.0, 304.264, 495.236, 345.646 ],
+    "font" : "Gulim",
+    "font size" : 11.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "순차적인 방식이었으나, 위에서 언급된 라벨링 지연 문제에 유연하게 대응하고 전반적인 프로젝트 기간을 최적화하기 위해, 라벨링 작업과 웹 개발을 동시에 진행하는 병행 방식으로 일정을 전면 수정하였다."
+  }, {
+    "type" : "heading",
+    "id" : 48,
+    "level" : "Subtitle",
+    "page number" : 5,
+    "bounding box" : [ 72.0, 751.602, 265.312, 769.477 ],
+    "heading level" : 3,
+    "font" : "Gulim",
+    "font size" : 16.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "2. 설계 상세화 및 변경 내역"
+  }, {
+    "type" : "list",
+    "id" : 49,
+    "level" : "3",
+    "page number" : 5,
+    "bounding box" : [ 90.0, 159.266, 502.88, 736.01 ],
+    "numbering style" : "english letters",
+    "number of list items" : 9,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 90.0, 722.604, 226.002, 736.01 ],
+      "font" : "ArialMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "a. 사용자 접속 및 로그인",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 1,
+        "level" : "4",
+        "page number" : 5,
+        "bounding box" : [ 118.062, 688.509, 424.13, 715.344 ],
+        "numbering style" : "roman numbers",
+        "number of list items" : 2,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 5,
+          "bounding box" : [ 120.504, 703.055, 402.643, 715.344 ],
+          "font" : "ArialMT",
+          "font size" : 11.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "i. 사용자는 AWS EC2에 배포된 웹 서비스에 접속한다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 5,
+          "bounding box" : [ 118.062, 688.509, 424.13, 700.798 ],
+          "font" : "ArialMT",
+          "font size" : 11.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "ii. 본인 계정으로 로그인하거나, 가족 계정으로 로그인한다.",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 90.0, 672.813, 186.668, 686.219 ],
+      "font" : "ArialMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "b. 대화 세션 시작",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 2,
+        "level" : "4",
+        "page number" : 5,
+        "bounding box" : [ 118.062, 638.718, 456.071, 665.553 ],
+        "numbering style" : "roman numbers",
+        "number of list items" : 2,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 5,
+          "bounding box" : [ 120.504, 653.264, 456.071, 665.553 ],
+          "font" : "ArialMT",
+          "font size" : 11.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "i. 사용자는 '대화 시작' 버튼을 눌러 AI와의 회상 대화를 시작한다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 5,
+          "bounding box" : [ 118.062, 638.718, 356.63, 651.007 ],
+          "font" : "ArialMT",
+          "font size" : 11.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "ii. 초기 추천 질문 리스트 중 하나를 선택한다.",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 90.0, 623.022, 241.336, 636.428 ],
+      "font" : "ArialMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "c. 음성 및 표정 데이터 수집",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 3,
+        "level" : "4",
+        "page number" : 5,
+        "bounding box" : [ 115.62, 559.835, 505.531, 615.763 ],
+        "numbering style" : "roman numbers",
+        "number of list items" : 3,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 5,
+          "bounding box" : [ 120.504, 603.474, 339.272, 615.763 ],
+          "font" : "ArialMT",
+          "font size" : 11.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "i. 사용자의 웹캠 및 마이크가 활성화된다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 5,
+          "bounding box" : [ 118.062, 588.927, 488.269, 601.216 ],
+          "font" : "ArialMT",
+          "font size" : 11.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "ii. Whisper API를 통해 사용자의 발화 내용을 실시간 텍스트로 변환한다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 5,
+          "bounding box" : [ 115.62, 559.835, 505.531, 586.67 ],
+          "font" : "ArialMT",
+          "font size" : 11.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "iii. YOLO 모델을 활용하여 실시간으로 사용자의 얼굴 표정을 분석하고, 감정 상태를 추출한다.",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 90.0, 544.139, 216.674, 557.545 ],
+      "font" : "ArialMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "d. AI 응답 생성 및 출력",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 4,
+        "level" : "4",
+        "page number" : 5,
+        "bounding box" : [ 115.62, 451.859, 505.749, 536.879 ],
+        "numbering style" : "roman numbers",
+        "number of list items" : 5,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 5,
+          "bounding box" : [ 120.504, 524.59, 399.192, 536.879 ],
+          "font" : "ArialMT",
+          "font size" : 11.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "i. KoBERT 모델을 통해 텍스트 감정 분석을 수행한다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 5,
+          "bounding box" : [ 118.062, 510.044, 463.988, 522.333 ],
+          "font" : "ArialMT",
+          "font size" : 11.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "ii. 표정 감정과 텍스트 감정을 종합하여 현재 감정 상태를 판단한다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 5,
+          "bounding box" : [ 115.62, 495.498, 463.988, 507.787 ],
+          "font" : "ArialMT",
+          "font size" : 11.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "iii. 표정 감정과 텍스트 감정을 종합하여 현재 감정 상태를 판단한다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 5,
+          "bounding box" : [ 115.824, 466.405, 505.749, 493.241 ],
+          "font" : "ArialMT",
+          "font size" : 11.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "iv. Naver CLOVA Voice API를 이용해 AI의 텍스트 응답을 음성으로 변환하여 사용자에게 전달한다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 5,
+          "bounding box" : [ 118.266, 451.859, 449.684, 464.148 ],
+          "font" : "ArialMT",
+          "font size" : 11.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "v. 사용자에게는 텍스트와 음성 두 가지 형태로 동시에 출력된다.",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 90.0, 436.163, 186.668, 449.569 ],
+      "font" : "ArialMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "e. 대화 기록 저장",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 5,
+        "level" : "4",
+        "page number" : 5,
+        "bounding box" : [ 118.062, 402.068, 486.59, 428.904 ],
+        "numbering style" : "roman numbers",
+        "number of list items" : 2,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 5,
+          "bounding box" : [ 120.504, 416.615, 486.59, 428.904 ],
+          "font" : "ArialMT",
+          "font size" : 11.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "i. 사용자와 AI 간의 모든 질문, 응답, 감정 분석 결과를 서버에 저장한다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 5,
+          "bounding box" : [ 118.062, 402.068, 376.076, 414.357 ],
+          "font" : "ArialMT",
+          "font size" : 11.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "ii. 저장된 데이터는 개인별 일기 생성에 활용된다.",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 90.0, 386.372, 284.004, 399.778 ],
+      "font" : "ArialMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "f. 대화 종료 및 감성 일기 자동 생성",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 6,
+        "level" : "4",
+        "page number" : 5,
+        "bounding box" : [ 115.62, 308.639, 509.985, 379.113 ],
+        "numbering style" : "roman numbers",
+        "number of list items" : 3,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 5,
+          "bounding box" : [ 120.504, 366.824, 446.63, 379.113 ],
+          "font" : "ArialMT",
+          "font size" : 11.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "i. 사용자가 대화 종료를 선택하여 시스템이 종료됨을 감지한다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 5,
+          "bounding box" : [ 118.062, 337.731, 505.74, 364.566 ],
+          "font" : "ArialMT",
+          "font size" : 11.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "ii. 종료 후 ChatGPT API를 통해 전체 대화 내용을 1인칭 시점의 감성 일기로 자동 생성한다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 5,
+          "bounding box" : [ 115.62, 308.639, 509.985, 335.474 ],
+          "font" : "ArialMT",
+          "font size" : 11.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "iii. 전체 감정 분위기에 맞는 YouTube 음악 및 표지 디자인을 추천하고 일기에 함께 저장한다.",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 90.0, 292.942, 244.67, 306.349 ],
+      "font" : "ArialMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "g. 일기 및 앨범 저장 및 열람",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 7,
+        "level" : "4",
+        "page number" : 5,
+        "bounding box" : [ 115.62, 244.302, 521.204, 285.683 ],
+        "numbering style" : "roman numbers",
+        "number of list items" : 3,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 5,
+          "bounding box" : [ 120.504, 273.394, 521.204, 285.683 ],
+          "font" : "ArialMT",
+          "font size" : 11.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "i. 생성된 일기, 음악, 표지 데이터를 서버에 저장하고, 사용자 앨범에 등록한다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 5,
+          "bounding box" : [ 118.062, 258.848, 463.113, 271.137 ],
+          "font" : "ArialMT",
+          "font size" : 11.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "ii. 사용자는 일기의 공개 범위(비공개, 가족 공개)를 설정할 수 있다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 5,
+          "bounding box" : [ 115.62, 244.302, 492.596, 256.591 ],
+          "font" : "ArialMT",
+          "font size" : 11.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "iii. 가족 사용자가 접근 가능한 경우, 일기에 사진 첨부 기능이 활성화된다.",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 90.0, 228.605, 214.002, 242.012 ],
+      "font" : "ArialMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "h. 데이터 보관 및 관리",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 8,
+        "level" : "4",
+        "page number" : 5,
+        "bounding box" : [ 118.062, 194.511, 503.69, 221.346 ],
+        "numbering style" : "roman numbers",
+        "number of list items" : 2,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 5,
+          "bounding box" : [ 120.504, 209.057, 503.69, 221.346 ],
+          "font" : "ArialMT",
+          "font size" : 11.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "i. 모든 일기 및 대화 기록은 MySQL 기반 데이터베이스에 암호화 저장된다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 5,
+          "bounding box" : [ 118.062, 194.511, 444.542, 206.8 ],
+          "font" : "ArialMT",
+          "font size" : 11.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "ii. 사용자 요청 시 데이터 삭제 또는 공개 범위 변경이 가능하다.",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 90.0, 159.266, 502.88, 192.221 ],
+      "font" : "ArialMT",
+      "font size" : 12.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "i. 서비스 종료 i. 사용자가 로그아웃하거나 브라우저를 종료하면 서비스 세션이 종료된다.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 52,
+    "level" : "6",
+    "page number" : 6,
+    "bounding box" : [ 72.0, 286.715, 245.117, 769.477 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 2,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 72.0, 751.602, 245.117, 769.477 ],
+      "font" : "ArialMT",
+      "font size" : 16.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "3. 갱신된 과제 추진 계획",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 72.0, 286.715, 204.729, 304.59 ],
+      "font" : "ArialMT",
+      "font size" : 16.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "4. 구성원별 진척도",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 53,
+    "page number" : 6,
+    "bounding box" : [ 73.5, 327.342, 508.5, 741.342 ],
+    "source" : "2025중간보고서_21_치매노노_AI 기반 추억 앨범 및 치매 예방 서비스_images/imageFile6.png"
+  }, {
+    "type" : "table",
+    "id" : 50,
+    "level" : "5",
+    "page number" : 6,
+    "bounding box" : [ 72.0, 80.0, 522.875, 264.0 ],
+    "number of rows" : 3,
+    "number of columns" : 2,
+    "rows" : [ {
+      "type" : "table row",
+      "row number" : 1,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 6,
+        "bounding box" : [ 72.438, 240.5, 207.5, 263.563 ],
+        "row number" : 1,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 1,
+          "page number" : 6,
+          "bounding box" : [ 130.125, 246.613, 149.875, 256.613 ],
+          "font" : "Gulim",
+          "font size" : 10.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "이름"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 6,
+        "bounding box" : [ 207.5, 240.5, 522.063, 263.563 ],
+        "row number" : 1,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 2,
+          "page number" : 6,
+          "bounding box" : [ 355.125, 246.613, 374.875, 256.613 ],
+          "font" : "Gulim",
+          "font size" : 10.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "담당"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 2,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 6,
+        "bounding box" : [ 72.438, 160.5, 207.5, 240.5 ],
+        "row number" : 2,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 3,
+          "page number" : 6,
+          "bounding box" : [ 125.25, 223.864, 154.75, 233.864 ],
+          "font" : "Gulim",
+          "font size" : 10.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "김나림"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 6,
+        "bounding box" : [ 207.5, 160.5, 522.063, 240.5 ],
+        "row number" : 2,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "list",
+          "id" : 4,
+          "level" : "1",
+          "page number" : 6,
+          "bounding box" : [ 213.0, 171.416, 374.441, 234.333 ],
+          "numbering style" : "unordered",
+          "number of list items" : 4,
+          "list items" : [ {
+            "type" : "list item",
+            "page number" : 6,
+            "bounding box" : [ 213.0, 223.161, 374.441, 234.333 ],
+            "font" : "ArialMT",
+            "font size" : 10.0,
+            "text color" : "[0.0, 0.0, 0.0]",
+            "content" : "- KOBERT 모델 구성, 학습 초안 코드",
+            "kids" : [ ]
+          }, {
+            "type" : "list item",
+            "page number" : 6,
+            "bounding box" : [ 213.0, 205.913, 332.347, 217.084 ],
+            "font" : "ArialMT",
+            "font size" : 10.0,
+            "text color" : "[0.0, 0.0, 0.0]",
+            "content" : "- 로그인 페이지 UI/UX 구현",
+            "kids" : [ ]
+          }, {
+            "type" : "list item",
+            "page number" : 6,
+            "bounding box" : [ 213.0, 188.664, 322.597, 199.836 ],
+            "font" : "ArialMT",
+            "font size" : 10.0,
+            "text color" : "[0.0, 0.0, 0.0]",
+            "content" : "- 채팅 페이지 UI/UX 구현",
+            "kids" : [ ]
+          }, {
+            "type" : "list item",
+            "page number" : 6,
+            "bounding box" : [ 213.0, 171.416, 322.597, 182.587 ],
+            "font" : "ArialMT",
+            "font size" : 10.0,
+            "text color" : "[0.0, 0.0, 0.0]",
+            "content" : "- 일기 페이지 UI/UX 구현",
+            "kids" : [ ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 3,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 6,
+        "bounding box" : [ 72.438, 80.438, 207.5, 160.5 ],
+        "row number" : 3,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 5,
+          "page number" : 6,
+          "bounding box" : [ 125.25, 143.62, 154.75, 153.62 ],
+          "font" : "Gulim",
+          "font size" : 10.0,
+          "text color" : "[0.0, 0.0, 0.0]",
+          "content" : "김채현"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 6,
+        "bounding box" : [ 207.5, 80.438, 522.063, 160.5 ],
+        "row number" : 3,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "list",
+          "id" : 6,
+          "level" : "1",
+          "page number" : 6,
+          "bounding box" : [ 213.0, 91.171, 413.942, 154.089 ],
+          "numbering style" : "unordered",
+          "number of list items" : 4,
+          "list items" : [ {
+            "type" : "list item",
+            "page number" : 6,
+            "bounding box" : [ 213.0, 142.917, 325.188, 154.089 ],
+            "font" : "ArialMT",
+            "font size" : 10.0,
+            "text color" : "[0.0, 0.0, 0.0]",
+            "content" : "- 로그인 페이지 기능 구현",
+            "kids" : [ ]
+          }, {
+            "type" : "list item",
+            "page number" : 6,
+            "bounding box" : [ 213.0, 125.668, 283.41, 136.84 ],
+            "font" : "ArialMT",
+            "font size" : 10.0,
+            "text color" : "[0.0, 0.0, 0.0]",
+            "content" : "- 채팅 기능 구현",
+            "kids" : [ ]
+          }, {
+            "type" : "list item",
+            "page number" : 6,
+            "bounding box" : [ 213.0, 108.42, 283.41, 119.592 ],
+            "font" : "ArialMT",
+            "font size" : 10.0,
+            "text color" : "[0.0, 0.0, 0.0]",
+            "content" : "- 일기 기능 구현",
+            "kids" : [ ]
+          }, {
+            "type" : "list item",
+            "page number" : 6,
+            "bounding box" : [ 213.0, 91.171, 413.942, 102.343 ],
+            "font" : "ArialMT",
+            "font size" : 10.0,
+            "text color" : "[0.0, 0.0, 0.0]",
+            "content" : "- Colab 활용 표정 데이터 분류, 전처리, 라벨링",
+            "kids" : [ ]
+          } ]
+        } ]
+      } ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 55,
+    "level" : "Subtitle",
+    "page number" : 7,
+    "bounding box" : [ 72.0, 751.602, 404.644, 769.477 ],
+    "heading level" : 3,
+    "font" : "Gulim",
+    "font size" : 16.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "5. 보고 시점까지의 과제 수행 내용 및 중간 결과"
+  }, {
+    "type" : "list",
+    "id" : 56,
+    "level" : "7",
+    "page number" : 7,
+    "bounding box" : [ 72.0, 702.595, 493.309, 742.384 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 7,
+      "bounding box" : [ 72.0, 702.595, 493.309, 742.384 ],
+      "font" : "ArialMT",
+      "font size" : 14.0,
+      "text color" : "[0.0, 0.0, 0.0]",
+      "content" : "5-1. 소셜 로그인 기반 사용자 인증 및 인가 화면, 기능 구현 (카카오, 네이버)",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 57,
+    "page number" : 7,
+    "bounding box" : [ 73.5, 420.796, 442.5, 693.046 ],
+    "source" : "2025중간보고서_21_치매노노_AI 기반 추억 앨범 및 치매 예방 서비스_images/imageFile7.png"
+  }, {
+    "type" : "heading",
+    "id" : 59,
+    "level" : "Subtitle",
+    "page number" : 8,
+    "bounding box" : [ 72.0, 729.753, 229.298, 745.394 ],
+    "heading level" : 4,
+    "font" : "Gulim",
+    "font size" : 14.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "5-2. 채팅 화면, 기능 구현"
+  }, {
+    "type" : "image",
+    "id" : 60,
+    "page number" : 8,
+    "bounding box" : [ 73.5, 428.454, 438.75, 720.204 ],
+    "source" : "2025중간보고서_21_치매노노_AI 기반 추억 앨범 및 치매 예방 서비스_images/imageFile8.png"
+  }, {
+    "type" : "heading",
+    "id" : 62,
+    "level" : "Subtitle",
+    "page number" : 9,
+    "bounding box" : [ 72.0, 753.901, 294.073, 769.542 ],
+    "heading level" : 4,
+    "font" : "Gulim",
+    "font size" : 14.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "5-3. 감정 일기 생성 화면, 기능 구현"
+  }, {
+    "type" : "image",
+    "id" : 63,
+    "page number" : 9,
+    "bounding box" : [ 73.5, 334.102, 525.0, 744.352 ],
+    "source" : "2025중간보고서_21_치매노노_AI 기반 추억 앨범 및 치매 예방 서비스_images/imageFile9.png"
+  }, {
+    "type" : "heading",
+    "id" : 65,
+    "level" : "Subtitle",
+    "page number" : 10,
+    "bounding box" : [ 72.0, 753.901, 189.416, 769.542 ],
+    "heading level" : 4,
+    "font" : "ArialMT",
+    "font size" : 14.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "5-4. KOBERT 모델"
+  }, {
+    "type" : "image",
+    "id" : 67,
+    "page number" : 10,
+    "bounding box" : [ 73.5, 504.352, 525.0, 744.352 ],
+    "source" : "2025중간보고서_21_치매노노_AI 기반 추억 앨범 및 치매 예방 서비스_images/imageFile10.png"
+  }, {
+    "type" : "caption",
+    "id" : 66,
+    "level" : "8",
+    "page number" : 10,
+    "bounding box" : [ 90.0, 399.619, 512.846, 492.878 ],
+    "linked content id" : 67,
+    "font" : "Gulim",
+    "font size" : 11.0,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "- KoBERT 기반 감정 분류 모델 학습을 위한 1차적인 코드 구현을 완료하였으며, 현재는 기본적인 학습 루프와 클래스 가중치 적용을 포함한 형태로 구성되어 있다. 향후에는 학습 효율성과 모델 성능 향상을 위해 하이퍼파라미터 튜닝, 검증 루프 추가, Early Stopping 및 Learning Rate Scheduler 적용 등 최적화 작업을 진행할 예정이다."
+  } ]
+}

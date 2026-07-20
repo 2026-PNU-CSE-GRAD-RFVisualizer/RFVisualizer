@@ -15,6 +15,7 @@ Metric Room Envelope와 선택적 PGSR 참조 형상을 보면서 Proxy Obstacle
 - Room OBJ/JSON과 calibration은 읽기 전용으로 열고 SHA-256을 결과에 기록한다. 방 꼭짓점, boolean, 문 opening, calibration은 수정하지 않는다.
 - 모든 편집은 meter/+Z Metric 좌표에서 수행한다. 각 obstacle의 Metric/PGSR vertex와 4×4 transform, 왕복 오차를 함께 내보낸다.
 - Candidate를 Add하면 구체적인 placeholder geometry는 보이지만 `enabled: false`, `confidence: unset`, `placement_status: provisional_unconfirmed` 상태다. 사용자가 명시적으로 활성화해야 Sionna scene에 들어간다.
+- 기존 draft YAML의 null geometry도 GUI에서 semantic class가 candidate 하나와 명확히 대응하면 Room 중심의 `provisional_placeholder`로만 표시한다. 원본 YAML은 명시적으로 저장하기 전까지 바뀌지 않고, placeholder는 계속 비활성·미측정 상태다. Headless `validate`는 null draft를 기존처럼 `DISABLED_INCOMPLETE`로 다룬다.
 - Open3D GUI와 독립된 코어를 사용하므로 display server가 없어도 load/transform/validate/save/preview 테스트가 실행된다.
 
 ## 환경 선택
@@ -26,6 +27,8 @@ conda run -n pgsr python -c "import open3d; print(open3d.__version__)"
 ```
 
 Open3D 데스크톱 창에는 X11 또는 Wayland display가 필요하다. Display가 없는 서버에서는 `edit`가 명확한 오류로 종료되고 `validate`, `export-preview`는 계속 사용할 수 있다.
+
+편집기 창은 한국어 전용이다. 제목, 패널, 버튼, 속성, 단축키 도움말, 상태와 검증 메시지는 쉬운 한국어로 표시하고 필요한 전문 용어만 영어를 함께 적는다. YAML key, object ID, enum, material identifier는 Phase 2-B 호환성을 위해 기존 영문 값을 유지한다. Open3D 창을 만들기 전에 시스템의 Noto Sans CJK 또는 NanumGothic 글꼴을 등록해 한글 glyph를 추가한다. 명령행 출력과 생성되는 preview/report의 언어는 변경하지 않는다.
 
 ## 명령
 
@@ -95,39 +98,58 @@ conda run -n pgsr python -m tools.proxy_placement_editor.main export-preview \
 
 ## 화면과 상호작용
 
-중앙 Viewport는 반투명 Room, +Z Metric 축, 경사진 floor grid, optional reference, 유효/무효/비활성 obstacle을 서로 다른 geometry layer로 표시한다. Room/reference는 picking 대상이 아니며 겹친 obstacle 중 광선의 가장 가까운 triangle hit가 선택된다. 오른쪽에는 Candidate, Object List, Identity/Geometry/Transform/Material 속성, 실시간 clearance·collision·좌표 검증, 외부 명령 로그가 있다.
+중앙 Viewport는 반투명 Room, +Z Metric 축, 경사진 floor grid, optional reference, 유효/무효/비활성 obstacle을 서로 다른 geometry layer로 표시한다. Room/reference는 picking 대상이 아니며 겹친 obstacle 중 광선의 가장 가까운 triangle hit가 선택된다. 오른쪽에는 큰 제목과 구분선으로 나눈 Candidate, Object List, Identity/Geometry/Transform/Material 속성, 실시간 clearance·collision·좌표 검증, 외부 명령 로그가 있다.
+
+상단의 배경 선택은 `둘 다`, `Point Cloud만`, `Proxy Mesh만`을 지원한다. 여기서 Proxy Mesh는 Room Envelope 배경을 뜻하며 배치된 obstacle과 선택 gizmo는 세 모드에서 항상 유지된다. Point Cloud 점 개수는 바꾸지 않고 `점 크기` 슬라이더만 1–12px 범위에서 변경한다. 점 크기 변경은 대형 reference geometry를 다시 올리지 않고 material만 갱신한다.
 
 | 입력 | 동작 |
 |---|---|
-| 왼쪽 클릭 | 가장 가까운 obstacle 선택, 빈 공간은 선택 해제 |
-| 우클릭 드래그 + `W/A/S/D` | FPS 시점 회전 + 수평 전후좌우 이동 |
+| 왼쪽 클릭 | 가장 가까운 obstacle 선택; 변형 모드의 빈 공간/선택 객체 본체 drag는 카메라 회전 |
+| 우클릭 드래그 + `W/A/S/D` | FPS 시점 회전 + 카메라 시선 기준 전후좌우 이동 |
 | 우클릭 + Shift | FPS 이동 속도 증가 |
-| Alt+왼쪽 / 가운데 드래그 / Wheel | Open3D Orbit / Pan / Zoom |
-| `G` + drag | 실제 floor plane 광선 교점으로 XY 이동; `floor_at_xy`는 Z 자동 갱신 |
-| `R` + horizontal drag | 기본 yaw 회전 |
-| `S` + horizontal drag | 균일 크기 조절 |
-| `X`, `Y`, `Z` | 활성 transform 축 제한 |
-| Shift / Ctrl | 미세 조작 / grid snap |
+| Alt+왼쪽 / Ctrl+왼쪽 / 가운데 드래그 / Wheel | Open3D Orbit / Pan / Pan / Zoom |
+| `G` + X/Y/Z 축 drag | 선택한 World/Local 축 방향 이동; `floor_at_xy` Z축은 바닥 clearance 변경 |
+| `R` + X/Y/Z 회전 링 drag | 선택한 World/Local 축 중심 회전 |
+| `S` + X/Y/Z 축 drag | Phase 2-B 호환 로컬 크기 축 한 방향 조절 |
+| 상단 World/Local | 이동·회전 gizmo 좌표계 전환; 크기 조절은 항상 Local |
+| Shift / gizmo drag 도중 Ctrl | 미세 조작 / grid snap |
 | `F`, Home | 선택 object / 전체 room frame |
 | Delete, Ctrl+D | 삭제 / 비활성 복제 |
 | Ctrl+Z, Ctrl+Y, Ctrl+Shift+Z | Undo / Redo |
 | Ctrl+S | 전체 검증 후 저장 |
-| `V`, `H` | reference / 선택 object 표시 전환 |
+| `V`, `H` | 배경 표시 모드 순환 / 선택 object 표시 전환 |
 | `1`, `3`, `7` | Front / Side / Top view |
 | Esc | Select mode 복귀 |
 
-Toolbar 기본 snap은 translation 0.05m, rotation 5도, size 0.05m다. 지원 단위는 코어에서 임의 양수로 검증되며 UI 설정은 scenario가 아니라 editor state에 저장된다. 마우스 drag는 이동 중 preview만 바꾸고 mouse-up에 명령 하나만 쌓는다.
+Toolbar 기본 snap은 translation 0.05m, rotation 5도, size 0.05m다. 지원 단위는 코어에서 임의 양수로 검증되며 World/Local, 배경 모드, 점 크기를 포함한 UI 설정은 scenario가 아니라 editor state에 저장된다. 마우스 drag 중에는 선택 객체와 gizmo만 다시 만들고, 전체 장면 검증과 다른 객체 갱신은 mouse-up에 한 번만 수행한다. Mouse-up에는 명령 하나만 쌓인다. Gizmo handle은 고정된 화면 픽셀 허용 범위로 선택한다. 이동·크기는 화면에 투영된 축 방향의 mouse 이동을 실제 거리로 환산하고, 회전은 선택한 링의 화면상 접선 방향 이동을 각도로 환산한다. Gizmo drag 중에는 SceneWidget을 `PICK_POINTS` 제어로 전환해 mouse capture는 유지하면서 카메라 회전은 막고, mouse-up에 `ROTATE_CAMERA`로 복구한다.
 
-FPS 카메라는 우클릭을 누른 동안만 활성화된다. Open3D `FLY` interactor는 상대 마우스 이동으로 시점을 회전하고, 편집기 제어기는 camera view matrix에서 수평 forward/right를 계산해 실제 m/s 단위로 이동한다. 우클릭을 놓거나 Esc를 누르면 눌린 이동 키를 즉시 지운다. 따라서 평상시 `S`는 기존 Scale 단축키로 유지되고 FPS 중에만 후진이다. 첫 구현은 카메라 높이를 유지하며 중력, floor 추적, 벽 충돌, native cursor lock은 지원하지 않는다.
+일반 편집 단축키는 Viewport에만 연결한다. 따라서 TextEdit/NumberEdit에 포커스가 있을 때 화살표, Backspace, Delete 등의 편집 키는 입력창이 직접 처리한다. Open3D 0.18은 ImGui 입력창이 활성화된 동안 Window와 SceneWidget key callback을 모두 건너뛰므로, Linux/X11·XWayland에서는 우클릭 FPS 중 로컬 키보드의 `XQueryKeymap` 상태와 XInput2 raw key event를 함께 읽는다. RustDesk 1.4.9가 키를 누른 상태 대신 즉시 Press/Release 펄스로 반복 전송하면, 120ms 유지 창을 반복 Press로 갱신해 연속 입력으로 복원한다. FPS 중에는 활성 속성 입력을 잠그고 우클릭을 놓을 때 상태 값으로 다시 표시해, 이동 키가 기존 입력값에 섞이지 않게 한다. XInput2를 사용할 수 없으면 로컬 keymap polling을 유지하고, X11 poller도 사용할 수 없는 환경에서는 기존 Window/Viewport callback을 fallback으로 유지한다. 우클릭 DRAG 이벤트의 버튼 bit가 비어 있어도 이동 상태를 유지하고 실제 `BUTTON_UP`에서만 종료한다. Ctrl+왼쪽 drag도 객체 선택보다 먼저 Open3D에 넘겨 카메라 평행 이동을 보존한다.
+
+오른쪽 섹션의 구분선은 box-drawing 문자를 쓰지 않는다. Open3D fallback font에서 `?`로 표시되지 않도록 2px 높이의 배경색 layout으로 그린다.
+
+FPS 카메라는 우클릭을 누른 동안만 활성화된다. 상대 마우스 회전은 Open3D `FLY` interactor가 처리하고, `W/S`는 카메라가 실제로 바라보는 3차원 방향의 앞뒤로, `A/D`는 카메라의 좌우 방향으로 매 tick 이동한다. 아래를 보며 W를 누르면 전진하면서 내려가고 위를 보면 올라간다. `horizontal_only: true`로 바꾸면 높이를 고정한 예전 수평 이동을 사용할 수 있으며, 이 모드에서는 수직 시점의 미세한 행렬 오차가 이동 방향을 뒤집지 않도록 안정된 수평 방향을 유지한다. Shift는 설정된 배율만큼 속도를 높인다. 우클릭을 놓으면 입력 상태를 지우고 다음 tick에 일반 회전 제어로 복구한다. 따라서 평상시 `S`는 기존 Scale 단축키로 유지되고 FPS 중에만 후진이다. 첫 구현은 중력, floor 추적, 벽 충돌, native cursor lock을 지원하지 않는다.
+
+### 한국어 UI 수동 확인
+
+화면이 있는 환경에서는 다음 항목을 확인한다.
+
+- 창 제목과 모든 패널·버튼·단축키 설명이 한글로 표시되고 네모 글자가 없는지 확인한다.
+- 오른쪽 패널을 기본 폭과 최소 사용 폭에서 열어 긴 문구가 기능을 구분하기 어려울 정도로 잘리지 않는지 확인한다.
+- 한국어로 표시된 확신도·형상·기준점·바닥 정책·재질을 변경한 뒤 저장한 YAML에는 기존 영문 enum이 기록되는지 확인한다.
+- 유효·경고·오류·비활성 상태와 저장 차단 대화상자가 한국어로 표시되는지 확인한다.
 
 ```yaml
+reference:
+  point_size: 2.0
+  visible: true
+  display_mode: both  # both / point_cloud / proxy_mesh
 navigation:
   fps:
     enabled: true
     movement_speed_mps: 1.5
     sprint_multiplier: 3.0
     max_frame_delta_seconds: 0.05
-    horizontal_only: true
+    horizontal_only: false  # false: 카메라 시선 방향, true: 높이 고정 수평 이동
 ```
 
 ## Candidate library

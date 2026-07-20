@@ -7,13 +7,14 @@ reference:
   wireframe: false
   point_size: 2.0
   visible: true
+  display_mode: both
 navigation:
   fps:
     enabled: true
     movement_speed_mps: 1.5
     sprint_multiplier: 3.0
     max_frame_delta_seconds: 0.05
-    horizontal_only: true
+    horizontal_only: false
 external_commands:
   sionna_environment:
     type: conda

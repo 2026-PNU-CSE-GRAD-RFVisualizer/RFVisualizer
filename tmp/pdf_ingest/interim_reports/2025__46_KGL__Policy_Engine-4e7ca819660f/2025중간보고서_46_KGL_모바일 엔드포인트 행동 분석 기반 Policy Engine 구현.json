@@ -1,0 +1,4698 @@
+{
+  "file name" : "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현.pdf",
+  "number of pages" : 28,
+  "author" : "s1",
+  "title" : null,
+  "creation date" : "D:20250713200847+09'00'",
+  "modification date" : "D:20250713200847+09'00'",
+  "kids" : [ {
+    "type" : "paragraph",
+    "id" : 153,
+    "page number" : 1,
+    "bounding box" : [ 380.914, 774.682, 510.053, 786.37 ],
+    "font" : "HCRDotum",
+    "font size" : 8.99,
+    "text color" : "[0.0]",
+    "content" : "2025 전기 졸업과제 중간보고서"
+  }, {
+    "type" : "heading",
+    "id" : 156,
+    "level" : "Doctitle",
+    "page number" : 1,
+    "bounding box" : [ 173.04, 657.329, 422.281, 703.637 ],
+    "heading level" : 1,
+    "font" : "HCRBatang-Bold",
+    "font size" : 15.96,
+    "text color" : "[0.0]",
+    "content" : "모바일 엔드포인트 행동 분석 기반 Policy Engine 구현"
+  }, {
+    "type" : "image",
+    "id" : 152,
+    "page number" : 1,
+    "bounding box" : [ 103.624, 290.083, 491.375, 677.619 ],
+    "source" : "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile1.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 157,
+    "page number" : 1,
+    "bounding box" : [ 412.8, 191.661, 504.749, 273.093 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "팀명: KGL 지도교수: 최윤호 202255655 권태현 202255654 구현서 202255668 이승원"
+  }, {
+    "type" : "footer",
+    "id" : 159,
+    "page number" : 1,
+    "bounding box" : [ 505.32, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 56,
+      "page number" : 1,
+      "bounding box" : [ 505.32, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "1"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 160,
+    "page number" : 2,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 84,
+      "page number" : 2,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 164,
+    "level" : "1",
+    "page number" : 2,
+    "bounding box" : [ 85.08, 230.661, 218.189, 667.413 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 5,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 85.08, 653.061, 218.189, 667.413 ],
+      "font" : "HCRBatang-Bold",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "1. 과제 배경 및 연구 목적",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 148,
+        "level" : "2",
+        "page number" : 2,
+        "bounding box" : [ 100.2, 617.901, 169.469, 649.773 ],
+        "numbering style" : "arabic numbers",
+        "number of list items" : 2,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 100.2, 635.421, 169.469, 649.773 ],
+          "font" : "HCRBatang-Bold",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "1.1 과제 배경",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 100.2, 617.901, 169.469, 632.253 ],
+          "font" : "HCRBatang-Bold",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "1.2 연구 목적",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 85.08, 582.621, 218.189, 596.973 ],
+      "font" : "HCRBatang-Bold",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "2. 요구 조건 및 제약 사항",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 149,
+        "level" : "3",
+        "page number" : 2,
+        "bounding box" : [ 101.52, 547.461, 176.069, 579.453 ],
+        "numbering style" : "arabic numbers",
+        "number of list items" : 2,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 101.52, 565.101, 170.789, 579.453 ],
+          "font" : "HCRBatang-Bold",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "2.1 요구 조건",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 101.52, 547.461, 176.069, 561.813 ],
+          "font" : "HCRBatang-Bold",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "2.2 유스케이스",
+          "kids" : [ ]
+        } ]
+      }, {
+        "type" : "list",
+        "id" : 150,
+        "level" : "4",
+        "page number" : 2,
+        "bounding box" : [ 101.52, 477.021, 181.469, 544.173 ],
+        "numbering style" : "arabic numbers",
+        "number of list items" : 2,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 101.52, 529.821, 170.789, 544.173 ],
+          "font" : "HCRBatang-Bold",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "2.2 제약 사항",
+          "kids" : [ {
+            "type" : "paragraph",
+            "id" : 147,
+            "level" : "5",
+            "page number" : 2,
+            "bounding box" : [ 85.08, 494.661, 185.909, 509.013 ],
+            "font" : "HCRBatang-Bold",
+            "font size" : 11.04,
+            "text color" : "[0.0]",
+            "content" : "3. 과제 구체화 방안"
+          } ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 101.52, 477.021, 181.469, 491.373 ],
+          "font" : "HCRBatang-Bold",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "3.1 전체 구조도",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 85.08, 371.421, 148.349, 385.773 ],
+      "font" : "HCRBatang-Bold",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "4. 수행 현황",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 151,
+        "level" : "6",
+        "page number" : 2,
+        "bounding box" : [ 101.52, 301.101, 202.829, 368.253 ],
+        "numbering style" : "arabic numbers",
+        "number of list items" : 4,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 101.52, 353.901, 154.709, 368.253 ],
+          "font" : "HCRBatang-Bold",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "4.1 백엔드",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 101.52, 336.261, 176.069, 350.613 ],
+          "font" : "HCRBatang-Bold",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "4.2 프론트엔드",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 101.52, 318.621, 202.829, 332.973 ],
+          "font" : "HCRBatang-Bold",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "4.3 앱 어플리케이션",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 2,
+          "bounding box" : [ 101.52, 301.101, 192.149, 315.453 ],
+          "font" : "HCRBatang-Bold",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "4.4 머신러닝 모델",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 85.08, 265.821, 180.389, 280.173 ],
+      "font" : "HCRBatang-Bold",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "5. 구성원별 진척도",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 85.08, 230.661, 175.229, 245.013 ],
+      "font" : "HCRBatang-Bold",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "6. 향후 추진 계획",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 165,
+    "level" : "7",
+    "page number" : 2,
+    "bounding box" : [ 101.52, 406.701, 202.829, 473.853 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 4,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 101.52, 459.501, 154.709, 473.853 ],
+      "font" : "HCRBatang-Bold",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "3.2 백엔드",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 101.52, 441.861, 176.069, 456.213 ],
+      "font" : "HCRBatang-Bold",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "3.3 프론트엔드",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 101.52, 424.221, 202.829, 438.573 ],
+      "font" : "HCRBatang-Bold",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "3.4 앱 어플리케이션",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 101.52, 406.701, 192.149, 421.053 ],
+      "font" : "HCRBatang-Bold",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "3.5 머신러닝 모델",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 163,
+    "level" : "Subtitle",
+    "page number" : 2,
+    "bounding box" : [ 282.12, 698.849, 313.201, 719.597 ],
+    "heading level" : 1,
+    "font" : "HCRBatang-Bold",
+    "font size" : 15.96,
+    "text color" : "[0.0]",
+    "content" : "목차"
+  }, {
+    "type" : "footer",
+    "id" : 166,
+    "page number" : 2,
+    "bounding box" : [ 505.32, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 57,
+      "page number" : 2,
+      "bounding box" : [ 505.32, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 167,
+    "page number" : 3,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 85,
+      "page number" : 3,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 170,
+    "level" : "Subtitle",
+    "page number" : 3,
+    "bounding box" : [ 85.08, 727.739, 242.131, 744.587 ],
+    "heading level" : 2,
+    "font" : "HCRBatang",
+    "font size" : 12.96,
+    "text color" : "[0.0]",
+    "content" : "1. 과제 배경 및 연구 목적"
+  }, {
+    "type" : "heading",
+    "id" : 171,
+    "level" : "Subtitle",
+    "page number" : 3,
+    "bounding box" : [ 85.08, 691.379, 166.891, 708.227 ],
+    "heading level" : 2,
+    "font" : "HCRBatang",
+    "font size" : 12.96,
+    "text color" : "[0.0]",
+    "content" : "1.1 과제 배경"
+  }, {
+    "type" : "paragraph",
+    "id" : 172,
+    "page number" : 3,
+    "bounding box" : [ 85.08, 582.861, 510.269, 674.253 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "오늘날 클라우드 서비스와 모바일 환경의 확산으로 사용자 인증과 보안의 중요성이 크게 증가하고 있다. 특히 스마트폰과 같은 모바일 기기는 민감한 개인 데이터를 갖 고 있기 때문에 더욱 보안 공격에 예민하게 반응해야 한다. 최근에는 SK텔레콤의 해 킹피해로 수천만명의 개인정보가 위협받기도 했다. 많은 이들이 이러한 보안 피해에 불편함을 겪었고, 이는 모바일 보안이 얼마나 중요한 논제인지 여실히 보여주는 큰 사례가 되었다."
+  }, {
+    "type" : "image",
+    "id" : 175,
+    "page number" : 3,
+    "bounding box" : [ 85.034, 321.968, 509.965, 579.686 ],
+    "source" : "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile2.png"
+  }, {
+    "type" : "caption",
+    "id" : 173,
+    "page number" : 3,
+    "bounding box" : [ 85.08, 294.141, 510.269, 308.493 ],
+    "linked content id" : 175,
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "기존의 정적인 경계 기반 보안 및 방화벽은 내부자 위협이나 계정 탈취와 같은 사용"
+  }, {
+    "type" : "list",
+    "id" : 174,
+    "level" : "8",
+    "page number" : 3,
+    "bounding box" : [ 85.08, 217.101, 510.269, 293.013 ],
+    "numbering style" : "korean letters",
+    "number of list items" : 1,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 3,
+      "bounding box" : [ 85.08, 217.101, 510.269, 293.013 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "자 기반 공격에 취약하다는 점이 꾸준히 지적되어 왔다. 최근에는 사용자 행동 기반 이상 탐지(UEBA)를 통해 정상적인 활동 패턴을 학습하고, 이를 벗어나는 비정상 행 위를 실시간으로 탐지하려는 시도가 활발해졌다. 그러나 현실에서는 명확히 라벨링된 공격 데이터를 수집하기 어렵기 때문에, 비지도 학습 기반의 유연한 이상 탐지 시스 템이 요구된다.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 176,
+    "page number" : 3,
+    "bounding box" : [ 505.32, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 58,
+      "page number" : 3,
+      "bounding box" : [ 505.32, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "3"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 177,
+    "page number" : 4,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 86,
+      "page number" : 4,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 180,
+    "level" : "Subtitle",
+    "page number" : 4,
+    "bounding box" : [ 85.08, 727.739, 166.891, 744.587 ],
+    "heading level" : 2,
+    "font" : "HCRBatang",
+    "font size" : 12.96,
+    "text color" : "[0.0]",
+    "content" : "1.2 연구 목적"
+  }, {
+    "type" : "paragraph",
+    "id" : 181,
+    "page number" : 4,
+    "bounding box" : [ 85.08, 570.261, 510.293, 707.853 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "본 연구는 모바일 단말 사용자의 행위 데이터를 활용하여 비지도 학습 기반 이상 탐 지 모델을 개발하고 이를 네트워크 접근 제어와 연계하는 NAC Agent를 구현하는 것 을 목표로 한다. 이를 위해 실제 사용자 로그를 바탕으로 정상 행위 프로필을 구축하 고, 벗어나는 패턴을 실시간으로 탐지할 계획이다. 탐지된 이상 징후는 모바일 단말의 동적 접근 통제를 위해 정책 엔진과 연동되어 네트워크 접근 권한을 즉시 조정한다. 또한 네트워크 접근이나 위치정보등 모바일 기기 데이터를 활용하여 사용자 인증 신 뢰성을 보완할 수 있도록 설계할 예정이다. 궁극적으로는 기존 정적 인증 체계를 보 완하는 지능형 NAC 프로토타입을 완성하여 동적인 사용자 환경에서도 실질적인 보안 효과가 있는 시스템을 구현하고자 한다."
+  }, {
+    "type" : "heading",
+    "id" : 182,
+    "level" : "Subtitle",
+    "page number" : 4,
+    "bounding box" : [ 85.08, 521.939, 242.131, 538.787 ],
+    "heading level" : 2,
+    "font" : "HCRBatang",
+    "font size" : 12.96,
+    "text color" : "[0.0]",
+    "content" : "2. 요구 조건 및 제약 사항"
+  }, {
+    "type" : "heading",
+    "id" : 183,
+    "level" : "Subtitle",
+    "page number" : 4,
+    "bounding box" : [ 85.08, 485.579, 166.891, 502.427 ],
+    "heading level" : 2,
+    "font" : "HCRBatang",
+    "font size" : 12.96,
+    "text color" : "[0.0]",
+    "content" : "2.1 요구 조건"
+  }, {
+    "type" : "list",
+    "id" : 184,
+    "level" : "1",
+    "page number" : 4,
+    "bounding box" : [ 85.08, 99.861, 277.109, 468.453 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 5,
+    "next list id" : 191,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 85.08, 454.101, 196.229, 468.453 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "1)엔드포인트 에이전트",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 143,
+        "level" : "5",
+        "page number" : 4,
+        "bounding box" : [ 85.08, 407.901, 499.613, 452.973 ],
+        "numbering style" : "unordered",
+        "number of list items" : 3,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 4,
+          "bounding box" : [ 85.08, 438.621, 499.613, 452.973 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-모바일 사용자 단말에서 위치·터치이벤트등의 로그 데이터를 실시간으로 수집한다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 4,
+          "bounding box" : [ 85.08, 423.261, 420.053, 437.613 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-수집한 데이터를 로컬 DB에 저장하고, 서버 API를 통해 전송한다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 4,
+          "bounding box" : [ 85.08, 407.901, 483.773, 422.253 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-단말 리소스 소모를 최소화하기 위해 핵심 속성만 전처리·벡터화하여 전송한다.",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 85.08, 377.061, 277.109, 391.413 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "2)로그 콜렉터 및 로그 수집 서버 구축",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 144,
+        "level" : "5",
+        "page number" : 4,
+        "bounding box" : [ 85.08, 315.501, 510.269, 376.053 ],
+        "numbering style" : "unordered",
+        "number of list items" : 2,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 4,
+          "bounding box" : [ 85.08, 346.221, 510.269, 376.053 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-Django REST API 등을 이용하여 모바일 단말로부터 수집된 로그 데이터를 수신한 다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 4,
+          "bounding box" : [ 85.08, 315.501, 510.269, 345.213 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-수신된 데이터를 SQLite 등을 이용하여 DB에 저장하고, 실시간으로 UEBA 분석 및 정책 엔진에 반영한다.",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 85.08, 284.661, 266.429, 299.013 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "3)행동 분석 및 이상 탐지 모듈 구현",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 145,
+        "level" : "5",
+        "page number" : 4,
+        "bounding box" : [ 85.08, 223.101, 510.269, 283.653 ],
+        "numbering style" : "unordered",
+        "number of list items" : 3,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 4,
+          "bounding box" : [ 85.08, 253.821, 510.269, 283.653 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-Isolation Forest, LSTM Auto-Encoder 등 비지도 학습 기반 모델을 통해 정상 행 동 패턴을 학습한다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 4,
+          "bounding box" : [ 85.08, 238.461, 473.333, 252.813 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-요청 속성 등을 입력으로 사용, 재구성 오차 기반으로 이상 여부를 탐지한다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 4,
+          "bounding box" : [ 85.08, 223.101, 362.453, 237.453 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-탐지된 이상 징후를 정책 엔진과 대시보드로 전달한다.",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 85.08, 192.261, 169.709, 206.613 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "4)정책 엔진 개발",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 146,
+        "level" : "5",
+        "page number" : 4,
+        "bounding box" : [ 85.08, 130.701, 510.269, 191.253 ],
+        "numbering style" : "unordered",
+        "number of list items" : 3,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 4,
+          "bounding box" : [ 85.08, 176.901, 476.933, 191.253 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-로그, 위치, 시간대 등의 속성을 기준으로 정적 규칙 기반 필터링을 수행한다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 4,
+          "bounding box" : [ 85.08, 146.061, 510.269, 175.773 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-이상 탐지 결과와 결합하여 실시간으로 네트워크 접근 제어 여부를 평가하고, 이상 현상 발생시 네트워크 접근을 차단하거나 추가 인증을 사용자에게 요구한다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 4,
+          "bounding box" : [ 85.08, 130.701, 400.853, 145.053 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-정책 룰이나 threshold는 관리자가 직접 추가·수정할 수 있다.",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 85.08, 99.861, 174.869, 114.213 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "5)관리자 대시보드",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 185,
+    "level" : "5",
+    "page number" : 4,
+    "bounding box" : [ 85.08, 84.501, 405.173, 98.853 ],
+    "numbering style" : "unordered",
+    "number of list items" : 1,
+    "next list id" : 190,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 85.08, 84.501, 405.173, 98.853 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-이상 탐지 결과를 실시간으로 시각화하여 관리자에게 제공한다.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 186,
+    "page number" : 4,
+    "bounding box" : [ 505.32, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 59,
+      "page number" : 4,
+      "bounding box" : [ 505.32, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "4"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 187,
+    "page number" : 5,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 87,
+      "page number" : 5,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 190,
+    "level" : "5",
+    "page number" : 5,
+    "bounding box" : [ 85.08, 729.861, 504.053, 744.213 ],
+    "numbering style" : "unordered",
+    "number of list items" : 1,
+    "previous list id" : 185,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 85.08, 729.861, 504.053, 744.213 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-사용자별 행동 이력, 접근 시도 현황, 정책 위반 내역 등을 한눈에 확인할 수 있다.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 191,
+    "level" : "1",
+    "page number" : 5,
+    "bounding box" : [ 85.08, 699.021, 244.709, 713.373 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "previous list id" : 184,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 85.08, 699.021, 244.709, 713.373 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "6)시스템 아키텍처 및 개발 환경",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 192,
+    "level" : "4",
+    "page number" : 5,
+    "bounding box" : [ 85.08, 637.461, 510.269, 698.013 ],
+    "numbering style" : "unordered",
+    "number of list items" : 3,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 85.08, 683.661, 416.093, 698.013 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-ZTNA(Zero Trust Network Access) 구조를 반영하여 설계한다.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 85.08, 668.301, 446.093, 682.653 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-로컬/클라우드 연동으로 동작하며 UEBA 학습에는 공개 데이터셋 활용.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 85.08, 637.461, 510.269, 667.173 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-모듈 간 API 설계는 RESTful 구조를 기본으로 하고, 로그 전송과 정책 처리 흐름이 실시간으로 연동되도록 한다.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 193,
+    "level" : "Subtitle",
+    "page number" : 5,
+    "bounding box" : [ 85.08, 604.499, 173.01, 621.347 ],
+    "heading level" : 2,
+    "font" : "HCRBatang",
+    "font size" : 12.96,
+    "text color" : "[0.0]",
+    "content" : "2.2 유스케이스"
+  }, {
+    "type" : "image",
+    "id" : 196,
+    "page number" : 5,
+    "bounding box" : [ 85.034, 317.533, 509.965, 585.2 ],
+    "source" : "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile3.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 194,
+    "page number" : 5,
+    "bounding box" : [ 85.08, 228.141, 510.269, 273.333 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "이 유스케이스는 NAC 시스템에서 사용자와 관리자가 수행할 수 있는 주요 동작 흐 름을 보여준다. 사용자는 자신의 행동 데이터를 서버에 보내고, 서버의 추가 인증 요 청을 처리한다. 사용자는 이상 행동을 탐지하는 NAC 서버의 제어를 받게 된다. 관리"
+  }, {
+    "type" : "list",
+    "id" : 195,
+    "level" : "5",
+    "page number" : 5,
+    "bounding box" : [ 85.08, 135.741, 510.293, 227.133 ],
+    "numbering style" : "korean letters",
+    "number of list items" : 1,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 85.08, 135.741, 510.293, 227.133 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "자는 대시보드 모니터링을 통해 실시간으로 이상현상을 모니터링할 수 있으며, 정책 등록/변경/삭제, 사용자 제어 이력 확인 등의 작업을 수행할 수 있다. NAC 서버는 필터링 모듈과 제어 모듈을 포함하며, 로그 기록, 이상 탐지 결과 알림, 정책 적용, 접근 제어 명령 전달 등의 기능을 제공한다. 전체적으로 이 시스템은 사용자 단말에서 수집된 행동 및 로그 데이터 기반으로 이상 탐지를 수행하고, 실시간으로 네트워크 접근 권한을 동적으로 제어하는 구조이다.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 197,
+    "page number" : 5,
+    "bounding box" : [ 505.32, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 60,
+      "page number" : 5,
+      "bounding box" : [ 505.32, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "5"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 198,
+    "page number" : 6,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 88,
+      "page number" : 6,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 201,
+    "level" : "Subtitle",
+    "page number" : 6,
+    "bounding box" : [ 85.08, 727.739, 166.891, 744.587 ],
+    "heading level" : 2,
+    "font" : "HCRBatang",
+    "font size" : 12.96,
+    "text color" : "[0.0]",
+    "content" : "2.3 제약 사항"
+  }, {
+    "type" : "list",
+    "id" : 202,
+    "level" : "1",
+    "page number" : 6,
+    "bounding box" : [ 85.08, 634.701, 510.269, 710.613 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 85.08, 634.701, 510.269, 710.613 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "2.3.1)Time-slice 기반 사용자 데이터 분할 처리 로그 및 행동 데이터 수집 시 큰 Time-slice(30초)를 설정하여 분할처리 하는 방식은 연산 부담이 최소화 된다는 장점이 있지만, 실시간 정책반영에서 사용자 UX가 떨어 진다는 느낌을 줄 수 있다. 이러한 단점을 바탕으로 agent 구현시 실시간 정책 반영 방법을 구상해야 할 것이다.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 203,
+    "level" : "4",
+    "page number" : 6,
+    "bounding box" : [ 85.08, 605.301, 145.392, 619.653 ],
+    "numbering style" : "unordered",
+    "number of list items" : 1,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 85.08, 605.301, 145.392, 619.653 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-해결 방안-",
+      "kids" : [ {
+        "type" : "paragraph",
+        "id" : 141,
+        "page number" : 6,
+        "bounding box" : [ 85.08, 466.701, 510.269, 588.813 ],
+        "font" : "HCRBatang",
+        "font size" : 11.04,
+        "text color" : "[0.0]",
+        "content" : "위에서 언급한 단점 때문에 우리는 사용자 데이터를 더욱 짧은 time-slice로 REST 서버에 전송할 계획이다. 사용자가 소규모라면 실시간으로 데이터를 전송하여도 서버 측 부하가 적을 것이라 판단했기 때문이다. 또한 이미 NAC agent가 사용자 로그 및 행동 데이터를 전처리하여 서버에 보내기 때문에 연산 부담은 고려대상이 아니라 판 단했다. 위에서 언급한 단점에도 불구하고 Time-slice 기법은 서버측 부하를 줄이는 데에 쓸 만한 방법이라고 생각한다. 그래서 더욱 큰 Time-slice를 사용하는 기법은 사용자가 많아질 때에 사용하기 적합한 방법일 것이다."
+      }, {
+        "type" : "list",
+        "id" : 142,
+        "level" : "5",
+        "page number" : 6,
+        "bounding box" : [ 85.08, 235.701, 510.269, 450.213 ],
+        "numbering style" : "arabic numbers",
+        "number of list items" : 2,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 6,
+          "bounding box" : [ 85.08, 420.501, 510.269, 450.213 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "2.3.2)CLUE-LDS 오픈소스 데이터 CLUE-LDS는 우리가 사용할 모바일 환경의 행동 속성과 일치하지 않는 속성이 많았",
+          "kids" : [ {
+            "type" : "paragraph",
+            "id" : 138,
+            "level" : "6",
+            "page number" : 6,
+            "bounding box" : [ 85.08, 389.661, 510.269, 419.373 ],
+            "font" : "HCRBatang",
+            "font size" : 11.04,
+            "text color" : "[0.0]",
+            "content" : "다. 따라서 UEBA 모델 학습 시 모바일 사용자의 실제 이상 징후를 정확히 판단하기 어렵다고 판단했다."
+          }, {
+            "type" : "paragraph",
+            "id" : 139,
+            "level" : "7",
+            "page number" : 6,
+            "bounding box" : [ 85.08, 358.821, 145.392, 373.173 ],
+            "font" : "HCRBatang",
+            "font size" : 11.04,
+            "text color" : "[0.0]",
+            "content" : "-해결 방안-"
+          }, {
+            "type" : "paragraph",
+            "id" : 140,
+            "page number" : 6,
+            "bounding box" : [ 85.08, 266.421, 510.269, 342.453 ],
+            "font" : "HCRBatang",
+            "font size" : 11.04,
+            "text color" : "[0.0]",
+            "content" : "CLUE-LDS 데이터셋을 머신러닝 모델의 개발 및 성능향상 목적으로만 사용, 그렇게 보완된 모델을 바탕으로 실제 사용자의 로그를 Input으로 입력 받으면 시계열로 분석 하는 UEBA 모델을 개발할 예정이다. CLUE-LDS가 아닌 다른 데이터셋이 우리가 개발할 모델과 잘 맞는다면 그 모델을 채용하는 것도 방법일 것이다."
+          } ]
+        }, {
+          "type" : "list item",
+          "page number" : 6,
+          "bounding box" : [ 85.08, 235.701, 247.709, 250.053 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "2.3.3)다른 앱에서의 터치 이벤트",
+          "kids" : [ ]
+        } ]
+      } ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 204,
+    "page number" : 6,
+    "bounding box" : [ 85.08, 198.261, 503.918, 234.573 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "Android 보안 정책에 의해 다른 앱의 터치 이벤트에 접근할 수 없음. Accessibility Service를 통한 접근은 사용자의 명시적 권한 승인이 필요하며, Google Play Store 정책상 제한됨."
+  }, {
+    "type" : "paragraph",
+    "id" : 205,
+    "level" : "7",
+    "page number" : 6,
+    "bounding box" : [ 85.08, 163.701, 145.392, 178.053 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "-해결 방안-"
+  }, {
+    "type" : "list",
+    "id" : 206,
+    "level" : "8",
+    "page number" : 6,
+    "bounding box" : [ 85.08, 108.501, 510.269, 149.253 ],
+    "numbering style" : "korean letters",
+    "number of list items" : 1,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 85.08, 108.501, 510.269, 149.253 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "자체 앱 내 터치 패턴 상세 분석으로 대체. Policy Engine 앱 내에서만 터치 이벤트 를 수집하여 이상패턴을 감지한다. 터치 압력, 속도, 리듬, 접촉 면적 등 상세한 터치 분석을 통해 추가 인증 필요여부를 판단한다.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 207,
+    "page number" : 6,
+    "bounding box" : [ 505.32, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 61,
+      "page number" : 6,
+      "bounding box" : [ 505.32, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "6"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 208,
+    "page number" : 7,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 89,
+      "page number" : 7,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 211,
+    "level" : "Subtitle",
+    "page number" : 7,
+    "bounding box" : [ 85.08, 727.739, 203.971, 744.587 ],
+    "heading level" : 2,
+    "font" : "HCRBatang",
+    "font size" : 12.96,
+    "text color" : "[0.0]",
+    "content" : "3. 과제 구체화 방안"
+  }, {
+    "type" : "heading",
+    "id" : 212,
+    "level" : "Subtitle",
+    "page number" : 7,
+    "bounding box" : [ 85.08, 696.539, 179.491, 713.387 ],
+    "heading level" : 2,
+    "font" : "HCRBatang",
+    "font size" : 12.96,
+    "text color" : "[0.0]",
+    "content" : "3.1 전체 구조도"
+  }, {
+    "type" : "image",
+    "id" : 215,
+    "page number" : 7,
+    "bounding box" : [ 85.034, 458.498, 509.965, 681.934 ],
+    "source" : "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile4.png"
+  }, {
+    "type" : "list",
+    "id" : 213,
+    "level" : "1",
+    "page number" : 7,
+    "bounding box" : [ 85.08, 152.061, 313.973, 430.773 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 3,
+    "next list id" : 220,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 7,
+      "bounding box" : [ 85.08, 416.421, 185.549, 430.773 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "1)모바일 클라이언트",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 135,
+        "level" : "4",
+        "page number" : 7,
+        "bounding box" : [ 85.08, 317.301, 510.269, 414.213 ],
+        "numbering style" : "unordered",
+        "number of list items" : 4,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 7,
+          "bounding box" : [ 85.08, 399.861, 442.973, 414.213 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-사용자의 행동 수집 서비스는 위치 정보등의 로그 기록 등을 수집한다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 7,
+          "bounding box" : [ 85.08, 383.421, 455.573, 397.773 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-수집된 로그는 전처리를 거쳐 로컬 저장한 뒤 서버 API를 통해 전송된다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 7,
+          "bounding box" : [ 85.08, 350.301, 510.269, 381.213 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-클라이언트에서 ABAC 속성에 필요한 핵심 값만 추출·전처리하여 데이터 전송 비용 과 디바이스 리소스를 최소화한다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 7,
+          "bounding box" : [ 85.08, 317.301, 510.269, 348.213 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-관리자가 아닌 일반 사용자는 자신의 로그 기록만을 볼 수 있으며, 행동 및 로그 기 록을 바탕으로 네트워크 접근이 차단될 수 있다.",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 7,
+      "bounding box" : [ 85.08, 267.741, 313.973, 282.093 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "2) 로그 수집 서버(서버 API & 로그 수집 DB)",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 136,
+        "level" : "4",
+        "page number" : 7,
+        "bounding box" : [ 85.08, 201.621, 510.269, 265.533 ],
+        "numbering style" : "unordered",
+        "number of list items" : 3,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 7,
+          "bounding box" : [ 85.08, 251.181, 478.013, 265.533 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-Django REST API를 통해 모바일 클라이언트에서 전송된 데이터를 수신한다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 7,
+          "bounding box" : [ 85.08, 218.181, 510.269, 249.093 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-수집된 로그 데이터는 SQLite 등 DB에 저장되어 ML 모델 학습/탐지 모듈과 연계 된다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 7,
+          "bounding box" : [ 85.08, 201.621, 410.693, 215.973 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-실시간으로 정책 필터링 엔진과 연결되어 요청 흐름을 관리한다.",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 7,
+      "bounding box" : [ 85.08, 152.061, 294.773, 166.413 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "3) 행동 분석 및 이상 탐지 모듈(ML 모델)",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 214,
+    "level" : "4",
+    "page number" : 7,
+    "bounding box" : [ 85.08, 86.061, 510.269, 149.973 ],
+    "numbering style" : "unordered",
+    "number of list items" : 3,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 7,
+      "bounding box" : [ 85.08, 135.621, 504.413, 149.973 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-Isolation Forest와 LSTM Auto-Encoder를 사용하여 정상 행동 패턴을 학습한다.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 7,
+      "bounding box" : [ 85.08, 102.501, 510.269, 133.413 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-사용자 속성, 요청 속성등을 입력으로 사용하여 재구성 오차 기반으로 이상을 탐지 한다.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 7,
+      "bounding box" : [ 85.08, 86.061, 491.213, 100.413 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-탐지된 로그 및 행동패턴은 정책 엔진으로 전달되어 동적 접근 제어에 활용된다.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 216,
+    "page number" : 7,
+    "bounding box" : [ 505.32, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 62,
+      "page number" : 7,
+      "bounding box" : [ 505.32, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "7"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 217,
+    "page number" : 8,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 90,
+      "page number" : 8,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 220,
+    "level" : "1",
+    "page number" : 8,
+    "bounding box" : [ 85.08, 614.181, 248.093, 744.213 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 2,
+    "previous list id" : 213,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 8,
+      "bounding box" : [ 85.08, 729.861, 248.093, 744.213 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "4) 정책 관리 DB(ABAC 룰 매칭)",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 137,
+        "level" : "3",
+        "page number" : 8,
+        "bounding box" : [ 85.08, 663.741, 510.149, 727.653 ],
+        "numbering style" : "unordered",
+        "number of list items" : 3,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 8,
+          "bounding box" : [ 85.08, 713.301, 507.293, 727.653 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-사용자, 위치, 로그, 시간대 등의 속성을 기반으로 정적 접근 통제를 먼저 수행한다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 8,
+          "bounding box" : [ 85.08, 680.301, 510.149, 711.213 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-이상 탐지 모듈의 출력 결과와 결합하여 정책 위반 시 알림 및 즉시 접근 차단 여부 를 판단한다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 8,
+          "bounding box" : [ 85.08, 663.741, 248.573, 678.093 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-룰은 정책 관련 DB에 저장된다.",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 8,
+      "bounding box" : [ 85.08, 614.181, 191.069, 628.533 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "5) 관리자 인터페이스",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 221,
+    "level" : "3",
+    "page number" : 8,
+    "bounding box" : [ 85.08, 564.621, 434.213, 612.093 ],
+    "numbering style" : "unordered",
+    "number of list items" : 3,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 8,
+      "bounding box" : [ 85.08, 597.741, 432.053, 612.093 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-관리자 대시보드는 실시간 모니터링과 탐지 결과 시각화를 제공한다.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 8,
+      "bounding box" : [ 85.08, 581.181, 434.213, 595.533 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-이상 사용자 활동 이력, 정책 위반 상황, 정책 수정 기능을 지원한다.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 8,
+      "bounding box" : [ 85.08, 564.621, 432.293, 578.973 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-최종적으로 관리자 판단에 따라 수동 차단 및 정책 관리가 가능하다.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 222,
+    "level" : "Subtitle",
+    "page number" : 8,
+    "bounding box" : [ 85.08, 506.939, 147.811, 523.787 ],
+    "heading level" : 2,
+    "font" : "HCRBatang",
+    "font size" : 12.96,
+    "text color" : "[0.0]",
+    "content" : "3.2 백엔드"
+  }, {
+    "type" : "paragraph",
+    "id" : 223,
+    "page number" : 8,
+    "bounding box" : [ 85.08, 333.381, 510.269, 470.853 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "백엔드 서버는 Python 기반 Django REST framework를 사용하여 모바일 클라이언 트로부터 사용자 행동 데이터를 수신하고 구조화된 데이터베이스에 저장한다. 저장된 데이터는 TensorFlow로 학습된 이상 탐지 모델과 연동되어 실시간으로 정상 및 이상 여부를 판단하며, ABAC 정책 엔진과 결합하여 최종 접근 허용 여부를 결정 한다. 또한 관리자용 대시보드가 REST API를 통해 감지된 이상 행동, 차단 이력, 정책 관 리를 손쉽게 할 수 있도록 직관적인 API를 제공하고, Postman과 Swagger를 활용하 여 API 품질과 문서화를 유지한다."
+  }, {
+    "type" : "paragraph",
+    "id" : 224,
+    "page number" : 8,
+    "bounding box" : [ 85.08, 298.101, 170.789, 312.453 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "백엔드 설계 사항"
+  }, {
+    "type" : "list",
+    "id" : 225,
+    "level" : "4",
+    "page number" : 8,
+    "bounding box" : [ 85.08, 210.141, 510.269, 294.933 ],
+    "numbering style" : "circled arabic numbers",
+    "number of list items" : 4,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 8,
+      "bounding box" : [ 85.08, 280.581, 460.709, 294.933 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "① 데이터 수신 & 저장 — 클라이언트로부터 행동 로그 받기 → DB에 저장",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 8,
+      "bounding box" : [ 85.08, 262.941, 448.589, 277.293 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "② 머신러닝 모델 연동 — 저장된 로그를 기반으로 ML 모델에 요청 송신",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 8,
+      "bounding box" : [ 85.08, 245.301, 431.189, 259.653 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "③ 정책 엔진 처리 — ABAC 룰셋 + ML 결과로 접근 허용 여부 판단",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 8,
+      "bounding box" : [ 85.08, 210.141, 510.269, 242.133 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "④ API 설계 & 대시보드 연동 — 관리자 화면이 REST로 서버에서 결과를 받아볼 수 있도록 제공",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 226,
+    "level" : "1",
+    "page number" : 8,
+    "bounding box" : [ 85.08, 176.061, 226.109, 190.413 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "next list id" : 236,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 8,
+      "bounding box" : [ 85.08, 176.061, 226.109, 190.413 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "1) 데이터 수신 & 저장 모듈",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 227,
+    "page number" : 8,
+    "bounding box" : [ 85.08, 142.941, 109.973, 157.293 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "목표:"
+  }, {
+    "type" : "list",
+    "id" : 228,
+    "level" : "3",
+    "page number" : 8,
+    "bounding box" : [ 85.08, 86.901, 510.269, 140.853 ],
+    "numbering style" : "unordered",
+    "number of list items" : 3,
+    "next list id" : 234,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 8,
+      "bounding box" : [ 85.08, 126.501, 375.029, 140.853 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-모바일 앱에서 사용자 행동 데이터(위치, 요청 로그) 수신",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 8,
+      "bounding box" : [ 85.08, 113.301, 467.309, 127.653 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-JSON 형태의 요청을 파싱하고 Django ORM을 통해 DB에 구조적으로 저장",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 8,
+      "bounding box" : [ 85.08, 86.901, 510.269, 114.453 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-수신 과정에서 속성 벡터(사용자, 요청, 통계 속성)를 생성하거나, 클라이언트가 벡 터화한 것을 그대로 받음",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 229,
+    "page number" : 8,
+    "bounding box" : [ 505.32, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 63,
+      "page number" : 8,
+      "bounding box" : [ 505.32, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "8"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 230,
+    "page number" : 9,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 91,
+      "page number" : 9,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 234,
+    "level" : "3",
+    "page number" : 9,
+    "bounding box" : [ 85.08, 673.701, 510.292, 744.213 ],
+    "numbering style" : "unordered",
+    "number of list items" : 4,
+    "previous list id" : 228,
+    "list items" : [ {
+      "type" : "list item",
+      "id" : 233,
+      "page number" : 9,
+      "bounding box" : [ 85.08, 729.861, 124.493, 744.213 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "DB설계:",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 85.08, 700.101, 510.292, 727.653 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-UserBehaviorLog 테이블: user_id, device_id, request_time, request_url, request_method, stat_feature_json 등",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 85.08, 686.901, 424.133, 701.253 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-PolicyRule 테이블: ABAC 정책 룰셋 저장 (역할, 위치, 시간대 등)",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 85.08, 673.701, 470.213, 688.053 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-AnomalyResult 테이블: 모델 추론 결과 저장 (score, is_anomaly flag 등)",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 235,
+    "page number" : 9,
+    "bounding box" : [ 85.08, 627.501, 342.173, 658.413 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "툴: Django + DRF, SQLite (초기), PostgreSQL (확장)"
+  }, {
+    "type" : "list",
+    "id" : 236,
+    "level" : "1",
+    "page number" : 9,
+    "bounding box" : [ 85.08, 280.941, 196.589, 608.853 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 2,
+    "previous list id" : 226,
+    "next list id" : 242,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 85.08, 594.501, 196.589, 608.853 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "2) 머신러닝 모델 연동",
+      "kids" : [ {
+        "type" : "paragraph",
+        "id" : 133,
+        "page number" : 9,
+        "bounding box" : [ 85.08, 561.381, 109.973, 575.733 ],
+        "font" : "HCRBatang",
+        "font size" : 11.04,
+        "text color" : "[0.0]",
+        "content" : "목표:"
+      }, {
+        "type" : "list",
+        "id" : 134,
+        "level" : "3",
+        "page number" : 9,
+        "bounding box" : [ 85.08, 346.941, 510.269, 559.293 ],
+        "numbering style" : "unordered",
+        "number of list items" : 8,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 9,
+          "bounding box" : [ 85.08, 544.941, 484.589, 559.293 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-저장된 로그 데이터 or 실시간 속성 벡터를 비동기 or 동기로 ML 모듈에 전달",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 9,
+          "bounding box" : [ 85.08, 505.341, 438.029, 546.093 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-LSTM AE, Isolation Forest 모델을 Django에서 직접 로드하여 추론 구현 아이디어:",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 9,
+          "bounding box" : [ 85.08, 492.141, 313.492, 506.493 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-서버 시작 시 모델 파일 로드 (lazy loading)",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 9,
+          "bounding box" : [ 85.08, 478.941, 510.269, 493.293 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-Django View에서 numpy로 벡터화 → model.predict() 호출 → 오차 점수 계산",
+          "kids" : [ {
+            "type" : "paragraph",
+            "id" : 132,
+            "level" : "4",
+            "page number" : 9,
+            "bounding box" : [ 85.08, 465.741, 176.309, 480.093 ],
+            "font" : "HCRBatang",
+            "font size" : 11.04,
+            "text color" : "[0.0]",
+            "content" : "→ 이상 여부 판단"
+          } ]
+        }, {
+          "type" : "list item",
+          "page number" : 9,
+          "bounding box" : [ 85.08, 426.141, 395.189, 466.893 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-추후 대규모라면 Celery + Redis로 비동기 큐 구성 고려가능 툴:",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 9,
+          "bounding box" : [ 85.08, 412.941, 271.61, 427.293 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-TensorFlow, Numpy, Scikit-learn",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 9,
+          "bounding box" : [ 85.08, 373.341, 408.389, 414.093 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-Jupyter Notebook: 추론 로직은 사전에 검증 후 서버에 옮기기 API 흐름:",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 9,
+          "bounding box" : [ 85.08, 346.941, 510.269, 374.493 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-클라이언트 → 서버(로그 저장) → 저장된 로그 → 모델 추론 → 결과 DB 기록 → 접근 허용 여부 판단 → 응답",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 85.08, 280.941, 175.229, 321.693 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "3) 정책 엔진 모듈 목표:",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 237,
+    "level" : "3",
+    "page number" : 9,
+    "bounding box" : [ 85.08, 122.541, 436.229, 282.093 ],
+    "numbering style" : "unordered",
+    "number of list items" : 6,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 85.08, 254.541, 436.229, 282.093 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-ABAC 룰셋 + ML 결과 결합하여 접근 제어 로직 완성 예: 정상 행동이지만 정적 정책 위반(야간접속, 특정 IP 불가)이면 차단",
+      "kids" : [ {
+        "type" : "paragraph",
+        "id" : 131,
+        "page number" : 9,
+        "bounding box" : [ 85.08, 219.261, 158.213, 233.613 ],
+        "font" : "HCRBatang",
+        "font size" : 11.04,
+        "text color" : "[0.0]",
+        "content" : "구현 아이디어:"
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 85.08, 201.741, 333.989, 216.093 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-PolicyEngine 모델에 위치, 시간대 조건 등 정의",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 85.08, 188.541, 424.589, 202.893 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-View 단에서 ML 이상 점수와 ABAC 룰 결과를 조합 → 최종 판단",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 85.08, 148.941, 340.829, 189.693 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-PolicyEngine 클래스로 모듈화하여 재사용성 확보 툴:",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 85.08, 135.741, 287.669, 150.093 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-Django ORM 로직 + rule 테이블 매칭",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 85.08, 122.541, 321.629, 136.893 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-rule 기반으로 필터링 후 이상 탐지 결과 반영",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 238,
+    "page number" : 9,
+    "bounding box" : [ 505.32, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 64,
+      "page number" : 9,
+      "bounding box" : [ 505.32, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "9"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 239,
+    "page number" : 10,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 92,
+      "page number" : 10,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 242,
+    "level" : "1",
+    "page number" : 10,
+    "bounding box" : [ 85.08, 703.461, 235.949, 744.213 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "previous list id" : 236,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 85.08, 703.461, 235.949, 744.213 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "4) API 설계 및 대시보드 연동 목표:",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 243,
+    "level" : "3",
+    "page number" : 10,
+    "bounding box" : [ 85.08, 474.621, 510.269, 704.613 ],
+    "numbering style" : "unordered",
+    "number of list items" : 10,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 85.08, 677.061, 510.269, 704.613 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-관리자용 대시보드가 REST API를 통해 감지된 이상 행동, 접근 차단 현황, 정책 편 집 등을 할 수 있도록 지원",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 85.08, 637.461, 315.509, 678.213 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-Postman, Swagger로 API 테스트 및 문서화 구현 아이디어:",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 85.08, 624.261, 322.349, 638.613 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-/api/logs/ : 저장된 행동 로그 리스트/필터링",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 85.08, 606.621, 321.989, 620.973 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-/api/anomalies/ : 이상 탐지 결과 목록 제공",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 85.08, 589.101, 253.458, 603.453 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-/api/policies/ : 정책 룰 CRUD",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 85.08, 571.461, 450.389, 585.813 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-/api/access-control/ : 실시간 접근 시도에 대한 허용/차단 여부 응답",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 85.08, 553.821, 447.893, 568.173 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-/api/dashboard/ : 주요 지표(최근 이상 탐지 건수, 사용자별 통계 등)",
+      "kids" : [ {
+        "type" : "paragraph",
+        "id" : 130,
+        "page number" : 10,
+        "bounding box" : [ 85.08, 518.661, 99.293, 533.013 ],
+        "font" : "HCRBatang",
+        "font size" : 11.04,
+        "text color" : "[0.0]",
+        "content" : "툴:"
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 85.08, 501.021, 390.893, 515.373 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-Django REST framework (ViewSet, Router, Permission)",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 85.08, 487.821, 135.716, 502.173 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-Swagger",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 85.08, 474.621, 256.229, 488.973 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-Postman -> 테스트 케이스 작성",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 244,
+    "level" : "Subtitle",
+    "page number" : 10,
+    "bounding box" : [ 85.08, 447.299, 173.01, 464.147 ],
+    "heading level" : 2,
+    "font" : "HCRBatang",
+    "font size" : 12.96,
+    "text color" : "[0.0]",
+    "content" : "3.3 프론트엔드"
+  }, {
+    "type" : "list",
+    "id" : 245,
+    "level" : "1",
+    "page number" : 10,
+    "bounding box" : [ 85.08, 132.621, 223.349, 427.773 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 3,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 85.08, 413.421, 148.349, 427.773 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "1) 주요 목표",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 128,
+        "level" : "3",
+        "page number" : 10,
+        "bounding box" : [ 85.08, 347.301, 510.269, 411.213 ],
+        "numbering style" : "unordered",
+        "number of list items" : 2,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 10,
+          "bounding box" : [ 85.08, 380.421, 510.269, 411.213 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-Django REST API와 연동하여 실시간 이상 탐지 결과, 정책 룰 관리, 로그 모니터 링 등을 관리자 대시보드에서 직관적으로 시각화한다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 10,
+          "bounding box" : [ 85.08, 347.301, 510.269, 378.213 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-이상 탐지 현황, 사용자별 통계, 정책 상태 등을 카드, 차트 등으로 시각화하여 즉각 적인 모니터링과 정책 수정이 가능하도록 한다.",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 85.08, 314.301, 159.029, 328.653 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "2) 페이지 구성",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 129,
+        "level" : "3",
+        "page number" : 10,
+        "bounding box" : [ 85.08, 182.181, 510.293, 312.093 ],
+        "numbering style" : "unordered",
+        "number of list items" : 4,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 10,
+          "bounding box" : [ 85.08, 281.301, 510.269, 312.093 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-로그인 페이지: 관리자나 사용자가 로그인 할 수 있는 페이지. 사용자와 관리자는 이 단계에서 인증과정을 거치게 된다.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 10,
+          "bounding box" : [ 85.08, 231.741, 510.293, 279.093 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-메인 대시보드: 최근 이상 탐지 건수, 사용자 이상 비율 등을 카드 & 차트로 표시. 접근 시도/차단 현황을 테이블로 구성하여 시각화. 최근 n개의 이상 수치를 그래프화 함.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 10,
+          "bounding box" : [ 85.08, 198.621, 510.269, 229.533 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-로그 관리 페이지: 서버 API를 이용하여 사용자의 로그를 로드함. 차단 여부 및 이 상 수치 표시됨.",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 10,
+          "bounding box" : [ 85.08, 182.181, 408.053, 196.533 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-정책 관리 페이지: ABAC 룰 등록/수정/삭제할 수 있는 페이지.",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 85.08, 132.621, 223.349, 163.413 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "3)상태 관리 및 데이터 흐름 상태관리:",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 246,
+    "level" : "3",
+    "page number" : 10,
+    "bounding box" : [ 85.08, 99.501, 401.549, 130.413 ],
+    "numbering style" : "unordered",
+    "number of list items" : 2,
+    "next list id" : 252,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 85.08, 116.061, 401.549, 130.413 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-Redux Toolkit 또는 React Query로 REST 데이터 요청/캐싱",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 85.08, 99.501, 345.172, 113.853 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-사용자 인증 토큰 상태 (Context API 또는 Redux)",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 247,
+    "page number" : 10,
+    "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 65,
+      "page number" : 10,
+      "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "10"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 248,
+    "page number" : 11,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 93,
+      "page number" : 11,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 252,
+    "level" : "3",
+    "page number" : 11,
+    "bounding box" : [ 85.08, 614.181, 453.869, 744.213 ],
+    "numbering style" : "unordered",
+    "number of list items" : 6,
+    "previous list id" : 246,
+    "list items" : [ {
+      "type" : "list item",
+      "id" : 251,
+      "page number" : 11,
+      "bounding box" : [ 85.08, 729.861, 158.213, 744.213 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "컴포넌트 구조:",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 85.08, 713.301, 453.869, 727.653 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-각 페이지는 /pages에 라우팅, 공통 컴포넌트는 /components로 모듈화",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 85.08, 696.861, 281.789, 711.213 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-chart.js 등의 시각화 라이브러리 활용",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 85.08, 680.301, 264.968, 694.653 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-Tailwind CSS를 이용한 반응형 UI",
+      "kids" : [ {
+        "type" : "paragraph",
+        "id" : 127,
+        "page number" : 11,
+        "bounding box" : [ 85.08, 647.301, 136.853, 661.653 ],
+        "font" : "HCRBatang",
+        "font size" : 11.04,
+        "text color" : "[0.0]",
+        "content" : "형상 관리:"
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 85.08, 630.741, 358.829, 645.093 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-Git, Github를 이용한 프론트엔드 프로젝트 형상 관리",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 85.08, 614.181, 370.68, 628.533 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-Github 주소:https://github.com/bootaeng/KGL_NAC",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 253,
+    "level" : "Subtitle",
+    "page number" : 11,
+    "bounding box" : [ 85.08, 579.059, 204.69, 595.907 ],
+    "heading level" : 2,
+    "font" : "HCRBatang",
+    "font size" : 12.96,
+    "text color" : "[0.0]",
+    "content" : "3.4 앱 어플리케이션"
+  }, {
+    "type" : "list",
+    "id" : 254,
+    "level" : "1",
+    "page number" : 11,
+    "bounding box" : [ 85.08, 189.981, 510.269, 559.533 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 2,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 85.08, 512.061, 510.269, 559.533 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "1)데이터 수집 및 전송 최적화 현재 주기적으로 쌓인 데이터를 서버에 전송하고 안드로이드 에뮬레이터를 이용 중이 기에, 추후 실제 스마트폰을 사용한 데이터 수집 결과를 확인한 후 전송 주기, 데이",
+      "kids" : [ {
+        "type" : "paragraph",
+        "id" : 124,
+        "page number" : 11,
+        "bounding box" : [ 85.08, 495.621, 403.229, 509.973 ],
+        "font" : "HCRBatang",
+        "font size" : 11.04,
+        "text color" : "[0.0]",
+        "content" : "터 형식, 데이터 개수, 사용하지 않는 데이터 조절 및 제거 예정"
+      }, {
+        "type" : "paragraph",
+        "id" : 125,
+        "page number" : 11,
+        "bounding box" : [ 85.08, 462.501, 163.613, 476.853 ],
+        "font" : "HCRBatang",
+        "font size" : 11.04,
+        "text color" : "[0.0]",
+        "content" : "세부 개선 계획:"
+      }, {
+        "type" : "list",
+        "id" : 126,
+        "level" : "3",
+        "page number" : 11,
+        "bounding box" : [ 85.08, 228.021, 510.269, 460.413 ],
+        "numbering style" : "unordered",
+        "number of list items" : 7,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 11,
+          "bounding box" : [ 85.08, 429.501, 510.269, 460.413 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-적응형 학습 단계 구현: 초기 몇십분(예:30~60분)동안 집중적인 데이터 수집을 통해 사용자의 기본 사용 습관 및 패턴을 머신러닝으로 학습",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 11,
+          "bounding box" : [ 85.08, 402.021, 498.509, 427.293 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-학습 완료 후 모드 전환: 이후 데이터는 이상반응 감지, 잘못된 접근, 비정상 패턴 탐지용으로 활용하여 수집 빈도 및 데이터량 최적화",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 11,
+          "bounding box" : [ 85.08, 360.981, 507.389, 397.293 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-실기기 테스트 기반 최적화: 서버 과부화 및 배터리 사용량을 실제 스마트폰에서 측 정하여 모델 학습 및 이상 반응 감지 목적에 최적화된 데이터 전처리, 선별적 수집, 불필요 데이터 제거 적용",
+          "kids" : [ {
+            "type" : "paragraph",
+            "id" : 123,
+            "page number" : 11,
+            "bounding box" : [ 85.08, 303.981, 166.229, 337.293 ],
+            "font" : "HCRBatang",
+            "font size" : 11.04,
+            "text color" : "[0.0]",
+            "content" : "추가 고려 사항: 2단계 수집 전략"
+          } ]
+        }, {
+          "type" : "list item",
+          "page number" : 11,
+          "bounding box" : [ 85.08, 285.021, 381.413, 299.373 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-phase 1(학습 단계): 고빈도 수집(15초 주기, 전체 데이터)",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 11,
+          "bounding box" : [ 85.08, 265.941, 392.093, 280.293 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-phase 2(감지 단계); 저빈도 수집(60초 주기, 핵심 데이터만)",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 11,
+          "bounding box" : [ 85.08, 246.981, 367.829, 261.333 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-배터리 임계값 연동: 배터리20% 이하시 최소 모드 전환",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 11,
+          "bounding box" : [ 85.08, 228.021, 343.829, 242.373 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-네트워크 최적화: WIFI/셀룰러별 차등 데이터 전송",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 85.08, 189.981, 245.909, 204.333 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "2)사용자 편의성 및 UI/UX 개선",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 255,
+    "page number" : 11,
+    "bounding box" : [ 85.08, 148.941, 508.469, 185.373 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "머신러닝을 통해 사용자가 이상 반응 행동을 보였을 때 앱에서 이를 보고하는 방식을 구현하며, 실제 스마트폰 테스트를 통해 더욱 사용자 친화적인 앱으로 변모하기 위한 UI/UX 변경 예정"
+  }, {
+    "type" : "paragraph",
+    "id" : 256,
+    "page number" : 11,
+    "bounding box" : [ 85.08, 111.021, 163.613, 125.373 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "세부 개선 계획:"
+  }, {
+    "type" : "list",
+    "id" : 257,
+    "level" : "3",
+    "page number" : 11,
+    "bounding box" : [ 85.08, 91.941, 362.789, 106.293 ],
+    "numbering style" : "unordered",
+    "number of list items" : 1,
+    "next list id" : 262,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 85.08, 91.941, 362.789, 106.293 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-단계별 알림 시스템: 이상 탐지 수준에 따른 차등 알림",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 258,
+    "page number" : 11,
+    "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 66,
+      "page number" : 11,
+      "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "11"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 259,
+    "page number" : 12,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 94,
+      "page number" : 12,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 262,
+    "level" : "3",
+    "page number" : 12,
+    "bounding box" : [ 85.08, 577.821, 505.709, 744.213 ],
+    "numbering style" : "unordered",
+    "number of list items" : 6,
+    "previous list id" : 257,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 12,
+      "bounding box" : [ 85.08, 710.901, 505.709, 744.213 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-설명 가능한 알림: 단순한 이상 감지 메시지가 아닌, 구체적인 행동 패턴 변화 설명 제공",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 12,
+      "bounding box" : [ 85.08, 691.821, 421.709, 706.173 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-사용자 피드백 연동: 잘못된 탐지에 대한 신고 기능으로 모델 개선",
+      "kids" : [ {
+        "type" : "paragraph",
+        "id" : 122,
+        "page number" : 12,
+        "bounding box" : [ 85.08, 653.901, 202.373, 668.253 ],
+        "font" : "HCRBatang",
+        "font size" : 11.04,
+        "text color" : "[0.0]",
+        "content" : "추가 UI/UX 개선 사항:"
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 12,
+      "bounding box" : [ 85.08, 634.821, 357.139, 649.173 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-학습 진행률 표시: “사용 패턴 학습 중 … 85% 완료”",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 12,
+      "bounding box" : [ 85.08, 615.861, 373.469, 630.213 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-투명성 강화: 수집되는 데이터 종류 및 용도 실시간 표시",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 12,
+      "bounding box" : [ 85.08, 596.901, 310.589, 611.253 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-프라이버시 컨트롤: 세부 기능별on/off 설정",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 12,
+      "bounding box" : [ 85.08, 577.821, 363.389, 592.173 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-접근성 고려: 시각/청각 장애인을 위한 대체 알람 방식",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 263,
+    "level" : "Subtitle",
+    "page number" : 12,
+    "bounding box" : [ 85.08, 537.779, 192.091, 554.627 ],
+    "heading level" : 2,
+    "font" : "HCRBatang",
+    "font size" : 12.96,
+    "text color" : "[0.0]",
+    "content" : "3.3 머신러닝 모델"
+  }, {
+    "type" : "list",
+    "id" : 264,
+    "level" : "1",
+    "page number" : 12,
+    "bounding box" : [ 85.08, 355.101, 207.269, 518.133 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 2,
+    "next list id" : 271,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 12,
+      "bounding box" : [ 85.08, 503.781, 142.829, 518.133 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "1)주요 목표",
+      "kids" : [ {
+        "type" : "paragraph",
+        "id" : 119,
+        "page number" : 12,
+        "bounding box" : [ 85.08, 388.221, 510.269, 485.133 ],
+        "font" : "HCRBatang",
+        "font size" : 11.04,
+        "text color" : "[0.0]",
+        "content" : "모바일 클라이언트에서 수집된 BehaviorLog(위치, 요청, 디바이스 정보)를 속성 벡터 로 변환해 실시간으로 이상 여부를 판단한다. 정상 데이터를 기반으로 비지도 학습 (Unsupervised)하여 정상 행동 패턴을 학습하고, 정상 행동 패턴에서 많이 벗어나는 행동은 이상으로 탐지한다. Isolation Forest와 LSTM Auto-Encoder를 병행하여 단 일 로그 + 시퀀스 기반 이상 탐지를 결합, 탐지 신뢰도를 고양한다. 최종 탐지 결과 는 ABAC 정책 엔진과 결합해 접근 허용/차단/추가 인증 여부를 결정하게 된다."
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 12,
+      "bounding box" : [ 85.08, 355.101, 207.269, 369.453 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "2)입력 데이터 및 전처리",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 265,
+    "page number" : 12,
+    "bounding box" : [ 85.08, 322.101, 147.533, 336.453 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "입력 데이터:"
+  }, {
+    "type" : "list",
+    "id" : 266,
+    "level" : "3",
+    "page number" : 12,
+    "bounding box" : [ 85.08, 189.981, 469.493, 319.893 ],
+    "numbering style" : "unordered",
+    "number of list items" : 6,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 12,
+      "bounding box" : [ 85.08, 305.541, 469.493, 319.893 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-사용자 속성: user_id, device_info(model, os_version, network_type 등)",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 12,
+      "bounding box" : [ 85.08, 289.101, 333.989, 303.453 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-사용자 로그: 위치, 터치등의 사용자 행동 데이터",
+      "kids" : [ {
+        "type" : "paragraph",
+        "id" : 118,
+        "page number" : 12,
+        "bounding box" : [ 85.08, 255.981, 147.533, 270.333 ],
+        "font" : "HCRBatang",
+        "font size" : 11.04,
+        "text color" : "[0.0]",
+        "content" : "전처리 흐름:"
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 12,
+      "bounding box" : [ 85.08, 239.541, 288.749, 253.893 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-Django ORM 으로 최근 로그 n건 조회",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 12,
+      "bounding box" : [ 85.08, 222.981, 338.669, 237.333 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-범주형 속성과 수치형 속성을 인코딩 or 스케일링",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 12,
+      "bounding box" : [ 85.08, 206.421, 255.029, 220.773 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-Isolation Forest: 1건 단위 벡터",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 12,
+      "bounding box" : [ 85.08, 189.981, 347.813, 204.333 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-LSTM AE: 시계열 시퀀스 배열 (ex: 최근 10~30건)",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 267,
+    "page number" : 12,
+    "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 67,
+      "page number" : 12,
+      "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "12"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 268,
+    "page number" : 13,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 95,
+      "page number" : 13,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 271,
+    "level" : "1",
+    "page number" : 13,
+    "bounding box" : [ 85.08, 449.061, 185.909, 744.213 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 2,
+    "previous list id" : 264,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 13,
+      "bounding box" : [ 85.08, 729.861, 148.349, 744.213 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "3) 판단 로직",
+      "kids" : [ {
+        "type" : "list",
+        "id" : 120,
+        "level" : "3",
+        "page number" : 13,
+        "bounding box" : [ 85.08, 498.621, 510.269, 711.213 ],
+        "numbering style" : "unordered",
+        "number of list items" : 3,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 13,
+          "bounding box" : [ 85.08, 647.301, 348.749, 711.213 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-Isolation Forest 입력: 단일 행동 벡터 출력: 이상 점수 (0.0~1.0) 판단: 이상 점수 > threshold(예: 0.6)이면 이상 행동",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 13,
+          "bounding box" : [ 85.08, 564.621, 327.869, 628.533 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-LSTM Auto-Encoder 입력: 시계열 행동 시퀀스 (벡터 리스트) 출력: 재구성 오차 (Reconstruction Error) 판단: 오차 > threshold(예: 0.05)이면 이상 행동",
+          "kids" : [ ]
+        }, {
+          "type" : "list item",
+          "page number" : 13,
+          "bounding box" : [ 85.08, 498.621, 510.269, 545.973 ],
+          "font" : "HCRBatang",
+          "font size" : 11.04,
+          "text color" : "[0.0]",
+          "content" : "-최종 판단 두 모델의 결과를 종합해 신뢰도 or 이상 수치 생성 ABAC 정책 조건(위치/시간대/역할)과 조합하여 PolicyResponse 생성 -> 정책 반영",
+          "kids" : [ ]
+        } ]
+      }, {
+        "type" : "paragraph",
+        "id" : 121,
+        "page number" : 13,
+        "bounding box" : [ 85.08, 482.061, 323.549, 496.413 ],
+        "font" : "HCRBatang",
+        "font size" : 11.04,
+        "text color" : "[0.0]",
+        "content" : "하여 네트워크 접근 차단 등의 agent 행동 수행"
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 13,
+      "bounding box" : [ 85.08, 449.061, 185.909, 463.413 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "4) 백엔드 연동 방식",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 272,
+    "page number" : 13,
+    "bounding box" : [ 85.08, 415.941, 186.509, 430.293 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "Django 백엔드 연동"
+  }, {
+    "type" : "list",
+    "id" : 273,
+    "level" : "3",
+    "page number" : 13,
+    "bounding box" : [ 85.08, 333.381, 510.192, 413.853 ],
+    "numbering style" : "unordered",
+    "number of list items" : 4,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 13,
+      "bounding box" : [ 85.08, 399.501, 375.389, 413.853 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-서버 시작 시 머신러닝 모델 파일 로드 → 메모리에 상주",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 13,
+      "bounding box" : [ 85.08, 382.941, 394.469, 397.293 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-요청 시 View 함수가 벡터를 생성하여 model.predict() 호출",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 13,
+      "bounding box" : [ 85.08, 366.381, 309.749, 380.733 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-추론 결과는 AnomalyResult 테이블에 저장",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 13,
+      "bounding box" : [ 85.08, 333.381, 510.192, 364.293 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "-최종 결과는 PolicyEngine 모듈과 결합하여 allow / block / warning / additional_auth 로 반환",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 274,
+    "page number" : 13,
+    "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 68,
+      "page number" : 13,
+      "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "13"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 275,
+    "page number" : 14,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 96,
+      "page number" : 14,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 278,
+    "level" : "1",
+    "page number" : 14,
+    "bounding box" : [ 85.08, 727.739, 159.691, 744.587 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 14,
+      "bounding box" : [ 85.08, 727.739, 159.691, 744.587 ],
+      "font" : "HCRBatang",
+      "font size" : 12.96,
+      "text color" : "[0.0]",
+      "content" : "4. 수행 현황",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 279,
+    "level" : "3",
+    "page number" : 14,
+    "bounding box" : [ 85.08, 688.739, 147.811, 705.587 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 14,
+      "bounding box" : [ 85.08, 688.739, 147.811, 705.587 ],
+      "font" : "HCRBatang",
+      "font size" : 12.96,
+      "text color" : "[0.0]",
+      "content" : "4.1 백엔드",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 280,
+    "level" : "1",
+    "page number" : 14,
+    "bounding box" : [ 85.08, 291.141, 293.789, 669.093 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 2,
+    "next list id" : 288,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 14,
+      "bounding box" : [ 85.08, 654.741, 293.789, 669.093 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "1) Behavior Log API POST 테스트 화면",
+      "kids" : [ {
+        "type" : "paragraph",
+        "id" : 116,
+        "page number" : 14,
+        "bounding box" : [ 85.08, 359.789, 510.181, 372.737 ],
+        "font" : "HCRBatang",
+        "font size" : 9.96,
+        "text color" : "[0.0]",
+        "content" : "Django REST Framework 기본 Swagger 형태로 구현된 /api/behavior-logs/ 엔드포인트"
+      }, {
+        "type" : "list",
+        "id" : 117,
+        "level" : "3",
+        "page number" : 14,
+        "bounding box" : [ 85.08, 327.749, 510.181, 356.777 ],
+        "numbering style" : "korean letters",
+        "number of list items" : 1,
+        "list items" : [ {
+          "type" : "list item",
+          "page number" : 14,
+          "bounding box" : [ 85.08, 327.749, 510.181, 356.777 ],
+          "font" : "HCRBatang",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "가 POST 요청을 수신하고, 정상적으로 행동 로그와 이상탐지 결과를 생성하여 Stub 응답 (status, decision)을 반환함을 확인하였다.",
+          "kids" : [ ]
+        } ]
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 14,
+      "bounding box" : [ 85.08, 291.141, 247.229, 305.493 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "2) Anomaly 결과 DB 저장 현황",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 281,
+    "page number" : 14,
+    "bounding box" : [ 85.034, 375.909, 493.294, 633.867 ],
+    "source" : "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile5.png"
+  }, {
+    "type" : "image",
+    "id" : 282,
+    "page number" : 14,
+    "bounding box" : [ 85.034, 91.58, 518.841, 277.377 ],
+    "source" : "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile6.png"
+  }, {
+    "type" : "footer",
+    "id" : 283,
+    "page number" : 14,
+    "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 69,
+      "page number" : 14,
+      "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "14"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 284,
+    "page number" : 15,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 97,
+      "page number" : 15,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 288,
+    "level" : "1",
+    "page number" : 15,
+    "bounding box" : [ 85.08, 663.741, 510.269, 744.213 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 2,
+    "previous list id" : 280,
+    "list items" : [ {
+      "type" : "list item",
+      "id" : 287,
+      "page number" : 15,
+      "bounding box" : [ 85.08, 696.861, 510.269, 744.213 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "사용자 행동 로그에 대한 이상탐지 결과가 AnomalyResult 모델에 정상적으로 FK로 연결되어 관리되고 있음을 보여준다. risk_score, confidence, decision 필드가 저장 됨을 확인하였다.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 15,
+      "bounding box" : [ 85.08, 663.741, 298.589, 678.093 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "3) User Behavior Log 저장 및 관리 현황",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 293,
+    "page number" : 15,
+    "bounding box" : [ 85.034, 451.186, 488.857, 659.158 ],
+    "source" : "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile7.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 289,
+    "page number" : 15,
+    "bounding box" : [ 85.08, 380.781, 510.269, 430.413 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "클라이언트에서 POST로 전송된 사용자 행동 로그가 UserBehaviorLog 모델에 기록 되어 Admin 페이지에서 ID, user_id, action_type, request_time 등 주요 정보가 확인된다."
+  }, {
+    "type" : "heading",
+    "id" : 290,
+    "level" : "Subtitle",
+    "page number" : 15,
+    "bounding box" : [ 85.08, 341.579, 173.01, 358.427 ],
+    "heading level" : 2,
+    "font" : "HCRBatang",
+    "font size" : 12.96,
+    "text color" : "[0.0]",
+    "content" : "4.2 프론트엔드"
+  }, {
+    "type" : "paragraph",
+    "id" : 291,
+    "page number" : 15,
+    "bounding box" : [ 85.08, 274.581, 510.269, 322.053 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "백엔드에서 모델(LSTM-AE + Isolation Forest)이 실시간으로 판단한 이상 탐지 결 과를 관리자가 한눈에 모니터링하고, 이상 분석 결과를 비교해 즉각 대응할 수 있도 록 하는 NAC 대시보드이다."
+  }, {
+    "type" : "list",
+    "id" : 292,
+    "level" : "1",
+    "page number" : 15,
+    "bounding box" : [ 85.08, 258.141, 214.469, 272.493 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "next list id" : 300,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 15,
+      "bounding box" : [ 85.08, 258.141, 214.469, 272.493 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "1)NAC 대시보드 홈페이지",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 294,
+    "page number" : 15,
+    "bounding box" : [ 85.034, 84.987, 509.965, 254.002 ],
+    "source" : "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile8.png"
+  }, {
+    "type" : "footer",
+    "id" : 295,
+    "page number" : 15,
+    "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 70,
+      "page number" : 15,
+      "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "15"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 296,
+    "page number" : 16,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 98,
+      "page number" : 16,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 300,
+    "level" : "1",
+    "page number" : 16,
+    "bounding box" : [ 85.08, 350.781, 510.269, 744.213 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 3,
+    "previous list id" : 292,
+    "list items" : [ {
+      "type" : "list item",
+      "id" : 299,
+      "page number" : 16,
+      "bounding box" : [ 85.08, 680.301, 510.269, 744.213 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "홈에 들어가면 이상 탐지 결과를 로그형식으로 볼 수 있고, 리스크 게이지를 자동차 속력게이지 형태로 시각화하여 직관성을 높였다. 전체 로그중 몇 개의 로그가 위험한 로그로 인식 되었는 지에 대한 컴포넌트도 배치되어있으며, 최근 20개의 로그의 위험 도 점수를 그래프로 시각화 하여 관리자 친화적인 UI를 구성하고자 했다.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 16,
+      "bounding box" : [ 85.08, 647.301, 156.989, 661.653 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "2)Logs 페이지",
+      "kids" : [ {
+        "type" : "paragraph",
+        "id" : 115,
+        "page number" : 16,
+        "bounding box" : [ 85.08, 383.781, 510.269, 431.133 ],
+        "font" : "HCRBatang",
+        "font size" : 11.04,
+        "text color" : "[0.0]",
+        "content" : "전체 로그와 위험로그로 판단된 로그를 볼 수 있는 페이지이다. 평범한 로그는 배경 색과 맞추고, 위험 로그만 빨간색으로 더욱 돋보이게 UI를 구성했다. 더보기 버튼을 누르면 최근 로그를 20개씩 추가로 보여주게 된다."
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 16,
+      "bounding box" : [ 85.08, 350.781, 271.589, 365.133 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "3)아직 구현하지 못한 페이지 및 기능",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 302,
+    "page number" : 16,
+    "bounding box" : [ 85.034, 445.672, 509.965, 642.856 ],
+    "source" : "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile9.png"
+  }, {
+    "type" : "list",
+    "id" : 301,
+    "level" : "2",
+    "page number" : 16,
+    "bounding box" : [ 85.08, 119.421, 510.293, 332.013 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 3,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 16,
+      "bounding box" : [ 85.08, 301.221, 510.269, 332.013 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "3-1.유저 페이지 유저 페이지를 이용하여 유저의 정보를 수정할 수 있으며, 웹페이지 화면 UI도 사용",
+      "kids" : [ {
+        "type" : "paragraph",
+        "id" : 114,
+        "page number" : 16,
+        "bounding box" : [ 85.08, 284.661, 340.613, 299.013 ],
+        "font" : "HCRBatang",
+        "font size" : 11.04,
+        "text color" : "[0.0]",
+        "content" : "자 설정으로 맞출 수 있는 기능을 제공할 예정이다."
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 16,
+      "bounding box" : [ 85.08, 202.101, 510.293, 266.013 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "3-2.관리자 페이지(정책 변경) 로그를 바탕으로 유동적인 정책 변경을 할 수있게 해주는 관리자용 페이지이다. 로그 의 특성을 바탕으로 정책을 변경하여 이를 백엔드에 넘겨주는 과정을 거치게 된다. 관리자 페이지 접근에는 추가인증을 거치도록 조치할 예정이다.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 16,
+      "bounding box" : [ 85.08, 119.421, 510.269, 183.333 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "3-3.시간대별 로그 조회기능 지금은 로그를 최근 20개씩 보여주고 있으나, 시간대별, 혹은 blocked 된 로그만 보 고 싶은 순간이 생길 수도 있다. 이를 위해 디바이스 종류별, 시간대별 로그 조회를 가능하게 할 예정이다.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 303,
+    "page number" : 16,
+    "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 71,
+      "page number" : 16,
+      "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "16"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 304,
+    "page number" : 17,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 99,
+      "page number" : 17,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 307,
+    "level" : "Subtitle",
+    "page number" : 17,
+    "bounding box" : [ 85.08, 727.739, 204.69, 744.587 ],
+    "heading level" : 2,
+    "font" : "HCRBatang",
+    "font size" : 12.96,
+    "text color" : "[0.0]",
+    "content" : "4.3 앱 어플리케이션"
+  }, {
+    "type" : "list",
+    "id" : 308,
+    "level" : "1",
+    "page number" : 17,
+    "bounding box" : [ 85.08, 693.861, 228.629, 708.213 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "next list id" : 344,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 17,
+      "bounding box" : [ 85.08, 693.861, 228.629, 708.213 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "1)현재 수집중인 데이터 현황",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 309,
+    "page number" : 17,
+    "bounding box" : [ 85.08, 660.741, 147.533, 675.093 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "센서 데이터:"
+  }, {
+    "type" : "list",
+    "id" : 310,
+    "level" : "1",
+    "page number" : 17,
+    "bounding box" : [ 85.08, 379.941, 430.957, 658.653 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 3,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 17,
+      "bounding box" : [ 85.08, 578.181, 329.189, 658.653 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "1.가속도계 SensorManager.TYPE_ACCELEROMETER 활용 수집필드: x, y, z, magnitude, activity_level 수집 주기: 30초마다 스냅샷 데이터 형식: Float 배열 -> JSON 변환",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 17,
+      "bounding box" : [ 85.08, 479.061, 430.957, 559.533 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "2.자이로스코프 SensorManager.TYPE_GYROSCOPE 활용 수집필드: rotation_x, rotation_y, rotation_z, rotation_magnitude 수집 주기: 30초마다 스냅샷 데이터 형식: Float 배열 -> JSON 변환",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 17,
+      "bounding box" : [ 85.08, 379.941, 381.809, 460.413 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "3.근접센서 SensorManager.TYPE_PROXIMITY 활용 수집필드: distance, max_range, is_near, usage_context 수집 주기: 30초마다 스냅샷 데이터 형식: Float 배열 -> Boolean 변환 -> JSON 변환",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 311,
+    "page number" : 17,
+    "bounding box" : [ 85.08, 343.941, 184.973, 358.293 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "시스템 상태 데이터:"
+  }, {
+    "type" : "list",
+    "id" : 312,
+    "level" : "1",
+    "page number" : 17,
+    "bounding box" : [ 85.08, 97.581, 503.473, 341.733 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 3,
+    "next list id" : 318,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 17,
+      "bounding box" : [ 85.08, 277.821, 467.362, 341.733 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "1.배터리 BatteryManager 활용 val batteryFilter = IntentFilter(Intent.ACTION_BATTERY_CHANGED) 수집 데이터: level, scale, percentage, status, temperature, is_charging",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 17,
+      "bounding box" : [ 85.08, 196.701, 503.473, 259.173 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "2.네트워크 ConnectivityManager 활용 val networkCapabilities = connectivityManager.getNetworkCapabilities(activeNetwork) 수집 데이터:is_connected, has_wifi, has_cellular, has_ethernet",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 17,
+      "bounding box" : [ 85.08, 97.581, 447.052, 178.053 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "3.메모리 ActivityManager 활용 val memoryInfo = ActivityManager.MemoryInfo() activityManager.getMemoryInfo(memoryInfo) 수집 데이터:available_memory, total_memory, memory_percentage,",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 313,
+    "page number" : 17,
+    "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 72,
+      "page number" : 17,
+      "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "17"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 314,
+    "page number" : 18,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 100,
+      "page number" : 18,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 318,
+    "level" : "1",
+    "page number" : 18,
+    "bounding box" : [ 85.08, 564.621, 389.688, 744.213 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 3,
+    "previous list id" : 312,
+    "list items" : [ {
+      "type" : "list item",
+      "id" : 317,
+      "page number" : 18,
+      "bounding box" : [ 85.08, 729.861, 152.156, 744.213 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "low_memory",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 18,
+      "bounding box" : [ 85.08, 630.741, 389.688, 711.213 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "4.화면 밝기 Settings.System 활용 val brightness = Settings.System.getInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS) 수집 데이터: brightness, brightness_percentage",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 18,
+      "bounding box" : [ 85.08, 564.621, 383.556, 612.093 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "5.앱 상태 자체 구현 메트릭 수집 데이터: session_duration, total_events, queue_size",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 319,
+    "page number" : 18,
+    "bounding box" : [ 85.08, 528.972, 208.447, 543.656 ],
+    "font" : "MalgunGothic",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "사용자 인터랙션 데이터:"
+  }, {
+    "type" : "list",
+    "id" : 320,
+    "level" : "1",
+    "page number" : 18,
+    "bounding box" : [ 84.234, 91.941, 488.822, 524.696 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 4,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 18,
+      "bounding box" : [ 84.234, 434.181, 379.103, 524.696 ],
+      "font" : "MalgunGothic",
+      "font size" : 11.636,
+      "text color" : "[0.0]",
+      "content" : "1.버튼 클릭 View.OnClickListener 활용 view.setOnTouchListener { v, event -> //수집데이터: x,y,pressure,size,duration,screen }",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 18,
+      "bounding box" : [ 85.08, 377.181, 269.189, 410.493 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "2.스크롤 이벤트 View.OnScrollChangeListener 활용",
+      "kids" : [ {
+        "type" : "paragraph",
+        "id" : 111,
+        "page number" : 18,
+        "bounding box" : [ 85.08, 348.501, 452.453, 373.893 ],
+        "font" : "HCRBatang",
+        "font size" : 11.04,
+        "text color" : "[0.0]",
+        "content" : "logText.setOnScrollChangeListener { _, scrollX, scrollY, oldScrollX, oldScrollY ->"
+      }, {
+        "type" : "paragraph",
+        "id" : 112,
+        "page number" : 18,
+        "bounding box" : [ 84.234, 318.501, 424.732, 343.893 ],
+        "font" : "HCRBatang",
+        "font size" : 11.636,
+        "text color" : "[0.0]",
+        "content" : "//수집데이터: scroll_direction,scroll_distance,scroll_speed, current_position"
+      }, {
+        "type" : "paragraph",
+        "id" : 113,
+        "page number" : 18,
+        "bounding box" : [ 85.08, 299.541, 88.613, 313.893 ],
+        "font" : "HCRBatang",
+        "font size" : 11.04,
+        "text color" : "[0.0]",
+        "content" : "}"
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 18,
+      "bounding box" : [ 84.234, 204.501, 488.822, 294.933 ],
+      "font" : "HCRBatang",
+      "font size" : 11.636,
+      "text color" : "[0.0]",
+      "content" : "3.버튼 클릭 View.OnClickListener 활용 button.setOnClickListener { view -> //수집데이터: button_type,screen_x,screen_y,view_width,view_height }",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 18,
+      "bounding box" : [ 84.234, 91.941, 354.773, 180.933 ],
+      "font" : "HCRBatang",
+      "font size" : 11.636,
+      "text color" : "[0.0]",
+      "content" : "4.앱 생명 주기 Application.ActivityLifecycleCallbacks 활용 override fun onActivityStarted(activity: Activity) { //수집데이터: activity_name,task_id,duration }",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "footer",
+    "id" : 321,
+    "page number" : 18,
+    "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 73,
+      "page number" : 18,
+      "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "18"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 322,
+    "page number" : 19,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 101,
+      "page number" : 19,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 325,
+    "page number" : 19,
+    "bounding box" : [ 85.08, 729.861, 174.293, 744.213 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "전송 데이터 형식:"
+  }, {
+    "type" : "paragraph",
+    "id" : 326,
+    "page number" : 19,
+    "bounding box" : [ 85.08, 680.301, 107.211, 711.213 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "json {"
+  }, {
+    "type" : "paragraph",
+    "id" : 327,
+    "page number" : 19,
+    "bounding box" : [ 96.0, 647.301, 136.853, 678.093 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "\"logs\": [ {"
+  }, {
+    "type" : "paragraph",
+    "id" : 328,
+    "page number" : 19,
+    "bounding box" : [ 117.96, 548.181, 357.772, 645.093 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "\"sequence_index\": 45, \"timestamp\": \"2025-07-12T09:30:00.000Z\", \"user_id\": \"device--1020935285-anonymous\", \"session_id\": \"session-uuid-abc123\", \"action_type\": \"snapshot_accelerometer\", \"params\": {"
+  }, {
+    "type" : "list",
+    "id" : 329,
+    "level" : "2",
+    "page number" : 19,
+    "bounding box" : [ 128.88, 449.061, 317.812, 545.973 ],
+    "numbering style" : "english letters",
+    "number of list items" : 3,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 19,
+      "bounding box" : [ 128.88, 531.621, 188.212, 545.973 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "\"x\": -0.123,",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 19,
+      "bounding box" : [ 128.88, 515.061, 176.211, 529.413 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "\"y\": 9.81,",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 19,
+      "bounding box" : [ 128.88, 449.061, 317.812, 512.973 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "\"z\": 0.456, \"magnitude\": 9.813456, \"activity_level\": \"gentle_movement\", \"snapshot_time\": 1720778400000",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 330,
+    "page number" : 19,
+    "bounding box" : [ 117.96, 415.941, 197.933, 446.853 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "}, \"device_info\": {"
+  }, {
+    "type" : "paragraph",
+    "id" : 331,
+    "page number" : 19,
+    "bounding box" : [ 128.88, 333.381, 353.087, 413.853 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "\"model\": \"Google sdk_gphone16k_x86_64\", \"os_version\": \"Android 16\", \"app_version\": \"1.0\", \"screen_density\": 2.75, \"network_type\": \"WiFi\""
+  }, {
+    "type" : "paragraph",
+    "id" : 332,
+    "page number" : 19,
+    "bounding box" : [ 117.96, 300.381, 180.053, 331.173 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "}, \"location\": {"
+  }, {
+    "type" : "paragraph",
+    "id" : 333,
+    "page number" : 19,
+    "bounding box" : [ 128.88, 250.821, 267.891, 298.173 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "\"latitude\": 37.4219999, \"longitude\": -122.0840575, \"accuracy\": 20.0"
+  }, {
+    "type" : "paragraph",
+    "id" : 334,
+    "page number" : 19,
+    "bounding box" : [ 107.04, 217.701, 121.493, 248.613 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "} }"
+  }, {
+    "type" : "paragraph",
+    "id" : 335,
+    "page number" : 19,
+    "bounding box" : [ 96.0, 151.701, 295.612, 215.613 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "], \"batch_size\": 9, \"timestamp\": \"2025-07-12T09:30:00Z\", \"source\": \"android-app\""
+  }, {
+    "type" : "paragraph",
+    "id" : 336,
+    "page number" : 19,
+    "bounding box" : [ 85.08, 135.141, 88.613, 149.493 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "}"
+  }, {
+    "type" : "footer",
+    "id" : 337,
+    "page number" : 19,
+    "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 74,
+      "page number" : 19,
+      "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "19"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 338,
+    "page number" : 20,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 102,
+      "page number" : 20,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 341,
+    "page number" : 20,
+    "bounding box" : [ 85.08, 696.861, 197.669, 744.213 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "테스트 서버 응답 처리 json {"
+  }, {
+    "type" : "paragraph",
+    "id" : 342,
+    "page number" : 20,
+    "bounding box" : [ 96.0, 548.181, 323.332, 694.653 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "\"status\": \"success\", \"decision\": \"allow\", \"risk_score\": 0.15, \"confidence\": 0.92, \"message\": \"정상 패턴입니다\", \"next_check_interval\": 30, \"processed_logs\": 9, \"total_received\": 156, \"server_timestamp\": \"2025-07-12 17:30:57\""
+  }, {
+    "type" : "paragraph",
+    "id" : 343,
+    "page number" : 20,
+    "bounding box" : [ 85.08, 531.621, 88.613, 545.973 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "}"
+  }, {
+    "type" : "list",
+    "id" : 344,
+    "level" : "1",
+    "page number" : 20,
+    "bounding box" : [ 85.08, 498.621, 160.184, 512.973 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "previous list id" : 308,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 20,
+      "bounding box" : [ 85.08, 498.621, 160.184, 512.973 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "2) 현재 UI/UX",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 345,
+    "level" : "2",
+    "page number" : 20,
+    "bounding box" : [ 85.08, 482.061, 137.669, 496.413 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "1. 홈 화면"
+  }, {
+    "type" : "image",
+    "id" : 347,
+    "page number" : 20,
+    "bounding box" : [ 85.034, 141.565, 342.296, 477.677 ],
+    "source" : "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile10.png"
+  }, {
+    "type" : "caption",
+    "id" : 346,
+    "page number" : 20,
+    "bounding box" : [ 85.08, 118.572, 356.88, 133.256 ],
+    "linked content id" : 347,
+    "font" : "MalgunGothic",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "즉시 전송 버튼: 현재까지 쌓인 데이터를 서버로 전송"
+  }, {
+    "type" : "footer",
+    "id" : 348,
+    "page number" : 20,
+    "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 75,
+      "page number" : 20,
+      "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "20"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 349,
+    "page number" : 21,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 103,
+      "page number" : 21,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 352,
+    "page number" : 21,
+    "bounding box" : [ 85.08, 729.861, 133.349, 744.213 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "설정 버튼"
+  }, {
+    "type" : "image",
+    "id" : 355,
+    "page number" : 21,
+    "bounding box" : [ 85.034, 493.98, 313.631, 725.327 ],
+    "source" : "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile11.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 353,
+    "page number" : 21,
+    "bounding box" : [ 85.08, 462.621, 318.989, 476.973 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "데이터 초기화: 현재까지 쌓인 데이터를 초기화"
+  }, {
+    "type" : "paragraph",
+    "id" : 354,
+    "page number" : 21,
+    "bounding box" : [ 85.08, 429.501, 417.413, 443.853 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "수집 통계 보기: 총 이벤트 및 데이터 타입별 개수 표기(아래 그림)"
+  }, {
+    "type" : "image",
+    "id" : 356,
+    "page number" : 21,
+    "bounding box" : [ 85.034, 90.381, 273.213, 425.414 ],
+    "source" : "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile12.png"
+  }, {
+    "type" : "footer",
+    "id" : 357,
+    "page number" : 21,
+    "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 76,
+      "page number" : 21,
+      "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "21"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 358,
+    "page number" : 22,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 104,
+      "page number" : 22,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 361,
+    "level" : "Subtitle",
+    "page number" : 22,
+    "bounding box" : [ 85.08, 727.739, 192.091, 744.587 ],
+    "heading level" : 2,
+    "font" : "HCRBatang",
+    "font size" : 12.96,
+    "text color" : "[0.0]",
+    "content" : "4.4 머신러닝 모델"
+  }, {
+    "type" : "list",
+    "id" : 362,
+    "level" : "1",
+    "page number" : 22,
+    "bounding box" : [ 85.08, 693.861, 306.749, 708.213 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "next list id" : 373,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 22,
+      "bounding box" : [ 85.08, 693.861, 306.749, 708.213 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "0)CLUE-LDS 데이터셋 전처리 및 로그 분석",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 363,
+    "page number" : 22,
+    "bounding box" : [ 85.08, 660.741, 510.269, 675.093 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "CLUE-LDS데이터 셋의 로그데이터에는 여러 파리미터들이 존재 한다. 이러한 파라미"
+  }, {
+    "type" : "list",
+    "id" : 364,
+    "level" : "2",
+    "page number" : 22,
+    "bounding box" : [ 85.08, 627.741, 510.269, 658.653 ],
+    "numbering style" : "korean letters",
+    "number of list items" : 1,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 22,
+      "bounding box" : [ 85.08, 627.741, 510.269, 658.653 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "터를 그대로 사용할 수는 없기 때문에 데이터 전처리 과정을 거쳐야 한다. 아래는 CLUE-LDS의 실제 로그 데이터 예시이다.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 366,
+    "page number" : 22,
+    "bounding box" : [ 85.034, 219.959, 509.965, 609.533 ],
+    "source" : "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile13.png"
+  }, {
+    "type" : "caption",
+    "id" : 365,
+    "page number" : 22,
+    "bounding box" : [ 85.08, 174.261, 510.269, 205.173 ],
+    "linked content id" : 366,
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "이러한 파라미터를 전처리 하는 과정이 필요하기에 vectorize_clue.py로 전처리를 진 행해 주었다. 데이터를 벡터화 하여 좀 더 빠른 데이터 처리를 위함이다."
+  }, {
+    "type" : "footer",
+    "id" : 367,
+    "page number" : 22,
+    "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 77,
+      "page number" : 22,
+      "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "22"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 368,
+    "page number" : 23,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 105,
+      "page number" : 23,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 375,
+    "page number" : 23,
+    "bounding box" : [ 85.034, 435.244, 509.965, 741.869 ],
+    "source" : "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile14.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 371,
+    "page number" : 23,
+    "bounding box" : [ 85.08, 423.021, 177.475, 437.373 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "vectorize_clue.py"
+  }, {
+    "type" : "image",
+    "id" : 376,
+    "page number" : 23,
+    "bounding box" : [ 85.034, 202.698, 483.22, 402.28 ],
+    "source" : "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile15.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 372,
+    "page number" : 23,
+    "bounding box" : [ 85.08, 173.661, 472.133, 188.013 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "이렇게 전처리 된 CLUE-LDS 데이터 셋을 가지고 모델개발을 진행해 보았다."
+  }, {
+    "type" : "list",
+    "id" : 373,
+    "level" : "1",
+    "page number" : 23,
+    "bounding box" : [ 85.08, 140.541, 199.109, 154.893 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "previous list id" : 362,
+    "next list id" : 402,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 23,
+      "bounding box" : [ 85.08, 140.541, 199.109, 154.893 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "1)LSTM-AE 개발 현황",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 374,
+    "page number" : 23,
+    "bounding box" : [ 85.08, 90.981, 510.293, 121.893 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "데이터 셋을 벡터화 한 뒤, LSTM-AE 모델을 학습하여 이로 만들어진 모델의 성능을 검증하는 과정이 필요하다. train_latm_ae.py를 이용하여 정상 시퀀스를 학습시켰고,"
+  }, {
+    "type" : "footer",
+    "id" : 377,
+    "page number" : 23,
+    "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 78,
+      "page number" : 23,
+      "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "23"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 378,
+    "page number" : 24,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 106,
+      "page number" : 24,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 381,
+    "page number" : 24,
+    "bounding box" : [ 85.08, 729.861, 279.293, 744.213 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "이를 lstm_ae_ckpt.pt에 세이브하였다."
+  }, {
+    "type" : "image",
+    "id" : 385,
+    "page number" : 24,
+    "bounding box" : [ 85.034, 417.863, 509.965, 725.327 ],
+    "source" : "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile16.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 382,
+    "page number" : 24,
+    "bounding box" : [ 85.08, 405.501, 237.749, 419.853 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "train_lstm_ae.py의 일부 코드"
+  }, {
+    "type" : "paragraph",
+    "id" : 383,
+    "page number" : 24,
+    "bounding box" : [ 85.08, 355.941, 510.269, 386.853 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "이렇게 학습된 모델의 성능을 시험해보기 위해 make_test_sequences를 이용하여 정상+이상데이터가 섞인 테스트 시퀀스를 생성했다."
+  }, {
+    "type" : "image",
+    "id" : 386,
+    "page number" : 24,
+    "bounding box" : [ 85.034, 98.292, 509.965, 351.815 ],
+    "source" : "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile17.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 384,
+    "page number" : 24,
+    "bounding box" : [ 85.08, 85.581, 215.873, 99.933 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "make_test_sequences.py"
+  }, {
+    "type" : "footer",
+    "id" : 387,
+    "page number" : 24,
+    "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 79,
+      "page number" : 24,
+      "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "24"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 388,
+    "page number" : 25,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 107,
+      "page number" : 25,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 391,
+    "page number" : 25,
+    "bounding box" : [ 85.08, 729.861, 510.269, 744.213 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "이후 재구성 오차를 구성, threshold를 조정하는 과정을 거친 뒤 f-1 score등의 평"
+  }, {
+    "type" : "list",
+    "id" : 392,
+    "level" : "2",
+    "page number" : 25,
+    "bounding box" : [ 85.08, 713.301, 335.093, 727.653 ],
+    "numbering style" : "korean letters",
+    "number of list items" : 1,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 25,
+      "bounding box" : [ 85.08, 713.301, 335.093, 727.653 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "가 지표를 이용하여 모델의 성능을 평가해 보았다.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 395,
+    "page number" : 25,
+    "bounding box" : [ 85.034, 389.214, 509.965, 692.362 ],
+    "source" : "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile18.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 393,
+    "page number" : 25,
+    "bounding box" : [ 85.08, 376.821, 184.709, 391.173 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "run.py의 일부 코드"
+  }, {
+    "type" : "image",
+    "id" : 396,
+    "page number" : 25,
+    "bounding box" : [ 85.034, 124.903, 509.965, 356.25 ],
+    "source" : "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile19.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 394,
+    "page number" : 25,
+    "bounding box" : [ 85.08, 95.781, 267.269, 110.133 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "정상 데이터와 이상 데이터를 시각화"
+  }, {
+    "type" : "footer",
+    "id" : 397,
+    "page number" : 25,
+    "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 80,
+      "page number" : 25,
+      "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "25"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 398,
+    "page number" : 26,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 108,
+      "page number" : 26,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 405,
+    "page number" : 26,
+    "bounding box" : [ 85.034, 473.003, 509.965, 741.869 ],
+    "source" : "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile20.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 401,
+    "page number" : 26,
+    "bounding box" : [ 85.08, 460.701, 345.029, 475.053 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "f-1 score, precision, recall등을 이용한 모델 평가"
+  }, {
+    "type" : "list",
+    "id" : 402,
+    "level" : "1",
+    "page number" : 26,
+    "bounding box" : [ 85.08, 427.701, 232.829, 442.053 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "previous list id" : 373,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 26,
+      "bounding box" : [ 85.08, 427.701, 232.829, 442.053 ],
+      "font" : "HCRBatang",
+      "font size" : 11.04,
+      "text color" : "[0.0]",
+      "content" : "2)Isolation Forest 개발 현황",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 403,
+    "page number" : 26,
+    "bounding box" : [ 85.08, 361.581, 510.269, 409.053 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "Isolation Forest의 성능평가를 위해서는 단일 테스트 시퀀스를 만들어야 할 필요가 있었다. 그래서 단일 테스트 시퀀스 json 파일을 만들었다. 아래는 단일 시퀀스 입력에 맞춰진 Iolation Forest 모델의 프로토타입이다."
+  }, {
+    "type" : "image",
+    "id" : 406,
+    "page number" : 26,
+    "bounding box" : [ 85.034, 102.848, 509.965, 352.775 ],
+    "source" : "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile21.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 404,
+    "page number" : 26,
+    "bounding box" : [ 85.08, 90.141, 275.669, 104.493 ],
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "isolation_forest_clue.py의 일부 코드"
+  }, {
+    "type" : "footer",
+    "id" : 407,
+    "page number" : 26,
+    "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 81,
+      "page number" : 26,
+      "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "26"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 408,
+    "page number" : 27,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 109,
+      "page number" : 27,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 411,
+    "level" : "Subtitle",
+    "page number" : 27,
+    "bounding box" : [ 85.08, 713.301, 510.269, 744.213 ],
+    "heading level" : 3,
+    "font" : "HCRBatang",
+    "font size" : 11.04,
+    "text color" : "[0.0]",
+    "content" : "저 모델에 단일 시퀀스를 넣으면 모델이 그 로그가 정상인지(1), 비정상인지(-1) 판단 하게 된다. 아래는 모델에 비정상 로그를 삽입했을 때의 결과 화면이다."
+  }, {
+    "type" : "image",
+    "id" : 412,
+    "page number" : 27,
+    "bounding box" : [ 85.034, 589.875, 465.23, 692.363 ],
+    "source" : "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile22.png"
+  }, {
+    "type" : "footer",
+    "id" : 413,
+    "page number" : 27,
+    "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 82,
+      "page number" : 27,
+      "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "27"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 414,
+    "page number" : 28,
+    "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 110,
+      "page number" : 28,
+      "bounding box" : [ 381.12, 774.61, 510.329, 786.31 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "2025 전기 졸업과제 중간보고서"
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 417,
+    "level" : "1",
+    "page number" : 28,
+    "bounding box" : [ 85.08, 357.419, 197.491, 744.587 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 2,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 28,
+      "bounding box" : [ 85.08, 727.739, 197.491, 744.587 ],
+      "font" : "HCRBatang",
+      "font size" : 12.96,
+      "text color" : "[0.0]",
+      "content" : "5. 구성원별 진척도",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 28,
+      "bounding box" : [ 85.08, 357.419, 191.371, 374.267 ],
+      "font" : "HCRBatang",
+      "font size" : 12.96,
+      "text color" : "[0.0]",
+      "content" : "6. 향후 추진 계획",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "table",
+    "id" : 418,
+    "level" : "2",
+    "page number" : 28,
+    "bounding box" : [ 84.854, 454.243, 504.569, 706.807 ],
+    "number of rows" : 4,
+    "number of columns" : 2,
+    "rows" : [ {
+      "type" : "table row",
+      "row number" : 1,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 28,
+        "bounding box" : [ 85.064, 684.691, 139.125, 706.537 ],
+        "row number" : 1,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 1,
+          "page number" : 28,
+          "bounding box" : [ 90.24, 689.669, 109.621, 702.617 ],
+          "font" : "HCRBatang-Bold",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "팀원"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 28,
+        "bounding box" : [ 139.125, 684.691, 504.359, 706.537 ],
+        "row number" : 1,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 2,
+          "page number" : 28,
+          "bounding box" : [ 144.36, 689.669, 163.741, 702.617 ],
+          "font" : "HCRBatang-Bold",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "역할"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 2,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 28,
+        "bounding box" : [ 85.064, 575.97, 139.125, 684.691 ],
+        "row number" : 2,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 3,
+          "page number" : 28,
+          "bounding box" : [ 90.24, 624.269, 119.341, 637.217 ],
+          "font" : "HCRBatang",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "권태현"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 28,
+        "bounding box" : [ 139.125, 575.97, 504.359, 684.691 ],
+        "row number" : 2,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "list",
+          "id" : 4,
+          "level" : "1",
+          "page number" : 28,
+          "bounding box" : [ 144.36, 576.269, 499.381, 685.217 ],
+          "numbering style" : "unordered",
+          "number of list items" : 6,
+          "list items" : [ {
+            "type" : "list item",
+            "page number" : 28,
+            "bounding box" : [ 144.36, 672.269, 459.781, 685.217 ],
+            "font" : "HCRBatang",
+            "font size" : 9.96,
+            "text color" : "[0.0]",
+            "content" : "-머신러닝 모델(LSTM-AE 및 Isolation Forest)프로토타입 개발 완료",
+            "kids" : [ ]
+          }, {
+            "type" : "list item",
+            "page number" : 28,
+            "bounding box" : [ 144.36, 656.309, 383.941, 669.257 ],
+            "font" : "HCRBatang",
+            "font size" : 9.96,
+            "text color" : "[0.0]",
+            "content" : "-머신러닝 모델의 성능 향상을 위한 리팩토링 진행중",
+            "kids" : [ ]
+          }, {
+            "type" : "list item",
+            "page number" : 28,
+            "bounding box" : [ 144.36, 640.229, 294.061, 653.177 ],
+            "font" : "HCRBatang",
+            "font size" : 9.96,
+            "text color" : "[0.0]",
+            "content" : "-CLUE-LDS 데이터 전처리 완료",
+            "kids" : [ ]
+          }, {
+            "type" : "list item",
+            "page number" : 28,
+            "bounding box" : [ 144.36, 624.269, 296.101, 637.217 ],
+            "font" : "HCRBatang",
+            "font size" : 9.96,
+            "text color" : "[0.0]",
+            "content" : "-사용자 로그 데이터 분석 진행중",
+            "kids" : [ ]
+          }, {
+            "type" : "list item",
+            "page number" : 28,
+            "bounding box" : [ 144.36, 592.229, 499.381, 621.257 ],
+            "font" : "HCRBatang",
+            "font size" : 9.96,
+            "text color" : "[0.0]",
+            "content" : "-이상 탐지 결과 시각화 및 사용자 편의를 위한 대시보드(프론트엔드)프로토타 입 개발 완료",
+            "kids" : [ ]
+          }, {
+            "type" : "list item",
+            "page number" : 28,
+            "bounding box" : [ 144.36, 576.269, 271.741, 589.217 ],
+            "font" : "HCRBatang",
+            "font size" : 9.96,
+            "text color" : "[0.0]",
+            "content" : "-대시보드 기능 추가 진행중",
+            "kids" : [ ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 3,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 28,
+        "bounding box" : [ 85.064, 515.196, 139.125, 575.97 ],
+        "row number" : 3,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 5,
+          "page number" : 28,
+          "bounding box" : [ 90.24, 539.429, 119.341, 552.377 ],
+          "font" : "HCRBatang",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "구현서"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 28,
+        "bounding box" : [ 139.125, 515.196, 504.359, 575.97 ],
+        "row number" : 3,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "list",
+          "id" : 6,
+          "level" : "1",
+          "page number" : 28,
+          "bounding box" : [ 144.36, 515.429, 306.541, 576.377 ],
+          "numbering style" : "unordered",
+          "number of list items" : 4,
+          "list items" : [ {
+            "type" : "list item",
+            "page number" : 28,
+            "bounding box" : [ 144.36, 563.429, 306.541, 576.377 ],
+            "font" : "HCRBatang",
+            "font size" : 9.96,
+            "text color" : "[0.0]",
+            "content" : "-모바일 어플리케이션 UI 개발 완료",
+            "kids" : [ ]
+          }, {
+            "type" : "list item",
+            "page number" : 28,
+            "bounding box" : [ 144.36, 547.469, 291.181, 560.417 ],
+            "font" : "HCRBatang",
+            "font size" : 9.96,
+            "text color" : "[0.0]",
+            "content" : "-어플리케이션 기능 추가 진행중",
+            "kids" : [ ]
+          }, {
+            "type" : "list item",
+            "page number" : 28,
+            "bounding box" : [ 144.36, 531.509, 296.101, 544.457 ],
+            "font" : "HCRBatang",
+            "font size" : 9.96,
+            "text color" : "[0.0]",
+            "content" : "-사용자 행동 데이터 수집 진행중",
+            "kids" : [ ]
+          }, {
+            "type" : "list item",
+            "page number" : 28,
+            "bounding box" : [ 144.36, 515.429, 305.821, 528.377 ],
+            "font" : "HCRBatang",
+            "font size" : 9.96,
+            "text color" : "[0.0]",
+            "content" : "-머신러닝 모델 경량화 방안 구상중",
+            "kids" : [ ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 4,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 28,
+        "bounding box" : [ 85.064, 454.513, 139.125, 515.196 ],
+        "row number" : 4,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 7,
+          "page number" : 28,
+          "bounding box" : [ 90.24, 478.589, 119.341, 491.537 ],
+          "font" : "HCRBatang",
+          "font size" : 9.96,
+          "text color" : "[0.0]",
+          "content" : "이승원"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 28,
+        "bounding box" : [ 139.125, 454.513, 504.359, 515.196 ],
+        "row number" : 4,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "list",
+          "id" : 8,
+          "level" : "1",
+          "page number" : 28,
+          "bounding box" : [ 144.36, 454.589, 456.061, 515.537 ],
+          "numbering style" : "unordered",
+          "number of list items" : 4,
+          "list items" : [ {
+            "type" : "list item",
+            "page number" : 28,
+            "bounding box" : [ 144.36, 502.589, 456.061, 515.537 ],
+            "font" : "HCRBatang",
+            "font size" : 9.96,
+            "text color" : "[0.0]",
+            "content" : "-사용자 행동 데이터 수신 및 처리를 위한 DB 프로토타입 개발 완료",
+            "kids" : [ ]
+          }, {
+            "type" : "list item",
+            "page number" : 28,
+            "bounding box" : [ 144.36, 486.629, 309.421, 499.577 ],
+            "font" : "HCRBatang",
+            "font size" : 9.96,
+            "text color" : "[0.0]",
+            "content" : "-정책 관리 DB 프로토타입 개발완료",
+            "kids" : [ ]
+          }, {
+            "type" : "list item",
+            "page number" : 28,
+            "bounding box" : [ 144.36, 470.669, 378.661, 483.617 ],
+            "font" : "HCRBatang",
+            "font size" : 9.96,
+            "text color" : "[0.0]",
+            "content" : "-Django를 이용한 백엔드 아키텍쳐 설계 및 보완중",
+            "kids" : [ ]
+          }, {
+            "type" : "list item",
+            "page number" : 28,
+            "bounding box" : [ 144.36, 454.589, 432.781, 467.537 ],
+            "font" : "HCRBatang",
+            "font size" : 9.96,
+            "text color" : "[0.0]",
+            "content" : "-이상 탐지 모델 및 사용자 어플리케이션과의 연동 방안 구상중",
+            "kids" : [ ]
+          } ]
+        } ]
+      } ]
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 419,
+    "page number" : 28,
+    "bounding box" : [ 85.034, 110.999, 509.965, 335.993 ],
+    "source" : "2025중간보고서_46_KGL_모바일 엔드포인트 행동 분석 기반 Policy Engine 구현_images/imageFile23.png"
+  }, {
+    "type" : "footer",
+    "id" : 420,
+    "page number" : 28,
+    "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 83,
+      "page number" : 28,
+      "bounding box" : [ 500.4, 40.93, 510.27, 52.63 ],
+      "heading level" : 4,
+      "font" : "HCRDotum",
+      "font size" : 9.0,
+      "text color" : "[0.0]",
+      "content" : "28"
+    } ]
+  } ]
+}

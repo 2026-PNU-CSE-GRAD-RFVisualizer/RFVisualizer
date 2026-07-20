@@ -1,16 +1,34 @@
 {
   "schema_version": "1.0",
-  "camera": {},
-  "selected_object": null,
+  "camera": {
+    "eye": [
+      -7.638389497198009,
+      -2.5721945461175317,
+      1.8094178184208007
+    ],
+    "forward": [
+      0.1588725817536836,
+      -0.9755702705378293,
+      -0.15173017057059252
+    ],
+    "up": [
+      0.04946123983275769,
+      -0.1456245342435167,
+      0.9881028039162283
+    ]
+  },
+  "selected_object": "blackboard_example",
   "viewport_mode": "translate",
-  "axis_constraint": "z",
+  "axis_constraint": null,
+  "transform_space": "world",
+  "scene_display_mode": "both",
+  "reference_point_size": 12.0,
   "reference_visibility": true,
   "grid_visibility": true,
   "show_disabled": true,
   "object_visibility": {
     "blackboard_example": true,
     "desk_block_example": true,
-    "desk_block_example_copy": true,
     "door_example": true,
     "large_metal_object_example": true
   },
@@ -24,6 +42,6 @@
     "side_panel_width": 410.0
   },
   "last_opened_scenario": "/data/RFVisualizer/configs/sionna/scenarios/pnu_classroom_proxy_draft.yaml",
-  "autosaved_at": "2026-07-14T12:50:26.575414Z",
+  "autosaved_at": "2026-07-20T16:17:31.360069Z",
   "source_scenario_path": "/data/RFVisualizer/configs/sionna/scenarios/pnu_classroom_proxy_draft.yaml"
 }

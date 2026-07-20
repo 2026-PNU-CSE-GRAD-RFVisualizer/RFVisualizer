@@ -1,5 +1,14 @@
 """Obstacle list and destructive action controls."""
 
+from .strings_ko import (
+    confidence_label,
+    material_label,
+    semantic_label,
+    status_label,
+    tr,
+)
+from .section import make_section
+
 
 class ObjectListPanel:
     def __init__(
@@ -11,22 +20,23 @@ class ObjectListPanel:
         on_up,
         on_down,
         on_visibility,
+        heading_font_id=None,
     ):
         from open3d.visualization import gui
 
         self.on_select, self.on_enable = on_select, on_enable
         self.updating = False
         self.ids = []
-        self.widget = gui.CollapsableVert("Objects", 0.25, gui.Margins(6, 6, 6, 6))
+        self.widget = make_section(gui, tr("objects"), heading_font_id)
         self.list = gui.ListView()
         self.list.set_max_visible_items(8)
         self.list.set_on_selection_changed(self._selected)
         actions = gui.Horiz(4)
-        duplicate = gui.Button("Duplicate")
-        delete = gui.Button("Delete")
-        up = gui.Button("Up")
-        down = gui.Button("Down")
-        visibility = gui.Button("Show/Hide")
+        duplicate = gui.Button(tr("duplicate"))
+        delete = gui.Button(tr("delete"))
+        up = gui.Button(tr("move_up"))
+        down = gui.Button(tr("move_down"))
+        visibility = gui.Button(tr("show_hide"))
         duplicate.set_on_clicked(on_duplicate)
         delete.set_on_clicked(on_delete)
         up.set_on_clicked(on_up)
@@ -37,7 +47,7 @@ class ObjectListPanel:
         actions.add_child(up)
         actions.add_child(down)
         actions.add_child(visibility)
-        self.enabled = gui.Checkbox("Enabled in Sionna scenario")
+        self.enabled = gui.Checkbox(tr("enabled_in_sionna"))
         self.enabled.set_on_checked(self._enabled_changed)
         self.widget.add_child(self.list)
         self.widget.add_child(self.enabled)
@@ -57,16 +67,16 @@ class ObjectListPanel:
         self.ids = [str(value.get("id")) for value in state.obstacles]
         self.list.set_items(
             [
-                "{}{} {} | {} | {} | {} | {}".format(
-                    "✓" if value.get("enabled") else "○",
-                    "V"
+                "{}·{} {} | {} | {} | {} | {}".format(
+                    "활성" if value.get("enabled") else "비활성",
+                    "표시"
                     if state.object_visibility.get(str(value.get("id")), True)
-                    else "H",
+                    else "숨김",
                     value.get("id"),
-                    value.get("semantic_class", "?"),
-                    value.get("material", {}).get("category", "?"),
-                    status.get(value.get("id"), "INCOMPLETE"),
-                    value.get("confidence", "unset"),
+                    semantic_label(value.get("semantic_class", "?")),
+                    material_label(value.get("material", {}).get("category", "?")),
+                    status_label(status.get(value.get("id"), "INCOMPLETE")),
+                    confidence_label(value.get("confidence", "unset")),
                 )
                 for value in state.obstacles
             ]

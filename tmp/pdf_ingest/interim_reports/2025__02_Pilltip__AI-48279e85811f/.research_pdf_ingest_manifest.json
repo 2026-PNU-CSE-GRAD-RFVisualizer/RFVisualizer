@@ -1,0 +1,58 @@
+{
+  "tool": "research-pdf-ingest",
+  "created_at": "2026-07-16T10:36:38.845810+00:00",
+  "input_pdf": "/data/RFVisualizer/Documents/중간보고서/Ref/2025중간보고서_02_Pilltip_개인맞춤 AI 의약관리 애플리케이션.pdf",
+  "input_sha256": "48279e85811f7cfea2d301c037d00056731535807ef20f4e4adc922053c4c748",
+  "output_dir": "/data/RFVisualizer/tmp/pdf_ingest/interim_reports/2025__02_Pilltip__AI-48279e85811f",
+  "opendataloader_pdf_version": "2.4.1",
+  "options": {
+    "formats": [
+      "markdown",
+      "json",
+      "html"
+    ],
+    "pages": null,
+    "password_present": false,
+    "table_method": "cluster",
+    "reading_order": "xycut",
+    "image_output": "external",
+    "image_dir": null,
+    "include_header_footer": false,
+    "use_struct_tree": false,
+    "sanitize": false,
+    "hybrid": "off",
+    "hybrid_url": null,
+    "hybrid_timeout": "60000",
+    "hybrid_fallback": false,
+    "threads": "1"
+  },
+  "artifacts": {
+    "markdown": [
+      "2025중간보고서_02_Pilltip_개인맞춤 AI 의약관리 애플리케이션.md"
+    ],
+    "json": [
+      "2025중간보고서_02_Pilltip_개인맞춤 AI 의약관리 애플리케이션.json"
+    ],
+    "html": [
+      "2025중간보고서_02_Pilltip_개인맞춤 AI 의약관리 애플리케이션.html"
+    ],
+    "images": [
+      "2025중간보고서_02_Pilltip_개인맞춤 AI 의약관리 애플리케이션_images/imageFile1.png",
+      "2025중간보고서_02_Pilltip_개인맞춤 AI 의약관리 애플리케이션_images/imageFile10.png",
+      "2025중간보고서_02_Pilltip_개인맞춤 AI 의약관리 애플리케이션_images/imageFile11.png",
+      "2025중간보고서_02_Pilltip_개인맞춤 AI 의약관리 애플리케이션_images/imageFile12.png",
+      "2025중간보고서_02_Pilltip_개인맞춤 AI 의약관리 애플리케이션_images/imageFile13.png",
+      "2025중간보고서_02_Pilltip_개인맞춤 AI 의약관리 애플리케이션_images/imageFile14.png",
+      "2025중간보고서_02_Pilltip_개인맞춤 AI 의약관리 애플리케이션_images/imageFile15.png",
+      "2025중간보고서_02_Pilltip_개인맞춤 AI 의약관리 애플리케이션_images/imageFile16.png",
+      "2025중간보고서_02_Pilltip_개인맞춤 AI 의약관리 애플리케이션_images/imageFile2.png",
+      "2025중간보고서_02_Pilltip_개인맞춤 AI 의약관리 애플리케이션_images/imageFile3.png",
+      "2025중간보고서_02_Pilltip_개인맞춤 AI 의약관리 애플리케이션_images/imageFile4.png",
+      "2025중간보고서_02_Pilltip_개인맞춤 AI 의약관리 애플리케이션_images/imageFile5.png",
+      "2025중간보고서_02_Pilltip_개인맞춤 AI 의약관리 애플리케이션_images/imageFile6.png",
+      "2025중간보고서_02_Pilltip_개인맞춤 AI 의약관리 애플리케이션_images/imageFile7.png",
+      "2025중간보고서_02_Pilltip_개인맞춤 AI 의약관리 애플리케이션_images/imageFile8.png",
+      "2025중간보고서_02_Pilltip_개인맞춤 AI 의약관리 애플리케이션_images/imageFile9.png"
+    ]
+  }
+}

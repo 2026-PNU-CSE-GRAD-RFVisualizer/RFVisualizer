@@ -1,0 +1,15 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces PGSR에서 추출한 강의실 표면 Mesh. 책상과 벽의 형태는 보이지만 천장과 창 주변의 구멍 및 노이즈가 남아 있어 전파 계산용 단순화가 필요하다.}}{7}{figure.caption.3}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces 검출한 평면 후보를 이용해 생성한 닫힌 Room Envelope의 위/옆 투영}}{7}{figure.caption.4}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces 임베디드 측정값이 그래픽스 입력으로 전달되는 전체 경로}}{8}{figure.caption.5}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces 미터 단위 Room Envelope와 송신기/수신기를 배치한 임시 Sionna RT 장면}}{11}{figure.caption.7}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces 검증용 가상 벽에 따른 전파 지도 A/B 결과. 실제 강의실 구조와 재질을 검증한 수치가 아니라 구조물 반영 경로의 동작 검증이다.}}{12}{figure.caption.8}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces 가상 벽 추가 전후의 직접/반사 경로 변화}}{12}{figure.caption.9}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces 실물 임베디드 게이트웨이 연동의 서버 처리와 저장 결과}}{13}{figure.caption.10}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces 실물 데이터 708건 수신 후의 네트워크 모니터링 대시보드}}{13}{figure.caption.11}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

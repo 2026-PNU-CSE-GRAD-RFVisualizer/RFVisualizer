@@ -10,6 +10,9 @@ from tools.proxy_placement_editor.command_stack import (
 )
 from tools.proxy_placement_editor.transform_controller import set_numeric_geometry
 
+from .strings_ko import option_index, option_labels, option_value, tr
+from .section import make_section
+
 
 def _values(value, names, default):
     if value is None:
@@ -22,20 +25,20 @@ def _values(value, names, default):
 
 
 class PropertiesPanel:
-    def __init__(self, core, on_change):
+    def __init__(self, core, on_change, heading_font_id=None):
         from open3d.visualization import gui
 
         self.gui, self.core, self.on_change = gui, core, on_change
         self.updating = False
-        self.widget = gui.CollapsableVert("Properties", 0.25, gui.Margins(6, 6, 6, 6))
+        self.widget = make_section(gui, tr("properties"), heading_font_id)
         self.identity = {}
         for key, label in (
-            ("id", "Object ID"),
-            ("display_name", "Display name"),
-            ("semantic_class", "Semantic class"),
-            ("purpose", "Purpose"),
-            ("measurement_source", "Measurement source"),
-            ("notes", "Notes"),
+            ("id", tr("object_id")),
+            ("display_name", tr("display_name")),
+            ("semantic_class", tr("semantic_class")),
+            ("purpose", tr("purpose")),
+            ("measurement_source", tr("measurement_source")),
+            ("notes", tr("notes")),
         ):
             self.widget.add_child(gui.Label(label))
             edit = gui.TextEdit()
@@ -43,40 +46,42 @@ class PropertiesPanel:
             self.identity[key] = edit
             self.widget.add_child(edit)
         self.confidence = gui.Combobox()
-        for value in ("unset", "estimated_from_reference", "measured", "synthetic"):
-            self.confidence.add_item(value)
+        for label in option_labels("confidence"):
+            self.confidence.add_item(label)
         self.confidence.set_on_selection_changed(
-            lambda value, index: self._identity("confidence", value)
+            lambda value, index: self._identity(
+                "confidence", option_value("confidence", index)
+            )
         )
-        self.widget.add_child(gui.Label("Confidence"))
+        self.widget.add_child(gui.Label(tr("confidence")))
         self.widget.add_child(self.confidence)
-        self.physical = gui.Checkbox("Physical object")
+        self.physical = gui.Checkbox(tr("physical_object"))
         self.physical.set_on_checked(
             lambda value: self._identity("physical_object", bool(value))
         )
         self.widget.add_child(self.physical)
 
         self.geometry_type = gui.Combobox()
-        for value in ("box", "thin_panel", "mesh"):
-            self.geometry_type.add_item(value)
+        for label in option_labels("geometry_type"):
+            self.geometry_type.add_item(label)
         self.geometry_type.set_on_selection_changed(self._geometry_type)
         self.anchor_mode = gui.Combobox()
-        for value in ("center", "bottom_center", "floor_at_xy", "explicit_transform"):
-            self.anchor_mode.add_item(value)
+        for label in option_labels("anchor_mode"):
+            self.anchor_mode.add_item(label)
         self.anchor_mode.set_on_selection_changed(self._anchor_mode)
         self.floor_policy = gui.Combobox()
-        for value in ("anchor_point", "minimum_bottom_vertex_clearance"):
-            self.floor_policy.add_item(value)
+        for label in option_labels("floor_policy"):
+            self.floor_policy.add_item(label)
         self.floor_policy.set_on_selection_changed(self._floor_policy)
         self.floor_clearance = gui.NumberEdit(gui.NumberEdit.DOUBLE)
         self.floor_clearance.decimal_precision = 6
         self.floor_clearance.set_limits(0.0, 100.0)
         self.floor_clearance.set_on_value_changed(self._floor_clearance)
         for label, widget in (
-            ("Geometry type", self.geometry_type),
-            ("Anchor mode", self.anchor_mode),
-            ("Floor contact policy", self.floor_policy),
-            ("Floor clearance m", self.floor_clearance),
+            (tr("geometry_type"), self.geometry_type),
+            (tr("anchor_mode"), self.anchor_mode),
+            (tr("floor_policy"), self.floor_policy),
+            (tr("floor_clearance"), self.floor_clearance),
         ):
             self.widget.add_child(gui.Label(label))
             self.widget.add_child(widget)
@@ -86,24 +91,26 @@ class PropertiesPanel:
         [grid.add_child(gui.Label(value)) for value in ("X", "Y", "Z")]
         self.position, self.size, self.rotation = [], [], []
         for label, target, callback in (
-            ("Position m", self.position, self._numeric),
-            ("Size m", self.size, self._numeric),
-            ("Roll/Pitch/Yaw", self.rotation, self._numeric),
+            (tr("position"), self.position, self._numeric),
+            (tr("size"), self.size, self._numeric),
+            (tr("rotation"), self.rotation, self._numeric),
         ):
             grid.add_child(gui.Label(label))
             for _ in range(3):
                 edit = gui.NumberEdit(gui.NumberEdit.DOUBLE)
                 edit.decimal_precision = 6
-                edit.set_limits(-10000.0 if label != "Size m" else 0.001, 10000.0)
+                edit.set_limits(
+                    -10000.0 if target is not self.size else 0.001, 10000.0
+                )
                 edit.set_on_value_changed(callback)
                 target.append(edit)
                 grid.add_child(edit)
         self.widget.add_child(grid)
         self.material = gui.Combobox()
-        for value in ("concrete", "wood", "metal", "glass"):
-            self.material.add_item(value)
+        for label in option_labels("material"):
+            self.material.add_item(label)
         self.material.set_on_selection_changed(self._material)
-        self.widget.add_child(gui.Label("Material category"))
+        self.widget.add_child(gui.Label(tr("material_category")))
         self.widget.add_child(self.material)
         self.material_thickness = gui.NumberEdit(gui.NumberEdit.DOUBLE)
         self.material_thickness.decimal_precision = 6
@@ -113,14 +120,12 @@ class PropertiesPanel:
         self.scattering.decimal_precision = 6
         self.scattering.set_limits(0.0, 1.0)
         self.scattering.set_on_value_changed(self._material_numbers)
-        self.widget.add_child(gui.Label("Material thickness m"))
+        self.widget.add_child(gui.Label(tr("material_thickness")))
         self.widget.add_child(self.material_thickness)
-        self.widget.add_child(gui.Label("Scattering coefficient"))
+        self.widget.add_child(gui.Label(tr("scattering")))
         self.widget.add_child(self.scattering)
-        self.widget.add_child(
-            gui.Label("Fallback policy: none (strict Phase 2-B resolution)")
-        )
-        self.transforms = gui.Label("Local/world transform: select a renderable object")
+        self.widget.add_child(gui.Label(tr("fallback_policy")))
+        self.transforms = gui.Label(tr("select_renderable"))
         self.widget.add_child(self.transforms)
         self.set_enabled(False)
 
@@ -155,31 +160,15 @@ class PropertiesPanel:
                 edit.text_value = str(obstacle.get(key, ""))
             confidence = str(obstacle.get("confidence", "unset"))
             self.physical.checked = bool(obstacle.get("physical_object", True))
-            values = [
-                self.confidence.get_item(index)
-                for index in range(self.confidence.number_of_items)
-            ]
-            self.confidence.selected_index = (
-                values.index(confidence) if confidence in values else 0
-            )
+            self.confidence.selected_index = option_index("confidence", confidence)
             geometry = obstacle.get("geometry", {})
             anchor = geometry.get("anchor", {})
             mode = anchor if isinstance(anchor, str) else anchor.get("mode", "center")
-            geometry_types = [
-                self.geometry_type.get_item(index)
-                for index in range(self.geometry_type.number_of_items)
-            ]
             geometry_type = geometry.get("type", "box")
-            self.geometry_type.selected_index = (
-                geometry_types.index(geometry_type)
-                if geometry_type in geometry_types
-                else 0
+            self.geometry_type.selected_index = option_index(
+                "geometry_type", geometry_type
             )
-            modes = [
-                self.anchor_mode.get_item(index)
-                for index in range(self.anchor_mode.number_of_items)
-            ]
-            self.anchor_mode.selected_index = modes.index(mode) if mode in modes else 0
+            self.anchor_mode.selected_index = option_index("anchor_mode", mode)
             contact = (
                 anchor.get("floor_contact_policy", {})
                 if isinstance(anchor, dict)
@@ -192,7 +181,7 @@ class PropertiesPanel:
                 clearance = contact.get(
                     "clearance_m", geometry.get("floor_clearance_m", 0.0)
                 )
-            self.floor_policy.selected_index = 0 if policy == "anchor_point" else 1
+            self.floor_policy.selected_index = option_index("floor_policy", policy)
             self.floor_clearance.double_value = float(clearance)
             self.floor_policy.enabled = mode == "floor_at_xy"
             self.floor_clearance.enabled = mode == "floor_at_xy"
@@ -222,13 +211,7 @@ class PropertiesPanel:
             self.scattering.double_value = float(
                 material.get("scattering_coefficient", 0.0)
             )
-            categories = [
-                self.material.get_item(index)
-                for index in range(self.material.number_of_items)
-            ]
-            self.material.selected_index = (
-                categories.index(category) if category in categories else 0
-            )
+            self.material.selected_index = option_index("material", category)
             record = next(
                 (value for value in report["objects"] if value["id"] == selected), None
             )
@@ -236,14 +219,17 @@ class PropertiesPanel:
                 metric = np.asarray(record["metric_transform"])
                 scene = np.asarray(record["scene_transform"])
                 self.transforms.text = (
-                    "Metric T:\n{}\nScene T:\n{}\nRound trip: {:.3e}".format(
+                    "{}:\n{}\n{}:\n{}\n{}: {:.3e}".format(
+                        tr("metric_transform"),
                         np.array2string(metric, precision=5, suppress_small=True),
+                        tr("scene_transform"),
                         np.array2string(scene, precision=5, suppress_small=True),
+                        tr("round_trip"),
                         record["coordinate_round_trip"]["maximum_error"],
                     )
                 )
             else:
-                self.transforms.text = "Object has incomplete geometry"
+                self.transforms.text = tr("incomplete_geometry")
         finally:
             self.updating = False
 
@@ -292,7 +278,10 @@ class PropertiesPanel:
         object_id = self.core.state.selected_object_id
         obstacle = dict(self.core.state.get_object(object_id))
         material = dict(obstacle.get("material", {}))
-        material.update({"source": "sionna_preset", "category": value, "preset": value})
+        category = option_value("material", index)
+        material.update(
+            {"source": "sionna_preset", "category": category, "preset": category}
+        )
         obstacle["material"] = material
         self.core.replace_object(object_id, obstacle, ChangeMaterialCommand)
         self.on_change()
@@ -303,7 +292,7 @@ class PropertiesPanel:
         object_id = self.core.state.selected_object_id
         obstacle = dict(self.core.state.get_object(object_id))
         geometry = dict(obstacle.get("geometry", {}))
-        geometry["type"] = value
+        geometry["type"] = option_value("geometry_type", index)
         obstacle["geometry"] = geometry
         self.core.replace_object(object_id, obstacle, ChangePropertyCommand)
         self.on_change()
@@ -323,10 +312,11 @@ class PropertiesPanel:
         names = ("x", "y") if current_mode == "floor_at_xy" else ("x", "y", "z")
         defaults = (0.0, 0.0) if current_mode == "floor_at_xy" else (0.0, 0.0, 0.0)
         position = _values(geometry.get("position_m"), names, defaults)
-        if value == "floor_at_xy":
+        mode_value = option_value("anchor_mode", index)
+        if mode_value == "floor_at_xy":
             geometry["position_m"] = {"x": position[0], "y": position[1]}
             geometry["anchor"] = {
-                "mode": value,
+                "mode": mode_value,
                 "floor_contact_policy": {
                     "type": "minimum_bottom_vertex_clearance",
                     "clearance_m": 0.01,
@@ -353,7 +343,7 @@ class PropertiesPanel:
                 "y": position[1],
                 "z": position[2],
             }
-            geometry["anchor"] = {"mode": value}
+            geometry["anchor"] = {"mode": mode_value}
         obstacle["geometry"] = geometry
         self.core.replace_object(object_id, obstacle, ChangePropertyCommand)
         self.on_change()
@@ -361,12 +351,16 @@ class PropertiesPanel:
     def _floor_policy(self, value, index):
         if self.updating or not self.core.state.selected_object_id:
             return
-        self._set_floor_contact(value, self.floor_clearance.double_value)
+        self._set_floor_contact(
+            option_value("floor_policy", index), self.floor_clearance.double_value
+        )
 
     def _floor_clearance(self, value):
         if self.updating or not self.core.state.selected_object_id:
             return
-        self._set_floor_contact(self.floor_policy.selected_text, value)
+        self._set_floor_contact(
+            option_value("floor_policy", self.floor_policy.selected_index), value
+        )
 
     def _set_floor_contact(self, policy, clearance):
         object_id = self.core.state.selected_object_id

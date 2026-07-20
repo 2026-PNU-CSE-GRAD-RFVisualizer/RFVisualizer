@@ -16,6 +16,7 @@ DEFAULTS = {
         "wireframe": False,
         "point_size": 2.0,
         "visible": True,
+        "display_mode": "both",
     },
     "navigation": {
         "fps": {
@@ -23,7 +24,7 @@ DEFAULTS = {
             "movement_speed_mps": 1.5,
             "sprint_multiplier": 3.0,
             "max_frame_delta_seconds": 0.05,
-            "horizontal_only": True,
+            "horizontal_only": False,
         }
     },
     "external_commands": {"sionna_environment": {"type": "conda", "name": "sionna"}},
@@ -76,4 +77,14 @@ def load_editor_config(path: Path = None) -> Dict[str, Any]:
         "max_frame_delta_seconds",
     ):
         fps[key] = _positive_finite(fps.get(key), "navigation.fps.{}".format(key))
+    reference = result.get("reference", {})
+    reference["point_size"] = _positive_finite(
+        reference.get("point_size"), "reference.point_size"
+    )
+    if reference.get("display_mode") not in {"both", "point_cloud", "proxy_mesh"}:
+        raise ValueError(
+            "reference.display_mode는 both/point_cloud/proxy_mesh여야 합니다."
+        )
+    if not isinstance(reference.get("visible"), bool):
+        raise ValueError("reference.visible은 bool이어야 합니다.")
     return result

@@ -1,0 +1,3957 @@
+{
+  "file name" : "PGSR.pdf",
+  "number of pages" : 17,
+  "author" : "",
+  "title" : "",
+  "creation date" : "D:20240610173842Z",
+  "modification date" : "D:20240610173842Z",
+  "kids" : [ {
+    "type" : "header",
+    "id" : 112,
+    "page number" : 1,
+    "bounding box" : [ 559.549, 758.819, 563.036, 767.223 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 22,
+      "page number" : 1,
+      "bounding box" : [ 559.549, 758.819, 563.036, 767.223 ],
+      "heading level" : 9,
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 6.974,
+      "text color" : "[0.0]",
+      "content" : "1"
+    } ]
+  }, {
+    "type" : "heading",
+    "id" : 113,
+    "level" : "Doctitle",
+    "page number" : 1,
+    "bounding box" : [ 48.964, 680.626, 563.035, 737.333 ],
+    "heading level" : 1,
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 23.91,
+    "text color" : "[0.0]",
+    "content" : "PGSR: Planar-based Gaussian Splatting for Efficient and High-Fidelity Surface Reconstruction"
+  }, {
+    "type" : "paragraph",
+    "id" : 114,
+    "page number" : 1,
+    "bounding box" : [ 132.516, 647.03, 479.486, 674.158 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 10.959,
+    "text color" : "[0.0]",
+    "content" : "Danpeng Chen, Hai Li, Weicai Ye, Yifan Wang, Weijian Xie, Shangjin Zhai, Nan Wang, Haomin Liu, Hujun Bao, Guofeng Zhang†"
+  }, {
+    "type" : "image",
+    "id" : 115,
+    "page number" : 1,
+    "bounding box" : [ 51.533, 299.465, 560.458, 571.245 ],
+    "source" : "PGSR_images/imageFile1.png"
+  }, {
+    "type" : "list",
+    "id" : 116,
+    "level" : "1",
+    "page number" : 1,
+    "bounding box" : [ 48.964, 258.072, 563.035, 294.862 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "next list id" : 125,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 1,
+      "bounding box" : [ 48.964, 258.072, 563.035, 294.862 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "Fig. 1: PGSR representation. We present a Planar-based Gaussian Splatting Reconstruction representation for efficient and high-fidelity surface reconstruction from multi-view RGB images without any geometric prior (depth or normal from pre-trained model). The courthouse reconstructed by our method demonstrates that PGSR can recover geometric details, such as textual details on the building. From left to right: input SfM points, planar-based Gaussian ellipsoid, rendered view, textured mesh, surface, and normal.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 117,
+    "page number" : 1,
+    "bounding box" : [ 48.964, 138.001, 300.023, 239.367 ],
+    "font" : "NimbusRomNo9L-Medi",
+    "font size" : 8.966,
+    "text color" : "[0.0]",
+    "content" : "Abstract—Recently, 3D Gaussian Splatting (3DGS) has attracted widespread attention due to its high-quality rendering, and ultra-fast training and rendering speed. However, due to the unstructured and irregular nature of Gaussian point clouds, it is difficult to guarantee geometric reconstruction accuracy and multi-view consistency simply by relying on image reconstruction loss. Although many studies on surface reconstruction based on 3DGS have emerged recently, the quality of their meshes is generally unsatisfactory. To address this problem, we propose a fast planar-based Gaussian splatting reconstruction representa-"
+  }, {
+    "type" : "paragraph",
+    "id" : 118,
+    "page number" : 1,
+    "bounding box" : [ 48.964, 92.304, 300.022, 125.212 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 7.97,
+    "text color" : "[0.0]",
+    "content" : "H. Bao, G. Zhang, W. Ye and H. Li are with the State Key Lab of CAD&CG, Zhejiang University. E-mails: {baohujun, zhangguofeng}@zju.edu.cn."
+  }, {
+    "type" : "paragraph",
+    "id" : 119,
+    "page number" : 1,
+    "bounding box" : [ 48.964, 70.776, 300.022, 98.313 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 7.97,
+    "text color" : "[0.0]",
+    "content" : "D. Chen and W. Xie are with the State Key Lab of CAD&CG, Zhejiang University and SenseTime Research. D. Chen is also affiliated with Tetras.AI. E-mails: chendanpeng@tetras.ai, xieweijian@sensetime.com."
+  }, {
+    "type" : "paragraph",
+    "id" : 120,
+    "page number" : 1,
+    "bounding box" : [ 56.934, 41.319, 254.569, 71.414 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 7.97,
+    "text color" : "[0.0]",
+    "content" : "Y. Wang is with Shanghai AI Laboratory. S. Zhai, N. Wang and H. Liu are with SenseTime Research. † Corresponding author"
+  }, {
+    "type" : "paragraph",
+    "id" : 121,
+    "page number" : 1,
+    "bounding box" : [ 311.978, 78.226, 563.037, 239.331 ],
+    "font" : "NimbusRomNo9L-Medi",
+    "font size" : 8.966,
+    "text color" : "[0.0]",
+    "content" : "tion (PGSR) to achieve high-fidelity surface reconstruction while ensuring high-quality rendering. Specifically, we first introduce an unbiased depth rendering method, which directly renders the distance from the camera origin to the Gaussian plane and the corresponding normal map based on the Gaussian distribution of the point cloud, and divides the two to obtain the unbiased depth. We then introduce single-view geometric, multi-view photometric, and geometric regularization to preserve global geometric accuracy. We also propose a camera exposure compensation model to cope with scenes with large illumination variations. Experiments on indoor and outdoor scenes show that our method achieves fast training and rendering while maintaining high-fidelity rendering and geometric reconstruction, outperforming 3DGS-based and NeRF-based methods. Our code will be made publicly available, and more information can be found on our project page (https://zju3dv.github.io/pgsr/)."
+  }, {
+    "type" : "paragraph",
+    "id" : 122,
+    "page number" : 1,
+    "bounding box" : [ 311.978, 47.653, 563.033, 69.318 ],
+    "font" : "NimbusRomNo9L-Medi",
+    "font size" : 8.966,
+    "text color" : "[0.0]",
+    "content" : "Index Terms—Planar-Based Gaussian Splatting, Surface Reconstruction, Neural Rendering, Neural Radiance Fields."
+  }, {
+    "type" : "header",
+    "id" : 123,
+    "page number" : 2,
+    "bounding box" : [ 559.549, 758.819, 563.036, 767.223 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 23,
+      "page number" : 2,
+      "bounding box" : [ 559.549, 758.819, 563.036, 767.223 ],
+      "heading level" : 9,
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 6.974,
+      "text color" : "[0.0]",
+      "content" : "2"
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 124,
+    "page number" : 2,
+    "bounding box" : [ 54.106, 594.137, 557.89, 735.93 ],
+    "source" : "PGSR_images/imageFile2.png"
+  }, {
+    "type" : "list",
+    "id" : 125,
+    "level" : "1",
+    "page number" : 2,
+    "bounding box" : [ 48.964, 43.318, 563.039, 589.534 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 2,
+    "previous list id" : 116,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 48.964, 543.777, 563.039, 589.534 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "Fig. 2: Unbiased depth rendering. (a) Illustration of the rendered depth: We take a single Gaussian, flatten it into a plane, and fit it onto the surface as an example. Our rendered depth is the intersection point of rays and surfaces, matching the actual surface. In contrast, the depth from previous methods [11], [24] corresponds to a curved surface and may deviate from the actual surface. (b) We use true depth to supervise two different depth rendering methods. After optimization, we map the positions of all Gaussian points. Gaussians of our method fit well onto the actual surface, while the previous method results in noise and poor adherence to the surface.",
+      "kids" : [ {
+        "type" : "paragraph",
+        "id" : 107,
+        "level" : "2",
+        "page number" : 2,
+        "bounding box" : [ 135.619, 510.043, 213.372, 522.047 ],
+        "font" : "NimbusRomNo9L-Regu",
+        "font size" : 7.97,
+        "text color" : "[0.0]",
+        "content" : "I. INTRODUCTION"
+      }, {
+        "type" : "paragraph",
+        "id" : 108,
+        "page number" : 2,
+        "bounding box" : [ 48.964, 466.597, 70.218, 504.895 ],
+        "font" : "NimbusRomNo9L-Medi",
+        "font size" : 29.437,
+        "text color" : "[0.0]",
+        "content" : "N"
+      }, {
+        "type" : "paragraph",
+        "id" : 109,
+        "page number" : 2,
+        "bounding box" : [ 71.712, 475.031, 300.025, 498.99 ],
+        "font" : "NimbusRomNo9L-Regu",
+        "font size" : 9.963,
+        "text color" : "[0.0]",
+        "content" : "OVEL view synthesis and geometry reconstruction are challenging and crucial tasks in computer vision, widely"
+      }, {
+        "type" : "paragraph",
+        "id" : 110,
+        "page number" : 2,
+        "bounding box" : [ 48.964, 259.838, 300.022, 475.08 ],
+        "font" : "NimbusRomNo9L-Regu",
+        "font size" : 9.963,
+        "text color" : "[0.0]",
+        "content" : "used in AR/VR [13], [65], [71], 3D content generation [10], [18], [48], [53], [63], and autonomous driving. To achieve a realistic and immersive experience in AR/VR, novel view synthesis needs to be sufficiently convincing, and 3D reconstruction [32], [36], [62], [64], [66] needs to be finely detailed. Recently, neural radiance fields [22], [41], [42], [61] have been widely used to tackle this task, achieving highfidelity novel view synthesis [2], [3], [44] and 3D geometry reconstruction [33], [56]. However, due to the computationally intensive volume rendering methods, neural radiance fields often require training times of several hours to even hundreds of hours, and rendering speeds are difficult to achieve in realtime. Recently, 3D Gaussian Splatting (3DGS) [27] has made groundbreaking advancements in this field. By optimizing the positions, rotations, scales, and appearances of the explicit 3D Gaussians and combining alpha-blend rendering, 3DGS has achieved training times in the order of minutes and rendering speeds in the millisecond range."
+      }, {
+        "type" : "paragraph",
+        "id" : 111,
+        "page number" : 2,
+        "bounding box" : [ 48.964, 210.69, 300.022, 258.56 ],
+        "font" : "NimbusRomNo9L-Regu",
+        "font size" : 9.963,
+        "text color" : "[0.0]",
+        "content" : "Although 3DGS achieves high-fidelity novel view rendering and fast training and rendering speeds. As discussed in previous methods [19], [24], Gaussians often do not conform well to actual surfaces, resulting in poor geometric accuracy."
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 2,
+      "bounding box" : [ 48.964, 43.318, 300.022, 210.739 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 9.963,
+      "text color" : "[0.0]",
+      "content" : "Fig. 3 also shows this conclusion. Extracting accurate meshes from millions of discrete Gaussian points is an extremely challenging task. The fundamental reason for this lies in the disorderly and irregular nature of Gaussians, which makes them unable to accurately model the surfaces of real scenes. Moreover, optimizing solely based on image reconstruction loss can easily lead to local optima, ultimately resulting in Gaussians failing to conform to actual surfaces and exhibiting poor geometric accuracy. In many practical tasks, geometric reconstruction accuracy is a crucial metric. Therefore, to address these issues, we propose a novel framework based on 3DGS that achieves high-fidelity geometric reconstruction while maintaining the high-quality rendering quality, fast training, and rendering speeds characteristic of 3DGS.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 126,
+    "page number" : 2,
+    "bounding box" : [ 311.978, 247.029, 563.036, 522.047 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "In this paper, we propose a novel unbiased depth rendering method based on 3DGS, facilitating the integration of various geometric constraints to achieve precise geometric estimation. Previous methods [24] render depth by blending the accumulations of each Gaussian at the z-position of the camera, resulting in two main issues as shown in Fig. 2. The depth corresponds to a curved surface and may deviate from the actual surface. To address these issues, we compress 3D Gaussians into flat planes and blend their accumulations to obtain normal and camera-to-plane distance maps. These maps are then transformed into depth maps. This method involves blending Gaussian plane accumulations to determine a pixel’s plane parameters. The intersection of the ray and plane defines the depth, depending on the Gaussian’s position and rotation. By dividing the distance map by the normal map, we cancel out the ray accumulation weights, ensuring the depth estimation is unbiased and falls on the estimated plane. In our experiment shown in Fig. 2, we used true depth to guide two depth rendering methods. After optimization, we mapped the positions of all Gaussian points. Results show that our method produces Gaussians that closely align with the actual surface, while the previous method generates noisy Gaussians that fail to adhere precisely to the surface."
+  }, {
+    "type" : "paragraph",
+    "id" : 127,
+    "page number" : 2,
+    "bounding box" : [ 311.978, 55.509, 563.036, 246.841 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "After rendering the plane parameters for each pixel, we apply single-view and multi-view regularization to optimize these parameters. Empirically, adjacent pixels often belong to the same plane. Using this local plane assumption, we compute a normal map from neighboring pixel depth estimations and ensure consistency between this normal map and the rendered normal map. At geometric edges, the local plane assumption fails, so we detect these edges using image edges and reduce the weight in these areas, achieving smooth geometry and consistent depth and normals. However, due to the discrete and unordered nature of Gaussians, geometry may be inconsistent across multiple views. To address this, we apply multi-view regularization ensuring global geometric consistency. Similar to the Eikonal loss [56], we incorporate a multi-view geometric consistency loss to ensures smooth and consistent geometric reconstruction, even in areas with noise, blur, or weak textures."
+  }, {
+    "type" : "paragraph",
+    "id" : 128,
+    "page number" : 2,
+    "bounding box" : [ 321.94, 43.318, 563.035, 55.322 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "We use two photometric coefficients to compensate for"
+  }, {
+    "type" : "header",
+    "id" : 129,
+    "page number" : 3,
+    "bounding box" : [ 559.549, 758.819, 563.036, 767.223 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 24,
+      "page number" : 3,
+      "bounding box" : [ 559.549, 758.819, 563.036, 767.223 ],
+      "heading level" : 9,
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 6.974,
+      "text color" : "[0.0]",
+      "content" : "3"
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 130,
+    "page number" : 3,
+    "bounding box" : [ 48.964, 605.211, 300.022, 736.767 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "overall changes in image brightness, further improving reconstruction quality. Finally, we validate the rendering and reconstruction quality on the MipNeRF360, the DTU [23] and the Tanks and Temples(TnT) [28] dataset. Experimental results demonstrate that, while maintaining the original Gaussian rendering quality and rendering speed, our method achieves state-of-the-art reconstruction accuracy. Moreover, our training speed only requires one hour on a single GPU, while the stateof-the-art method based on NeRF [33] requires eight GPUs over two days. In summary, our method makes the following contributions:"
+  }, {
+    "type" : "list",
+    "id" : 131,
+    "level" : "3",
+    "page number" : 3,
+    "bounding box" : [ 58.926, 435.481, 300.027, 603.261 ],
+    "numbering style" : "unordered",
+    "number of list items" : 4,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 3,
+      "bounding box" : [ 58.927, 555.032, 300.023, 603.261 ],
+      "font" : "CMSY7",
+      "font size" : 9.963,
+      "text color" : "[0.0]",
+      "content" : "• We propose a novel unbiased depth rendering method. Based on this rendering method, we can render the reliable plane parameters for each pixel, facilitating the incorporation of various geometric constraints.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 3,
+      "bounding box" : [ 58.927, 519.167, 300.025, 555.44 ],
+      "font" : "CMSY7",
+      "font size" : 9.963,
+      "text color" : "[0.0]",
+      "content" : "• We introduce single-view and multi-view regularizations to optimize the plane parameters of each pixel, achieving high-precision global geometric consistency.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 3,
+      "bounding box" : [ 58.926, 495.256, 300.024, 519.575 ],
+      "font" : "CMSY7",
+      "font size" : 9.963,
+      "text color" : "[0.0]",
+      "content" : "• The exposure compensation simply and effectively enhances reconstruction accuracy.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 3,
+      "bounding box" : [ 58.926, 435.481, 300.027, 495.305 ],
+      "font" : "CMSY7",
+      "font size" : 9.963,
+      "text color" : "[0.0]",
+      "content" : "• Our method, while maintaining the high rendering accuracy and speed of the original GS, achieves state-ofthe-art reconstruction accuracy, and our training time is near 100 times faster compared to state-of-the-art reconstruction methods based on NeRF [33].",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 132,
+    "page number" : 3,
+    "bounding box" : [ 48.964, 346.075, 300.025, 420.332 ],
+    "source" : "PGSR_images/imageFile3.png"
+  }, {
+    "type" : "list",
+    "id" : 133,
+    "level" : "1",
+    "page number" : 3,
+    "bounding box" : [ 48.964, 322.614, 300.02, 341.472 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "next list id" : 143,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 3,
+      "bounding box" : [ 48.964, 322.614, 300.02, 341.472 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "Fig. 3: Rendered Depth. The original depth in 3DGS exhibits significant noise, while our depth is smoother and more accurate.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 134,
+    "page number" : 3,
+    "bounding box" : [ 131.545, 283.593, 217.444, 295.597 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 7.97,
+    "text color" : "[0.0]",
+    "content" : "II. RELATED WORK"
+  }, {
+    "type" : "paragraph",
+    "id" : 135,
+    "page number" : 3,
+    "bounding box" : [ 48.964, 171.82, 300.022, 279.466 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Surface reconstruction is a cornerstone field in computer graphics and computer vision, aimed at generating intricate and accurate surface representations from sparse or noisy input data. Obtaining high-fidelity 3D models from real-world environments is pivotal for enabling immersive experiences in augmented reality (AR) and virtual reality (VR). This paper focuses exclusively on surface reconstruction under given poses, which can be readily computed using SLAM [5], [7], [8] or SFM [43], [51], [57] methods."
+  }, {
+    "type" : "list",
+    "id" : 136,
+    "level" : "3",
+    "page number" : 3,
+    "bounding box" : [ 48.964, 142.812, 204.958, 154.707 ],
+    "numbering style" : "english letters",
+    "number of list items" : 1,
+    "next list id" : 213,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 3,
+      "bounding box" : [ 48.964, 142.812, 204.958, 154.707 ],
+      "font" : "NimbusRomNo9L-ReguItal",
+      "font size" : 9.963,
+      "text color" : "[0.0]",
+      "content" : "A. Traditional Surface Reconstruction",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 137,
+    "page number" : 3,
+    "bounding box" : [ 48.964, 43.318, 300.022, 139.008 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Traditional methods adhere to the universal multi-view stereo pipeline, which can be roughly categorized based on the intermediate representation they rely on, such as point cloud [16], [30], volume [29], depth map [4], [17], [52], etc. The commonly used method separates the overall MVS problem into several parts, by initially extracting dense point clouds from multi-view images through block-based matching [1], followed by the construction of surface structures"
+  }, {
+    "type" : "paragraph",
+    "id" : 138,
+    "page number" : 3,
+    "bounding box" : [ 311.978, 641.076, 563.036, 736.767 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "either through triangulation [6] or implicit surface fitting [25], [26]. Despite being well-established and extensively utilized in academia and industry, these traditional methods are susceptible to artifacts stemming from erroneous matching or noise introduced during the pipeline. In response, several approaches aim to enhance reconstruction completeness and accuracy by integrating deep neural networks into the matching process [50], [54]."
+  }, {
+    "type" : "list",
+    "id" : 139,
+    "level" : "3",
+    "page number" : 3,
+    "bounding box" : [ 311.978, 273.663, 527.668, 626.231 ],
+    "numbering style" : "english letters",
+    "number of list items" : 2,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 3,
+      "bounding box" : [ 311.978, 614.336, 450.797, 626.231 ],
+      "font" : "NimbusRomNo9L-ReguItal",
+      "font size" : 9.963,
+      "text color" : "[0.0]",
+      "content" : "B. Neural Surface Reconstruction",
+      "kids" : [ {
+        "type" : "paragraph",
+        "id" : 104,
+        "page number" : 3,
+        "bounding box" : [ 311.978, 515.497, 563.036, 611.187 ],
+        "font" : "NimbusRomNo9L-Regu",
+        "font size" : 9.963,
+        "text color" : "[0.0]",
+        "content" : "Numerous pioneering efforts have leveraged pure deep neural networks to predict surface models directly from single or multiple image conditions using point clouds [14], [34], voxels [12], [58], and triangular meshes [32], [55] or implicit fields [40], [47] in end-to-end manner. However, these methods often incur significant computational overhead during network inference and demand extensively labeled training 3D models, hindering their real-time and real-world applicability."
+      }, {
+        "type" : "paragraph",
+        "id" : 105,
+        "page number" : 3,
+        "bounding box" : [ 311.978, 431.861, 563.036, 515.596 ],
+        "font" : "NimbusRomNo9L-Regu",
+        "font size" : 9.963,
+        "text color" : "[0.0]",
+        "content" : "With the rapid advancement in neural surface reconstruction tasks, a meticulously designed scene recovery method named NeRF [41] emerged. NeRF-based methods take 5D ray information as input and predict density and color sampled in continuous space, yielding notably more realistic rendering results. However, this representation falls short in capturing high-fidelity surfaces."
+      }, {
+        "type" : "paragraph",
+        "id" : 106,
+        "page number" : 3,
+        "bounding box" : [ 311.978, 300.404, 563.036, 431.959 ],
+        "font" : "NimbusRomNo9L-Regu",
+        "font size" : 9.963,
+        "text color" : "[0.0]",
+        "content" : "Consequently, several approaches have transformed NeRFbased network architectures into surface reconstruction frameworks by incorporating intermediate representations such as occupancy [46] or signed distance fields [56], [60]. Despite the potent surface reconstruction capabilities exhibited by NeRFbased frameworks, the stacked multi-layer-perceptron (MLP) layers impose constraints on inference time and representation ability. To address this challenge, various following studies aim to reduce dependency on MLP layers by decomposing scene information into separable structures, such as points [59] and voxels [31], [33], [35]."
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 3,
+      "bounding box" : [ 311.978, 273.663, 527.668, 285.558 ],
+      "font" : "NimbusRomNo9L-ReguItal",
+      "font size" : 9.963,
+      "text color" : "[0.0]",
+      "content" : "C. Gaussian Splatting based Surface Reconstruction",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 140,
+    "page number" : 3,
+    "bounding box" : [ 311.978, 43.318, 563.036, 270.515 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "SuGaR [19] proposed a method to extract Mesh from 3DGS. They introduced regularization terms to encourage Gaussian fitting to the scene surface. By sampling 3D point clouds from the Gaussian using the density field, they utilized Poisson reconstruction to extract a mesh from these sampled point clouds. While encouraging Gaussian fitting to the surface enhances geometric reconstruction accuracy, irregular 3D Gaussian shapes make modeling smooth geometric surfaces challenging. Moreover, due to the discreteness and disorder of the Gaussian, relying solely on image reconstruction loss can lead to overfitting, resulting in incomplete geometric information and surface mismatch. 2DGS [21] achieves viewconsistent geometry by collapsing the 3D volume into a set of 2D oriented planar Gaussian disks. GOF [69] establishes a Gaussian opacity field, enabling geometry extraction by directly identifying its level-set. However, these 3DGS-based methods still produce biased depth and multi-view geometric consistency is not guaranteed. To address these issues, we flattened the Gaussian into a planar shape, which is more"
+  }, {
+    "type" : "header",
+    "id" : 141,
+    "page number" : 4,
+    "bounding box" : [ 559.549, 758.819, 563.036, 767.223 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 25,
+      "page number" : 4,
+      "bounding box" : [ 559.549, 758.819, 563.036, 767.223 ],
+      "heading level" : 9,
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 6.974,
+      "text color" : "[0.0]",
+      "content" : "4"
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 142,
+    "page number" : 4,
+    "bounding box" : [ 54.106, 533.406, 557.904, 735.93 ],
+    "source" : "PGSR_images/imageFile4.png"
+  }, {
+    "type" : "list",
+    "id" : 143,
+    "level" : "1",
+    "page number" : 4,
+    "bounding box" : [ 48.964, 500.979, 563.036, 528.803 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "previous list id" : 133,
+    "next list id" : 181,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 48.964, 500.979, 563.036, 528.803 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "Fig. 4: PGSR Overview. We compress Gaussians into flat planes and render distance and normal maps, which are then transformed into unbiased depth maps. Single-view and multi-view geometric regularization ensure high precision in global geometry. Exposure compensation RGB loss enhances reconstruction accuracy.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 144,
+    "page number" : 4,
+    "bounding box" : [ 48.964, 383.558, 300.022, 479.248 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "suitable for modeling actual surfaces and facilitates rendering parameters such as normals and distances from the plane to the origin. Based on these plane parameters, we proposed unbiased depth estimation, allowing us to extract geometric parameters from the Gaussian. Then, we introduced geometric regularization terms from single-view and multi-view to optimize these geometric parameters, achieving globally consistent high-precision geometric reconstruction."
+  }, {
+    "type" : "paragraph",
+    "id" : 145,
+    "page number" : 4,
+    "bounding box" : [ 71.147, 362.054, 277.844, 374.058 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 7.97,
+    "text color" : "[0.0]",
+    "content" : "III. PRELIMINARY OF 3D GAUSSIAN SPLATTING"
+  }, {
+    "type" : "paragraph",
+    "id" : 146,
+    "page number" : 4,
+    "bounding box" : [ 48.964, 323.294, 300.024, 359.208 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "3DGS [27] explicitly represents 3D scenes with a set of 3D Gaussians {Gi}. Each Gaussian is defined by a Gaussian function:"
+  }, {
+    "type" : "list",
+    "id" : 148,
+    "level" : "3",
+    "page number" : 4,
+    "bounding box" : [ 172.663, 305.978, 254.825, 319.782 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 2,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 172.663, 314.042, 176.053, 319.023 ],
+      "font" : "CMR5",
+      "font size" : 4.981,
+      "text color" : "[0.0]",
+      "content" : "1",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 172.663, 305.978, 254.825, 319.782 ],
+      "font" : "CMR5",
+      "font size" : 9.963,
+      "text color" : "[0.0]",
+      "content" : "2(x−µi)⊤Σ−i 1(x−µi),",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 147,
+    "page number" : 4,
+    "bounding box" : [ 94.162, 298.932, 171.468, 318.064 ],
+    "font" : "CMR10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Gi(x|µi,Σi) = e−"
+  }, {
+    "type" : "paragraph",
+    "id" : 149,
+    "page number" : 4,
+    "bounding box" : [ 48.964, 245.47, 300.027, 300.105 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "where µi ∈ R3 and Σi ∈ R3×3 are the center of a point pi ∈ P and corresponding 3D covariance matrix, respectively. The covariance matrix Σi is factorized into a scaling matrix Si ∈ R3×3 and a rotation matrix Ri ∈ R3×3:"
+  }, {
+    "type" : "heading",
+    "id" : 150,
+    "level" : "Subtitle",
+    "page number" : 4,
+    "bounding box" : [ 134.749, 233.232, 214.238, 247.005 ],
+    "heading level" : 7,
+    "font" : "CMMIB10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Σi = RiSiSi⊤Ri⊤."
+  }, {
+    "type" : "paragraph",
+    "id" : 151,
+    "page number" : 4,
+    "bounding box" : [ 48.964, 181.421, 300.021, 229.29 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "3DGS allows fast α-blending for rendering. Given a transformation matrix W and an intrinsic matrix K, µi and Σi can be transformed to camera coordinate corresponding to W and then projected to 2D coordinate:"
+  }, {
+    "type" : "paragraph",
+    "id" : 153,
+    "page number" : 4,
+    "bounding box" : [ 88.965, 168.952, 91.162, 177.594 ],
+    "font" : "CMSY5",
+    "font size" : 4.981,
+    "text color" : "[0.0]",
+    "content" : "′"
+  }, {
+    "type" : "paragraph",
+    "id" : 155,
+    "page number" : 4,
+    "bounding box" : [ 183.119, 168.952, 185.316, 177.594 ],
+    "font" : "CMSY5",
+    "font size" : 4.981,
+    "text color" : "[0.0]",
+    "content" : "′"
+  }, {
+    "type" : "paragraph",
+    "id" : 154,
+    "page number" : 4,
+    "bounding box" : [ 88.965, 162.328, 183.12, 176.102 ],
+    "font" : "CMMIB10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "i = KW[µi,1]⊤, Σ"
+  }, {
+    "type" : "heading",
+    "id" : 156,
+    "level" : "Subtitle",
+    "page number" : 4,
+    "bounding box" : [ 183.119, 162.328, 267.075, 176.102 ],
+    "heading level" : 7,
+    "font" : "CMMIB10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "i = JWΣiW⊤J⊤,"
+  }, {
+    "type" : "paragraph",
+    "id" : 152,
+    "page number" : 4,
+    "bounding box" : [ 81.912, 164.043, 88.965, 174.006 ],
+    "font" : "CMMIB10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "µ"
+  }, {
+    "type" : "paragraph",
+    "id" : 157,
+    "page number" : 4,
+    "bounding box" : [ 48.964, 122.228, 300.026, 158.143 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "where J is the Jacobian of the affine approximation for the projective transformation. Rendering color C ∈ R3 of a pixel u can be obtained in a manner of α-blending:"
+  }, {
+    "type" : "list",
+    "id" : 161,
+    "level" : "4",
+    "page number" : 4,
+    "bounding box" : [ 200.466, 85.667, 214.254, 117.072 ],
+    "numbering style" : "english letters in lower case",
+    "number of list items" : 2,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 200.851, 104.986, 213.869, 117.072 ],
+      "font" : "CMMI7",
+      "font size" : 6.974,
+      "text color" : "[0.0]",
+      "content" : "i−1",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 4,
+      "bounding box" : [ 200.466, 85.667, 214.254, 92.64 ],
+      "font" : "CMMI7",
+      "font size" : 6.974,
+      "text color" : "[0.0]",
+      "content" : "j=1",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 162,
+    "page number" : 4,
+    "bounding box" : [ 214.253, 89.601, 251.618, 106.886 ],
+    "font" : "CMR10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "(1 − αi),"
+  }, {
+    "type" : "heading",
+    "id" : 158,
+    "level" : "Subtitle",
+    "page number" : 4,
+    "bounding box" : [ 97.369, 96.674, 116.72, 106.637 ],
+    "heading level" : 7,
+    "font" : "CMMIB10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "C ="
+  }, {
+    "type" : "paragraph",
+    "id" : 160,
+    "page number" : 4,
+    "bounding box" : [ 136.393, 95.927, 197.699, 106.637 ],
+    "font" : "CMMI10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Tiαici, Ti ="
+  }, {
+    "type" : "paragraph",
+    "id" : 159,
+    "page number" : 4,
+    "bounding box" : [ 119.487, 80.627, 133.985, 92.713 ],
+    "font" : "CMMI7",
+    "font size" : 6.974,
+    "text color" : "[0.0]",
+    "content" : "i∈N"
+  }, {
+    "type" : "paragraph",
+    "id" : 164,
+    "page number" : 4,
+    "bounding box" : [ 232.256, 71.947, 234.453, 80.589 ],
+    "font" : "CMSY5",
+    "font size" : 4.981,
+    "text color" : "[0.0]",
+    "content" : "′"
+  }, {
+    "type" : "paragraph",
+    "id" : 166,
+    "page number" : 4,
+    "bounding box" : [ 248.276, 71.947, 250.473, 80.589 ],
+    "font" : "CMSY5",
+    "font size" : 4.981,
+    "text color" : "[0.0]",
+    "content" : "′"
+  }, {
+    "type" : "paragraph",
+    "id" : 167,
+    "page number" : 4,
+    "bounding box" : [ 48.964, 36.553, 300.023, 79.232 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "i) multiplied with a learnable opacity corresponding to Gi, and the viewdependent color ci ∈ R3 is represented by spherical harmonics"
+  }, {
+    "type" : "paragraph",
+    "id" : 163,
+    "page number" : 4,
+    "bounding box" : [ 48.964, 60.463, 232.257, 79.232 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "where αi is calculated by evaluating Gi(u|µ"
+  }, {
+    "type" : "paragraph",
+    "id" : 165,
+    "page number" : 4,
+    "bounding box" : [ 232.256, 65.691, 248.276, 77.499 ],
+    "font" : "CMBX10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "i,Σ"
+  }, {
+    "type" : "paragraph",
+    "id" : 168,
+    "page number" : 4,
+    "bounding box" : [ 311.978, 455.289, 561.95, 479.248 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "(SH) from the Gaussian Gi. Ti is the cumulative opacity. N is the number of Gaussians that the ray passes through."
+  }, {
+    "type" : "paragraph",
+    "id" : 169,
+    "page number" : 4,
+    "bounding box" : [ 311.978, 431.381, 563.032, 455.341 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "The center µi of a Gaussian Gi. can be projected into the camera coordinate system as:"
+  }, {
+    "type" : "paragraph",
+    "id" : 170,
+    "page number" : 4,
+    "bounding box" : [ 382.146, 411.225, 497.019, 425.922 ],
+    "font" : "CMMI10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "xi,yi,zi,1 ⊤ = W[µi,1]⊤,"
+  }, {
+    "type" : "paragraph",
+    "id" : 171,
+    "page number" : 4,
+    "bounding box" : [ 311.978, 381.041, 563.036, 405.0 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Previous Methods [11], [24] render depth under the current viewpoint:"
+  }, {
+    "type" : "heading",
+    "id" : 172,
+    "level" : "Subtitle",
+    "page number" : 4,
+    "bounding box" : [ 402.807, 368.731, 422.988, 378.694 ],
+    "heading level" : 7,
+    "font" : "CMMIB10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "D ="
+  }, {
+    "type" : "paragraph",
+    "id" : 174,
+    "page number" : 4,
+    "bounding box" : [ 442.661, 367.985, 472.208, 378.694 ],
+    "font" : "CMMI10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Tiαizi."
+  }, {
+    "type" : "paragraph",
+    "id" : 173,
+    "page number" : 4,
+    "bounding box" : [ 425.755, 352.685, 440.253, 364.771 ],
+    "font" : "CMMI7",
+    "font size" : 6.974,
+    "text color" : "[0.0]",
+    "content" : "i∈N"
+  }, {
+    "type" : "paragraph",
+    "id" : 175,
+    "page number" : 4,
+    "bounding box" : [ 409.253, 328.25, 465.763, 340.254 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 7.97,
+    "text color" : "[0.0]",
+    "content" : "IV. METHOD"
+  }, {
+    "type" : "paragraph",
+    "id" : 176,
+    "page number" : 4,
+    "bounding box" : [ 311.978, 169.697, 563.036, 325.163 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Given multi-view RGB images of static scenes, our goal is to achieve efficient and high-fidelity scene geometry reconstruction and rendering quality. Compared to 3DGS, we achieve global consistency in geometry reconstruction while maintaining similar rendering quality. Initially, we improve the modeling of scene geometry attributes by compressing 3D Gaussians into a 2D flat plane representation, which is used to generate plane distance and normal maps, and subsequently converted into unbiased depth maps. We then introduce single-view geometric, multi-view photometric, and geometric consistency loss to ensure global geometry consistency. Additionally, the exposure compensation model further improves reconstruction accuracy."
+  }, {
+    "type" : "paragraph",
+    "id" : 177,
+    "page number" : 4,
+    "bounding box" : [ 311.978, 142.204, 523.614, 154.099 ],
+    "font" : "NimbusRomNo9L-ReguItal",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "A. Planar-based Gaussian Splatting Representation"
+  }, {
+    "type" : "paragraph",
+    "id" : 178,
+    "page number" : 4,
+    "bounding box" : [ 311.978, 43.318, 563.036, 139.008 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "In this section, we will discuss how to transform 3D Gaussians into a 2D flat plane representation. Based on this plane representation, we introduce an unbiased depth rendering method, which will render plane-to-camera distance and normal maps, and can then be converted into depth maps. With geometric depth, distance, and normal maps available, it becomes easier to introduce single-view regularization and multi-view regularization in the following sections."
+  }, {
+    "type" : "header",
+    "id" : 179,
+    "page number" : 5,
+    "bounding box" : [ 559.549, 758.819, 563.036, 767.223 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 26,
+      "page number" : 5,
+      "bounding box" : [ 559.549, 758.819, 563.036, 767.223 ],
+      "heading level" : 9,
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 6.974,
+      "text color" : "[0.0]",
+      "content" : "5"
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 180,
+    "page number" : 5,
+    "bounding box" : [ 54.106, 539.047, 557.906, 735.934 ],
+    "source" : "PGSR_images/imageFile5.png"
+  }, {
+    "type" : "list",
+    "id" : 181,
+    "level" : "1",
+    "page number" : 5,
+    "bounding box" : [ 48.964, 515.586, 563.038, 534.444 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "previous list id" : 143,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 48.964, 515.586, 563.038, 534.444 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "Fig. 5: The rendering and mesh reconstruction results in various indoor and outdoor scenes that we have achieved. PGSR achieves high-precision geometric reconstruction from a series of RGB images without requiring any prior knowledge.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 182,
+    "page number" : 5,
+    "bounding box" : [ 86.623, 374.701, 262.361, 493.02 ],
+    "source" : "PGSR_images/imageFile6.png"
+  }, {
+    "type" : "caption",
+    "id" : 183,
+    "page number" : 5,
+    "bounding box" : [ 133.451, 359.729, 215.536, 370.098 ],
+    "linked content id" : 182,
+    "font" : "NimbusRomNo9L-Medi",
+    "font size" : 7.97,
+    "text color" : "[0.0]",
+    "content" : "Fig. 6: Unbiased Depth."
+  }, {
+    "type" : "paragraph",
+    "id" : 184,
+    "page number" : 5,
+    "bounding box" : [ 48.964, 253.425, 300.022, 337.16 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Due to the difficulty in modeling real-world scene geometry attributes such as depth and normals using 3D Gaussian shapes, it’s necessary to flatten the 3D Gaussians into 2D flat Gaussians in order to accurately represent the geometry surface of the actual scene. Achieving precise geometry reconstruction and high-quality rendering requires the 2D flat Gaussians to accurately conform to the scene surface. Since"
+  }, {
+    "type" : "list",
+    "id" : 185,
+    "level" : "3",
+    "page number" : 5,
+    "bounding box" : [ 48.964, 229.515, 300.022, 253.474 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "next list id" : 210,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 48.964, 229.515, 300.022, 253.474 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 9.963,
+      "text color" : "[0.0]",
+      "content" : "the 2D flat Gaussians approximate a local plane, we can conveniently render the depth and normals of the scene.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 186,
+    "page number" : 5,
+    "bounding box" : [ 48.964, 97.076, 300.026, 229.429 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Flattening 3D Gaussian: The covariance matrix i = RiSiSiTRiT of a 3D Gaussian expresses the ellipsoidal shape. Here, Ri represents the orthonormal basis of the ellipsoid’s three axes, and the scale factor Si defines the size along each direction. By compressing the scale factor along specific axes, the Gaussian ellipsoid can be flattened into planes aligned with those axes. We compress the Gaussian ellipsoid along the direction of the minimum scale factor, effectively flattening the ellipsoid into a plane closest to its original shape. According to the method [9], we directly minimize the minimum scale factor Si = diag(s1,s2,s3) for each Gaussian:"
+  }, {
+    "type" : "paragraph",
+    "id" : 187,
+    "page number" : 5,
+    "bounding box" : [ 120.652, 69.876, 300.022, 88.645 ],
+    "font" : "CMMI10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Ls =∥ min(s1,s2,s3) ∥1 . (1)"
+  }, {
+    "type" : "paragraph",
+    "id" : 188,
+    "page number" : 5,
+    "bounding box" : [ 48.964, 42.879, 300.026, 67.636 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Unbiased Depth Rendering: The direction of the minimum scale factor corresponds to the normal ni of the Gaussian. Due"
+  }, {
+    "type" : "paragraph",
+    "id" : 189,
+    "page number" : 5,
+    "bounding box" : [ 311.978, 410.12, 563.036, 493.855 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "to the ambiguity of the normal direction when there are two directions for the shortest axis, we resolve this issue by using the viewing direction to determine the normal direction. This implies that the angle between the viewing direction and the normal direction should be greater than 90 degrees. The final normal map under the current viewpoint is achieved through α-blending:"
+  }, {
+    "type" : "list",
+    "id" : 193,
+    "level" : "4",
+    "page number" : 5,
+    "bounding box" : [ 450.278, 371.272, 464.066, 402.677 ],
+    "numbering style" : "english letters in lower case",
+    "number of list items" : 2,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 450.663, 390.591, 463.681, 402.677 ],
+      "font" : "CMMI7",
+      "font size" : 6.974,
+      "text color" : "[0.0]",
+      "content" : "i−1",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 450.278, 371.272, 464.066, 378.245 ],
+      "font" : "CMMI7",
+      "font size" : 6.974,
+      "text color" : "[0.0]",
+      "content" : "j=1",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 192,
+    "page number" : 5,
+    "bounding box" : [ 413.499, 380.564, 448.12, 394.113 ],
+    "font" : "CMMIB10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "RcTniαi"
+  }, {
+    "type" : "paragraph",
+    "id" : 194,
+    "page number" : 5,
+    "bounding box" : [ 464.065, 375.206, 563.036, 393.975 ],
+    "font" : "CMR10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "(1 − αj), (2)"
+  }, {
+    "type" : "heading",
+    "id" : 190,
+    "level" : "Subtitle",
+    "page number" : 5,
+    "bounding box" : [ 372.704, 382.279, 393.826, 392.242 ],
+    "heading level" : 7,
+    "font" : "CMMIB10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "N ="
+  }, {
+    "type" : "paragraph",
+    "id" : 191,
+    "page number" : 5,
+    "bounding box" : [ 396.593, 366.232, 411.092, 378.318 ],
+    "font" : "CMMI7",
+    "font size" : 6.974,
+    "text color" : "[0.0]",
+    "content" : "i∈N"
+  }, {
+    "type" : "paragraph",
+    "id" : 195,
+    "page number" : 5,
+    "bounding box" : [ 311.978, 341.145, 563.037, 365.104 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "where Rc is the rotation from the camera to the global world. The distance from the plane to the camera center can be"
+  }, {
+    "type" : "paragraph",
+    "id" : 196,
+    "page number" : 5,
+    "bounding box" : [ 311.978, 293.324, 563.039, 341.194 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "expressed as di = (RcT(µi − Tc))RcTnTi , where Tc is the camera center in the world. µi is the center of gaussian Gi. The final distance map under the current viewpoint is achieved through α-blending:"
+  }, {
+    "type" : "list",
+    "id" : 200,
+    "level" : "5",
+    "page number" : 5,
+    "bounding box" : [ 441.115, 254.476, 454.903, 285.881 ],
+    "numbering style" : "english letters in lower case",
+    "number of list items" : 2,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 441.5, 273.795, 454.518, 285.881 ],
+      "font" : "CMMI7",
+      "font size" : 6.974,
+      "text color" : "[0.0]",
+      "content" : "i−1",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 5,
+      "bounding box" : [ 441.115, 254.476, 454.903, 261.449 ],
+      "font" : "CMMI7",
+      "font size" : 6.974,
+      "text color" : "[0.0]",
+      "content" : "j=1",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 201,
+    "page number" : 5,
+    "bounding box" : [ 454.902, 258.41, 563.036, 277.179 ],
+    "font" : "CMR10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "(1 − αj), (3)"
+  }, {
+    "type" : "heading",
+    "id" : 197,
+    "level" : "Subtitle",
+    "page number" : 5,
+    "bounding box" : [ 381.867, 258.609, 401.589, 276.193 ],
+    "heading level" : 7,
+    "font" : "CMBSY10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "D ="
+  }, {
+    "type" : "paragraph",
+    "id" : 199,
+    "page number" : 5,
+    "bounding box" : [ 421.262, 264.736, 438.957, 275.446 ],
+    "font" : "CMMI10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "diαi"
+  }, {
+    "type" : "paragraph",
+    "id" : 198,
+    "page number" : 5,
+    "bounding box" : [ 404.356, 249.436, 418.855, 261.522 ],
+    "font" : "CMMI7",
+    "font size" : 6.974,
+    "text color" : "[0.0]",
+    "content" : "i∈N"
+  }, {
+    "type" : "paragraph",
+    "id" : 202,
+    "page number" : 5,
+    "bounding box" : [ 311.978, 212.435, 563.036, 248.349 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Referencing Fig. 6, after obtaining the distance and normal of the plane through rendering, we can determine the corresponding depth map by intersecting rays with the plane:"
+  }, {
+    "type" : "paragraph",
+    "id" : 203,
+    "page number" : 5,
+    "bounding box" : [ 391.376, 180.986, 480.127, 206.532 ],
+    "font" : "CMMIB10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "D(p) = D N(p)K−1p˜"
+  }, {
+    "type" : "paragraph",
+    "id" : 205,
+    "level" : "6",
+    "page number" : 5,
+    "bounding box" : [ 480.871, 188.774, 563.036, 200.778 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : ". (4)"
+  }, {
+    "type" : "paragraph",
+    "id" : 206,
+    "page number" : 5,
+    "bounding box" : [ 311.978, 139.23, 563.038, 175.145 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "where p = [u,v]T is the 2D position on the image plane. p˜ denotes the homogeneous coordinate of p, and K is the intrinsic of camera."
+  }, {
+    "type" : "paragraph",
+    "id" : 207,
+    "page number" : 5,
+    "bounding box" : [ 311.978, 43.318, 563.036, 139.008 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "As shown in Fig. 2, our method of rendering depth has two major advantages compared to other depth rendering techniques. First, Our depth shapes are consistent with flattened Gaussian shapes, which can truly reflect actual surfaces. Previous methods typically involve directly rendering the depth map based on α-blending of the depth Z of Gaussians. Their depth is curved, inconsistent with the flat Gaussian shape, causing geometric conflicts. In contrast, we render the normal and"
+  }, {
+    "type" : "header",
+    "id" : 208,
+    "page number" : 6,
+    "bounding box" : [ 559.549, 758.819, 563.036, 767.223 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 27,
+      "page number" : 6,
+      "bounding box" : [ 559.549, 758.819, 563.036, 767.223 ],
+      "heading level" : 9,
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 6.974,
+      "text color" : "[0.0]",
+      "content" : "6"
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 209,
+    "page number" : 6,
+    "bounding box" : [ 48.964, 712.807, 300.022, 736.767 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "distance maps of the plane first and then convert them into the depth map. Our depth lies on the Gaussian fast plane. When"
+  }, {
+    "type" : "list",
+    "id" : 210,
+    "level" : "3",
+    "page number" : 6,
+    "bounding box" : [ 48.964, 605.211, 300.022, 712.856 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "previous list id" : 185,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 48.964, 605.211, 300.022, 712.856 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 9.963,
+      "text color" : "[0.0]",
+      "content" : "the 3D Gaussian flat planes fit the actual surface, the rendered depth can ensure complete consistency with the actual surface. Second, since the accumulation weight for each ray may be less than 1, previous rendering methods are affected by the weight accumulation, potentially resulting in depths that are closer to the camera side and overall underestimated. In contrast, our depth is obtained by dividing the distance from the rendering origin to the plane by the normal, effectively eliminating the influence of weight accumulation coefficients.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 211,
+    "page number" : 6,
+    "bounding box" : [ 48.964, 472.413, 300.016, 590.198 ],
+    "source" : "PGSR_images/imageFile7.png"
+  }, {
+    "type" : "list",
+    "id" : 212,
+    "level" : "1",
+    "page number" : 6,
+    "bounding box" : [ 48.964, 448.953, 300.019, 467.81 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "next list id" : 244,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 48.964, 448.953, 300.019, 467.81 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "Fig. 7: Qualitative comparison on DTU dataset. PGSR produces smooth and detailed surfaces.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 213,
+    "level" : "3",
+    "page number" : 6,
+    "bounding box" : [ 48.964, 402.899, 166.891, 414.794 ],
+    "numbering style" : "english letters",
+    "number of list items" : 1,
+    "previous list id" : 136,
+    "next list id" : 299,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 6,
+      "bounding box" : [ 48.964, 402.899, 166.891, 414.794 ],
+      "font" : "NimbusRomNo9L-ReguItal",
+      "font size" : 9.963,
+      "text color" : "[0.0]",
+      "content" : "B. Geometric Regularization",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 214,
+    "level" : "3",
+    "page number" : 6,
+    "bounding box" : [ 48.964, 325.421, 300.025, 397.2 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "1) Single-View Regularization: The original 3DGS relying solely on image reconstruction loss can easily fall into local overfitting optimization, leading to Gaussian shapes inconsistent with the actual surface. Based on this, we introduce geometric constraints to ensure that the 3D Gaussian fits the actual surface as closely as possible."
+  }, {
+    "type" : "paragraph",
+    "id" : 215,
+    "page number" : 6,
+    "bounding box" : [ 48.964, 181.244, 300.024, 325.114 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Local Plane Assumption: Encouraged by these methods [24], [37], [49], we adopt the assumption of local planarity to constrain the local consistency of depth and normals, meaning a pixel and its neighboring pixels can be considered as an approximate plane. After rendering the depth map, we sample four neighboring points using a fixed template. With these known depths, we compute the plane’s normal. This process is repeated for the entire image, generating normals from the rendered depth map. We then minimize the difference between this normal map and the rendered normal map, ensuring geometric consistency between local depth and normals."
+  }, {
+    "type" : "paragraph",
+    "id" : 216,
+    "page number" : 6,
+    "bounding box" : [ 48.964, 72.933, 300.025, 180.938 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Image Edge-Aware Single-View Loss: Neighboring pixels may not necessarily fully adhere to the local planarity assumption, especially in edge regions. To address this issue, We use image edges to approximate geometric edges. For a pixel point p, we sample four points from the neighboring pixels, such as up, down, left, and right. We project the four sampled depth points into 3D points {Pj|j = 1,...,4} in the camera coordinate system, then calculate the normal of the local plane for the pixel point p is:"
+  }, {
+    "type" : "paragraph",
+    "id" : 218,
+    "page number" : 6,
+    "bounding box" : [ 141.548, 33.066, 245.804, 63.925 ],
+    "font" : "CMMIB10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "(P1 − P0) × (P3 − P2) |(P1 − P0) × (P3 − P2)|"
+  }, {
+    "type" : "paragraph",
+    "id" : 220,
+    "page number" : 6,
+    "bounding box" : [ 246.998, 46.665, 300.022, 58.669 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : ", (5)"
+  }, {
+    "type" : "paragraph",
+    "id" : 217,
+    "page number" : 6,
+    "bounding box" : [ 99.221, 46.226, 137.588, 56.936 ],
+    "font" : "CMR10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Nd(p) ="
+  }, {
+    "type" : "paragraph",
+    "id" : 221,
+    "page number" : 6,
+    "bounding box" : [ 311.978, 724.763, 504.017, 736.767 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Finally, we add the single-view normal loss is:"
+  }, {
+    "type" : "paragraph",
+    "id" : 223,
+    "page number" : 6,
+    "bounding box" : [ 384.091, 686.906, 563.036, 719.655 ],
+    "font" : "CMMIB10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "1 W p∈W ∇I 5 ∥ Nd(p) − N(p) ∥1, (6)"
+  }, {
+    "type" : "paragraph",
+    "id" : 222,
+    "page number" : 6,
+    "bounding box" : [ 341.742, 702.206, 380.129, 712.915 ],
+    "font" : "CMMI7",
+    "font size" : 6.974,
+    "text color" : "[0.0]",
+    "content" : "Lsvgeo ="
+  }, {
+    "type" : "paragraph",
+    "id" : 226,
+    "page number" : 6,
+    "bounding box" : [ 311.978, 648.847, 563.037, 684.761 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Where ∇I is the image gradient normalized to the range of 0 to 1, N(p) is from Equation 2, and W is the set of image pixels."
+  }, {
+    "type" : "paragraph",
+    "id" : 228,
+    "level" : "3",
+    "page number" : 6,
+    "bounding box" : [ 311.978, 553.18, 563.039, 648.87 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "2) Multi-View Regularization: Single-view geometry regularization can maintain consistency between depth and normal geometry, providing fairly accurate initial geometric information. However, due to the irregular discretization of Gaussian point cloud optimization, we found that the geometry structure across multiple views is not entirely consistent. Therefore, it is necessary to introduce multi-view geometry regularization to ensure global consistency of the geometry structure."
+  }, {
+    "type" : "paragraph",
+    "id" : 229,
+    "page number" : 6,
+    "bounding box" : [ 311.978, 409.7, 563.036, 553.57 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Multi-View Geometric Consistency: The image loss often suffers from influences such as image noise, blur, and weak textures. In these cases, the geometric solution for photometric consistency is unreliable. Due to the discrete nature of Gaussian properties, we cannot establish a spatially dense or semi-dense SDF field as in SDF methods based on NeRF. We are unable to use spatial smoothness constraints, such as the Eikonal loss [56], to avoid the influence of unreliable solutions. To mitigate the impact of unreliable geometric solutions and ensure multi-view geometric consistency, we introduce this consistency prior constraint, which helps converge to the correct solution position, enhancing geometric smoothness."
+  }, {
+    "type" : "paragraph",
+    "id" : 230,
+    "page number" : 6,
+    "bounding box" : [ 311.978, 325.559, 563.04, 409.732 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "We render the normals N and the plane distances D to the camera for both the reference frame and the neighboring frame. As shown in Fig. 9, for a specific pixel pr in the reference frame, the corresponding normal is nr and the distance is dr. The pixel pr in the reference frame can be mapped to a pixel pn in the neighboring frame through the homography matrix Hrn:"
+  }, {
+    "type" : "paragraph",
+    "id" : 231,
+    "page number" : 6,
+    "bounding box" : [ 367.136, 276.54, 563.036, 319.244 ],
+    "font" : "CMMIB10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "p˜n = Hrnp˜r, (7) Hrn = Kn(Rrn −"
+  }, {
+    "type" : "paragraph",
+    "id" : 232,
+    "page number" : 6,
+    "bounding box" : [ 449.915, 276.033, 477.403, 301.689 ],
+    "font" : "CMMI7",
+    "font size" : 6.974,
+    "text color" : "[0.0]",
+    "content" : "TrnnTr dr"
+  }, {
+    "type" : "paragraph",
+    "id" : 234,
+    "page number" : 6,
+    "bounding box" : [ 480.169, 281.898, 563.036, 295.671 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : ")Kr−1, (8)"
+  }, {
+    "type" : "paragraph",
+    "id" : 235,
+    "page number" : 6,
+    "bounding box" : [ 311.978, 165.698, 563.041, 273.344 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "where p˜ is the homogeneous coordinate of p, Rrn and Trn are the relative transformation from the reference frame to the neighboring frame. Similarly, for the pixel pn in the neighboring frame, we can obtain the normal nn and the distance dn to compute the homography matrix Hnr. The pixel pr undergo forward and backward projections between the reference frame and the neighboring frame through Hrn and Hnr. Minimizing the forward and backward projection error constitutes the multi-view geometric consistency regularization:"
+  }, {
+    "type" : "paragraph",
+    "id" : 237,
+    "page number" : 6,
+    "bounding box" : [ 435.262, 132.731, 450.931, 160.591 ],
+    "font" : "CMMI10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "1 V p"
+  }, {
+    "type" : "paragraph",
+    "id" : 240,
+    "page number" : 6,
+    "bounding box" : [ 468.397, 143.142, 563.036, 155.584 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "ϕ(pr) (9)"
+  }, {
+    "type" : "paragraph",
+    "id" : 236,
+    "page number" : 6,
+    "bounding box" : [ 382.534, 143.142, 431.299, 153.851 ],
+    "font" : "CMMI7",
+    "font size" : 6.974,
+    "text color" : "[0.0]",
+    "content" : "Lmvgeom ="
+  }, {
+    "type" : "paragraph",
+    "id" : 239,
+    "page number" : 6,
+    "bounding box" : [ 450.932, 127.842, 465.021, 139.928 ],
+    "font" : "CMSY7",
+    "font size" : 6.974,
+    "text color" : "[0.0]",
+    "content" : "r∈V"
+  }, {
+    "type" : "paragraph",
+    "id" : 241,
+    "page number" : 6,
+    "bounding box" : [ 311.978, 43.318, 563.039, 127.053 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "where ϕ(pr) =∥ pr − HnrHrnpr ∥ is the forward and backward projection error of pr. When ϕ(pr) exceeds a certain threshold, it can be considered that the pixel is occluded or that there is a significant geometric error. To prevent errors caused by occlusion, these pixels will not be included in the multi-view regularization term. If these pixels are mistakenly identified as occluded due to geometric errors, it does not"
+  }, {
+    "type" : "header",
+    "id" : 242,
+    "page number" : 7,
+    "bounding box" : [ 559.549, 758.819, 563.036, 767.223 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 28,
+      "page number" : 7,
+      "bounding box" : [ 559.549, 758.819, 563.036, 767.223 ],
+      "heading level" : 9,
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 6.974,
+      "text color" : "[0.0]",
+      "content" : "7"
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 243,
+    "page number" : 7,
+    "bounding box" : [ 54.106, 218.454, 557.898, 735.933 ],
+    "source" : "PGSR_images/imageFile8.png"
+  }, {
+    "type" : "list",
+    "id" : 244,
+    "level" : "1",
+    "page number" : 7,
+    "bounding box" : [ 48.964, 194.994, 563.033, 213.851 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "previous list id" : 212,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 7,
+      "bounding box" : [ 48.964, 194.994, 563.033, 213.851 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "Fig. 8: Qualitative comparison on Tanks and Temples dataset. We visualize surface quality using a normal map generated from the reconstructed mesh. PGSR outperforms other baseline approaches in capturing scene details, whereas baseline methods exhibit missing or noisy surfaces.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 245,
+    "page number" : 7,
+    "bounding box" : [ 48.964, 98.032, 300.022, 181.767 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "affect our final convergence. This is because the single-view regularization term and the use of sparse 3D Gaussians to represent dense scenes will gradually propagate high-precision geometry, eventually leading all Gaussians to converge to the correct positions. V is the set of all pixels in the image excluding those with high forward and backward projection error."
+  }, {
+    "type" : "paragraph",
+    "id" : 246,
+    "page number" : 7,
+    "bounding box" : [ 48.964, 42.88, 300.025, 91.547 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Multi-View Photometric Consistency: Drawing inspiration from multi-view Stereo (MVS methods) [4], [15], [51], we employ photometric multi-view consistency constraints based on plane patches. We map a 11x11 pixel patch Pr centered at"
+  }, {
+    "type" : "paragraph",
+    "id" : 247,
+    "page number" : 7,
+    "bounding box" : [ 311.978, 98.032, 563.038, 181.767 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "pr to the neighboring frame patch Pn using the homography matrix Hrn. Focusing on geometric details, we convert color images into grayscale. Multi-view photometric regularization requires that Pr and Pn should be as consistent as possible. We use the normalized cross correlation (NCC) [68] of patches in the reference frame and the neighboring frame to measure the photometric consistency:"
+  }, {
+    "type" : "paragraph",
+    "id" : 249,
+    "page number" : 7,
+    "bounding box" : [ 366.131, 62.947, 381.8, 90.807 ],
+    "font" : "CMMI10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "1 V p"
+  }, {
+    "type" : "paragraph",
+    "id" : 252,
+    "page number" : 7,
+    "bounding box" : [ 397.605, 67.031, 563.036, 85.8 ],
+    "font" : "CMR10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "(1 − NCC(Ir(pr),In(Hrnpr))), (10)"
+  }, {
+    "type" : "paragraph",
+    "id" : 248,
+    "page number" : 7,
+    "bounding box" : [ 320.768, 73.358, 362.168, 84.067 ],
+    "font" : "CMMI7",
+    "font size" : 6.974,
+    "text color" : "[0.0]",
+    "content" : "Lmvrgb ="
+  }, {
+    "type" : "paragraph",
+    "id" : 251,
+    "page number" : 7,
+    "bounding box" : [ 381.801, 58.058, 395.89, 70.144 ],
+    "font" : "CMSY7",
+    "font size" : 6.974,
+    "text color" : "[0.0]",
+    "content" : "r∈V"
+  }, {
+    "type" : "paragraph",
+    "id" : 253,
+    "page number" : 7,
+    "bounding box" : [ 321.94, 43.318, 563.033, 55.322 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "where V is the set of all pixels in the image, excluding"
+  }, {
+    "type" : "header",
+    "id" : 254,
+    "page number" : 8,
+    "bounding box" : [ 559.549, 758.819, 563.036, 767.223 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 29,
+      "page number" : 8,
+      "bounding box" : [ 559.549, 758.819, 563.036, 767.223 ],
+      "heading level" : 9,
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 6.974,
+      "text color" : "[0.0]",
+      "content" : "8"
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 255,
+    "level" : "3",
+    "page number" : 8,
+    "bounding box" : [ 48.964, 722.034, 563.039, 740.891 ],
+    "numbering style" : "roman numbers",
+    "number of list items" : 1,
+    "next list id" : 317,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 8,
+      "bounding box" : [ 48.964, 722.034, 563.039, 740.891 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "TABLE I: Quantitative results of rendering quality for novel view synthesis on Mip-NeRF360 dataset. ”Red”, ”Orange” and ”Yellow” denote the best, second-best, and third-best results. PGSR achieves results close to 3DGS and outperforms similar reconstruction method SuGaR.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "table",
+    "id" : 256,
+    "level" : "4",
+    "page number" : 8,
+    "bounding box" : [ 182.679, 695.027, 535.437, 716.073 ],
+    "number of rows" : 2,
+    "number of columns" : 3,
+    "rows" : [ {
+      "type" : "table row",
+      "row number" : 1,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 8,
+        "bounding box" : [ 182.679, 707.886, 296.881, 716.073 ],
+        "row number" : 1,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 1,
+          "page number" : 8,
+          "bounding box" : [ 215.286, 707.669, 254.521, 716.073 ],
+          "font" : "NimbusRomNo9L-Regu",
+          "font size" : 6.974,
+          "text color" : "[0.0]",
+          "content" : "Indoor scenes"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 8,
+        "bounding box" : [ 296.881, 707.886, 421.235, 716.073 ],
+        "row number" : 1,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 3,
+          "page number" : 8,
+          "bounding box" : [ 337.314, 707.669, 381.2, 716.073 ],
+          "font" : "NimbusRomNo9L-Regu",
+          "font size" : 6.974,
+          "text color" : "[0.0]",
+          "content" : "Outdoor scenes"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 8,
+        "bounding box" : [ 421.235, 707.886, 535.437, 716.073 ],
+        "row number" : 1,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 4,
+          "page number" : 8,
+          "bounding box" : [ 452.179, 707.669, 514.65, 716.073 ],
+          "font" : "NimbusRomNo9L-Regu",
+          "font size" : 6.974,
+          "text color" : "[0.0]",
+          "content" : "Average on all scenes"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 2,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 8,
+        "bounding box" : [ 182.679, 695.027, 296.881, 707.886 ],
+        "row number" : 2,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 5,
+          "page number" : 8,
+          "bounding box" : [ 182.689, 695.027, 286.72, 708.103 ],
+          "font" : "NimbusRomNo9L-Regu",
+          "font size" : 6.974,
+          "text color" : "[0.0]",
+          "content" : "PSNR↑ SSIM↑ LPIPS↓"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 8,
+        "bounding box" : [ 296.881, 695.027, 421.235, 707.886 ],
+        "row number" : 2,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 7,
+          "page number" : 8,
+          "bounding box" : [ 307.043, 695.027, 411.073, 708.103 ],
+          "font" : "NimbusRomNo9L-Regu",
+          "font size" : 6.974,
+          "text color" : "[0.0]",
+          "content" : "PSNR↑ SSIM↑ LPIPS↓"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 8,
+        "bounding box" : [ 421.235, 695.027, 535.437, 707.886 ],
+        "row number" : 2,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 8,
+          "page number" : 8,
+          "bounding box" : [ 431.397, 695.027, 535.427, 708.103 ],
+          "font" : "NimbusRomNo9L-Regu",
+          "font size" : 6.974,
+          "text color" : "[0.0]",
+          "content" : "PSNR↑ SSIM↑ LPIPS↓"
+        } ]
+      } ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 258,
+    "page number" : 8,
+    "bounding box" : [ 105.578, 659.45, 532.124, 699.734 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 6.974,
+    "text color" : "[0.0]",
+    "content" : "NeRF [41] 26.84 0.790 0.370 21.46 0.458 0.515 24.15 0.624 0.443 Deep Blending [20] 26.40 0.844 0.261 21.54 0.524 0.364 23.97 0.684 0.313 INGP [44] 29.15 0.880 0.216 22.90 0.566 0.371 26.03 0.723 0.294 M-NeRF360 [2] 31.72 0.917 0.180 24.47 0.691 0.283 28.10 0.804 0.232 Neus [56] 25.10 0.789 0.319 21.93 0.629 0.600 23.74 0.720 0.439"
+  }, {
+    "type" : "paragraph",
+    "id" : 257,
+    "page number" : 8,
+    "bounding box" : [ 78.028, 662.709, 86.432, 697.571 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 6.974,
+    "text color" : "[0.0]",
+    "content" : "NeRF-based"
+  }, {
+    "type" : "paragraph",
+    "id" : 267,
+    "page number" : 8,
+    "bounding box" : [ 116.869, 630.334, 532.127, 654.678 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 6.974,
+    "text color" : "[0.0]",
+    "content" : "3DGS [27] 30.99 0.926 0.199 24.24 0.705 0.283 27.24 0.803 0.246 SuGaR [19] 29.44 0.911 0.216 22.76 0.631 0.349 26.10 0.771 0.283 2DGS [21] 30.39 0.923 0.183 24.33 0.709 0.284 27.03 0.804 0.239"
+  }, {
+    "type" : "paragraph",
+    "id" : 266,
+    "page number" : 8,
+    "bounding box" : [ 76.844, 618.952, 87.649, 653.813 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 8.966,
+    "text color" : "[0.0]",
+    "content" : "GS-based"
+  }, {
+    "type" : "paragraph",
+    "id" : 275,
+    "page number" : 8,
+    "bounding box" : [ 119.968, 614.394, 532.124, 630.768 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 6.974,
+    "text color" : "[0.0]",
+    "content" : "GOF [69] 30.80 0.928 0.167 24.76 0.742 0.225 27.78 0.835 0.196 PGSR 30.41 0.930 0.161 24.45 0.730 0.224 27.43 0.830 0.193"
+  }, {
+    "type" : "image",
+    "id" : 294,
+    "page number" : 8,
+    "bounding box" : [ 61.518, 445.526, 287.471, 589.257 ],
+    "source" : "PGSR_images/imageFile9.png"
+  }, {
+    "type" : "caption",
+    "id" : 295,
+    "page number" : 8,
+    "bounding box" : [ 86.476, 430.554, 262.511, 440.923 ],
+    "linked content id" : 294,
+    "font" : "NimbusRomNo9L-Medi",
+    "font size" : 7.97,
+    "text color" : "[0.0]",
+    "content" : "Fig. 9: Multi-view photometric and geometric loss."
+  }, {
+    "type" : "paragraph",
+    "id" : 296,
+    "page number" : 8,
+    "bounding box" : [ 48.964, 397.738, 280.395, 409.742 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "those with high forward and backward projection errors."
+  }, {
+    "type" : "paragraph",
+    "id" : 297,
+    "level" : "5",
+    "page number" : 8,
+    "bounding box" : [ 48.964, 350.0, 300.025, 397.87 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "3) Geometric Regularization Loss: Finally, the geometric regularization loss includes single-view geometric, multiview geometric, and multi-view photometric consistency constraints:"
+  }, {
+    "type" : "paragraph",
+    "id" : 298,
+    "page number" : 8,
+    "bounding box" : [ 72.132, 319.152, 300.023, 331.595 ],
+    "font" : "CMMI7",
+    "font size" : 6.974,
+    "text color" : "[0.0]",
+    "content" : "Lgeo = λ2Lsvgeo + λ3Lmvrgb + λ4Lmvgeom. (11)"
+  }, {
+    "type" : "list",
+    "id" : 299,
+    "level" : "3",
+    "page number" : 8,
+    "bounding box" : [ 48.964, 286.175, 211.334, 298.07 ],
+    "numbering style" : "english letters",
+    "number of list items" : 1,
+    "previous list id" : 213,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 8,
+      "bounding box" : [ 48.964, 286.175, 211.334, 298.07 ],
+      "font" : "NimbusRomNo9L-ReguItal",
+      "font size" : 9.963,
+      "text color" : "[0.0]",
+      "content" : "C. Exposure Compensation Image Loss",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 300,
+    "page number" : 8,
+    "bounding box" : [ 48.964, 175.372, 300.026, 283.018 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Due to changes in external lighting conditions, cameras may have different exposure times during different shooting moments, leading to overall brightness variations in images. The original 3DGS does not consider brightness changes, which can result in floating artifacts in practical scenes. To model the overall brightness variations at different times, we assign two exposure coefficients, a and b, to each image. Ultimately, images with exposure compensation can be obtained by simply computing with exposure coefficients:"
+  }, {
+    "type" : "paragraph",
+    "id" : 301,
+    "page number" : 8,
+    "bounding box" : [ 130.262, 155.469, 300.023, 169.019 ],
+    "font" : "CMMI10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Iia = exp(ai)Iir + bi, (12)"
+  }, {
+    "type" : "paragraph",
+    "id" : 302,
+    "page number" : 8,
+    "bounding box" : [ 48.964, 126.425, 300.021, 150.384 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "where Iir is the rendered image and Iia is the exposureadjusted image. We employ the following image loss:"
+  }, {
+    "type" : "paragraph",
+    "id" : 303,
+    "page number" : 8,
+    "bounding box" : [ 66.126, 81.411, 300.023, 120.746 ],
+    "font" : "CMR10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Lrgb = (1 − λ)L1(I˜− Ii) + λLSSIM(Iir − Ii). (13) I˜ ="
+  }, {
+    "type" : "paragraph",
+    "id" : 304,
+    "page number" : 8,
+    "bounding box" : [ 117.562, 66.786, 257.404, 99.902 ],
+    "font" : "CMMI7",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Iia, if LSSIM(Iir − Ii) < 0.5 Iir, if LSSIM(Iir − Ii) >= 0.5"
+  }, {
+    "type" : "paragraph",
+    "id" : 305,
+    "level" : "5",
+    "page number" : 8,
+    "bounding box" : [ 283.425, 81.103, 300.023, 93.107 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "(14)"
+  }, {
+    "type" : "paragraph",
+    "id" : 306,
+    "page number" : 8,
+    "bounding box" : [ 48.964, 43.318, 300.026, 67.277 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "where Ii is the ground truth image. The L1 loss constraint ensures that the exposure-adjusted image is consistent with the"
+  }, {
+    "type" : "paragraph",
+    "id" : 307,
+    "page number" : 8,
+    "bounding box" : [ 311.978, 482.446, 563.036, 590.092 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "ground truth image, while the SSIM loss requires the rendered image to have similar structures to the ground truth image. To enhance the robustness of exposure coefficient estimation, we need to ensure that the rendered image and the ground truth image have sufficient structural similarity before performing the estimation. After training, Iir is required to be globally consistent and maintain structural similarity with the ground truth image, while Iia can adjust the brightness of images to match the ground truth image perfectly."
+  }, {
+    "type" : "paragraph",
+    "id" : 308,
+    "page number" : 8,
+    "bounding box" : [ 311.978, 456.427, 360.825, 468.322 ],
+    "font" : "NimbusRomNo9L-ReguItal",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "D. Training"
+  }, {
+    "type" : "paragraph",
+    "id" : 309,
+    "page number" : 8,
+    "bounding box" : [ 311.978, 416.971, 563.036, 453.323 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "In summary, our final training loss L consists of the image reconstruction loss Lrgb, the flattening 3D Gaussian loss Ls, the geometric loss Lgeo:"
+  }, {
+    "type" : "paragraph",
+    "id" : 310,
+    "page number" : 8,
+    "bounding box" : [ 382.781, 398.712, 563.036, 411.155 ],
+    "font" : "CMMIB10",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "L = Lrgb + λ1Ls + Lgeo. (15)"
+  }, {
+    "type" : "paragraph",
+    "id" : 311,
+    "page number" : 8,
+    "bounding box" : [ 311.978, 356.544, 563.037, 392.897 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "We set λ1 = 100. For the image reconstruction loss, we set λ = 0.2. For the geometric loss, we set λ2 = 0.01, λ3 = 0.2, and λ4 = 0.05."
+  }, {
+    "type" : "paragraph",
+    "id" : 312,
+    "page number" : 8,
+    "bounding box" : [ 399.799, 333.095, 475.22, 345.099 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 7.97,
+    "text color" : "[0.0]",
+    "content" : "V. EXPERIMENTS"
+  }, {
+    "type" : "paragraph",
+    "id" : 313,
+    "page number" : 8,
+    "bounding box" : [ 311.978, 246.366, 563.036, 330.46 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Datasets: To validate the effectiveness of our method, we conducted experiments on various real-world datasets, including objects, and indoor and outdoor environments. We chose the widely used MiP-NeRF360 dataset [2] for evaluating novel view synthesis performance. The large and complex scenes of the TnT [28] and 15 object-centric scenes of the DTU dataset [23] were selected to assess reconstruction quality."
+  }, {
+    "type" : "paragraph",
+    "id" : 314,
+    "page number" : 8,
+    "bounding box" : [ 311.978, 174.73, 563.036, 246.869 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Evaluation Criterion: We chose three widely used image evaluation metrics to validate novel view synthesis: peak signal-to-noise ratio (PSNR), structural similarity index measure (SSIM), and the learned perceptual image patch similarity (LPIPS) [70]. For assessing surface quality, we employed the F1 score and chamfer distance."
+  }, {
+    "type" : "paragraph",
+    "id" : 315,
+    "page number" : 8,
+    "bounding box" : [ 311.978, 43.318, 563.04, 175.232 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Implementation Details: Our training strategy and hyperparameters are generally consistent with 3DGS [27]. The training iterations for all scenes are set to 30,000. We adopt the densification strategy of AbsGS [67]. The learning rate for the exposure coefficient is 0.001. We begin by rendering the depth for each training view, followed by utilizing the TSDF Fusion algorithm [45] to generate the corresponding TSDF field. Subsequently, we extract the mesh [38] from the TSDF field. We only utilize the exposure compensation on the Tanks and Temples dataset. All experiments in this paper are conducted on Nvidia RTX 4090 GPU."
+  }, {
+    "type" : "header",
+    "id" : 316,
+    "page number" : 9,
+    "bounding box" : [ 559.549, 758.819, 563.036, 767.223 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 30,
+      "page number" : 9,
+      "bounding box" : [ 559.549, 758.819, 563.036, 767.223 ],
+      "heading level" : 9,
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 6.974,
+      "text color" : "[0.0]",
+      "content" : "9"
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 317,
+    "level" : "3",
+    "page number" : 9,
+    "bounding box" : [ 48.964, 573.816, 563.033, 740.891 ],
+    "numbering style" : "roman numbers",
+    "number of list items" : 2,
+    "previous list id" : 255,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 48.964, 722.034, 563.033, 740.891 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "TABLE II: Quantitative results of chamfer distance(mm)↓ on DTU dataset [23]. PGSR achieves the highest reconstruction accuracy and is over 100 times faster than the SDF method based on NeRF.",
+      "kids" : [ {
+        "type" : "paragraph",
+        "id" : 44,
+        "page number" : 9,
+        "bounding box" : [ 67.507, 680.459, 553.379, 713.0 ],
+        "font" : "NimbusRomNo9L-Regu",
+        "font size" : 7.921,
+        "text color" : "[0.0]",
+        "content" : "24 37 40 55 63 65 69 83 97 105 106 110 114 118 122 Mean Time VolSDF [60] 1.14 1.26 0.81 0.49 1.25 0.70 0.72 1.29 1.18 0.70 0.66 1.08 0.42 0.61 0.55 0.86 > 12h NeuS [56] 1.00 1.37 0.93 0.43 1.10 0.65 0.57 1.48 1.09 0.83 0.52 1.20 0.35 0.49 0.54 0.84 > 12h"
+      }, {
+        "type" : "paragraph",
+        "id" : 47,
+        "page number" : 9,
+        "bounding box" : [ 58.866, 671.547, 555.359, 681.092 ],
+        "font" : "NimbusRomNo9L-Regu",
+        "font size" : 7.921,
+        "text color" : "[0.0]",
+        "content" : "Neuralangelo [33] 0.37 0.72 0.35 0.35 0.87 0.54 0.53 1.29 0.97 0.73 0.47 0.74 0.32 0.41 0.43 0.61 > 128h"
+      }, {
+        "type" : "paragraph",
+        "id" : 63,
+        "page number" : 9,
+        "bounding box" : [ 68.759, 630.729, 552.586, 667.007 ],
+        "font" : "NimbusRomNo9L-Regu",
+        "font size" : 7.921,
+        "text color" : "[0.0]",
+        "content" : "SuGaR [19] 1.47 1.33 1.13 0.61 2.25 1.71 1.15 1.63 1.62 1.07 0.79 2.45 0.98 0.88 0.79 1.33 1h 2DGS [21] 0.48 0.91 0.39 0.39 1.01 0.83 0.81 1.36 1.27 0.76 0.70 1.40 0.40 0.76 0.52 0.80 0.32h GOF [69] 0.50 0.82 0.37 0.37 1.12 0.74 0.73 1.18 1.29 0.68 0.77 0.90 0.42 0.66 0.49 0.74 2h PGSR(DS) 0.34 0.58 0.29 0.29 0.78 0.58 0.54 1.01 0.73 0.51 0.49 0.69 0.31 0.37 0.38 0.53 0.6h"
+      }, {
+        "type" : "paragraph",
+        "id" : 84,
+        "page number" : 9,
+        "bounding box" : [ 78.28, 621.818, 550.606, 631.363 ],
+        "font" : "NimbusRomNo9L-Regu",
+        "font size" : 7.921,
+        "text color" : "[0.0]",
+        "content" : "PGSR 0.31 0.52 0.27 0.27 0.76 0.54 0.49 0.98 0.69 0.49 0.46 0.56 0.28 0.35 0.36 0.49 1.0h"
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 48.964, 573.816, 300.026, 601.64 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "TABLE III: Quantitative results of F1 Score↑ for reconstruction on Tanks and Temples dataset. PGSR achieves similar reconstruction accuracy to Neuralgangelo, but our training speed is over a hundred times faster.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 322,
+    "page number" : 9,
+    "bounding box" : [ 311.978, 513.477, 563.031, 596.678 ],
+    "source" : "PGSR_images/imageFile10.png"
+  }, {
+    "type" : "table",
+    "id" : 318,
+    "level" : "5",
+    "page number" : 9,
+    "bounding box" : [ 52.378, 500.223, 293.817, 567.388 ],
+    "number of rows" : 3,
+    "number of columns" : 3,
+    "rows" : [ {
+      "type" : "table row",
+      "row number" : 1,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 9,
+        "bounding box" : [ 52.542, 559.835, 92.408, 567.224 ],
+        "row number" : 1,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ ]
+      }, {
+        "type" : "table cell",
+        "page number" : 9,
+        "bounding box" : [ 92.408, 559.835, 191.063, 567.224 ],
+        "row number" : 1,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 1,
+          "page number" : 9,
+          "bounding box" : [ 96.678, 560.37, 186.794, 568.285 ],
+          "font" : "NimbusRomNo9L-Regu",
+          "font size" : 6.569,
+          "text color" : "[0.0]",
+          "content" : "NeuS Geo-Neus Neurlangelo"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 9,
+        "bounding box" : [ 191.063, 559.835, 293.653, 567.224 ],
+        "row number" : 1,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 2,
+          "page number" : 9,
+          "bounding box" : [ 195.333, 560.37, 289.712, 568.285 ],
+          "font" : "NimbusRomNo9L-Regu",
+          "font size" : 6.569,
+          "text color" : "[0.0]",
+          "content" : "SuGaR 2D GS GOF PGSR"
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 2,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 9,
+        "bounding box" : [ 52.542, 515.167, 92.408, 559.835 ],
+        "row number" : 2,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 4,
+          "page number" : 9,
+          "bounding box" : [ 52.378, 515.702, 88.139, 560.567 ],
+          "font" : "NimbusRomNo9L-Regu",
+          "font size" : 6.569,
+          "text color" : "[0.0]",
+          "content" : "Barn Caterpillar Courthouse Ignatius Meetingroom Truck"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 9,
+        "bounding box" : [ 92.408, 515.167, 191.063, 559.835 ],
+        "row number" : 2,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 5,
+          "page number" : 9,
+          "bounding box" : [ 98.228, 515.702, 176.306, 560.567 ],
+          "font" : "NimbusRomNo9L-Regu",
+          "font size" : 6.569,
+          "text color" : "[0.0]",
+          "content" : "0.29 0.33 0.70 0.29 0.26 0.36 0.17 0.12 0.28 0.83 0.72 0.89 0.24 0.20 0.32 0.45 0.45 0.48"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 9,
+        "bounding box" : [ 191.063, 515.167, 293.653, 559.835 ],
+        "row number" : 2,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "list",
+          "id" : 23,
+          "level" : "1",
+          "page number" : 9,
+          "bounding box" : [ 199.073, 515.702, 287.245, 560.567 ],
+          "numbering style" : "arabic numbers",
+          "number of list items" : 2,
+          "list items" : [ {
+            "type" : "list item",
+            "page number" : 9,
+            "bounding box" : [ 199.073, 530.482, 287.245, 560.567 ],
+            "font" : "NimbusRomNo9L-Regu",
+            "font size" : 6.569,
+            "text color" : "[0.0]",
+            "content" : "0.14 0.36 0.51 0.66 0.16 0.23 0.41 0.41 0.08 0.13 0.28 0.21 0.33 0.44 0.68 0.80",
+            "kids" : [ ]
+          }, {
+            "type" : "list item",
+            "page number" : 9,
+            "bounding box" : [ 199.073, 515.702, 287.245, 531.008 ],
+            "font" : "NimbusRomNo9L-Regu",
+            "font size" : 6.569,
+            "text color" : "[0.0]",
+            "content" : "0.15 0.16 0.28 0.29 0.26 0.26 0.58 0.60",
+            "kids" : [ ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "type" : "table row",
+      "row number" : 3,
+      "cells" : [ {
+        "type" : "table cell",
+        "page number" : 9,
+        "bounding box" : [ 52.542, 500.387, 92.408, 515.167 ],
+        "row number" : 3,
+        "column number" : 1,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 28,
+          "page number" : 9,
+          "bounding box" : [ 52.378, 500.594, 67.335, 515.899 ],
+          "font" : "NimbusRomNo9L-Regu",
+          "font size" : 6.569,
+          "text color" : "[0.0]",
+          "content" : "Mean Time"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 9,
+        "bounding box" : [ 92.408, 500.387, 191.063, 515.167 ],
+        "row number" : 3,
+        "column number" : 2,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 30,
+          "page number" : 9,
+          "bounding box" : [ 97.078, 500.594, 179.098, 515.899 ],
+          "font" : "NimbusRomNo9L-Regu",
+          "font size" : 6.569,
+          "text color" : "[0.0]",
+          "content" : "0.38 0.35 0.50 >24h >24h >128h"
+        } ]
+      }, {
+        "type" : "table cell",
+        "page number" : 9,
+        "bounding box" : [ 191.063, 500.387, 293.653, 515.167 ],
+        "row number" : 3,
+        "column number" : 3,
+        "row span" : 1,
+        "column span" : 1,
+        "kids" : [ {
+          "type" : "paragraph",
+          "id" : 32,
+          "page number" : 9,
+          "bounding box" : [ 199.073, 500.594, 287.245, 515.899 ],
+          "font" : "NimbusRomNo9L-Regu",
+          "font size" : 6.569,
+          "text color" : "[0.0]",
+          "content" : "0.19 0.30 0.46 0.50 2h 34.2 m 2h 1.2h"
+        } ]
+      } ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 319,
+    "page number" : 9,
+    "bounding box" : [ 52.378, 500.594, 58.218, 553.177 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 6.569,
+    "text color" : "[0.0]",
+    "content" : "C C I M T T"
+  }, {
+    "type" : "caption",
+    "id" : 323,
+    "page number" : 9,
+    "bounding box" : [ 311.978, 481.05, 563.037, 508.874 ],
+    "linked content id" : 322,
+    "font" : "NimbusRomNo9L-Medi",
+    "font size" : 7.97,
+    "text color" : "[0.0]",
+    "content" : "Fig. 10: The qualitative comparison of our unbiased depth method with the previous depth method [11], [24] is depicted in the normal map. Our overall geometric structure appears smoother and more precise."
+  }, {
+    "type" : "list",
+    "id" : 320,
+    "level" : "6",
+    "page number" : 9,
+    "bounding box" : [ 48.964, 70.504, 146.249, 478.921 ],
+    "numbering style" : "english letters",
+    "number of list items" : 3,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 48.964, 467.026, 146.249, 478.921 ],
+      "font" : "NimbusRomNo9L-ReguItal",
+      "font size" : 9.963,
+      "text color" : "[0.0]",
+      "content" : "A. Real-time Rendering",
+      "kids" : [ {
+        "type" : "paragraph",
+        "id" : 39,
+        "page number" : 9,
+        "bounding box" : [ 48.964, 332.244, 300.022, 463.8 ],
+        "font" : "NimbusRomNo9L-Regu",
+        "font size" : 9.963,
+        "text color" : "[0.0]",
+        "content" : "For the validation of rendering quality, we follow the 3DGS method and conduct validation on the Mip-NeRF360 dataset [2]. We compare with current state-of-the-art methods for pure novel view synthesis as well as similar reconstruction methods to ours, including NeRF [41], Deep Blending [20], INGP [44], Mip-NeRF360 [2], NeuS [56], 3DGS [27], SuGaR [19], 2DGS [21], and GOF [69]. As shown in Table I and Fig. 5, compared to the current state-of-theart methods, our approach not only provides excellent surface reconstruction quality but also achieves outstanding novel view synthesis results."
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 48.964, 304.638, 122.847, 316.533 ],
+      "font" : "NimbusRomNo9L-ReguItal",
+      "font size" : 9.963,
+      "text color" : "[0.0]",
+      "content" : "B. Reconstruction",
+      "kids" : [ {
+        "type" : "paragraph",
+        "id" : 40,
+        "page number" : 9,
+        "bounding box" : [ 48.964, 229.632, 300.022, 301.412 ],
+        "font" : "NimbusRomNo9L-Regu",
+        "font size" : 9.963,
+        "text color" : "[0.0]",
+        "content" : "We compared our method, PGSR, with current state-of-theart neural surface reconstruction methods including NeuS [56], Geo-NeuS [15], and NeuralAngelo [33]. We also compared it with recently emerged reconstruction methods based on 3DGS, such as SuGaR [19], 2DGS [21], and GOF [69]. All results are summarized in Fig. 5, Fig. 7, Fig. 8, Table II and Table III."
+      }, {
+        "type" : "paragraph",
+        "id" : 41,
+        "page number" : 9,
+        "bounding box" : [ 48.964, 157.893, 300.025, 230.032 ],
+        "font" : "NimbusRomNo9L-Regu",
+        "font size" : 9.963,
+        "text color" : "[0.0]",
+        "content" : "The DTU dataset: Our method achieves the highest reconstruction accuracy with relatively fast training speed. PGSR(DS) denotes downsampling to half the original image size for training. Our method significantly outperforms other 3DGS-based reconstruction methods. As shown in Fig. 7, our surfaces are smoother and contain more details."
+      }, {
+        "type" : "paragraph",
+        "id" : 42,
+        "page number" : 9,
+        "bounding box" : [ 48.964, 98.109, 300.024, 158.293 ],
+        "font" : "NimbusRomNo9L-Regu",
+        "font size" : 9.963,
+        "text color" : "[0.0]",
+        "content" : "The TnT dataset: The F1 score of PGSR is similar to NeuralAngelo and better compared to other current reconstruction methods. Our training time is over 100 times faster than NeuralAngelo. Moreover, compared to NeuralAngelo, we can reconstruct more surface details."
+      } ]
+    }, {
+      "type" : "list item",
+      "page number" : 9,
+      "bounding box" : [ 48.964, 70.504, 101.278, 82.399 ],
+      "font" : "NimbusRomNo9L-ReguItal",
+      "font size" : 9.963,
+      "text color" : "[0.0]",
+      "content" : "C. Ablations",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "paragraph",
+    "id" : 324,
+    "page number" : 9,
+    "bounding box" : [ 325.85, 461.971, 549.165, 472.34 ],
+    "font" : "NimbusRomNo9L-Medi",
+    "font size" : 7.97,
+    "text color" : "[0.0]",
+    "content" : "TABLE IV: Ablation study on the Meetingroom of TnT dataset."
+  }, {
+    "type" : "paragraph",
+    "id" : 326,
+    "page number" : 9,
+    "bounding box" : [ 375.378, 438.507, 513.511, 452.891 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 7.671,
+    "text color" : "[0.0]",
+    "content" : "Model setting F1-Score↑ PSNR↑"
+  }, {
+    "type" : "paragraph",
+    "id" : 329,
+    "page number" : 9,
+    "bounding box" : [ 371.426, 420.386, 510.3, 438.397 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 7.671,
+    "text color" : "[0.0]",
+    "content" : "w/o Single-view 0.26 27.46 w/o Multi-view 0.15 28.14"
+  }, {
+    "type" : "paragraph",
+    "id" : 332,
+    "page number" : 9,
+    "bounding box" : [ 359.06, 397.126, 510.3, 420.863 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 7.671,
+    "text color" : "[0.0]",
+    "content" : "w/o Our unbiased depth 0.20 26.80 Full model 0.29 27.30"
+  }, {
+    "type" : "paragraph",
+    "id" : 337,
+    "page number" : 9,
+    "bounding box" : [ 311.978, 343.33, 563.036, 379.245 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "precise, especially in flat regions. Table IV also demonstrates that our depth rendering method achieves higher reconstruction and rendering accuracy."
+  }, {
+    "type" : "paragraph",
+    "id" : 338,
+    "page number" : 9,
+    "bounding box" : [ 311.978, 235.832, 563.04, 343.837 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Single-View and Multi-view Regularization: The singleview regularization term can provide a good initial geometric accuracy without relying on multi-view information. When single-view regularization is removed, the reconstruction accuracy decreases. Multi-view regularization effectively constrains the consistency of geometry between multiple views, improving overall reconstruction accuracy. From Table IV, it is evident that multi-view regularization is crucial for reconstruction accuracy."
+  }, {
+    "type" : "paragraph",
+    "id" : 339,
+    "page number" : 9,
+    "bounding box" : [ 311.978, 188.111, 563.036, 236.339 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Exposure Compensation: We validated the exposure compensation on the Ignatius series of the TnT dataset. As shown in Table V, exposure compensation enhances reconstruction and rendering quality."
+  }, {
+    "type" : "paragraph",
+    "id" : 340,
+    "page number" : 9,
+    "bounding box" : [ 311.978, 162.154, 435.833, 174.049 ],
+    "font" : "NimbusRomNo9L-ReguItal",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "D. Virtual Reality Application"
+  }, {
+    "type" : "paragraph",
+    "id" : 341,
+    "page number" : 9,
+    "bounding box" : [ 311.978, 111.185, 563.036, 159.055 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "As shown in Fig. 11, we used our method to separately reconstruct the original materials. We then extracted the excavator and Ignatius using masks and placed them in the garden scene. By rendering the scene and objects separately and using"
+  }, {
+    "type" : "paragraph",
+    "id" : 342,
+    "page number" : 9,
+    "bounding box" : [ 343.165, 85.356, 531.85, 95.725 ],
+    "font" : "NimbusRomNo9L-Medi",
+    "font size" : 7.97,
+    "text color" : "[0.0]",
+    "content" : "TABLE V: Ablation study on exposure Compensation."
+  }, {
+    "type" : "paragraph",
+    "id" : 344,
+    "page number" : 9,
+    "bounding box" : [ 361.588, 52.539, 513.668, 76.275 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 7.671,
+    "text color" : "[0.0]",
+    "content" : "Model setting F1-Score↑ PSNR↑ w/o exposure modeling 0.76 21.71"
+  }, {
+    "type" : "paragraph",
+    "id" : 321,
+    "page number" : 9,
+    "bounding box" : [ 48.964, 43.318, 300.024, 67.636 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Our Unbiased Depth: From Fig 10, it can be observed that our overall geometric structure appears smoother and more"
+  }, {
+    "type" : "paragraph",
+    "id" : 348,
+    "page number" : 9,
+    "bounding box" : [ 364.573, 43.772, 510.458, 53.016 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 7.671,
+    "text color" : "[0.0]",
+    "content" : "w exposure modeling 0.80 25.77"
+  }, {
+    "type" : "header",
+    "id" : 351,
+    "page number" : 10,
+    "bounding box" : [ 556.062, 758.819, 563.036, 767.223 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 31,
+      "page number" : 10,
+      "bounding box" : [ 556.062, 758.819, 563.036, 767.223 ],
+      "heading level" : 9,
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 6.974,
+      "text color" : "[0.0]",
+      "content" : "10"
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 352,
+    "page number" : 10,
+    "bounding box" : [ 48.964, 573.604, 300.022, 735.931 ],
+    "source" : "PGSR_images/imageFile11.png"
+  }, {
+    "type" : "caption",
+    "id" : 353,
+    "page number" : 10,
+    "bounding box" : [ 48.964, 541.177, 300.026, 569.001 ],
+    "linked content id" : 352,
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 7.97,
+    "text color" : "[0.0]",
+    "content" : "Fig. 11: Virtual Reality Application. (a) Original materials, including garden scene, excavator, and Ignatius. (b) A Virtual Reality effect showcase synthesized from these original materials."
+  }, {
+    "type" : "paragraph",
+    "id" : 354,
+    "page number" : 10,
+    "bounding box" : [ 48.964, 490.727, 300.022, 526.641 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "our rendered depth to determine occlusion relationships, we achieved immersive, high-fidelity virtual reality effects with high-precision depth estimation."
+  }, {
+    "type" : "paragraph",
+    "id" : 355,
+    "page number" : 10,
+    "bounding box" : [ 92.128, 461.149, 256.868, 473.153 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 7.97,
+    "text color" : "[0.0]",
+    "content" : "VI. LIMITATIONS AND FUTURE WORK"
+  }, {
+    "type" : "paragraph",
+    "id" : 356,
+    "page number" : 10,
+    "bounding box" : [ 48.964, 275.738, 300.022, 455.114 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "Although our PGSR efficiently and faithfully performs geometric reconstruction, it also faces several challenges. Firstly, we cannot perform geometric reconstruction in regions with missing or limited viewpoints, leading to incomplete or less accurate geometry. Exploring methods to improve reconstruction quality under insufficient constraints using priors is another avenue for further investigation. Secondly, our method does not consider scenarios involving reflective surfaces or mirrors, so reconstruction in these environments will pose challenges. Integrating with existing 3DGS work that accounts for reflective surfaces would enhance reconstruction accuracy in such scenarios. Finally, we found that there are some floating points in the scene, which affect the rendering and reconstruction quality. Integrating more advanced 3DGS baselines [39] would help further enhance overall quality."
+  }, {
+    "type" : "paragraph",
+    "id" : 357,
+    "page number" : 10,
+    "bounding box" : [ 134.289, 246.16, 214.705, 258.164 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 7.97,
+    "text color" : "[0.0]",
+    "content" : "VII. CONCLUSION"
+  }, {
+    "type" : "paragraph",
+    "id" : 358,
+    "page number" : 10,
+    "bounding box" : [ 48.964, 108.569, 300.022, 240.125 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 9.963,
+    "text color" : "[0.0]",
+    "content" : "In this paper, we propose a novel unbiased depth rendering method based on 3DGS. With this method, we render the plane geometry parameters for each pixel, including normal, distance, and depth maps. We then incorporate single-view and multi-view geometric regularization, and exposure compensation model to achieve precise global consistency in geometry. We validate our rendering and reconstruction quality on the MipNeRF360, DTU, and TnT datasets. The experimental results indicate that our method achieves the highest geometric reconstruction accuracy and rendering quality compared to the current state-of-the-art methods."
+  }, {
+    "type" : "paragraph",
+    "id" : 359,
+    "page number" : 10,
+    "bounding box" : [ 146.598, 78.991, 202.398, 90.995 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 7.97,
+    "text color" : "[0.0]",
+    "content" : "REFERENCES"
+  }, {
+    "type" : "paragraph",
+    "id" : 360,
+    "page number" : 10,
+    "bounding box" : [ 52.949, 43.877, 300.022, 71.414 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 7.97,
+    "text color" : "[0.0]",
+    "content" : "[1] Connelly Barnes, Eli Shechtman, Adam Finkelstein, and Dan B Goldman. Patchmatch: A randomized correspondence algorithm for structural image editing. ACM Trans. Graph., 28(3):24, 2009."
+  }, {
+    "type" : "list",
+    "id" : 361,
+    "level" : "7",
+    "page number" : 10,
+    "bounding box" : [ 311.978, 43.877, 563.04, 734.926 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 19,
+    "next list id" : 363,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 315.963, 689.456, 563.036, 734.926 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[2] Jonathan T Barron, Ben Mildenhall, Matthew Tancik, Peter Hedman, Ricardo Martin-Brualla, and Pratul P Srinivasan. Mip-nerf: A multiscale representation for anti-aliasing neural radiance fields. In Proceedings of the IEEE/CVF International Conference on Computer Vision, pages 5855–5864, 2021.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 315.963, 653.591, 563.037, 690.094 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[3] Jonathan T Barron, Ben Mildenhall, Dor Verbin, Pratul P Srinivasan, and Peter Hedman. Zip-nerf: Anti-aliased grid-based neural radiance fields. In Proceedings of the IEEE/CVF International Conference on Computer Vision, pages 19697–19705, 2023.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 315.963, 608.759, 563.037, 654.268 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[4] Neill DF Campbell, George Vogiatzis, Carlos Hern´andez, and Roberto Cipolla. Using multiple hypotheses to improve depth-maps for multiview stereo. In Computer Vision–ECCV 2008: 10th European Conference on Computer Vision, Marseille, France, October 12-18, 2008, Proceedings, Part I 10, pages 766–779. Springer, 2008.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 315.963, 572.893, 563.038, 609.436 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[5] Carlos Campos, Richard Elvira, Juan J G´omez Rodr´ıguez, Jos´e MM Montiel, and Juan D Tard´os. Orb-slam3: An accurate open-source library for visual, visual–inertial, and multimap slam. IEEE Transactions on Robotics, 37(6):1874–1890, 2021.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 315.963, 545.994, 563.036, 573.571 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[6] Fr´ed´eric Cazals and Joachim Giesen. Delaunay triangulation based surface reconstruction. In Effective computational geometry for curves and surfaces, pages 231–276. Springer, 2006.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 315.963, 501.162, 563.037, 546.632 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[7] Danpeng Chen, Nan Wang, Runsen Xu, Weijian Xie, Hujun Bao, and Guofeng Zhang. Rnin-vio: Robust neural inertial navigation aided visual-inertial odometry in challenging scenes. In 2021 IEEE International Symposium on Mixed and Augmented Reality (ISMAR), pages 275–283. IEEE, 2021.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 315.963, 465.297, 563.037, 501.8 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[8] Danpeng Chen, Shuai Wang, Weijian Xie, Shangjin Zhai, Nan Wang, Hujun Bao, and Guofeng Zhang. Vip-slam: An efficient tightly-coupled rgb-d visual inertial planar slam. In 2022 International Conference on Robotics and Automation (ICRA), pages 5615–5621. IEEE, 2022.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 315.963, 438.398, 563.036, 465.934 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[9] Hanlin Chen, Chen Li, and Gim Hee Lee. Neusg: Neural implicit surface reconstruction with 3d gaussian splatting guidance. arXiv preprint arXiv:2312.00846, 2023.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 311.978, 402.532, 563.036, 439.035 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[10] Yiwen Chen, Tong He, Di Huang, Weicai Ye, Sijin Chen, Jiaxiang Tang, Zhongang Cai, Lei Yang, Gang Yu, Guosheng Lin, and Chi Zhang. Artist-Created Mesh Generation with Autoregressive Transformers. arXiv, 2024.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 311.978, 375.633, 563.036, 403.17 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[11] Kai Cheng, Xiaoxiao Long, Kaizhi Yang, Yao Yao, Wei Yin, Yuexin Ma, Wenping Wang, and Xuejin Chen. Gaussianpro: 3d gaussian splatting with progressive propagation. arXiv preprint arXiv:2402.14650, 2024.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 311.978, 339.768, 563.038, 376.271 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[12] Christopher B. Choy, Danfei Xu, JunYoung Gwak, Kevin Chen, and Silvio Savarese. 3D-R2N2: A unified approach for single and multiview 3D object reconstruction. In European Conference on Computer Vision, volume 9912, pages 628–644, 2016.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 311.978, 303.902, 563.04, 340.405 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[13] Nianchen Deng, Zhenyi He, Jiannan Ye, Budmonde Duinkharjav, Praneeth Chakravarthula, Xubo Yang, and Qi Sun. Fov-nerf: Foveated neural radiance fields for virtual reality. IEEE Transactions on Visualization and Computer Graphics, 28(11):3854–3864, 2022.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 311.978, 268.037, 563.036, 304.54 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[14] Haoqiang Fan, Hao Su, and Leonidas J. Guibas. A point set generation network for 3D object reconstruction from a single image. In IEEE Conference on Computer Vision and Pattern Recognition, pages 2463– 2471, 2017.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 311.978, 232.171, 563.036, 268.674 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[15] Qiancheng Fu, Qingshan Xu, Yew Soon Ong, and Wenbing Tao. Geoneus: Geometry-consistent neural implicit surfaces learning for multiview reconstruction. Advances in Neural Information Processing Systems, 35:3403–3416, 2022.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 311.978, 205.272, 563.036, 232.809 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[16] Yasutaka Furukawa and Jean Ponce. Accurate, dense, and robust multiview stereopsis. IEEE Transactions on Pattern Analysis and Machine Intelligence, 32(8):1362–1376, 2010.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 311.978, 169.406, 563.036, 205.91 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[17] Silvano Galliani, Katrin Lasinger, and Konrad Schindler. Massively parallel multiview stereopsis by surface normal diffusion. In Proceedings of the IEEE international conference on computer vision, pages 873– 881, 2015.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 311.978, 106.642, 563.037, 170.044 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[18] Peng Gao, Le Zhuo, Dongyang Liu, Ruoyi Du, Xu Luo, Longtian Qiu, Yuhang Zhang, Chen Lin, Rongjie Huang, Shijie Geng, Renrui Zhang, Junlin Xi, Wenqi Shao, Zhengkai Jiang, Tianshuo Yang, Weicai Ye, He Tong, Jingwen He, Yu Qiao, and Hongsheng Li. Lumina-t2x: Transforming text into any modality, resolution, and duration via flowbased large diffusion transformers. arXiv preprint arxiv:2405.05945, 2024.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 311.978, 79.743, 563.04, 107.319 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[19] Antoine Gu´edon and Vincent Lepetit. Sugar: Surface-aligned gaussian splatting for efficient 3d mesh reconstruction and high-quality mesh rendering. arXiv preprint arXiv:2311.12775, 2023.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 10,
+      "bounding box" : [ 311.978, 43.877, 563.036, 80.38 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[20] Peter Hedman, Julien Philip, True Price, Jan-Michael Frahm, George Drettakis, and Gabriel Brostow. Deep blending for free-viewpoint imagebased rendering. ACM Transactions on Graphics (ToG), 37(6):1–15, 2018.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 362,
+    "page number" : 11,
+    "bounding box" : [ 556.062, 758.819, 563.036, 767.223 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 32,
+      "page number" : 11,
+      "bounding box" : [ 556.062, 758.819, 563.036, 767.223 ],
+      "heading level" : 9,
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 6.974,
+      "text color" : "[0.0]",
+      "content" : "11"
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 363,
+    "level" : "7",
+    "page number" : 11,
+    "bounding box" : [ 48.964, 43.877, 300.026, 734.926 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 23,
+    "previous list id" : 361,
+    "next list id" : 365,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 48.964, 707.389, 300.022, 734.926 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[21] Binbin Huang, Zehao Yu, Anpei Chen, Andreas Geiger, and Shenghua Gao. 2d gaussian splatting for geometrically accurate radiance fields. arXiv preprint arXiv:2403.17888, 2024.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 48.964, 671.523, 300.022, 708.027 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[22] Chenxi Huang, Yuenan Hou, Weicai Ye, Di Huang, Xiaoshui Huang, Binbin Lin, Deng Cai, and Wanli Ouyang. Nerf-det++: Incorporating semantic cues and perspective-aware depth supervision for indoor multiview 3d detection. arXiv preprint arXiv:2402.14464, 2024.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 48.964, 635.658, 300.023, 672.161 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[23] Rasmus Jensen, Anders Dahl, George Vogiatzis, Engin Tola, and Henrik Aanæs. Large scale multi-view stereopsis evaluation. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages 406–413, 2014.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 48.964, 599.792, 300.022, 636.296 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[24] Yingwenqi Jiang, Jiadong Tu, Yuan Liu, Xifeng Gao, Xiaoxiao Long, Wenping Wang, and Yuexin Ma. Gaussianshader: 3d gaussian splatting with shading functions for reflective surfaces. arXiv preprint arXiv:2311.17977, 2023.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 48.964, 572.893, 300.023, 600.43 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[25] Michael Kazhdan, Matthew Bolitho, and Hugues Hoppe. Poisson surface reconstruction. In Proceedings of the fourth Eurographics symposium on Geometry processing, volume 7, 2006.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 48.964, 554.961, 300.022, 573.531 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[26] Michael Kazhdan and Hugues Hoppe. Screened poisson surface reconstruction. ACM Transactions on Graphics (ToG), 32(3):1–13, 2013.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 48.964, 528.061, 300.022, 555.638 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[27] Bernhard Kerbl, Georgios Kopanas, Thomas Leimk¨uhler, and George Drettakis. 3d gaussian splatting for real-time radiance field rendering. ACM Transactions on Graphics, 42(4):1–14, 2023.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 48.964, 501.162, 300.023, 528.699 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[28] Arno Knapitsch, Jaesik Park, Qian-Yi Zhou, and Vladlen Koltun. Tanks and temples: Benchmarking large-scale scene reconstruction. ACM Transactions on Graphics (ToG), 36(4):1–13, 2017.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 48.964, 483.23, 300.022, 501.8 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[29] Kiriakos N Kutulakos and Steven M Seitz. A theory of shape by space carving. International journal of computer vision, 38:199–218, 2000.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 48.964, 456.33, 300.022, 483.867 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[30] Maxime Lhuillier and Long Quan. A quasi-dense approach to surface reconstruction from uncalibrated images. IEEE transactions on pattern analysis and machine intelligence, 27(3):418–433, 2005.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 48.964, 429.431, 300.022, 456.968 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[31] Hai Li, Xingrui Yang, Hongjia Zhai, Yuqian Liu, Hujun Bao, and Guofeng Zhang. Vox-surf: Voxel-based implicit surface representation. IEEE Transactions on Visualization and Computer Graphics, 2022.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 48.964, 393.566, 300.026, 430.069 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[32] Hai Li, Weicai Ye, Guofeng Zhang, Sanyuan Zhang, and Hujun Bao. Saliency guided subdivision for single-view mesh reconstruction. In 2020 International Conference on 3D Vision (3DV), pages 1098–1107. IEEE, 2020.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 48.964, 348.734, 300.022, 394.243 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[33] Zhaoshuo Li, Thomas M¨uller, Alex Evans, Russell H Taylor, Mathias Unberath, Ming-Yu Liu, and Chen-Hsuan Lin. Neuralangelo: Highfidelity neural surface reconstruction. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pages 8456– 8465, 2023.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 48.964, 321.835, 300.024, 349.372 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[34] Chen-Hsuan Lin, Chen Kong, and Simon Lucey. Learning efficient point cloud generation for dense 3D object reconstruction. In Conference on Artificial Intelligence, pages 7114–7121, 2018.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 48.964, 294.936, 300.025, 322.473 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[35] Lingjie Liu, Jiatao Gu, Kyaw Zaw Lin, Tat-Seng Chua, and Christian Theobalt. Neural sparse voxel fields. In Advances in Neural Information Processing Systems, pages 15651–15663, 2020.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 48.964, 250.104, 300.024, 295.573 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[36] Xiangyu Liu, Weicai Ye, Chaoran Tian, Zhaopeng Cui, Hujun Bao, and Guofeng Zhang. Coxgraph: multi-robot collaborative, globally consistent, online dense reconstruction system. In 2021 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS), pages 8722–8728. IEEE, 2021.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 48.964, 214.238, 300.022, 250.742 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[37] Xiaoxiao Long, Yuhang Zheng, Yupeng Zheng, Beiwen Tian, Cheng Lin, Lingjie Liu, Hao Zhao, Guyue Zhou, and Wenping Wang. Adaptive surface normal constraint for geometric estimation from monocular images. arXiv preprint arXiv:2402.05869, 2024.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 48.964, 187.339, 300.022, 214.876 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[38] William E Lorensen and Harvey E Cline. Marching cubes: A high resolution 3d surface construction algorithm. In Seminal graphics: pioneering efforts that shaped the field, pages 347–353. 1998.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 48.964, 160.44, 300.022, 187.977 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[39] Tao Lu, Mulin Yu, Linning Xu, Yuanbo Xiangli, Limin Wang, Dahua Lin, and Bo Dai. Scaffold-gs: Structured 3d gaussians for view-adaptive rendering. arXiv preprint arXiv:2312.00109, 2023.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 48.964, 124.575, 300.024, 161.078 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[40] Lars M. Mescheder, Michael Oechsle, Michael Niemeyer, Sebastian Nowozin, and Andreas Geiger. Occupancy networks: Learning 3D reconstruction in function space. In IEEE Conference on Computer Vision and Pattern Recognition, pages 4460–4470, 2019.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 48.964, 88.709, 300.022, 125.212 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[41] Ben Mildenhall, Pratul P Srinivasan, Matthew Tancik, Jonathan T Barron, Ravi Ramamoorthi, and Ren Ng. Nerf: Representing scenes as neural radiance fields for view synthesis. Communications of the ACM, 65(1):99–106, 2021.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 48.964, 61.81, 300.023, 89.347 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[42] Yuhang Ming, Weicai Ye, and Andrew Calway. idf-slam: End-to-end rgb-d slam with neural implicit mapping and deep feature tracking. arXiv preprint arXiv:2209.07919, 2022.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 48.964, 43.877, 300.024, 62.448 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[43] Pierre Moulon, Pascal Monasse, and Renaud Marlet. Adaptive structure from motion with a contrario model estimation. In Proceedings of",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 365,
+    "level" : "7",
+    "page number" : 11,
+    "bounding box" : [ 311.977, 43.878, 563.04, 734.926 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 21,
+    "previous list id" : 363,
+    "next list id" : 367,
+    "list items" : [ {
+      "type" : "list item",
+      "id" : 364,
+      "page number" : 11,
+      "bounding box" : [ 330.237, 716.356, 563.034, 734.926 ],
+      "font" : "NimbusRomNo9L-ReguItal",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "the Asian Computer Vision Conference (ACCV 2012), pages 257–270. Springer Berlin Heidelberg, 2012.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 311.977, 689.008, 563.036, 716.585 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[44] Thomas M¨uller, Alex Evans, Christoph Schied, and Alexander Keller. Instant neural graphics primitives with a multiresolution hash encoding. ACM transactions on graphics (TOG), 41(4):1–15, 2022.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 311.977, 643.728, 563.038, 689.198 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[45] Richard A Newcombe, Shahram Izadi, Otmar Hilliges, David Molyneaux, David Kim, Andrew J Davison, Pushmeet Kohi, Jamie Shotton, Steve Hodges, and Andrew Fitzgibbon. Kinectfusion: Real-time dense surface mapping and tracking. In 2011 10th IEEE international symposium on mixed and augmented reality, pages 127–136. Ieee, 2011.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 311.977, 607.414, 563.037, 643.917 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[46] Michael Niemeyer, Lars M. Mescheder, Michael Oechsle, and Andreas Geiger. Differentiable volumetric rendering: Learning implicit 3D representations without 3D supervision. In IEEE Conference on Computer Vision and Pattern Recognition, pages 3501–3512, 2020.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 311.977, 571.1, 563.036, 607.604 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[47] Jeong Joon Park, Peter Florence, Julian Straub, Richard A. Newcombe, and Steven Lovegrove. DeepSDF: Learning continuous signed distance functions for shape representation. In IEEE Conference on Computer Vision and Pattern Recognition, pages 165–174, 2019.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 311.977, 543.753, 563.036, 571.29 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[48] Ben Poole, Ajay Jain, Jonathan T Barron, and Ben Mildenhall. Dreamfusion: Text-to-3d using 2d diffusion. arXiv preprint arXiv:2209.14988, 2022.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 311.977, 507.439, 563.036, 543.942 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[49] Xiaojuan Qi, Renjie Liao, Zhengzhe Liu, Raquel Urtasun, and Jiaya Jia. Geonet: Geometric neural network for joint depth and surface normal estimation. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 283–291, 2018.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 311.977, 480.092, 563.036, 507.629 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[50] Paul-Edouard Sarlin, Cesar Cadena, Roland Siegwart, and Marcin Dymczyk. From coarse to fine: Robust hierarchical localization at large scale. In CVPR, 2019.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 311.977, 452.744, 563.038, 480.281 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[51] Johannes L Schonberger and Jan-Michael Frahm. Structure-from-motion revisited. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages 4104–4113, 2016.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 311.977, 425.397, 563.036, 452.973 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[52] Johannes Lutz Sch¨onberger, Enliang Zheng, Marc Pollefeys, and JanMichael Frahm. Pixelwise view selection for unstructured multi-view stereo. In European Conference on Computer Vision (ECCV), 2016.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 311.977, 398.049, 563.036, 425.586 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[53] Jiaxiang Tang, Jiawei Ren, Hang Zhou, Ziwei Liu, and Gang Zeng. Dreamgaussian: Generative gaussian splatting for efficient 3d content creation. arXiv preprint arXiv:2309.16653, 2023.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 311.977, 361.736, 563.039, 398.239 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[54] Fangjinhua Wang, Silvano Galliani, Christoph Vogel, Pablo Speciale, and Marc Pollefeys. Patchmatchnet: Learned multi-view patchmatch stereo. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition, pages 14194–14203, 2021.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 311.978, 325.422, 563.036, 361.925 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[55] Nanyang Wang, Yinda Zhang, Zhuwen Li, Yanwei Fu, Wei Liu, and Yu-Gang Jiang. Pixel2mesh: Generating 3D mesh models from single RGB images. In European Conference on Computer Vision, volume 11215, pages 55–71, 2018.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 311.978, 289.108, 563.04, 325.611 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[56] Peng Wang, Lingjie Liu, Yuan Liu, Christian Theobalt, Taku Komura, and Wenping Wang. Neus: Learning neural implicit surfaces by volume rendering for multi-view reconstruction. arXiv preprint arXiv:2106.10689, 2021.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 311.978, 261.761, 563.036, 289.297 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[57] Changchang Wu. Towards linear-time incremental structure from motion. In 2013 International Conference on 3D Vision-3DV 2013, pages 127–134. IEEE, 2013.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 311.978, 225.447, 563.036, 261.95 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[58] Haozhe Xie, Hongxun Yao, Xiaoshuai Sun, Shangchen Zhou, and Shengping Zhang. Pix2Vox: Context-aware 3D reconstruction from single and multi-view images. In IEEE/CVF International Conference on Computer Vision, pages 2690–2698, 2019.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 311.978, 189.133, 563.039, 225.636 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[59] Qiangeng Xu, Zexiang Xu, Julien Philip, Sai Bi, Zhixin Shu, Kalyan Sunkavalli, and Ulrich Neumann. Point-nerf: Point-based neural radiance fields. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition, pages 5438–5448, 2022.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 311.978, 161.786, 563.036, 189.322 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[60] Lior Yariv, Jiatao Gu, Yoni Kasten, and Yaron Lipman. Volume rendering of neural implicit surfaces. In Advances in Neural Information Processing Systems, pages 4805–4815, 2021.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 311.978, 116.505, 563.037, 161.975 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[61] Weicai Ye, Shuo Chen, Chong Bao, Hujun Bao, Marc Pollefeys, Zhaopeng Cui, and Guofeng Zhang. IntrinsicNeRF: Learning Intrinsic Neural Radiance Fields for Editable Novel View Synthesis. In Proceedings of the IEEE/CVF International Conference on Computer Vision, 2023.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 311.978, 80.192, 563.036, 116.695 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[62] Weicai Ye, Xinyu Chen, Ruohao Zhan, Di Huang, Xiaoshui Huang, Haoyi Zhu, Hujun Bao, Wanli Ouyang, Tong He, and Guofeng Zhang. Dynamic-Aware Tracking Any Point for Structure from Motion in the Wild. arXiv preprint, 2024.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 11,
+      "bounding box" : [ 311.978, 43.878, 563.036, 80.381 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[63] Weicai Ye, Chenhao Ji, Zheng Chen, Junyao Gao, Xiaoshui Huang, Song-Hai Zhang, Wanli Ouyang, Tong He, Cairong Zhao, and Guofeng Zhang. DiffPano: Scalable and Consistent Text to Panorama Generation with Spherical Epipolar-Aware Diffusion. arXiv preprint, 2024.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "list",
+    "id" : 367,
+    "level" : "7",
+    "page number" : 12,
+    "bounding box" : [ 48.964, 456.331, 300.025, 734.926 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 8,
+    "previous list id" : 365,
+    "list items" : [ {
+      "type" : "list item",
+      "page number" : 12,
+      "bounding box" : [ 48.964, 698.423, 300.022, 734.926 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[64] Weicai Ye, Xinyue Lan, Shuo Chen, Yuhang Ming, Xingyuan Yu, Hujun Bao, Zhaopeng Cui, and Guofeng Zhang. Pvo: Panoptic visual odometry. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), pages 9579–9589, June 2023.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 12,
+      "bounding box" : [ 48.964, 662.557, 300.025, 699.06 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[65] Weicai Ye, Hai Li, Tianxiang Zhang, Xiaowei Zhou, Hujun Bao, and Guofeng Zhang. SuperPlane: 3D plane detection and description from a single image. In 2021 IEEE Virtual Reality and 3D User Interfaces (VR), pages 207–215. IEEE, 2021.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 12,
+      "bounding box" : [ 48.964, 626.692, 300.024, 663.195 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[66] Weicai Ye, Xingyuan Yu, Xinyue Lan, Yuhang Ming, Jinyu Li, Hujun Bao, Zhaopeng Cui, and Guofeng Zhang. Deflowslam: Self-supervised scene motion decomposition for dynamic dense slam. arXiv preprint arXiv:2207.08794, 2022.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 12,
+      "bounding box" : [ 48.964, 599.792, 300.023, 627.329 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[67] Zongxin Ye, Wenyu Li, Sidun Liu, Peng Qiao, and Yong Dou. Absgs: Recovering fine details for 3d gaussian splatting. arXiv preprint arXiv:2404.10484, 2024.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 12,
+      "bounding box" : [ 48.964, 581.86, 300.022, 600.43 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[68] Jae-Chern Yoo and Tae Hee Han. Fast normalized cross-correlation. Circuits, systems and signal processing, 28:819–843, 2009.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 12,
+      "bounding box" : [ 48.964, 554.961, 300.023, 582.497 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[69] Zehao Yu, Torsten Sattler, and Andreas Geiger. Gaussian opacity fields: Efficient and compact surface reconstruction in unbounded scenes. arXiv preprint arXiv:2404.10772, 2024.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 12,
+      "bounding box" : [ 48.964, 519.095, 300.024, 555.598 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[70] Richard Zhang, Phillip Isola, Alexei A Efros, Eli Shechtman, and Oliver Wang. The unreasonable effectiveness of deep features as a perceptual metric. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages 586–595, 2018.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "page number" : 12,
+      "bounding box" : [ 48.964, 456.331, 300.024, 519.733 ],
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "[71] Tianxiang Zhang, Chong Bao, Hongjia Zhai, Jiazhen Xia, Weicai Ye, and Guofeng Zhang. Arcargo: Multi-device integrated cargo loading management system with augmented reality. In 2021 IEEE Intl Conf on Dependable, Autonomic and Secure Computing, Intl Conf on Pervasive Intelligence and Computing, Intl Conf on Cloud and Big Data Computing, Intl Conf on Cyber Science and Technology Congress (DASC/PiCom/CBDCom/CyberSciTech), pages 341–348. IEEE, 2021.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 366,
+    "page number" : 12,
+    "bounding box" : [ 556.062, 758.819, 563.036, 767.223 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 33,
+      "page number" : 12,
+      "bounding box" : [ 556.062, 758.819, 563.036, 767.223 ],
+      "heading level" : 9,
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 6.974,
+      "text color" : "[0.0]",
+      "content" : "12"
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 368,
+    "page number" : 13,
+    "bounding box" : [ 556.062, 758.819, 563.036, 767.223 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 34,
+      "page number" : 13,
+      "bounding box" : [ 556.062, 758.819, 563.036, 767.223 ],
+      "heading level" : 9,
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 6.974,
+      "text color" : "[0.0]",
+      "content" : "13"
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 370,
+    "page number" : 13,
+    "bounding box" : [ 54.455, 625.374, 258.025, 735.925 ],
+    "source" : "PGSR_images/imageFile12.png"
+  }, {
+    "type" : "image",
+    "id" : 371,
+    "page number" : 13,
+    "bounding box" : [ 210.785, 625.374, 414.355, 735.925 ],
+    "source" : "PGSR_images/imageFile13.png"
+  }, {
+    "type" : "image",
+    "id" : 372,
+    "page number" : 13,
+    "bounding box" : [ 356.888, 625.374, 560.458, 735.925 ],
+    "source" : "PGSR_images/imageFile14.png"
+  }, {
+    "type" : "heading",
+    "id" : 384,
+    "level" : "Subtitle",
+    "page number" : 13,
+    "bounding box" : [ 57.608, 86.741, 74.867, 697.615 ],
+    "heading level" : 4,
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 15.584,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "PGSRGOFPGSR2DGSGOF2DGS"
+  }, {
+    "type" : "image",
+    "id" : 375,
+    "page number" : 13,
+    "bounding box" : [ 54.455, 515.797, 258.025, 626.348 ],
+    "source" : "PGSR_images/imageFile15.png"
+  }, {
+    "type" : "image",
+    "id" : 376,
+    "page number" : 13,
+    "bounding box" : [ 210.785, 515.797, 414.355, 626.348 ],
+    "source" : "PGSR_images/imageFile16.png"
+  }, {
+    "type" : "image",
+    "id" : 377,
+    "page number" : 13,
+    "bounding box" : [ 356.888, 515.797, 560.458, 626.348 ],
+    "source" : "PGSR_images/imageFile17.png"
+  }, {
+    "type" : "image",
+    "id" : 386,
+    "page number" : 13,
+    "bounding box" : [ 228.886, 323.363, 663.584, 562.994 ],
+    "source" : "PGSR_images/imageFile18.png"
+  }, {
+    "type" : "image",
+    "id" : 389,
+    "page number" : 13,
+    "bounding box" : [ 208.981, 405.351, 464.201, 546.516 ],
+    "source" : "PGSR_images/imageFile19.png"
+  }, {
+    "type" : "image",
+    "id" : 385,
+    "page number" : 13,
+    "bounding box" : [ 84.991, 407.681, 257.176, 515.118 ],
+    "source" : "PGSR_images/imageFile20.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 382,
+    "page number" : 13,
+    "bounding box" : [ 134.468, 393.741, 471.395, 407.763 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.662,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "scan24 scan37 scan40"
+  }, {
+    "type" : "image",
+    "id" : 380,
+    "page number" : 13,
+    "bounding box" : [ 353.966, 277.649, 557.536, 388.2 ],
+    "source" : "PGSR_images/imageFile21.png"
+  }, {
+    "type" : "image",
+    "id" : 373,
+    "page number" : 13,
+    "bounding box" : [ 56.403, 277.162, 259.973, 387.713 ],
+    "source" : "PGSR_images/imageFile22.png"
+  }, {
+    "type" : "image",
+    "id" : 374,
+    "page number" : 13,
+    "bounding box" : [ 206.889, 277.162, 410.459, 387.713 ],
+    "source" : "PGSR_images/imageFile23.png"
+  }, {
+    "type" : "image",
+    "id" : 378,
+    "page number" : 13,
+    "bounding box" : [ 54.455, 167.585, 258.025, 277.649 ],
+    "source" : "PGSR_images/imageFile24.png"
+  }, {
+    "type" : "image",
+    "id" : 379,
+    "page number" : 13,
+    "bounding box" : [ 206.889, 167.585, 410.459, 277.649 ],
+    "source" : "PGSR_images/imageFile25.png"
+  }, {
+    "type" : "image",
+    "id" : 381,
+    "page number" : 13,
+    "bounding box" : [ 353.966, 167.585, 557.536, 277.649 ],
+    "source" : "PGSR_images/imageFile26.png"
+  }, {
+    "type" : "image",
+    "id" : 388,
+    "page number" : 13,
+    "bounding box" : [ 169.665, 27.004, 467.297, 191.031 ],
+    "source" : "PGSR_images/imageFile27.png"
+  }, {
+    "type" : "image",
+    "id" : 387,
+    "page number" : 13,
+    "bounding box" : [ 43.382, 30.946, 307.115, 176.853 ],
+    "source" : "PGSR_images/imageFile28.png"
+  }, {
+    "type" : "image",
+    "id" : 390,
+    "page number" : 13,
+    "bounding box" : [ 310.347, 40.151, 539.664, 166.611 ],
+    "source" : "PGSR_images/imageFile29.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 383,
+    "page number" : 13,
+    "bounding box" : [ 140.261, 40.658, 473.406, 55.655 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.662,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "scan55 scan63 scan65"
+  }, {
+    "type" : "footer",
+    "id" : 391,
+    "page number" : 13,
+    "bounding box" : [ 120.585, 18.189, 491.418, 27.793 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 20,
+      "page number" : 13,
+      "bounding box" : [ 120.585, 18.189, 491.418, 27.793 ],
+      "heading level" : 8,
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "Fig. 12: Qualitative comparisons in surface reconstruction between PGSR, 2DGS, and GOF on the DTU dataset."
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 392,
+    "page number" : 14,
+    "bounding box" : [ 556.062, 758.819, 563.036, 767.223 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 35,
+      "page number" : 14,
+      "bounding box" : [ 556.062, 758.819, 563.036, 767.223 ],
+      "heading level" : 9,
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 6.974,
+      "text color" : "[0.0]",
+      "content" : "14"
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 396,
+    "page number" : 14,
+    "bounding box" : [ 68.977, 627.57, 268.526, 735.937 ],
+    "source" : "PGSR_images/imageFile30.png"
+  }, {
+    "type" : "image",
+    "id" : 397,
+    "page number" : 14,
+    "bounding box" : [ 211.716, 627.57, 411.265, 735.937 ],
+    "source" : "PGSR_images/imageFile31.png"
+  }, {
+    "type" : "image",
+    "id" : 398,
+    "page number" : 14,
+    "bounding box" : [ 350.637, 627.57, 550.186, 735.937 ],
+    "source" : "PGSR_images/imageFile32.png"
+  }, {
+    "type" : "heading",
+    "id" : 414,
+    "level" : "Subtitle",
+    "page number" : 14,
+    "bounding box" : [ 67.719, 96.712, 84.636, 695.997 ],
+    "heading level" : 5,
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 15.276,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "PGSR2DGSGOFPGSR2DGSGOF"
+  }, {
+    "type" : "image",
+    "id" : 399,
+    "page number" : 14,
+    "bounding box" : [ 68.977, 513.473, 268.526, 621.841 ],
+    "source" : "PGSR_images/imageFile33.png"
+  }, {
+    "type" : "image",
+    "id" : 400,
+    "page number" : 14,
+    "bounding box" : [ 211.716, 513.473, 411.265, 621.841 ],
+    "source" : "PGSR_images/imageFile34.png"
+  }, {
+    "type" : "image",
+    "id" : 401,
+    "page number" : 14,
+    "bounding box" : [ 350.637, 513.473, 550.186, 621.841 ],
+    "source" : "PGSR_images/imageFile35.png"
+  }, {
+    "type" : "image",
+    "id" : 408,
+    "page number" : 14,
+    "bounding box" : [ -20.035, 344.058, 399.444, 575.222 ],
+    "source" : "PGSR_images/imageFile36.png"
+  }, {
+    "type" : "image",
+    "id" : 409,
+    "page number" : 14,
+    "bounding box" : [ 212.17, 389.088, 474.254, 533.522 ],
+    "source" : "PGSR_images/imageFile37.png"
+  }, {
+    "type" : "image",
+    "id" : 410,
+    "page number" : 14,
+    "bounding box" : [ 334.413, 372.496, 587.448, 511.564 ],
+    "source" : "PGSR_images/imageFile38.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 406,
+    "page number" : 14,
+    "bounding box" : [ 144.67, 388.577, 466.181, 402.322 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.412,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "scan69 scan83 scan97"
+  }, {
+    "type" : "image",
+    "id" : 395,
+    "page number" : 14,
+    "bounding box" : [ 67.067, 271.437, 266.616, 379.327 ],
+    "source" : "PGSR_images/imageFile39.png"
+  }, {
+    "type" : "image",
+    "id" : 402,
+    "page number" : 14,
+    "bounding box" : [ 221.264, 270.482, 420.813, 378.849 ],
+    "source" : "PGSR_images/imageFile40.png"
+  }, {
+    "type" : "image",
+    "id" : 403,
+    "page number" : 14,
+    "bounding box" : [ 350.637, 270.482, 550.186, 378.849 ],
+    "source" : "PGSR_images/imageFile41.png"
+  }, {
+    "type" : "image",
+    "id" : 404,
+    "page number" : 14,
+    "bounding box" : [ 221.264, 158.773, 420.813, 267.14 ],
+    "source" : "PGSR_images/imageFile42.png"
+  }, {
+    "type" : "image",
+    "id" : 405,
+    "page number" : 14,
+    "bounding box" : [ 350.637, 158.773, 550.186, 267.14 ],
+    "source" : "PGSR_images/imageFile43.png"
+  }, {
+    "type" : "image",
+    "id" : 394,
+    "page number" : 14,
+    "bounding box" : [ 67.067, 156.863, 266.616, 265.231 ],
+    "source" : "PGSR_images/imageFile44.png"
+  }, {
+    "type" : "image",
+    "id" : 411,
+    "page number" : 14,
+    "bounding box" : [ 42.125, 31.659, 333.804, 192.449 ],
+    "source" : "PGSR_images/imageFile45.png"
+  }, {
+    "type" : "image",
+    "id" : 412,
+    "page number" : 14,
+    "bounding box" : [ 119.647, -68.838, 584.677, 187.283 ],
+    "source" : "PGSR_images/imageFile46.png"
+  }, {
+    "type" : "image",
+    "id" : 413,
+    "page number" : 14,
+    "bounding box" : [ 233.357, -53.273, 680.101, 158.295 ],
+    "source" : "PGSR_images/imageFile47.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 407,
+    "page number" : 14,
+    "bounding box" : [ 147.779, 37.218, 466.585, 50.963 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.412,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "scan105 scan106 scan110"
+  }, {
+    "type" : "footer",
+    "id" : 415,
+    "page number" : 14,
+    "bounding box" : [ 120.585, 14.906, 491.418, 24.51 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 21,
+      "page number" : 14,
+      "bounding box" : [ 120.585, 14.906, 491.418, 24.51 ],
+      "heading level" : 8,
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 7.97,
+      "text color" : "[0.0]",
+      "content" : "Fig. 13: Qualitative comparisons in surface reconstruction between PGSR, 2DGS, and GOF on the DTU dataset."
+    } ]
+  }, {
+    "type" : "header",
+    "id" : 416,
+    "page number" : 15,
+    "bounding box" : [ 556.062, 758.819, 563.036, 767.223 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 36,
+      "page number" : 15,
+      "bounding box" : [ 556.062, 758.819, 563.036, 767.223 ],
+      "heading level" : 9,
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 6.974,
+      "text color" : "[0.0]",
+      "content" : "15"
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 418,
+    "page number" : 15,
+    "bounding box" : [ 61.816, 469.768, 271.619, 583.202 ],
+    "source" : "PGSR_images/imageFile48.png"
+  }, {
+    "type" : "image",
+    "id" : 419,
+    "page number" : 15,
+    "bounding box" : [ 207.373, 469.768, 417.175, 583.202 ],
+    "source" : "PGSR_images/imageFile49.png"
+  }, {
+    "type" : "image",
+    "id" : 420,
+    "page number" : 15,
+    "bounding box" : [ 340.382, 469.768, 550.184, 583.202 ],
+    "source" : "PGSR_images/imageFile50.png"
+  }, {
+    "type" : "heading",
+    "id" : 425,
+    "level" : "Subtitle",
+    "page number" : 15,
+    "bounding box" : [ 83.777, 279.541, 101.87, 540.206 ],
+    "heading level" : 3,
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 16.061,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "2DGSPGSRGOF"
+  }, {
+    "type" : "image",
+    "id" : 421,
+    "page number" : 15,
+    "bounding box" : [ 61.816, 352.319, 271.619, 466.255 ],
+    "source" : "PGSR_images/imageFile51.png"
+  }, {
+    "type" : "image",
+    "id" : 422,
+    "page number" : 15,
+    "bounding box" : [ 207.373, 352.319, 417.175, 466.255 ],
+    "source" : "PGSR_images/imageFile52.png"
+  }, {
+    "type" : "image",
+    "id" : 423,
+    "page number" : 15,
+    "bounding box" : [ 340.382, 352.319, 550.184, 466.255 ],
+    "source" : "PGSR_images/imageFile53.png"
+  }, {
+    "type" : "image",
+    "id" : 426,
+    "page number" : 15,
+    "bounding box" : [ -52.105, 205.357, 356.632, 430.799 ],
+    "source" : "PGSR_images/imageFile54.png"
+  }, {
+    "type" : "image",
+    "id" : 427,
+    "page number" : 15,
+    "bounding box" : [ 104.821, 197.555, 497.442, 414.58 ],
+    "source" : "PGSR_images/imageFile55.png"
+  }, {
+    "type" : "image",
+    "id" : 428,
+    "page number" : 15,
+    "bounding box" : [ 261.928, 190.127, 625.777, 389.791 ],
+    "source" : "PGSR_images/imageFile56.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 424,
+    "page number" : 15,
+    "bounding box" : [ 141.765, 222.008, 460.598, 236.962 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 13.05,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "scan114 scan118 scan122"
+  }, {
+    "type" : "paragraph",
+    "id" : 429,
+    "page number" : 15,
+    "bounding box" : [ 120.585, 199.295, 491.418, 208.899 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 7.97,
+    "text color" : "[0.0]",
+    "content" : "Fig. 14: Qualitative comparisons in surface reconstruction between PGSR, 2DGS, and GOF on the DTU dataset."
+  }, {
+    "type" : "header",
+    "id" : 430,
+    "page number" : 16,
+    "bounding box" : [ 556.062, 758.819, 563.036, 767.223 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 37,
+      "page number" : 16,
+      "bounding box" : [ 556.062, 758.819, 563.036, 767.223 ],
+      "heading level" : 9,
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 6.974,
+      "text color" : "[0.0]",
+      "content" : "16"
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 442,
+    "page number" : 16,
+    "bounding box" : [ 131.458, 481.041, 422.338, 643.652 ],
+    "source" : "PGSR_images/imageFile57.png"
+  }, {
+    "type" : "image",
+    "id" : 441,
+    "page number" : 16,
+    "bounding box" : [ -16.002, 474.005, 259.458, 631.673 ],
+    "source" : "PGSR_images/imageFile58.png"
+  }, {
+    "type" : "image",
+    "id" : 443,
+    "page number" : 16,
+    "bounding box" : [ 401.913, 508.464, 550.188, 618.154 ],
+    "source" : "PGSR_images/imageFile59.png"
+  }, {
+    "type" : "heading",
+    "id" : 444,
+    "level" : "Subtitle",
+    "page number" : 16,
+    "bounding box" : [ 68.714, 217.976, 88.247, 585.577 ],
+    "heading level" : 2,
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 17.639,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "PGSRInputGOF2DGS"
+  }, {
+    "type" : "image",
+    "id" : 432,
+    "page number" : 16,
+    "bounding box" : [ 117.972, 332.545, 497.495, 540.573 ],
+    "source" : "PGSR_images/imageFile60.png"
+  }, {
+    "type" : "image",
+    "id" : 435,
+    "page number" : 16,
+    "bounding box" : [ 381.907, 398.222, 586.586, 510.351 ],
+    "source" : "PGSR_images/imageFile61.png"
+  }, {
+    "type" : "image",
+    "id" : 438,
+    "page number" : 16,
+    "bounding box" : [ 15.958, 374.586, 258.167, 507.361 ],
+    "source" : "PGSR_images/imageFile62.png"
+  }, {
+    "type" : "image",
+    "id" : 434,
+    "page number" : 16,
+    "bounding box" : [ 114.019, 218.732, 499.235, 430.222 ],
+    "source" : "PGSR_images/imageFile63.png"
+  }, {
+    "type" : "image",
+    "id" : 436,
+    "page number" : 16,
+    "bounding box" : [ 380.824, 286.877, 585.503, 399.006 ],
+    "source" : "PGSR_images/imageFile64.png"
+  }, {
+    "type" : "image",
+    "id" : 437,
+    "page number" : 16,
+    "bounding box" : [ 14.807, 264.677, 257.579, 398.222 ],
+    "source" : "PGSR_images/imageFile65.png"
+  }, {
+    "type" : "image",
+    "id" : 433,
+    "page number" : 16,
+    "bounding box" : [ 115.438, 113.369, 493.063, 320.425 ],
+    "source" : "PGSR_images/imageFile66.png"
+  }, {
+    "type" : "image",
+    "id" : 440,
+    "page number" : 16,
+    "bounding box" : [ 380.26, 178.84, 584.938, 291.535 ],
+    "source" : "PGSR_images/imageFile67.png"
+  }, {
+    "type" : "image",
+    "id" : 439,
+    "page number" : 16,
+    "bounding box" : [ 17.423, 158.739, 253.927, 288.531 ],
+    "source" : "PGSR_images/imageFile68.png"
+  }, {
+    "type" : "paragraph",
+    "id" : 445,
+    "page number" : 16,
+    "bounding box" : [ 154.593, 164.346, 457.409, 173.95 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 7.97,
+    "text color" : "[0.0]",
+    "content" : "Fig. 15: Qualitative comparisons in surface reconstruction between PGSR, 2DGS, and GOF."
+  }, {
+    "type" : "header",
+    "id" : 446,
+    "page number" : 17,
+    "bounding box" : [ 556.062, 758.819, 563.036, 767.223 ],
+    "kids" : [ {
+      "type" : "heading",
+      "id" : 38,
+      "page number" : 17,
+      "bounding box" : [ 556.062, 758.819, 563.036, 767.223 ],
+      "heading level" : 9,
+      "font" : "NimbusRomNo9L-Regu",
+      "font size" : 6.974,
+      "text color" : "[0.0]",
+      "content" : "17"
+    } ]
+  }, {
+    "type" : "image",
+    "id" : 450,
+    "page number" : 17,
+    "bounding box" : [ 177.882, 561.608, 464.462, 748.33 ],
+    "source" : "PGSR_images/imageFile69.png"
+  }, {
+    "type" : "image",
+    "id" : 451,
+    "page number" : 17,
+    "bounding box" : [ 338.318, 558.753, 628.266, 748.012 ],
+    "source" : "PGSR_images/imageFile70.png"
+  }, {
+    "type" : "image",
+    "id" : 458,
+    "page number" : 17,
+    "bounding box" : [ 8.179, 577.515, 222.9, 713.307 ],
+    "source" : "PGSR_images/imageFile71.png"
+  }, {
+    "type" : "image",
+    "id" : 455,
+    "page number" : 17,
+    "bounding box" : [ 338.98, 441.096, 622.452, 621.621 ],
+    "source" : "PGSR_images/imageFile72.png"
+  }, {
+    "type" : "image",
+    "id" : 454,
+    "page number" : 17,
+    "bounding box" : [ 178.501, 437.872, 458.564, 619.172 ],
+    "source" : "PGSR_images/imageFile73.png"
+  }, {
+    "type" : "image",
+    "id" : 459,
+    "page number" : 17,
+    "bounding box" : [ 55.311, 439.453, 244.893, 602.95 ],
+    "source" : "PGSR_images/imageFile74.png"
+  }, {
+    "type" : "image",
+    "id" : 456,
+    "page number" : 17,
+    "bounding box" : [ 61.816, 357.792, 222.9, 505.992 ],
+    "source" : "PGSR_images/imageFile75.png"
+  }, {
+    "type" : "image",
+    "id" : 448,
+    "page number" : 17,
+    "bounding box" : [ 208.442, 358.637, 391.309, 492.277 ],
+    "source" : "PGSR_images/imageFile76.png"
+  }, {
+    "type" : "image",
+    "id" : 449,
+    "page number" : 17,
+    "bounding box" : [ 370.067, 357.277, 555.374, 491.948 ],
+    "source" : "PGSR_images/imageFile77.png"
+  }, {
+    "type" : "image",
+    "id" : 452,
+    "page number" : 17,
+    "bounding box" : [ 192.095, 219.309, 433.126, 391.087 ],
+    "source" : "PGSR_images/imageFile78.png"
+  }, {
+    "type" : "image",
+    "id" : 453,
+    "page number" : 17,
+    "bounding box" : [ 357.708, 218.469, 599.595, 390.247 ],
+    "source" : "PGSR_images/imageFile79.png"
+  }, {
+    "type" : "image",
+    "id" : 457,
+    "page number" : 17,
+    "bounding box" : [ 61.816, 246.45, 222.9, 359.152 ],
+    "source" : "PGSR_images/imageFile80.png"
+  }, {
+    "type" : "image",
+    "id" : 461,
+    "page number" : 17,
+    "bounding box" : [ 168.803, 132.041, 424.5, 269.199 ],
+    "source" : "PGSR_images/imageFile81.png"
+  }, {
+    "type" : "image",
+    "id" : 463,
+    "page number" : 17,
+    "bounding box" : [ 332.482, 132.041, 589.731, 264.775 ],
+    "source" : "PGSR_images/imageFile82.png"
+  }, {
+    "type" : "image",
+    "id" : 462,
+    "page number" : 17,
+    "bounding box" : [ 61.816, 130.903, 222.9, 243.604 ],
+    "source" : "PGSR_images/imageFile83.png"
+  }, {
+    "type" : "heading",
+    "id" : 460,
+    "level" : "Subtitle",
+    "page number" : 17,
+    "bounding box" : [ 94.158, 111.742, 519.634, 128.009 ],
+    "heading level" : 6,
+    "font" : "ArialMT",
+    "font size" : 12.522,
+    "text color" : "[0.0, 0.0, 0.0]",
+    "content" : "(a) Rendered RGB (b) Mesh (c) Mesh Normal"
+  }, {
+    "type" : "paragraph",
+    "id" : 464,
+    "page number" : 17,
+    "bounding box" : [ 48.964, 80.121, 563.035, 98.691 ],
+    "font" : "NimbusRomNo9L-Regu",
+    "font size" : 7.97,
+    "text color" : "[0.0]",
+    "content" : "Fig. 16: PGSR achieves high-precision geometric reconstruction in various indoor and outdoor scenes from a series of RGB images without requiring any prior knowledge."
+  } ]
+}

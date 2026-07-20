@@ -1,0 +1,58 @@
+{
+  "tool": "research-pdf-ingest",
+  "created_at": "2026-07-16T10:36:40.429452+00:00",
+  "input_pdf": "/data/RFVisualizer/Documents/중간보고서/Ref/2025중간보고서_35_wUDC_어린이가 작성한 이야기(일기) 기반 그림 동화 생성기.pdf",
+  "input_sha256": "e5ef41b15acc4389daf8134630b4c8f7ce1fe66e3cbdf1ed65e4e278a2cf4be3",
+  "output_dir": "/data/RFVisualizer/tmp/pdf_ingest/interim_reports/2025__35_wUDC-e5ef41b15acc",
+  "opendataloader_pdf_version": "2.4.1",
+  "options": {
+    "formats": [
+      "markdown",
+      "json",
+      "html"
+    ],
+    "pages": null,
+    "password_present": false,
+    "table_method": "cluster",
+    "reading_order": "xycut",
+    "image_output": "external",
+    "image_dir": null,
+    "include_header_footer": false,
+    "use_struct_tree": false,
+    "sanitize": false,
+    "hybrid": "off",
+    "hybrid_url": null,
+    "hybrid_timeout": "60000",
+    "hybrid_fallback": false,
+    "threads": "1"
+  },
+  "artifacts": {
+    "markdown": [
+      "2025중간보고서_35_wUDC_어린이가 작성한 이야기(일기) 기반 그림 동화 생성기.md"
+    ],
+    "json": [
+      "2025중간보고서_35_wUDC_어린이가 작성한 이야기(일기) 기반 그림 동화 생성기.json"
+    ],
+    "html": [
+      "2025중간보고서_35_wUDC_어린이가 작성한 이야기(일기) 기반 그림 동화 생성기.html"
+    ],
+    "images": [
+      "2025중간보고서_35_wUDC_어린이가 작성한 이야기(일기) 기반 그림 동화 생성기_images/imageFile1.png",
+      "2025중간보고서_35_wUDC_어린이가 작성한 이야기(일기) 기반 그림 동화 생성기_images/imageFile10.png",
+      "2025중간보고서_35_wUDC_어린이가 작성한 이야기(일기) 기반 그림 동화 생성기_images/imageFile11.png",
+      "2025중간보고서_35_wUDC_어린이가 작성한 이야기(일기) 기반 그림 동화 생성기_images/imageFile12.png",
+      "2025중간보고서_35_wUDC_어린이가 작성한 이야기(일기) 기반 그림 동화 생성기_images/imageFile13.png",
+      "2025중간보고서_35_wUDC_어린이가 작성한 이야기(일기) 기반 그림 동화 생성기_images/imageFile14.png",
+      "2025중간보고서_35_wUDC_어린이가 작성한 이야기(일기) 기반 그림 동화 생성기_images/imageFile15.png",
+      "2025중간보고서_35_wUDC_어린이가 작성한 이야기(일기) 기반 그림 동화 생성기_images/imageFile16.png",
+      "2025중간보고서_35_wUDC_어린이가 작성한 이야기(일기) 기반 그림 동화 생성기_images/imageFile2.png",
+      "2025중간보고서_35_wUDC_어린이가 작성한 이야기(일기) 기반 그림 동화 생성기_images/imageFile3.png",
+      "2025중간보고서_35_wUDC_어린이가 작성한 이야기(일기) 기반 그림 동화 생성기_images/imageFile4.png",
+      "2025중간보고서_35_wUDC_어린이가 작성한 이야기(일기) 기반 그림 동화 생성기_images/imageFile5.png",
+      "2025중간보고서_35_wUDC_어린이가 작성한 이야기(일기) 기반 그림 동화 생성기_images/imageFile6.png",
+      "2025중간보고서_35_wUDC_어린이가 작성한 이야기(일기) 기반 그림 동화 생성기_images/imageFile7.png",
+      "2025중간보고서_35_wUDC_어린이가 작성한 이야기(일기) 기반 그림 동화 생성기_images/imageFile8.png",
+      "2025중간보고서_35_wUDC_어린이가 작성한 이야기(일기) 기반 그림 동화 생성기_images/imageFile9.png"
+    ]
+  }
+}

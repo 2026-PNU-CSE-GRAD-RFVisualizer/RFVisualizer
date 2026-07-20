@@ -7,6 +7,8 @@ from typing import Any, Dict, Optional, Sequence
 
 import numpy as np
 
+from tools.sionna_scenario.primitive_builder import rotation_matrix_xyz
+
 
 class TransformError(ValueError):
     pass
@@ -140,6 +142,74 @@ def rotate_obstacle(
         "roll": float(rotation[0]),
         "pitch": float(rotation[1]),
         "yaw": float(rotation[2]),
+    }
+    return result
+
+
+def _axis_rotation(axis: str, angle_deg: float) -> np.ndarray:
+    angle = np.deg2rad(float(angle_deg))
+    cosine, sine = float(np.cos(angle)), float(np.sin(angle))
+    if axis == "x":
+        return np.asarray(
+            [[1.0, 0.0, 0.0], [0.0, cosine, -sine], [0.0, sine, cosine]]
+        )
+    if axis == "y":
+        return np.asarray(
+            [[cosine, 0.0, sine], [0.0, 1.0, 0.0], [-sine, 0.0, cosine]]
+        )
+    return np.asarray(
+        [[cosine, -sine, 0.0], [sine, cosine, 0.0], [0.0, 0.0, 1.0]]
+    )
+
+
+def _matrix_to_rotation_xyz(matrix: np.ndarray) -> np.ndarray:
+    value = np.asarray(matrix, dtype=float)
+    pitch = float(np.arcsin(np.clip(-value[2, 0], -1.0, 1.0)))
+    if abs(float(np.cos(pitch))) > 1.0e-8:
+        roll = float(np.arctan2(value[2, 1], value[2, 2]))
+        yaw = float(np.arctan2(value[1, 0], value[0, 0]))
+    else:
+        roll = float(np.arctan2(-value[1, 2], value[1, 1]))
+        yaw = 0.0
+    return np.degrees([roll, pitch, yaw])
+
+
+def rotate_obstacle_in_space(
+    obstacle: Dict[str, Any],
+    delta_deg: float,
+    axis: str = "z",
+    space: str = "world",
+    snap_increment_deg: float = 5.0,
+    snap_enabled: bool = False,
+) -> Dict[str, Any]:
+    """Compose an axis rotation in world or local space and store XYZ Euler."""
+
+    if axis not in {"x", "y", "z"}:
+        raise TransformError("Rotate axis는 x/y/z여야 합니다.")
+    if space not in {"world", "local"}:
+        raise TransformError("Rotate space는 world/local이어야 합니다.")
+    result = deepcopy(obstacle)
+    geometry = result.setdefault("geometry", {})
+    anchor = geometry.get("anchor", {})
+    mode = anchor if isinstance(anchor, str) else anchor.get("mode", "center")
+    if mode == "explicit_transform":
+        raise TransformError(
+            "explicit_transform mesh 회전은 Properties의 행렬 입력을 사용해야 합니다."
+        )
+    rotation = _vector(
+        geometry.get("rotation_deg", [0.0, 0.0, 0.0]),
+        ("roll", "pitch", "yaw"),
+        "rotation_deg",
+    )
+    angle = snap_value(delta_deg, snap_increment_deg, snap_enabled)
+    current = rotation_matrix_xyz(rotation)
+    delta = _axis_rotation(axis, angle)
+    composed = delta @ current if space == "world" else current @ delta
+    values = _matrix_to_rotation_xyz(composed)
+    geometry["rotation_deg"] = {
+        "roll": float(values[0]),
+        "pitch": float(values[1]),
+        "yaw": float(values[2]),
     }
     return result
 
