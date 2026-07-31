@@ -5,6 +5,7 @@ from tools.proxy_placement_editor.fps_camera_controller import (
     FpsCameraController,
     FpsNavigationSettings,
     camera_pose_from_view,
+    constrained_look_pose,
     movement_basis,
 )
 
@@ -37,6 +38,16 @@ def view_looking_downward_45_degrees(eye=(0.0, 0.0, 1.7)):
     return np.linalg.inv(world_from_camera)
 
 
+def rolled_view_looking_positive_y(roll_deg=30.0, eye=(0.0, 0.0, 1.7)):
+    roll = np.deg2rad(roll_deg)
+    world_from_camera = np.eye(4, dtype=float)
+    world_from_camera[:3, 0] = [np.cos(roll), 0.0, -np.sin(roll)]
+    world_from_camera[:3, 1] = [np.sin(roll), 0.0, np.cos(roll)]
+    world_from_camera[:3, 2] = [0.0, -1.0, 0.0]
+    world_from_camera[:3, 3] = eye
+    return np.linalg.inv(world_from_camera)
+
+
 def test_camera_pose_is_recovered_from_view_matrix():
     eye, forward, right, up = camera_pose_from_view(
         view_looking_positive_y((1.0, 2.0, 3.0))
@@ -45,6 +56,49 @@ def test_camera_pose_is_recovered_from_view_matrix():
     np.testing.assert_allclose(forward, [0.0, 1.0, 0.0])
     np.testing.assert_allclose(right, [1.0, 0.0, 0.0])
     np.testing.assert_allclose(up, [0.0, 0.0, 1.0])
+
+
+def test_horizontal_mouse_look_changes_only_world_z_yaw():
+    pose = constrained_look_pose(
+        view_looking_positive_y(),
+        delta_x=100.0,
+        delta_y=0.0,
+        sensitivity_deg_per_pixel=0.9,
+        maximum_pitch_deg=85.0,
+    )
+
+    np.testing.assert_allclose(pose["forward"], [1.0, 0.0, 0.0], atol=1.0e-8)
+    np.testing.assert_allclose(pose["up"], [0.0, 0.0, 1.0], atol=1.0e-8)
+
+
+def test_vertical_mouse_look_preserves_yaw_clamps_pitch_and_removes_roll():
+    pose = constrained_look_pose(
+        view_looking_positive_y(),
+        delta_x=0.0,
+        delta_y=-1000.0,
+        sensitivity_deg_per_pixel=1.0,
+        maximum_pitch_deg=80.0,
+    )
+
+    forward = np.asarray(pose["forward"])
+    up = np.asarray(pose["up"])
+    assert forward[0] == pytest.approx(0.0)
+    assert np.degrees(np.arcsin(forward[2])) == pytest.approx(80.0)
+    assert np.dot(forward, up) == pytest.approx(0.0)
+    assert up[2] > 0.0
+
+
+def test_mouse_look_removes_existing_roll_without_changing_level_direction():
+    pose = constrained_look_pose(
+        rolled_view_looking_positive_y(),
+        delta_x=0.0,
+        delta_y=0.0,
+        sensitivity_deg_per_pixel=0.15,
+        maximum_pitch_deg=85.0,
+    )
+
+    np.testing.assert_allclose(pose["forward"], [0.0, 1.0, 0.0], atol=1.0e-8)
+    np.testing.assert_allclose(pose["up"], [0.0, 0.0, 1.0], atol=1.0e-8)
 
 
 def test_wasd_direction_diagonal_speed_and_sprint():

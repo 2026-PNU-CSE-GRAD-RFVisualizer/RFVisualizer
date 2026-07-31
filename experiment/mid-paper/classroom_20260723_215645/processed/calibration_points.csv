@@ -1,0 +1,4 @@
+﻿point_id,point_role,node_id,x,y,z,sample_count,median_raw,median_filtered,mean_filtered,std_filtered,min_filtered,max_filtered,iqr_filtered,device_offset_db,corrected_rssi
+offset-01,calibration,gw-01,,,,27,-44.0,-45.0,-45.111,1.013,-47.0,-43.0,1.0,-2.0,-47.0
+offset-01,calibration,node-01,,,,30,-47.0,-47.0,-46.6,0.724,-48.0,-45.0,1.0,0.0,-47.0
+offset-01,calibration,node-03,,,,30,-49.0,-50.0,-49.767,0.728,-51.0,-48.0,1.0,0.0,-50.0

@@ -162,6 +162,41 @@ def _axis_rotation(axis: str, angle_deg: float) -> np.ndarray:
     )
 
 
+def rotate_point_about_pivot(
+    point: Sequence[float],
+    pivot: Sequence[float],
+    axis: str,
+    angle_deg: float,
+) -> np.ndarray:
+    """Rotate one world-space point around a shared selection pivot."""
+
+    if axis not in {"x", "y", "z"}:
+        raise TransformError("Rotate axis는 x/y/z여야 합니다.")
+    value = _vector(point, ("x", "y", "z"), "point")
+    center = _vector(pivot, ("x", "y", "z"), "pivot")
+    return center + _axis_rotation(axis, angle_deg) @ (value - center)
+
+
+def scale_point_about_pivot(
+    point: Sequence[float],
+    pivot: Sequence[float],
+    axis: str,
+    factor: float,
+) -> np.ndarray:
+    """Scale one world-space point offset around a shared selection pivot."""
+
+    if axis not in {"x", "y", "z"}:
+        raise TransformError("Scale axis는 x/y/z여야 합니다.")
+    scale = float(factor)
+    if not np.isfinite(scale) or scale <= 0.0:
+        raise TransformError("Scale factor는 유한한 양수여야 합니다.")
+    value = _vector(point, ("x", "y", "z"), "point")
+    center = _vector(pivot, ("x", "y", "z"), "pivot")
+    offset = value - center
+    offset[{"x": 0, "y": 1, "z": 2}[axis]] *= scale
+    return center + offset
+
+
 def _matrix_to_rotation_xyz(matrix: np.ndarray) -> np.ndarray:
     value = np.asarray(matrix, dtype=float)
     pitch = float(np.arcsin(np.clip(-value[2, 0], -1.0, 1.0)))

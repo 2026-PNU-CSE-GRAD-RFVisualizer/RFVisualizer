@@ -101,6 +101,9 @@ def validate_document(
             value = obstacle if enabled else _enabled_copy(obstacle)
             spec = parse_obstacle(value)
             mesh = build_obstacle_mesh(spec, room=scene.containment)
+            is_transmitter_marker = isinstance(
+                value.get("rf_transmitter"), dict
+            )
             required_los = synthetic and spec.purpose == "validation_only"
             target_receivers = receivers
             if required_los:
@@ -114,8 +117,17 @@ def validate_document(
             phase2b = inspect_obstacle(
                 mesh,
                 scene.containment,
-                transmitter=transmitter,
-                receivers=target_receivers if required_los else receivers,
+                # AP/TX geometry is the visual body of the transmitter, so its
+                # own marker is expected to be inside it.  It is not a room
+                # obstacle for endpoint-collision validation.
+                transmitter=None if is_transmitter_marker else transmitter,
+                receivers=(
+                    []
+                    if is_transmitter_marker
+                    else target_receivers
+                    if required_los
+                    else receivers
+                ),
                 require_los_intersection=required_los,
             )
             material = resolve_material_request(value)

@@ -11,7 +11,10 @@ from tools.proxy_placement_editor.command_stack import (
 from tools.proxy_placement_editor.transform_controller import set_numeric_geometry
 
 from .strings_ko import option_index, option_labels, option_value, tr
+from .metrics import scaled
 from .section import make_section
+
+TRANSFORM_GRID_COLUMNS = 4
 
 
 def _values(value, names, default):
@@ -24,13 +27,20 @@ def _values(value, names, default):
     return [float(item) for item in value]
 
 
+def transform_grid_layout(ui_scale):
+    """Keep label/X/Y/Z columns fixed while scaling only pixel spacing."""
+    return TRANSFORM_GRID_COLUMNS, scaled(3, ui_scale)
+
+
 class PropertiesPanel:
-    def __init__(self, core, on_change, heading_font_id=None):
+    def __init__(self, core, on_change, heading_font_id=None, ui_scale=1.0):
         from open3d.visualization import gui
 
         self.gui, self.core, self.on_change = gui, core, on_change
         self.updating = False
-        self.widget = make_section(gui, tr("properties"), heading_font_id)
+        self.widget = make_section(
+            gui, tr("properties"), heading_font_id, ui_scale
+        )
         self.identity = {}
         for key, label in (
             ("id", tr("object_id")),
@@ -86,7 +96,8 @@ class PropertiesPanel:
             self.widget.add_child(gui.Label(label))
             self.widget.add_child(widget)
 
-        grid = gui.VGrid(4, 3)
+        grid_columns, grid_spacing = transform_grid_layout(ui_scale)
+        grid = gui.VGrid(grid_columns, grid_spacing)
         grid.add_child(gui.Label(""))
         [grid.add_child(gui.Label(value)) for value in ("X", "Y", "Z")]
         self.position, self.size, self.rotation = [], [], []
@@ -154,6 +165,10 @@ class PropertiesPanel:
             if not selected:
                 self.set_enabled(False)
                 return
+            if self.core.state.object_kind(selected) == "rx":
+                self.set_enabled(False)
+                self.transforms.text = "RX 속성은 아래 AP/TX 및 RX 속성에서 편집합니다."
+                return
             obstacle = self.core.state.get_object(selected)
             self.set_enabled(True)
             for key, edit in self.identity.items():
@@ -185,6 +200,8 @@ class PropertiesPanel:
             self.floor_clearance.double_value = float(clearance)
             self.floor_policy.enabled = mode == "floor_at_xy"
             self.floor_clearance.enabled = mode == "floor_at_xy"
+            if self.core.state.object_kind(selected) == "ap_tx":
+                self.anchor_mode.enabled = False
             position_names = ("x", "y") if mode == "floor_at_xy" else ("x", "y", "z")
             position_defaults = (0.0, 0.0) if mode == "floor_at_xy" else (0.0, 0.0, 0.0)
             position = _values(

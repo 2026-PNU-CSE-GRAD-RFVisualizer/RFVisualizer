@@ -113,7 +113,7 @@ def instantiate_candidate(
         z = floor_z if mode == "bottom_center" else (floor_z + ceiling_z) / 2.0
         position = {"x": float(center[0]), "y": float(center[1]), "z": float(z)}
     metadata = source.get("metadata", {})
-    return {
+    result = {
         "id": object_id,
         "display_name": template.label,
         "enabled": False,
@@ -145,6 +145,13 @@ def instantiate_candidate(
             "group_name": metadata.get("semantic_class", template.id),
         },
     }
+    transmitter = source.get("transmitter")
+    if isinstance(transmitter, dict):
+        result["rf_transmitter"] = {
+            "frequency_hz": float(transmitter.get("frequency_hz", 2.4e9)),
+            "power_dbm": float(transmitter.get("power_dbm", 20.0)),
+        }
+    return result
 
 
 def _template_for_draft(

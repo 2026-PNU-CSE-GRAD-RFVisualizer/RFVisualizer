@@ -7,7 +7,7 @@ scenario:
   base_scene:
     phase2a_config: configs/sionna/pnu_classroom_smoke_test.yaml
   obstacles:
-  - id: desk_block_example
+  - id: Left_Desk01
     enabled: false
     semantic_class: desk_cluster
     purpose: classroom_proxy
@@ -17,13 +17,30 @@ scenario:
       type: box
       anchor:
         mode: floor_at_xy
-      position_m: null
-      size_m: null
-      rotation_deg: null
+        floor_contact_policy:
+          type: anchor_point
+          clearance_m: 0.000000000
+      position_m:
+        x: -11.404328907
+        y: -7.888025594
+      size_m:
+        x: 2.000000000
+        y: 0.800000000
+        z: 0.350000000
+      rotation_deg:
+        roll: 0.000000000
+        pitch: -0.000000000
+        yaw: 30.000000000
     material:
       source: sionna_preset
       category: wood
-  - id: blackboard_example
+    display_name: Desk Cluster
+    measurement_source: unset
+    notes: Visible editor placeholder; not an on-site measurement.
+    placement_status: provisional_placeholder
+    export:
+      object_name: Left_Desk01
+  - id: Blackboard
     enabled: false
     semantic_class: blackboard
     purpose: classroom_proxy
@@ -33,13 +50,28 @@ scenario:
       type: thin_panel
       anchor:
         mode: center
-      position_m: null
-      size_m: null
-      rotation_deg: null
+      position_m:
+        x: -6.879328907
+        y: -11.043058000
+        z: 1.700000000
+      size_m:
+        x: 0.500000000
+        y: 7.000000000
+        z: 1.200000000
+      rotation_deg:
+        roll: 1.500000000
+        pitch: -0.000000000
+        yaw: 90.000000000
     material:
       source: sionna_preset
       category: metal
-  - id: door_example
+    display_name: Blackboard Panel
+    measurement_source: unset
+    notes: Visible editor placeholder; not an on-site measurement.
+    placement_status: provisional_placeholder
+    export:
+      object_name: Blackboard
+  - id: Door
     enabled: false
     semantic_class: door
     purpose: classroom_proxy
@@ -49,29 +81,241 @@ scenario:
     geometry:
       type: thin_panel
       anchor:
-        mode: bottom_center
-      position_m: null
-      size_m: null
-      rotation_deg: null
+        mode: center
+      position_m:
+        x: -15.229328907
+        y: -9.600000000
+        z: 0.256482556
+      size_m:
+        x: 0.050000000
+        y: 2.500000000
+        z: 2.000000000
+      rotation_deg:
+        roll: -3.000000000
+        pitch: -0.000000000
+        yaw: 0.000000000
     material:
       source: sionna_preset
-      category: wood
-  - id: large_metal_object_example
+      category: metal
+      preset: metal
+    display_name: Door Panel
+    measurement_source: unset
+    notes: Visible editor placeholder; not an on-site measurement.
+    placement_status: provisional_placeholder
+    export:
+      object_name: Door
+  - id: Left_Desk02
+    display_name: Desk Cluster
     enabled: false
-    semantic_class: large_equipment
+    semantic_class: desk_cluster
     purpose: classroom_proxy
     physical_object: true
     confidence: unset
+    measurement_source: unset
+    notes: UI convenience placeholder; not an on-site measurement.
+    placement_status: provisional_unconfirmed
+    geometry:
+      type: box
+      anchor:
+        mode: center
+      position_m:
+        x: -12.268919562
+        y: -7.046407593
+        z: 0.584828180
+      size_m:
+        x: 3.200000000
+        y: 0.599393096
+        z: 0.369149524
+      rotation_deg:
+        roll: 0.000000000
+        pitch: 3.305314919
+        yaw: 29.895995034
+    material:
+      source: sionna_preset
+      category: wood
+      preset: wood
+      thickness_m: 0.100000000
+      scattering_coefficient: 0.000000000
+    export:
+      object_name: Left_Desk02
+      group_name: desk_cluster
+  - id: Left_Desk03
+    display_name: Desk Cluster
+    enabled: false
+    semantic_class: desk_cluster
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    measurement_source: unset
+    notes: UI convenience placeholder; not an on-site measurement.
+    placement_status: provisional_unconfirmed
+    geometry:
+      type: box
+      anchor:
+        mode: center
+      position_m:
+        x: -12.586753004
+        y: -5.720199471
+        z: 0.562565765
+      size_m:
+        x: 3.200000000
+        y: 0.599393096
+        z: 0.600000000
+      rotation_deg:
+        roll: 0.000000000
+        pitch: 3.305314919
+        yaw: 29.895995034
+    material:
+      source: sionna_preset
+      category: wood
+      preset: wood
+      thickness_m: 0.100000000
+      scattering_coefficient: 0.000000000
+    export:
+      object_name: Left_Desk03
+      group_name: desk_cluster
+  - id: Left_Desk05
+    display_name: Desk Cluster
+    enabled: false
+    semantic_class: desk_cluster
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    measurement_source: unset
+    notes: UI convenience placeholder; not an on-site measurement.
+    placement_status: provisional_unconfirmed
+    geometry:
+      type: box
+      anchor:
+        mode: center
+      position_m:
+        x: -12.900929596
+        y: -3.176233900
+        z: 0.705399742
+      size_m:
+        x: 2.400000000
+        y: 0.600000000
+        z: 0.600000000
+      rotation_deg:
+        roll: 0.145709189
+        pitch: 3.302105247
+        yaw: 32.424001009
+    material:
+      source: sionna_preset
+      category: wood
+      preset: wood
+      thickness_m: 0.100000000
+      scattering_coefficient: 0.000000000
+    export:
+      object_name: Left_Desk05
+      group_name: desk_cluster
+  - id: Left_Desk04
+    display_name: Desk Cluster
+    enabled: false
+    semantic_class: desk_cluster
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    measurement_source: unset
+    notes: UI convenience placeholder; not an on-site measurement.
+    placement_status: provisional_unconfirmed
+    geometry:
+      type: box
+      anchor:
+        mode: center
+      position_m:
+        x: -12.999944028
+        y: -4.631818551
+        z: 0.651923660
+      size_m:
+        x: 3.200000000
+        y: 0.599393096
+        z: 0.600000000
+      rotation_deg:
+        roll: 0.000000000
+        pitch: 3.305314919
+        yaw: 29.895995034
+    material:
+      source: sionna_preset
+      category: wood
+      preset: wood
+      thickness_m: 0.100000000
+      scattering_coefficient: 0.000000000
+    export:
+      object_name: Left_Desk04
+      group_name: desk_cluster
+  - id: Left_Desk06
+    display_name: Desk Cluster
+    enabled: false
+    semantic_class: desk_cluster
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    measurement_source: unset
+    notes: UI convenience placeholder; not an on-site measurement.
+    placement_status: provisional_unconfirmed
+    geometry:
+      type: box
+      anchor:
+        mode: center
+      position_m:
+        x: -13.207114886
+        y: -1.949102765
+        z: 0.685406114
+      size_m:
+        x: 1.900000000
+        y: 0.600000000
+        z: 0.600000000
+      rotation_deg:
+        roll: 0.145709189
+        pitch: 3.302105247
+        yaw: 32.424001009
+    material:
+      source: sionna_preset
+      category: wood
+      preset: wood
+      thickness_m: 0.100000000
+      scattering_coefficient: 0.000000000
+    export:
+      object_name: Left_Desk06
+      group_name: desk_cluster
+  - id: Mid_Desk01
+    display_name: Desk Cluster
+    enabled: false
+    semantic_class: desk_cluster
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    measurement_source: unset
+    notes: UI convenience placeholder; not an on-site measurement.
+    placement_status: provisional_unconfirmed
     geometry:
       type: box
       anchor:
         mode: floor_at_xy
-      position_m: null
-      size_m: null
-      rotation_deg: null
+        floor_contact_policy:
+          type: minimum_bottom_vertex_clearance
+          clearance_m: 0.000000000
+      position_m:
+        x: -7.729328907
+        y: -7.393058274
+      size_m:
+        x: 3.800000000
+        y: 0.800000000
+        z: 0.350000000
+      rotation_deg:
+        roll: 0.000000000
+        pitch: 0.000000000
+        yaw: 0.000000000
     material:
       source: sionna_preset
-      category: metal
+      category: wood
+      preset: wood
+      thickness_m: 0.100000000
+      scattering_coefficient: 0.000000000
+    export:
+      object_name: Mid_Desk01
+      group_name: desk_cluster
   confidence: low
   provenance:
     authoring_method: interactive_proxy_placement

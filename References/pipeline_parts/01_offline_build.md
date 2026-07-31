@@ -218,7 +218,7 @@ Phase 2-A 연결 시험에서는 미터 단위 Room Envelope를 객체별 PLY와
 
 Phase 2-B에서는 Room Envelope를 수정하지 않고 큰 장애물을 별도 Proxy Obstacle shape로 추가하는 경로를 검증했다. 검증 전용 synthetic wood blocker로 동일한 TX/RX·solver·seed·격자를 사용한 A/B 실험을 수행해 `rx_los` 직접 경로가 사라지고 Coverage가 baseline 반복 noise보다 크게 달라지는 것을 확인했다. 실제 책상·칠판·문은 위치와 크기를 측정하기 전까지 비활성 template로만 유지하며, 이 결과 역시 실제 강의실 재질이나 RSSI 정확도를 뜻하지 않는다.
 
-Phase 2-C의 Proxy Placement Editor는 이 비활성 template와 Phase 2-B schema를 그대로 사용한다. 미터 좌표의 Room Envelope와 선택적 PGSR/TSDF reference를 함께 표시하고 사람이 box·thin panel의 위치·yaw·크기·재질 근거를 입력한다. 경사진 바닥에서는 회전된 bottom vertex 전체의 최소 여유를 맞출 수 있으며, Room과 calibration 원본은 읽기 전용이다. Candidate 기본 크기는 UI placeholder이고 사용자가 명시적으로 활성화하기 전에는 Sionna 장면에 포함하지 않는다.
+Phase 2-C의 Proxy Placement Editor는 이 비활성 template와 Phase 2-B schema를 그대로 사용한다. 미터 좌표의 Room Envelope, 실제 PGSR Gaussian Point Cloud, PGSR Output Mesh를 서로 다른 표시 계층으로 읽고 각 계층을 독립 체크박스로 중첩 표시한다. 대형 PGSR Output Mesh는 원본을 수정하지 않고 별도 프로세스가 만든 최대 100만 삼각형의 고화질 표시 전용 캐시를 재사용한다. 사용자는 이 배경 위에서 box·thin panel의 위치·yaw·크기·재질 근거를 입력한다. 경사진 바닥에서는 회전된 bottom vertex 전체의 최소 여유를 맞출 수 있으며, Room과 calibration 원본은 읽기 전용이다. Candidate 기본 크기는 UI placeholder이고 사용자가 명시적으로 활성화하기 전에는 Sionna 장면에 포함하지 않는다.
 
 ## 3.7 Radio Map 계산
 

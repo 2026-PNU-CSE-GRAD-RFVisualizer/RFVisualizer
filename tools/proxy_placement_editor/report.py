@@ -25,7 +25,7 @@ def placement_report_markdown(report: Dict[str, Any], files: Dict[str, str]) -> 
         "|---|---:|---|---|---:|---:|---:|",
     ]
     for value in report.get("objects", []):
-        if value.get("renderable"):
+        if value.get("renderable") and value.get("object_kind") != "rx":
             containment = value["phase2b_validation"]["containment"]
             lines.append(
                 "| {} | {} | {} | {} | {:.4f} | {:.4f} | {:.4f} |".format(
@@ -36,6 +36,12 @@ def placement_report_markdown(report: Dict[str, Any], files: Dict[str, str]) -> 
                     containment["minimum_floor_clearance_m"],
                     containment["minimum_ceiling_clearance_m"],
                     containment["minimum_wall_clearance_m"],
+                )
+            )
+        elif value.get("object_kind") == "rx":
+            lines.append(
+                "| {} | - | {} | RX point | - | - | - |".format(
+                    value["id"], value["status"]
                 )
             )
         else:

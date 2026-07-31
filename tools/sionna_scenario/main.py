@@ -23,8 +23,16 @@ from .scene_composer import annotate_runtime_objects
 LOGGER = logging.getLogger("sionna_scenario")
 
 
+def _prepare_from_args(args: argparse.Namespace):
+    document = load_scenario(args.scenario)
+    markers = getattr(args, "markers", None)
+    if markers is None:
+        return prepare_scenario(document)
+    return prepare_scenario(document, markers)
+
+
 def command_validate(args: argparse.Namespace) -> int:
-    prepared = prepare_scenario(load_scenario(args.scenario))
+    prepared = _prepare_from_args(args)
     result = validation_summary(prepared)
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0 if result["success"] else 2
@@ -34,7 +42,7 @@ def command_build(args: argparse.Namespace) -> int:
     failure = Path(args.output).expanduser().resolve() / "phase2b_failure.json"
     if failure.exists():
         failure.unlink()
-    prepared = prepare_scenario(load_scenario(args.scenario))
+    prepared = _prepare_from_args(args)
     manifest = build_scenario(prepared, args.output)
     environment = diagnose_environment()
     if environment.get("status") == "available":
@@ -56,6 +64,8 @@ def command_build(args: argparse.Namespace) -> int:
         "room_object_count": manifest["room_object_count"],
         "obstacle_object_count": manifest["obstacle_object_count"],
         "total_triangle_count": manifest["total_triangle_count"],
+        "position_source": getattr(prepared, "position_source", "phase2a_config"),
+        "position_count": len(getattr(prepared, "positions", [])),
         "material_resolution": material_resolution,
         "scenario_manifest": str(
             (Path(args.output).expanduser().resolve() / "scenario_manifest.json")
@@ -98,9 +108,15 @@ def build_parser() -> argparse.ArgumentParser:
     commands = parser.add_subparsers(dest="command", required=True)
     validate = commands.add_parser("validate", help="Scenario schema와 geometry를 검증합니다.")
     validate.add_argument("--scenario", type=Path, required=True, help="Scenario YAML")
+    validate.add_argument(
+        "--markers", type=Path, help="최신 AP/TX/RX 위치를 담은 실험 Marker JSON"
+    )
     validate.set_defaults(handler=command_validate)
     build = commands.add_parser("build", help="Room과 obstacle을 독립 shape로 내보냅니다.")
     build.add_argument("--scenario", type=Path, required=True, help="Scenario YAML")
+    build.add_argument(
+        "--markers", type=Path, help="최신 AP/TX/RX 위치를 담은 실험 Marker JSON"
+    )
     build.add_argument("--output", type=Path, required=True, help="Scenario 결과 폴더")
     build.set_defaults(handler=command_build)
     run_ab = commands.add_parser("run-ab", help="Empty baseline과 obstacle variant를 비교합니다.")

@@ -36,12 +36,26 @@ def test_supported_categories_resolve_to_installed_itu_type_without_fallback(
 
     assert result["category"] == category
     assert result["itu_type"] == category
-    assert result["actual_sionna_material_name"] == "itu_{}_object_000".format(
+    assert result["actual_sionna_material_name"] == "radio_itu_{}_object_000".format(
         category
     )
     assert result["availability_verified_against_installed_sionna"] is True
     assert result["fallback_used"] is False
     assert result["warning"] is None
+
+
+def test_resolved_material_name_avoids_sionna_automatic_itu_rewrite(monkeypatch):
+    # Given: an obstacle with a non-zero diffuse-scattering coefficient.
+    monkeypatch.setattr(resolver, "installed_itu_types", lambda: None)
+
+    # When: its Sionna material name is resolved.
+    result = resolve_material_request(
+        _obstacle("concrete", "wall", scattering_coefficient=0.2)
+    )
+
+    # Then: the ID does not trigger Sionna's `itu_` XML rewrite, which drops
+    # custom scattering properties in Sionna RT 1.2.2.
+    assert not result["actual_sionna_material_name"].startswith(("itu_", "itu-"))
 
 
 def test_unknown_category_or_missing_installed_itu_type_fails_strictly(monkeypatch):

@@ -1,0 +1,42 @@
+schema_version: "1.0"
+
+# IMG_2810.jpg의 녹색 원점과 빨간 치수를 PGSR 장면에 대응시킨 4층 복도 외곽.
+# 아래 복도 11.80 m, 꺾임 x=5.34 m, 아래 복도 폭 7.50 m를 기준으로 한다.
+# 천장 높이는 PGSR plane_001, 바닥은 plane_000을 그대로 사용한다.
+# 도면에 표시된 엘리베이터/계단 내부 구조는 이번 Room Envelope에 막힌
+# 장애물로 넣지 않는다. (6.92, 11.20) Test 지점의 배치를 막지 않기 위함이다.
+room_envelope:
+  enabled: true
+
+  floor:
+    candidate_id: plane_000
+
+  ceiling:
+    candidate_id: plane_001
+
+  ordered_walls:
+    - candidate_id: plan_y_min
+    - candidate_id: plan_x_max
+    - candidate_id: plan_y_max
+    - candidate_id: plan_x_step
+    - candidate_id: plan_y_step
+    - candidate_id: plan_x_min
+
+  interior_point: null
+
+  validation:
+    floor_ceiling_max_angle_deg: 10.0
+    wall_max_up_dot: 1.0e-8
+    adjacent_wall_min_angle_deg: 45.0
+    plane_residual_tolerance: 1.0e-6
+    vertex_merge_tolerance: 1.0e-6
+    intersection_max_condition_number: 1.0e8
+    minimum_height: null
+    minimum_height_ratio: 0.05
+    require_simple_polygon: true
+    require_closed_manifold: true
+
+  output:
+    normal_orientation: outward
+    write_individual_objects: true
+    write_preview_ply: true

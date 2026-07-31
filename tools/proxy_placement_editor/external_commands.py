@@ -29,7 +29,11 @@ class ExternalCommandRunner:
         self.process: Optional[subprocess.Popen] = None
 
     def scenario_command(
-        self, action: str, scenario: Path, output: Optional[Path] = None
+        self,
+        action: str,
+        scenario: Path,
+        output: Optional[Path] = None,
+        markers: Optional[Path] = None,
     ) -> List[str]:
         if action not in {"validate", "build"}:
             raise ValueError("Scenario action은 validate/build만 지원합니다.")
@@ -45,6 +49,8 @@ class ExternalCommandRunner:
             if output is None:
                 raise ValueError("build output이 필요합니다.")
             command += ["--output", str(Path(output).resolve())]
+        if markers is not None:
+            command += ["--markers", str(Path(markers).resolve())]
         return command
 
     def experiment_command(self, experiment: Path, output: Path) -> List[str]:

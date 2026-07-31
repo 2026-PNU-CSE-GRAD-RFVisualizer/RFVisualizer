@@ -2,35 +2,45 @@
   "schema_version": "1.0",
   "camera": {
     "eye": [
-      -7.638389497198009,
-      -2.5721945461175317,
-      1.8094178184208007
+      -13.506535927875957,
+      -5.994337657066582,
+      1.907540874436702
     ],
     "forward": [
-      0.1588725817536836,
-      -0.9755702705378293,
-      -0.15173017057059252
+      0.8071098780052883,
+      -0.09859752720188034,
+      -0.5821102721198811
     ],
     "up": [
-      0.04946123983275769,
-      -0.1456245342435167,
-      0.9881028039162283
+      0.5866700968524531,
+      0.023262178384270735,
+      0.8094920311795945
     ]
   },
-  "selected_object": "blackboard_example",
+  "selected_object": "Left_Desk01",
   "viewport_mode": "translate",
   "axis_constraint": null,
-  "transform_space": "world",
-  "scene_display_mode": "both",
-  "reference_point_size": 12.0,
-  "reference_visibility": true,
+  "transform_space": "local",
+  "reference_point_size": 2.0,
+  "layer_visibility": {
+    "point_cloud": false,
+    "proxy_mesh": true,
+    "pgsr_output_mesh": true
+  },
   "grid_visibility": true,
   "show_disabled": true,
   "object_visibility": {
-    "blackboard_example": true,
-    "desk_block_example": true,
-    "door_example": true,
-    "large_metal_object_example": true
+    "Blackboard": true,
+    "Door": true,
+    "Left_Desk01": true,
+    "Left_Desk02": true,
+    "Left_Desk03": true,
+    "Left_Desk04": true,
+    "Left_Desk05": true,
+    "Left_Desk06": true,
+    "Mid_Desk01": true,
+    "Mid_Desk02": true,
+    "Mid_Desk03": true
   },
   "snap_settings": {
     "enabled": true,
@@ -42,6 +52,6 @@
     "side_panel_width": 410.0
   },
   "last_opened_scenario": "/data/RFVisualizer/configs/sionna/scenarios/pnu_classroom_proxy_draft.yaml",
-  "autosaved_at": "2026-07-20T16:17:31.360069Z",
+  "autosaved_at": "2026-07-22T12:27:58.065589Z",
   "source_scenario_path": "/data/RFVisualizer/configs/sionna/scenarios/pnu_classroom_proxy_draft.yaml"
 }

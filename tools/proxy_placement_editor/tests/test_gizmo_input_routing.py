@@ -1,8 +1,14 @@
+import math
 from types import SimpleNamespace
 
 import numpy as np
 
 from tools.proxy_placement_editor.app import ProxyPlacementApp
+from tools.proxy_placement_editor.transform_controller import (
+    rotate_point_about_pivot,
+    scale_point_about_pivot,
+)
+from tools.sionna_scenario.primitive_builder import rotation_matrix_xyz
 
 
 class Results:
@@ -56,10 +62,14 @@ class Viewport:
 
     def __init__(self):
         self.hit = None
+        self.near_gizmo = False
         self.interactions = []
 
     def pick_gizmo(self, origin, direction, screen_xy=None):
         return None
+
+    def is_near_gizmo(self, screen_xy):
+        return self.near_gizmo
 
     def set_gizmo_interaction(self, enabled):
         self.interactions.append(bool(enabled))
@@ -84,6 +94,14 @@ def _app():
 def test_transform_mode_background_drag_is_left_for_camera():
     value = _app()
     assert value._on_mouse(Event()) == Results.IGNORED
+    assert value._drag is None
+
+
+def test_near_gizmo_miss_is_consumed_without_clearing_selection():
+    value = _app()
+    value.viewport.near_gizmo = True
+    assert value._on_mouse(Event()) == Results.CONSUMED
+    assert value.core.state.selected_object_id == "box"
     assert value._drag is None
 
 
@@ -131,7 +149,7 @@ def test_screen_axis_drag_converts_pixels_to_world_distance():
 
 def test_gizmo_drag_updates_object_and_restores_camera_control(draft_core):
     draft_core.materialize_draft_placeholders()
-    object_id = "desk_block_example"
+    object_id = str(draft_core.state.obstacles[0]["id"])
     draft_core.state.select(object_id)
     draft_core.state.viewport_mode = "translate"
     draft_core.state.snap.enabled = False
@@ -173,7 +191,7 @@ def test_gizmo_drag_updates_object_and_restores_camera_control(draft_core):
 
 def test_rotation_gizmo_drag_changes_object_yaw(draft_core):
     draft_core.materialize_draft_placeholders()
-    object_id = "desk_block_example"
+    object_id = str(draft_core.state.obstacles[0]["id"])
     draft_core.state.select(object_id)
     draft_core.state.viewport_mode = "rotate"
     draft_core.state.transform_space = "world"
@@ -211,3 +229,139 @@ def test_rotation_gizmo_drag_changes_object_yaw(draft_core):
         draft_core.state.get_object(object_id)["geometry"]["rotation_deg"]["yaw"]
     )
     assert np.isclose(after_yaw - before_yaw, 90.0, atol=0.1)
+
+
+def _center_anchor_ids(core):
+    identifiers = []
+    for obstacle in core.state.obstacles:
+        anchor = obstacle.get("geometry", {}).get("anchor", {})
+        mode = anchor if isinstance(anchor, str) else anchor.get("mode", "center")
+        if mode == "center":
+            identifiers.append(str(obstacle["id"]))
+        if len(identifiers) == 2:
+            return identifiers
+    raise AssertionError("그룹 변환 테스트에는 center anchor 객체 두 개가 필요합니다.")
+
+
+def _mesh_center(core, object_id):
+    vertices = np.asarray(core.preview_mesh(object_id).vertices, dtype=float)
+    return (np.min(vertices, axis=0) + np.max(vertices, axis=0)) / 2.0
+
+
+def _group_drag_app(draft_core, mode):
+    object_ids = _center_anchor_ids(draft_core)
+    draft_core.state.select(object_ids[0])
+    draft_core.state.select(object_ids[1], additive=True)
+    draft_core.state.viewport_mode = mode
+    draft_core.state.transform_space = "local"
+    draft_core.state.snap.enabled = False
+    centers = {
+        object_id: _mesh_center(draft_core, object_id)
+        for object_id in object_ids
+    }
+    vertices = np.concatenate(
+        [
+            np.asarray(draft_core.preview_mesh(object_id).vertices, dtype=float)
+            for object_id in object_ids
+        ],
+        axis=0,
+    )
+    pivot = (np.min(vertices, axis=0) + np.max(vertices, axis=0)) / 2.0
+    value = _app()
+    value.core = draft_core
+    value.refresh = lambda: None
+    value._refresh_drag_preview = lambda *args: None
+    value.viewport.gizmo_object_ids = object_ids
+    frame = SimpleNamespace(
+        center=pivot,
+        length=1.0,
+        axis=lambda name: np.eye(3)[:, {"x": 0, "y": 1, "z": 2}[name]],
+    )
+    value.viewport.gizmo_frame = frame
+    value.viewport.pick_gizmo = lambda origin, direction, screen_xy=None: {
+        "axis": "z" if mode == "rotate" else "x",
+        "point": (
+            pivot + np.asarray([1.0, 0.0, 0.0])
+        ).tolist(),
+    }
+    return value, object_ids, centers, pivot
+
+
+def test_group_translation_moves_every_selected_object_as_one_undo(draft_core):
+    value, object_ids, centers, _ = _group_drag_app(draft_core, "translate")
+
+    value._on_mouse(DragEvent(Gui.MouseEvent.Type.BUTTON_DOWN, 100, 100))
+    value._on_mouse(DragEvent(Gui.MouseEvent.Type.DRAG, 125, 100))
+    value._on_mouse(DragEvent(Gui.MouseEvent.Type.BUTTON_UP, 125, 100))
+
+    for object_id in object_ids:
+        np.testing.assert_allclose(
+            _mesh_center(draft_core, object_id),
+            centers[object_id] + [0.5, 0.0, 0.0],
+            atol=1.0e-8,
+        )
+    assert draft_core.commands.undo_count == 1
+
+
+def test_group_rotation_uses_combined_center_and_world_axes(draft_core):
+    value, object_ids, centers, pivot = _group_drag_app(draft_core, "rotate")
+    before_rotations = {
+        object_id: list(
+            draft_core.state.get_object(object_id)["geometry"][
+                "rotation_deg"
+            ].values()
+        )
+        for object_id in object_ids
+    }
+
+    value._on_mouse(DragEvent(Gui.MouseEvent.Type.BUTTON_DOWN, 150, 100))
+    value._on_mouse(DragEvent(Gui.MouseEvent.Type.DRAG, 150, 21.46))
+    value._on_mouse(DragEvent(Gui.MouseEvent.Type.BUTTON_UP, 150, 21.46))
+
+    expected_delta = rotation_matrix_xyz([0.0, 0.0, 90.0])
+    for object_id in object_ids:
+        np.testing.assert_allclose(
+            _mesh_center(draft_core, object_id),
+            rotate_point_about_pivot(
+                centers[object_id], pivot, "z", 90.0
+            ),
+            atol=2.0e-3,
+        )
+        after = list(
+            draft_core.state.get_object(object_id)["geometry"][
+                "rotation_deg"
+            ].values()
+        )
+        np.testing.assert_allclose(
+            rotation_matrix_xyz(after),
+            expected_delta @ rotation_matrix_xyz(before_rotations[object_id]),
+            atol=2.0e-3,
+        )
+
+
+def test_group_scale_resizes_objects_and_their_offsets_from_center(draft_core):
+    value, object_ids, centers, pivot = _group_drag_app(draft_core, "scale")
+    before_sizes = {
+        object_id: float(
+            draft_core.state.get_object(object_id)["geometry"]["size_m"]["x"]
+        )
+        for object_id in object_ids
+    }
+
+    value._on_mouse(DragEvent(Gui.MouseEvent.Type.BUTTON_DOWN, 100, 100))
+    value._on_mouse(DragEvent(Gui.MouseEvent.Type.DRAG, 125, 100))
+    value._on_mouse(DragEvent(Gui.MouseEvent.Type.BUTTON_UP, 125, 100))
+
+    factor = math.exp(0.5)
+    for object_id in object_ids:
+        np.testing.assert_allclose(
+            _mesh_center(draft_core, object_id),
+            scale_point_about_pivot(
+                centers[object_id], pivot, "x", factor
+            ),
+            atol=1.0e-8,
+        )
+        assert np.isclose(
+            draft_core.state.get_object(object_id)["geometry"]["size_m"]["x"],
+            before_sizes[object_id] * factor,
+        )

@@ -3,6 +3,7 @@ import numpy as np
 from tools.proxy_placement_editor.gizmo import (
     axis_drag_parameter,
     make_gizmo_frame,
+    make_front_gizmo_frame,
     pick_gizmo_axis,
     pick_projected_gizmo_axis,
     rotation_drag_angle_deg,
@@ -40,6 +41,24 @@ def test_world_local_axes_and_scale_is_always_local():
     np.testing.assert_allclose(world.axes, np.eye(3), atol=1.0e-12)
     np.testing.assert_allclose(local.axis("x"), [0.0, 1.0, 0.0], atol=1.0e-12)
     np.testing.assert_allclose(scale.axes, local.axes, atol=1.0e-12)
+
+
+def test_front_frame_keeps_perspective_projection_and_moves_actual_handles_near():
+    frame = make_gizmo_frame(
+        _box_vertices(), np.eye(4), "translate", "world", 10.0
+    )
+    eye = np.asarray([1.0, -2.0, 20.0])
+    forward = np.asarray([0.0, 0.0, -1.0])
+    display = make_front_gizmo_frame(frame, eye, forward, 0.1)
+    logical_end = frame.center + frame.axis("x") * frame.length
+    display_end = display.center + display.axis("x") * display.length
+
+    assert np.isclose(np.dot(display.center - eye, forward), 0.15)
+    np.testing.assert_allclose(
+        (display_end - eye)[:2] / abs(display_end[2] - eye[2]),
+        (logical_end - eye)[:2] / abs(logical_end[2] - eye[2]),
+        atol=1.0e-12,
+    )
 
 
 def test_axis_handle_pick_and_drag_parameter():
@@ -85,7 +104,11 @@ def test_screen_space_pick_uses_fixed_pixel_tolerance():
         return np.asarray([100.0 + value[0] * 100.0, 100.0 - value[1] * 100.0, 0.5])
 
     endpoint = project(frame.center + frame.axis("x") * frame.length)
-    hit = pick_projected_gizmo_axis(endpoint[:2] + [0.0, 8.0], frame, project)
+    hit = pick_projected_gizmo_axis(endpoint[:2] + [0.0, 20.0], frame, project)
     assert hit["axis"] == "x"
-    assert hit["distance_px"] <= 8.0 + 1.0e-9
+    assert hit["distance_px"] <= 20.0 + 1.0e-9
     assert pick_projected_gizmo_axis(endpoint[:2] + [0.0, 30.0], frame, project) is None
+    guard_hit = pick_projected_gizmo_axis(
+        endpoint[:2] + [0.0, 30.0], frame, project, tolerance_px=34.0
+    )
+    assert guard_hit["axis"] == "x"

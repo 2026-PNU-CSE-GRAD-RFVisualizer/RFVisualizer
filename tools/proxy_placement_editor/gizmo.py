@@ -15,6 +15,13 @@ AXIS_COLORS = {
     "z": (0.18, 0.42, 1.0),
 }
 
+GIZMO_PICK_TOLERANCE_PX = 22.0
+GIZMO_GUARD_TOLERANCE_PX = 34.0
+# Keep the copied handles just behind the near plane. A large multiplier can
+# put them behind the selected mesh because Open3D derives a relatively distant
+# near plane when setup_camera() frames a large room.
+GIZMO_FRONT_NEAR_MULTIPLIER = 1.5
+
 
 @dataclass(frozen=True)
 class GizmoFrame:
@@ -26,6 +33,41 @@ class GizmoFrame:
 
     def axis(self, name: str) -> np.ndarray:
         return self.axes[:, AXIS_NAMES.index(name)]
+
+
+def make_front_gizmo_frame(
+    frame: GizmoFrame,
+    eye: np.ndarray,
+    forward: np.ndarray,
+    near_plane: float,
+) -> GizmoFrame:
+    """Move the actual 3D handles near the camera without changing projection."""
+
+    camera = np.asarray(eye, dtype=float)
+    view_forward = np.asarray(forward, dtype=float)
+    if camera.shape != (3,) or view_forward.shape != (3,):
+        raise ValueError("Gizmo front frame에는 3D camera 좌표가 필요합니다.")
+    if not np.all(np.isfinite(camera)) or not np.all(np.isfinite(view_forward)):
+        raise ValueError("Gizmo front frame camera 좌표는 유한해야 합니다.")
+    forward_length = float(np.linalg.norm(view_forward))
+    near = float(near_plane)
+    if forward_length <= 1.0e-9:
+        raise ValueError("Gizmo front frame forward 길이는 0일 수 없습니다.")
+    if not np.isfinite(near) or near <= 0.0:
+        raise ValueError("Gizmo front frame near plane은 유한한 양수여야 합니다.")
+    normalized_forward = view_forward / forward_length
+    center_depth = float(np.dot(frame.center - camera, normalized_forward))
+    target_depth = near * GIZMO_FRONT_NEAR_MULTIPLIER
+    if center_depth <= target_depth:
+        return frame
+    scale = target_depth / center_depth
+    return GizmoFrame(
+        center=camera + (frame.center - camera) * scale,
+        axes=frame.axes,
+        length=frame.length * scale,
+        mode=frame.mode,
+        space=frame.space,
+    )
 
 
 def _orthonormal_axes(linear: np.ndarray) -> np.ndarray:
@@ -168,7 +210,7 @@ def pick_projected_gizmo_axis(
     mouse_xy: np.ndarray,
     frame: Optional[GizmoFrame],
     project: Callable[[np.ndarray], Optional[np.ndarray]],
-    tolerance_px: float = 14.0,
+    tolerance_px: float = GIZMO_PICK_TOLERANCE_PX,
 ) -> Optional[Dict[str, object]]:
     """Pick the visible gizmo in screen pixels instead of scene units."""
 

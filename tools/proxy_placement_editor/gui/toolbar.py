@@ -1,17 +1,21 @@
 """Transform modes, axis constraints, and snap settings."""
 
 from .strings_ko import tr
+from .metrics import scaled, scaled_margins
 
 
 class PlacementToolbar:
-    def __init__(self, state, on_change, on_point_size):
+    def __init__(self, state, on_change, on_point_size, ui_scale=1.0):
         from open3d.visualization import gui
 
         self.gui, self.state, self.on_change = gui, state, on_change
         self.on_point_size = on_point_size
         self.updating = False
-        self.widget = gui.Vert(3, gui.Margins(4, 4, 4, 4))
-        modes = gui.Horiz(4)
+        self.widget = gui.Vert(
+            scaled(3, ui_scale),
+            scaled_margins(gui, 4, 4, 4, 4, ui_scale),
+        )
+        modes = gui.Horiz(scaled(4, ui_scale))
         for label, mode in (
             (tr("select"), "select"),
             ("G " + tr("move"), "translate"),
@@ -25,18 +29,19 @@ class PlacementToolbar:
         self.space.set_on_clicked(self._toggle_space)
         self._refresh_space_label()
         modes.add_child(self.space)
-        modes.add_child(gui.Label(tr("display_mode")))
-        self.display = gui.Combobox()
-        for label in (
-            tr("display_both"),
-            tr("display_point_cloud"),
-            tr("display_proxy_mesh"),
-        ):
-            self.display.add_item(label)
-        display_values = ("both", "point_cloud", "proxy_mesh")
-        self.display.selected_index = display_values.index(state.scene_display_mode)
-        self.display.set_on_selection_changed(self._display_mode)
-        modes.add_child(self.display)
+        modes.add_child(gui.Label(tr("display_layers")))
+        self.point_cloud = gui.Checkbox(tr("display_point_cloud"))
+        self.point_cloud.checked = state.point_cloud_visible
+        self.point_cloud.set_on_checked(self._point_cloud_visibility)
+        modes.add_child(self.point_cloud)
+        self.proxy_mesh = gui.Checkbox(tr("display_proxy_mesh"))
+        self.proxy_mesh.checked = state.proxy_mesh_visible
+        self.proxy_mesh.set_on_checked(self._proxy_mesh_visibility)
+        modes.add_child(self.proxy_mesh)
+        self.pgsr_output_mesh = gui.Checkbox(tr("display_pgsr_output_mesh"))
+        self.pgsr_output_mesh.checked = state.pgsr_output_mesh_visible
+        self.pgsr_output_mesh.set_on_checked(self._pgsr_output_mesh_visibility)
+        modes.add_child(self.pgsr_output_mesh)
         modes.add_child(gui.Label(tr("point_size")))
         self.point_size = gui.Slider(gui.Slider.DOUBLE)
         self.point_size.set_limits(1.0, 12.0)
@@ -46,7 +51,7 @@ class PlacementToolbar:
         modes.add_child(self.point_size)
         modes.add_child(self.point_size_label)
 
-        settings = gui.Horiz(4)
+        settings = gui.Horiz(scaled(4, ui_scale))
         self.snap = gui.Checkbox(tr("snap"))
         self.snap.checked = state.snap.enabled
         self.snap.set_on_checked(self._snap)
@@ -97,11 +102,9 @@ class PlacementToolbar:
         self.updating = True
         try:
             self._refresh_space_label()
-            self.display.selected_index = (
-                "both",
-                "point_cloud",
-                "proxy_mesh",
-            ).index(self.state.scene_display_mode)
+            self.point_cloud.checked = self.state.point_cloud_visible
+            self.proxy_mesh.checked = self.state.proxy_mesh_visible
+            self.pgsr_output_mesh.checked = self.state.pgsr_output_mesh_visible
             self.point_size.double_value = float(self.state.reference_point_size)
             self.point_size_label.text = "{:.1f}px".format(
                 self.state.reference_point_size
@@ -124,10 +127,22 @@ class PlacementToolbar:
         self._refresh_space_label()
         self.on_change()
 
-    def _display_mode(self, text, index):
+    def _point_cloud_visibility(self, checked):
         if self.updating:
             return
-        self.state.scene_display_mode = ("both", "point_cloud", "proxy_mesh")[index]
+        self.state.point_cloud_visible = bool(checked)
+        self.on_change()
+
+    def _proxy_mesh_visibility(self, checked):
+        if self.updating:
+            return
+        self.state.proxy_mesh_visible = bool(checked)
+        self.on_change()
+
+    def _pgsr_output_mesh_visibility(self, checked):
+        if self.updating:
+            return
+        self.state.pgsr_output_mesh_visible = bool(checked)
         self.on_change()
 
     def _point_size(self, value):

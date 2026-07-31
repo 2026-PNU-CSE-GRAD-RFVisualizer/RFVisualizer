@@ -6,6 +6,7 @@ import math
 import os
 import subprocess
 import time
+from copy import deepcopy
 from pathlib import Path
 from typing import Any, Dict, Optional
 
@@ -23,14 +24,18 @@ from .native_keyboard import NativeKeyboardState, fps_keys_from_native
 from .picking import nearest_obstacle_hit, ray_plane_intersection
 from .transform_controller import (
     resize_obstacle,
+    rotate_point_about_pivot,
     rotate_obstacle_in_space,
+    scale_point_about_pivot,
     snap_value,
     translate_obstacle,
 )
 from .gui.candidate_panel import CandidatePanel
 from .gui.korean_font import configure_heading_font, configure_korean_font
+from .gui.metrics import scaled, scaled_margins, validate_ui_scale
 from .gui.object_list_panel import ObjectListPanel
 from .gui.properties_panel import PropertiesPanel
+from .gui.radio_properties_panel import RadioPropertiesPanel
 from .gui.section import make_section
 from .gui.shortcuts import shortcut_text
 from .gui.strings_ko import format_enabled_errors, localize_message, tr
@@ -53,28 +58,64 @@ class ProxyPlacementApp:
 
         self.o3d, self.gui, self.core = o3d, gui, core
         self.experiment = Path(experiment).resolve() if experiment else None
+        ui_config = editor_config.get("ui", {})
+        self.ui_scale = validate_ui_scale(ui_config.get("scale", 1.0))
+        default_font_size = scaled(
+            ui_config.get("base_font_point_size", 16), self.ui_scale
+        )
+        heading_font_size = scaled(
+            ui_config.get("heading_font_point_size", 18), self.ui_scale
+        )
+        window_width = scaled(width, self.ui_scale)
+        window_height = scaled(height, self.ui_scale)
+        side_panel_width = scaled(
+            ui_config.get("side_panel_width", 410), self.ui_scale
+        )
+        self.toolbar_height = scaled(78, self.ui_scale)
+        core.state.panel_sizes["side_panel_width"] = float(side_panel_width)
         app = gui.Application.instance
         app.initialize()
-        self.korean_font_path = configure_korean_font(gui, app)
-        self.heading_font_id = configure_heading_font(
-            gui, app, self.korean_font_path
+        self.korean_font_path = configure_korean_font(
+            gui, app, point_size=default_font_size
         )
-        self.window = app.create_window(tr("window_title"), width, height)
+        self.heading_font_id = configure_heading_font(
+            gui, app, self.korean_font_path, point_size=heading_font_size
+        )
+        self.window = app.create_window(
+            tr("window_title"), window_width, window_height
+        )
         reference_config = editor_config.get("reference", {})
         core.state.reference_point_size = float(
             reference_config.get("point_size", core.state.reference_point_size)
         )
-        core.state.reference_visible = bool(reference_config.get("visible", True))
-        core.state.scene_display_mode = str(
-            reference_config.get("display_mode", core.state.scene_display_mode)
+        core.state.point_cloud_visible = bool(
+            reference_config.get("point_cloud_visible", True)
+        )
+        core.state.proxy_mesh_visible = bool(
+            reference_config.get("proxy_mesh_visible", True)
+        )
+        core.state.pgsr_output_mesh_visible = bool(
+            reference_config.get("pgsr_output_mesh_visible", True)
         )
         core.materialize_draft_placeholders()
-        self.viewport = PlacementViewport(self.window.renderer, core)
+        self.viewport = PlacementViewport(
+            self.window.renderer,
+            core,
+            editor_config.get("navigation", {}).get("initial_camera"),
+            ui_scale=self.ui_scale,
+        )
         self.toolbar = PlacementToolbar(
-            core.state, self.refresh, self._set_reference_point_size
+            core.state,
+            self.refresh,
+            self._set_reference_point_size,
+            self.ui_scale,
         )
         self.candidate_panel = CandidatePanel(
-            core, self._add_candidate, self.heading_font_id
+            core,
+            self._add_candidate,
+            self._add_receiver,
+            self.heading_font_id,
+            self.ui_scale,
         )
         self.object_panel = ObjectListPanel(
             self._select,
@@ -85,21 +126,34 @@ class ProxyPlacementApp:
             lambda: self._reorder(1),
             self._toggle_visibility,
             self.heading_font_id,
+            self.ui_scale,
+            is_ctrl_down=self._ctrl_selection_active,
         )
         self.properties_panel = PropertiesPanel(
-            core, self.refresh, self.heading_font_id
+            core, self.refresh, self.heading_font_id, self.ui_scale
         )
-        self.validation_panel = ValidationPanel(self.heading_font_id)
+        self.radio_properties_panel = RadioPropertiesPanel(
+            core, self.refresh, self.heading_font_id, self.ui_scale
+        )
+        self.validation_panel = ValidationPanel(
+            self.heading_font_id, self.ui_scale
+        )
         self.warning = gui.Label(tr("provisional_warning"))
         self.warning.text_color = gui.Color(1.0, 0.38, 0.18)
-        self.side = gui.ScrollableVert(4, gui.Margins(8, 8, 8, 8))
+        self.side = gui.ScrollableVert(
+            scaled(4, self.ui_scale),
+            scaled_margins(gui, 8, 8, 8, 8, self.ui_scale),
+        )
         self.side.add_child(self.warning)
         self.side.add_child(self.candidate_panel.widget)
         self.side.add_child(self.object_panel.widget)
         self.side.add_child(self.properties_panel.widget)
+        self.side.add_child(self.radio_properties_panel.widget)
         self.side.add_child(self.validation_panel.widget)
         self._add_actions()
-        shortcuts = make_section(gui, tr("shortcuts"), self.heading_font_id)
+        shortcuts = make_section(
+            gui, tr("shortcuts"), self.heading_font_id, self.ui_scale
+        )
         shortcuts.add_child(gui.Label(shortcut_text()))
         self.side.add_child(shortcuts)
         self.window.add_child(self.toolbar.widget)
@@ -123,6 +177,7 @@ class ProxyPlacementApp:
             Path(__file__).resolve().parents[2],
         )
         self._drag = None
+        self._fps_mouse_position = None
         self._keys = {"ctrl": False, "shift": False}
         self.fps_camera = FpsCameraController(
             FpsNavigationSettings.from_dict(
@@ -139,8 +194,11 @@ class ProxyPlacementApp:
 
     def _add_actions(self):
         gui = self.gui
-        actions = make_section(gui, tr("scenario_actions"), self.heading_font_id)
-        row1, row2, row3 = gui.Horiz(4), gui.Horiz(4), gui.Horiz(4)
+        actions = make_section(
+            gui, tr("scenario_actions"), self.heading_font_id, self.ui_scale
+        )
+        gap = scaled(4, self.ui_scale)
+        row1, row2, row3 = gui.Horiz(gap), gui.Horiz(gap), gui.Horiz(gap)
         for label, callback, row in (
             (tr("validate"), self._validate, row1),
             (tr("save"), self._save, row1),
@@ -160,7 +218,7 @@ class ProxyPlacementApp:
 
     def _layout(self, context):
         rect = self.window.content_rect
-        toolbar_height = 78
+        toolbar_height = self.toolbar_height
         side_width = int(self.core.state.panel_sizes.get("side_panel_width", 410.0))
         self.toolbar.widget.frame = self.gui.Rect(
             rect.x, rect.y, rect.width, toolbar_height
@@ -184,12 +242,29 @@ class ProxyPlacementApp:
         self.toolbar.refresh()
         self.object_panel.refresh(self.core.state, report)
         self.properties_panel.refresh(self.core.state.selected_object_id, report)
+        self.radio_properties_panel.refresh(self.core.state.selected_object_id)
         self.validation_panel.refresh(report, self.core.state.selected_object_id)
+        # RX/AP selection changes which radio-property rows are visible. Open3D
+        # does not automatically recompute ScrollableVert geometry when only a
+        # child's visibility changes, so the rows stay collapsed until the
+        # user resizes the window unless a layout pass is requested explicitly.
+        self.window.set_needs_layout()
         self.window.post_redraw()
 
-    def _refresh_drag_preview(self, object_id):
-        mesh = self.core.preview_mesh(object_id)
-        self.viewport.update_object_preview(object_id, mesh)
+    def _refresh_drag_preview(self, object_ids, pivot=None):
+        identifiers = (
+            [object_ids] if isinstance(object_ids, str) else list(object_ids)
+        )
+        if len(identifiers) == 1:
+            object_id = identifiers[0]
+            mesh = self.core.preview_mesh(object_id)
+            self.viewport.update_object_preview(object_id, mesh)
+        else:
+            meshes = {
+                object_id: self.core.preview_mesh(object_id)
+                for object_id in identifiers
+            }
+            self.viewport.update_group_preview(identifiers, meshes, pivot)
         self.window.post_redraw()
 
     def _set_reference_point_size(self, value):
@@ -209,13 +284,41 @@ class ProxyPlacementApp:
         )
         return float(parameter - drag["start_parameter"])
 
-    def _select(self, object_id):
-        self.core.state.select(object_id)
+    def _select(self, object_id, additive=False):
+        self.core.state.select(object_id, additive=additive)
         self.refresh()
 
+    def _ctrl_selection_active(self):
+        if bool(getattr(self, "_keys", {}).get("ctrl", False)):
+            return True
+        native_keyboard = getattr(self, "native_keyboard", None)
+        if native_keyboard is None or not native_keyboard.available:
+            return False
+        return "ctrl" in fps_keys_from_native(native_keyboard.pressed())
+
+    @staticmethod
+    def _mesh_center(mesh):
+        vertices = np.asarray(mesh.vertices, dtype=float)
+        return (np.min(vertices, axis=0) + np.max(vertices, axis=0)) / 2.0
+
+    def _preview_center(self, object_id, value):
+        return self._mesh_center(
+            self.core.preview_mesh_value(object_id, value)
+        )
+
     def _add_candidate(self, candidate_id):
-        self.core.add_candidate(candidate_id)
-        self.refresh()
+        try:
+            self.core.add_candidate(candidate_id)
+            self.refresh()
+        except Exception as exc:
+            self._message("객체를 추가할 수 없음", str(exc))
+
+    def _add_receiver(self, role):
+        try:
+            self.core.add_receiver(role)
+            self.refresh()
+        except Exception as exc:
+            self._message("RX를 추가할 수 없음", str(exc))
 
     def _duplicate(self):
         if self.core.state.selected_object_id:
@@ -252,6 +355,11 @@ class ProxyPlacementApp:
     def _message(self, title, text):
         self.window.show_message_box(title, localize_message(text))
 
+    def _append_validation_log(self, line):
+        self.validation_panel.append_log(line)
+        self.window.set_needs_layout()
+        self.window.post_redraw()
+
     def _validate(self):
         report = self.core.validate()
         self.refresh()
@@ -265,9 +373,13 @@ class ProxyPlacementApp:
     def _save(self):
         try:
             result = self.core.save()
-            self.validation_panel.append_log(
+            self._append_validation_log(
                 "{}: {}".format(tr("saved"), result["scenario"])
             )
+            if result.get("markers"):
+                self._append_validation_log(
+                    "TX/RX 저장됨: {}".format(result["markers"])
+                )
             self.refresh()
         except Exception as exc:
             self._message(tr("save_blocked"), str(exc))
@@ -296,7 +408,7 @@ class ProxyPlacementApp:
     def _preview(self):
         try:
             files = self.core.export_preview()
-            self.validation_panel.append_log(
+            self._append_validation_log(
                 "{}: {}".format(
                     tr("preview_created"), files["perspective_view_png"]
                 )
@@ -305,17 +417,17 @@ class ProxyPlacementApp:
             self._message(tr("preview_failed"), str(exc))
 
     def _external(self, command):
-        self.validation_panel.append_log("$ " + " ".join(command))
+        self._append_validation_log("$ " + " ".join(command))
 
         def output(line):
             self.gui.Application.instance.post_to_main_thread(
-                self.window, lambda: self.validation_panel.append_log(line)
+                self.window, lambda: self._append_validation_log(line)
             )
 
         def complete(code):
             self.gui.Application.instance.post_to_main_thread(
                 self.window,
-                lambda: self.validation_panel.append_log(
+                lambda: self._append_validation_log(
                     "{} {}".format(tr("exit_code"), code)
                 ),
             )
@@ -329,7 +441,10 @@ class ProxyPlacementApp:
         try:
             self.core.save()
             command = self.runner.scenario_command(
-                "build", self.core.state.source_path, self.core.output / "sionna_build"
+                "build",
+                self.core.state.source_path,
+                self.core.output / "sionna_build",
+                markers=self.core.state.marker_source_path,
             )
             self._external(command)
         except Exception as exc:
@@ -356,27 +471,44 @@ class ProxyPlacementApp:
             self._message(tr("open_output_failed"), str(exc))
 
     def _replace_preview(self, object_id, value):
-        for index, obstacle in enumerate(self.core.state.obstacles):
-            if obstacle.get("id") == object_id:
-                self.core.state.obstacles[index] = value
+        values = (
+            self.core.state.receivers
+            if self.core.state.object_kind(object_id) == "rx"
+            else self.core.state.obstacles
+        )
+        for index, editable in enumerate(values):
+            if editable.get("id") == object_id:
+                values[index] = value
                 self.core.state.dirty = True
                 self.core.last_validation = None
                 return
 
     def _set_fps_property_lock(self, active):
-        panel = getattr(self, "properties_panel", None)
-        if panel is None:
+        panels = [
+            value
+            for value in (
+                getattr(self, "properties_panel", None),
+                getattr(self, "radio_properties_panel", None),
+            )
+            if value is not None
+        ]
+        if not panels:
             return
         if active:
             # Open3D 0.18 keeps ImGui's text-edit ActiveId after a right-click
             # in the SceneWidget. Prevent polled WASD keys from changing the
             # active property while FPS navigation owns the keyboard.
-            panel.updating = True
-            panel.set_enabled(False)
+            for panel in panels:
+                panel.updating = True
+                panel.set_enabled(False)
             return
-        panel.updating = False
+        for panel in panels:
+            panel.updating = False
         report = self.core.last_validation or self.core.validate()
-        panel.refresh(self.core.state.selected_object_id, report)
+        self.properties_panel.refresh(self.core.state.selected_object_id, report)
+        radio_panel = getattr(self, "radio_properties_panel", None)
+        if radio_panel is not None:
+            radio_panel.refresh(self.core.state.selected_object_id)
 
     def _start_fps_navigation(self):
         if not self.fps_camera.settings.enabled:
@@ -397,9 +529,10 @@ class ProxyPlacementApp:
         if not self.fps_camera.active and not self._fps_exit_pending:
             return
         self.fps_camera.deactivate()
+        self._fps_mouse_position = None
         self._keys["ctrl"] = False
         self._keys["shift"] = False
-        # Fly interactor가 현재 BUTTON_UP을 먼저 받은 뒤 다음 tick에 복귀한다.
+        # 현재 BUTTON_UP 처리가 끝난 뒤 다음 tick에 일반 궤도 조작으로 복귀한다.
         self._fps_exit_pending = True
         self._set_fps_property_lock(False)
         self.toolbar.set_fps_active(False)
@@ -413,12 +546,28 @@ class ProxyPlacementApp:
         )
         right_down = event.is_button_down(gui.MouseButton.RIGHT)
         if event.type == gui.MouseEvent.Type.BUTTON_DOWN and right_down:
-            self._start_fps_navigation()
-            return ignored
+            if not self._start_fps_navigation():
+                return ignored
+            self._fps_mouse_position = np.asarray([event.x, event.y], dtype=float)
+            return handled
         if self.fps_camera.active:
             if event.type == gui.MouseEvent.Type.BUTTON_UP:
                 self._end_fps_navigation()
-            return ignored
+                return consumed
+            if event.type == gui.MouseEvent.Type.DRAG:
+                current = np.asarray([event.x, event.y], dtype=float)
+                previous = self._fps_mouse_position
+                self._fps_mouse_position = current
+                if previous is not None:
+                    delta = current - previous
+                    if float(np.linalg.norm(delta)) > 0.0:
+                        self.core.state.camera = self.viewport.rotate_fps_camera(
+                            float(delta[0]),
+                            float(delta[1]),
+                            self.fps_camera.settings,
+                        )
+                return consumed
+            return consumed
         if self._fps_exit_pending:
             return consumed
         if event.is_modifier_down(gui.KeyModifier.ALT) or event.is_button_down(
@@ -443,10 +592,23 @@ class ProxyPlacementApp:
                 if gizmo_hit is not None and frame is not None:
                     axis_name = str(gizmo_hit["axis"])
                     axis = frame.axis(axis_name)
+                    object_ids = list(
+                        getattr(self.viewport, "gizmo_object_ids", [])
+                    )
+                    if not object_ids:
+                        object_ids = [selected]
+                    sources = {
+                        object_id: deepcopy(
+                            self.core.state.get_object(object_id)
+                        )
+                        for object_id in object_ids
+                    }
                     drag = {
                         "before": self.core.state.snapshot_document(),
                         "object_id": selected,
-                        "source": self.core.state.get_object(selected),
+                        "object_ids": object_ids,
+                        "sources": sources,
+                        "source": sources[selected],
                         "axis": axis_name,
                         "axis_vector": axis,
                         "center": frame.center,
@@ -456,6 +618,13 @@ class ProxyPlacementApp:
                             [event.x, event.y], dtype=float
                         ),
                     }
+                    if len(object_ids) > 1:
+                        drag["centers"] = {
+                            object_id: self._preview_center(
+                                object_id, sources[object_id]
+                            )
+                            for object_id in object_ids
+                        }
                     if mode == "rotate":
                         drag["start_point"] = np.asarray(
                             gizmo_hit["point"], dtype=float
@@ -520,6 +689,10 @@ class ProxyPlacementApp:
                     # rotating at the same time.
                     self.viewport.set_gizmo_interaction(True)
                     return handled
+                if self.viewport.is_near_gizmo((event.x, event.y)):
+                    # A near miss around an always-visible handle must not fall
+                    # through to obstacle selection or native scene controls.
+                    return consumed
             hit = nearest_obstacle_hit(origin, direction, self.viewport.obstacle_meshes)
             if mode == "select":
                 self.core.state.select(hit["object_id"] if hit else None)
@@ -548,13 +721,25 @@ class ProxyPlacementApp:
                         distance, self.core.state.snap.translation_m, snap
                     )
                     delta = drag["axis_vector"] * distance
-                    value = translate_obstacle(
-                        drag["source"],
-                        delta,
-                        axis=None,
-                        snap_increment_m=self.core.state.snap.translation_m,
-                        snap_enabled=False,
-                    )
+                    values = {}
+                    for object_id in drag["object_ids"]:
+                        source = drag["sources"][object_id]
+                        if self.core.state.object_kind(object_id) == "rx":
+                            value = deepcopy(source)
+                            position = (
+                                np.asarray(value["position_m"], dtype=float)
+                                + delta
+                            )
+                            value["position_m"] = position.tolist()
+                        else:
+                            value = translate_obstacle(
+                                source,
+                                delta,
+                                axis=None,
+                                snap_increment_m=self.core.state.snap.translation_m,
+                                snap_enabled=False,
+                            )
+                        values[object_id] = value
                 elif drag["mode"] == "rotate":
                     tangent = drag.get("screen_tangent")
                     if tangent is not None:
@@ -580,27 +765,103 @@ class ProxyPlacementApp:
                             drag["start_point"],
                             current,
                         )
-                    value = rotate_obstacle_in_space(
-                        drag["source"],
-                        angle * fine,
-                        axis=drag["axis"],
-                        space=self.core.state.transform_space,
-                        snap_increment_deg=self.core.state.snap.rotation_deg,
-                        snap_enabled=snap,
-                    )
+                    values = {}
+                    if len(drag["object_ids"]) == 1:
+                        object_id = drag["object_id"]
+                        values[object_id] = rotate_obstacle_in_space(
+                            drag["source"],
+                            angle * fine,
+                            axis=drag["axis"],
+                            space=self.core.state.transform_space,
+                            snap_increment_deg=self.core.state.snap.rotation_deg,
+                            snap_enabled=snap,
+                        )
+                    else:
+                        angle = snap_value(
+                            angle * fine,
+                            self.core.state.snap.rotation_deg,
+                            snap,
+                        )
+                        for object_id in drag["object_ids"]:
+                            source = drag["sources"][object_id]
+                            target_center = rotate_point_about_pivot(
+                                drag["centers"][object_id],
+                                drag["center"],
+                                drag["axis"],
+                                angle,
+                            )
+                            if self.core.state.object_kind(object_id) == "rx":
+                                value = deepcopy(source)
+                                value["position_m"] = target_center.tolist()
+                            else:
+                                value = rotate_obstacle_in_space(
+                                    source,
+                                    angle,
+                                    axis=drag["axis"],
+                                    space="world",
+                                    snap_enabled=False,
+                                )
+                                current_center = self._preview_center(
+                                    object_id, value
+                                )
+                                value = translate_obstacle(
+                                    value,
+                                    target_center - current_center,
+                                    snap_enabled=False,
+                                )
+                            values[object_id] = value
                 else:
                     distance = self._axis_drag_distance(
                         drag, event, origin, direction
                     ) * fine
-                    value = resize_obstacle(
-                        drag["source"],
-                        math.exp(distance / drag["gizmo_length"]),
-                        axis=drag["axis"],
-                        snap_increment_m=self.core.state.snap.size_m,
-                        snap_enabled=snap,
+                    factor = math.exp(distance / drag["gizmo_length"])
+                    values = {}
+                    if len(drag["object_ids"]) == 1:
+                        object_id = drag["object_id"]
+                        values[object_id] = resize_obstacle(
+                            drag["source"],
+                            factor,
+                            axis=drag["axis"],
+                            snap_increment_m=self.core.state.snap.size_m,
+                            snap_enabled=snap,
+                        )
+                    else:
+                        for object_id in drag["object_ids"]:
+                            source = drag["sources"][object_id]
+                            target_center = scale_point_about_pivot(
+                                drag["centers"][object_id],
+                                drag["center"],
+                                drag["axis"],
+                                factor,
+                            )
+                            if self.core.state.object_kind(object_id) == "rx":
+                                value = deepcopy(source)
+                                value["position_m"] = target_center.tolist()
+                            else:
+                                value = resize_obstacle(
+                                    source,
+                                    factor,
+                                    axis=drag["axis"],
+                                    snap_increment_m=self.core.state.snap.size_m,
+                                    snap_enabled=snap,
+                                )
+                                current_center = self._preview_center(
+                                    object_id, value
+                                )
+                                value = translate_obstacle(
+                                    value,
+                                    target_center - current_center,
+                                    snap_enabled=False,
+                                )
+                            values[object_id] = value
+                for object_id, value in values.items():
+                    self._replace_preview(object_id, value)
+                if len(drag["object_ids"]) == 1:
+                    self._refresh_drag_preview(drag["object_id"])
+                else:
+                    self._refresh_drag_preview(
+                        drag["object_ids"], drag["center"]
                     )
-                self._replace_preview(drag["object_id"], value)
-                self._refresh_drag_preview(drag["object_id"])
             except ValueError:
                 pass
             return consumed
@@ -639,6 +900,13 @@ class ProxyPlacementApp:
     def _on_window_key(self, event):
         if self.fps_camera.active or self._fps_exit_pending:
             return bool(self._on_key(event))
+        if event.key in (
+            self.gui.KeyName.LEFT_CONTROL,
+            self.gui.KeyName.RIGHT_CONTROL,
+            self.gui.KeyName.LEFT_SHIFT,
+            self.gui.KeyName.RIGHT_SHIFT,
+        ):
+            self._on_key(event)
         return False
 
     def _on_key(self, event):
@@ -703,13 +971,6 @@ class ProxyPlacementApp:
         if event.key == gui.KeyName.HOME:
             self.viewport.frame_room()
             return handled
-        if event.key == gui.KeyName.V:
-            values = ("both", "point_cloud", "proxy_mesh")
-            index = values.index(self.core.state.scene_display_mode)
-            self.core.state.scene_display_mode = values[(index + 1) % len(values)]
-            self.core.state.reference_visible = True
-            self.refresh()
-            return handled
         if event.key == gui.KeyName.H and self.core.state.selected_object_id:
             key = self.core.state.selected_object_id
             self.core.state.object_visibility[
@@ -734,6 +995,7 @@ class ProxyPlacementApp:
 
     def _on_tick(self):
         now = time.monotonic()
+        self.viewport.update_gizmo_front_geometry()
         if self.fps_camera.active:
             try:
                 native_keyboard = getattr(self, "native_keyboard", None)

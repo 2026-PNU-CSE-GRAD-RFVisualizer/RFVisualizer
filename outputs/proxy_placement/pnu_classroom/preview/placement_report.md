@@ -2,20 +2,17 @@
 
 > **PROVISIONAL GEOMETRY** — 현장 실측으로 검증되지 않았으며 실제 RSSI 정확도로 해석하면 안 됩니다.
 
-- Scenario: `pnu_classroom_proxy_draft`
+- Scenario: `pnu_classroom_synthetic_blocker`
 - Validation success: `True`
-- Enabled obstacles: `0`
-- Renderable obstacles: `0`
-- Maximum coordinate round-trip error: `0.000e+00`
+- Enabled obstacles: `1`
+- Renderable obstacles: `1`
+- Maximum coordinate round-trip error: `1.986e-15`
 
 ## Objects
 
 | ID | Enabled | Status | Material | Min floor | Min ceiling | Min wall |
 |---|---:|---|---|---:|---:|---:|
-| desk_block_example | False | DISABLED_INCOMPLETE | - | - | - | - |
-| blackboard_example | False | DISABLED_INCOMPLETE | - | - | - | - |
-| door_example | False | DISABLED_INCOMPLETE | - | - | - | - |
-| large_metal_object_example | False | DISABLED_INCOMPLETE | - | - | - | - |
+| blocker_panel_000 | True | VALID | wood | 0.0115 | 0.1415 | 3.4765 |
 
 ## Files
 

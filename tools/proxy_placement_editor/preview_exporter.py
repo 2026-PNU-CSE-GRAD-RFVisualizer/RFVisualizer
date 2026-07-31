@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any, Dict, Iterable, Optional, Tuple
+from typing import Any, Dict, Iterable, List, Optional, Tuple, Union
 
 import numpy as np
 
@@ -19,6 +19,8 @@ MATERIAL_COLORS = {
     "wood": (0.55, 0.31, 0.12),
     "metal": (0.25, 0.45, 0.68),
     "glass": (0.25, 0.75, 0.85),
+    "calibration_rx": (0.18, 0.55, 0.95),
+    "test_rx": (0.15, 0.85, 0.35),
 }
 
 
@@ -118,6 +120,18 @@ def _draw_reference_projection(
     )
 
 
+def _reference_layers(
+    reference: Optional[
+        Union[ReferenceGeometry, Iterable[ReferenceGeometry]]
+    ]
+) -> List[ReferenceGeometry]:
+    if reference is None:
+        return []
+    if isinstance(reference, ReferenceGeometry):
+        return [reference]
+    return [value for value in reference if value is not None]
+
+
 def _projection(
     path: Path,
     scene: PlacementScene,
@@ -125,7 +139,7 @@ def _projection(
     axes: Tuple[int, int],
     labels: Tuple[str, str],
     title: str,
-    reference: Optional[ReferenceGeometry],
+    references: Iterable[ReferenceGeometry],
 ) -> None:
     import matplotlib
 
@@ -135,7 +149,7 @@ def _projection(
 
     figure, ax = plt.subplots(figsize=(10, 7), dpi=150)
     _draw_room_projection(ax, scene, axes)
-    if reference is not None:
+    for reference in references:
         _draw_reference_projection(ax, reference, axes)
     for record in records:
         if not record.get("renderable"):
@@ -174,6 +188,13 @@ def _projection(
     ax.set_xlabel(labels[0])
     ax.set_ylabel(labels[1])
     ax.set_title("{} — PROVISIONAL".format(title))
+    bounds = scene.room_metadata["bounds"]
+    minimum = np.asarray(bounds["min"], dtype=float)
+    maximum = np.asarray(bounds["max"], dtype=float)
+    for setter, axis in ((ax.set_xlim, axes[0]), (ax.set_ylim, axes[1])):
+        span = max(float(maximum[axis] - minimum[axis]), 1.0)
+        margin = span * 0.03
+        setter(minimum[axis] - margin, maximum[axis] + margin)
     ax.set_aspect("equal", adjustable="box")
     ax.grid(True, alpha=0.2)
     figure.tight_layout()
@@ -185,7 +206,7 @@ def _perspective(
     path: Path,
     scene: PlacementScene,
     records: Iterable[Dict[str, Any]],
-    reference: Optional[ReferenceGeometry],
+    references: Iterable[ReferenceGeometry],
 ) -> None:
     import matplotlib
 
@@ -205,7 +226,7 @@ def _perspective(
             linewidth=1.0,
             alpha=0.7,
         )
-    if reference is not None:
+    for reference in references:
         points = reference.vertices_metric
         stride = max(1, len(points) // 40000)
         ax.scatter(
@@ -253,13 +274,15 @@ def export_preview(
     scene: PlacementScene,
     report: Dict[str, Any],
     output: Path,
-    reference: Optional[ReferenceGeometry] = None,
+    reference: Optional[
+        Union[ReferenceGeometry, Iterable[ReferenceGeometry]]
+    ] = None,
     include_reference: bool = True,
 ) -> Dict[str, str]:
     directory = Path(output).expanduser().resolve()
     directory.mkdir(parents=True, exist_ok=True)
     values = report["objects"]
-    active_reference = reference if include_reference else None
+    active_references = _reference_layers(reference) if include_reference else []
     paths = {
         "top_view_png": directory / "top_view.png",
         "front_view_png": directory / "front_view.png",
@@ -277,7 +300,7 @@ def export_preview(
         (0, 1),
         ("X [m]", "Y [m]"),
         "Top view",
-        active_reference,
+        active_references,
     )
     _projection(
         paths["front_view_png"],
@@ -286,7 +309,7 @@ def export_preview(
         (0, 2),
         ("X [m]", "Z [m]"),
         "Front view",
-        active_reference,
+        active_references,
     )
     _projection(
         paths["side_view_png"],
@@ -295,9 +318,9 @@ def export_preview(
         (1, 2),
         ("Y [m]", "Z [m]"),
         "Side view",
-        active_reference,
+        active_references,
     )
-    _perspective(paths["perspective_view_png"], scene, values, active_reference)
+    _perspective(paths["perspective_view_png"], scene, values, active_references)
     _write_obj(paths["proxy_objects_metric_obj"], values, "metric_vertices")
     _write_ply(paths["proxy_objects_metric_ply"], values)
     _write_obj(paths["proxy_objects_scene_obj"], values, "scene_vertices")

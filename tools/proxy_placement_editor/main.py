@@ -17,13 +17,20 @@ from tools.sionna_smoke_test.config import load_config as load_phase2a_config
 from tools.sionna_smoke_test.io_utils import write_json
 
 from .app import ensure_gui_display, run_editor
-from .candidate_library import load_candidate_library
+from .candidate_library import instantiate_candidate, load_candidate_library
 from .coordinate_bridge import PlacementCoordinateBridge
 from .editor_config import load_editor_config
 from .editor_core import EditorCore
 from .editor_state import EditorState
 from .exporter import export_resolved_outputs
-from .reference_loader import load_reference_geometry
+from .reference_loader import (
+    DEFAULT_PGSR_MESH_PREVIEW_TRIANGLES,
+    build_mesh_preview_cache,
+    load_pgsr_output_mesh_geometry,
+    load_point_cloud_geometry,
+    load_reference_geometry,
+    mesh_preview_cache_is_current,
+)
 from .scenario_io import load_editor_scenario
 from .scene_loader import load_placement_scene
 
@@ -56,6 +63,24 @@ def _inferred_room_inputs(document: Dict) -> Dict[str, Path]:
     }
 
 
+def _pgsr_mesh_preview_path(args) -> Optional[Path]:
+    source = getattr(args, "pgsr_output_mesh", None)
+    if not source:
+        return None
+    configured = getattr(args, "pgsr_output_mesh_preview", None)
+    if configured:
+        return Path(configured).expanduser().resolve()
+    output = getattr(args, "output", None)
+    if not output:
+        return None
+    cache_root = Path(output).expanduser().resolve()
+    if getattr(args, "command", None) == "export-preview":
+        cache_root = cache_root.parent
+    return (
+        cache_root / "cache" / "pgsr_output_mesh_preview.ply"
+    )
+
+
 def _create_core(args) -> EditorCore:
     scenario_path = Path(args.scenario).expanduser().resolve()
     document = load_editor_scenario(scenario_path)
@@ -76,28 +101,113 @@ def _create_core(args) -> EditorCore:
         else inferred["calibration"]
     )
     scene = load_placement_scene(room_json, calibration, room_obj=room_obj)
-    state = EditorState(document, source_path=scenario_path)
+    marker_path = getattr(args, "markers", None)
+    marker_document = None
+    marker_source_path = None
+    if marker_path:
+        marker_source_path = Path(marker_path).expanduser().resolve()
+        if not marker_source_path.is_file():
+            raise ValueError("TX/RX JSON을 찾을 수 없습니다: {}".format(marker_source_path))
+        try:
+            marker_document = json.loads(marker_source_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            raise ValueError("TX/RX JSON을 읽을 수 없습니다: {}".format(exc)) from exc
+        if not isinstance(marker_document, dict):
+            raise ValueError("TX/RX JSON 최상위 값은 객체여야 합니다.")
+    state = EditorState(
+        document,
+        source_path=scenario_path,
+        marker_document=marker_document,
+        marker_source_path=marker_source_path,
+    )
     candidates = load_candidate_library(getattr(args, "candidates", DEFAULT_CANDIDATES))
     configured_output = (
         getattr(args, "output", None) or PROJECT_ROOT / "outputs/proxy_placement"
     )
     output = Path(configured_output).resolve()
     core = EditorCore(scene, state, candidates, output)
+    if marker_document is not None:
+        ap_template = next((value for value in candidates if value.id == "ap_tx"), None)
+        if ap_template is None and marker_document.get("tx"):
+            raise ValueError("AP/TX Candidate가 없어 기존 TX를 통합할 수 없습니다.")
+        existing = {str(value.get("id")): value for value in state.obstacles}
+        for transmitter in marker_document.get("tx", []):
+            transmitter_id = str(transmitter.get("id", "")).strip()
+            if not transmitter_id:
+                raise ValueError("TX id가 비어 있습니다.")
+            obstacle = existing.get(transmitter_id)
+            if obstacle is None:
+                obstacle = instantiate_candidate(
+                    ap_template, transmitter_id, scene.containment
+                )
+                state.add_object(obstacle)
+                # EditorState owns a deep copy.  Continue editing that stored
+                # object so the marker position is visible in the GUI.
+                obstacle = state.get_object(transmitter_id)
+                existing[transmitter_id] = obstacle
+            obstacle["display_name"] = str(
+                transmitter.get("name", obstacle.get("display_name", transmitter_id))
+            )
+            obstacle["enabled"] = True
+            position = transmitter.get("position_m", [])
+            if not isinstance(position, list) or len(position) != 3:
+                raise ValueError("TX position_m에는 X/Y/Z 숫자 3개가 필요합니다.")
+            obstacle["geometry"]["anchor"] = {"mode": "center"}
+            obstacle["geometry"]["position_m"] = {
+                axis: float(position[index])
+                for index, axis in enumerate(("x", "y", "z"))
+            }
+            obstacle["rf_transmitter"] = {
+                "frequency_hz": float(transmitter.get("frequency_hz")),
+                "power_dbm": float(transmitter.get("power_dbm")),
+            }
+        state.dirty = False
+    point_cloud = getattr(args, "point_cloud", None)
+    pgsr_output_mesh = getattr(args, "pgsr_output_mesh", None)
     reference_mesh = getattr(args, "reference_mesh", None)
-    if reference_mesh:
-        LOGGER.info("Reference geometry를 읽는 중: %s", reference_mesh)
+    if point_cloud or pgsr_output_mesh or reference_mesh:
         bridge = PlacementCoordinateBridge.from_calibration(scene.calibration)
-        core.reference = load_reference_geometry(
+    if point_cloud:
+        LOGGER.info("Point Cloud를 읽는 중: %s", point_cloud)
+        core.point_cloud = load_point_cloud_geometry(
+            point_cloud,
+            getattr(args, "point_cloud_coordinate_space", "scene"),
+            bridge,
+        )
+        LOGGER.info(
+            "Point Cloud 준비 완료: points=%d, discarded_nonfinite=%d, display_decimated=%s",
+            len(core.point_cloud.vertices_metric),
+            core.point_cloud.discarded_nonfinite_points,
+            core.point_cloud.display_decimated,
+        )
+    elif reference_mesh:
+        LOGGER.warning(
+            "--reference-mesh는 이전 호환 인자입니다. --point-cloud를 사용하세요."
+        )
+        core.point_cloud = load_reference_geometry(
             reference_mesh,
             getattr(args, "reference_coordinate_space", "scene"),
             bridge,
         )
+    if pgsr_output_mesh:
+        full_resolution = bool(
+            getattr(args, "pgsr_output_mesh_full_resolution", False)
+        )
+        preview_path = None if full_resolution else _pgsr_mesh_preview_path(args)
+        LOGGER.info("PGSR Output Mesh를 읽는 중: %s", pgsr_output_mesh)
+        core.pgsr_output_mesh = load_pgsr_output_mesh_geometry(
+            pgsr_output_mesh,
+            getattr(args, "pgsr_output_mesh_coordinate_space", "scene"),
+            bridge,
+            preview_path=preview_path,
+            maximum_triangles=DEFAULT_PGSR_MESH_PREVIEW_TRIANGLES,
+            full_resolution=full_resolution,
+        )
         LOGGER.info(
-            "Reference geometry 준비 완료: kind=%s, vertices=%d, faces=%d, display_decimated=%s",
-            core.reference.kind,
-            len(core.reference.vertices_metric),
-            len(core.reference.faces),
-            core.reference.display_decimated,
+            "PGSR Output Mesh 준비 완료: vertices=%d, faces=%d, preview=%s",
+            len(core.pgsr_output_mesh.vertices_metric),
+            len(core.pgsr_output_mesh.faces),
+            core.pgsr_output_mesh.preview_path,
         )
     return core
 
@@ -222,11 +332,73 @@ def command_setup_gui_runtime(args) -> int:
     return 0
 
 
+def command_prepare_pgsr_mesh_preview(args) -> int:
+    metadata = build_mesh_preview_cache(
+        args.source,
+        args.output,
+        maximum_triangles=args.maximum_triangles,
+    )
+    print(json.dumps({"success": True, **metadata}, ensure_ascii=False, indent=2))
+    return 0
+
+
+def _prepare_pgsr_mesh_preview_subprocess(args) -> None:
+    source = getattr(args, "pgsr_output_mesh", None)
+    if not source:
+        return
+    if getattr(args, "pgsr_output_mesh_full_resolution", False):
+        LOGGER.info("PGSR Output Mesh 원본 해상도 모드: 단순화 캐시를 사용하지 않습니다.")
+        return
+    preview = _pgsr_mesh_preview_path(args)
+    if preview is None:
+        raise ValueError(
+            "PGSR Output Mesh에는 --output 또는 --pgsr-output-mesh-preview가 필요합니다."
+        )
+    if mesh_preview_cache_is_current(
+        source, preview, DEFAULT_PGSR_MESH_PREVIEW_TRIANGLES
+    ):
+        LOGGER.info("표시용 PGSR Mesh 캐시를 재사용합니다: %s", preview)
+        return
+    LOGGER.info(
+        "표시용 PGSR Mesh 캐시를 별도 프로세스에서 준비합니다. "
+        "첫 실행에는 약 1분이 걸릴 수 있습니다."
+    )
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "tools.proxy_placement_editor.main",
+            "prepare-pgsr-mesh-preview",
+            "--source",
+            str(Path(source).expanduser().resolve()),
+            "--output",
+            str(preview),
+            "--maximum-triangles",
+            str(DEFAULT_PGSR_MESH_PREVIEW_TRIANGLES),
+        ],
+        check=False,
+    )
+    if completed.returncode != 0:
+        if completed.returncode < 0:
+            raise RuntimeError(
+                "표시용 PGSR Mesh 생성 프로세스가 signal {}로 종료되었습니다.".format(
+                    -completed.returncode
+                )
+            )
+        raise RuntimeError(
+            "표시용 PGSR Mesh 생성에 실패했습니다 (exit code {}).".format(
+                completed.returncode
+            )
+        )
+
+
 def command_edit(args) -> int:
     # Fail before loading a multi-million-triangle reference when no GUI is possible.
     ensure_gui_display()
     if os.environ.get(GUI_WORKER_ENV) == "1":
         return _run_editor_in_process(args)
+
+    _prepare_pgsr_mesh_preview_subprocess(args)
 
     software = bool(args.software_rendering)
     compatible_python = _compatible_gui_python()
@@ -299,6 +471,7 @@ def command_validate(args) -> int:
 
 
 def command_export_preview(args) -> int:
+    _prepare_pgsr_mesh_preview_subprocess(args)
     core = _create_core(args)
     files = core.export_preview(
         args.output, include_reference=not args.exclude_reference
@@ -333,10 +506,43 @@ def _common_inputs(parser, require_room=False):
         help="Candidate library YAML",
     )
     parser.add_argument(
-        "--reference-mesh", type=Path, help="표시 전용 OBJ/PLY reference"
+        "--point-cloud", type=Path, help="표시할 PGSR Gaussian Point Cloud PLY"
+    )
+    parser.add_argument(
+        "--point-cloud-coordinate-space",
+        choices=("scene", "metric"),
+        default="scene",
+    )
+    parser.add_argument(
+        "--pgsr-output-mesh", type=Path, help="표시할 PGSR Output Mesh OBJ/PLY"
+    )
+    parser.add_argument(
+        "--pgsr-output-mesh-coordinate-space",
+        choices=("scene", "metric"),
+        default="scene",
+    )
+    parser.add_argument(
+        "--pgsr-output-mesh-preview",
+        type=Path,
+        help="선택적 표시용 단순화 Mesh 캐시 PLY 경로",
+    )
+    parser.add_argument(
+        "--pgsr-output-mesh-full-resolution",
+        action="store_true",
+        help="표시 캐시를 건너뛰고 PGSR Output Mesh 원본 삼각형을 모두 읽음",
+    )
+    parser.add_argument(
+        "--reference-mesh",
+        type=Path,
+        help="이전 호환용 표시 reference; 새 실행에서는 --point-cloud 사용",
     )
     parser.add_argument(
         "--reference-coordinate-space", choices=("scene", "metric"), default="scene"
+    )
+    parser.add_argument(
+        "--markers",
+        type=Path,
+        help="같은 창에서 편집하고 함께 저장할 TX/RX JSON",
     )
 
 
@@ -374,6 +580,18 @@ def build_parser() -> argparse.ArgumentParser:
         help="편집기 전용 virtual environment 폴더",
     )
     setup_gui.set_defaults(handler=command_setup_gui_runtime)
+    prepare_mesh = commands.add_parser(
+        "prepare-pgsr-mesh-preview",
+        help="대형 PGSR Output Mesh의 표시용 단순화 캐시를 생성합니다.",
+    )
+    prepare_mesh.add_argument("--source", type=Path, required=True)
+    prepare_mesh.add_argument("--output", type=Path, required=True)
+    prepare_mesh.add_argument(
+        "--maximum-triangles",
+        type=int,
+        default=DEFAULT_PGSR_MESH_PREVIEW_TRIANGLES,
+    )
+    prepare_mesh.set_defaults(handler=command_prepare_pgsr_mesh_preview)
     validate = commands.add_parser("validate", help="GUI 없이 scenario를 검증합니다.")
     _common_inputs(validate, require_room=False)
     validate.add_argument(

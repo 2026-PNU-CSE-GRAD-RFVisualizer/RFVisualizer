@@ -1,6 +1,20 @@
 **/datasets
 **/data
 PGSR/output
+Documents/
+output/
+outputs/
+recordings/
+paper/
+
+### OS / Editor ###
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+### Project-local tools ###
+.codegraph/
 
 ### CMake ###
 **/CMakeLists.txt.user

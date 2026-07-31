@@ -1,0 +1,95 @@
+schema_version: "1.0"
+
+sionna_smoke_test:
+  status: provisional
+  confidence: low
+  physically_validated: false
+
+  input:
+    metric_obj: outputs/proxy_mesh/4f_corridor/final_editor_proxy/room/room_envelope.obj
+    metric_mtl: outputs/proxy_mesh/4f_corridor/final_editor_proxy/room/room_envelope.mtl
+    metric_json: outputs/proxy_mesh/4f_corridor/final_editor_proxy/room/room_envelope.json
+    calibration_json: outputs/proxy_mesh/4f_corridor/final_editor_proxy/calibration.json
+
+  scene:
+    name: pnu_4f_corridor
+    carrier_frequency_hz: 2.4e+9
+    coordinate_system:
+      id: pnu_4f_corridor
+      up_axis: "+Z"
+      units: meters
+
+  materials:
+    floor:
+      preset: concrete
+    ceiling:
+      preset: concrete
+    walls:
+      preset: concrete
+
+  # Editor에서는 configs/rf_experiment/pnu_4f_corridor/tx_rx.json 값으로 덮어쓴다.
+  transmitter:
+    name: tx_01
+    position_mode: explicit
+    position_m: [3.15, 0.50, 0.45]
+    power_dbm: 20.0
+
+  receivers:
+    - name: cal_rx_01
+      position_m: [3.13, 3.93, 0.45]
+
+  placement:
+    mode: strict
+    clearance_m: 0.2
+    minimum_device_separation_m: 0.5
+
+  antenna:
+    pattern: iso
+    polarization: V
+
+  path_test:
+    max_depth: 2
+    samples_per_src: 200000
+    seed: 42
+    enable_los: true
+    enable_reflection: true
+    enable_refraction: false
+    enable_diffraction: false
+    enable_scattering: false
+    synthetic_array: true
+
+  coverage:
+    enabled: true
+    z_height_m: 0.45
+    region_mode: metric_bounds_with_margin
+    margin_m: 0.5
+    cell_size_m: 0.5
+    max_cells: 10000
+    samples_per_tx: 200000
+    seed: 43
+    max_depth: 2
+    enable_los: true
+    enable_reflection: true
+    enable_refraction: false
+    enable_diffraction: false
+    enable_scattering: false
+
+  validation:
+    require_tx_inside_room: true
+    require_rx_inside_room: true
+    require_tx_above_floor: true
+    require_rx_above_floor: true
+    require_tx_below_ceiling: true
+    require_rx_below_ceiling: true
+    minimum_path_count_los_case: 1
+    maximum_los_distance_error_m: 1.0e-4
+    require_finite_coverage_values: true
+    minimum_valid_coverage_ratio: 0.1
+
+  output:
+    save_scene: true
+    save_paths: true
+    save_coverage_numpy: true
+    save_coverage_csv: true
+    save_coverage_png: true
+    save_scene_preview: true

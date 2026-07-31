@@ -53,7 +53,7 @@ def _vertex_csv(report: Dict[str, Any], coordinate: str) -> str:
     writer.writerow(["object_id", "vertex_index", "x", "y", "z", "coordinate_space"])
     key = "metric_vertices" if coordinate == "metric" else "scene_vertices"
     for record in report["objects"]:
-        if not record.get("renderable"):
+        if not record.get("renderable") or record.get("object_kind") == "rx":
             continue
         for index, vertex in enumerate(record[key]):
             writer.writerow(
@@ -77,7 +77,11 @@ def export_resolved_outputs(
 ) -> Dict[str, str]:
     directory = Path(output).expanduser().resolve()
     directory.mkdir(parents=True, exist_ok=True)
-    renderable = [value for value in report["objects"] if value.get("renderable")]
+    renderable = [
+        value
+        for value in report["objects"]
+        if value.get("renderable") and value.get("object_kind") != "rx"
+    ]
     resolved = with_authoring_metadata(state.document)
     resolved["authoring_resolution"] = {
         "status": "provisional",

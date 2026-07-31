@@ -50,9 +50,11 @@ class FakeGui:
 
 
 class MouseEvent:
-    def __init__(self, event_type, right=False):
+    def __init__(self, event_type, right=False, x=0.0, y=0.0):
         self.type = event_type
         self.right = right
+        self.x = x
+        self.y = y
 
     def is_button_down(self, button):
         return self.right if button == FakeGui.MouseButton.RIGHT else False
@@ -72,6 +74,8 @@ class FakeViewport:
         self.widget = object()
         self.navigation_modes = []
         self.movements = []
+        self.rotations = []
+        self.gizmo_front_updates = 0
 
     def set_fps_navigation(self, enabled):
         self.navigation_modes.append(bool(enabled))
@@ -86,6 +90,14 @@ class FakeViewport:
     def translate_camera(self, movement):
         self.movements.append(np.asarray(movement))
         return {"eye": [0, 0, 0], "forward": [0, 1, 0], "up": [0, 0, 1]}
+
+    def rotate_fps_camera(self, delta_x, delta_y, settings):
+        self.rotations.append((delta_x, delta_y, settings))
+        return {"eye": [0, 0, 0], "forward": [1, 0, 0], "up": [0, 0, 1]}
+
+    def update_gizmo_front_geometry(self):
+        self.gizmo_front_updates += 1
+        return True
 
 
 def make_app():
@@ -105,6 +117,7 @@ def make_app():
     value._fps_exit_pending = False
     value._keys = {"ctrl": False, "shift": False}
     value._drag = None
+    value._fps_mouse_position = None
     value._last_autosave = 0.0
     value._autosave_seconds = 60
     state = SimpleNamespace(viewport_mode="select", dirty=False, camera={})
@@ -121,7 +134,7 @@ def test_right_mouse_routes_wasd_to_fps_and_restores_scale(monkeypatch):
     )
     assert (
         value._on_mouse(MouseEvent(FakeGui.MouseEvent.Type.BUTTON_DOWN, right=True))
-        == EventResults.IGNORED
+        == EventResults.HANDLED
     )
     assert value.fps_camera.active is True
     assert value.viewport.navigation_modes == [True]
@@ -132,14 +145,18 @@ def test_right_mouse_routes_wasd_to_fps_and_restores_scale(monkeypatch):
     # Open3D 0.18/0.19 may omit the held-button bit on DRAG events. FPS must
     # end on BUTTON_UP, not on that transient bit.
     assert (
-        value._on_mouse(MouseEvent(FakeGui.MouseEvent.Type.DRAG, right=False))
-        == EventResults.IGNORED
+        value._on_mouse(
+            MouseEvent(FakeGui.MouseEvent.Type.DRAG, right=False, x=20, y=10)
+        )
+        == EventResults.CONSUMED
     )
     assert value.fps_camera.active is True
+    assert value.viewport.rotations[0][:2] == (20.0, 10.0)
+    assert value.core.state.camera["forward"] == [1, 0, 0]
 
     assert (
         value._on_mouse(MouseEvent(FakeGui.MouseEvent.Type.BUTTON_UP, right=False))
-        == EventResults.IGNORED
+        == EventResults.CONSUMED
     )
     assert value.fps_camera.active is False
     assert value._fps_exit_pending is True
@@ -164,6 +181,23 @@ def test_active_fps_movement_is_captured_without_native_focus_dependency():
     assert value.fps_camera.pressed_keys == {"w"}
 
 
+def test_window_tracks_ctrl_for_list_selection_without_consuming_it():
+    value = make_app()
+
+    assert (
+        value._on_window_key(KeyEvent(FakeGui.KeyName.LEFT_CONTROL))
+        is False
+    )
+    assert value._ctrl_selection_active() is True
+    assert (
+        value._on_window_key(
+            KeyEvent(FakeGui.KeyName.LEFT_CONTROL, is_down=False)
+        )
+        is False
+    )
+    assert value._ctrl_selection_active() is False
+
+
 def test_tick_moves_camera_from_captured_fps_keys(monkeypatch):
     value = make_app()
     value.fps_camera.activate(5.0)
@@ -172,6 +206,7 @@ def test_tick_moves_camera_from_captured_fps_keys(monkeypatch):
         "tools.proxy_placement_editor.app.time.monotonic", lambda: 5.25
     )
     assert value._on_tick() is True
+    assert value.viewport.gizmo_front_updates == 1
     assert len(value.viewport.movements) == 1
     np.testing.assert_allclose(value.viewport.movements[0], [0.0, 0.25, 0.0])
     assert value.core.state.camera["forward"] == [0, 1, 0]

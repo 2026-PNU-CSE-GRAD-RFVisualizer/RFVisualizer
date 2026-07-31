@@ -48,6 +48,17 @@ def _convex_hull(points: np.ndarray) -> np.ndarray:
 
 
 def _room_hull(metric_scene: Any) -> np.ndarray:
+    metadata = getattr(metric_scene, "metric_metadata", {})
+    corners = np.asarray(metadata.get("bottom_corners", []), dtype=float)
+    if (
+        corners.ndim == 2
+        and len(corners) >= 3
+        and corners.shape[1] == 3
+        and np.all(np.isfinite(corners))
+    ):
+        # Room Envelope builder가 기록한 순서를 보존해야 오목한 복도도
+        # 실제 footprint대로 보인다. Vertex convex hull은 notch를 지운다.
+        return corners[:, :2].copy()
     return _convex_hull(np.asarray(metric_scene.vertices, dtype=float)[:, :2])
 
 

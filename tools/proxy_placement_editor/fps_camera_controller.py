@@ -15,6 +15,8 @@ MIN_HORIZONTAL_FORWARD_NORM = 1.0e-3
 @dataclass(frozen=True)
 class FpsNavigationSettings:
     enabled: bool = True
+    mouse_sensitivity_deg_per_pixel: float = 0.15
+    maximum_pitch_deg: float = 85.0
     movement_speed_mps: float = 1.5
     sprint_multiplier: float = 3.0
     max_frame_delta_seconds: float = 0.05
@@ -24,6 +26,10 @@ class FpsNavigationSettings:
     def from_dict(cls, value: Dict) -> "FpsNavigationSettings":
         return cls(
             enabled=bool(value.get("enabled", True)),
+            mouse_sensitivity_deg_per_pixel=float(
+                value.get("mouse_sensitivity_deg_per_pixel", 0.15)
+            ),
+            maximum_pitch_deg=float(value.get("maximum_pitch_deg", 85.0)),
             movement_speed_mps=float(value.get("movement_speed_mps", 1.5)),
             sprint_multiplier=float(value.get("sprint_multiplier", 3.0)),
             max_frame_delta_seconds=float(
@@ -60,6 +66,59 @@ def _normalized(vector: np.ndarray, label: str) -> np.ndarray:
     if not np.isfinite(length) or length <= 1e-9:
         raise ValueError("{} vector의 길이가 0입니다.".format(label))
     return vector / length
+
+
+def constrained_look_pose(
+    view_matrix,
+    delta_x: float,
+    delta_y: float,
+    sensitivity_deg_per_pixel: float,
+    maximum_pitch_deg: float,
+) -> Dict[str, list]:
+    """Apply roll-free FPS yaw/pitch around world +Z."""
+
+    eye, forward, _, _ = camera_pose_from_view(view_matrix)
+    forward = _normalized(forward, "Camera forward")
+    values = np.asarray(
+        [delta_x, delta_y, sensitivity_deg_per_pixel, maximum_pitch_deg],
+        dtype=float,
+    )
+    if not np.all(np.isfinite(values)):
+        raise ValueError("FPS mouse-look 설정은 finite 숫자여야 합니다.")
+    if sensitivity_deg_per_pixel <= 0.0:
+        raise ValueError("FPS mouse sensitivity는 0보다 커야 합니다.")
+    if maximum_pitch_deg <= 0.0 or maximum_pitch_deg >= 90.0:
+        raise ValueError("FPS maximum pitch는 0보다 크고 90보다 작아야 합니다.")
+
+    horizontal_length = float(np.linalg.norm(forward[:2]))
+    if horizontal_length <= 1.0e-9:
+        yaw = 0.0
+    else:
+        yaw = float(np.arctan2(forward[0], forward[1]))
+    pitch = float(np.arcsin(np.clip(forward[2], -1.0, 1.0)))
+    radians_per_pixel = np.deg2rad(sensitivity_deg_per_pixel)
+    yaw += float(delta_x) * radians_per_pixel
+    pitch -= float(delta_y) * radians_per_pixel
+    maximum_pitch = np.deg2rad(maximum_pitch_deg)
+    pitch = float(np.clip(pitch, -maximum_pitch, maximum_pitch))
+
+    cos_pitch = float(np.cos(pitch))
+    forward = np.asarray(
+        [
+            cos_pitch * np.sin(yaw),
+            cos_pitch * np.cos(yaw),
+            np.sin(pitch),
+        ],
+        dtype=float,
+    )
+    world_up = np.asarray([0.0, 0.0, 1.0], dtype=float)
+    right = _normalized(np.cross(forward, world_up), "Camera right")
+    up = _normalized(np.cross(right, forward), "Camera up")
+    return {
+        "eye": eye.tolist(),
+        "forward": forward.tolist(),
+        "up": up.tolist(),
+    }
 
 
 def movement_basis(

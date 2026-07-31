@@ -24,7 +24,15 @@ Open3D는 기존 환경에 설치되어 있고 headless core와 GUI import를 �
 
 수정 후 PLY header에서 크기를 먼저 확인하고, 기준을 넘는 mesh는 face를 읽거나 단순화하지 않고 vertex/color만 읽어 최대 500,000점의 표시 전용 point cloud로 축약한다. 동일 파일 실측은 약 1.0초, 최대 RSS 약 0.64GB였다.
 
+이후 세 배경 계층 분리 요구에 따라 실제 PGSR Gaussian Point Cloud와 PGSR Output Mesh를 별도 입력으로 바꿨다. Point Cloud는 유한하지 않은 좌표 14,026개를 표시 계층에서 제외한 뒤 500,000점을 사용한다. Output Mesh는 GUI 실행 전에 별도 프로세스에서 단순화하며, 초기 안정형 캐시는 원본 6,933,784개 삼각형을 250,000개 삼각형·155,438개 정점의 7.2MB로 줄였다. 이 설정은 정점색의 공간 해상도가 낮아지는 문제가 있어 고화질 기본값을 1,000,000개 삼각형·572,805개 정점의 약 28.5MB 캐시로 높였다. 캐시 단독 로드는 약 2.0초·최대 RSS 약 436MB였고 500,000 Point Cloud와 동시 로드는 약 2.37초·최대 RSS 약 464MB였다. GUI용 Open3D 0.18에서 캐시 읽기와 정점 법선 준비는 약 0.87초·최대 RSS 약 281MB였다. 원본 경로·크기·수정 시각·목표 삼각형 수를 sidecar에 기록해 이후 즉시 재사용하며, GUI 프로세스에는 원본 4GB 단순화 작업이 남지 않는다.
+
 RustDesk 세션에서 빈 Open3D 0.19 창도 `Application.create_window()`의 `XSendEvent()`에서 signal 11로 종료됨을 GDB로 확인했다. 공식 `open3d-cpu==0.19.0`도 같은 반면 0.18.0은 동일 XWayland 화면에서 창 생성과 렌더 tick을 통과했다. 이에 `setup-gui-runtime`이 `pgsr` package를 공유하는 얇은 0.18 CPU venv를 만들고, `edit` supervisor가 이를 우선 사용하도록 변경했다. PGSR의 Open3D 설치는 수정하지 않았다.
+
+## Proxy/PGSR Mesh 밝기 진단
+
+PGSR 원본과 표시 캐시의 정점색 밝기 중앙값은 각각 약 0.501, 0.490으로 데이터 자체가 비정상적으로 어둡지 않았다. 문제는 Proxy Mesh에 알파 0.18, PGSR Output Mesh에 알파 0.34를 지정하고 두 계층 모두 `defaultLitTransparency`로 렌더링한 설정이었다. 낮은 알파가 어두운 배경색과 섞인 뒤 조명 계산까지 적용되어, Proxy는 명백히 반투명하고 두 계층 모두 면 방향에 따라 더 어둡게 보였다.
+
+두 기준 계층을 알파 1.0의 `defaultUnlit`으로 바꿨다. Proxy Mesh는 밝은 청회색 `[0.82, 0.88, 0.98, 1.0]`, PGSR Output Mesh는 정점색을 그대로 통과시키는 흰색 `[1.0, 1.0, 1.0, 1.0]`을 사용한다. Open3D 0.18.0과 0.19.0의 실제 `MaterialRecord`에서 두 재질 모두 `has_alpha=False`임을 확인했다. 비활성·경고 obstacle의 기존 반투명 재질 경로는 변경하지 않았다.
 
 ## 입력 보존
 
@@ -33,9 +41,10 @@ RustDesk 세션에서 빈 Open3D 0.19 창도 `Application.create_window()`의 `X
 | `room_envelope_metric.obj` | `dd3da1aba1d057b3a24fbf8cba063e649952d95c2194551ea1266e86c241fe50` |
 | `room_envelope_metric.json` | `bbebc55117e6498353ba7bfad35db7e2df19ca5cebea6b47994f2790b1ad820b` |
 | `calibration.json` | `829c435f5dbe9728108433f510f5d0052a2f246d601bbf7525755c7cffd39515` |
+| `point_cloud.ply` | `1c3c33cfb7ad4ac769bf9dc3df6388fb0fb5acad356451296848efb438b8a943` |
 | `tsdf_fusion_post.ply` | `233fd4adeeb441789aabedee55b85eabab3c96ba5f6a0eff32394a371da9494e` |
 
-Room/calibration/TSDF 원본은 수정하지 않았다. Reference mesh는 화면 표시용으로만 축약하고 scene→metric 변환했다.
+Room/calibration/PGSR Point Cloud/TSDF 원본은 수정하지 않았다. Point Cloud 필터링과 Output Mesh 단순화는 표시 계층에만 적용하고 두 입력 모두 scene→metric 변환했다.
 
 ## Synthetic blocker round trip
 
@@ -61,24 +70,24 @@ Headless 검증에서 Draft scenario의 네 null geometry object는 렌더링하
 ## 후속 편집기 버그 수정과 gizmo 검증
 
 - 일반 편집 단축키는 Viewport에만 연결하고 Window callback은 평상시에 `False`를 반환해 TextEdit/NumberEdit의 화살표·Backspace·Delete 입력을 보존했다.
-- 이동·회전·크기 모드에서 객체 본체나 빈 화면을 drag해도 변형을 시작하지 않는다. X/Y/Z gizmo handle을 선택한 이벤트만 소비하므로 Open3D 카메라 회전과 객체 변형이 동시에 실행되지 않는다.
+- 이동·회전·크기 모드에서 객체 본체나 빈 화면을 drag해도 변형을 시작하지 않는다. X/Y/Z gizmo handle을 선택한 이벤트와 handle 주변의 오입력 보호 클릭만 소비하므로 Open3D 카메라 회전과 객체 변형이 동시에 실행되지 않는다.
 - 이동·회전은 World/Local 전환을 지원한다. Phase 2-B primitive에 shear를 만들지 않도록 크기 조절은 항상 local XYZ dimension을 변경한다.
 - drag frame마다 선택 obstacle과 gizmo만 다시 만들고 전체 validation, 다른 obstacle, Room/reference 갱신을 mouse-up까지 미뤄 대형 장면의 반복 작업을 제거했다.
-- 배경은 Point Cloud/Room Proxy Mesh/둘 다를 전환한다. 장애물과 gizmo는 항상 유지하며 Point Cloud는 개수 대신 material point size만 바꾼다.
-- 새 gizmo 수학, 입력 routing, World/Local 회전, draft placeholder, editor display config를 display 없이 단위 검증했다. 새 gizmo의 실제 클릭 영역과 조작감은 화면 세션에서 수동 확인해야 한다.
+- Point Cloud, Room Proxy Mesh, PGSR Output Mesh는 각각의 체크박스로 독립 표시한다. 세 계층의 모든 중첩 조합에서 장애물과 gizmo는 유지하며 Point Cloud만 material point size를 바꾼다.
+- 새 gizmo 수학, 입력 routing, World/Local 회전, 실제 3D handle의 near-plane 앞쪽 표시, draft placeholder, editor display config를 단위 검증했다. Open3D 0.18 실제 화면에서도 이동 화살표·회전 링·크기 박스가 겹친 Mesh 위에 유지되는 것을 확인했다.
 
 ## 후속 실제 UI 제보 반영
 
 - 우클릭 회전 중 Open3D DRAG event에 right-button bit가 없으면 FPS를 종료하던 조건을 제거하고 `BUTTON_UP`에서만 종료한다. Tick에서는 카메라 방향 기반 이동 계산을 한 번만 적용한다.
 - Ctrl+왼쪽 drag는 객체 선택과 gizmo 판정보다 먼저 Open3D 카메라에 넘겨 평행 이동을 복구했다. Gizmo drag가 시작된 뒤 Ctrl을 누르는 동작은 기존 snap 용도로 유지한다.
 - 글꼴 atlas에 없는 `━` 문자를 사용하던 구분선을 2px 배경색 layout으로 교체해 `???` 표기를 제거했다.
-- Gizmo 선택을 world-space 거리만으로 판정하지 않고 14px screen-space picking으로 우선 판정한다. Mouse-down에서는 `PICK_POINTS` 제어로 SceneWidget mouse capture를 유지하고, 이동·크기 조절은 투영된 축의 pixel 이동을 meter로 환산한다. 회전은 camera ray와 평면의 각도에 의존하지 않고 화면에 투영된 링의 접선 방향 이동을 각도로 환산한다.
+- Gizmo의 선과 실제 handle은 비조명 재질, Open3D 최고 geometry priority 7, 3px 선 굵기를 사용한다. Priority만으로는 깊이 가림이 없어지지 않는 Open3D 0.18 동작을 실제 화면에서 확인했기 때문에, 논리 gizmo는 객체 위치에 유지하고 표시용 화살표·회전 링·크기 박스는 동일한 화면 투영을 유지하도록 camera near plane 바로 뒤에 축소 복제한다. 카메라 변경 때 표시 geometry만 갱신하며 상시 world-origin 축과 별도 점·문자 표식은 끈다. 선택은 world-space 거리보다 22px screen-space picking을 우선하며, 34px 보호 영역 안의 빗나간 클릭은 다른 객체 선택이나 native scene control로 전달하지 않는다. Mouse-down에서는 `PICK_POINTS` 제어로 SceneWidget mouse capture를 유지하고, 이동·크기 조절은 투영된 축의 pixel 이동을 meter로 환산한다. 회전은 camera ray와 평면의 각도에 의존하지 않고 화면에 투영된 링의 접선 방향 이동을 각도로 환산한다.
 - 초기 top-down 카메라에서는 수평 forward가 사실상 0인데 `1e-9`보다 큰 행렬 오차를 정규화해 W 방향이 프레임마다 반전됐다. 수평 성분이 `1e-3` 미만이면 camera right와 직전의 안정된 heading을 사용하고 A/D도 그 heading에 직교하도록 계산한다.
 - Open3D 0.18의 `Window::OnKeyEvent`는 ImGui `ActiveId != 0`이면 Window callback과 focused SceneWidget key dispatch를 모두 건너뛴다. TextEdit를 활성화한 뒤 우클릭한 실제 최소 창에서도 mouse event만 들어오고 key callback은 0회였다. `set_focus_widget`은 이 ImGui ID를 해제하지 않는다.
 - Linux/X11·XWayland에서는 FPS active 동안 로컬 키보드의 `XQueryKeymap` 상태와 XInput2 raw key event를 결합해 ImGui focus와 독립적으로 W/A/S/D·Shift 상태를 갱신한다. XInput2를 사용할 수 없으면 local keymap polling, X11도 사용할 수 없으면 기존 Window/Viewport callback을 유지한다.
 - RustDesk 1.4.9 실측에서는 W keycode 25가 약 30~45ms 간격으로 반복됐고 각 Press/Release는 동일 timestamp였다. 즉시 release는 120ms 유지 펄스로 해석하고 반복 Press가 들어올 때마다 갱신해 원격 Hold를 복원한다. 일반 키보드의 지속 keymap 상태와 시간차가 있는 실제 release는 기존 방식대로 즉시 반영한다.
 - FPS 진입 시 속성 입력을 임시로 잠그고 종료 시 공유 상태에서 다시 읽어 표시하므로, native poll로 감지한 이동 키가 기존 TextEdit 값에 섞여 저장되지 않는다.
-- 자동 테스트는 right-button bit 없는 DRAG 중 FPS 유지, Window/Viewport key capture, X11 bitmap decode와 callback 없는 native key polling, RustDesk 즉시 Press/Release 펄스 유지·만료, 일반 키보드 release, FPS 시작 시 이전 펄스 초기화, FPS 중 속성 입력 잠금·복원, tick 카메라 이동, 수직 시점의 부호 반전 방지, Ctrl 카메라 평행 이동 통과, 글리프 없는 divider, screen-space gizmo picking, 실제 draft object의 90도 회전과 이동 gizmo drag, camera control 복구, drag 중 전체 validation 미호출을 포함한다.
+- 자동 테스트는 right-button bit 없는 DRAG 중 FPS 유지, Window/Viewport key capture, X11 bitmap decode와 callback 없는 native key polling, RustDesk 즉시 Press/Release 펄스 유지·만료, 일반 키보드 release, FPS 시작 시 이전 펄스 초기화, FPS 중 속성 입력 잠금·복원, tick 카메라 이동, 수직 시점의 부호 반전 방지, Ctrl 카메라 평행 이동 통과, 글리프 없는 divider, screen-space gizmo picking, gizmo priority 7과 near-plane 표시 frame, 보호 영역 오입력 차단, 실제 draft object의 90도 회전과 이동 gizmo drag, camera control 복구, drag 중 전체 validation 미호출을 포함한다.
 - XWayland `:1`과 편집기 전용 Open3D 0.18 runtime에서 실제 창을 열고 W를 1초간 입력했다. 수정 전에는 이동 부호가 반복 반전됐고, 수정 후에는 89개 frame이 모두 `+Y`였으며 누적 이동은 1.49008m였다.
 - 활성 TextEdit를 의도적으로 유지한 실제 편집기 창에서는 Open3D key callback이 한 번도 호출되지 않았지만, X11 poller가 W를 감지해 54개 frame 연속 동일 방향의 이동을 적용했다.
 - 후속 조작 요구에 따라 기본 `horizontal_only`를 `false`로 바꿨다. W/S는 카메라의 pitch를 포함한 실제 시선 벡터를 따르며, 기존 수평 방향 안정화는 설정을 `true`로 선택할 때만 적용한다.
@@ -107,10 +116,10 @@ TensorFlow는 cuDNN library 문제로 GPU를 등록하지 못했다는 기존 �
 | Candidate add, disabled 기본값 | Core 확인 | 통합 테스트 |
 | Object List와 selection 동기화 | 코드/단위 확인 | 실제 창 클릭은 display 환경에서 필요 |
 | Viewport ray selection | 수학 단위 확인 | 가장 가까운 triangle 선택, room layer 제외 |
-| XYZ 이동 gizmo / XYZ 회전 링 / local scale gizmo | 수학·입력 routing 확인 | 새 handle의 실제 클릭 영역과 조작감은 display 환경에서 필요 |
+| XYZ 이동 gizmo / XYZ 회전 링 / local scale gizmo | 수학·입력 routing·priority 7 확인 | Open3D 0.18 실제 화면에서 세 모드의 Mesh 위 표시 확인; 22px/34px 조작감은 사용자 확인 필요 |
 | R/S 중 빈 화면 카메라 drag 분리 | 자동 확인 | gizmo가 없으면 이벤트를 소비하지 않는 회귀 테스트 |
 | 텍스트 입력 화살표·Backspace·Delete | 코드·routing 확인 | 평상시 Window callback 통과와 Viewport 전용 shortcut, 실제 입력감은 display 환경에서 필요 |
-| Point 크기와 Point Cloud/Proxy Mesh/둘 다 | 설정·API 확인 | Open3D 0.18/0.19 API 확인, 실제 화면 비교 필요 |
+| Point 크기와 세 배경 계층 독립 체크 | 상태·실제 자산 로드 확인 | 500,000 Point와 1,000,000 Triangle 동시 준비 확인, 실제 화면 비교 필요 |
 | RMB drag + WASD FPS camera | 자동·실제 창 확인 | 수직 시점 89 frame 순이동, 활성 TextEdit 상태에서도 native poll 54 frame 이동 |
 | Ctrl+왼쪽 camera pan | 자동 routing 확인 | 객체 선택보다 먼저 native camera에 넘김, 실제 이동감은 display 환경에서 재확인 필요 |
 | Gizmo drag 중 camera lock | 자동 routing 확인 | mouse-down 뒤 DRAG/UP을 소비하고 PICK_POINTS 제어 유지 |
@@ -127,15 +136,17 @@ RustDesk 화면에서 실제 Room/reference가 포함된 전체 편집기 창을
 
 ## 테스트 결과
 
-- Phase 2-C: 95 passed
+- Phase 2-C: 111 passed
 - Phase 2-B: 83 passed, 1 skipped
 - Phase 2-A: 15 passed, 1 skipped
 - Proxy Mesh Editor: 73 passed
-- 전체 headless regression: 266 passed, 2 skipped
+- 전체 headless regression: 282 passed, 2 skipped
 - Phase 2-B 실제 Sionna integration: 84 passed
 - Phase 2-A 실제 Sionna integration: 1 passed
-- 정적 검사: Ruff 통과
+- 정적 검사: Python compile 통과, 현재 `pgsr` 환경에는 Ruff 명령이 없어 재실행하지 못함
 - whitespace 검사: `git diff --check` 통과
+
+이번 gizmo 표시·입력 변경의 관련 테스트는 24개가 통과했고, GUI runtime의 Open3D 0.18과 `pgsr` 환경의 Open3D 0.19에서 `set_geometry_priority` API를 모두 확인했다. Open3D 0.18 실제 화면에서는 Point Cloud, Proxy Mesh, PGSR Output Mesh를 모두 켠 상태로 실제 이동 화살표, 회전 3축 링, local scale 박스가 Mesh보다 앞에 표시됐다. 현재 작업 트리 전체 회귀는 280 passed, 2 skipped, 5 failed이며, 실패 5개는 채워진 `pnu_classroom_proxy_draft.yaml`을 null draft 계약으로 기대하는 기존 테스트다. 이번 gizmo 변경 경로의 실패는 아니다.
 
 Skipped 항목은 실제 display/Sionna 통합처럼 명시적 환경 변수가 필요한 기존 테스트다. 최종 통합 수치는 완료 시 다시 확인한다.
 

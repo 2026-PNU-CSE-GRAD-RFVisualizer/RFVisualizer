@@ -25,6 +25,21 @@ candidates:
     material: {category: wood}
     metadata: {semantic_class: door, purpose: classroom_proxy, physical_object: true, confidence: unset}
 
+  - id: stair_step
+    label: Stair Step
+    geometry: {type: box, default_size_m: [1.0, 0.35, 0.15]}
+    anchor: {mode: bottom_center}
+    material: {category: concrete}
+    metadata: {semantic_class: stair_step, purpose: stepped_floor_proxy, physical_object: true, confidence: unset}
+
+  - id: ap_tx
+    label: AP / TX
+    geometry: {type: box, default_size_m: [0.25, 0.18, 0.05]}
+    anchor: {mode: center}
+    material: {category: wood}
+    transmitter: {frequency_hz: 2400000000, power_dbm: 20.0}
+    metadata: {semantic_class: access_point, purpose: rf_transmitter, physical_object: true, confidence: unset}
+
   - id: large_metal_object
     label: Large Metal Object
     geometry: {type: box, default_size_m: [1.0, 0.8, 1.8]}

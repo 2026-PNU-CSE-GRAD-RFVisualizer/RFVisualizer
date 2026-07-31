@@ -127,21 +127,22 @@
   ],
   "placement_warnings": [],
   "enabled_obstacle_count": 0,
-  "renderable_obstacle_count": 0,
-  "maximum_coordinate_round_trip_error": 0.0,
+  "renderable_obstacle_count": 9,
+  "maximum_coordinate_round_trip_error": 4.47545209131181e-15,
   "objects": [
     {
-      "id": "desk_block_example",
+      "id": "Left_Desk01",
       "enabled": false,
-      "renderable": false,
-      "status": "DISABLED_INCOMPLETE",
+      "renderable": true,
+      "status": "DISABLED_INVALID",
       "errors": [
-        "활성 box에는 size_m이 필요합니다."
+        "장애물 일부가 Room Envelope 밖에 있습니다.",
+        "장애물 일부가 바닥 아래에 있습니다."
       ],
       "warnings": [],
       "collision_warnings": [],
       "source": {
-        "id": "desk_block_example",
+        "id": "Left_Desk01",
         "enabled": false,
         "semantic_class": "desk_cluster",
         "purpose": "classroom_proxy",
@@ -150,30 +151,663 @@
         "geometry": {
           "type": "box",
           "anchor": {
-            "mode": "floor_at_xy"
+            "mode": "floor_at_xy",
+            "floor_contact_policy": {
+              "type": "anchor_point",
+              "clearance_m": 0.0
+            }
           },
-          "position_m": null,
-          "size_m": null,
-          "rotation_deg": null
+          "position_m": {
+            "x": -11.404328907,
+            "y": -7.888025594
+          },
+          "size_m": {
+            "x": 2.0,
+            "y": 0.8,
+            "z": 0.35
+          },
+          "rotation_deg": {
+            "roll": 0.0,
+            "pitch": -0.0,
+            "yaw": 30.0
+          }
         },
         "material": {
           "source": "sionna_preset",
           "category": "wood"
+        },
+        "display_name": "Desk Cluster",
+        "measurement_source": "unset",
+        "notes": "Visible editor placeholder; not an on-site measurement.",
+        "placement_status": "provisional_placeholder",
+        "export": {
+          "object_name": "Left_Desk01"
         }
-      }
+      },
+      "geometry_type": "box",
+      "metric_vertices": [
+        [
+          -12.070354310784438,
+          -8.734435755513775,
+          0.37271893747032064
+        ],
+        [
+          -10.338303503215561,
+          -7.7344357555137755,
+          0.37271893747032064
+        ],
+        [
+          -10.738303503215562,
+          -7.041615432486225,
+          0.37271893747032064
+        ],
+        [
+          -12.470354310784439,
+          -8.041615432486225,
+          0.37271893747032064
+        ],
+        [
+          -12.070354310784438,
+          -8.734435755513775,
+          0.7227189374703207
+        ],
+        [
+          -10.338303503215561,
+          -7.7344357555137755,
+          0.7227189374703207
+        ],
+        [
+          -10.738303503215562,
+          -7.041615432486225,
+          0.7227189374703207
+        ],
+        [
+          -12.470354310784439,
+          -8.041615432486225,
+          0.7227189374703207
+        ]
+      ],
+      "faces": [
+        [
+          0,
+          2,
+          1
+        ],
+        [
+          0,
+          3,
+          2
+        ],
+        [
+          4,
+          5,
+          6
+        ],
+        [
+          4,
+          6,
+          7
+        ],
+        [
+          0,
+          1,
+          5
+        ],
+        [
+          0,
+          5,
+          4
+        ],
+        [
+          1,
+          2,
+          6
+        ],
+        [
+          1,
+          6,
+          5
+        ],
+        [
+          2,
+          3,
+          7
+        ],
+        [
+          2,
+          7,
+          6
+        ],
+        [
+          3,
+          0,
+          4
+        ],
+        [
+          3,
+          4,
+          7
+        ]
+      ],
+      "metric_transform": [
+        [
+          0.8660254037844387,
+          -0.49999999999999994,
+          0.0,
+          -11.404328907
+        ],
+        [
+          0.49999999999999994,
+          0.8660254037844387,
+          0.0,
+          -7.888025594
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.5477189374703206
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "scene_vertices": [
+        [
+          4.1038406493115085,
+          1.1971874016683888,
+          -0.33409733871102243
+        ],
+        [
+          2.859325973934687,
+          1.0484915549290075,
+          -0.005789070877683322
+        ],
+        [
+          2.7239236770399264,
+          1.0793094214054006,
+          -0.505099240239808
+        ],
+        [
+          3.968438352416748,
+          1.228005268144782,
+          -0.8334075080731471
+        ],
+        [
+          4.125494476425003,
+          0.9723503863203138,
+          -0.3538465360051102
+        ],
+        [
+          2.8809798010481815,
+          0.8236545395809327,
+          -0.025538268171771072
+        ],
+        [
+          2.745577504153421,
+          0.8544724060573259,
+          -0.5248484375338958
+        ],
+        [
+          3.990092179530243,
+          1.003168252796707,
+          -0.8531567053672349
+        ]
+      ],
+      "scene_transform": [
+        [
+          -0.6222573376884111,
+          -0.1692528711184507,
+          0.06186807746712714,
+          3.424709076732465
+        ],
+        [
+          -0.0743479233696906,
+          0.03852233309549141,
+          -0.6423914724230709,
+          1.025829903862857
+        ],
+        [
+          0.16415413391666964,
+          -0.624137711702656,
+          -0.05642627798310757,
+          -0.42947288812245965
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "metric_bounds": {
+        "min": [
+          -12.470354310784439,
+          -8.734435755513775,
+          0.37271893747032064
+        ],
+        "max": [
+          -10.338303503215561,
+          -7.041615432486225,
+          0.7227189374703207
+        ]
+      },
+      "scene_bounds": {
+        "min": [
+          2.7239236770399264,
+          0.8236545395809327,
+          -0.8531567053672349
+        ],
+        "max": [
+          4.125494476425003,
+          1.228005268144782,
+          -0.005789070877683322
+        ]
+      },
+      "bounds": {
+        "min": [
+          -12.470354310784439,
+          -8.734435755513775,
+          0.37271893747032064
+        ],
+        "max": [
+          -10.338303503215561,
+          -7.041615432486225,
+          0.7227189374703207
+        ]
+      },
+      "phase2b_validation": {
+        "schema_version": "1.0",
+        "obstacle_id": "Left_Desk01",
+        "success": false,
+        "checks": {
+          "finite_geometry": true,
+          "nondegenerate_triangles": true,
+          "closed_manifold": true,
+          "positive_signed_volume": true,
+          "room_containment": false,
+          "on_or_above_floor": false,
+          "on_or_below_ceiling": true,
+          "inside_walls": true,
+          "devices_outside_obstacle": true,
+          "required_los_intersection": true
+        },
+        "errors": [
+          "장애물 일부가 Room Envelope 밖에 있습니다.",
+          "장애물 일부가 바닥 아래에 있습니다."
+        ],
+        "mesh_statistics": {
+          "vertex_count": 8,
+          "triangle_count": 12,
+          "bounds": {
+            "min": [
+              -12.470354310784439,
+              -8.734435755513775,
+              0.37271893747032064
+            ],
+            "max": [
+              -10.338303503215561,
+              -7.041615432486225,
+              0.7227189374703207
+            ],
+            "extent": [
+              2.132050807568877,
+              1.6928203230275507,
+              0.35000000000000003
+            ]
+          },
+          "surface_area": 5.159999999999998,
+          "signed_volume": 0.5600000000000002,
+          "absolute_volume": 0.5600000000000002,
+          "degenerate_triangle_count": 0,
+          "boundary_edge_count": 0,
+          "non_manifold_edge_count": 0,
+          "closed_manifold": true,
+          "outward_or_tangent_face_count": 12,
+          "strictly_outward_face_count": 12
+        },
+        "bounds": {
+          "min": [
+            -12.470354310784439,
+            -8.734435755513775,
+            0.37271893747032064
+          ],
+          "max": [
+            -10.338303503215561,
+            -7.041615432486225,
+            0.7227189374703207
+          ]
+        },
+        "containment": {
+          "fully_inside": false,
+          "outside_vertex_indices": [
+            0,
+            3
+          ],
+          "floor_failure_vertex_indices": [
+            0,
+            3
+          ],
+          "ceiling_failure_vertex_indices": [],
+          "wall_failure_vertex_indices": [],
+          "minimum_floor_clearance_m": -0.033375867904760936,
+          "minimum_ceiling_clearance_m": 1.9665051660473643,
+          "minimum_wall_clearance_m": 2.16608925604859,
+          "vertex_inspections": [
+            {
+              "position_m": [
+                -12.070354310784438,
+                -8.734435755513775,
+                0.37271893747032064
+              ],
+              "inside_room": false,
+              "safe_with_clearance": false,
+              "floor_z_m": 0.4060948053750816,
+              "ceiling_z_m": 2.8165822645210175,
+              "floor_clearance_m": -0.033375867904760936,
+              "ceiling_clearance_m": 2.4438633270506966,
+              "minimum_wall_clearance_m": 2.185972804002011,
+              "oriented_plane_distances_m": [
+                -0.03335841769303495,
+                2.4384648791186905,
+                8.06433789247017,
+                3.2058258744022936,
+                2.185972804002011,
+                12.095558591823076
+              ]
+            },
+            {
+              "position_m": [
+                -10.338303503215561,
+                -7.7344357555137755,
+                0.37271893747032064
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.3554464234833869,
+              "ceiling_z_m": 2.7295268067131477,
+              "floor_clearance_m": 0.017272513986933746,
+              "ceiling_clearance_m": 2.356807869242827,
+              "minimum_wall_clearance_m": 3.1831899068869074,
+              "oriented_plane_distances_m": [
+                0.01726348323971931,
+                2.3516017251728947,
+                7.1636981106362585,
+                4.917804740481982,
+                3.1831899068869074,
+                10.365051340845525
+              ]
+            },
+            {
+              "position_m": [
+                -10.738303503215562,
+                -7.041615432486225,
+                0.37271893747032064
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.3393430695655597,
+              "ceiling_z_m": 2.689224103517685,
+              "floor_clearance_m": 0.033375867904760936,
+              "ceiling_clearance_m": 2.316505166047364,
+              "minimum_wall_clearance_m": 3.8751608291714295,
+              "oriented_plane_distances_m": [
+                0.03335841769303503,
+                2.3113880498875905,
+                6.452535310608468,
+                4.505427784035046,
+                3.8751608291714295,
+                10.761178133654472
+              ]
+            },
+            {
+              "position_m": [
+                -12.470354310784439,
+                -8.041615432486225,
+                0.37271893747032064
+              ],
+              "inside_room": false,
+              "safe_with_clearance": false,
+              "floor_z_m": 0.38999145145725433,
+              "ceiling_z_m": 2.7762795613255546,
+              "floor_clearance_m": -0.01727251398693369,
+              "ceiling_clearance_m": 2.403560623855234,
+              "minimum_wall_clearance_m": 2.7934489179553577,
+              "oriented_plane_distances_m": [
+                -0.017263483239719227,
+                2.3982512038333863,
+                7.35317509244238,
+                2.7934489179553577,
+                2.877943726286535,
+                12.491685384632023
+              ]
+            },
+            {
+              "position_m": [
+                -12.070354310784438,
+                -8.734435755513775,
+                0.7227189374703207
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.4060948053750816,
+              "ceiling_z_m": 2.8165822645210175,
+              "floor_clearance_m": 0.3166241320952391,
+              "ceiling_clearance_m": 2.0938633270506966,
+              "minimum_wall_clearance_m": 2.16608925604859,
+              "oriented_plane_distances_m": [
+                0.31645858859062165,
+                2.0892380225082112,
+                8.093565869666941,
+                3.1919509584927646,
+                2.16608925604859,
+                12.123015712281383
+              ]
+            },
+            {
+              "position_m": [
+                -10.338303503215561,
+                -7.7344357555137755,
+                0.7227189374703207
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.3554464234833869,
+              "ceiling_z_m": 2.7295268067131477,
+              "floor_clearance_m": 0.3672725139869338,
+              "ceiling_clearance_m": 2.0068078692428273,
+              "minimum_wall_clearance_m": 3.163306358933487,
+              "oriented_plane_distances_m": [
+                0.3670804895233759,
+                2.0023748685624154,
+                7.192926087833031,
+                4.903929824572453,
+                3.163306358933487,
+                10.392508461303832
+              ]
+            },
+            {
+              "position_m": [
+                -10.738303503215562,
+                -7.041615432486225,
+                0.7227189374703207
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.3393430695655597,
+              "ceiling_z_m": 2.689224103517685,
+              "floor_clearance_m": 0.38337586790476097,
+              "ceiling_clearance_m": 1.9665051660473643,
+              "minimum_wall_clearance_m": 3.855277281218009,
+              "oriented_plane_distances_m": [
+                0.38317542397669163,
+                1.9621611932771115,
+                6.48176328780524,
+                4.491552868125517,
+                3.855277281218009,
+                10.788635254112778
+              ]
+            },
+            {
+              "position_m": [
+                -12.470354310784439,
+                -8.041615432486225,
+                0.7227189374703207
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.38999145145725433,
+              "ceiling_z_m": 2.7762795613255546,
+              "floor_clearance_m": 0.33272748601306634,
+              "ceiling_clearance_m": 2.053560623855234,
+              "minimum_wall_clearance_m": 2.7795740020458286,
+              "oriented_plane_distances_m": [
+                0.33255352304393737,
+                2.049024347222907,
+                7.382403069639152,
+                2.7795740020458286,
+                2.8580601783331137,
+                12.519142505090329
+              ]
+            }
+          ]
+        },
+        "los": {
+          "required": false,
+          "any_intersection": false,
+          "segments": [
+            {
+              "name": "rx_los",
+              "start_m": [
+                -7.0,
+                -5.0,
+                1.5
+              ],
+              "end_m": [
+                -3.0,
+                -5.0,
+                1.5
+              ],
+              "length_m": 4.0,
+              "aabb_intersection": false,
+              "mesh_intersection": false,
+              "intersection_count": 0,
+              "intersections": [],
+              "start_inside_obstacle": false,
+              "end_inside_obstacle": false
+            },
+            {
+              "name": "rx_reflection",
+              "start_m": [
+                -7.0,
+                -5.0,
+                1.5
+              ],
+              "end_m": [
+                -10.0,
+                -8.0,
+                1.5
+              ],
+              "length_m": 4.242640687119285,
+              "aabb_intersection": false,
+              "mesh_intersection": false,
+              "intersection_count": 0,
+              "intersections": [],
+              "start_inside_obstacle": false,
+              "end_inside_obstacle": false
+            }
+          ]
+        }
+      },
+      "material": {
+        "obstacle_id": "Left_Desk01",
+        "object_name": "Left_Desk01",
+        "category": "wood",
+        "actual_sionna_material_name": "itu_wood_Left_Desk01",
+        "itu_type": "wood",
+        "thickness_m": 0.1,
+        "scattering_coefficient": 0.0,
+        "source": "sionna_preset",
+        "availability_verified_against_installed_sionna": false,
+        "fallback_used": false,
+        "warning": null
+      },
+      "coordinate_round_trip": {
+        "metric_to_scene_to_metric_vertex_max_error_m": 4.037076858493351e-15,
+        "metric_to_scene_to_metric_transform_max_error": 1.7763568394002505e-15,
+        "maximum_error": 4.037076858493351e-15,
+        "success": true,
+        "metric_transform": [
+          [
+            0.8660254037844387,
+            -0.49999999999999994,
+            0.0,
+            -11.404328907
+          ],
+          [
+            0.49999999999999994,
+            0.8660254037844387,
+            0.0,
+            -7.888025594
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.5477189374703206
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "scene_transform": [
+          [
+            -0.6222573376884111,
+            -0.1692528711184507,
+            0.06186807746712714,
+            3.424709076732465
+          ],
+          [
+            -0.0743479233696906,
+            0.03852233309549141,
+            -0.6423914724230709,
+            1.025829903862857
+          ],
+          [
+            0.16415413391666964,
+            -0.624137711702656,
+            -0.05642627798310757,
+            -0.42947288812245965
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "object_kind": "obstacle"
     },
     {
-      "id": "blackboard_example",
+      "id": "Blackboard",
       "enabled": false,
-      "renderable": false,
-      "status": "DISABLED_INCOMPLETE",
+      "renderable": true,
+      "status": "DISABLED_INVALID",
       "errors": [
-        "활성 thin_panel에는 size_m 또는 thickness/width/height가 필요합니다."
+        "장애물 일부가 Room Envelope 밖에 있습니다.",
+        "장애물 일부가 벽을 관통하거나 방 밖에 있습니다."
       ],
       "warnings": [],
       "collision_warnings": [],
       "source": {
-        "id": "blackboard_example",
+        "id": "Blackboard",
         "enabled": false,
         "semantic_class": "blackboard",
         "purpose": "classroom_proxy",
@@ -184,28 +818,663 @@
           "anchor": {
             "mode": "center"
           },
-          "position_m": null,
-          "size_m": null,
-          "rotation_deg": null
+          "position_m": {
+            "x": -6.879328907,
+            "y": -11.043058,
+            "z": 1.7
+          },
+          "size_m": {
+            "x": 0.5,
+            "y": 7.0,
+            "z": 1.2
+          },
+          "rotation_deg": {
+            "roll": 1.5,
+            "pitch": -0.0,
+            "yaw": 90.0
+          }
         },
         "material": {
           "source": "sionna_preset",
           "category": "metal"
+        },
+        "display_name": "Blackboard Panel",
+        "measurement_source": "unset",
+        "notes": "Visible editor placeholder; not an on-site measurement.",
+        "placement_status": "provisional_placeholder",
+        "export": {
+          "object_name": "Blackboard"
         }
-      }
+      },
+      "geometry_type": "thin_panel",
+      "metric_vertices": [
+        [
+          -3.396234438570273,
+          -11.293058,
+          1.0085862859371097
+        ],
+        [
+          -3.396234438570273,
+          -10.793058,
+          1.0085862859371097
+        ],
+        [
+          -10.393835713399174,
+          -10.793058,
+          1.1918249240922216
+        ],
+        [
+          -10.393835713399174,
+          -11.293058,
+          1.1918249240922216
+        ],
+        [
+          -3.3648221006008256,
+          -11.293058,
+          2.2081750759077785
+        ],
+        [
+          -3.3648221006008256,
+          -10.793058,
+          2.2081750759077785
+        ],
+        [
+          -10.362423375429726,
+          -10.793058,
+          2.39141371406289
+        ],
+        [
+          -10.362423375429726,
+          -11.293058,
+          2.39141371406289
+        ]
+      ],
+      "faces": [
+        [
+          0,
+          2,
+          1
+        ],
+        [
+          0,
+          3,
+          2
+        ],
+        [
+          4,
+          5,
+          6
+        ],
+        [
+          4,
+          6,
+          7
+        ],
+        [
+          0,
+          1,
+          5
+        ],
+        [
+          0,
+          5,
+          4
+        ],
+        [
+          1,
+          2,
+          6
+        ],
+        [
+          1,
+          6,
+          5
+        ],
+        [
+          2,
+          3,
+          7
+        ],
+        [
+          2,
+          7,
+          6
+        ],
+        [
+          3,
+          0,
+          4
+        ],
+        [
+          3,
+          4,
+          7
+        ]
+      ],
+      "metric_transform": [
+        [
+          6.123233995736766e-17,
+          -0.9996573249755573,
+          0.026176948307873153,
+          -6.879328907
+        ],
+        [
+          1.0,
+          6.121135716377608e-17,
+          -1.602875797834129e-18,
+          -11.043058
+        ],
+        [
+          0.0,
+          0.026176948307873153,
+          0.9996573249755573,
+          1.7
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "scene_vertices": [
+        [
+          1.3739348223879277,
+          0.07289087671257044,
+          4.743052910674828
+        ],
+        [
+          1.145081844939809,
+          0.07098455540701859,
+          4.513831887256801
+        ],
+        [
+          4.335178398157031,
+          0.5386114657501455,
+          1.324968445355364
+        ],
+        [
+          4.56403137560515,
+          0.5405177870556972,
+          1.5541894687733908
+        ],
+        [
+          1.4338815731620782,
+          -0.700342322836571,
+          4.6896330223157525
+        ],
+        [
+          1.2050285957139595,
+          -0.702248644142123,
+          4.460411998897726
+        ],
+        [
+          4.395125148931181,
+          -0.23462173379899603,
+          1.2715485569962892
+        ],
+        [
+          4.6239781263793,
+          -0.23271541249344424,
+          1.5007695804143157
+        ]
+      ],
+      "scene_transform": [
+        [
+          -0.45770595489623733,
+          0.4557280790310317,
+          0.049955625645124485,
+          2.8845299856595537
+        ],
+        [
+          -0.003812642611103694,
+          0.0668038443347324,
+          -0.6443609996242846,
+          -0.08086542854321271
+        ],
+        [
+          -0.45844204683605333,
+          -0.4555519202716338,
+          -0.044516573632562305,
+          3.0073007338355584
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "metric_bounds": {
+        "min": [
+          -10.393835713399174,
+          -11.293058,
+          1.0085862859371097
+        ],
+        "max": [
+          -3.3648221006008256,
+          -10.793058,
+          2.39141371406289
+        ]
+      },
+      "scene_bounds": {
+        "min": [
+          1.145081844939809,
+          -0.702248644142123,
+          1.2715485569962892
+        ],
+        "max": [
+          4.6239781263793,
+          0.5405177870556972,
+          4.743052910674828
+        ]
+      },
+      "bounds": {
+        "min": [
+          -10.393835713399174,
+          -11.293058,
+          1.0085862859371097
+        ],
+        "max": [
+          -3.3648221006008256,
+          -10.793058,
+          2.39141371406289
+        ]
+      },
+      "phase2b_validation": {
+        "schema_version": "1.0",
+        "obstacle_id": "Blackboard",
+        "success": false,
+        "checks": {
+          "finite_geometry": true,
+          "nondegenerate_triangles": true,
+          "closed_manifold": true,
+          "positive_signed_volume": true,
+          "room_containment": false,
+          "on_or_above_floor": true,
+          "on_or_below_ceiling": true,
+          "inside_walls": false,
+          "devices_outside_obstacle": true,
+          "required_los_intersection": true
+        },
+        "errors": [
+          "장애물 일부가 Room Envelope 밖에 있습니다.",
+          "장애물 일부가 벽을 관통하거나 방 밖에 있습니다."
+        ],
+        "mesh_statistics": {
+          "vertex_count": 8,
+          "triangle_count": 12,
+          "bounds": {
+            "min": [
+              -10.393835713399174,
+              -11.293058,
+              1.0085862859371097
+            ],
+            "max": [
+              -3.3648221006008256,
+              -10.793058,
+              2.39141371406289
+            ],
+            "extent": [
+              7.029013612798348,
+              0.5,
+              1.3828274281257804
+            ]
+          },
+          "surface_area": 24.999999999999996,
+          "signed_volume": 4.199999999999991,
+          "absolute_volume": 4.199999999999991,
+          "degenerate_triangle_count": 0,
+          "boundary_edge_count": 0,
+          "non_manifold_edge_count": 0,
+          "closed_manifold": true,
+          "outward_or_tangent_face_count": 12,
+          "strictly_outward_face_count": 12
+        },
+        "bounds": {
+          "min": [
+            -10.393835713399174,
+            -11.293058,
+            1.0085862859371097
+          ],
+          "max": [
+            -3.3648221006008256,
+            -10.793058,
+            2.39141371406289
+          ]
+        },
+        "containment": {
+          "fully_inside": false,
+          "outside_vertex_indices": [
+            0,
+            3,
+            4,
+            7
+          ],
+          "floor_failure_vertex_indices": [],
+          "ceiling_failure_vertex_indices": [],
+          "wall_failure_vertex_indices": [
+            0,
+            3,
+            4,
+            7
+          ],
+          "minimum_floor_clearance_m": 0.628425070804586,
+          "minimum_ceiling_clearance_m": 0.5384266934880597,
+          "minimum_wall_clearance_m": -0.48435041921280053,
+          "vertex_inspections": [
+            {
+              "position_m": [
+                -3.396234438570273,
+                -11.293058,
+                1.0085862859371097
+              ],
+              "inside_room": false,
+              "safe_with_clearance": false,
+              "floor_z_m": 0.3801612151325237,
+              "ceiling_z_m": 2.875411183846527,
+              "floor_clearance_m": 0.628425070804586,
+              "ceiling_clearance_m": 1.8668248979094173,
+              "minimum_wall_clearance_m": -0.41048809002687925,
+              "oriented_plane_distances_m": [
+                0.6280965055498722,
+                1.862701116968812,
+                11.135946872247347,
+                11.893568206242515,
+                -0.41048809002687925,
+                3.5078579684046725
+              ]
+            },
+            {
+              "position_m": [
+                -3.396234438570273,
+                -10.793058,
+                1.0085862859371097
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.36511397140920554,
+              "ceiling_z_m": 2.8427147736152594,
+              "floor_clearance_m": 0.6434723145279042,
+              "ceiling_clearance_m": 1.8341284876781496,
+              "minimum_wall_clearance_m": 0.08870429619532239,
+              "oriented_plane_distances_m": [
+                0.6431358819844769,
+                1.830076932490205,
+                10.638438742611521,
+                11.884359989366004,
+                0.08870429619532239,
+                3.5059544780901053
+              ]
+            },
+            {
+              "position_m": [
+                -10.393835713399174,
+                -10.793058,
+                1.1918249240922216
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.44815308166101037,
+              "ceiling_z_m": 2.930233279447448,
+              "floor_clearance_m": 0.7436718424312112,
+              "ceiling_clearance_m": 1.7384083553552265,
+              "minimum_wall_clearance_m": 0.08301194728682226,
+              "oriented_plane_distances_m": [
+                0.7432830216478215,
+                1.7345682441317094,
+                10.272453437418989,
+                4.886183017545834,
+                0.08301194728682226,
+                10.49631409662935
+              ]
+            },
+            {
+              "position_m": [
+                -10.393835713399174,
+                -11.293058,
+                1.1918249240922216
+              ],
+              "inside_room": false,
+              "safe_with_clearance": false,
+              "floor_z_m": 0.46320032538432854,
+              "ceiling_z_m": 2.9629296896787163,
+              "floor_clearance_m": 0.7286245987078931,
+              "ceiling_clearance_m": 1.7711047655864947,
+              "minimum_wall_clearance_m": -0.41618043893538115,
+              "oriented_plane_distances_m": [
+                0.7282436452132166,
+                1.7671924286103162,
+                10.769961567054814,
+                4.895391234422345,
+                -0.41618043893538115,
+                10.498217586943916
+              ]
+            },
+            {
+              "position_m": [
+                -3.3648221006008256,
+                -11.293058,
+                2.2081750759077785
+              ],
+              "inside_room": false,
+              "safe_with_clearance": false,
+              "floor_z_m": 0.37978845131054156,
+              "ceiling_z_m": 2.8750183119500288,
+              "floor_clearance_m": 1.8283866245972369,
+              "ceiling_clearance_m": 0.6668432360422503,
+              "minimum_wall_clearance_m": -0.47865807030429863,
+              "oriented_plane_distances_m": [
+                1.8274306724162435,
+                0.6653701919285564,
+                11.237834344656742,
+                11.87739568123356,
+                -0.47865807030429863,
+                3.570649107093063
+              ]
+            },
+            {
+              "position_m": [
+                -3.3648221006008256,
+                -10.793058,
+                2.2081750759077785
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.3647412075872234,
+              "ceiling_z_m": 2.842321901718761,
+              "floor_clearance_m": 1.8434338683205551,
+              "ceiling_clearance_m": 0.6341468258109826,
+              "minimum_wall_clearance_m": 0.020534315917903,
+              "oriented_plane_distances_m": [
+                1.8424700488508483,
+                0.6327460074499496,
+                10.740326215020916,
+                11.86818746435705,
+                0.020534315917903,
+                3.5687456167784957
+              ]
+            },
+            {
+              "position_m": [
+                -10.362423375429726,
+                -10.793058,
+                2.39141371406289
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.4477803178390283,
+              "ceiling_z_m": 2.92984040755095,
+              "floor_clearance_m": 1.9436333962238619,
+              "ceiling_clearance_m": 0.5384266934880597,
+              "minimum_wall_clearance_m": 0.014841967009401102,
+              "oriented_plane_distances_m": [
+                1.9426171885141927,
+                0.5372373190914543,
+                10.374340909828383,
+                4.8700104925368795,
+                0.014841967009401102,
+                10.55910523531774
+              ]
+            },
+            {
+              "position_m": [
+                -10.362423375429726,
+                -11.293058,
+                2.39141371406289
+              ],
+              "inside_room": false,
+              "safe_with_clearance": false,
+              "floor_z_m": 0.4628275615623464,
+              "ceiling_z_m": 2.962536817782218,
+              "floor_clearance_m": 1.9285861525005439,
+              "ceiling_clearance_m": 0.5711231037193278,
+              "minimum_wall_clearance_m": -0.48435041921280053,
+              "oriented_plane_distances_m": [
+                1.927577812079588,
+                0.5698615035700612,
+                10.87184903946421,
+                4.87921870941339,
+                -0.48435041921280053,
+                10.561008725632306
+              ]
+            }
+          ]
+        },
+        "los": {
+          "required": false,
+          "any_intersection": false,
+          "segments": [
+            {
+              "name": "rx_los",
+              "start_m": [
+                -7.0,
+                -5.0,
+                1.5
+              ],
+              "end_m": [
+                -3.0,
+                -5.0,
+                1.5
+              ],
+              "length_m": 4.0,
+              "aabb_intersection": false,
+              "mesh_intersection": false,
+              "intersection_count": 0,
+              "intersections": [],
+              "start_inside_obstacle": false,
+              "end_inside_obstacle": false
+            },
+            {
+              "name": "rx_reflection",
+              "start_m": [
+                -7.0,
+                -5.0,
+                1.5
+              ],
+              "end_m": [
+                -10.0,
+                -8.0,
+                1.5
+              ],
+              "length_m": 4.242640687119285,
+              "aabb_intersection": false,
+              "mesh_intersection": false,
+              "intersection_count": 0,
+              "intersections": [],
+              "start_inside_obstacle": false,
+              "end_inside_obstacle": false
+            }
+          ]
+        }
+      },
+      "material": {
+        "obstacle_id": "Blackboard",
+        "object_name": "Blackboard",
+        "category": "metal",
+        "actual_sionna_material_name": "itu_metal_Blackboard",
+        "itu_type": "metal",
+        "thickness_m": 0.1,
+        "scattering_coefficient": 0.0,
+        "source": "sionna_preset",
+        "availability_verified_against_installed_sionna": false,
+        "fallback_used": false,
+        "warning": null
+      },
+      "coordinate_round_trip": {
+        "metric_to_scene_to_metric_vertex_max_error_m": 3.978256139440565e-15,
+        "metric_to_scene_to_metric_transform_max_error": 2.6645352591003757e-15,
+        "maximum_error": 3.978256139440565e-15,
+        "success": true,
+        "metric_transform": [
+          [
+            6.123233995736766e-17,
+            -0.9996573249755573,
+            0.026176948307873153,
+            -6.879328907
+          ],
+          [
+            1.0,
+            6.121135716377608e-17,
+            -1.602875797834129e-18,
+            -11.043058
+          ],
+          [
+            0.0,
+            0.026176948307873153,
+            0.9996573249755573,
+            1.7
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "scene_transform": [
+          [
+            -0.45770595489623733,
+            0.4557280790310317,
+            0.049955625645124485,
+            2.8845299856595537
+          ],
+          [
+            -0.003812642611103694,
+            0.0668038443347324,
+            -0.6443609996242846,
+            -0.08086542854321271
+          ],
+          [
+            -0.45844204683605333,
+            -0.4555519202716338,
+            -0.044516573632562305,
+            3.0073007338355584
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "object_kind": "obstacle"
     },
     {
-      "id": "door_example",
+      "id": "Door",
       "enabled": false,
-      "renderable": false,
-      "status": "DISABLED_INCOMPLETE",
+      "renderable": true,
+      "status": "DISABLED_INVALID",
       "errors": [
-        "활성 thin_panel에는 size_m 또는 thickness/width/height가 필요합니다."
+        "장애물 일부가 Room Envelope 밖에 있습니다.",
+        "장애물 일부가 바닥 아래에 있습니다.",
+        "장애물 일부가 벽을 관통하거나 방 밖에 있습니다."
       ],
       "warnings": [],
       "collision_warnings": [],
       "source": {
-        "id": "door_example",
+        "id": "Door",
         "enabled": false,
         "semantic_class": "door",
         "purpose": "classroom_proxy",
@@ -215,51 +1484,4617 @@
         "geometry": {
           "type": "thin_panel",
           "anchor": {
-            "mode": "bottom_center"
+            "mode": "center"
           },
-          "position_m": null,
-          "size_m": null,
-          "rotation_deg": null
+          "position_m": {
+            "x": -15.229328907,
+            "y": -9.6,
+            "z": 0.256482556
+          },
+          "size_m": {
+            "x": 0.05,
+            "y": 2.5,
+            "z": 2.0
+          },
+          "rotation_deg": {
+            "roll": -3.0,
+            "pitch": -0.0,
+            "yaw": 0.0
+          }
         },
         "material": {
           "source": "sionna_preset",
-          "category": "wood"
+          "category": "metal",
+          "preset": "metal"
+        },
+        "display_name": "Door Panel",
+        "measurement_source": "unset",
+        "notes": "Visible editor placeholder; not an on-site measurement.",
+        "placement_status": "provisional_placeholder",
+        "export": {
+          "object_name": "Door"
         }
-      }
+      },
+      "geometry_type": "thin_panel",
+      "metric_vertices": [
+        [
+          -15.254328907,
+          -10.90062287468616,
+          -0.6767270334508941
+        ],
+        [
+          -15.204328906999999,
+          -10.90062287468616,
+          -0.6767270334508941
+        ],
+        [
+          -15.204328906999999,
+          -8.404049037799727,
+          -0.8075669240582537
+        ],
+        [
+          -15.254328907,
+          -8.404049037799727,
+          -0.8075669240582537
+        ],
+        [
+          -15.254328907,
+          -10.795950962200273,
+          1.3205320360582535
+        ],
+        [
+          -15.204328906999999,
+          -10.795950962200273,
+          1.3205320360582535
+        ],
+        [
+          -15.204328906999999,
+          -8.299377125313839,
+          1.189692145450894
+        ],
+        [
+          -15.254328907,
+          -8.299377125313839,
+          1.189692145450894
+        ]
+      ],
+      "faces": [
+        [
+          0,
+          2,
+          1
+        ],
+        [
+          0,
+          3,
+          2
+        ],
+        [
+          4,
+          5,
+          6
+        ],
+        [
+          4,
+          6,
+          7
+        ],
+        [
+          0,
+          1,
+          5
+        ],
+        [
+          0,
+          5,
+          4
+        ],
+        [
+          1,
+          2,
+          6
+        ],
+        [
+          1,
+          6,
+          5
+        ],
+        [
+          2,
+          3,
+          7
+        ],
+        [
+          2,
+          7,
+          6
+        ],
+        [
+          3,
+          0,
+          4
+        ],
+        [
+          3,
+          4,
+          7
+        ]
+      ],
+      "metric_transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -15.229328907
+        ],
+        [
+          0.0,
+          0.9986295347545738,
+          0.052335956242943835,
+          -9.6
+        ],
+        [
+          0.0,
+          -0.052335956242943835,
+          0.9986295347545738,
+          0.256482556
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "scene_vertices": [
+        [
+          6.476755945918778,
+          2.1459356848702607,
+          -0.7280681436851484
+        ],
+        [
+          6.454042734590266,
+          2.141753267025035,
+          -0.7053566183871778
+        ],
+        [
+          5.303251210121311,
+          2.21628515321169,
+          -1.8425082302080436
+        ],
+        [
+          5.3259644214498225,
+          2.2204675710569157,
+          -1.8652197555060142
+        ],
+        [
+          6.552413567097923,
+          0.8625144138042173,
+          -0.8887520449518285
+        ],
+        [
+          6.529700355769411,
+          0.8583319959589915,
+          -0.8660405196538579
+        ],
+        [
+          5.378908831300458,
+          0.9328638821456468,
+          -2.003192131474724
+        ],
+        [
+          5.401622042628968,
+          0.9370462999908726,
+          -2.0259036567726945
+        ]
+      ],
+      "scene_transform": [
+        [
+          -0.45426422657021065,
+          -0.46031660978758204,
+          0.03782881058957281,
+          5.927832388609617
+        ],
+        [
+          -0.0836483569045165,
+          0.02981275447466216,
+          -0.6417106355330217,
+          1.5393997835079536
+        ],
+        [
+          0.45423050595939657,
+          -0.4548606447283465,
+          -0.08034195063334026,
+          -1.3656301375799356
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "metric_bounds": {
+        "min": [
+          -15.254328907,
+          -10.90062287468616,
+          -0.8075669240582537
+        ],
+        "max": [
+          -15.204328906999999,
+          -8.299377125313839,
+          1.3205320360582535
+        ]
+      },
+      "scene_bounds": {
+        "min": [
+          5.303251210121311,
+          0.8583319959589915,
+          -2.0259036567726945
+        ],
+        "max": [
+          6.552413567097923,
+          2.2204675710569157,
+          -0.7053566183871778
+        ]
+      },
+      "bounds": {
+        "min": [
+          -15.254328907,
+          -10.90062287468616,
+          -0.8075669240582537
+        ],
+        "max": [
+          -15.204328906999999,
+          -8.299377125313839,
+          1.3205320360582535
+        ]
+      },
+      "phase2b_validation": {
+        "schema_version": "1.0",
+        "obstacle_id": "Door",
+        "success": false,
+        "checks": {
+          "finite_geometry": true,
+          "nondegenerate_triangles": true,
+          "closed_manifold": true,
+          "positive_signed_volume": true,
+          "room_containment": false,
+          "on_or_above_floor": false,
+          "on_or_below_ceiling": true,
+          "inside_walls": false,
+          "devices_outside_obstacle": true,
+          "required_los_intersection": true
+        },
+        "errors": [
+          "장애물 일부가 Room Envelope 밖에 있습니다.",
+          "장애물 일부가 바닥 아래에 있습니다.",
+          "장애물 일부가 벽을 관통하거나 방 밖에 있습니다."
+        ],
+        "mesh_statistics": {
+          "vertex_count": 8,
+          "triangle_count": 12,
+          "bounds": {
+            "min": [
+              -15.254328907,
+              -10.90062287468616,
+              -0.8075669240582537
+            ],
+            "max": [
+              -15.204328906999999,
+              -8.299377125313839,
+              1.3205320360582535
+            ],
+            "extent": [
+              0.05000000000000071,
+              2.601245749372321,
+              2.1280989601165072
+            ]
+          },
+          "surface_area": 10.450000000000001,
+          "signed_volume": 0.24999999999997394,
+          "absolute_volume": 0.24999999999997394,
+          "degenerate_triangle_count": 0,
+          "boundary_edge_count": 0,
+          "non_manifold_edge_count": 0,
+          "closed_manifold": true,
+          "outward_or_tangent_face_count": 12,
+          "strictly_outward_face_count": 12
+        },
+        "bounds": {
+          "min": [
+            -15.254328907,
+            -10.90062287468616,
+            -0.8075669240582537
+          ],
+          "max": [
+            -15.204328906999999,
+            -8.299377125313839,
+            1.3205320360582535
+          ]
+        },
+        "containment": {
+          "fully_inside": false,
+          "outside_vertex_indices": [
+            0,
+            1,
+            2,
+            3,
+            7
+          ],
+          "floor_failure_vertex_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "ceiling_failure_vertex_indices": [],
+          "wall_failure_vertex_indices": [
+            7
+          ],
+          "minimum_floor_clearance_m": -1.2415024890695614,
+          "minimum_ceiling_clearance_m": 1.6376368075128585,
+          "minimum_wall_clearance_m": -0.015504638271536919,
+          "vertex_inspections": [
+            {
+              "position_m": [
+                -15.254328907,
+                -10.90062287468616,
+                -0.6767270334508941
+              ],
+              "inside_room": false,
+              "safe_with_clearance": false,
+              "floor_z_m": 0.5090686750050868,
+              "ceiling_z_m": 2.998057095706525,
+              "floor_clearance_m": -1.185795708455981,
+              "ceiling_clearance_m": 3.6747841291574193,
+              "minimum_wall_clearance_m": 0.08505022962247466,
+              "oriented_plane_distances_m": [
+                -1.185175727988797,
+                3.666666600422062,
+                9.958602317092788,
+                0.1063907722019497,
+                0.08505022962247466,
+                15.195616197532757
+              ]
+            },
+            {
+              "position_m": [
+                -15.204328906999999,
+                -10.90062287468616,
+                -0.6767270334508941
+              ],
+              "inside_room": false,
+              "safe_with_clearance": false,
+              "floor_z_m": 0.5084753351805493,
+              "ceiling_z_m": 2.997431749231391,
+              "floor_clearance_m": -1.1852023686314435,
+              "ceiling_clearance_m": 3.674158782682285,
+              "minimum_wall_clearance_m": 0.08501652190575015,
+              "oriented_plane_distances_m": [
+                -1.1845826983855723,
+                3.6660426353254802,
+                9.961326731325482,
+                0.15634298181009498,
+                0.08501652190575015,
+                15.145770654237985
+              ]
+            },
+            {
+              "position_m": [
+                -15.204328906999999,
+                -8.404049037799727,
+                -0.8075669240582537
+              ],
+              "inside_room": false,
+              "safe_with_clearance": false,
+              "floor_z_m": 0.4333422251867701,
+              "ceiling_z_m": 2.834173744544412,
+              "floor_clearance_m": -1.2409091492450237,
+              "ceiling_clearance_m": 3.641740668602666,
+              "minimum_wall_clearance_m": 0.11555183079008557,
+              "oriented_plane_distances_m": [
+                -1.240260353311124,
+                3.6336961322475796,
+                7.466268927325267,
+                0.11555183079008557,
+                2.5849908560480124,
+                15.12600199846702
+              ]
+            },
+            {
+              "position_m": [
+                -15.254328907,
+                -8.404049037799727,
+                -0.8075669240582537
+              ],
+              "inside_room": false,
+              "safe_with_clearance": false,
+              "floor_z_m": 0.4339355650113076,
+              "ceiling_z_m": 2.8347990910195464,
+              "floor_clearance_m": -1.2415024890695614,
+              "ceiling_clearance_m": 3.6423660150778003,
+              "minimum_wall_clearance_m": 0.06559962118194029,
+              "oriented_plane_distances_m": [
+                -1.2408533829143487,
+                3.634320097344161,
+                7.463544513092574,
+                0.06559962118194029,
+                2.5850245637647387,
+                15.175847541761792
+              ]
+            },
+            {
+              "position_m": [
+                -15.254328907,
+                -10.795950962200273,
+                1.3205320360582535
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.5059186274487649,
+              "ceiling_z_m": 2.9912123041258654,
+              "floor_clearance_m": 0.8146134086094886,
+              "ceiling_clearance_m": 1.6706802680676118,
+              "minimum_wall_clearance_m": 0.02528651274847249,
+              "oriented_plane_distances_m": [
+                0.8141874967951327,
+                1.6669897669097267,
+                10.021240183822153,
+                0.02528651274847249,
+                0.07608851176819442,
+                15.351900521755107
+              ]
+            },
+            {
+              "position_m": [
+                -15.204328906999999,
+                -10.795950962200273,
+                1.3205320360582535
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.5053252876242273,
+              "ceiling_z_m": 2.990586957650731,
+              "floor_clearance_m": 0.8152067484340262,
+              "ceiling_clearance_m": 1.6700549215924776,
+              "minimum_wall_clearance_m": 0.07523872235661777,
+              "oriented_plane_distances_m": [
+                0.8147805263983572,
+                1.666365801813145,
+                10.023964598054846,
+                0.07523872235661777,
+                0.07605480405146992,
+                15.302054978460335
+              ]
+            },
+            {
+              "position_m": [
+                -15.204328906999999,
+                -8.299377125313839,
+                1.189692145450894
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.43019217763044815,
+              "ceiling_z_m": 2.8273289529637524,
+              "floor_clearance_m": 0.7594999678204458,
+              "ceiling_clearance_m": 1.6376368075128585,
+              "minimum_wall_clearance_m": 0.03444757133660836,
+              "oriented_plane_distances_m": [
+                0.7591028714728054,
+                1.634019298735244,
+                7.528906794054631,
+                0.03444757133660836,
+                2.5760291381937304,
+                15.28228632268937
+              ]
+            },
+            {
+              "position_m": [
+                -15.254328907,
+                -8.299377125313839,
+                1.189692145450894
+              ],
+              "inside_room": false,
+              "safe_with_clearance": false,
+              "floor_z_m": 0.4307855174549856,
+              "ceiling_z_m": 2.827954299438886,
+              "floor_clearance_m": 0.7589066279959084,
+              "ceiling_clearance_m": 1.6382621539879922,
+              "minimum_wall_clearance_m": -0.015504638271536919,
+              "oriented_plane_distances_m": [
+                0.7585098418695809,
+                1.6346432638318258,
+                7.526182379821939,
+                -0.015504638271536919,
+                2.5760628459104566,
+                15.332131865984142
+              ]
+            }
+          ]
+        },
+        "los": {
+          "required": false,
+          "any_intersection": false,
+          "segments": [
+            {
+              "name": "rx_los",
+              "start_m": [
+                -7.0,
+                -5.0,
+                1.5
+              ],
+              "end_m": [
+                -3.0,
+                -5.0,
+                1.5
+              ],
+              "length_m": 4.0,
+              "aabb_intersection": false,
+              "mesh_intersection": false,
+              "intersection_count": 0,
+              "intersections": [],
+              "start_inside_obstacle": false,
+              "end_inside_obstacle": false
+            },
+            {
+              "name": "rx_reflection",
+              "start_m": [
+                -7.0,
+                -5.0,
+                1.5
+              ],
+              "end_m": [
+                -10.0,
+                -8.0,
+                1.5
+              ],
+              "length_m": 4.242640687119285,
+              "aabb_intersection": false,
+              "mesh_intersection": false,
+              "intersection_count": 0,
+              "intersections": [],
+              "start_inside_obstacle": false,
+              "end_inside_obstacle": false
+            }
+          ]
+        }
+      },
+      "material": {
+        "obstacle_id": "Door",
+        "object_name": "Door",
+        "category": "metal",
+        "actual_sionna_material_name": "itu_metal_Door",
+        "itu_type": "metal",
+        "thickness_m": 0.1,
+        "scattering_coefficient": 0.0,
+        "source": "sionna_preset",
+        "availability_verified_against_installed_sionna": false,
+        "fallback_used": false,
+        "warning": null
+      },
+      "coordinate_round_trip": {
+        "metric_to_scene_to_metric_vertex_max_error_m": 4.027524346742929e-15,
+        "metric_to_scene_to_metric_transform_max_error": 3.552713678800501e-15,
+        "maximum_error": 4.027524346742929e-15,
+        "success": true,
+        "metric_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            -15.229328907
+          ],
+          [
+            0.0,
+            0.9986295347545738,
+            0.052335956242943835,
+            -9.6
+          ],
+          [
+            0.0,
+            -0.052335956242943835,
+            0.9986295347545738,
+            0.256482556
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "scene_transform": [
+          [
+            -0.45426422657021065,
+            -0.46031660978758204,
+            0.03782881058957281,
+            5.927832388609617
+          ],
+          [
+            -0.0836483569045165,
+            0.02981275447466216,
+            -0.6417106355330217,
+            1.5393997835079536
+          ],
+          [
+            0.45423050595939657,
+            -0.4548606447283465,
+            -0.08034195063334026,
+            -1.3656301375799356
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "object_kind": "obstacle"
     },
     {
-      "id": "large_metal_object_example",
+      "id": "Left_Desk02",
       "enabled": false,
-      "renderable": false,
-      "status": "DISABLED_INCOMPLETE",
+      "renderable": true,
+      "status": "DISABLED_INVALID",
       "errors": [
-        "활성 box에는 size_m이 필요합니다."
+        "장애물 일부가 Room Envelope 밖에 있습니다.",
+        "장애물 일부가 바닥 아래에 있습니다."
       ],
       "warnings": [],
       "collision_warnings": [],
       "source": {
-        "id": "large_metal_object_example",
+        "id": "Left_Desk02",
+        "display_name": "Desk Cluster",
         "enabled": false,
-        "semantic_class": "large_equipment",
+        "semantic_class": "desk_cluster",
         "purpose": "classroom_proxy",
         "physical_object": true,
         "confidence": "unset",
+        "measurement_source": "unset",
+        "notes": "UI convenience placeholder; not an on-site measurement.",
+        "placement_status": "provisional_unconfirmed",
         "geometry": {
           "type": "box",
           "anchor": {
-            "mode": "floor_at_xy"
+            "mode": "center"
           },
-          "position_m": null,
-          "size_m": null,
-          "rotation_deg": null
+          "position_m": {
+            "x": -12.268919562,
+            "y": -7.046407593,
+            "z": 0.58482818
+          },
+          "size_m": {
+            "x": 3.2,
+            "y": 0.599393096,
+            "z": 0.369149524
+          },
+          "rotation_deg": {
+            "roll": 0.0,
+            "pitch": 3.305314919,
+            "yaw": 29.895995034
+          }
         },
         "material": {
           "source": "sionna_preset",
-          "category": "metal"
+          "category": "wood",
+          "preset": "wood",
+          "thickness_m": 0.1,
+          "scattering_coefficient": 0.0
+        },
+        "export": {
+          "object_name": "Left_Desk02",
+          "group_name": "desk_cluster"
         }
-      }
+      },
+      "geometry_type": "box",
+      "metric_vertices": [
+        [
+          -13.513551601499875,
+          -8.107685032350433,
+          0.4928110803573838
+        ],
+        [
+          -10.74398543668581,
+          -6.515371447265637,
+          0.30830984602138334
+        ],
+        [
+          -11.042739224812854,
+          -5.995738636896424,
+          0.30830984602138334
+        ],
+        [
+          -13.81230538962692,
+          -7.588052221981221,
+          0.4928110803573838
+        ],
+        [
+          -13.495099899187148,
+          -8.097076549103575,
+          0.8613465139786167
+        ],
+        [
+          -10.725533734373082,
+          -6.504762964018778,
+          0.6768452796426163
+        ],
+        [
+          -11.024287522500126,
+          -5.985130153649565,
+          0.6768452796426163
+        ],
+        [
+          -13.793853687314192,
+          -7.577443738734362,
+          0.8613465139786167
+        ]
+      ],
+      "faces": [
+        [
+          0,
+          2,
+          1
+        ],
+        [
+          0,
+          3,
+          2
+        ],
+        [
+          4,
+          5,
+          6
+        ],
+        [
+          4,
+          6,
+          7
+        ],
+        [
+          0,
+          1,
+          5
+        ],
+        [
+          0,
+          5,
+          4
+        ],
+        [
+          1,
+          2,
+          6
+        ],
+        [
+          1,
+          6,
+          5
+        ],
+        [
+          2,
+          3,
+          7
+        ],
+        [
+          2,
+          7,
+          6
+        ],
+        [
+          3,
+          0,
+          4
+        ],
+        [
+          3,
+          4,
+          7
+        ]
+      ],
+      "metric_transform": [
+        [
+          0.8654894265043956,
+          -0.49842714258931614,
+          0.049984358946993886,
+          -12.268919562
+        ],
+        [
+          0.497597995338999,
+          0.8669315910325621,
+          0.028737632198217036,
+          -7.046407593
+        ],
+        [
+          -0.057656635730000134,
+          0.0,
+          0.9983364725163045,
+          0.58482818
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "scene_vertices": [
+        [
+          4.479995882138527,
+          1.2383727387164498,
+          -1.2837468112930377
+        ],
+        [
+          2.481654903730072,
+          1.1191541766556536,
+          -0.745298152175778
+        ],
+        [
+          2.3795290305630674,
+          1.1421632659565397,
+          -1.1192227657028446
+        ],
+        [
+          4.377870008971523,
+          1.2613818280173357,
+          -1.6576714248201034
+        ],
+        [
+          4.489558946660686,
+          1.000044817936614,
+          -1.3010239428133674
+        ],
+        [
+          2.491217968252231,
+          0.8808262558758178,
+          -0.7625752836961082
+        ],
+        [
+          2.3890920950852275,
+          0.9038353451767038,
+          -1.1364998972231743
+        ],
+        [
+          4.387433073493681,
+          1.0230539072375,
+          -1.6749485563404336
+        ]
+      ],
+      "scene_transform": [
+        [
+          -0.624481555752642,
+          -0.17038213127333732,
+          0.025905666675491427,
+          3.4345439886118774
+        ],
+        [
+          -0.0372558006439988,
+          0.03838731118932679,
+          -0.6456135123713063,
+          1.071104041946577
+        ],
+        [
+          0.1682652059741437,
+          -0.6238387062220455,
+          -0.0468025295905032,
+          -1.210123354258106
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "metric_bounds": {
+        "min": [
+          -13.81230538962692,
+          -8.107685032350433,
+          0.30830984602138334
+        ],
+        "max": [
+          -10.725533734373082,
+          -5.985130153649565,
+          0.8613465139786167
+        ]
+      },
+      "scene_bounds": {
+        "min": [
+          2.3795290305630674,
+          0.8808262558758178,
+          -1.6749485563404336
+        ],
+        "max": [
+          4.489558946660686,
+          1.2613818280173357,
+          -0.745298152175778
+        ]
+      },
+      "bounds": {
+        "min": [
+          -13.81230538962692,
+          -8.107685032350433,
+          0.30830984602138334
+        ],
+        "max": [
+          -10.725533734373082,
+          -5.985130153649565,
+          0.8613465139786167
+        ]
+      },
+      "phase2b_validation": {
+        "schema_version": "1.0",
+        "obstacle_id": "Left_Desk02",
+        "success": false,
+        "checks": {
+          "finite_geometry": true,
+          "nondegenerate_triangles": true,
+          "closed_manifold": true,
+          "positive_signed_volume": true,
+          "room_containment": false,
+          "on_or_above_floor": false,
+          "on_or_below_ceiling": true,
+          "inside_walls": true,
+          "devices_outside_obstacle": true,
+          "required_los_intersection": true
+        },
+        "errors": [
+          "장애물 일부가 Room Envelope 밖에 있습니다.",
+          "장애물 일부가 바닥 아래에 있습니다."
+        ],
+        "mesh_statistics": {
+          "vertex_count": 8,
+          "triangle_count": 12,
+          "bounds": {
+            "min": [
+              -13.81230538962692,
+              -8.107685032350433,
+              0.30830984602138334
+            ],
+            "max": [
+              -10.725533734373082,
+              -5.985130153649565,
+              0.8613465139786167
+            ],
+            "extent": [
+              3.0867716552538376,
+              2.1225548787008686,
+              0.5530366679572334
+            ]
+          },
+          "surface_area": 6.641204120154571,
+          "signed_volume": 0.7080501634473126,
+          "absolute_volume": 0.7080501634473126,
+          "degenerate_triangle_count": 0,
+          "boundary_edge_count": 0,
+          "non_manifold_edge_count": 0,
+          "closed_manifold": true,
+          "outward_or_tangent_face_count": 12,
+          "strictly_outward_face_count": 12
+        },
+        "bounds": {
+          "min": [
+            -13.81230538962692,
+            -8.107685032350433,
+            0.30830984602138334
+          ],
+          "max": [
+            -10.725533734373082,
+            -5.985130153649565,
+            0.8613465139786167
+          ]
+        },
+        "containment": {
+          "fully_inside": false,
+          "outside_vertex_indices": [
+            1,
+            2
+          ],
+          "floor_failure_vertex_indices": [
+            1,
+            2
+          ],
+          "ceiling_failure_vertex_indices": [],
+          "wall_failure_vertex_indices": [],
+          "minimum_floor_clearance_m": -0.015263606885252912,
+          "minimum_ceiling_clearance_m": 1.9011324645127377,
+          "minimum_wall_clearance_m": 1.4396667028406984,
+          "vertex_inspections": [
+            {
+              "position_m": [
+                -13.513551601499875,
+                -8.107685032350433,
+                0.4928110803573838
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.40435919214959354,
+              "ceiling_z_m": 2.7936472337798777,
+              "floor_clearance_m": 0.08845188820779026,
+              "ceiling_clearance_m": 2.3008361534224937,
+              "minimum_wall_clearance_m": 1.7477047229837428,
+              "oriented_plane_distances_m": [
+                0.0884056420942453,
+                2.295753649815666,
+                7.372102103092256,
+                1.7477047229837428,
+                2.805861668744683,
+                13.541332723086791
+              ]
+            },
+            {
+              "position_m": [
+                -10.74398543668581,
+                -6.515371447265637,
+                0.30830984602138334
+              ],
+              "inside_room": false,
+              "safe_with_clearance": false,
+              "floor_z_m": 0.32357345290663625,
+              "ceiling_z_m": 2.6548825886140173,
+              "floor_clearance_m": -0.015263606885252912,
+              "ceiling_clearance_m": 2.3465727425926337,
+              "minimum_wall_clearance_m": 4.4042177304160885,
+              "oriented_plane_distances_m": [
+                -0.015255626473399415,
+                2.34138920772416,
+                5.923225683144235,
+                4.492613088845776,
+                4.4042177304160885,
+                10.759786290833686
+              ]
+            },
+            {
+              "position_m": [
+                -11.042739224812854,
+                -5.995738636896424,
+                0.30830984602138334
+              ],
+              "inside_room": false,
+              "safe_with_clearance": false,
+              "floor_z_m": 0.3114806202226639,
+              "ceiling_z_m": 2.624638826105866,
+              "floor_clearance_m": -0.003170774201280535,
+              "ceiling_clearance_m": 2.3163289800844824,
+              "minimum_wall_clearance_m": 4.184575068702733,
+              "oriented_plane_distances_m": [
+                -0.003169116396266842,
+                2.3112122531161727,
+                5.389904006526963,
+                4.184575068702733,
+                4.923212621712418,
+                11.055638956401626
+              ]
+            },
+            {
+              "position_m": [
+                -13.81230538962692,
+                -7.588052221981221,
+                0.4928110803573838
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.39226635946562116,
+              "ceiling_z_m": 2.763403471271726,
+              "floor_clearance_m": 0.10054472089176264,
+              "ceiling_clearance_m": 2.270592390914342,
+              "minimum_wall_clearance_m": 1.4396667028406984,
+              "oriented_plane_distances_m": [
+                0.10049215217137782,
+                2.2655766952076783,
+                6.838780426474986,
+                1.4396667028406984,
+                3.3248565600410114,
+                13.837185388654733
+              ]
+            },
+            {
+              "position_m": [
+                -13.495099899187148,
+                -8.097076549103575,
+                0.8613465139786167
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.40382097268744005,
+              "ceiling_z_m": 2.7927227409995057,
+              "floor_clearance_m": 0.4575255412911767,
+              "ceiling_clearance_m": 1.931376227020889,
+              "minimum_wall_clearance_m": 1.7513337095824948,
+              "oriented_plane_distances_m": [
+                0.4572863290079684,
+                1.9271098534134625,
+                7.393327734955053,
+                1.7513337095824948,
+                2.7955040291050075,
+                13.55180883939272
+              ]
+            },
+            {
+              "position_m": [
+                -10.725533734373082,
+                -6.504762964018778,
+                0.6768452796426163
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.32303523344448276,
+              "ceiling_z_m": 2.6539580958336457,
+              "floor_clearance_m": 0.35381004619813355,
+              "ceiling_clearance_m": 1.9771128161910294,
+              "minimum_wall_clearance_m": 4.393860090776413,
+              "oriented_plane_distances_m": [
+                0.3536250604403237,
+                1.9727454113219567,
+                5.944451315007031,
+                4.496242075444529,
+                4.393860090776413,
+                10.770262407139613
+              ]
+            },
+            {
+              "position_m": [
+                -11.024287522500126,
+                -5.985130153649565,
+                0.6768452796426163
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.3109424007605104,
+              "ceiling_z_m": 2.623714333325494,
+              "floor_clearance_m": 0.36590287888210593,
+              "ceiling_clearance_m": 1.9468690536828777,
+              "minimum_wall_clearance_m": 4.188204055301483,
+              "oriented_plane_distances_m": [
+                0.36571157051745623,
+                1.9425684567139692,
+                5.41112963838976,
+                4.188204055301483,
+                4.912854982072742,
+                11.066115072707555
+              ]
+            },
+            {
+              "position_m": [
+                -13.793853687314192,
+                -7.577443738734362,
+                0.8613465139786167
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.3917281400034677,
+              "ceiling_z_m": 2.7624789784913544,
+              "floor_clearance_m": 0.46961837397514905,
+              "ceiling_clearance_m": 1.9011324645127377,
+              "minimum_wall_clearance_m": 1.4432956894394486,
+              "oriented_plane_distances_m": [
+                0.4693728390851009,
+                1.896932898805475,
+                6.860006058337782,
+                1.4432956894394486,
+                3.314498920401336,
+                13.84766150496066
+              ]
+            }
+          ]
+        },
+        "los": {
+          "required": false,
+          "any_intersection": false,
+          "segments": [
+            {
+              "name": "rx_los",
+              "start_m": [
+                -7.0,
+                -5.0,
+                1.5
+              ],
+              "end_m": [
+                -3.0,
+                -5.0,
+                1.5
+              ],
+              "length_m": 4.0,
+              "aabb_intersection": false,
+              "mesh_intersection": false,
+              "intersection_count": 0,
+              "intersections": [],
+              "start_inside_obstacle": false,
+              "end_inside_obstacle": false
+            },
+            {
+              "name": "rx_reflection",
+              "start_m": [
+                -7.0,
+                -5.0,
+                1.5
+              ],
+              "end_m": [
+                -10.0,
+                -8.0,
+                1.5
+              ],
+              "length_m": 4.242640687119285,
+              "aabb_intersection": false,
+              "mesh_intersection": false,
+              "intersection_count": 0,
+              "intersections": [],
+              "start_inside_obstacle": false,
+              "end_inside_obstacle": false
+            }
+          ]
+        }
+      },
+      "material": {
+        "obstacle_id": "Left_Desk02",
+        "object_name": "Left_Desk02",
+        "category": "wood",
+        "actual_sionna_material_name": "itu_wood_Left_Desk02",
+        "itu_type": "wood",
+        "thickness_m": 0.1,
+        "scattering_coefficient": 0.0,
+        "source": "sionna_preset",
+        "availability_verified_against_installed_sionna": false,
+        "fallback_used": false,
+        "warning": null
+      },
+      "coordinate_round_trip": {
+        "metric_to_scene_to_metric_vertex_max_error_m": 3.985994439185401e-15,
+        "metric_to_scene_to_metric_transform_max_error": 1.7763568394002505e-15,
+        "maximum_error": 3.985994439185401e-15,
+        "success": true,
+        "metric_transform": [
+          [
+            0.8654894265043956,
+            -0.49842714258931614,
+            0.049984358946993886,
+            -12.268919562
+          ],
+          [
+            0.497597995338999,
+            0.8669315910325621,
+            0.028737632198217036,
+            -7.046407593
+          ],
+          [
+            -0.057656635730000134,
+            0.0,
+            0.9983364725163045,
+            0.58482818
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "scene_transform": [
+          [
+            -0.624481555752642,
+            -0.17038213127333732,
+            0.025905666675491427,
+            3.4345439886118774
+          ],
+          [
+            -0.0372558006439988,
+            0.03838731118932679,
+            -0.6456135123713063,
+            1.071104041946577
+          ],
+          [
+            0.1682652059741437,
+            -0.6238387062220455,
+            -0.0468025295905032,
+            -1.210123354258106
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "object_kind": "obstacle"
+    },
+    {
+      "id": "Left_Desk03",
+      "enabled": false,
+      "renderable": true,
+      "status": "DISABLED_INVALID",
+      "errors": [
+        "장애물 일부가 Room Envelope 밖에 있습니다.",
+        "장애물 일부가 바닥 아래에 있습니다."
+      ],
+      "warnings": [],
+      "collision_warnings": [],
+      "source": {
+        "id": "Left_Desk03",
+        "display_name": "Desk Cluster",
+        "enabled": false,
+        "semantic_class": "desk_cluster",
+        "purpose": "classroom_proxy",
+        "physical_object": true,
+        "confidence": "unset",
+        "measurement_source": "unset",
+        "notes": "UI convenience placeholder; not an on-site measurement.",
+        "placement_status": "provisional_unconfirmed",
+        "geometry": {
+          "type": "box",
+          "anchor": {
+            "mode": "center"
+          },
+          "position_m": {
+            "x": -12.586753004,
+            "y": -5.720199471,
+            "z": 0.562565765
+          },
+          "size_m": {
+            "x": 3.2,
+            "y": 0.599393096,
+            "z": 0.6
+          },
+          "rotation_deg": {
+            "roll": 0.0,
+            "pitch": 3.305314919,
+            "yaw": 29.895995034
+          }
+        },
+        "material": {
+          "source": "sionna_preset",
+          "category": "wood",
+          "preset": "wood",
+          "thickness_m": 0.1,
+          "scattering_coefficient": 0.0
+        },
+        "export": {
+          "object_name": "Left_Desk03",
+          "group_name": "desk_cluster"
+        }
+      },
+      "geometry_type": "box",
+      "metric_vertices": [
+        [
+          -13.837154500027609,
+          -6.78479395838647,
+          0.35531544041310886
+        ],
+        [
+          -11.067588335213543,
+          -5.192480373301673,
+          0.17081420607710845
+        ],
+        [
+          -11.366342123340587,
+          -4.67284756293246,
+          0.17081420607710845
+        ],
+        [
+          -14.135908288154653,
+          -6.265161148017257,
+          0.35531544041310886
+        ],
+        [
+          -13.807163884659413,
+          -6.76755137906754,
+          0.9543173239228915
+        ],
+        [
+          -11.037597719845348,
+          -5.175237793982743,
+          0.7698160895868911
+        ],
+        [
+          -11.336351507972392,
+          -4.65560498361353,
+          0.7698160895868911
+        ],
+        [
+          -14.105917672786457,
+          -6.247918568698327,
+          0.9543173239228915
+        ]
+      ],
+      "faces": [
+        [
+          0,
+          2,
+          1
+        ],
+        [
+          0,
+          3,
+          2
+        ],
+        [
+          4,
+          5,
+          6
+        ],
+        [
+          4,
+          6,
+          7
+        ],
+        [
+          0,
+          1,
+          5
+        ],
+        [
+          0,
+          5,
+          4
+        ],
+        [
+          1,
+          2,
+          6
+        ],
+        [
+          1,
+          6,
+          5
+        ],
+        [
+          2,
+          3,
+          7
+        ],
+        [
+          2,
+          7,
+          6
+        ],
+        [
+          3,
+          0,
+          4
+        ],
+        [
+          3,
+          4,
+          7
+        ]
+      ],
+      "metric_transform": [
+        [
+          0.8654894265043956,
+          -0.49842714258931614,
+          0.049984358946993886,
+          -12.586753004
+        ],
+        [
+          0.497597995338999,
+          0.8669315910325621,
+          0.028737632198217036,
+          -5.720199471
+        ],
+        [
+          -0.057656635730000134,
+          0.0,
+          0.9983364725163045,
+          0.562565765
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "scene_vertices": [
+        [
+          4.012995389418255,
+          1.3487239051849451,
+          -2.02944764410944
+        ],
+        [
+          2.0146544110098006,
+          1.229505343124149,
+          -1.4909989849921812
+        ],
+        [
+          1.912528537842797,
+          1.252514432425035,
+          -1.8649235985192474
+        ],
+        [
+          3.9108695162512506,
+          1.3717329944858312,
+          -2.403372257636507
+        ],
+        [
+          4.028538789423551,
+          0.9613557977621616,
+          -2.0575291618637426
+        ],
+        [
+          2.030197811015096,
+          0.8421372357013652,
+          -1.5190805027464835
+        ],
+        [
+          1.9280719378480926,
+          0.8651463250022513,
+          -1.8930051162735497
+        ],
+        [
+          3.926412916256548,
+          0.9843648870630477,
+          -2.4314537753908088
+        ]
+      ],
+      "scene_transform": [
+        [
+          -0.624481555752642,
+          -0.17038213127333732,
+          0.025905666675491427,
+          2.970533663633174
+        ],
+        [
+          -0.0372558006439988,
+          0.03838731118932679,
+          -0.6456135123713063,
+          1.1069351150935982
+        ],
+        [
+          0.1682652059741437,
+          -0.6238387062220455,
+          -0.0468025295905032,
+          -1.9612263801914953
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "metric_bounds": {
+        "min": [
+          -14.135908288154653,
+          -6.78479395838647,
+          0.17081420607710845
+        ],
+        "max": [
+          -11.037597719845348,
+          -4.65560498361353,
+          0.9543173239228915
+        ]
+      },
+      "scene_bounds": {
+        "min": [
+          1.912528537842797,
+          0.8421372357013652,
+          -2.4314537753908088
+        ],
+        "max": [
+          4.028538789423551,
+          1.3717329944858312,
+          -1.4909989849921812
+        ]
+      },
+      "bounds": {
+        "min": [
+          -14.135908288154653,
+          -6.78479395838647,
+          0.17081420607710845
+        ],
+        "max": [
+          -11.037597719845348,
+          -4.65560498361353,
+          0.9543173239228915
+        ]
+      },
+      "phase2b_validation": {
+        "schema_version": "1.0",
+        "obstacle_id": "Left_Desk03",
+        "success": false,
+        "checks": {
+          "finite_geometry": true,
+          "nondegenerate_triangles": true,
+          "closed_manifold": true,
+          "positive_signed_volume": true,
+          "room_containment": false,
+          "on_or_above_floor": false,
+          "on_or_below_ceiling": true,
+          "inside_walls": true,
+          "devices_outside_obstacle": true,
+          "required_los_intersection": true
+        },
+        "errors": [
+          "장애물 일부가 Room Envelope 밖에 있습니다.",
+          "장애물 일부가 바닥 아래에 있습니다."
+        ],
+        "mesh_statistics": {
+          "vertex_count": 8,
+          "triangle_count": 12,
+          "bounds": {
+            "min": [
+              -14.135908288154653,
+              -6.78479395838647,
+              0.17081420607710845
+            ],
+            "max": [
+              -11.037597719845348,
+              -4.65560498361353,
+              0.9543173239228915
+            ],
+            "extent": [
+              3.098310568309305,
+              2.1291889747729407,
+              0.783503117845783
+            ]
+          },
+          "surface_area": 8.3953875296,
+          "signed_volume": 1.150834744319998,
+          "absolute_volume": 1.150834744319998,
+          "degenerate_triangle_count": 0,
+          "boundary_edge_count": 0,
+          "non_manifold_edge_count": 0,
+          "closed_manifold": true,
+          "outward_or_tangent_face_count": 12,
+          "strictly_outward_face_count": 12
+        },
+        "bounds": {
+          "min": [
+            -14.135908288154653,
+            -6.78479395838647,
+            0.17081420607710845
+          ],
+          "max": [
+            -11.037597719845348,
+            -4.65560498361353,
+            0.9543173239228915
+          ]
+        },
+        "containment": {
+          "fully_inside": false,
+          "outside_vertex_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "floor_failure_vertex_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "ceiling_failure_vertex_indices": [],
+          "wall_failure_vertex_indices": [],
+          "minimum_floor_clearance_m": -0.11678764775149753,
+          "minimum_ceiling_clearance_m": 1.7251232160905026,
+          "minimum_wall_clearance_m": 1.0974608576509528,
+          "vertex_inspections": [
+            {
+              "position_m": [
+                -13.837154500027609,
+                -6.78479395838647,
+                0.35531544041310886
+              ],
+              "inside_room": false,
+              "safe_with_clearance": false,
+              "floor_z_m": 0.36838759307156327,
+              "ceiling_z_m": 2.711186933927412,
+              "floor_clearance_m": -0.013072152658454406,
+              "ceiling_clearance_m": 2.3558714935143032,
+              "minimum_wall_clearance_m": 1.4054988777939972,
+              "oriented_plane_distances_m": [
+                -0.01306531802475267,
+                2.3506674178806697,
+                6.02668935289171,
+                1.4054988777939972,
+                4.134645277033109,
+                13.848113364318628
+              ]
+            },
+            {
+              "position_m": [
+                -11.067588335213543,
+                -5.192480373301673,
+                0.17081420607710845
+              ],
+              "inside_room": false,
+              "safe_with_clearance": false,
+              "floor_z_m": 0.287601853828606,
+              "ceiling_z_m": 2.5724222887615515,
+              "floor_clearance_m": -0.11678764775149753,
+              "ceiling_clearance_m": 2.4016080826844433,
+              "minimum_wall_clearance_m": 4.15040724365603,
+              "oriented_plane_distances_m": [
+                -0.11672658659239732,
+                2.3963029757891636,
+                4.577812932943687,
+                4.15040724365603,
+                5.733001338704517,
+                11.066566932065522
+              ]
+            },
+            {
+              "position_m": [
+                -11.366342123340587,
+                -4.67284756293246,
+                0.17081420607710845
+              ],
+              "inside_room": false,
+              "safe_with_clearance": false,
+              "floor_z_m": 0.27550902114463355,
+              "ceiling_z_m": 2.5421785262534002,
+              "floor_clearance_m": -0.1046948150675251,
+              "ceiling_clearance_m": 2.371364320176292,
+              "minimum_wall_clearance_m": 3.8423692235129856,
+              "oriented_plane_distances_m": [
+                -0.10464007651526475,
+                2.366126021181176,
+                4.044491256326416,
+                3.8423692235129856,
+                6.251996230000845,
+                11.362419597633464
+              ]
+            },
+            {
+              "position_m": [
+                -14.135908288154653,
+                -6.265161148017257,
+                0.35531544041310886
+              ],
+              "inside_room": false,
+              "safe_with_clearance": false,
+              "floor_z_m": 0.3562947603875908,
+              "ceiling_z_m": 2.68094317141926,
+              "floor_clearance_m": -0.000979319974481918,
+              "ceiling_clearance_m": 2.3256277310061515,
+              "minimum_wall_clearance_m": 1.0974608576509528,
+              "oriented_plane_distances_m": [
+                -0.0009788079476201529,
+                2.320490463272682,
+                5.493367676274438,
+                1.0974608576509528,
+                4.653640168329439,
+                14.14396602988657
+              ]
+            },
+            {
+              "position_m": [
+                -13.807163884659413,
+                -6.76755137906754,
+                0.9543173239228915
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.36751279395549535,
+              "ceiling_z_m": 2.709684302521546,
+              "floor_clearance_m": 0.5868045299673961,
+              "ceiling_clearance_m": 1.7553669785986543,
+              "minimum_wall_clearance_m": 1.4113972788962315,
+              "oriented_plane_distances_m": [
+                0.5864977255625222,
+                1.7514894060966912,
+                6.061188595853426,
+                1.4113972788962315,
+                4.117810408288147,
+                13.865140800018523
+              ]
+            },
+            {
+              "position_m": [
+                -11.037597719845348,
+                -5.175237793982743,
+                0.7698160895868911
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.28672705471253807,
+              "ceiling_z_m": 2.570919657355686,
+              "floor_clearance_m": 0.483089034874353,
+              "ceiling_clearance_m": 1.8011035677687948,
+              "minimum_wall_clearance_m": 4.156305644758266,
+              "oriented_plane_distances_m": [
+                0.48283645699487754,
+                1.7971249640051852,
+                4.612312175905403,
+                4.156305644758266,
+                5.716166469959553,
+                11.083594367765414
+              ]
+            },
+            {
+              "position_m": [
+                -11.336351507972392,
+                -4.65560498361353,
+                0.7698160895868911
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.2746342220285657,
+              "ceiling_z_m": 2.540675894847534,
+              "floor_clearance_m": 0.4951818675583254,
+              "ceiling_clearance_m": 1.770859805260643,
+              "minimum_wall_clearance_m": 3.84826762461522,
+              "oriented_plane_distances_m": [
+                0.4949229670720101,
+                1.7669480093971976,
+                4.078990499288132,
+                3.84826762461522,
+                6.235161361255883,
+                11.379447033333358
+              ]
+            },
+            {
+              "position_m": [
+                -14.105917672786457,
+                -6.247918568698327,
+                0.9543173239228915
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.3554199612715229,
+              "ceiling_z_m": 2.679440540013394,
+              "floor_clearance_m": 0.5988973626513685,
+              "ceiling_clearance_m": 1.7251232160905026,
+              "minimum_wall_clearance_m": 1.1033592587531889,
+              "oriented_plane_distances_m": [
+                0.5985842356396548,
+                1.7213124514887035,
+                5.527866919236154,
+                1.1033592587531889,
+                4.636805299584475,
+                14.160993465586465
+              ]
+            }
+          ]
+        },
+        "los": {
+          "required": false,
+          "any_intersection": false,
+          "segments": [
+            {
+              "name": "rx_los",
+              "start_m": [
+                -7.0,
+                -5.0,
+                1.5
+              ],
+              "end_m": [
+                -3.0,
+                -5.0,
+                1.5
+              ],
+              "length_m": 4.0,
+              "aabb_intersection": false,
+              "mesh_intersection": false,
+              "intersection_count": 0,
+              "intersections": [],
+              "start_inside_obstacle": false,
+              "end_inside_obstacle": false
+            },
+            {
+              "name": "rx_reflection",
+              "start_m": [
+                -7.0,
+                -5.0,
+                1.5
+              ],
+              "end_m": [
+                -10.0,
+                -8.0,
+                1.5
+              ],
+              "length_m": 4.242640687119285,
+              "aabb_intersection": false,
+              "mesh_intersection": false,
+              "intersection_count": 0,
+              "intersections": [],
+              "start_inside_obstacle": false,
+              "end_inside_obstacle": false
+            }
+          ]
+        }
+      },
+      "material": {
+        "obstacle_id": "Left_Desk03",
+        "object_name": "Left_Desk03",
+        "category": "wood",
+        "actual_sionna_material_name": "itu_wood_Left_Desk03",
+        "itu_type": "wood",
+        "thickness_m": 0.1,
+        "scattering_coefficient": 0.0,
+        "source": "sionna_preset",
+        "availability_verified_against_installed_sionna": false,
+        "fallback_used": false,
+        "warning": null
+      },
+      "coordinate_round_trip": {
+        "metric_to_scene_to_metric_vertex_max_error_m": 4.47545209131181e-15,
+        "metric_to_scene_to_metric_transform_max_error": 1.7763568394002505e-15,
+        "maximum_error": 4.47545209131181e-15,
+        "success": true,
+        "metric_transform": [
+          [
+            0.8654894265043956,
+            -0.49842714258931614,
+            0.049984358946993886,
+            -12.586753004
+          ],
+          [
+            0.497597995338999,
+            0.8669315910325621,
+            0.028737632198217036,
+            -5.720199471
+          ],
+          [
+            -0.057656635730000134,
+            0.0,
+            0.9983364725163045,
+            0.562565765
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "scene_transform": [
+          [
+            -0.624481555752642,
+            -0.17038213127333732,
+            0.025905666675491427,
+            2.970533663633174
+          ],
+          [
+            -0.0372558006439988,
+            0.03838731118932679,
+            -0.6456135123713063,
+            1.1069351150935982
+          ],
+          [
+            0.1682652059741437,
+            -0.6238387062220455,
+            -0.0468025295905032,
+            -1.9612263801914953
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "object_kind": "obstacle"
+    },
+    {
+      "id": "Left_Desk05",
+      "enabled": false,
+      "renderable": true,
+      "status": "DISABLED",
+      "errors": [],
+      "warnings": [],
+      "collision_warnings": [],
+      "source": {
+        "id": "Left_Desk05",
+        "display_name": "Desk Cluster",
+        "enabled": false,
+        "semantic_class": "desk_cluster",
+        "purpose": "classroom_proxy",
+        "physical_object": true,
+        "confidence": "unset",
+        "measurement_source": "unset",
+        "notes": "UI convenience placeholder; not an on-site measurement.",
+        "placement_status": "provisional_unconfirmed",
+        "geometry": {
+          "type": "box",
+          "anchor": {
+            "mode": "center"
+          },
+          "position_m": {
+            "x": -12.900929596,
+            "y": -3.1762339,
+            "z": 0.705399742
+          },
+          "size_m": {
+            "x": 2.4,
+            "y": 0.6,
+            "z": 0.6
+          },
+          "rotation_deg": {
+            "roll": 0.145709189,
+            "pitch": 3.302105247,
+            "yaw": 32.424001009
+          }
+        },
+        "material": {
+          "source": "sionna_preset",
+          "category": "wood",
+          "preset": "wood",
+          "thickness_m": 0.1,
+          "scattering_coefficient": 0.0
+        },
+        "export": {
+          "object_name": "Left_Desk05",
+          "group_name": "desk_cluster"
+        }
+      },
+      "geometry_type": "box",
+      "metric_vertices": [
+        [
+          -13.766350705509026,
+          -4.080457209031132,
+          0.4742579876133165
+        ],
+        [
+          -11.743866070558406,
+          -2.795760695061555,
+          0.33601628484938584
+        ],
+        [
+          -12.065499101863308,
+          -2.289253170294805,
+          0.3375396128773097
+        ],
+        [
+          -14.087983736813928,
+          -3.5739496842643823,
+          0.4757813156412404
+        ],
+        [
+          -13.73636009013669,
+          -4.063214629705195,
+          1.0732598711226902
+        ],
+        [
+          -11.71387545518607,
+          -2.778518115735618,
+          0.9350181683587596
+        ],
+        [
+          -12.035508486490972,
+          -2.272010590968868,
+          0.9365414963866835
+        ],
+        [
+          -14.057993121441593,
+          -3.5567071049384453,
+          1.0747831991506143
+        ]
+      ],
+      "faces": [
+        [
+          0,
+          2,
+          1
+        ],
+        [
+          0,
+          3,
+          2
+        ],
+        [
+          4,
+          5,
+          6
+        ],
+        [
+          4,
+          6,
+          7
+        ],
+        [
+          0,
+          1,
+          5
+        ],
+        [
+          0,
+          5,
+          4
+        ],
+        [
+          1,
+          2,
+          6
+        ],
+        [
+          1,
+          6,
+          5
+        ],
+        [
+          2,
+          3,
+          7
+        ],
+        [
+          2,
+          7,
+          6
+        ],
+        [
+          3,
+          0,
+          4
+        ],
+        [
+          3,
+          4,
+          7
+        ]
+      ],
+      "metric_transform": [
+        [
+          0.8427019312294252,
+          -0.5360550521748354,
+          0.04998435895389253,
+          -12.900929596
+        ],
+        [
+          0.5352902141539906,
+          0.8441792079445831,
+          0.028737632209894795,
+          -3.1762339
+        ],
+        [
+          -0.05760070948497111,
+          0.002538880046539791,
+          0.9983364725156231,
+          0.705399742
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "scene_vertices": [
+        [
+          2.7503994709626847,
+          1.2560829365558028,
+          -3.243779560642178
+        ],
+        [
+          1.235091059462607,
+          1.1708126222948498,
+          -2.906263776291791
+        ],
+        [
+          1.1494601747587048,
+          1.194806991783112,
+          -3.2846496129573666
+        ],
+        [
+          2.6647685862587815,
+          1.280077306044065,
+          -3.6221653973077528
+        ],
+        [
+          2.765942870962866,
+          0.868714829132909,
+          -3.271861078397788
+        ],
+        [
+          1.2506344594627894,
+          0.7834445148719557,
+          -2.934345294047402
+        ],
+        [
+          1.1650035747588863,
+          0.8074388843602178,
+          -3.3127311307129785
+        ],
+        [
+          2.680311986258965,
+          0.892709198621171,
+          -3.650246915063363
+        ]
+      ],
+      "scene_transform": [
+        [
+          -0.631378504791699,
+          -0.14271814117317008,
+          0.02590566666697048,
+          1.957701522860785
+        ],
+        [
+          -0.035529297608730456,
+          0.03999061581377031,
+          -0.6456135123714901,
+          1.0317609104580105
+        ],
+        [
+          0.14063157681266078,
+          -0.630643061109291,
+          -0.04680252959268475,
+          -3.278255345677577
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "metric_bounds": {
+        "min": [
+          -14.087983736813928,
+          -4.080457209031132,
+          0.33601628484938584
+        ],
+        "max": [
+          -11.71387545518607,
+          -2.272010590968868,
+          1.0747831991506143
+        ]
+      },
+      "scene_bounds": {
+        "min": [
+          1.1494601747587048,
+          0.7834445148719557,
+          -3.650246915063363
+        ],
+        "max": [
+          2.765942870962866,
+          1.280077306044065,
+          -2.906263776291791
+        ]
+      },
+      "bounds": {
+        "min": [
+          -14.087983736813928,
+          -4.080457209031132,
+          0.33601628484938584
+        ],
+        "max": [
+          -11.71387545518607,
+          -2.272010590968868,
+          1.0747831991506143
+        ]
+      },
+      "phase2b_validation": {
+        "schema_version": "1.0",
+        "obstacle_id": "Left_Desk05",
+        "success": true,
+        "checks": {
+          "finite_geometry": true,
+          "nondegenerate_triangles": true,
+          "closed_manifold": true,
+          "positive_signed_volume": true,
+          "room_containment": true,
+          "on_or_above_floor": true,
+          "on_or_below_ceiling": true,
+          "inside_walls": true,
+          "devices_outside_obstacle": true,
+          "required_los_intersection": true
+        },
+        "errors": [],
+        "mesh_statistics": {
+          "vertex_count": 8,
+          "triangle_count": 12,
+          "bounds": {
+            "min": [
+              -14.087983736813928,
+              -4.080457209031132,
+              0.33601628484938584
+            ],
+            "max": [
+              -11.71387545518607,
+              -2.272010590968868,
+              1.0747831991506143
+            ],
+            "extent": [
+              2.3741082816278585,
+              1.808446618062264,
+              0.7387669143012284
+            ]
+          },
+          "surface_area": 6.48,
+          "signed_volume": 0.8640000000000012,
+          "absolute_volume": 0.8640000000000012,
+          "degenerate_triangle_count": 0,
+          "boundary_edge_count": 0,
+          "non_manifold_edge_count": 0,
+          "closed_manifold": true,
+          "outward_or_tangent_face_count": 12,
+          "strictly_outward_face_count": 12
+        },
+        "bounds": {
+          "min": [
+            -14.087983736813928,
+            -4.080457209031132,
+            0.33601628484938584
+          ],
+          "max": [
+            -11.71387545518607,
+            -2.272010590968868,
+            1.0747831991506143
+          ]
+        },
+        "containment": {
+          "fully_inside": true,
+          "outside_vertex_indices": [],
+          "floor_failure_vertex_indices": [],
+          "ceiling_failure_vertex_indices": [],
+          "wall_failure_vertex_indices": [],
+          "minimum_floor_clearance_m": 0.11251723103412062,
+          "minimum_ceiling_clearance_m": 1.4280720438012935,
+          "minimum_wall_clearance_m": 1.0910015021530253,
+          "vertex_inspections": [
+            {
+              "position_m": [
+                -13.766350705509026,
+                -4.080457209031132,
+                0.4742579876133165
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.2861617504962871,
+              "ceiling_z_m": 2.5334571883400137,
+              "floor_clearance_m": 0.18809623711702939,
+              "ceiling_clearance_m": 2.059199200726697,
+              "minimum_wall_clearance_m": 1.4217155650706026,
+              "oriented_plane_distances_m": [
+                0.18799789303285724,
+                2.0546504685845575,
+                3.349621008497014,
+                1.4217155650706026,
+                6.827809032063569,
+                13.776563848442958
+              ]
+            },
+            {
+              "position_m": [
+                -11.743866070558406,
+                -2.795760695061555,
+                0.33601628484938584
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.22349905381526522,
+              "ceiling_z_m": 2.424152187103563,
+              "floor_clearance_m": 0.11251723103412062,
+              "ceiling_clearance_m": 2.0881359022541774,
+              "minimum_wall_clearance_m": 2.169984449261962,
+              "oriented_plane_distances_m": [
+                0.11245840261623603,
+                2.083523249484893,
+                2.169984449261962,
+                3.4240878279745335,
+                8.116920532114563,
+                11.744591213339216
+              ]
+            },
+            {
+              "position_m": [
+                -12.065499101863308,
+                -2.289253170294805,
+                0.3375396128773097
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.21207272319674364,
+              "ceiling_z_m": 2.3950528731218332,
+              "floor_clearance_m": 0.12546688968056607,
+              "ceiling_clearance_m": 2.0575132602445234,
+              "minimum_wall_clearance_m": 1.6486032053599669,
+              "oriented_plane_distances_m": [
+                0.12540129067364977,
+                2.0529682523130663,
+                1.6486032053599669,
+                3.0933737650569544,
+                8.62274022179839,
+                12.063421916174555
+              ]
+            },
+            {
+              "position_m": [
+                -14.087983736813928,
+                -3.5739496842643823,
+                0.4757813156412404
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.27473541987776556,
+              "ceiling_z_m": 2.5043578743582837,
+              "floor_clearance_m": 0.2010458957634748,
+              "ceiling_clearance_m": 2.0285765587170435,
+              "minimum_wall_clearance_m": 1.0910015021530253,
+              "oriented_plane_distances_m": [
+                0.20094078109027097,
+                2.0240954714127306,
+                2.828239764595019,
+                1.0910015021530253,
+                7.333628721747396,
+                14.095394551278297
+              ]
+            },
+            {
+              "position_m": [
+                -13.73636009013669,
+                -4.063214629705195,
+                1.0732598711226902
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.2852869513799592,
+              "ceiling_z_m": 2.5319545569336377,
+              "floor_clearance_m": 0.787972919742731,
+              "ceiling_clearance_m": 1.4586946858109475,
+              "minimum_wall_clearance_m": 1.427613966176862,
+              "oriented_plane_distances_m": [
+                0.7875609366199833,
+                1.4554724568004784,
+                3.3841202514519493,
+                1.427613966176862,
+                6.810974163325622,
+                13.793591284138664
+              ]
+            },
+            {
+              "position_m": [
+                -11.71387545518607,
+                -2.778518115735618,
+                0.9350181683587596
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.2226242546989373,
+              "ceiling_z_m": 2.422649555697187,
+              "floor_clearance_m": 0.7123939136598223,
+              "ceiling_clearance_m": 1.4876313873384275,
+              "minimum_wall_clearance_m": 2.2044836922168978,
+              "oriented_plane_distances_m": [
+                0.7120214462033622,
+                1.484345237700814,
+                2.2044836922168978,
+                3.429986229080793,
+                8.100085663376616,
+                11.761618649034924
+              ]
+            },
+            {
+              "position_m": [
+                -12.035508486490972,
+                -2.272010590968868,
+                0.9365414963866835
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.21119792408041577,
+              "ceiling_z_m": 2.393550241715457,
+              "floor_clearance_m": 0.7253435723062678,
+              "ceiling_clearance_m": 1.4570087453287734,
+              "minimum_wall_clearance_m": 1.683102448314902,
+              "oriented_plane_distances_m": [
+                0.724964334260776,
+                1.453790240528987,
+                1.683102448314902,
+                3.099272166163214,
+                8.605905353060443,
+                12.080449351870264
+              ]
+            },
+            {
+              "position_m": [
+                -14.057993121441593,
+                -3.5567071049384453,
+                1.0747831991506143
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.2738606207614377,
+              "ceiling_z_m": 2.5028552429519078,
+              "floor_clearance_m": 0.8009225783891766,
+              "ceiling_clearance_m": 1.4280720438012935,
+              "minimum_wall_clearance_m": 1.096899903259283,
+              "oriented_plane_distances_m": [
+                0.8005038246773972,
+                1.4249174596286514,
+                2.8627390075499544,
+                1.096899903259283,
+                7.31679385300945,
+                14.112421986974004
+              ]
+            }
+          ]
+        },
+        "los": {
+          "required": false,
+          "any_intersection": false,
+          "segments": [
+            {
+              "name": "rx_los",
+              "start_m": [
+                -7.0,
+                -5.0,
+                1.5
+              ],
+              "end_m": [
+                -3.0,
+                -5.0,
+                1.5
+              ],
+              "length_m": 4.0,
+              "aabb_intersection": false,
+              "mesh_intersection": false,
+              "intersection_count": 0,
+              "intersections": [],
+              "start_inside_obstacle": false,
+              "end_inside_obstacle": false
+            },
+            {
+              "name": "rx_reflection",
+              "start_m": [
+                -7.0,
+                -5.0,
+                1.5
+              ],
+              "end_m": [
+                -10.0,
+                -8.0,
+                1.5
+              ],
+              "length_m": 4.242640687119285,
+              "aabb_intersection": false,
+              "mesh_intersection": false,
+              "intersection_count": 0,
+              "intersections": [],
+              "start_inside_obstacle": false,
+              "end_inside_obstacle": false
+            }
+          ]
+        }
+      },
+      "material": {
+        "obstacle_id": "Left_Desk05",
+        "object_name": "Left_Desk05",
+        "category": "wood",
+        "actual_sionna_material_name": "itu_wood_Left_Desk05",
+        "itu_type": "wood",
+        "thickness_m": 0.1,
+        "scattering_coefficient": 0.0,
+        "source": "sionna_preset",
+        "availability_verified_against_installed_sionna": false,
+        "fallback_used": false,
+        "warning": null
+      },
+      "coordinate_round_trip": {
+        "metric_to_scene_to_metric_vertex_max_error_m": 3.607797795906347e-15,
+        "metric_to_scene_to_metric_transform_max_error": 1.7763568394002505e-15,
+        "maximum_error": 3.607797795906347e-15,
+        "success": true,
+        "metric_transform": [
+          [
+            0.8427019312294252,
+            -0.5360550521748354,
+            0.04998435895389253,
+            -12.900929596
+          ],
+          [
+            0.5352902141539906,
+            0.8441792079445831,
+            0.028737632209894795,
+            -3.1762339
+          ],
+          [
+            -0.05760070948497111,
+            0.002538880046539791,
+            0.9983364725156231,
+            0.705399742
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "scene_transform": [
+          [
+            -0.631378504791699,
+            -0.14271814117317008,
+            0.02590566666697048,
+            1.957701522860785
+          ],
+          [
+            -0.035529297608730456,
+            0.03999061581377031,
+            -0.6456135123714901,
+            1.0317609104580105
+          ],
+          [
+            0.14063157681266078,
+            -0.630643061109291,
+            -0.04680252959268475,
+            -3.278255345677577
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "object_kind": "obstacle"
+    },
+    {
+      "id": "Left_Desk04",
+      "enabled": false,
+      "renderable": true,
+      "status": "DISABLED",
+      "errors": [],
+      "warnings": [],
+      "collision_warnings": [],
+      "source": {
+        "id": "Left_Desk04",
+        "display_name": "Desk Cluster",
+        "enabled": false,
+        "semantic_class": "desk_cluster",
+        "purpose": "classroom_proxy",
+        "physical_object": true,
+        "confidence": "unset",
+        "measurement_source": "unset",
+        "notes": "UI convenience placeholder; not an on-site measurement.",
+        "placement_status": "provisional_unconfirmed",
+        "geometry": {
+          "type": "box",
+          "anchor": {
+            "mode": "center"
+          },
+          "position_m": {
+            "x": -12.999944028,
+            "y": -4.631818551,
+            "z": 0.65192366
+          },
+          "size_m": {
+            "x": 3.2,
+            "y": 0.599393096,
+            "z": 0.6
+          },
+          "rotation_deg": {
+            "roll": 0.0,
+            "pitch": 3.305314919,
+            "yaw": 29.895995034
+          }
+        },
+        "material": {
+          "source": "sionna_preset",
+          "category": "wood",
+          "preset": "wood",
+          "thickness_m": 0.1,
+          "scattering_coefficient": 0.0
+        },
+        "export": {
+          "object_name": "Left_Desk04",
+          "group_name": "desk_cluster"
+        }
+      },
+      "geometry_type": "box",
+      "metric_vertices": [
+        [
+          -14.250345524027608,
+          -5.696413038386471,
+          0.4446733354131089
+        ],
+        [
+          -11.480779359213543,
+          -4.104099453301673,
+          0.2601721010771085
+        ],
+        [
+          -11.779533147340587,
+          -3.58446664293246,
+          0.2601721010771085
+        ],
+        [
+          -14.549099312154652,
+          -5.1767802280172575,
+          0.4446733354131089
+        ],
+        [
+          -14.220354908659413,
+          -5.6791704590675405,
+          1.0436752189228915
+        ],
+        [
+          -11.450788743845347,
+          -4.086856873982743,
+          0.8591739845868911
+        ],
+        [
+          -11.749542531972391,
+          -3.56722406361353,
+          0.8591739845868911
+        ],
+        [
+          -14.519108696786457,
+          -5.159537648698327,
+          1.0436752189228915
+        ]
+      ],
+      "faces": [
+        [
+          0,
+          2,
+          1
+        ],
+        [
+          0,
+          3,
+          2
+        ],
+        [
+          4,
+          5,
+          6
+        ],
+        [
+          4,
+          6,
+          7
+        ],
+        [
+          0,
+          1,
+          5
+        ],
+        [
+          0,
+          5,
+          4
+        ],
+        [
+          1,
+          2,
+          6
+        ],
+        [
+          1,
+          6,
+          5
+        ],
+        [
+          2,
+          3,
+          7
+        ],
+        [
+          2,
+          7,
+          6
+        ],
+        [
+          3,
+          0,
+          4
+        ],
+        [
+          3,
+          4,
+          7
+        ]
+      ],
+      "metric_transform": [
+        [
+          0.8654894265043956,
+          -0.49842714258931614,
+          0.049984358946993886,
+          -12.999944028
+        ],
+        [
+          0.497597995338999,
+          0.8669315910325621,
+          0.028737632198217036,
+          -4.631818551
+        ],
+        [
+          -0.057656635730000134,
+          0.0,
+          0.9983364725163045,
+          0.65192366
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "scene_vertices": [
+        [
+          3.7080632632520834,
+          1.321734298215859,
+          -2.721133322124204
+        ],
+        [
+          1.709722284843628,
+          1.2025157361550631,
+          -2.1826846630069445
+        ],
+        [
+          1.6075964116766244,
+          1.2255248254559492,
+          -2.5566092765340107
+        ],
+        [
+          3.605937390085079,
+          1.3447433875167452,
+          -3.09505793565127
+        ],
+        [
+          3.723606663257379,
+          0.9343661907930756,
+          -2.7492148398785057
+        ],
+        [
+          1.7252656848489236,
+          0.8151476287322794,
+          -2.2107661807612473
+        ],
+        [
+          1.62313981168192,
+          0.8381567180331656,
+          -2.5846907942883135
+        ],
+        [
+          3.6214807900903745,
+          0.9573752800939617,
+          -3.123139453405572
+        ]
+      ],
+      "scene_transform": [
+        [
+          -0.624481555752642,
+          -0.17038213127333732,
+          0.025905666675491427,
+          2.665601537467002
+        ],
+        [
+          -0.0372558006439988,
+          0.03838731118932679,
+          -0.6456135123713063,
+          1.0799455081245124
+        ],
+        [
+          0.1682652059741437,
+          -0.6238387062220455,
+          -0.0468025295905032,
+          -2.652912058206258
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "metric_bounds": {
+        "min": [
+          -14.549099312154652,
+          -5.696413038386471,
+          0.2601721010771085
+        ],
+        "max": [
+          -11.450788743845347,
+          -3.56722406361353,
+          1.0436752189228915
+        ]
+      },
+      "scene_bounds": {
+        "min": [
+          1.6075964116766244,
+          0.8151476287322794,
+          -3.123139453405572
+        ],
+        "max": [
+          3.723606663257379,
+          1.3447433875167452,
+          -2.1826846630069445
+        ]
+      },
+      "bounds": {
+        "min": [
+          -14.549099312154652,
+          -5.696413038386471,
+          0.2601721010771085
+        ],
+        "max": [
+          -11.450788743845347,
+          -3.56722406361353,
+          1.0436752189228915
+        ]
+      },
+      "phase2b_validation": {
+        "schema_version": "1.0",
+        "obstacle_id": "Left_Desk04",
+        "success": true,
+        "checks": {
+          "finite_geometry": true,
+          "nondegenerate_triangles": true,
+          "closed_manifold": true,
+          "positive_signed_volume": true,
+          "room_containment": true,
+          "on_or_above_floor": true,
+          "on_or_below_ceiling": true,
+          "inside_walls": true,
+          "devices_outside_obstacle": true,
+          "required_los_intersection": true
+        },
+        "errors": [],
+        "mesh_statistics": {
+          "vertex_count": 8,
+          "triangle_count": 12,
+          "bounds": {
+            "min": [
+              -14.549099312154652,
+              -5.696413038386471,
+              0.2601721010771085
+            ],
+            "max": [
+              -11.450788743845347,
+              -3.56722406361353,
+              1.0436752189228915
+            ],
+            "extent": [
+              3.098310568309305,
+              2.1291889747729407,
+              0.783503117845783
+            ]
+          },
+          "surface_area": 8.3953875296,
+          "signed_volume": 1.1508347443200022,
+          "absolute_volume": 1.1508347443200022,
+          "degenerate_triangle_count": 0,
+          "boundary_edge_count": 0,
+          "non_manifold_edge_count": 0,
+          "closed_manifold": true,
+          "outward_or_tangent_face_count": 12,
+          "strictly_outward_face_count": 12
+        },
+        "bounds": {
+          "min": [
+            -14.549099312154652,
+            -5.696413038386471,
+            0.2601721010771085
+          ],
+          "max": [
+            -11.450788743845347,
+            -3.56722406361353,
+            1.0436752189228915
+          ]
+        },
+        "containment": {
+          "fully_inside": true,
+          "outside_vertex_indices": [],
+          "floor_failure_vertex_indices": [],
+          "ceiling_failure_vertex_indices": [],
+          "wall_failure_vertex_indices": [],
+          "minimum_floor_clearance_m": 0.0004212593889884597,
+          "minimum_ceiling_clearance_m": 1.5697607740024033,
+          "minimum_wall_clearance_m": 0.6610782889616065,
+          "vertex_inspections": [
+            {
+              "position_m": [
+                -14.250345524027608,
+                -5.696413038386471,
+                0.4446733354131089
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.34053658093107736,
+              "ceiling_z_m": 2.6451823868393127,
+              "floor_clearance_m": 0.10413675448203152,
+              "ceiling_clearance_m": 2.200509051426204,
+              "minimum_wall_clearance_m": 0.9691163091046509,
+              "oriented_plane_distances_m": [
+                0.10408230770571558,
+                2.1956481684928,
+                4.928680715414007,
+                0.9691163091046509,
+                5.216470334442094,
+                14.262894570717757
+              ]
+            },
+            {
+              "position_m": [
+                -11.480779359213543,
+                -4.104099453301673,
+                0.2601721010771085
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.25975084168812,
+              "ceiling_z_m": 2.5064177416734523,
+              "floor_clearance_m": 0.0004212593889884597,
+              "ceiling_clearance_m": 2.246245640596344,
+              "minimum_wall_clearance_m": 3.479804295465984,
+              "oriented_plane_distances_m": [
+                0.0004210391380709262,
+                2.241283726401294,
+                3.479804295465984,
+                3.7140246749666836,
+                6.8148263961135,
+                11.48134813846465
+              ]
+            },
+            {
+              "position_m": [
+                -11.779533147340587,
+                -3.58446664293246,
+                0.2601721010771085
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.24765800900414756,
+              "ceiling_z_m": 2.476173979165301,
+              "floor_clearance_m": 0.01251409207296092,
+              "ceiling_clearance_m": 2.2160018780881927,
+              "minimum_wall_clearance_m": 2.9464826188487123,
+              "oriented_plane_distances_m": [
+                0.012507549215203473,
+                2.211106771793306,
+                2.9464826188487123,
+                3.405986654823641,
+                7.33382128740983,
+                11.777200804032592
+              ]
+            },
+            {
+              "position_m": [
+                -14.549099312154652,
+                -5.1767802280172575,
+                0.4446733354131089
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.32844374824710487,
+              "ceiling_z_m": 2.614938624331161,
+              "floor_clearance_m": 0.11622958716600401,
+              "ceiling_clearance_m": 2.1702652889180523,
+              "minimum_wall_clearance_m": 0.6610782889616065,
+              "oriented_plane_distances_m": [
+                0.1161688177828481,
+                2.1654712138848122,
+                4.395359038796735,
+                0.6610782889616065,
+                5.735465225738423,
+                14.558747236285697
+              ]
+            },
+            {
+              "position_m": [
+                -14.220354908659413,
+                -5.6791704590675405,
+                1.0436752189228915
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.3396617818150094,
+              "ceiling_z_m": 2.6436797554334466,
+              "floor_clearance_m": 0.7040134371078821,
+              "ceiling_clearance_m": 1.600004536510555,
+              "minimum_wall_clearance_m": 0.9750147102068869,
+              "oriented_plane_distances_m": [
+                0.7036453512929904,
+                1.5964701567088213,
+                4.963179958375722,
+                0.9750147102068869,
+                5.199635465697131,
+                14.279922006417651
+              ]
+            },
+            {
+              "position_m": [
+                -11.450788743845347,
+                -4.086856873982743,
+                0.8591739845868911
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.2588760425720521,
+              "ceiling_z_m": 2.5049151102675866,
+              "floor_clearance_m": 0.600297942014839,
+              "ceiling_clearance_m": 1.6457411256806955,
+              "minimum_wall_clearance_m": 3.5143035384276997,
+              "oriented_plane_distances_m": [
+                0.5999840827253459,
+                1.6421057146173155,
+                3.5143035384276997,
+                3.7199230760689197,
+                6.797991527368539,
+                11.498375574164545
+              ]
+            },
+            {
+              "position_m": [
+                -11.749542531972391,
+                -3.56722406361353,
+                0.8591739845868911
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.2467832098880797,
+              "ceiling_z_m": 2.474671347759435,
+              "floor_clearance_m": 0.6123907746988114,
+              "ceiling_clearance_m": 1.6154973631725438,
+              "minimum_wall_clearance_m": 2.980981861810428,
+              "oriented_plane_distances_m": [
+                0.6120705928024784,
+                1.611928760009328,
+                2.980981861810428,
+                3.411885055925877,
+                7.316986418664868,
+                11.794228239732485
+              ]
+            },
+            {
+              "position_m": [
+                -14.519108696786457,
+                -5.159537648698327,
+                1.0436752189228915
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.327568949131037,
+              "ceiling_z_m": 2.613435992925295,
+              "floor_clearance_m": 0.7161062697918545,
+              "ceiling_clearance_m": 1.5697607740024033,
+              "minimum_wall_clearance_m": 0.6669766900638425,
+              "oriented_plane_distances_m": [
+                0.715731861370123,
+                1.5662932021008338,
+                4.42985828175845,
+                0.6669766900638425,
+                5.718630356993461,
+                14.575774671985593
+              ]
+            }
+          ]
+        },
+        "los": {
+          "required": false,
+          "any_intersection": false,
+          "segments": [
+            {
+              "name": "rx_los",
+              "start_m": [
+                -7.0,
+                -5.0,
+                1.5
+              ],
+              "end_m": [
+                -3.0,
+                -5.0,
+                1.5
+              ],
+              "length_m": 4.0,
+              "aabb_intersection": false,
+              "mesh_intersection": false,
+              "intersection_count": 0,
+              "intersections": [],
+              "start_inside_obstacle": false,
+              "end_inside_obstacle": false
+            },
+            {
+              "name": "rx_reflection",
+              "start_m": [
+                -7.0,
+                -5.0,
+                1.5
+              ],
+              "end_m": [
+                -10.0,
+                -8.0,
+                1.5
+              ],
+              "length_m": 4.242640687119285,
+              "aabb_intersection": false,
+              "mesh_intersection": false,
+              "intersection_count": 0,
+              "intersections": [],
+              "start_inside_obstacle": false,
+              "end_inside_obstacle": false
+            }
+          ]
+        }
+      },
+      "material": {
+        "obstacle_id": "Left_Desk04",
+        "object_name": "Left_Desk04",
+        "category": "wood",
+        "actual_sionna_material_name": "itu_wood_Left_Desk04",
+        "itu_type": "wood",
+        "thickness_m": 0.1,
+        "scattering_coefficient": 0.0,
+        "source": "sionna_preset",
+        "availability_verified_against_installed_sionna": false,
+        "fallback_used": false,
+        "warning": null
+      },
+      "coordinate_round_trip": {
+        "metric_to_scene_to_metric_vertex_max_error_m": 3.978256139440565e-15,
+        "metric_to_scene_to_metric_transform_max_error": 2.6645352591003757e-15,
+        "maximum_error": 3.978256139440565e-15,
+        "success": true,
+        "metric_transform": [
+          [
+            0.8654894265043956,
+            -0.49842714258931614,
+            0.049984358946993886,
+            -12.999944028
+          ],
+          [
+            0.497597995338999,
+            0.8669315910325621,
+            0.028737632198217036,
+            -4.631818551
+          ],
+          [
+            -0.057656635730000134,
+            0.0,
+            0.9983364725163045,
+            0.65192366
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "scene_transform": [
+          [
+            -0.624481555752642,
+            -0.17038213127333732,
+            0.025905666675491427,
+            2.665601537467002
+          ],
+          [
+            -0.0372558006439988,
+            0.03838731118932679,
+            -0.6456135123713063,
+            1.0799455081245124
+          ],
+          [
+            0.1682652059741437,
+            -0.6238387062220455,
+            -0.0468025295905032,
+            -2.652912058206258
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "object_kind": "obstacle"
+    },
+    {
+      "id": "Left_Desk06",
+      "enabled": false,
+      "renderable": true,
+      "status": "DISABLED",
+      "errors": [],
+      "warnings": [],
+      "collision_warnings": [],
+      "source": {
+        "id": "Left_Desk06",
+        "display_name": "Desk Cluster",
+        "enabled": false,
+        "semantic_class": "desk_cluster",
+        "purpose": "classroom_proxy",
+        "physical_object": true,
+        "confidence": "unset",
+        "measurement_source": "unset",
+        "notes": "UI convenience placeholder; not an on-site measurement.",
+        "placement_status": "provisional_unconfirmed",
+        "geometry": {
+          "type": "box",
+          "anchor": {
+            "mode": "center"
+          },
+          "position_m": {
+            "x": -13.207114886,
+            "y": -1.949102765,
+            "z": 0.685406114
+          },
+          "size_m": {
+            "x": 1.9,
+            "y": 0.6,
+            "z": 0.6
+          },
+          "rotation_deg": {
+            "roll": 0.145709189,
+            "pitch": 3.302105247,
+            "yaw": 32.424001009
+          }
+        },
+        "material": {
+          "source": "sionna_preset",
+          "category": "wood",
+          "preset": "wood",
+          "thickness_m": 0.1,
+          "scattering_coefficient": 0.0
+        },
+        "export": {
+          "object_name": "Left_Desk06",
+          "group_name": "desk_cluster"
+        }
+      },
+      "geometry_type": "box",
+      "metric_vertices": [
+        [
+          -13.86186051270167,
+          -2.7195035204926343,
+          0.4398641822420737
+        ],
+        [
+          -12.260726843365763,
+          -1.7024521136000523,
+          0.33042283422062857
+        ],
+        [
+          -12.582359874670663,
+          -1.1959445888333025,
+          0.33194616224855245
+        ],
+        [
+          -14.183493544006572,
+          -2.2129959957258842,
+          0.44138751026999756
+        ],
+        [
+          -13.831869897329335,
+          -2.7022609411666974,
+          1.0388660657514475
+        ],
+        [
+          -12.230736227993427,
+          -1.6852095342741154,
+          0.9294247177300023
+        ],
+        [
+          -12.55236925929833,
+          -1.1787020095073655,
+          0.9309480457579262
+        ],
+        [
+          -14.153502928634236,
+          -2.1957534163999477,
+          1.0403893937793713
+        ]
+      ],
+      "faces": [
+        [
+          0,
+          2,
+          1
+        ],
+        [
+          0,
+          3,
+          2
+        ],
+        [
+          4,
+          5,
+          6
+        ],
+        [
+          4,
+          6,
+          7
+        ],
+        [
+          0,
+          1,
+          5
+        ],
+        [
+          0,
+          5,
+          4
+        ],
+        [
+          1,
+          2,
+          6
+        ],
+        [
+          1,
+          6,
+          5
+        ],
+        [
+          2,
+          3,
+          7
+        ],
+        [
+          2,
+          7,
+          6
+        ],
+        [
+          3,
+          0,
+          4
+        ],
+        [
+          3,
+          4,
+          7
+        ]
+      ],
+      "metric_transform": [
+        [
+          0.8427019312294252,
+          -0.5360550521748354,
+          0.04998435895389253,
+          -13.207114886
+        ],
+        [
+          0.5352902141539906,
+          0.8441792079445831,
+          0.028737632209894795,
+          -1.949102765
+        ],
+        [
+          -0.05760070948497111,
+          0.002538880046539791,
+          0.9983364725156231,
+          0.685406114
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "scene_vertices": [
+        [
+          2.1687416734597535,
+          1.2809776322457391,
+          -3.909140708887267
+        ],
+        [
+          0.9691225143555258,
+          1.2134719667891516,
+          -3.641940712943212
+        ],
+        [
+          0.8834916296516226,
+          1.2374663362774136,
+          -4.020326549608786
+        ],
+        [
+          2.0831107887558513,
+          1.3049720017340016,
+          -4.287526545552843
+        ],
+        [
+          2.184285073459936,
+          0.8936095248228455,
+          -3.937222226642879
+        ],
+        [
+          0.9846659143557082,
+          0.8261038593662575,
+          -3.670022230698823
+        ],
+        [
+          0.8990350296518059,
+          0.8500982288545196,
+          -4.048408067364399
+        ],
+        [
+          2.0986541887560337,
+          0.9176038943111073,
+          -4.315608063308453
+        ]
+      ],
+      "scene_transform": [
+        [
+          -0.631378504791699,
+          -0.14271814117317008,
+          0.02590566666697048,
+          1.5338883515557802
+        ],
+        [
+          -0.035529297608730456,
+          0.03999061581377031,
+          -0.6456135123714901,
+          1.0655379305501294
+        ],
+        [
+          0.14063157681266078,
+          -0.630643061109291,
+          -0.04680252959268475,
+          -3.9787743881258324
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "metric_bounds": {
+        "min": [
+          -14.183493544006572,
+          -2.7195035204926343,
+          0.33042283422062857
+        ],
+        "max": [
+          -12.230736227993427,
+          -1.1787020095073655,
+          1.0403893937793713
+        ]
+      },
+      "scene_bounds": {
+        "min": [
+          0.8834916296516226,
+          0.8261038593662575,
+          -4.315608063308453
+        ],
+        "max": [
+          2.184285073459936,
+          1.3049720017340016,
+          -3.641940712943212
+        ]
+      },
+      "bounds": {
+        "min": [
+          -14.183493544006572,
+          -2.7195035204926343,
+          0.33042283422062857
+        ],
+        "max": [
+          -12.230736227993427,
+          -1.1787020095073655,
+          1.0403893937793713
+        ]
+      },
+      "phase2b_validation": {
+        "schema_version": "1.0",
+        "obstacle_id": "Left_Desk06",
+        "success": true,
+        "checks": {
+          "finite_geometry": true,
+          "nondegenerate_triangles": true,
+          "closed_manifold": true,
+          "positive_signed_volume": true,
+          "room_containment": true,
+          "on_or_above_floor": true,
+          "on_or_below_ceiling": true,
+          "inside_walls": true,
+          "devices_outside_obstacle": true,
+          "required_los_intersection": true
+        },
+        "errors": [],
+        "mesh_statistics": {
+          "vertex_count": 8,
+          "triangle_count": 12,
+          "bounds": {
+            "min": [
+              -14.183493544006572,
+              -2.7195035204926343,
+              0.33042283422062857
+            ],
+            "max": [
+              -12.230736227993427,
+              -1.1787020095073655,
+              1.0403893937793713
+            ],
+            "extent": [
+              1.9527573160131446,
+              1.5408015109852689,
+              0.7099665595587428
+            ]
+          },
+          "surface_area": 5.279999999999998,
+          "signed_volume": 0.6840000000000012,
+          "absolute_volume": 0.6840000000000012,
+          "degenerate_triangle_count": 0,
+          "boundary_edge_count": 0,
+          "non_manifold_edge_count": 0,
+          "closed_manifold": true,
+          "outward_or_tangent_face_count": 12,
+          "strictly_outward_face_count": 12
+        },
+        "bounds": {
+          "min": [
+            -14.183493544006572,
+            -2.7195035204926343,
+            0.33042283422062857
+          ],
+          "max": [
+            -12.230736227993427,
+            -1.1787020095073655,
+            1.0403893937793713
+          ]
+        },
+        "containment": {
+          "fully_inside": true,
+          "outside_vertex_indices": [],
+          "floor_failure_vertex_indices": [],
+          "ceiling_failure_vertex_indices": [],
+          "wall_failure_vertex_indices": [],
+          "minimum_floor_clearance_m": 0.13369286018049972,
+          "minimum_ceiling_clearance_m": 1.374663783385486,
+          "minimum_wall_clearance_m": 0.532113432782473,
+          "vertex_inspections": [
+            {
+              "position_m": [
+                -13.86186051270167,
+                -2.7195035204926343,
+                0.4398641822420737
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.2463379422459378,
+              "ceiling_z_m": 2.4456551225529632,
+              "floor_clearance_m": 0.19352623999613588,
+              "ceiling_clearance_m": 2.00579094031089,
+              "minimum_wall_clearance_m": 1.3025965939038233,
+              "oriented_plane_distances_m": [
+                0.19342505689365913,
+                2.001360186007282,
+                1.9873736194122178,
+                1.3025965939038233,
+                8.188582775848383,
+                13.863899331968904
+              ]
+            },
+            {
+              "position_m": [
+                -12.260726843365763,
+                -1.7024521136000523,
+                0.33042283422062857
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.19672997404012885,
+              "ceiling_z_m": 2.359121996574107,
+              "floor_clearance_m": 0.13369286018049972,
+              "ceiling_clearance_m": 2.0286991623534782,
+              "minimum_wall_clearance_m": 1.0534946766844682,
+              "oriented_plane_distances_m": [
+                0.13362296031383397,
+                2.024217804220048,
+                1.0534946766844682,
+                2.8878079687027665,
+                9.20912938005542,
+                12.255254329178445
+              ]
+            },
+            {
+              "position_m": [
+                -12.582359874670663,
+                -1.1959445888333025,
+                0.33194616224855245
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.18530364342160724,
+              "ceiling_z_m": 2.330022682592377,
+              "floor_clearance_m": 0.1466425188269452,
+              "ceiling_clearance_m": 1.9980765203438244,
+              "minimum_wall_clearance_m": 0.532113432782473,
+              "oriented_plane_distances_m": [
+                0.14656584837124775,
+                1.993662807048221,
+                0.532113432782473,
+                2.557093905785189,
+                9.714949069739248,
+                12.574085032013782
+              ]
+            },
+            {
+              "position_m": [
+                -14.183493544006572,
+                -2.2129959957258842,
+                0.44138751026999756
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.23491161162741628,
+              "ceiling_z_m": 2.4165558085712338,
+              "floor_clearance_m": 0.20647589864258128,
+              "ceiling_clearance_m": 1.9751682983012362,
+              "minimum_wall_clearance_m": 0.971882530986246,
+              "oriented_plane_distances_m": [
+                0.20636794495107288,
+                1.9708051888354554,
+                1.4659923755102224,
+                0.971882530986246,
+                8.69440246553221,
+                14.182730034804244
+              ]
+            },
+            {
+              "position_m": [
+                -13.831869897329335,
+                -2.7022609411666974,
+                1.0388660657514475
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.24546314312960996,
+              "ceiling_z_m": 2.4441524911465873,
+              "floor_clearance_m": 0.7934029226218375,
+              "ceiling_clearance_m": 1.4052864253951398,
+              "minimum_wall_clearance_m": 1.308494995010081,
+              "oriented_plane_distances_m": [
+                0.7929881004807853,
+                1.402182174223203,
+                2.021872862367153,
+                1.308494995010081,
+                8.171747907110436,
+                13.880926767664612
+              ]
+            },
+            {
+              "position_m": [
+                -12.230736227993427,
+                -1.6852095342741154,
+                0.9294247177300023
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.19585517492380095,
+              "ceiling_z_m": 2.3576193651677304,
+              "floor_clearance_m": 0.7335695428062015,
+              "ceiling_clearance_m": 1.428194647437728,
+              "minimum_wall_clearance_m": 1.0879939196394035,
+              "oriented_plane_distances_m": [
+                0.7331860039009601,
+                1.4250397924359688,
+                1.0879939196394035,
+                2.893706369809026,
+                9.192294511317474,
+                12.272281764874151
+              ]
+            },
+            {
+              "position_m": [
+                -12.55236925929833,
+                -1.1787020095073655,
+                0.9309480457579262
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.1844288443052794,
+              "ceiling_z_m": 2.3285200511860005,
+              "floor_clearance_m": 0.7465192014526468,
+              "ceiling_clearance_m": 1.3975720054280742,
+              "minimum_wall_clearance_m": 0.5666126757374081,
+              "oriented_plane_distances_m": [
+                0.7461288919583738,
+                1.3944847952641417,
+                0.5666126757374081,
+                2.5629923068914486,
+                9.698114201001301,
+                12.591112467709491
+              ]
+            },
+            {
+              "position_m": [
+                -14.153502928634236,
+                -2.1957534163999477,
+                1.0403893937793713
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.23403681251108835,
+              "ceiling_z_m": 2.4150531771648573,
+              "floor_clearance_m": 0.806352581268283,
+              "ceiling_clearance_m": 1.374663783385486,
+              "minimum_wall_clearance_m": 0.9777809320925037,
+              "oriented_plane_distances_m": [
+                0.805930988538199,
+                1.371627177051376,
+                1.500491618465158,
+                0.9777809320925037,
+                8.677567596794264,
+                14.19975747049995
+              ]
+            }
+          ]
+        },
+        "los": {
+          "required": false,
+          "any_intersection": false,
+          "segments": [
+            {
+              "name": "rx_los",
+              "start_m": [
+                -7.0,
+                -5.0,
+                1.5
+              ],
+              "end_m": [
+                -3.0,
+                -5.0,
+                1.5
+              ],
+              "length_m": 4.0,
+              "aabb_intersection": false,
+              "mesh_intersection": false,
+              "intersection_count": 0,
+              "intersections": [],
+              "start_inside_obstacle": false,
+              "end_inside_obstacle": false
+            },
+            {
+              "name": "rx_reflection",
+              "start_m": [
+                -7.0,
+                -5.0,
+                1.5
+              ],
+              "end_m": [
+                -10.0,
+                -8.0,
+                1.5
+              ],
+              "length_m": 4.242640687119285,
+              "aabb_intersection": false,
+              "mesh_intersection": false,
+              "intersection_count": 0,
+              "intersections": [],
+              "start_inside_obstacle": false,
+              "end_inside_obstacle": false
+            }
+          ]
+        }
+      },
+      "material": {
+        "obstacle_id": "Left_Desk06",
+        "object_name": "Left_Desk06",
+        "category": "wood",
+        "actual_sionna_material_name": "itu_wood_Left_Desk06",
+        "itu_type": "wood",
+        "thickness_m": 0.1,
+        "scattering_coefficient": 0.0,
+        "source": "sionna_preset",
+        "availability_verified_against_installed_sionna": false,
+        "fallback_used": false,
+        "warning": null
+      },
+      "coordinate_round_trip": {
+        "metric_to_scene_to_metric_vertex_max_error_m": 3.210061615366513e-15,
+        "metric_to_scene_to_metric_transform_max_error": 2.4424906541753444e-15,
+        "maximum_error": 3.210061615366513e-15,
+        "success": true,
+        "metric_transform": [
+          [
+            0.8427019312294252,
+            -0.5360550521748354,
+            0.04998435895389253,
+            -13.207114886
+          ],
+          [
+            0.5352902141539906,
+            0.8441792079445831,
+            0.028737632209894795,
+            -1.949102765
+          ],
+          [
+            -0.05760070948497111,
+            0.002538880046539791,
+            0.9983364725156231,
+            0.685406114
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "scene_transform": [
+          [
+            -0.631378504791699,
+            -0.14271814117317008,
+            0.02590566666697048,
+            1.5338883515557802
+          ],
+          [
+            -0.035529297608730456,
+            0.03999061581377031,
+            -0.6456135123714901,
+            1.0655379305501294
+          ],
+          [
+            0.14063157681266078,
+            -0.630643061109291,
+            -0.04680252959268475,
+            -3.9787743881258324
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "object_kind": "obstacle"
+    },
+    {
+      "id": "Mid_Desk01",
+      "enabled": false,
+      "renderable": true,
+      "status": "DISABLED",
+      "errors": [],
+      "warnings": [],
+      "collision_warnings": [],
+      "source": {
+        "id": "Mid_Desk01",
+        "display_name": "Desk Cluster",
+        "enabled": false,
+        "semantic_class": "desk_cluster",
+        "purpose": "classroom_proxy",
+        "physical_object": true,
+        "confidence": "unset",
+        "measurement_source": "unset",
+        "notes": "UI convenience placeholder; not an on-site measurement.",
+        "placement_status": "provisional_unconfirmed",
+        "geometry": {
+          "type": "box",
+          "anchor": {
+            "mode": "floor_at_xy",
+            "floor_contact_policy": {
+              "type": "minimum_bottom_vertex_clearance",
+              "clearance_m": 0.0
+            }
+          },
+          "position_m": {
+            "x": -7.729328906979958,
+            "y": -7.39305827366146
+          },
+          "size_m": {
+            "x": 3.8000000000000003,
+            "y": 0.8,
+            "z": 0.35000000000000003
+          },
+          "rotation_deg": {
+            "roll": 0.0,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        "material": {
+          "source": "sionna_preset",
+          "category": "wood",
+          "preset": "wood",
+          "thickness_m": 0.1,
+          "scattering_coefficient": 0.0
+        },
+        "export": {
+          "object_name": "Mid_Desk01",
+          "group_name": "desk_cluster"
+        }
+      },
+      "geometry_type": "box",
+      "metric_vertices": [
+        [
+          -9.629328906979957,
+          -7.79305827366146,
+          0.3487973808692332
+        ],
+        [
+          -5.829328906979957,
+          -7.79305827366146,
+          0.3487973808692332
+        ],
+        [
+          -5.829328906979957,
+          -6.993058273661459,
+          0.3487973808692332
+        ],
+        [
+          -9.629328906979957,
+          -6.993058273661459,
+          0.3487973808692332
+        ],
+        [
+          -9.629328906979957,
+          -7.79305827366146,
+          0.6987973808692333
+        ],
+        [
+          -5.829328906979957,
+          -7.79305827366146,
+          0.6987973808692333
+        ],
+        [
+          -5.829328906979957,
+          -6.993058273661459,
+          0.6987973808692333
+        ],
+        [
+          -9.629328906979957,
+          -6.993058273661459,
+          0.6987973808692333
+        ]
+      ],
+      "faces": [
+        [
+          0,
+          2,
+          1
+        ],
+        [
+          0,
+          3,
+          2
+        ],
+        [
+          4,
+          5,
+          6
+        ],
+        [
+          4,
+          6,
+          7
+        ],
+        [
+          0,
+          1,
+          5
+        ],
+        [
+          0,
+          5,
+          4
+        ],
+        [
+          1,
+          2,
+          6
+        ],
+        [
+          1,
+          6,
+          5
+        ],
+        [
+          2,
+          3,
+          7
+        ],
+        [
+          2,
+          7,
+          6
+        ],
+        [
+          3,
+          0,
+          4
+        ],
+        [
+          3,
+          4,
+          7
+        ]
+      ],
+      "metric_transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -7.729328906979958
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.39305827366146
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.5237973808692332
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "scene_vertices": [
+        [
+          2.562616072248071,
+          1.0047775055451407,
+          0.3444736502956435
+        ],
+        [
+          0.8364120112812694,
+          0.686913749307978,
+          2.07054957294135
+        ],
+        [
+          0.4702472473642798,
+          0.683863635219095,
+          1.7037959354725072
+        ],
+        [
+          2.1964513083310804,
+          1.0017273914562577,
+          -0.022279987173199567
+        ],
+        [
+          2.5842698993615656,
+          0.7799404901970657,
+          0.32472445300155584
+        ],
+        [
+          0.8580658383947641,
+          0.46207673395990306,
+          2.0508003756472624
+        ],
+        [
+          0.49190107447777454,
+          0.45902661987102006,
+          1.6840467381784197
+        ],
+        [
+          2.218105135444575,
+          0.7768903761081827,
+          -0.04202918446728732
+        ]
+      ],
+      "scene_transform": [
+        [
+          -0.45426422657021065,
+          -0.4577059548962373,
+          0.06186807746712714,
+          1.5272585733629223
+        ],
+        [
+          -0.0836483569045165,
+          -0.0038126426111036887,
+          -0.6423914724230709,
+          0.7319020627080803
+        ],
+        [
+          0.45423050595939657,
+          -0.4584420468360534,
+          -0.05642627798310757,
+          1.0142601942370313
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "metric_bounds": {
+        "min": [
+          -9.629328906979957,
+          -7.79305827366146,
+          0.3487973808692332
+        ],
+        "max": [
+          -5.829328906979957,
+          -6.993058273661459,
+          0.6987973808692333
+        ]
+      },
+      "scene_bounds": {
+        "min": [
+          0.4702472473642798,
+          0.45902661987102006,
+          -0.04202918446728732
+        ],
+        "max": [
+          2.5842698993615656,
+          1.0047775055451407,
+          2.07054957294135
+        ]
+      },
+      "bounds": {
+        "min": [
+          -9.629328906979957,
+          -7.79305827366146,
+          0.3487973808692332
+        ],
+        "max": [
+          -5.829328906979957,
+          -6.993058273661459,
+          0.6987973808692333
+        ]
+      },
+      "phase2b_validation": {
+        "schema_version": "1.0",
+        "obstacle_id": "Mid_Desk01",
+        "success": true,
+        "checks": {
+          "finite_geometry": true,
+          "nondegenerate_triangles": true,
+          "closed_manifold": true,
+          "positive_signed_volume": true,
+          "room_containment": true,
+          "on_or_above_floor": true,
+          "on_or_below_ceiling": true,
+          "inside_walls": true,
+          "devices_outside_obstacle": true,
+          "required_los_intersection": true
+        },
+        "errors": [],
+        "mesh_statistics": {
+          "vertex_count": 8,
+          "triangle_count": 12,
+          "bounds": {
+            "min": [
+              -9.629328906979957,
+              -7.79305827366146,
+              0.3487973808692332
+            ],
+            "max": [
+              -5.829328906979957,
+              -6.993058273661459,
+              0.6987973808692333
+            ],
+            "extent": [
+              3.8,
+              0.8000000000000007,
+              0.3500000000000001
+            ]
+          },
+          "surface_area": 9.300000000000008,
+          "signed_volume": 1.0640000000000032,
+          "absolute_volume": 1.0640000000000032,
+          "degenerate_triangle_count": 0,
+          "boundary_edge_count": 0,
+          "non_manifold_edge_count": 0,
+          "closed_manifold": true,
+          "outward_or_tangent_face_count": 12,
+          "strictly_outward_face_count": 12
+        },
+        "bounds": {
+          "min": [
+            -9.629328906979957,
+            -7.79305827366146,
+            0.3487973808692332
+          ],
+          "max": [
+            -5.829328906979957,
+            -6.993058273661459,
+            0.6987973808692333
+          ]
+        },
+        "containment": {
+          "fully_inside": true,
+          "outside_vertex_indices": [],
+          "floor_failure_vertex_indices": [],
+          "ceiling_failure_vertex_indices": [],
+          "wall_failure_vertex_indices": [],
+          "minimum_floor_clearance_m": -5.551115123125783e-17,
+          "minimum_ceiling_clearance_m": 1.925855233873659,
+          "minimum_wall_clearance_m": 3.103097771632256,
+          "vertex_inspections": [
+            {
+              "position_m": [
+                -9.629328906979957,
+                -7.79305827366146,
+                0.3487973808692332
+              ],
+              "inside_room": true,
+              "safe_with_clearance": false,
+              "floor_z_m": 0.34879738086923323,
+              "ceiling_z_m": 2.724493203223127,
+              "floor_clearance_m": -5.551115123125783e-17,
+              "ceiling_clearance_m": 2.3756958223538938,
+              "minimum_wall_clearance_m": 3.125543106056801,
+              "oriented_plane_distances_m": [
+                -5.597004750902801e-17,
+                2.3704479551522777,
+                7.258661625505119,
+                5.628129624067702,
+                3.125543106056801,
+                9.656613416830721
+              ]
+            },
+            {
+              "position_m": [
+                -5.829328906979957,
+                -7.79305827366146,
+                0.3487973808692332
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.3037035542043846,
+              "ceiling_z_m": 2.676966871112921,
+              "floor_clearance_m": 0.04509382666484857,
+              "ceiling_clearance_m": 2.328169490243688,
+              "minimum_wall_clearance_m": 3.1229813195856764,
+              "oriented_plane_distances_m": [
+                0.045070249845061305,
+                2.323026607812069,
+                7.46571710718974,
+                9.424497554286642,
+                3.1229813195856764,
+                5.868352126427982
+              ]
+            },
+            {
+              "position_m": [
+                -5.829328906979957,
+                -6.993058273661459,
+                0.3487973808692332
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.2796279642470756,
+              "ceiling_z_m": 2.6246526147428924,
+              "floor_clearance_m": 0.06916941662215759,
+              "ceiling_clearance_m": 2.275855233873659,
+              "minimum_wall_clearance_m": 3.9216891375412004,
+              "oriented_plane_distances_m": [
+                0.06913325214042904,
+                2.2708279126462982,
+                6.669704099772418,
+                9.409764407284223,
+                3.9216891375412004,
+                5.865306541924674
+              ]
+            },
+            {
+              "position_m": [
+                -9.629328906979957,
+                -6.993058273661459,
+                0.3487973808692332
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.32472179091192427,
+              "ceiling_z_m": 2.6721789468530983,
+              "floor_clearance_m": 0.024075589957308907,
+              "ceiling_clearance_m": 2.323381565983865,
+              "minimum_wall_clearance_m": 3.924250924012325,
+              "oriented_plane_distances_m": [
+                0.024063002295367675,
+                2.3182492599865063,
+                6.462648618087797,
+                5.613396477065283,
+                3.924250924012325,
+                9.653567832327415
+              ]
+            },
+            {
+              "position_m": [
+                -9.629328906979957,
+                -7.79305827366146,
+                0.6987973808692333
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.34879738086923323,
+              "ceiling_z_m": 2.724493203223127,
+              "floor_clearance_m": 0.35000000000000003,
+              "ceiling_clearance_m": 2.0256958223538937,
+              "minimum_wall_clearance_m": 3.1056595581033806,
+              "oriented_plane_distances_m": [
+                0.3498170062836566,
+                2.0212210985417984,
+                7.28788960270189,
+                5.614254708158173,
+                3.1056595581033806,
+                9.684070537289028
+              ]
+            },
+            {
+              "position_m": [
+                -5.829328906979957,
+                -7.79305827366146,
+                0.6987973808692333
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.3037035542043846,
+              "ceiling_z_m": 2.676966871112921,
+              "floor_clearance_m": 0.39509382666484866,
+              "ceiling_clearance_m": 1.9781694902436877,
+              "minimum_wall_clearance_m": 3.103097771632256,
+              "oriented_plane_distances_m": [
+                0.39488725612871795,
+                1.9737997512015903,
+                7.4949450843865115,
+                9.410622638377113,
+                3.103097771632256,
+                5.895809246886288
+              ]
+            },
+            {
+              "position_m": [
+                -5.829328906979957,
+                -6.993058273661459,
+                0.6987973808692333
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.2796279642470756,
+              "ceiling_z_m": 2.6246526147428924,
+              "floor_clearance_m": 0.4191694166221577,
+              "ceiling_clearance_m": 1.925855233873659,
+              "minimum_wall_clearance_m": 3.90180558958778,
+              "oriented_plane_distances_m": [
+                0.4189502584240857,
+                1.9216010560358192,
+                6.698932076969189,
+                9.395889491374696,
+                3.90180558958778,
+                5.892763662382981
+              ]
+            },
+            {
+              "position_m": [
+                -9.629328906979957,
+                -6.993058273661459,
+                0.6987973808692333
+              ],
+              "inside_room": true,
+              "safe_with_clearance": true,
+              "floor_z_m": 0.32472179091192427,
+              "ceiling_z_m": 2.6721789468530983,
+              "floor_clearance_m": 0.374075589957309,
+              "ceiling_clearance_m": 1.973381565983865,
+              "minimum_wall_clearance_m": 3.9043673760589046,
+              "oriented_plane_distances_m": [
+                0.3738800085790243,
+                1.9690224033760275,
+                6.491876595284568,
+                5.599521561155754,
+                3.9043673760589046,
+                9.681024952785721
+              ]
+            }
+          ]
+        },
+        "los": {
+          "required": false,
+          "any_intersection": false,
+          "segments": [
+            {
+              "name": "rx_los",
+              "start_m": [
+                -7.0,
+                -5.0,
+                1.5
+              ],
+              "end_m": [
+                -3.0,
+                -5.0,
+                1.5
+              ],
+              "length_m": 4.0,
+              "aabb_intersection": false,
+              "mesh_intersection": false,
+              "intersection_count": 0,
+              "intersections": [],
+              "start_inside_obstacle": false,
+              "end_inside_obstacle": false
+            },
+            {
+              "name": "rx_reflection",
+              "start_m": [
+                -7.0,
+                -5.0,
+                1.5
+              ],
+              "end_m": [
+                -10.0,
+                -8.0,
+                1.5
+              ],
+              "length_m": 4.242640687119285,
+              "aabb_intersection": false,
+              "mesh_intersection": false,
+              "intersection_count": 0,
+              "intersections": [],
+              "start_inside_obstacle": false,
+              "end_inside_obstacle": false
+            }
+          ]
+        }
+      },
+      "material": {
+        "obstacle_id": "Mid_Desk01",
+        "object_name": "Mid_Desk01",
+        "category": "wood",
+        "actual_sionna_material_name": "itu_wood_Mid_Desk01",
+        "itu_type": "wood",
+        "thickness_m": 0.1,
+        "scattering_coefficient": 0.0,
+        "source": "sionna_preset",
+        "availability_verified_against_installed_sionna": false,
+        "fallback_used": false,
+        "warning": null
+      },
+      "coordinate_round_trip": {
+        "metric_to_scene_to_metric_vertex_max_error_m": 3.552713678800501e-15,
+        "metric_to_scene_to_metric_transform_max_error": 1.7763568394002505e-15,
+        "maximum_error": 3.552713678800501e-15,
+        "success": true,
+        "metric_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            -7.729328906979958
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -7.39305827366146
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.5237973808692332
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "scene_transform": [
+          [
+            -0.45426422657021065,
+            -0.4577059548962373,
+            0.06186807746712714,
+            1.5272585733629223
+          ],
+          [
+            -0.0836483569045165,
+            -0.0038126426111036887,
+            -0.6423914724230709,
+            0.7319020627080803
+          ],
+          [
+            0.45423050595939657,
+            -0.4584420468360534,
+            -0.05642627798310757,
+            1.0142601942370313
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "object_kind": "obstacle"
     }
   ],
   "enabled_errors": [],
-  "success": true
+  "success": true,
+  "rf_marker_count": {
+    "tx": 0,
+    "calibration_rx": 0,
+    "test_rx": 0
+  }
 }

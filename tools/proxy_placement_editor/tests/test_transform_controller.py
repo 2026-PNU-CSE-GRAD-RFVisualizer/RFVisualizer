@@ -4,8 +4,10 @@ import pytest
 from tools.proxy_placement_editor.transform_controller import (
     TransformError,
     resize_obstacle,
+    rotate_point_about_pivot,
     rotate_obstacle,
     rotate_obstacle_in_space,
+    scale_point_about_pivot,
     translate_obstacle,
 )
 
@@ -72,3 +74,15 @@ def test_world_and_local_rotation_composition_are_distinct_and_valid():
     assert not np.allclose(world_rotation, local_rotation)
     assert np.all(np.isfinite(world_rotation))
     assert np.all(np.isfinite(local_rotation))
+
+
+def test_group_rotation_and_scale_move_centers_around_shared_pivot():
+    rotated = rotate_point_about_pivot(
+        [2.0, 1.0, 0.5], [1.0, 1.0, 0.5], "z", 90.0
+    )
+    scaled = scale_point_about_pivot(
+        [2.0, 1.0, 0.5], [1.0, 1.0, 0.5], "x", 2.5
+    )
+
+    np.testing.assert_allclose(rotated, [1.0, 2.0, 0.5], atol=1.0e-12)
+    np.testing.assert_allclose(scaled, [3.5, 1.0, 0.5], atol=1.0e-12)

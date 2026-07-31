@@ -15,6 +15,8 @@ _X11_KEYSYMS = {
     "a": "a",
     "s": "s",
     "d": "d",
+    "ctrl_left": "Control_L",
+    "ctrl_right": "Control_R",
     "shift_left": "Shift_L",
     "shift_right": "Shift_R",
 }
@@ -334,4 +336,6 @@ def fps_keys_from_native(pressed: Set[str]) -> Set[str]:
     result = {key for key in ("w", "a", "s", "d") if key in pressed}
     if "shift_left" in pressed or "shift_right" in pressed:
         result.add("shift")
+    if "ctrl_left" in pressed or "ctrl_right" in pressed:
+        result.add("ctrl")
     return result

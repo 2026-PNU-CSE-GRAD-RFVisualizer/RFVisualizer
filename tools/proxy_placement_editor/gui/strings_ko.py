@@ -11,7 +11,7 @@ from typing import Any, Dict, Iterable, List, Sequence, Tuple
 
 
 TEXT: Dict[str, str] = {
-    "window_title": "RFVisualizer Phase 2-C 장애물 배치 편집기",
+    "window_title": "RFVisualizer Proxy Placement 통합 편집기",
     "provisional_warning": (
         "임시 형상(PROVISIONAL GEOMETRY)\n"
         "현재 실제 크기와 장애물 배치는 현장 실측으로 검증되지 않았습니다.\n"
@@ -20,6 +20,8 @@ TEXT: Dict[str, str] = {
     "candidate_library": "후보 라이브러리",
     "candidate_placeholder": "임시 크기",
     "add_candidate": "비활성 임시 객체 추가",
+    "add_calibration_rx": "보정 RX 추가",
+    "add_test_rx": "Test RX 추가",
     "objects": "객체 목록",
     "duplicate": "복제",
     "delete": "삭제",
@@ -27,6 +29,13 @@ TEXT: Dict[str, str] = {
     "move_down": "아래로",
     "show_hide": "표시/숨기기",
     "enabled_in_sionna": "Sionna 시나리오에서 활성화",
+    "radio_properties": "AP/TX 및 RX 속성",
+    "marker_kind": "전파 객체 종류",
+    "marker_name": "이름",
+    "point_id": "측정 지점 ID",
+    "receiver_role": "RX 역할",
+    "frequency_hz": "송신 주파수 Hz",
+    "power_dbm": "송신 세기 dBm",
     "properties": "속성",
     "validation": "검증",
     "not_validated": "검증하지 않음",
@@ -49,10 +58,10 @@ TEXT: Dict[str, str] = {
     "coordinate_space": "좌표계",
     "space_world": "World",
     "space_local": "Local",
-    "display_mode": "배경",
-    "display_both": "둘 다",
-    "display_point_cloud": "Point Cloud만",
-    "display_proxy_mesh": "Proxy Mesh만",
+    "display_layers": "표시 계층",
+    "display_point_cloud": "Point Cloud",
+    "display_proxy_mesh": "Proxy Mesh",
+    "display_pgsr_output_mesh": "PGSR Output Mesh",
     "point_size": "점 크기",
     "snap": "스냅(Snap)",
     "move_unit": "이동 m",
@@ -140,6 +149,8 @@ CANDIDATE_LABELS = {
     "desk_cluster": "책상 묶음",
     "blackboard_panel": "칠판 판",
     "door_panel": "문 판",
+    "stair_step": "계단 단",
+    "ap_tx": "AP / TX",
     "large_metal_object": "대형 금속 물체",
     "custom_box": "사용자 정의 상자",
     "custom_thin_panel": "사용자 정의 얇은 판",

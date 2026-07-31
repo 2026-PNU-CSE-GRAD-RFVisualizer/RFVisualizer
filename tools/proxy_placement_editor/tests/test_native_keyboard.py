@@ -20,6 +20,7 @@ def test_native_keys_map_to_fps_keys():
         "shift",
     }
     assert fps_keys_from_native({"shift_left", "unknown"}) == {"shift"}
+    assert fps_keys_from_native({"ctrl_left"}) == {"ctrl"}
 
 
 def test_rustdesk_immediate_release_pulses_are_treated_as_held():

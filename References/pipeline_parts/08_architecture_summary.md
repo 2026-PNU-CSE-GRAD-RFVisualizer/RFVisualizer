@@ -61,7 +61,7 @@ Phase 2-A에서는 이 미터 단위 사본을 객체별 PLY와 Mitsuba XML로 �
 
 Phase 2-B에서는 닫힌 Room Envelope를 그대로 둔 채 box·thin panel·외부 mesh를 독립 Proxy Obstacle Layer로 구성하고 객체별 Sionna ITU 재질을 지정한다. 실제 실행한 synthetic blocker A/B 시험은 같은 TX/RX·seed·coverage grid에서 직접 경로 차단과 유한한 Coverage 변화를 확인했으며, baseline 반복 오차와 A/B 변화를 분리해 기록한다. 실제 강의실 장애물은 실측 전까지 활성화하지 않으므로 이 단계의 결과는 계층과 비교 파이프라인 검증이다.
 
-Phase 2-C에서는 Phase 2-B schema를 원본으로 사용하는 Open3D Proxy Placement Editor를 추가한다. Room Envelope와 calibration은 읽기 전용이며 모든 편집은 meter/+Z 좌표에서 수행한다. Candidate 기본값은 미측정 placeholder라 비활성 상태로 추가되고, 사람이 위치·크기·방향·confidence·measurement source를 확인한 뒤에만 활성화한다. Metric/PGSR transform과 왕복 오차, floor/ceiling/wall clearance, collision warning을 함께 저장한다.
+Phase 2-C에서는 Phase 2-B schema를 원본으로 사용하는 Open3D Proxy Placement Editor를 추가한다. Room Envelope와 calibration은 읽기 전용이며 모든 편집은 meter/+Z 좌표에서 수행한다. 실제 PGSR Gaussian Point Cloud, Proxy Mesh(Room Envelope), PGSR Output Mesh는 세 개의 독립 체크박스로 원하는 조합을 중첩 표시한다. 대형 Output Mesh는 원본과 분리된 최대 100만 삼각형의 고화질 표시 전용 캐시를 사용한다. Candidate 기본값은 미측정 placeholder라 비활성 상태로 추가되고, 사람이 위치·크기·방향·confidence·measurement source를 확인한 뒤에만 활성화한다. Metric/PGSR transform과 왕복 오차, floor/ceiling/wall clearance, collision warning을 함께 저장한다.
 
 실시간 Viewer는 공식 SIBR Real-time Viewer를 Fork하여 확장하는 방식을 우선 검증한다. 기존 Gaussian Renderer와 Camera 구조를 유지한 채 Heatmap Plane, PGSR Mesh Depth-only Pass, UDP Pose Receiver, Offscreen Framebuffer, JPEG Streaming 모듈을 추가한다.
 

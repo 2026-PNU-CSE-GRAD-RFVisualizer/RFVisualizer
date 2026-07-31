@@ -1,0 +1,156 @@
+{
+  "schema_version": "1.0",
+  "scene_id": "classroom_20260723",
+  "coordinate_system_id": "pnu_classroom_field_v1",
+  "status": "ready",
+  "purpose": "synthetic_end_to_end_dry_run_only_not_paper_evidence",
+  "requirements": {
+    "transmitter_count": 1,
+    "calibration_receiver_count": 4,
+    "test_receiver_count": 15
+  },
+  "tx": [
+    {
+      "id": "tx-dry-01",
+      "name": "종단 Dry Run 송신기",
+      "position_m": [2.5, 2.5, 1.2],
+      "frequency_hz": 2400000000.0,
+      "power_dbm": 20.0
+    }
+  ],
+  "rx": [
+    {
+      "id": "rx-cal-01",
+      "point_id": "cal-01",
+      "name": "합성 보정 위치 1",
+      "role": "calibration",
+      "position_m": [1.5, 1.5, 1.2]
+    },
+    {
+      "id": "rx-cal-02",
+      "point_id": "cal-02",
+      "name": "합성 보정 위치 2",
+      "role": "calibration",
+      "position_m": [13.5, 1.5, 1.2]
+    },
+    {
+      "id": "rx-cal-03",
+      "point_id": "cal-03",
+      "name": "합성 보정 위치 3",
+      "role": "calibration",
+      "position_m": [1.5, 9.0, 1.2]
+    },
+    {
+      "id": "rx-cal-04",
+      "point_id": "cal-04",
+      "name": "합성 보정 위치 4",
+      "role": "calibration",
+      "position_m": [13.5, 9.0, 1.2]
+    },
+    {
+      "id": "rx-test-01",
+      "point_id": "test-01",
+      "name": "합성 Test 위치 1",
+      "role": "test",
+      "position_m": [3.0, 3.0, 1.2]
+    },
+    {
+      "id": "rx-test-02",
+      "point_id": "test-02",
+      "name": "합성 Test 위치 2",
+      "role": "test",
+      "position_m": [5.5, 3.0, 1.2]
+    },
+    {
+      "id": "rx-test-03",
+      "point_id": "test-03",
+      "name": "합성 Test 위치 3",
+      "role": "test",
+      "position_m": [8.0, 3.0, 1.2]
+    },
+    {
+      "id": "rx-test-04",
+      "point_id": "test-04",
+      "name": "합성 Test 위치 4",
+      "role": "test",
+      "position_m": [10.5, 3.0, 1.2]
+    },
+    {
+      "id": "rx-test-05",
+      "point_id": "test-05",
+      "name": "합성 Test 위치 5",
+      "role": "test",
+      "position_m": [13.0, 3.0, 1.2]
+    },
+    {
+      "id": "rx-test-06",
+      "point_id": "test-06",
+      "name": "합성 Test 위치 6",
+      "role": "test",
+      "position_m": [3.0, 5.5, 1.2]
+    },
+    {
+      "id": "rx-test-07",
+      "point_id": "test-07",
+      "name": "합성 Test 위치 7",
+      "role": "test",
+      "position_m": [5.5, 5.5, 1.2]
+    },
+    {
+      "id": "rx-test-08",
+      "point_id": "test-08",
+      "name": "합성 Test 위치 8",
+      "role": "test",
+      "position_m": [8.0, 5.5, 1.2]
+    },
+    {
+      "id": "rx-test-09",
+      "point_id": "test-09",
+      "name": "합성 Test 위치 9",
+      "role": "test",
+      "position_m": [10.5, 5.5, 1.2]
+    },
+    {
+      "id": "rx-test-10",
+      "point_id": "test-10",
+      "name": "합성 Test 위치 10",
+      "role": "test",
+      "position_m": [13.0, 5.5, 1.2]
+    },
+    {
+      "id": "rx-test-11",
+      "point_id": "test-11",
+      "name": "합성 Test 위치 11",
+      "role": "test",
+      "position_m": [3.0, 8.0, 1.2]
+    },
+    {
+      "id": "rx-test-12",
+      "point_id": "test-12",
+      "name": "합성 Test 위치 12",
+      "role": "test",
+      "position_m": [5.5, 8.0, 1.2]
+    },
+    {
+      "id": "rx-test-13",
+      "point_id": "test-13",
+      "name": "합성 Test 위치 13",
+      "role": "test",
+      "position_m": [8.0, 8.0, 1.2]
+    },
+    {
+      "id": "rx-test-14",
+      "point_id": "test-14",
+      "name": "합성 Test 위치 14",
+      "role": "test",
+      "position_m": [10.5, 8.0, 1.2]
+    },
+    {
+      "id": "rx-test-15",
+      "point_id": "test-15",
+      "name": "합성 Test 위치 15",
+      "role": "test",
+      "position_m": [13.0, 8.0, 1.2]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "sionna_rssi": {
+    "id": "pnu_4f_corridor_doors_glass_diffraction_scattering_authored_v1",
+    "status": "provisional",
+    "scene_source": {
+      "default_mode": "metric_proxy_export",
+      "prebuilt_scene_xml_usage": "proxy_mesh_editor_sionna_build_override"
+    },
+    "runtime": {
+      "required_sionna_rt_version": "1.2.2",
+      "required_mitsuba_version": "3.8.0",
+      "required_drjit_version": "1.3.1"
+    },
+    "materials": {
+      "floor": {"preset": "concrete"},
+      "ceiling": {"preset": "concrete"},
+      "walls": {"preset": "concrete"}
+    },
+    "antenna": {"pattern": "iso", "polarization": "V"},
+    "path_solver": {
+      "max_depth": 2,
+      "samples_per_src": 500000,
+      "seed": 42,
+      "synthetic_array": true,
+      "enable_los": true,
+      "enable_reflection": true,
+      "enable_refraction": false,
+      "enable_diffraction": true,
+      "enable_scattering": true
+    },
+    "radio_map": {
+      "z_height_m": 0.45,
+      "margin_m": 0.1,
+      "cell_size_m": 0.2,
+      "max_cells": 10000,
+      "samples_per_tx": 1000000,
+      "seed": 43,
+      "max_depth": 2,
+      "enable_los": true,
+      "enable_reflection": true,
+      "enable_refraction": false,
+      "enable_diffraction": true,
+      "enable_scattering": true
+    },
+    "validation": {
+      "device_clearance_m": 0.02,
+      "minimum_valid_grid_ratio": 0.05,
+      "minimum_valid_grid_points": 3,
+      "rss_consistency_tolerance_db": 0.0001
+    }
+  }
+}

@@ -23,23 +23,27 @@ def find_korean_font(
     return None
 
 
-def configure_korean_font(gui, application) -> Optional[Path]:
+def configure_korean_font(
+    gui, application, point_size: int = 16
+) -> Optional[Path]:
     """Add Korean glyphs before the first Open3D window is created."""
 
     path = find_korean_font()
-    if path is None:
-        return None
-    font = gui.FontDescription()
-    font.add_typeface_for_language(str(path), "ko")
+    typeface = str(path) if path is not None else gui.FontDescription.SANS_SERIF
+    font = gui.FontDescription(typeface, point_size=int(point_size))
+    if path is not None:
+        font.add_typeface_for_language(str(path), "ko")
     application.set_font(application.DEFAULT_FONT_ID, font)
     return path
 
 
-def configure_heading_font(gui, application, path: Optional[Path]) -> int:
+def configure_heading_font(
+    gui, application, path: Optional[Path], point_size: int = 18
+) -> int:
     """Create a larger heading font before the first window is created."""
 
     typeface = str(path) if path is not None else gui.FontDescription.SANS_SERIF
-    font = gui.FontDescription(typeface, point_size=18)
+    font = gui.FontDescription(typeface, point_size=int(point_size))
     if path is not None:
         font.add_typeface_for_language(str(path), "ko")
     return int(application.add_font(font))

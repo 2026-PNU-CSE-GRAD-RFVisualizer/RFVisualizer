@@ -16,6 +16,8 @@ def test_required_templates_exist(project_root):
         "Desk Cluster",
         "Blackboard Panel",
         "Door Panel",
+        "Stair Step",
+        "AP / TX",
         "Large Metal Object",
         "Custom Box",
         "Custom Thin Panel",

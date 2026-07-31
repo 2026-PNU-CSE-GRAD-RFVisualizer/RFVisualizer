@@ -23,6 +23,41 @@ def test_validate_cli_prints_machine_readable_success(monkeypatch, capsys):
     assert result["success"] is True
 
 
+def test_validate_cli_passes_optional_markers_to_scenario_preparation(
+    monkeypatch, capsys
+):
+    captured = {}
+    monkeypatch.setattr(cli, "load_scenario", lambda path: {"scenario": "loaded"})
+
+    def prepare(document, markers):
+        captured["document"] = document
+        captured["markers"] = markers
+        return object()
+
+    monkeypatch.setattr(cli, "prepare_scenario", prepare)
+    monkeypatch.setattr(
+        cli,
+        "validation_summary",
+        lambda prepared: {"scenario_id": "field", "success": True},
+    )
+
+    assert (
+        cli.main(
+            [
+                "validate",
+                "--scenario",
+                "scenario.yaml",
+                "--markers",
+                "tx_rx.json",
+            ]
+        )
+        == 0
+    )
+    assert captured["document"] == {"scenario": "loaded"}
+    assert captured["markers"] == Path("tx_rx.json")
+    assert json.loads(capsys.readouterr().out)["success"] is True
+
+
 def test_build_cli_reports_independent_object_counts(monkeypatch, tmp_path: Path, capsys):
     monkeypatch.setattr(cli, "load_scenario", lambda path: {})
     monkeypatch.setattr(cli, "prepare_scenario", lambda document: object())

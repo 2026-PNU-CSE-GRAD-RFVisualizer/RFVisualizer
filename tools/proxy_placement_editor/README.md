@@ -1,6 +1,6 @@
-# Phase 2-C Interactive Proxy Placement Editor
+# RFVisualizer 통합 Proxy Placement Editor
 
-Metric Room Envelope와 선택적 PGSR 참조 형상을 보면서 Proxy Obstacle을 배치하고, 기존 Phase 2-B scenario YAML을 그대로 저장하는 Open3D 편집기다.
+Metric Room Envelope와 선택적 PGSR 참조 형상을 보면서 문·계단·책상·AP/TX·RX를 한 창에서 배치하고, 기존 Phase 2-B scenario YAML과 실험 TX/RX JSON을 함께 저장하는 Open3D 편집기다.
 
 > **PROVISIONAL GEOMETRY**
 >
@@ -40,10 +40,11 @@ conda run -n pgsr python -m tools.proxy_placement_editor.main edit \
   --room-json outputs/proxy_mesh/pnu_classroom/metric_calibration/room_envelope_metric.json \
   --calibration outputs/proxy_mesh/pnu_classroom/metric_calibration/calibration.json \
   --scenario configs/sionna/scenarios/pnu_classroom_proxy_draft.yaml \
+  --markers configs/rf_experiment/classroom_20260723/tx_rx.json \
   --output outputs/proxy_placement/pnu_classroom
 ```
 
-저장소에 실제 존재하는 표시 전용 PGSR/TSDF 참조 메시 예시는 다음과 같다.
+실제 PGSR Point Cloud와 Output Mesh를 함께 표시하는 예시는 다음과 같다.
 
 ```bash
 conda run -n pgsr python -m tools.proxy_placement_editor.main edit \
@@ -51,12 +52,14 @@ conda run -n pgsr python -m tools.proxy_placement_editor.main edit \
   --room-json outputs/proxy_mesh/pnu_classroom/metric_calibration/room_envelope_metric.json \
   --calibration outputs/proxy_mesh/pnu_classroom/metric_calibration/calibration.json \
   --scenario configs/sionna/scenarios/pnu_classroom_proxy_draft.yaml \
-  --reference-mesh PGSR/output/pnu_classroom/mesh/tsdf_fusion_post.ply \
-  --reference-coordinate-space scene \
+  --point-cloud PGSR/output/pnu_classroom/point_cloud/iteration_30000/point_cloud.ply \
+  --point-cloud-coordinate-space scene \
+  --pgsr-output-mesh PGSR/output/pnu_classroom/mesh/tsdf_fusion_post.ply \
+  --pgsr-output-mesh-coordinate-space scene \
   --output outputs/proxy_placement/pnu_classroom
 ```
 
-Reference 입력은 OBJ, triangle-mesh PLY, point-cloud PLY다. `scene` 입력에는 calibration의 `T_metric_from_scene`을 적용한다. 큰 PLY mesh는 수백만 triangle을 GUI 시작 시 단순화하지 않고 PLY의 vertex/color만 읽어 최대 50만 점의 표시용 point cloud로 결정적으로 축약한다. 원본, scenario, Sionna export에는 반영하지 않는다.
+`--point-cloud`는 PGSR Gaussian PLY의 위치를 최대 50만 점으로 표시하고, `--pgsr-output-mesh`는 실제 삼각형 표면을 별도 계층으로 표시한다. `scene` 입력에는 calibration의 `T_metric_from_scene`을 동일하게 적용한다. 기본 CLI는 약 693만 삼각형의 Output Mesh를 최대 100만 삼각형 캐시로 표시한다. `--pgsr-output-mesh-full-resolution`을 지정하면 캐시를 건너뛰고 원본 Mesh를 그대로 표시한다. 프로젝트의 `run_proxy_editor.sh`는 구조 보존을 위해 이 원본 모드를 사용한다. PGSR 원본·scenario·Sionna export는 수정하지 않는다. 이전 `--reference-mesh` 인자는 호환용으로만 유지한다.
 
 ### RustDesk / Wayland GUI runtime
 
@@ -89,22 +92,23 @@ conda run -n pgsr python -m tools.proxy_placement_editor.main validate \
 ```bash
 conda run -n pgsr python -m tools.proxy_placement_editor.main export-preview \
   --scenario configs/sionna/scenarios/pnu_classroom_synthetic_blocker.yaml \
-  --reference-mesh PGSR/output/pnu_classroom/mesh/tsdf_fusion_post.ply \
-  --reference-coordinate-space scene \
+  --point-cloud PGSR/output/pnu_classroom/point_cloud/iteration_30000/point_cloud.ply \
+  --pgsr-output-mesh PGSR/output/pnu_classroom/mesh/tsdf_fusion_post.ply \
   --output outputs/proxy_placement/pnu_classroom/preview
 ```
 
-`--exclude-reference`를 추가하면 PNG에서 reference를 제외한다.
+`--exclude-reference`를 추가하면 PNG에서 두 PGSR 계층을 제외한다.
 
 ## 화면과 상호작용
 
-중앙 Viewport는 반투명 Room, +Z Metric 축, 경사진 floor grid, optional reference, 유효/무효/비활성 obstacle을 서로 다른 geometry layer로 표시한다. Room/reference는 picking 대상이 아니며 겹친 obstacle 중 광선의 가장 가까운 triangle hit가 선택된다. 오른쪽에는 큰 제목과 구분선으로 나눈 Candidate, Object List, Identity/Geometry/Transform/Material 속성, 실시간 clearance·collision·좌표 검증, 외부 명령 로그가 있다.
+중앙 Viewport는 Point Cloud, 불투명 Proxy Mesh(Room Envelope), 불투명 PGSR Output Mesh, 경사진 floor grid, 유효/무효/비활성 obstacle을 서로 다른 geometry layer로 표시한다. 세 배경 계층은 picking 대상이 아니며 겹친 obstacle 중 광선의 가장 가까운 triangle hit가 선택된다. 선택한 객체의 변형 gizmo는 화살표·회전 링·크기 박스 자체를 화면 투영은 유지한 채 camera near plane 바로 뒤에 다시 만들어 깊이 가림을 우회한다. 카메라가 움직이면 이 실제 3D handle도 갱신하며, 혼동을 주는 상시 world-origin 축과 별도 색상 표식은 표시하지 않는다. 오른쪽에는 큰 제목과 구분선으로 나눈 Candidate, Object List, Identity/Geometry/Transform/Material 속성, 실시간 clearance·collision·좌표 검증, 외부 명령 로그가 있다.
 
-상단의 배경 선택은 `둘 다`, `Point Cloud만`, `Proxy Mesh만`을 지원한다. 여기서 Proxy Mesh는 Room Envelope 배경을 뜻하며 배치된 obstacle과 선택 gizmo는 세 모드에서 항상 유지된다. Point Cloud 점 개수는 바꾸지 않고 `점 크기` 슬라이더만 1–12px 범위에서 변경한다. 점 크기 변경은 대형 reference geometry를 다시 올리지 않고 material만 갱신한다.
+상단에는 `Point Cloud`, `Proxy Mesh`, `PGSR Output Mesh` 체크박스가 따로 있다. 세 항목을 독립적으로 체크하거나 해제할 수 있어 0개부터 3개까지 원하는 조합으로 중첩 표시한다. 여기서 Proxy Mesh는 Room Envelope를 뜻하며 배치된 obstacle과 선택 gizmo는 체크 상태와 무관하게 유지된다. Proxy Mesh는 밝은 청회색 불투명 재질, PGSR Output Mesh는 원본 정점색을 보존하는 불투명 재질로 표시한다. 두 기준 계층은 조명 방향에 따라 어두워지지 않도록 비조명 셰이더를 사용한다. `점 크기` 슬라이더는 Point Cloud에만 적용되며 1–12px 범위에서 material만 갱신한다.
 
 | 입력 | 동작 |
 |---|---|
-| 왼쪽 클릭 | 가장 가까운 obstacle 선택; 변형 모드의 빈 공간/선택 객체 본체 drag는 카메라 회전 |
+| 왼쪽 클릭 | 가장 가까운 obstacle 선택; 변형 모드에서 gizmo 보호 영역 바깥의 빈 공간/선택 객체 본체 drag는 카메라 회전 |
+| 객체 목록에서 Ctrl+클릭 | 기존 선택을 유지한 채 객체를 추가하거나 제외; `●`는 대표 객체, `✓`는 함께 선택된 객체 |
 | 우클릭 드래그 + `W/A/S/D` | FPS 시점 회전 + 카메라 시선 기준 전후좌우 이동 |
 | 우클릭 + Shift | FPS 이동 속도 증가 |
 | Alt+왼쪽 / Ctrl+왼쪽 / 가운데 드래그 / Wheel | Open3D Orbit / Pan / Pan / Zoom |
@@ -117,11 +121,11 @@ conda run -n pgsr python -m tools.proxy_placement_editor.main export-preview \
 | Delete, Ctrl+D | 삭제 / 비활성 복제 |
 | Ctrl+Z, Ctrl+Y, Ctrl+Shift+Z | Undo / Redo |
 | Ctrl+S | 전체 검증 후 저장 |
-| `V`, `H` | 배경 표시 모드 순환 / 선택 object 표시 전환 |
+| `H` | 선택 object 표시 전환; 배경은 상단의 세 체크박스로 독립 전환 |
 | `1`, `3`, `7` | Front / Side / Top view |
 | Esc | Select mode 복귀 |
 
-Toolbar 기본 snap은 translation 0.05m, rotation 5도, size 0.05m다. 지원 단위는 코어에서 임의 양수로 검증되며 World/Local, 배경 모드, 점 크기를 포함한 UI 설정은 scenario가 아니라 editor state에 저장된다. 마우스 drag 중에는 선택 객체와 gizmo만 다시 만들고, 전체 장면 검증과 다른 객체 갱신은 mouse-up에 한 번만 수행한다. Mouse-up에는 명령 하나만 쌓인다. Gizmo handle은 고정된 화면 픽셀 허용 범위로 선택한다. 이동·크기는 화면에 투영된 축 방향의 mouse 이동을 실제 거리로 환산하고, 회전은 선택한 링의 화면상 접선 방향 이동을 각도로 환산한다. Gizmo drag 중에는 SceneWidget을 `PICK_POINTS` 제어로 전환해 mouse capture는 유지하면서 카메라 회전은 막고, mouse-up에 `ROTATE_CAMERA`로 복구한다.
+Toolbar 기본 snap은 translation 0.05m, rotation 5도, size 0.05m다. 지원 단위는 코어에서 임의 양수로 검증되며 World/Local, 배경 모드, 점 크기를 포함한 UI 설정은 scenario가 아니라 editor state에 저장된다. 여러 객체를 선택하면 결합 경계상자 중심에 World 축 gizmo 하나를 표시한다. 이동은 같은 변위를 적용하고, 회전·크기 조절은 각 객체 자체 변형과 그룹 중심으로부터의 위치 변화를 함께 적용한다. 이때 RX 점도 그룹 내 위치 변환에는 참여한다. 마우스 drag 중에는 선택 객체와 gizmo만 다시 만들고, 전체 장면 검증과 다른 객체 갱신은 mouse-up에 한 번만 수행한다. Mouse-up에는 선택 개수와 무관하게 명령 하나만 쌓인다. Gizmo handle은 화면 기준 22px 범위에서 선택하고, 그 바깥 34px까지는 좁게 빗나간 클릭이 다른 객체 선택이나 카메라 조작으로 전달되지 않게 막는다. 이동·크기는 화면에 투영된 축 방향의 mouse 이동을 실제 거리로 환산하고, 회전은 선택한 링의 화면상 접선 방향 이동을 각도로 환산한다. Gizmo drag 중에는 SceneWidget을 `PICK_POINTS` 제어로 전환해 mouse capture는 유지하면서 카메라 회전은 막고, mouse-up에 `ROTATE_CAMERA`로 복구한다.
 
 일반 편집 단축키는 Viewport에만 연결한다. 따라서 TextEdit/NumberEdit에 포커스가 있을 때 화살표, Backspace, Delete 등의 편집 키는 입력창이 직접 처리한다. Open3D 0.18은 ImGui 입력창이 활성화된 동안 Window와 SceneWidget key callback을 모두 건너뛰므로, Linux/X11·XWayland에서는 우클릭 FPS 중 로컬 키보드의 `XQueryKeymap` 상태와 XInput2 raw key event를 함께 읽는다. RustDesk 1.4.9가 키를 누른 상태 대신 즉시 Press/Release 펄스로 반복 전송하면, 120ms 유지 창을 반복 Press로 갱신해 연속 입력으로 복원한다. FPS 중에는 활성 속성 입력을 잠그고 우클릭을 놓을 때 상태 값으로 다시 표시해, 이동 키가 기존 입력값에 섞이지 않게 한다. XInput2를 사용할 수 없으면 로컬 keymap polling을 유지하고, X11 poller도 사용할 수 없는 환경에서는 기존 Window/Viewport callback을 fallback으로 유지한다. 우클릭 DRAG 이벤트의 버튼 bit가 비어 있어도 이동 상태를 유지하고 실제 `BUTTON_UP`에서만 종료한다. Ctrl+왼쪽 drag도 객체 선택보다 먼저 Open3D에 넘겨 카메라 평행 이동을 보존한다.
 
@@ -141,8 +145,9 @@ FPS 카메라는 우클릭을 누른 동안만 활성화된다. 상대 마우스
 ```yaml
 reference:
   point_size: 2.0
-  visible: true
-  display_mode: both  # both / point_cloud / proxy_mesh
+  point_cloud_visible: true
+  proxy_mesh_visible: true
+  pgsr_output_mesh_visible: true
 navigation:
   fps:
     enabled: true
@@ -159,9 +164,13 @@ navigation:
 - Desk Cluster
 - Blackboard Panel
 - Door Panel
+- Stair Step
+- AP / TX
 - Large Metal Object
 - Custom Box
 - Custom Thin Panel
+
+Candidate 패널의 `보정 RX 추가`와 `Test RX 추가`는 크기가 없는 측정점을 만든다. RX는 이동 기즈모와 숫자 X/Y/Z 입력을 지원하고, 물리 객체가 아니므로 회전·크기 조절과 Sionna 장애물 활성화는 지원하지 않는다. AP/TX는 하나의 물리 객체이며 일반 장애물 변형 기즈모와 송신 주파수·세기 속성을 함께 사용한다.
 
 Template에는 geometry type/default size, anchor/floor policy, material category, semantic/purpose/confidence가 있다. Thin panel의 size 순서는 Phase 2-B와 동일하게 `X=thickness, Y=width, Z=height`다.
 

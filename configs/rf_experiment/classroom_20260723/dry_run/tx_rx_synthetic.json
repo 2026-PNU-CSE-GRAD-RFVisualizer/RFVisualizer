@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "scene_id": "classroom_20260723",
+  "coordinate_system_id": "pnu_classroom_field_v1",
+  "status": "draft",
+  "purpose": "synthetic_pipeline_dry_run_only_not_paper_evidence",
+  "requirements": {
+    "transmitter_count": 1,
+    "calibration_receiver_count": 4,
+    "test_receiver_count": 15
+  },
+  "tx": [
+    {
+      "id": "tx-dry-01",
+      "name": "Dry Run 송신기",
+      "position_m": [2.0, 2.0, 1.2],
+      "frequency_hz": 2400000000.0,
+      "power_dbm": 20.0
+    }
+  ],
+  "rx": [
+    {
+      "id": "rx-dry-01",
+      "point_id": "dry-run-01",
+      "name": "Dry Run 수신기",
+      "role": "calibration",
+      "position_m": [5.0, 2.0, 1.2]
+    }
+  ]
+}

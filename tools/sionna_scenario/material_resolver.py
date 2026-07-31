@@ -78,7 +78,9 @@ def resolve_material_request(obstacle: Dict[str, Any]) -> Dict[str, Any]:
         "obstacle_id": obstacle_id,
         "object_name": str(export.get("object_name", obstacle_id)),
         "category": category,
-        "actual_sionna_material_name": "itu_{}_{}".format(itu_type, _safe_id(obstacle_id)),
+        "actual_sionna_material_name": "radio_itu_{}_{}".format(
+            itu_type, _safe_id(obstacle_id)
+        ),
         "itu_type": itu_type,
         "thickness_m": thickness,
         "scattering_coefficient": scattering,

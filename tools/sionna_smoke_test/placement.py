@@ -3,13 +3,55 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 import numpy as np
 
 
 class PlacementError(ValueError):
     """TX/RX를 Room Envelope 내부에 안전하게 배치할 수 없을 때 발생한다."""
+
+
+def _point_segment_distance_2d(
+    point: np.ndarray, start: np.ndarray, end: np.ndarray
+) -> float:
+    direction = end - start
+    denominator = float(np.dot(direction, direction))
+    if denominator <= 1.0e-24:
+        return float(np.linalg.norm(point - start))
+    parameter = float(np.clip(np.dot(point - start, direction) / denominator, 0.0, 1.0))
+    return float(np.linalg.norm(point - (start + parameter * direction)))
+
+
+def _point_in_polygon_2d(
+    point: np.ndarray, polygon: np.ndarray, tolerance: float = 1.0e-8
+) -> bool:
+    """Boundary-inclusive even/odd test for a simple 2-D polygon."""
+
+    inside = False
+    x, y = float(point[0]), float(point[1])
+    for index, start in enumerate(polygon):
+        end = polygon[(index + 1) % len(polygon)]
+        if _point_segment_distance_2d(point, start, end) <= tolerance:
+            return True
+        y1, y2 = float(start[1]), float(end[1])
+        if (y1 > y) == (y2 > y):
+            continue
+        intersection_x = float(start[0]) + (y - y1) * float(end[0] - start[0]) / (y2 - y1)
+        if x < intersection_x:
+            inside = not inside
+    return inside
+
+
+def _polygon_is_concave_2d(polygon: np.ndarray, tolerance: float = 1.0e-10) -> bool:
+    signs = set()
+    for index in range(len(polygon)):
+        first = polygon[(index + 1) % len(polygon)] - polygon[index]
+        second = polygon[(index + 2) % len(polygon)] - polygon[(index + 1) % len(polygon)]
+        cross = float(first[0] * second[1] - first[1] * second[0])
+        if abs(cross) > tolerance:
+            signs.add(1 if cross > 0.0 else -1)
+    return len(signs) > 1
 
 
 @dataclass
@@ -20,6 +62,8 @@ class RoomContainment:
     interior_point: np.ndarray
     bounds_min: np.ndarray
     bounds_max: np.ndarray
+    footprint_xy: Optional[np.ndarray] = None
+    footprint_is_concave: bool = False
 
     @classmethod
     def from_metadata(cls, metadata: Dict[str, Any]):
@@ -35,7 +79,29 @@ class RoomContainment:
             raise PlacementError("Metric metadata의 floor/ceiling/wall 평면식이 부족합니다.")
         if interior.shape != (3,) or minimum.shape != (3,) or maximum.shape != (3,):
             raise PlacementError("Metric metadata의 interior point 또는 bounds가 유효하지 않습니다.")
-        return cls(floor, ceiling, walls, interior, minimum, maximum)
+        corners = np.asarray(metadata.get("bottom_corners", []), dtype=float)
+        footprint = None
+        concave = False
+        if corners.size:
+            if (
+                corners.ndim != 2
+                or corners.shape[1] != 3
+                or len(corners) < 3
+                or not np.all(np.isfinite(corners))
+            ):
+                raise PlacementError("Metric metadata의 bottom_corners가 유효하지 않습니다.")
+            footprint = corners[:, :2].copy()
+            concave = _polygon_is_concave_2d(footprint)
+        return cls(
+            floor,
+            ceiling,
+            walls,
+            interior,
+            minimum,
+            maximum,
+            footprint_xy=footprint,
+            footprint_is_concave=concave,
+        )
 
     @property
     def planes(self):
@@ -69,8 +135,26 @@ class RoomContainment:
         floor_z, ceiling_z = self.floor_ceiling_z(value[0], value[1])
         floor_clearance = float(value[2] - floor_z)
         ceiling_clearance = float(ceiling_z - value[2])
-        wall_clearance = float(min(plane_distances[2:]))
-        inside = bool(all(distance >= -1e-8 for distance in plane_distances))
+        if self.footprint_is_concave and self.footprint_xy is not None:
+            horizontal_inside = _point_in_polygon_2d(value[:2], self.footprint_xy)
+            wall_clearance = min(
+                _point_segment_distance_2d(
+                    value[:2],
+                    start,
+                    self.footprint_xy[(index + 1) % len(self.footprint_xy)],
+                )
+                for index, start in enumerate(self.footprint_xy)
+            )
+            if not horizontal_inside:
+                wall_clearance = -wall_clearance
+            inside = bool(
+                horizontal_inside
+                and plane_distances[0] >= -1.0e-8
+                and plane_distances[1] >= -1.0e-8
+            )
+        else:
+            wall_clearance = float(min(plane_distances[2:]))
+            inside = bool(all(distance >= -1e-8 for distance in plane_distances))
         safe = bool(
             inside
             and floor_clearance >= clearance

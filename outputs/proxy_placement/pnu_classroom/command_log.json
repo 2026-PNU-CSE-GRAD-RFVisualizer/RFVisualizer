@@ -1,4 +1,143 @@
 {
   "schema_version": "1.0",
-  "commands": []
+  "commands": [
+    {
+      "timestamp": "2026-07-22T12:13:57.433772Z",
+      "action": "commit",
+      "command": "ChangePropertyCommand",
+      "object_id": "Door"
+    },
+    {
+      "timestamp": "2026-07-22T12:14:02.852878Z",
+      "action": "commit",
+      "command": "ChangePropertyCommand",
+      "object_id": "Door"
+    },
+    {
+      "timestamp": "2026-07-22T12:14:06.640018Z",
+      "action": "commit",
+      "command": "ChangeMaterialCommand",
+      "object_id": "Door"
+    },
+    {
+      "timestamp": "2026-07-22T12:14:20.255285Z",
+      "action": "commit",
+      "command": "ChangePropertyCommand",
+      "object_id": "Blackboard"
+    },
+    {
+      "timestamp": "2026-07-22T12:14:39.092496Z",
+      "action": "commit",
+      "command": "ChangePropertyCommand",
+      "object_id": "Left_Desk01"
+    },
+    {
+      "timestamp": "2026-07-22T12:14:58.289305Z",
+      "action": "commit",
+      "command": "ChangePropertyCommand",
+      "object_id": "Left_Desk02"
+    },
+    {
+      "timestamp": "2026-07-22T12:15:03.876626Z",
+      "action": "commit",
+      "command": "ChangePropertyCommand",
+      "object_id": "Left_Desk03"
+    },
+    {
+      "timestamp": "2026-07-22T12:15:09.836544Z",
+      "action": "commit",
+      "command": "ChangePropertyCommand",
+      "object_id": "Left_Desk04"
+    },
+    {
+      "timestamp": "2026-07-22T12:15:14.655048Z",
+      "action": "commit",
+      "command": "ChangePropertyCommand",
+      "object_id": "Left_Desk05"
+    },
+    {
+      "timestamp": "2026-07-22T12:15:25.535002Z",
+      "action": "commit",
+      "command": "ChangePropertyCommand",
+      "object_id": "Left_Desk06"
+    },
+    {
+      "timestamp": "2026-07-22T12:15:29.471134Z",
+      "action": "commit",
+      "command": "ChangePropertyCommand",
+      "object_id": "Left_Desk01"
+    },
+    {
+      "timestamp": "2026-07-22T12:15:42.438060Z",
+      "action": "commit",
+      "command": "ChangePropertyCommand",
+      "object_id": "Left_Desk06"
+    },
+    {
+      "timestamp": "2026-07-22T12:16:06.259837Z",
+      "action": "commit",
+      "command": "AddObjectCommand",
+      "object_id": "desk_cluster_000"
+    },
+    {
+      "timestamp": "2026-07-22T12:16:26.749318Z",
+      "action": "commit",
+      "command": "ChangePropertyCommand",
+      "object_id": "Mid_Desk01"
+    },
+    {
+      "timestamp": "2026-07-22T12:16:32.688460Z",
+      "action": "commit",
+      "command": "TransformObjectCommand",
+      "object_id": "Mid_Desk01"
+    },
+    {
+      "timestamp": "2026-07-22T12:16:43.630751Z",
+      "action": "commit",
+      "command": "TransformObjectCommand",
+      "object_id": "Mid_Desk01"
+    },
+    {
+      "timestamp": "2026-07-22T12:16:45.023608Z",
+      "action": "commit",
+      "command": "TransformObjectCommand",
+      "object_id": "Mid_Desk01"
+    },
+    {
+      "timestamp": "2026-07-22T12:16:48.992725Z",
+      "action": "commit",
+      "command": "ResizeObjectCommand",
+      "object_id": "Mid_Desk01"
+    },
+    {
+      "timestamp": "2026-07-22T12:16:56.646224Z",
+      "action": "commit",
+      "command": "TransformObjectCommand",
+      "object_id": "Mid_Desk01"
+    },
+    {
+      "timestamp": "2026-07-22T12:17:01.176718Z",
+      "action": "commit",
+      "command": "ResizeObjectCommand",
+      "object_id": "Mid_Desk01"
+    },
+    {
+      "timestamp": "2026-07-22T12:17:07.078310Z",
+      "action": "commit",
+      "command": "TransformObjectCommand",
+      "object_id": "Mid_Desk01"
+    },
+    {
+      "timestamp": "2026-07-22T12:17:09.423629Z",
+      "action": "commit",
+      "command": "ResizeObjectCommand",
+      "object_id": "Mid_Desk01"
+    },
+    {
+      "timestamp": "2026-07-22T12:17:11.652557Z",
+      "action": "commit",
+      "command": "TransformObjectCommand",
+      "object_id": "Mid_Desk01"
+    }
+  ]
 }
