@@ -64,7 +64,6 @@ class EditorCore:
         state: EditorState,
         candidates: list,
         output: Path,
-        reference: Optional[ReferenceGeometry] = None,
         point_cloud: Optional[ReferenceGeometry] = None,
         pgsr_output_mesh: Optional[ReferenceGeometry] = None,
     ):
@@ -72,9 +71,7 @@ class EditorCore:
         self.state = state
         self.candidates = candidates
         self.output = Path(output).expanduser().resolve()
-        # `reference` remains a read-compatible constructor argument for older
-        # callers. New code keeps the two PGSR products as distinct layers.
-        self.point_cloud = point_cloud or reference
+        self.point_cloud = point_cloud
         self.pgsr_output_mesh = pgsr_output_mesh
         self.commands = CommandStack()
         self.last_validation: Optional[Dict[str, Any]] = None
@@ -99,7 +96,6 @@ class EditorCore:
         output: Path,
         candidates: Path,
         room_obj: Optional[Path] = None,
-        reference: Optional[ReferenceGeometry] = None,
         point_cloud: Optional[ReferenceGeometry] = None,
         pgsr_output_mesh: Optional[ReferenceGeometry] = None,
     ) -> "EditorCore":
@@ -111,7 +107,6 @@ class EditorCore:
             state,
             load_candidate_library(candidates),
             output,
-            reference=reference,
             point_cloud=point_cloud,
             pgsr_output_mesh=pgsr_output_mesh,
         )

@@ -47,13 +47,15 @@ def _candidate_color(index: int) -> np.ndarray:
     return PALETTE[index % len(PALETTE)].copy()
 
 
-def _remove_local_inliers(
+def remove_local_inliers(
     source_cloud: Any,
     remaining_indices: np.ndarray,
     local_inliers: np.ndarray,
 ) -> Tuple[Any, np.ndarray]:
+    """RANSAC 반복에서 이번에 뽑힌 inlier를 남은 점 집합에서 제거한다."""
+
     keep_mask = np.ones(len(remaining_indices), dtype=bool)
-    keep_mask[local_inliers] = False
+    keep_mask[np.asarray(local_inliers, dtype=int)] = False
     updated_indices = remaining_indices[keep_mask]
     updated_cloud = source_cloud.select_by_index(updated_indices.tolist())
     return updated_cloud, updated_indices
@@ -188,7 +190,7 @@ def extract_planes(
             valid_labels = labels[labels >= 0]
             if not len(valid_labels):
                 rejection_counts["no_connected_component"] += 1
-                remaining_cloud, remaining_indices = _remove_local_inliers(
+                remaining_cloud, remaining_indices = remove_local_inliers(
                     point_cloud, remaining_indices, local_inliers
                 )
                 continue
@@ -207,7 +209,7 @@ def extract_planes(
             or initial_ratio < float(settings["min_inlier_ratio"])
         ):
             rejection_counts["connected_component_too_small"] += 1
-            remaining_cloud, remaining_indices = _remove_local_inliers(
+            remaining_cloud, remaining_indices = remove_local_inliers(
                 point_cloud, remaining_indices, local_inliers
             )
             continue
@@ -224,7 +226,7 @@ def extract_planes(
         except PlaneMeshingError as exc:
             rejection_counts["degenerate_rectangle"] += 1
             LOGGER.warning("퇴화한 평면 후보를 건너뜁니다: %s", exc)
-            remaining_cloud, remaining_indices = _remove_local_inliers(
+            remaining_cloud, remaining_indices = remove_local_inliers(
                 point_cloud, remaining_indices, local_inliers
             )
             continue
@@ -236,7 +238,7 @@ def extract_planes(
                 rectangle.area,
                 min_area,
             )
-            remaining_cloud, remaining_indices = _remove_local_inliers(
+            remaining_cloud, remaining_indices = remove_local_inliers(
                 point_cloud, remaining_indices, local_inliers
             )
             continue
@@ -255,7 +257,7 @@ def extract_planes(
             >= int(limit_settings[classification.orientation])
         ):
             rejection_counts["orientation_limit"] += 1
-            remaining_cloud, remaining_indices = _remove_local_inliers(
+            remaining_cloud, remaining_indices = remove_local_inliers(
                 point_cloud, remaining_indices, local_inliers
             )
             continue
@@ -299,7 +301,7 @@ def extract_planes(
             classification.confidence,
         )
 
-        remaining_cloud, remaining_indices = _remove_local_inliers(
+        remaining_cloud, remaining_indices = remove_local_inliers(
             point_cloud, remaining_indices, local_inliers
         )
 

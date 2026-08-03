@@ -15,21 +15,16 @@ from .calibration.preflight_config import load_preflight_config
 from .calibration.preview_exporter import CalibrationPreviewError
 from .calibration.report import CalibrationReportError
 from .calibration.metric_calibration import run_metric_calibration
-from .calibration.metric_config import (
-    MetricCalibrationConfigError,
-    load_metric_config,
-)
+from .calibration.metric_config import load_metric_config
 from .calibration.metric_exporter import MetricExportError
 from .calibration.metric_metadata import MetricMetadataError
-from .calibration.metric_transform import MetricTransformError
-from .calibration.metric_validator import MetricValidationError
-from .config import ConfigError, load_config, normalize_vector
+from .config import load_config, normalize_vector
 from .envelope.builder import build_room_envelope
 from .envelope.candidate_loader import load_envelope_candidates
 from .envelope.config import load_envelope_config
 from .envelope.exporter import EnvelopeExportError, export_envelope_geometry
 from .envelope.validator import validate_envelope
-from .export.obj_exporter import ObjExportError, export_obj_bundle
+from .export.obj_exporter import export_obj_bundle
 from .export.preview_exporter import (
     PreviewExportError,
     write_preview,
@@ -658,18 +653,12 @@ def main(argv: Optional[List[str]] = None) -> int:
     try:
         return int(args.handler(args))
     except (
-        ConfigError,
-        MetadataError,
-        ObjExportError,
         PreviewExportError,
         EnvelopeExportError,
         CalibrationPreviewError,
         CalibrationReportError,
-        MetricCalibrationConfigError,
         MetricExportError,
         MetricMetadataError,
-        MetricTransformError,
-        MetricValidationError,
         SceneLoadError,
         ValueError,
     ) as exc:

@@ -16,7 +16,6 @@ class StateCommand:
     before: Dict[str, Any]
     after: Dict[str, Any]
     object_id: Optional[str] = None
-    label: str = "Change"
 
     def execute(self) -> None:
         self.state.restore_document(self.after)
@@ -25,36 +24,38 @@ class StateCommand:
         self.state.restore_document(self.before)
 
 
+# 아래 subclass는 동작이 아니라 이름만 다르다. 클래스 이름이 그대로
+# command_log.json의 "command" 값으로 기록되므로 개별 타입을 유지한다.
 class AddObjectCommand(StateCommand):
-    label = "Add object"
+    pass
 
 
 class DeleteObjectCommand(StateCommand):
-    label = "Delete object"
+    pass
 
 
 class DuplicateObjectCommand(StateCommand):
-    label = "Duplicate object"
+    pass
 
 
 class TransformObjectCommand(StateCommand):
-    label = "Transform object"
+    pass
 
 
 class ResizeObjectCommand(StateCommand):
-    label = "Resize object"
+    pass
 
 
 class ChangeMaterialCommand(StateCommand):
-    label = "Change material"
+    pass
 
 
 class ChangePropertyCommand(StateCommand):
-    label = "Change property"
+    pass
 
 
 class EnableObjectCommand(StateCommand):
-    label = "Enable object"
+    pass
 
 
 class CommandStack:

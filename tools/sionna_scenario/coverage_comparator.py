@@ -472,16 +472,9 @@ def compare_coverage(
     return result
 
 
-def compare_coverage_maps(baseline: Any, variant: Any, **kwargs: Any) -> Dict[str, Any]:
-    """Backward-friendly alias for :func:`compare_coverage`."""
-
-    return compare_coverage(baseline, variant, **kwargs)
-
-
 __all__ = [
     "CoverageComparisonError",
     "compare_coverage",
-    "compare_coverage_maps",
     "to_db",
     "validate_common_grid",
     "validate_common_valid_mask",

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import csv
 import hashlib
 import math
 import time
@@ -13,7 +12,7 @@ import numpy as np
 
 from tools.sionna_smoke_test.coverage_test import run_coverage_solver
 from tools.sionna_smoke_test.environment import diagnose_environment
-from tools.sionna_smoke_test.io_utils import write_json
+from tools.sionna_smoke_test.io_utils import SmokeTestIOError, write_csv, write_json
 from tools.sionna_smoke_test.main import configure_sionna_scene
 from tools.sionna_smoke_test.metric_scene_loader import load_metric_scene
 from tools.sionna_smoke_test.path_test import arrays_from_paths
@@ -189,24 +188,14 @@ def validate_solver_document(document: Mapping[str, Any]) -> Dict[str, Any]:
 
 
 def _sha256(path: Path) -> str:
-    digest = hashlib.sha256()
     with Path(path).open("rb") as handle:
-        for block in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
+        return hashlib.file_digest(handle, "sha256").hexdigest()
 
 
 def _write_csv(path: Path, fields: Sequence[str], rows: Sequence[Mapping[str, Any]]) -> None:
-    output = Path(path)
-    output.parent.mkdir(parents=True, exist_ok=True)
-    temporary = output.with_suffix(output.suffix + ".tmp")
     try:
-        with temporary.open("w", encoding="utf-8", newline="") as handle:
-            writer = csv.DictWriter(handle, fieldnames=fields)
-            writer.writeheader()
-            writer.writerows(rows)
-        temporary.replace(output)
-    except OSError as exc:
+        write_csv(path, fields, rows)
+    except SmokeTestIOError as exc:
         raise SionnaRssiError("Sionna CSV를 저장할 수 없습니다: {}".format(exc)) from exc
 
 

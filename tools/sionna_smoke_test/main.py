@@ -112,9 +112,6 @@ def configure_sionna_scene(scene_xml: str, settings, positions):
     return scene, load_time
 
 
-# Backwards-compatible private name used by the original Phase 2-A implementation.
-_configure_sionna_scene = configure_sionna_scene
-
 
 def command_run(args: argparse.Namespace) -> int:
     config, settings = _load_settings(args.config)
@@ -272,6 +269,28 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+def _write_failure_json(
+    args: argparse.Namespace, exception_type: str, reason: str
+) -> None:
+    """run 명령이 실패했을 때만 진단 JSON을 남긴다. 저장 실패는 삼키고 기록만 한다."""
+
+    if getattr(args, "output", None) is None or args.command != "run":
+        return
+    try:
+        write_json(
+            Path(args.output).expanduser().resolve() / "smoke_test_failure.json",
+            {
+                "status": "failure",
+                "success": False,
+                "exception_type": exception_type,
+                "reason": reason,
+                "reproduction_command": " ".join(sys.argv),
+            },
+        )
+    except Exception:
+        LOGGER.exception("실패 진단 JSON도 저장하지 못했습니다.")
+
+
 def main(argv: Optional[List[str]] = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
@@ -295,37 +314,13 @@ def main(argv: Optional[List[str]] = None) -> int:
         ValueError,
     ) as exc:
         LOGGER.error("%s", exc)
-        if getattr(args, "output", None) is not None and args.command == "run":
-            try:
-                write_json(
-                    Path(args.output).expanduser().resolve() / "smoke_test_failure.json",
-                    {
-                        "status": "failure",
-                        "success": False,
-                        "exception_type": exc.__class__.__name__,
-                        "reason": str(exc),
-                        "reproduction_command": " ".join(sys.argv),
-                    },
-                )
-            except Exception:
-                LOGGER.exception("실패 진단 JSON도 저장하지 못했습니다.")
+        _write_failure_json(args, exc.__class__.__name__, str(exc))
         return 2
     except Exception:
         LOGGER.exception("예상하지 못한 Smoke Test 오류가 발생했습니다.")
-        if getattr(args, "output", None) is not None and args.command == "run":
-            try:
-                write_json(
-                    Path(args.output).expanduser().resolve() / "smoke_test_failure.json",
-                    {
-                        "status": "failure",
-                        "success": False,
-                        "exception_type": "UnexpectedError",
-                        "reason": "자세한 원인은 stderr traceback을 확인하세요.",
-                        "reproduction_command": " ".join(sys.argv),
-                    },
-                )
-            except Exception:
-                LOGGER.exception("실패 진단 JSON도 저장하지 못했습니다.")
+        _write_failure_json(
+            args, "UnexpectedError", "자세한 원인은 stderr traceback을 확인하세요."
+        )
         return 1
 
 

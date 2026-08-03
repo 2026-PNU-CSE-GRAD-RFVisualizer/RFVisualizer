@@ -30,61 +30,8 @@ def _json_scalar(value: Any) -> Any:
     return str(value)
 
 
-def _looks_like_path_record(value: Mapping) -> bool:
-    keys = set(value.keys())
-    return bool(
-        keys.intersection(
-            {
-                "path_type",
-                "interaction_count",
-                "distance_m",
-                "delay_s",
-                "amplitude_magnitude",
-                "interaction_object_ids",
-            }
-        )
-    )
-
-
-def _columnar_records(value: Mapping) -> Optional[List[Dict[str, Any]]]:
-    recognized = set(
-        _DISTANCE_KEYS
-        + _DELAY_KEYS
-        + _AMPLITUDE_KEYS
-        + _PATH_GAIN_KEYS
-        + _PATH_GAIN_DB_KEYS
-        + (
-            "path_type",
-            "interaction_count",
-            "interaction_object_ids",
-            "interaction_types",
-            "transmitter",
-            "receiver",
-        )
-    )
-    columns = {}
-    length = None
-    for key, item in value.items():
-        if key not in recognized or isinstance(item, (str, bytes, Mapping)):
-            continue
-        array = np.asarray(item, dtype=object)
-        if array.ndim == 0:
-            continue
-        if length is None:
-            length = len(array)
-        elif len(array) != length:
-            raise PathComparisonError("Columnar path arrays must have equal lengths.")
-        columns[key] = array
-    if length is None or not columns:
-        return None
-    return [
-        {key: _json_scalar(column[index]) for key, column in columns.items()}
-        for index in range(length)
-    ]
-
-
 def normalize_path_records(value: Any) -> List[Dict[str, Any]]:
-    """Normalize common list, document, structured-array, and columnar inputs."""
+    """Normalize a path result into a list of path-record dictionaries."""
 
     if value is None:
         raise PathComparisonError("Path result is missing.")
@@ -92,27 +39,7 @@ def normalize_path_records(value: Any) -> List[Dict[str, Any]]:
         for key in _PATH_CONTAINER_KEYS:
             if key in value:
                 return normalize_path_records(value[key])
-        # A runner may keep LoS and reflection documents separately.
-        nested = []
-        for key in ("los", "los_result", "reflection", "reflection_result"):
-            if key in value and value[key] is not None:
-                try:
-                    nested.extend(normalize_path_records(value[key]))
-                except PathComparisonError:
-                    pass
-        if nested:
-            return nested
-        if _looks_like_path_record(value):
-            return [dict(value)]
-        columnar = _columnar_records(value)
-        if columnar is not None:
-            return columnar
         raise PathComparisonError("Path dictionary does not contain path records.")
-    if isinstance(value, np.ndarray) and value.dtype.names:
-        return [
-            {name: _json_scalar(row[name]) for name in value.dtype.names}
-            for row in value
-        ]
     if isinstance(value, np.ndarray):
         value = value.tolist()
     if isinstance(value, (list, tuple)):
@@ -120,10 +47,6 @@ def normalize_path_records(value: Any) -> List[Dict[str, Any]]:
         for item in value:
             if isinstance(item, Mapping):
                 records.append(dict(item))
-            elif isinstance(item, np.void) and item.dtype.names:
-                records.append(
-                    {name: _json_scalar(item[name]) for name in item.dtype.names}
-                )
             else:
                 raise PathComparisonError("Each path record must be a dictionary-like value.")
         return records
@@ -738,16 +661,9 @@ def compare_paths(
     }
 
 
-def compare_path_sets(baseline: Any, variant: Any, **kwargs: Any) -> Dict[str, Any]:
-    """Alias for :func:`compare_paths`."""
-
-    return compare_paths(baseline, variant, **kwargs)
-
-
 __all__ = [
     "PathComparisonError",
     "canonicalize_path_records",
-    "compare_path_sets",
     "compare_paths",
     "normalize_path_records",
     "summarize_distribution",

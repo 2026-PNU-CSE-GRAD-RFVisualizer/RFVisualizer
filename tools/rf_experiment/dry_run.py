@@ -7,7 +7,7 @@ import math
 from pathlib import Path
 from typing import Any, Dict, List
 
-from tools.sionna_smoke_test.io_utils import write_json
+from tools.sionna_smoke_test.io_utils import SmokeTestIOError, write_csv, write_json
 
 from .analysis import SIONNA_POINT_COLUMNS
 from .contracts import SUMMARY_REQUIRED_COLUMNS, resolve_path, validate_csv_contract
@@ -18,16 +18,9 @@ class DryRunError(ValueError):
 
 
 def _write_csv(path: Path, rows: List[Dict[str, Any]]) -> None:
-    output = Path(path)
-    output.parent.mkdir(parents=True, exist_ok=True)
-    temporary = output.with_suffix(output.suffix + ".tmp")
     try:
-        with temporary.open("w", encoding="utf-8", newline="") as handle:
-            writer = csv.DictWriter(handle, fieldnames=SUMMARY_REQUIRED_COLUMNS)
-            writer.writeheader()
-            writer.writerows(rows)
-        temporary.replace(output)
-    except OSError as exc:
+        write_csv(path, SUMMARY_REQUIRED_COLUMNS, rows)
+    except SmokeTestIOError as exc:
         raise DryRunError("합성 Summary CSV를 저장할 수 없습니다: {}".format(exc)) from exc
 
 

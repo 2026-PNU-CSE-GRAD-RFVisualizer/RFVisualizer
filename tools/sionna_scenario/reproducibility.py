@@ -486,27 +486,11 @@ def analyze_reproducibility(
     }
 
 
-def compare_repeated_runs(repeats: Sequence[Any], **kwargs: Any) -> Dict[str, Any]:
-    """Alias for :func:`analyze_reproducibility`."""
-
-    return analyze_reproducibility(repeats, **kwargs)
-
-
-def analyze_baseline_reproducibility(
-    repeats: Sequence[Any], **kwargs: Any
-) -> Dict[str, Any]:
-    """Explicitly named alias used by A/B experiment runners."""
-
-    return analyze_reproducibility(repeats, **kwargs)
-
-
 __all__ = [
     "ReproducibilityError",
-    "analyze_baseline_reproducibility",
     "analyze_reproducibility",
     "compare_coverage_repeats",
     "compare_path_repeats",
-    "compare_repeated_runs",
     "compute_noise_statistics",
     "compute_numerical_noise_floor",
 ]

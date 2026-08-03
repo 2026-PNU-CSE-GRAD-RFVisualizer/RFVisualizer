@@ -318,26 +318,32 @@ def validate_config(config: Dict[str, Any]) -> Dict[str, Any]:
         if not np.isfinite(value) or value < 0.0:
             raise ConfigError("{} 값은 0 이상이어야 합니다.".format(path))
 
-    lower = float(config["plane_meshing"]["lower_percentile"])
-    upper = float(config["plane_meshing"]["upper_percentile"])
-    if not 0.0 <= lower < upper <= 100.0:
-        raise ConfigError(
-            "plane_meshing의 하한 백분위수는 상한보다 작고 0~100 범위여야 합니다."
-        )
+    def _check_percentile_pair(section: Dict[str, Any], lower_key: str, upper_key: str, label: str) -> None:
+        lower = float(section[lower_key])
+        upper = float(section[upper_key])
+        if not 0.0 <= lower < upper <= 100.0:
+            raise ConfigError(
+                "{} 하한 백분위수는 상한보다 작고 0~100 범위여야 합니다.".format(label)
+            )
 
-    height_lower = float(config["classification"]["height_lower_percentile"])
-    height_upper = float(config["classification"]["height_upper_percentile"])
-    if not 0.0 <= height_lower < height_upper <= 100.0:
-        raise ConfigError(
-            "classification의 높이 하한 백분위수는 상한보다 작고 0~100 범위여야 합니다."
-        )
-
-    wall_lower = float(config["wall_extraction"]["meshing"]["lower_percentile"])
-    wall_upper = float(config["wall_extraction"]["meshing"]["upper_percentile"])
-    if not 0.0 <= wall_lower < wall_upper <= 100.0:
-        raise ConfigError(
-            "wall_extraction.meshing의 하한 백분위수는 상한보다 작고 0~100 범위여야 합니다."
-        )
+    _check_percentile_pair(
+        config["plane_meshing"],
+        "lower_percentile",
+        "upper_percentile",
+        "plane_meshing의",
+    )
+    _check_percentile_pair(
+        config["classification"],
+        "height_lower_percentile",
+        "height_upper_percentile",
+        "classification의 높이",
+    )
+    _check_percentile_pair(
+        config["wall_extraction"]["meshing"],
+        "lower_percentile",
+        "upper_percentile",
+        "wall_extraction.meshing의",
+    )
 
     if int(config["plane_extraction"]["ransac_n"]) < 3:
         raise ConfigError("plane_extraction.ransac_n은 3 이상이어야 합니다.")

@@ -64,7 +64,7 @@ def _validate_ply(path: Path, label: str) -> Path:
 def filter_mesh_components(mesh: Any, settings: Dict[str, Any]) -> Dict[str, Any]:
     """삼각형 연결 조각 중 설정 기준보다 작은 조각을 제거한다."""
 
-    o3d = _open3d()
+    _open3d()
     before_triangles = len(mesh.triangles)
     before_vertices = len(mesh.vertices)
     stats = {

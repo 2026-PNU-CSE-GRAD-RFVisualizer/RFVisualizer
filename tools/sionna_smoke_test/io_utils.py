@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
+import csv
 import json
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any, Dict, Mapping, Sequence
 
 
 class SmokeTestIOError(RuntimeError):
@@ -35,6 +36,22 @@ def write_json(path: Path, value: Dict[str, Any]) -> None:
         temporary.replace(output)
     except OSError as exc:
         raise SmokeTestIOError("JSON 파일을 저장할 수 없습니다: {}".format(exc)) from exc
+
+
+def write_csv(
+    path: Path, fieldnames: Sequence[str], rows: Sequence[Mapping[str, Any]]
+) -> None:
+    output = Path(path)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    temporary = output.with_suffix(output.suffix + ".tmp")
+    try:
+        with temporary.open("w", encoding="utf-8", newline="") as handle:
+            writer = csv.DictWriter(handle, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(rows)
+        temporary.replace(output)
+    except OSError as exc:
+        raise SmokeTestIOError("CSV 파일을 저장할 수 없습니다: {}".format(exc)) from exc
 
 
 def atomic_write_text(path: Path, text: str) -> None:

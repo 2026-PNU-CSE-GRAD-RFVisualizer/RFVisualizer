@@ -11,6 +11,7 @@ from ..config import ConfigError, normalize_vector, resolve_scene_value
 from ..models import PlaneCandidate
 from .normal_analyzer import NormalAnalysisError, compute_normal_up_scores
 from .plane_classifier import scene_height_range
+from .plane_extractor import remove_local_inliers
 from .plane_mesher import PlaneMeshingError, build_plane_rectangle, normalize_plane
 
 
@@ -38,17 +39,6 @@ WALL_PALETTE = np.asarray(
 
 def _wall_color(index: int) -> np.ndarray:
     return WALL_PALETTE[index % len(WALL_PALETTE)].copy()
-
-
-def _remove_local_inliers(
-    source_cloud: Any,
-    remaining_indices: np.ndarray,
-    local_inliers: np.ndarray,
-) -> Tuple[Any, np.ndarray]:
-    keep = np.ones(len(remaining_indices), dtype=bool)
-    keep[np.asarray(local_inliers, dtype=int)] = False
-    updated_indices = remaining_indices[keep]
-    return source_cloud.select_by_index(updated_indices.tolist()), updated_indices
 
 
 def filter_vertical_points(
@@ -354,7 +344,7 @@ def extract_wall_planes(
         if raw_ratio < min_ratio:
             rejection_counts["too_small_ratio"] += 1
             consecutive_small += 1
-            remaining_cloud, remaining_indices = _remove_local_inliers(
+            remaining_cloud, remaining_indices = remove_local_inliers(
                 wall_cloud, remaining_indices, local_inliers
             )
             if consecutive_small >= max_small:
@@ -370,7 +360,7 @@ def extract_wall_planes(
             )
         except PlaneMeshingError:
             rejection_counts["degenerate_rectangle"] += 1
-            remaining_cloud, remaining_indices = _remove_local_inliers(
+            remaining_cloud, remaining_indices = remove_local_inliers(
                 wall_cloud, remaining_indices, local_inliers
             )
             continue
@@ -378,7 +368,7 @@ def extract_wall_planes(
         normal_up_dot = float(abs(np.dot(plane_normal, up)))
         if normal_up_dot > plane_normal_limit:
             rejection_counts["non_vertical_plane"] += 1
-            remaining_cloud, remaining_indices = _remove_local_inliers(
+            remaining_cloud, remaining_indices = remove_local_inliers(
                 wall_cloud, remaining_indices, local_inliers
             )
             continue
@@ -423,7 +413,7 @@ def extract_wall_planes(
         support_ratio = support_count / initial_count
         if support_count < min_inliers or support_ratio < min_ratio:
             rejection_counts["component_rejection"] += 1
-            remaining_cloud, remaining_indices = _remove_local_inliers(
+            remaining_cloud, remaining_indices = remove_local_inliers(
                 wall_cloud, remaining_indices, local_inliers
             )
             continue
@@ -440,14 +430,14 @@ def extract_wall_planes(
         except PlaneMeshingError as exc:
             rejection_counts["degenerate_rectangle"] += 1
             LOGGER.warning("퇴화한 벽 후보를 건너뜁니다: %s", exc)
-            remaining_cloud, remaining_indices = _remove_local_inliers(
+            remaining_cloud, remaining_indices = remove_local_inliers(
                 wall_cloud, remaining_indices, local_inliers
             )
             continue
 
         if rectangle.area < min_area:
             rejection_counts["too_small_area"] += 1
-            remaining_cloud, remaining_indices = _remove_local_inliers(
+            remaining_cloud, remaining_indices = remove_local_inliers(
                 wall_cloud, remaining_indices, local_inliers
             )
             continue
@@ -498,7 +488,7 @@ def extract_wall_planes(
             component_summary["used_component_count"],
             rectangle.area,
         )
-        remaining_cloud, remaining_indices = _remove_local_inliers(
+        remaining_cloud, remaining_indices = remove_local_inliers(
             wall_cloud, remaining_indices, local_inliers
         )
 

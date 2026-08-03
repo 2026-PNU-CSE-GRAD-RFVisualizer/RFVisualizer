@@ -2,13 +2,17 @@
 
 from __future__ import annotations
 
-import csv
 from pathlib import Path
 from typing import Any, Dict, Mapping, Optional, Sequence
 
 import numpy as np
 
-from tools.sionna_smoke_test.io_utils import atomic_write_text, write_json
+from tools.sionna_smoke_test.io_utils import (
+    SmokeTestIOError,
+    atomic_write_text,
+    write_csv,
+    write_json,
+)
 
 from .analysis_inputs import AnalysisError
 from .analysis_plots import (
@@ -23,16 +27,9 @@ from .reliability import metrics_csv_rows
 def _write_csv(
     path: Path, fieldnames: Sequence[str], rows: Sequence[Mapping[str, Any]]
 ) -> None:
-    output = Path(path)
-    output.parent.mkdir(parents=True, exist_ok=True)
-    temporary = output.with_suffix(output.suffix + ".tmp")
     try:
-        with temporary.open("w", encoding="utf-8", newline="") as handle:
-            writer = csv.DictWriter(handle, fieldnames=fieldnames)
-            writer.writeheader()
-            writer.writerows(rows)
-        temporary.replace(output)
-    except OSError as exc:
+        write_csv(path, fieldnames, rows)
+    except SmokeTestIOError as exc:
         raise AnalysisError("CSV를 저장할 수 없습니다: {}".format(exc)) from exc
 
 
