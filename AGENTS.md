@@ -1,107 +1,205 @@
-# RFVisualizer 작업 지침
+# AGENTS.md
 
-이 문서는 RFVisualizer 프로젝트를 다룰 때 따라야 할 기본 규칙이다. 설명은 이 분야를 자세히 모르는 사람도 이해할 수 있게, 쉬운 한국어를 먼저 쓰고 필요한 경우에만 원어를 괄호로 덧붙인다.
+이 문서는 `RFVisualizer` 그래픽스 저장소 전체에 적용된다.
 
-## 프로젝트 한 줄 요약
+AI Agent와 개발자는 작업을 시작하기 전에 중앙 문서 저장소인 `RFVisualizer-Docs`의 기준을 먼저 확인해야 한다. 이 저장소의 오래된 계획서, 회의록, 중간보고서, AI 작업 지시서는 현재 기준보다 우선하지 않는다.
 
-실제 실내 공간을 3차원 장면으로 복원하고, 전파 시뮬레이션으로 계산한 신호 세기 지도를 그 장면 위에 겹쳐 보여준 뒤, 사용자가 들고 있는 작은 화면 장치로 실시간 전송하는 시스템을 만든다.
+## 1. 필수 문서
 
-## 핵심 구조
+다음 순서로 읽는다.
 
-- 화면용 3차원 장면은 3차원 가우시안 표현(3D Gaussian Splatting, 3DGS)을 사용한다.
-- 전파 계산에는 가우시안 점 자체가 아니라 삼각형 표면 모델(Triangle Mesh)을 사용한다.
-- PGSR은 화면용 가우시안 장면과 전파 계산용 표면 모델을 함께 얻기 위한 우선 경로다.
-- Sionna RT는 실시간마다 실행하지 않는다. 장면, 송신기 위치, 주파수, 재질이 고정된 동안에는 미리 계산한 전파 지도(Radio Map)를 읽어 시각화한다.
-- 실시간 화면은 공식 SIBR 실시간 Viewer를 먼저 확장하는 방향으로 검증한다.
-- 최소 구현은 사람이 장치를 드는 높이의 단일 2차원 전파 지도를 3차원 공간에 평면으로 배치하는 방식이다. 여러 높이의 지도나 부피 전체 표현은 확장 항목이다.
-- 손에 드는 ESP32-S3 장치는 직접 3차원 렌더링을 하지 않는다. 방향과 버튼 입력을 PC에 보내고, PC가 렌더링한 JPEG 영상을 받아 LCD에 표시한다.
+1. `RFVisualizer-Docs/PROJECT.md`
+2. `RFVisualizer-Docs/CURRENT_STATUS.md`
+3. `RFVisualizer-Docs/INTERFACE.md`
+4. `RFVisualizer-Docs/graphics/GRAPHICS.md`
+5. 이 저장소의 `README.md`
+6. 수정 대상 디렉터리의 README, 설정 파일, 테스트, 소스 코드
 
-## 참고 문서 읽기 규칙
+중앙 문서 저장소:
 
-긴 원문인 `References/3DGS_Sionna_RT_실시간_시각화_파이프라인_수정본.md`를 먼저 통째로 읽지 않는다. 현재 작업에 필요한 분할 문서만 읽는다.
+- GitHub: https://github.com/2026-PNU-CSE-GRAD-RFVisualizer/RFVisualizer-Docs
+- 권장 로컬 위치: `../RFVisualizer-Docs`
+- 이 저장소 안에 Submodule이 남아 있다면: `./RFVisualizer-Docs`
 
-| 작업 주제 | 먼저 읽을 파일 |
-|---|---|
-| 전체 구조 파악, 신규 작업 시작 | `References/pipeline_parts/00_overview.md`, `References/pipeline_parts/08_architecture_summary.md` |
-| 촬영, 카메라 자세, PGSR, Mesh, Sionna RT, Radio Map | `References/pipeline_parts/01_offline_build.md` |
-| 임베디드 장치 역할, 방향과 위치 갱신, 제어 데이터, PC 초기화 | `References/pipeline_parts/02_realtime_control.md` |
-| SIBR Viewer, OpenGL 합성, 히트맵 가림 처리 | `References/pipeline_parts/03_viewer_rendering.md` |
-| JPEG 인코딩, 영상 전송, 실시간 Viewer 내부 Thread 구조 | `References/pipeline_parts/04_streaming_threads.md` |
-| 실행 반복 구조, PC/임베디드/네트워크 구성 요소 | `References/pipeline_parts/05_runtime_components.md` |
-| 구현 순서, 최소 구현 범위, 기존 기획과 달라진 점 | `References/pipeline_parts/06_implementation_scope.md` |
-| 아직 확정하지 않은 설계나 실험으로 결정할 항목 | `References/pipeline_parts/07_open_questions.md` |
-| 최종 구조 요약, 발표나 보고용 결론 정리 | `References/pipeline_parts/08_architecture_summary.md` |
+로컬 Submodule은 오래된 Commit을 가리킬 수 있다. Submodule이 존재한다는 이유만으로 최신 문서라고 가정하지 말고, 중앙 저장소의 현재 `main`과 일치하는지 확인한다.
 
-필요한 내용이 분할 문서에 없거나 앞뒤 맥락이 끊겨 보일 때만 원문을 열어 확인한다.
+중앙 문서에 접근할 수 없으면 공통 인터페이스나 프로젝트 범위를 추측해서 변경하지 않는다.
 
-## 핵심 논문 참고 규칙
+## 2. 문서와 코드의 우선순위
 
-구현에 필요한 핵심 논문은 각 기술별 프로젝트 폴더 안에 들어 있는 파일을 우선 참고한다. 인터넷에서 같은 논문을 다시 찾기 전에, 저장소 안의 논문 파일이 있는지 먼저 확인한다.
+설명이 충돌하면 다음 순서로 판단한다.
 
-| 기술 또는 주제 | 우선 참고 파일 |
-|---|---|
-| PGSR | `../PGSR/PGSR.pdf` |
-| GaussianRT-RF-NVS | `../GaussianRT-RF-NVS/GaussianRT-RF-NVS.pdf` |
+1. 현재 동작하는 코드와 통과한 테스트
+2. `RFVisualizer-Docs/INTERFACE.md`
+3. `RFVisualizer-Docs/CURRENT_STATUS.md`
+4. `RFVisualizer-Docs/graphics/GRAPHICS.md`
+5. `RFVisualizer-Docs/PROJECT.md`
+6. 이 저장소의 운영용 README와 Tool별 문서
+7. 과거 계획서, 회의록, 중간보고서, AI 작업 지시서
 
-PDF 논문을 읽거나 요약하거나 구현 근거를 확인할 때는 원본 PDF를 바로 읽지 말고, 먼저 PDF 전처리 절차를 사용한다.
+코드가 중앙 문서와 다르면 코드만 임의로 정답이라고 간주하지 않는다. 의도된 변경인지 결함인지 확인하고, 필요한 문서 변경을 같은 작업 범위에 포함한다.
 
-## 작업 시작 절차
+## 3. 이 저장소의 책임
 
-1. 현재 요청을 작은 단계로 나눈다.
-2. 가능한 접근 방법을 세 가지 정도 비교한다.
-3. 토큰 사용량, 구현 위험, 검증 가능성을 기준으로 방법을 고른다.
-4. 선택한 방법이 요청의 목적을 만족하는지 다시 확인한다.
-5. 관련 분할 문서를 읽고, 부족한 개념이 있으면 신뢰할 수 있는 자료를 조사한다.
+그래픽스 파트의 주요 책임은 다음과 같다.
 
-## 설명 원칙
+- PGSR 기반 Gaussian Scene과 Surface Mesh 생성
+- Plane 및 Wall Candidate 추출
+- 닫힌 Room Envelope 생성
+- 실제 meter 단위 Metric Calibration
+- Proxy Obstacle와 Material 배치
+- Sionna RT Scene, Path, Coverage, Radio Map 생성
+- Backend Export 데이터 입력
+- 실제 RSSI와 시뮬레이션 결과 비교
+- 향후 SIBR 기반 Heatmap Viewer와 영상 출력 구현
 
-- 한국어로 설명한다.
-- 불필요한 영어 혼용을 피한다.
-- 전문 용어는 먼저 쉬운 말로 뜻을 설명한 뒤, 필요한 경우에만 원어를 괄호 안에 쓴다.
-- 결정된 내용과 아직 실험이 필요한 내용을 분리해서 쓴다.
-- 과장하지 않고 현재 단계, 한계, 남은 검증 항목을 분명히 적는다.
-- 표가 이해를 돕는 경우에는 표를 우선 사용한다.
+다른 파트의 펌웨어, MQTT 수집 Backend, 실험 DB를 이 저장소에서 중복 구현하지 않는다.
 
-## 조사 원칙
+## 4. 현재 설계 기준
 
-- 인터넷 자료가 필요하면 공식 문서, 논문, 프로젝트 저장소, 제조사 문서처럼 출처가 분명한 자료를 우선한다.
-- 검색 결과 상위에 있는 글이라도 신뢰성과 최신성이 낮으면 근거로 쓰지 않는다.
-- 날짜, 버전, 지원 범위가 바뀔 수 있는 정보는 최신 자료로 확인한다.
-- 조사한 내용이 프로젝트 문서의 기존 결정과 충돌하면 충돌 지점을 명확히 적고, 임의로 결론을 바꾸지 않는다.
+### 장면 표현
 
-## 구현 원칙
+- 사용자에게 보여줄 시각 장면: PGSR Gaussian Scene
+- 전파 계산과 가림 판정: Triangle Mesh 또는 Proxy Scene
+- Gaussian 자체를 이용한 RF Ray Tracing은 현재 구현 기반이 아니라 Future Work다.
 
-- 처음부터 전체 시스템을 한 번에 만들지 않는다. 실패 가능성이 큰 연결부를 작은 기술 검증으로 먼저 확인한다.
-- 우선 구현 순서는 `References/pipeline_parts/06_implementation_scope.md`의 권장 순서를 따른다.
-- SIBR Viewer는 기존 가우시안 렌더링과 카메라 구조를 최대한 유지하고, 프로젝트 전용 기능을 별도 모듈로 추가한다.
-- 렌더링, JPEG 인코딩, 네트워크 전송, 자세 수신은 독립된 Thread로 분리한다.
-- Frame Queue는 1~2개로 제한하고 오래된 Frame을 버려 지연 누적을 막는다.
-- 카메라 위치는 매 순간 계속 바꾸지 않는다. 사용자가 버튼을 눌렀을 때만 추정 위치를 적용하고, 평소에는 방향만 갱신한다.
-- 좌표계, 실제 길이, 카메라 행렬, Mesh 방향이 맞는지 먼저 검증한 뒤에 보정값을 추가한다.
+### 좌표계
 
-## 미확정 항목 처리
+- 공통 단위는 `meter`다.
+- `+Z`는 위쪽이다.
+- `X`, `Y`는 바닥 평면이다.
+- 원점과 수평축은 Scene 또는 Experiment별 설정에 기록한다.
+- 강의실과 복도 등 서로 다른 Experiment의 좌표와 Transform을 혼합하지 않는다.
+- 원본 PGSR 좌표와 Metric 좌표 사이의 Transform 방향을 명시한다.
 
-다음 항목은 아직 확정된 구현으로 취급하지 않는다.
+### RF 측정 데이터
 
-- 고정 ESP32를 이용한 손잡이 장치 위치 추정 방식
-- 실제 RSSI와 Sionna RT 결과를 결합하거나 보정하는 방식
-- IMU의 방향 드리프트 보정 방식
-- PGSR Mesh Depth와 PGSR Unbiased Depth 중 최종 사용할 깊이 기준
-- JPEG 품질, 인코더, GPU에서 CPU로 영상을 가져오는 방식, ESP32-S3 버퍼 구조
-- 여러 높이의 전파 지도 또는 부피 전체 표현 확장 여부
+Backend Export의 기본 입력은 다음 값이다.
 
-이 항목을 다룰 때는 `References/pipeline_parts/07_open_questions.md`를 먼저 읽고, 실험 결과 없이 확정된 것처럼 쓰지 않는다.
+```text
+x, y, z, corrected_rssi
+```
 
-## 검증 원칙
+```text
+corrected_rssi = median_filtered + device_offset_db
+```
 
-- 새 기능을 추가하면 입력, 처리 결과, 지연시간, 실패 시 동작을 확인한다.
-- 성능 작업에서는 초당 화면 수, 인코딩 시간, 네트워크 전송 시간, 디코딩 시간, 전체 지연시간을 분리해서 측정한다.
-- 가림 처리 문제는 먼저 카메라 행렬, 좌표계, 실제 크기, Mesh 오류를 점검한다. 작은 깊이 보정이나 마스크 확장은 마지막 보완책으로만 쓴다.
-- 현재 저장소에 빌드나 테스트 명령이 정리되어 있지 않으면, 임의로 명령을 단정하지 말고 프로젝트 파일을 먼저 확인한다.
+- `calibration_points.csv`: RF Field 보정에 사용
+- `test_points.csv`: MAE와 RMSE 평가에만 사용
+- Test Point를 보정 과정에 포함하지 않는다.
+- Raw Sionna RT, Plain IDW, Sionna RT + Residual IDW를 구분한다.
 
-## 문서 관리 원칙
+### 실시간 Viewer
 
-- 큰 원문을 수정하면 관련 `References/pipeline_parts/` 문서도 함께 갱신한다.
-- 새로 확정된 설계는 관련 주제 파일과 `References/pipeline_parts/08_architecture_summary.md`에 반영한다.
-- 미확정 항목이 해결되면 `References/pipeline_parts/07_open_questions.md`에서 상태를 갱신한다.
-- 분할 문서를 추가하거나 이름을 바꾸면 이 파일의 참고 문서 표도 함께 수정한다.
+다음 항목은 중앙 `CURRENT_STATUS.md`에서 완료로 변경되기 전까지 계획 또는 미구현으로 취급한다.
+
+- SIBR Heatmap Viewer
+- Mesh Depth-only Pass
+- Offscreen 800×480 Rendering
+- IMU Pose 수신
+- Position Update
+- JPEG Encoding과 Streaming
+
+계획된 기능을 구현 완료된 기능처럼 README, 보고서, 코드 주석에 서술하지 않는다.
+
+## 5. 공통 인터페이스 변경 규칙
+
+다음 항목은 이 저장소에서 단독으로 변경하지 않는다.
+
+- 좌표 단위와 축
+- TX/RX 좌표 형식
+- Backend Export 폴더 구조
+- CSV 열 이름
+- `corrected_rssi` 계산
+- WebSocket Frame
+- PositionEstimate 형식
+- Handheld Packet
+- JPEG Streaming Protocol
+
+변경이 필요하면 다음 순서로 처리한다.
+
+1. `RFVisualizer-Docs/INTERFACE.md`의 현재 규격을 확인한다.
+2. 영향받는 그래픽스·임베디드·네트워크 파트를 식별한다.
+3. 중앙 문서 수정안을 먼저 제시하거나 같은 PR 범위에 포함한다.
+4. 코드와 테스트를 수정한다.
+5. 구현 상태가 바뀌면 `CURRENT_STATUS.md`와 `graphics/GRAPHICS.md`도 갱신한다.
+
+## 6. 코드 변경 원칙
+
+- 요청과 직접 관련된 범위만 수정한다.
+- 대규모 구조 변경은 필요성과 영향 범위를 먼저 설명한다.
+- 원본 PGSR, SIBR, Sionna 관련 외부 코드의 동작을 근거 없이 변경하지 않는다.
+- 원본 장면과 생성된 Metric/Proxy 사본을 구분한다.
+- 자동 생성 Cache와 실험 출력물을 Source처럼 Commit하지 않는다.
+- Placeholder Candidate를 실제 장애물로 자동 확정하지 않는다.
+- 실제 측정값, 추정값, 임의값을 Metadata에서 구분한다.
+- Scene-specific 상수를 전역 기본값으로 하드코딩하지 않는다.
+- 좌표 Transform, 단위, Frame ID를 출력 파일에 기록한다.
+- Random Seed와 Solver 설정이 비교 결과에 영향을 주면 설정을 고정하고 기록한다.
+
+## 7. 테스트와 검증
+
+변경 유형에 따라 최소한 다음을 확인한다.
+
+### Geometry 또는 Coordinate 변경
+
+- Room Envelope의 닫힘 여부
+- Face Orientation과 Normal 방향
+- `+Z` Up 여부
+- Metric Scale
+- Original → Metric → Original Round-trip Error
+- TX/RX와 장애물의 Scene 내부 위치
+- Floor, Ceiling, Wall Clearance
+
+### Sionna RT 변경
+
+- Scene Import 성공
+- Empty Room Baseline 재현
+- 동일한 TX/RX, Seed, Solver, Grid에서 A/B 비교
+- Path 또는 Coverage 결과가 유한한지 확인
+- 실험 설정과 출력 Metadata 저장
+
+### RSSI 분석 변경
+
+- Calibration/Test 분리
+- `corrected_rssi` 적용
+- 누락 좌표와 Invalid Sample 처리
+- MAE와 RMSE 계산
+- 결과가 어떤 Experiment와 Scene에 속하는지 기록
+
+### Viewer 변경
+
+- 기존 Gaussian Rendering 회귀 여부
+- Camera Pose와 좌표축
+- Heatmap 위치와 Depth 가림
+- 800×480 출력
+- Frame Queue와 Drop 정책
+- 장시간 실행 시 Memory 증가 여부
+
+실행하지 못한 테스트는 완료된 것처럼 쓰지 말고, 미실행 이유와 필요한 환경을 결과에 남긴다.
+
+## 8. 문서 갱신 기준
+
+다음 경우 중앙 문서를 함께 갱신한다.
+
+- 공통 데이터 형식 변경: `INTERFACE.md`
+- 완료 상태 또는 다음 작업 변경: `CURRENT_STATUS.md`
+- 그래픽스 구조와 설계 변경: `graphics/GRAPHICS.md`
+- 프로젝트 목표 또는 파트 책임 변경: `PROJECT.md`
+
+이 저장소의 README에는 설치, 실행, Tool, 테스트처럼 코드와 직접 연결된 내용만 유지한다. 프로젝트 전체 설명을 중앙 문서와 중복 작성하지 않는다.
+
+## 9. 작업 결과 보고 형식
+
+작업 완료 시 다음을 명시한다.
+
+1. 변경한 파일
+2. 변경 이유
+3. 사용한 Scene과 Experiment
+4. 좌표계와 단위
+5. 실행한 명령과 테스트
+6. 생성된 결과 파일
+7. 확인하지 못한 항목
+8. 중앙 문서 갱신 필요 여부
+
+불확실한 내용을 임의로 확정하지 않는다.
