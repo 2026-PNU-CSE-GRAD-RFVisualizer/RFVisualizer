@@ -161,7 +161,15 @@ def validate_envelope_config(config: Dict[str, Any]) -> Dict[str, Any]:
     return config
 
 
-def load_envelope_config(path: Path) -> Dict[str, Any]:
+def load_partial_envelope_config(path: Path) -> Dict[str, Any]:
+    """floor/ceiling/ordered_walls 없이 validation/output 설정만 읽는다.
+
+    3D Viewer에서 후보를 고르기 전에는 아직 floor/ceiling/wall이 정해지지
+    않았으므로, 여기서는 그 항목들의 존재를 검증하지 않는다. 선택이 끝난
+    뒤에는 resolve_envelope_config로 채운 사본을 validate_envelope_config로
+    검증한다.
+    """
+
     config_path = Path(path).expanduser().resolve()
     if not config_path.is_file():
         raise EnvelopeConfigError("Envelope 설정 파일을 찾을 수 없습니다: {}".format(config_path))
@@ -173,4 +181,8 @@ def load_envelope_config(path: Path) -> Dict[str, Any]:
         loaded = {}
     if not isinstance(loaded, dict):
         raise EnvelopeConfigError("Envelope YAML 최상위 값은 키와 값의 모음이어야 합니다.")
-    return validate_envelope_config(_deep_merge(DEFAULT_ENVELOPE_CONFIG, loaded))
+    return _deep_merge(DEFAULT_ENVELOPE_CONFIG, loaded)
+
+
+def load_envelope_config(path: Path) -> Dict[str, Any]:
+    return validate_envelope_config(load_partial_envelope_config(path))

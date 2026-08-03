@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import argparse
 import logging
+import os
+import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -21,8 +23,9 @@ from .calibration.metric_metadata import MetricMetadataError
 from .config import load_config, normalize_vector
 from .envelope.builder import build_room_envelope
 from .envelope.candidate_loader import load_envelope_candidates
-from .envelope.config import load_envelope_config
-from .envelope.exporter import EnvelopeExportError, export_envelope_geometry
+from .envelope.config import load_envelope_config, load_partial_envelope_config
+from .envelope.exporter import EnvelopeExportError
+from .envelope.report import write_envelope_outputs
 from .envelope.validator import validate_envelope
 from .export.obj_exporter import export_obj_bundle
 from .export.preview_exporter import (
@@ -40,6 +43,72 @@ from .models import PlaneCandidate
 
 
 LOGGER = logging.getLogger("proxy_mesh_editor")
+
+# pgsr conda 환경의 Open3D 0.19 GPU(OpenGL/Filament) 백엔드는 이 프로젝트가 쓰는
+# RustDesk/XWayland류 디스플레이 조합에서 창 생성 중 native segfault를 낸다.
+# proxy_placement_editor가 이미 겪어 해결한 문제라, 같은 재시도 전략(호환
+# Open3D 0.18 venv → 소프트웨어 렌더링)을 그대로 재사용한다.
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+GUI_WORKER_ENV = "RFVIS_ENVELOPE_PICKER_GUI_WORKER"
+SOFTWARE_RENDERING_ENV = "RFVIS_ENVELOPE_PICKER_SOFTWARE_RENDERING"
+GUI_PYTHON_ENV = "RFVIS_ENVELOPE_PICKER_GUI_PYTHON"
+DEFAULT_GUI_RUNTIME = PROJECT_ROOT / ".venv/proxy-placement-editor"
+NATIVE_GUI_CRASH_SIGNALS = {6, 11}
+
+
+def _software_rendering_environment() -> Dict[str, str]:
+    environment = dict(os.environ)
+    environment[GUI_WORKER_ENV] = "1"
+    environment[SOFTWARE_RENDERING_ENV] = "1"
+    environment["LIBGL_ALWAYS_SOFTWARE"] = "true"
+    mesa_glx = Path("/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0")
+    if mesa_glx.is_file():
+        preload = environment.get("LD_PRELOAD", "")
+        entries = [entry for entry in preload.split(":") if entry]
+        if str(mesa_glx) not in entries:
+            entries.insert(0, str(mesa_glx))
+        environment["LD_PRELOAD"] = ":".join(entries)
+    return environment
+
+
+def _runtime_python(runtime_dir: Path) -> Path:
+    directory = Path(runtime_dir).expanduser().absolute()
+    return directory / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
+
+
+def _compatible_gui_python() -> Optional[Path]:
+    override = os.environ.get(GUI_PYTHON_ENV)
+    python = (
+        Path(override).expanduser().absolute()
+        if override
+        else _runtime_python(DEFAULT_GUI_RUNTIME)
+    )
+    return python if python.is_file() else None
+
+
+def _is_same_python(left: Path, right: Path) -> bool:
+    # venv의 python은 원본 interpreter symlink일 수 있으므로 resolve()하지 않는다.
+    return os.path.abspath(str(left)) == os.path.abspath(str(right))
+
+
+def _native_signal(return_code: int) -> Optional[int]:
+    return None if return_code >= 0 else -return_code
+
+
+def _run_pick_envelope_worker(
+    raw_argv: List[str], software_rendering: bool, python_executable: Optional[Path] = None
+) -> int:
+    environment = (
+        _software_rendering_environment() if software_rendering else dict(os.environ)
+    )
+    environment[GUI_WORKER_ENV] = "1"
+    command = [
+        str(python_executable or sys.executable),
+        "-m",
+        "tools.proxy_mesh_editor.main",
+        *raw_argv,
+    ]
+    return int(subprocess.run(command, env=environment, check=False).returncode)
 
 
 def _utc_now() -> str:
@@ -281,95 +350,16 @@ def run_build_envelope(args: argparse.Namespace) -> int:
     topology, geometry, warnings = validate_envelope(mesh, validation_settings)
 
     output = Path(args.output).expanduser().resolve()
-    files = export_envelope_geometry(
-        mesh, output, envelope_config["room_envelope"]["output"]
+    write_envelope_outputs(
+        selected,
+        envelope_config,
+        Path(args.envelope_config),
+        mesh,
+        topology,
+        geometry,
+        warnings,
+        output,
     )
-    envelope_path = output / "room_envelope.json"
-    topology_path = output / "topology_report.json"
-    files["envelope_metadata"] = str(envelope_path.resolve())
-    files["topology_report"] = str(topology_path.resolve())
-
-    topology_document: Dict[str, Any] = {
-        "schema_version": "1.0",
-        "algorithm": {
-            "name": "rfvisualizer_room_envelope_validation",
-            "version": __version__,
-        },
-        "created_at": _utc_now(),
-        "topology": topology,
-        "geometry": geometry,
-        "validation_warnings": warnings,
-        "success": bool(
-            topology["closed_manifold_success"] and geometry["geometry_success"]
-        ),
-    }
-    write_json(topology_path, topology_document)
-
-    wall_objects = []
-    for index, (candidate, equation, rectangle_diagnostic) in enumerate(
-        zip(
-            mesh.wall_candidates,
-            mesh.normalized_wall_equations,
-            mesh.candidate_rectangle_diagnostics,
-        )
-    ):
-        wall_objects.append(
-            {
-                "object_name": "wall_{:03d}".format(index),
-                "candidate_id": candidate.candidate_id,
-                "normalized_plane_equation": equation.tolist(),
-                "candidate_rectangle_comparison": rectangle_diagnostic,
-            }
-        )
-    document: Dict[str, Any] = {
-        "schema_version": "1.0",
-        "algorithm": {
-            "name": "rfvisualizer_room_envelope_builder",
-            "version": __version__,
-        },
-        "created_at": _utc_now(),
-        "source_candidate_documents": {
-            "plane_candidates": str(selected.plane_document_path),
-            "wall_candidates": str(selected.wall_document_path),
-        },
-        "envelope_config_path": str(Path(args.envelope_config).expanduser().resolve()),
-        "envelope_config": envelope_config,
-        "up_vector": selected.up_vector.tolist(),
-        "selected_candidates": {
-            "floor": mesh.floor_candidate.candidate_id,
-            "ceiling": mesh.ceiling_candidate.candidate_id,
-            "input_ordered_walls": mesh.input_wall_ids,
-            "normalized_ordered_walls": mesh.normalized_wall_ids,
-        },
-        "normalized_plane_equations": {
-            "floor": mesh.normalized_floor_equation.tolist(),
-            "ceiling": mesh.normalized_ceiling_equation.tolist(),
-            "walls": [value.tolist() for value in mesh.normalized_wall_equations],
-        },
-        "interior_point": mesh.interior_point.tolist(),
-        "bottom_corners": mesh.bottom_corners.tolist(),
-        "top_corners": mesh.top_corners.tolist(),
-        "polygon": {
-            "coordinates_2d": mesh.polygon_2d.tolist(),
-            "ceiling_coordinates_2d": mesh.top_polygon_2d.tolist(),
-            "winding": mesh.polygon_winding,
-            "signed_area": mesh.polygon_signed_area,
-            "edge_lengths": mesh.polygon_edge_lengths.tolist(),
-        },
-        "floor_ceiling_height": mesh.height_statistics,
-        "wall_intersection_diagnostics": mesh.intersection_diagnostics,
-        "wall_objects": wall_objects,
-        "mesh_summary": {
-            "vertex_count": int(len(mesh.vertices)),
-            "triangle_count": int(len(mesh.faces)),
-            "orientation_flip_count": int(mesh.orientation_flip_count),
-        },
-        "topology_summary": topology,
-        "geometry_validation": geometry,
-        "validation_warnings": warnings,
-        "output_files": files,
-    }
-    write_json(envelope_path, document)
     LOGGER.info(
         "닫힌 Room Envelope 생성 완료: 벽 %d개, 꼭짓점 %d개, 삼각형 %d개, 부피 %.6g",
         len(mesh.wall_candidates),
@@ -378,6 +368,69 @@ def run_build_envelope(args: argparse.Namespace) -> int:
         topology["absolute_volume"],
     )
     return 0
+
+
+def _run_pick_envelope_in_process(args: argparse.Namespace) -> int:
+    from .envelope.interactive_app import EnvelopeAssemblyApp
+
+    envelope_config = load_partial_envelope_config(args.envelope_config)
+    output = Path(args.output).expanduser().resolve()
+    app = EnvelopeAssemblyApp(
+        plane_path=args.plane_candidates,
+        wall_path=args.wall_candidates,
+        base_envelope_config=envelope_config,
+        output=output,
+    )
+    app.run()
+    return 0
+
+
+def run_pick_envelope(args: argparse.Namespace) -> int:
+    from .envelope.interactive_app import ensure_gui_display
+
+    ensure_gui_display()
+    if os.environ.get(GUI_WORKER_ENV) == "1":
+        return _run_pick_envelope_in_process(args)
+
+    compatible_python = _compatible_gui_python()
+    if compatible_python and not _is_same_python(compatible_python, Path(sys.executable)):
+        LOGGER.info(
+            "RustDesk/XWayland 호환 GUI runtime을 사용합니다: %s", compatible_python
+        )
+        compatible_code = _run_pick_envelope_worker(
+            args._raw_argv, software_rendering=False, python_executable=compatible_python
+        )
+        if compatible_code >= 0:
+            return compatible_code
+        compatible_signal = _native_signal(compatible_code)
+        if compatible_signal not in NATIVE_GUI_CRASH_SIGNALS:
+            return 128 + int(compatible_signal or 0)
+        LOGGER.warning(
+            "호환 GUI runtime이 signal %d로 종료되어 현재 Python runtime을 시도합니다.",
+            compatible_signal,
+        )
+
+    return_code = _run_pick_envelope_worker(args._raw_argv, software_rendering=False)
+    if return_code >= 0:
+        return return_code
+
+    signal_number = int(_native_signal(return_code) or 0)
+    if signal_number not in NATIVE_GUI_CRASH_SIGNALS:
+        return 128 + signal_number
+    LOGGER.warning(
+        "Open3D GPU GUI가 signal %d로 종료되었습니다. Mesa 소프트웨어 렌더링으로 다시 시도합니다.",
+        signal_number,
+    )
+    retry_code = _run_pick_envelope_worker(args._raw_argv, software_rendering=True)
+    if retry_code >= 0:
+        return retry_code
+    raise ValueError(
+        "Open3D GUI가 native signal {}로 종료되었습니다. "
+        "`python -m tools.proxy_placement_editor.main setup-gui-runtime`으로 "
+        "호환 GUI runtime을 준비했는지 확인하거나 GNOME의 Ubuntu on Xorg 세션을 사용하세요.".format(
+            -retry_code
+        )
+    )
 
 
 def run_calibration_preflight(args: argparse.Namespace) -> int:
@@ -594,6 +647,25 @@ def build_parser() -> argparse.ArgumentParser:
     build_envelope.add_argument("--output", type=Path, required=True, help="결과 폴더")
     build_envelope.set_defaults(handler=run_build_envelope)
 
+    pick_envelope = subparsers.add_parser(
+        "pick-envelope",
+        help="3D Viewer에서 Floor/Ceiling/Wall 후보를 클릭으로 골라 Room Envelope를 만듭니다.",
+    )
+    pick_envelope.add_argument(
+        "--plane-candidates", type=Path, required=True, help="plane_candidates.json"
+    )
+    pick_envelope.add_argument(
+        "--wall-candidates", type=Path, required=True, help="wall_candidates.json"
+    )
+    pick_envelope.add_argument(
+        "--envelope-config",
+        type=Path,
+        required=True,
+        help="validation/output 설정만 담은 YAML (floor/ceiling/ordered_walls는 비워둠)",
+    )
+    pick_envelope.add_argument("--output", type=Path, required=True, help="결과 폴더")
+    pick_envelope.set_defaults(handler=run_pick_envelope)
+
     calibration_preflight = subparsers.add_parser(
         "calibration-preflight",
         help="Metric Calibration 전 상하 방향·회전·축척·좌표 프레임을 진단합니다.",
@@ -645,7 +717,9 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: Optional[List[str]] = None) -> int:
     parser = build_parser()
-    args = parser.parse_args(argv)
+    raw_argv = list(argv) if argv is not None else list(sys.argv[1:])
+    args = parser.parse_args(raw_argv)
+    args._raw_argv = raw_argv
     logging.basicConfig(
         level=logging.DEBUG if args.verbose else logging.INFO,
         format="%(levelname)s: %(message)s",
