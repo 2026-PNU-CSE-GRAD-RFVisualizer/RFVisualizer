@@ -1,0 +1,17 @@
+{
+  "ok": false,
+  "problems": [
+    "좌표 미등록 위치: offset-00, offset-01, test-01, test-02, test-03, test-04, test-05, test-06"
+  ],
+  "warnings": [
+    "보정 위치가 4개가 아닙니다 (현재 1개)",
+    "Test 위치가 15개가 아닙니다 (현재 6개)"
+  ],
+  "counts": {
+    "raw_rows": 1103,
+    "summary_rows": 39,
+    "calibration_points": 1,
+    "test_points": 6,
+    "registered_points": 0
+  }
+}

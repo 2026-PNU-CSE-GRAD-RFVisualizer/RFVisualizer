@@ -1,0 +1,132 @@
+{
+  "schema_version": "1.0",
+  "success": true,
+  "ready_input": false,
+  "draft_execution_allowed": true,
+  "paper_evidence_eligible": false,
+  "scene_id": "pnu_4f_corridor",
+  "coordinate_system_id": "pnu_4f_corridor",
+  "scene_mode": "prebuilt_scene_xml_override",
+  "scene_xml": "/data/RFVisualizer/outputs/proxy_placement/pnu_4f_corridor/sionna_build/scene/scene.xml",
+  "solver": {
+    "success": true,
+    "config_id": "pnu_4f_corridor_editor_scene_045m_diffraction_v1",
+    "status": "provisional",
+    "required_runtime": {
+      "required_sionna_rt_version": "1.2.2",
+      "required_mitsuba_version": "3.8.0",
+      "required_drjit_version": "1.3.1"
+    }
+  },
+  "environment": {
+    "python_version": "3.10.20",
+    "packages": {
+      "sionna": "1.2.2",
+      "sionna_rt_distribution": "1.2.2",
+      "mitsuba": "3.8.0",
+      "drjit": "1.3.1",
+      "tensorflow": "2.21.0",
+      "jax": null
+    },
+    "mitsuba_variant": "cuda_ad_mono_polarized",
+    "gpu_backend_active": true
+  },
+  "transmitter": {
+    "marker_id": "tx_01",
+    "frequency_hz": 2400000000.0,
+    "power_dbm": 20.0
+  },
+  "point_prediction": {
+    "solve_time_seconds": 0.6911178670125082,
+    "receiver_count": 10,
+    "aggregation": "sum_abs_squared_complex_path_amplitudes",
+    "gain_unit": "unitless_linear",
+    "minimum_valid_path_count": 16,
+    "maximum_valid_path_count": 79
+  },
+  "radio_map": {
+    "schema_version": "1.0",
+    "status": "provisional",
+    "confidence": "low",
+    "physically_validated": false,
+    "metric": "path_gain",
+    "value_unit": "unitless_linear",
+    "display_unit": "dB",
+    "grid_shape_yx": [
+      81,
+      58
+    ],
+    "cell_size_m": [
+      0.2,
+      0.2
+    ],
+    "center_m": [
+      5.9,
+      8.171226549047597,
+      0.45
+    ],
+    "size_m": [
+      11.600000000000001,
+      16.142453098095192
+    ],
+    "z_height_m": 0.45,
+    "total_cell_count": 4698,
+    "inside_cell_count": 4362,
+    "valid_cell_count": 3193,
+    "valid_ratio_of_inside": 0.7320036680421825,
+    "nan_count": 0,
+    "inf_count": 0,
+    "zero_or_negative_count": 1505,
+    "value_min_linear": 8.684273439252266e-11,
+    "value_mean_linear": 7.503631299700535e-05,
+    "value_max_linear": 0.23575027287006378,
+    "value_min_db": -100.61266510495278,
+    "value_mean_db": -62.45652091279115,
+    "value_max_db": -6.275477959145178,
+    "solver_options": {
+      "samples_per_tx": 1000000,
+      "max_depth": 2,
+      "los": true,
+      "specular_reflection": true,
+      "refraction": false,
+      "diffraction": true,
+      "diffuse_reflection": false,
+      "seed": 43
+    },
+    "solve_time_seconds": 0.16649525499087758,
+    "success": true,
+    "exported_valid_grid_point_count": 3193,
+    "rssi_conversion_validation": {
+      "radio_map_rss_property_available": true,
+      "formula": "tx_power_dbm + 10*log10(path_gain_linear)",
+      "rss_property_unit": "W",
+      "maximum_absolute_difference_db": 3.1050610971306014e-07,
+      "tolerance_db": 0.0001,
+      "success": true
+    }
+  },
+  "performance": {
+    "scene_load_seconds": 0.033284070988884196,
+    "point_solve_seconds": 0.6911178670125082,
+    "radio_map_solve_seconds": 0.16649525499087758
+  },
+  "input_sha256": {
+    "scene_json": "5d0d8b3a36e358262207950b215a77ae97259d9a05228e2bbbfc416f64d8fbe3",
+    "markers_json": "2e5877540c0ce0c4e15fe97110d54e65ea20e327e64a4ec51b639a154754707c",
+    "solver_json": "27f2774e2e4041915ddc1e0e984dc38342845bde38bdb0e76f01ee99cfa24d50",
+    "scene_xml": "21c1a14b9b8fa412d16f4dcd6d7418fb2a754db9ad2249df56648bfbbc1cf33b"
+  },
+  "warnings": [
+    "DRY RUN ONLY — draft Scene/Marker 결과는 논문 수치로 사용하지 않습니다."
+  ],
+  "files": {
+    "sionna_points_csv": "/data/RFVisualizer/outputs/rf_experiment/pnu_4f_corridor/editor_scene_diffraction/processed/sionna_points.csv",
+    "sionna_grid_csv": "/data/RFVisualizer/outputs/rf_experiment/pnu_4f_corridor/editor_scene_diffraction/processed/sionna_grid.csv",
+    "grid_path_gain_npy": "/data/RFVisualizer/outputs/rf_experiment/pnu_4f_corridor/editor_scene_diffraction/processed/sionna_grid_path_gain_linear.npy",
+    "grid_valid_mask_npy": "/data/RFVisualizer/outputs/rf_experiment/pnu_4f_corridor/editor_scene_diffraction/processed/sionna_grid_valid_mask.npy",
+    "grid_rssi_dbm_npy": "/data/RFVisualizer/outputs/rf_experiment/pnu_4f_corridor/editor_scene_diffraction/processed/sionna_grid_rssi_dbm.npy",
+    "radio_map_png": "/data/RFVisualizer/outputs/rf_experiment/pnu_4f_corridor/editor_scene_diffraction/figures/raw_sionna_rssi_map.png",
+    "environment_json": "/data/RFVisualizer/outputs/rf_experiment/pnu_4f_corridor/editor_scene_diffraction/environment.json",
+    "report_json": "/data/RFVisualizer/outputs/rf_experiment/pnu_4f_corridor/editor_scene_diffraction/sionna_rssi_report.json"
+  }
+}

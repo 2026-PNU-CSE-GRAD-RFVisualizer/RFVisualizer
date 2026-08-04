@@ -1,0 +1,50 @@
+{
+  "experiment_id": "Test_3_011702",
+  "nodes": [
+    {
+      "experiment_id": "Test_3_011702",
+      "node_id": "gw-01",
+      "offset_median_dbm": -33.0,
+      "device_offset_db": 1.0,
+      "sample_count": 54,
+      "std_db": 2.771,
+      "calibrated_at_ms": 1785169577510
+    },
+    {
+      "experiment_id": "Test_3_011702",
+      "node_id": "node-01",
+      "offset_median_dbm": -32.0,
+      "device_offset_db": 0.0,
+      "sample_count": 59,
+      "std_db": 2.548,
+      "calibrated_at_ms": 1785169577510
+    },
+    {
+      "experiment_id": "Test_3_011702",
+      "node_id": "node-02",
+      "offset_median_dbm": -28.0,
+      "device_offset_db": -4.0,
+      "sample_count": 59,
+      "std_db": 1.533,
+      "calibrated_at_ms": 1785169577510
+    },
+    {
+      "experiment_id": "Test_3_011702",
+      "node_id": "node-03",
+      "offset_median_dbm": -29.0,
+      "device_offset_db": -3.0,
+      "sample_count": 59,
+      "std_db": 2.252,
+      "calibrated_at_ms": 1785169577510
+    },
+    {
+      "experiment_id": "Test_3_011702",
+      "node_id": "node-04",
+      "offset_median_dbm": -33.0,
+      "device_offset_db": 1.0,
+      "sample_count": 59,
+      "std_db": 1.827,
+      "calibrated_at_ms": 1785169577510
+    }
+  ]
+}

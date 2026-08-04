@@ -1,0 +1,49 @@
+# Preview-only Wavefront materials; RF values live in scene.xml
+
+newmtl radio_itu_concrete_Wall_01
+Kd 0.55 0.55 0.55
+d 1.0
+
+newmtl radio_itu_concrete_Wall_02
+Kd 0.55 0.55 0.55
+d 1.0
+
+newmtl radio_itu_concrete_Wall_03
+Kd 0.55 0.55 0.55
+d 1.0
+
+newmtl radio_itu_concrete_Wall_04
+Kd 0.55 0.55 0.55
+d 1.0
+
+newmtl radio_itu_metal_door_02
+Kd 0.35 0.38 0.43
+d 1.0
+
+newmtl radio_itu_metal_door_01
+Kd 0.35 0.38 0.43
+d 1.0
+
+newmtl radio_itu_metal_door_03
+Kd 0.35 0.38 0.43
+d 1.0
+
+newmtl radio_itu_metal_door_04
+Kd 0.35 0.38 0.43
+d 1.0
+
+newmtl radio_itu_glass_window_01
+Kd 0.3 0.55 0.75
+d 1.0
+
+newmtl radio_itu_glass_window_01_copy
+Kd 0.3 0.55 0.75
+d 1.0
+
+newmtl radio_itu_glass_window_01_copy_copy
+Kd 0.3 0.55 0.75
+d 1.0
+
+newmtl radio_itu_glass_window_01_copy_copy_copy
+Kd 0.3 0.55 0.75
+d 1.0

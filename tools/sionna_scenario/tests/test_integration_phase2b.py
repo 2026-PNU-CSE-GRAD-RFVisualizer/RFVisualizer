@@ -26,10 +26,11 @@ def test_actual_sionna_empty_vs_synthetic_blocker_changes_los_and_coverage(
     project_root = Path(__file__).resolve().parents[3]
     experiment_path = (
         project_root
+        / "scenes"
+        / "pnu_classroom"
         / "configs"
         / "sionna"
-        / "experiments"
-        / "pnu_classroom_phase2b_ab.yaml"
+        / "phase2b_ab_experiment.yaml"
     )
     result = run_ab_experiment(
         load_experiment(experiment_path), tmp_path / "phase2b_integration"

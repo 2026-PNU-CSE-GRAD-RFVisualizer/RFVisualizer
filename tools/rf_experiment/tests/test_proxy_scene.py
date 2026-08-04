@@ -10,9 +10,15 @@ from tools.sionna_smoke_test.metric_scene_loader import load_metric_scene
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 SCENE_PATH = (
-    PROJECT_ROOT / "configs" / "rf_experiment" / "classroom_20260723" / "scene.json"
+    PROJECT_ROOT
+    / "scenes"
+    / "pnu_classroom"
+    / "experiments"
+    / "classroom_20260723"
+    / "configs"
+    / "scene.json"
 )
-LEGACY_DIRECTORY = PROJECT_ROOT / "outputs" / "proxy_mesh" / "pnu_classroom" / "metric_calibration"
+LEGACY_DIRECTORY = PROJECT_ROOT / "scenes" / "pnu_classroom" / "proxy_mesh" / "metric_calibration"
 
 
 def _envelope():

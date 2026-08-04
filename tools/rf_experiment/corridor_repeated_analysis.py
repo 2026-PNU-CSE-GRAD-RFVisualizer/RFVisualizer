@@ -38,7 +38,7 @@ from .corridor_repeated_models import (
 
 DEFAULT_OUTPUT: Final = (
     PROJECT_ROOT
-    / "output/spreadsheet/pnu_4f_corridor_doors_glass_100m_d5_tests_1_2"
+    / "scenes/pnu_4f_corridor/rf_experiment/spreadsheet/doors_glass_100m_d5_tests_1_2"
 )
 
 

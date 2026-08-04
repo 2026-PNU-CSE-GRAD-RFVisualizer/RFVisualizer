@@ -547,22 +547,23 @@ PGSR/output/my_room/
 
 수백만 삼각형의 상세 Mesh에서 바닥·천장·벽의 큰 평면을 찾아, Sionna RT가 안정적으로 사용할 수 있는 단순한 방 외곽을 만든다.
 
-### 5.1 장면별 설정 복사
+### 5.1 씬 폴더와 설정 복사
 
-`pnu_classroom` 설정은 현재 강의실 전용이므로 새 장소에 그대로 사용하면 안 된다.
+`pnu_classroom` 설정은 현재 강의실 전용이므로 새 장소에 그대로 사용하면 안 된다. 새 씬은 `scenes/<scene_id>/`에 그 씬만의 설정과 산출물을 모아 둔다.
 
 ```bash
-cp tools/proxy_mesh_editor/configs/pnu_classroom.yaml \
-  tools/proxy_mesh_editor/configs/my_room.yaml
-cp tools/proxy_mesh_editor/configs/pnu_classroom_envelope.yaml \
-  tools/proxy_mesh_editor/configs/my_room_envelope.yaml
-cp tools/proxy_mesh_editor/configs/pnu_classroom_calibration_preflight.yaml \
-  tools/proxy_mesh_editor/configs/my_room_calibration_preflight.yaml
-cp tools/proxy_mesh_editor/configs/pnu_classroom_metric_calibration.yaml \
-  tools/proxy_mesh_editor/configs/my_room_metric_calibration.yaml
+mkdir -p scenes/my_room/configs/proxy_mesh
+cp scenes/pnu_classroom/configs/proxy_mesh/base.yaml \
+  scenes/my_room/configs/proxy_mesh/base.yaml
+cp scenes/pnu_classroom/configs/proxy_mesh/envelope.yaml \
+  scenes/my_room/configs/proxy_mesh/envelope.yaml
+cp scenes/pnu_classroom/configs/proxy_mesh/calibration_preflight.yaml \
+  scenes/my_room/configs/proxy_mesh/calibration_preflight.yaml
+cp scenes/pnu_classroom/configs/proxy_mesh/metric_calibration.yaml \
+  scenes/my_room/configs/proxy_mesh/metric_calibration.yaml
 ```
 
-먼저 `my_room.yaml`의 `scene.up_vector`를 장면의 실제 위쪽에 맞춘다. 기존 강의실 값은 새 장소의 정답이 아니다.
+먼저 `scenes/my_room/configs/proxy_mesh/base.yaml`의 `scene.up_vector`를 장면의 실제 위쪽에 맞춘다. 기존 강의실 값은 새 장소의 정답이 아니다.
 
 ### 5.2 일반 평면 후보 추출
 
@@ -571,14 +572,14 @@ conda run --no-capture-output -n pgsr \
   python -m tools.proxy_mesh_editor.main extract \
   --mesh PGSR/output/my_room/mesh/tsdf_fusion_post.ply \
   --reference-point-cloud PGSR/output/my_room/point_cloud/iteration_30000/point_cloud.ply \
-  --config tools/proxy_mesh_editor/configs/my_room.yaml \
-  --output outputs/proxy_mesh/my_room/phase1
+  --config scenes/my_room/configs/proxy_mesh/base.yaml \
+  --output scenes/my_room/proxy_mesh/phase1
 ```
 
 주요 결과:
 
 ```text
-outputs/proxy_mesh/my_room/phase1/
+scenes/my_room/proxy_mesh/phase1/
 ├── plane_candidates.json
 ├── plane_candidates_colored.ply
 └── candidate_meshes/
@@ -591,25 +592,25 @@ conda run --no-capture-output -n pgsr \
   python -m tools.proxy_mesh_editor.main analyze-normals \
   --mesh PGSR/output/my_room/mesh/tsdf_fusion_post.ply \
   --reference-point-cloud PGSR/output/my_room/point_cloud/iteration_30000/point_cloud.ply \
-  --config tools/proxy_mesh_editor/configs/my_room.yaml \
-  --output outputs/proxy_mesh/my_room/normal_analysis
+  --config scenes/my_room/configs/proxy_mesh/base.yaml \
+  --output scenes/my_room/proxy_mesh/normal_analysis
 
 conda run --no-capture-output -n pgsr \
   python -m tools.proxy_mesh_editor.main extract-walls \
   --mesh PGSR/output/my_room/mesh/tsdf_fusion_post.ply \
   --reference-point-cloud PGSR/output/my_room/point_cloud/iteration_30000/point_cloud.ply \
-  --config tools/proxy_mesh_editor/configs/my_room.yaml \
-  --output outputs/proxy_mesh/my_room/wall_extraction
+  --config scenes/my_room/configs/proxy_mesh/base.yaml \
+  --output scenes/my_room/proxy_mesh/wall_extraction
 ```
 
 ### 5.4 바닥·천장·벽 후보 선택
 
 다음 두 파일을 Mesh 뷰어에서 함께 확인한다.
 
-- `outputs/proxy_mesh/my_room/phase1/plane_candidates_colored.ply`
-- `outputs/proxy_mesh/my_room/wall_extraction/wall_candidates_colored.ply`
+- `scenes/my_room/proxy_mesh/phase1/plane_candidates_colored.ply`
+- `scenes/my_room/proxy_mesh/wall_extraction/wall_candidates_colored.ply`
 
-`plane_...` 또는 `wall_...` 번호를 기록한 뒤 `my_room_envelope.yaml`을 수정한다.
+`plane_...` 또는 `wall_...` 번호를 기록한 뒤 `scenes/my_room/configs/proxy_mesh/envelope.yaml`을 수정한다.
 
 ```yaml
 room_envelope:
@@ -633,16 +634,16 @@ room_envelope:
 ```bash
 conda run --no-capture-output -n pgsr \
   python -m tools.proxy_mesh_editor.main build-envelope \
-  --plane-candidates outputs/proxy_mesh/my_room/phase1/plane_candidates.json \
-  --wall-candidates outputs/proxy_mesh/my_room/wall_extraction/wall_candidates.json \
-  --envelope-config tools/proxy_mesh_editor/configs/my_room_envelope.yaml \
-  --output outputs/proxy_mesh/my_room/room_envelope
+  --plane-candidates scenes/my_room/proxy_mesh/phase1/plane_candidates.json \
+  --wall-candidates scenes/my_room/proxy_mesh/wall_extraction/wall_candidates.json \
+  --envelope-config scenes/my_room/configs/proxy_mesh/envelope.yaml \
+  --output scenes/my_room/proxy_mesh/room_envelope
 ```
 
 필수 결과:
 
 ```text
-outputs/proxy_mesh/my_room/room_envelope/
+scenes/my_room/proxy_mesh/room_envelope/
 ├── room_envelope.obj
 ├── room_envelope.ply
 ├── room_envelope.json
@@ -653,15 +654,15 @@ outputs/proxy_mesh/my_room/room_envelope/
 
 ### 5.6 미터 단위 사전 진단
 
-먼저 `my_room_calibration_preflight.yaml` 안의 입력 경로와 실제 길이 참고값을 새 장면에 맞게 수정한다.
+먼저 `scenes/my_room/configs/proxy_mesh/calibration_preflight.yaml` 안의 입력 경로와 실제 길이 참고값을 새 장면에 맞게 수정한다.
 
 ```bash
 conda run --no-capture-output -n pgsr \
   python -m tools.proxy_mesh_editor.main calibration-preflight \
-  --envelope-json outputs/proxy_mesh/my_room/room_envelope/room_envelope.json \
-  --envelope-obj outputs/proxy_mesh/my_room/room_envelope/room_envelope.obj \
-  --config tools/proxy_mesh_editor/configs/my_room_calibration_preflight.yaml \
-  --output outputs/proxy_mesh/my_room/calibration_preflight
+  --envelope-json scenes/my_room/proxy_mesh/room_envelope/room_envelope.json \
+  --envelope-obj scenes/my_room/proxy_mesh/room_envelope/room_envelope.obj \
+  --config scenes/my_room/configs/proxy_mesh/calibration_preflight.yaml \
+  --output scenes/my_room/proxy_mesh/calibration_preflight
 ```
 
 확인할 파일:
@@ -675,7 +676,7 @@ conda run --no-capture-output -n pgsr \
 
 ### 5.7 미터 단위 Room 생성
 
-`my_room_metric_calibration.yaml`에서 다음을 실제 장면에 맞게 수정한다.
+`scenes/my_room/configs/proxy_mesh/metric_calibration.yaml`에서 다음을 실제 장면에 맞게 수정한다.
 
 - `real_distance_m`
 - 미터 원점으로 쓸 바닥 모서리
@@ -685,16 +686,16 @@ conda run --no-capture-output -n pgsr \
 ```bash
 conda run --no-capture-output -n pgsr \
   python -m tools.proxy_mesh_editor.main calibrate-metric \
-  --envelope-json outputs/proxy_mesh/my_room/room_envelope/room_envelope.json \
-  --envelope-obj outputs/proxy_mesh/my_room/room_envelope/room_envelope.obj \
-  --config tools/proxy_mesh_editor/configs/my_room_metric_calibration.yaml \
-  --output outputs/proxy_mesh/my_room/metric_calibration
+  --envelope-json scenes/my_room/proxy_mesh/room_envelope/room_envelope.json \
+  --envelope-obj scenes/my_room/proxy_mesh/room_envelope/room_envelope.obj \
+  --config scenes/my_room/configs/proxy_mesh/metric_calibration.yaml \
+  --output scenes/my_room/proxy_mesh/metric_calibration
 ```
 
 필수 결과:
 
 ```text
-outputs/proxy_mesh/my_room/metric_calibration/
+scenes/my_room/proxy_mesh/metric_calibration/
 ├── room_envelope_metric.obj
 ├── room_envelope_metric.json
 ├── calibration.json
@@ -709,15 +710,13 @@ outputs/proxy_mesh/my_room/metric_calibration/
 현재 `classroom_20260723` 실험은 현장에서 잰 가로·깊이·높이차를 우선해 기본 Envelope를 만든다.
 
 ```bash
-python -m tools.rf_experiment.main build-proxy-envelope \
-  --scene configs/rf_experiment/classroom_20260723/scene.json \
-  --output outputs/rf_experiment/classroom_20260723/proxy_scene
+python scripts/run_scene.py classroom_20260723 rf_experiment build-proxy-envelope
 ```
 
 결과는 다음 위치에 생긴다.
 
 ```text
-outputs/rf_experiment/classroom_20260723/proxy_scene/
+scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene/
 ├── room_envelope_metric.obj
 ├── room_envelope_metric.json
 ├── calibration.json
@@ -738,11 +737,13 @@ outputs/rf_experiment/classroom_20260723/proxy_scene/
 
 ### 현재 강의실 예시 실행
 
+`scenes/<scene_id>/scene.yaml`에 이미 입력·출력 경로가 선언되어 있으므로 공용 런처로 연다.
+
 ```bash
-./run_proxy_editor.sh
+python scripts/run_scene.py classroom_20260723 proxy_placement_editor edit
 ```
 
-이 스크립트는 다음 자료를 한 번에 연다.
+이 명령은 다음 자료를 한 번에 연다.
 
 - 실측 치수 기반 Room Proxy Mesh
 - PGSR Gaussian Point Cloud
@@ -761,30 +762,39 @@ conda run --no-capture-output -n pgsr \
   python -m tools.proxy_placement_editor.main setup-gui-runtime
 ```
 
-그다음 `./run_proxy_editor.sh`를 다시 실행한다. 그래도 실패하면 다음처럼 소프트웨어 렌더링을 시도한다.
+그다음 같은 명령을 다시 실행한다. 그래도 실패하면 뒤에 소프트웨어 렌더링 플래그를 이어 붙인다.
 
 ```bash
-./run_proxy_editor.sh --software-rendering
+python scripts/run_scene.py classroom_20260723 proxy_placement_editor edit --software-rendering
 ```
 
 ### 새 장면을 여는 기본 명령
 
+새 씬은 아직 `scene.yaml`이 없으므로 처음에는 모든 경로를 직접 지정한다. 먼저 문·책상 같은 Obstacle 후보 라이브러리도 기존 씬에서 복사해 온다.
+
+```bash
+mkdir -p scenes/my_room/configs/proxy_editor scenes/my_room/configs/sionna scenes/my_room/configs/rf_experiment
+cp scenes/pnu_classroom/configs/proxy_editor/candidates.yaml \
+  scenes/my_room/configs/proxy_editor/candidates.yaml
+```
+
 ```bash
 conda run --no-capture-output -n pgsr \
   python -m tools.proxy_placement_editor.main edit \
-  --room-obj outputs/proxy_mesh/my_room/metric_calibration/room_envelope_metric.obj \
-  --room-json outputs/proxy_mesh/my_room/metric_calibration/room_envelope_metric.json \
-  --calibration outputs/proxy_mesh/my_room/metric_calibration/calibration.json \
-  --scenario configs/sionna/scenarios/my_room_draft.yaml \
-  --markers configs/rf_experiment/my_room/tx_rx.json \
+  --room-obj scenes/my_room/proxy_mesh/metric_calibration/room_envelope_metric.obj \
+  --room-json scenes/my_room/proxy_mesh/metric_calibration/room_envelope_metric.json \
+  --calibration scenes/my_room/proxy_mesh/metric_calibration/calibration.json \
+  --scenario scenes/my_room/configs/sionna/draft.yaml \
+  --candidates scenes/my_room/configs/proxy_editor/candidates.yaml \
+  --markers scenes/my_room/configs/rf_experiment/tx_rx.json \
   --point-cloud PGSR/output/my_room/point_cloud/iteration_30000/point_cloud.ply \
   --point-cloud-coordinate-space scene \
   --pgsr-output-mesh PGSR/output/my_room/mesh/tsdf_fusion_post.ply \
   --pgsr-output-mesh-coordinate-space scene \
-  --output outputs/proxy_placement/my_room
+  --output scenes/my_room/proxy_placement
 ```
 
-새 장면에서는 먼저 기존 Scenario와 Marker 설정을 복사해 장면 ID, 좌표계 ID, 파일 경로를 맞춰야 한다. `scene.json`, Scenario YAML, `tx_rx.json`의 장면 ID가 서로 다르면 마지막 계약 검증에서 실패한다.
+새 장면에서는 먼저 기존 Scenario와 Marker 설정을 복사해 장면 ID, 좌표계 ID, 파일 경로를 맞춰야 한다. `scene.json`, Scenario YAML, `tx_rx.json`의 장면 ID가 서로 다르면 마지막 계약 검증에서 실패한다. 경로가 자리 잡으면 이 값들을 `scenes/my_room/scene.yaml`에 옮겨 적어 이후에는 `scripts/run_scene.py my_room proxy_placement_editor edit`만으로 열 수 있다.
 
 ### 화면 읽는 법
 
@@ -841,7 +851,7 @@ Candidate를 추가하면 보이는 기본 크기는 **실제 치수가 아닌 �
 ### Editor 결과
 
 ```text
-outputs/proxy_placement/classroom_20260723/
+scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_placement/
 ├── editor_state.json
 ├── placement_validation.json
 ├── obstacles_metric.json
@@ -987,18 +997,18 @@ python -m tools.rf_experiment.main validate-csv \
 
 ```bash
 python -m tools.rf_experiment.main validate-contracts \
-  --scene configs/rf_experiment/classroom_20260723/scene.json \
-  --markers configs/rf_experiment/classroom_20260723/tx_rx.json \
-  --methods configs/rf_experiment/classroom_20260723/method_config.json
+  --scene scenes/pnu_classroom/experiments/classroom_20260723/configs/scene.json \
+  --markers scenes/pnu_classroom/experiments/classroom_20260723/configs/tx_rx.json \
+  --methods scenes/pnu_classroom/experiments/classroom_20260723/configs/method_config.json
 ```
 
 초안 단계에서 `ready: false`와 경고가 나오는 것은 정상이다. 현장 입력을 모두 확정한 뒤에는 다음 명령이 exit code 0으로 끝나야 한다.
 
 ```bash
 python -m tools.rf_experiment.main validate-contracts \
-  --scene configs/rf_experiment/classroom_20260723/scene.json \
-  --markers configs/rf_experiment/classroom_20260723/tx_rx.json \
-  --methods configs/rf_experiment/classroom_20260723/method_config.json \
+  --scene scenes/pnu_classroom/experiments/classroom_20260723/configs/scene.json \
+  --markers scenes/pnu_classroom/experiments/classroom_20260723/configs/tx_rx.json \
+  --methods scenes/pnu_classroom/experiments/classroom_20260723/configs/method_config.json \
   --require-ready
 ```
 
@@ -1011,10 +1021,10 @@ Proxy Placement Editor에서 저장 후 `Build`를 눌러 `scene.xml`을 만든�
 ```bash
 conda run --no-capture-output -n sionna \
   python -m tools.rf_experiment.main run-sionna \
-  --scene configs/rf_experiment/classroom_20260723/scene.json \
-  --markers configs/rf_experiment/classroom_20260723/tx_rx.json \
-  --solver configs/rf_experiment/classroom_20260723/sionna_solver.json \
-  --scene-xml outputs/proxy_placement/classroom_20260723/sionna_build/scene/scene.xml \
+  --scene scenes/pnu_classroom/experiments/classroom_20260723/configs/scene.json \
+  --markers scenes/pnu_classroom/experiments/classroom_20260723/configs/tx_rx.json \
+  --solver scenes/pnu_classroom/experiments/classroom_20260723/configs/sionna_solver.json \
+  --scene-xml scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_placement/sionna_build/scene/scene.xml \
   --output experiments/classroom_20260723/sionna
 ```
 
@@ -1054,7 +1064,7 @@ python -m tools.rf_experiment.main analyze \
   --summary experiments/classroom_20260723/processed/measurements_summary.csv \
   --sionna-points experiments/classroom_20260723/sionna/processed/sionna_points.csv \
   --sionna-grid experiments/classroom_20260723/sionna/processed/sionna_grid.csv \
-  --methods configs/rf_experiment/classroom_20260723/method_config.json \
+  --methods scenes/pnu_classroom/experiments/classroom_20260723/configs/method_config.json \
   --output experiments/classroom_20260723
 ```
 
@@ -1136,17 +1146,17 @@ cd /data/RFVisualizer
 
 # 1. 실측 치수 기반 기본 Room 재생성
 python -m tools.rf_experiment.main build-proxy-envelope \
-  --scene configs/rf_experiment/classroom_20260723/scene.json \
-  --output outputs/rf_experiment/classroom_20260723/proxy_scene
+  --scene scenes/pnu_classroom/experiments/classroom_20260723/configs/scene.json \
+  --output scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene
 
 # 2. 문·책상·AP·RX 배치
-./run_proxy_editor.sh
+python scripts/run_scene.py classroom_20260723 proxy_placement_editor edit
 
 # 3. Scene/Marker/분석 설정 검사
 python -m tools.rf_experiment.main validate-contracts \
-  --scene configs/rf_experiment/classroom_20260723/scene.json \
-  --markers configs/rf_experiment/classroom_20260723/tx_rx.json \
-  --methods configs/rf_experiment/classroom_20260723/method_config.json
+  --scene scenes/pnu_classroom/experiments/classroom_20260723/configs/scene.json \
+  --markers scenes/pnu_classroom/experiments/classroom_20260723/configs/tx_rx.json \
+  --methods scenes/pnu_classroom/experiments/classroom_20260723/configs/method_config.json
 
 # 4. 현장 CSV 검사
 python -m tools.rf_experiment.main validate-csv \
@@ -1162,10 +1172,10 @@ python -m tools.rf_experiment.main validate-csv \
 # 5. 장애물 포함 Sionna 계산
 conda run --no-capture-output -n sionna \
   python -m tools.rf_experiment.main run-sionna \
-  --scene configs/rf_experiment/classroom_20260723/scene.json \
-  --markers configs/rf_experiment/classroom_20260723/tx_rx.json \
-  --solver configs/rf_experiment/classroom_20260723/sionna_solver.json \
-  --scene-xml outputs/proxy_placement/classroom_20260723/sionna_build/scene/scene.xml \
+  --scene scenes/pnu_classroom/experiments/classroom_20260723/configs/scene.json \
+  --markers scenes/pnu_classroom/experiments/classroom_20260723/configs/tx_rx.json \
+  --solver scenes/pnu_classroom/experiments/classroom_20260723/configs/sionna_solver.json \
+  --scene-xml scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_placement/sionna_build/scene/scene.xml \
   --output experiments/classroom_20260723/sionna
 
 # 6. 세 방법 비교와 최종 그림 생성
@@ -1173,7 +1183,7 @@ python -m tools.rf_experiment.main analyze \
   --summary experiments/classroom_20260723/processed/measurements_summary.csv \
   --sionna-points experiments/classroom_20260723/sionna/processed/sionna_points.csv \
   --sionna-grid experiments/classroom_20260723/sionna/processed/sionna_grid.csv \
-  --methods configs/rf_experiment/classroom_20260723/method_config.json \
+  --methods scenes/pnu_classroom/experiments/classroom_20260723/configs/method_config.json \
   --output experiments/classroom_20260723
 ```
 

@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "camera": {
+    "eye": [
+      0.15202887469970358,
+      6.450886224431713,
+      2.366557515454598
+    ],
+    "forward": [
+      -0.011317210955940779,
+      0.43114859385278076,
+      -0.902210071735923
+    ],
+    "up": [
+      -0.023673899776604678,
+      0.9018993640078696,
+      0.4312971029309607
+    ]
+  },
+  "selected_object": "Wall_03",
+  "selected_objects": [
+    "Wall_03"
+  ],
+  "viewport_mode": "translate",
+  "axis_constraint": null,
+  "transform_space": "world",
+  "reference_point_size": 2.0,
+  "layer_visibility": {
+    "point_cloud": false,
+    "proxy_mesh": true,
+    "pgsr_output_mesh": false
+  },
+  "grid_visibility": true,
+  "show_disabled": true,
+  "object_visibility": {
+    "Wall_01": true,
+    "Wall_02": true,
+    "Wall_03": true,
+    "Wall_04": true,
+    "cal_rx_01": true,
+    "cal_rx_02": true,
+    "cal_rx_03": true,
+    "cal_rx_04": true,
+    "door_01": true,
+    "door_02": true,
+    "door_03": true,
+    "door_04": true,
+    "test_rx_01": true,
+    "test_rx_02": true,
+    "test_rx_03": true,
+    "test_rx_04": true,
+    "test_rx_05": true,
+    "test_rx_06": true,
+    "tx_01": true,
+    "window_01": true,
+    "window_01_copy": true,
+    "window_01_copy_copy": true,
+    "window_01_copy_copy_copy": true
+  },
+  "snap_settings": {
+    "enabled": true,
+    "translation_m": 0.05,
+    "rotation_deg": 5.0,
+    "size_m": 0.01
+  },
+  "panel_sizes": {
+    "side_panel_width": 533.0
+  },
+  "last_opened_scenario": "/data/RFVisualizer/configs/sionna/scenarios/pnu_4f_corridor_proxy.yaml",
+  "autosaved_at": "2026-07-30T09:51:40.173294Z",
+  "source_scenario_path": "/data/RFVisualizer/configs/sionna/scenarios/pnu_4f_corridor_proxy.yaml"
+}

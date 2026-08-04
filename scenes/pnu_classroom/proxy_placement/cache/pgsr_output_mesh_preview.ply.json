@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "source_path": "/data/RFVisualizer/PGSR/output/pnu_classroom/mesh/tsdf_fusion_post.ply",
+  "source_size_bytes": 189132911,
+  "source_mtime_ns": 1783499603942214330,
+  "maximum_triangles": 1000000,
+  "preview_path": "/data/RFVisualizer/outputs/proxy_placement/pnu_classroom/cache/pgsr_output_mesh_preview.ply",
+  "source_vertices": 3666424,
+  "source_triangles": 6933784,
+  "preview_vertices": 572805,
+  "preview_triangles": 1000000,
+  "cache_reused": false
+}

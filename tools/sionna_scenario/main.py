@@ -85,7 +85,7 @@ def command_run_ab(args: argparse.Namespace) -> int:
     paths = result["path_comparison"]["rx_los"]
     summary = {
         "experiment_id": result["validation"].get(
-            "experiment_id", "pnu_classroom_phase2b_ab"
+            "experiment_id", Path(args.experiment).stem
         ),
         "overall_success": validation["overall_success"],
         "baseline_rx_los": paths["baseline"]["los_path_exists"],

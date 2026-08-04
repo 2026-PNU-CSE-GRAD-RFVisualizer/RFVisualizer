@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0",
+  "camera": {
+    "eye": [
+      9.280508758099002,
+      4.862817506097306,
+      1.7640221316440161
+    ],
+    "forward": [
+      -0.9187355633314684,
+      -0.35268167164449366,
+      -0.17759674308966092
+    ],
+    "up": [
+      -0.16580011069714629,
+      -0.06364688876032408,
+      0.9841033466277539
+    ]
+  },
+  "selected_object": "test_rx_001",
+  "selected_objects": [
+    "test_rx_001"
+  ],
+  "viewport_mode": "translate",
+  "axis_constraint": null,
+  "transform_space": "world",
+  "reference_point_size": 2.0,
+  "layer_visibility": {
+    "point_cloud": true,
+    "proxy_mesh": true,
+    "pgsr_output_mesh": true
+  },
+  "grid_visibility": true,
+  "show_disabled": true,
+  "object_visibility": {
+    "ap_tx_000": true,
+    "cal_rx_000": true,
+    "cal_rx_001": true,
+    "cal_rx_002": true,
+    "desk_left_01": true,
+    "desk_left_02": true,
+    "desk_left_03": true,
+    "desk_left_04": true,
+    "desk_left_05": true,
+    "desk_left_06": true,
+    "desk_mid_01": true,
+    "desk_mid_02": true,
+    "desk_mid_03": true,
+    "desk_mid_04": true,
+    "desk_mid_05": true,
+    "desk_mid_06": true,
+    "desk_right_01": true,
+    "desk_right_02": true,
+    "desk_right_03": true,
+    "desk_right_04": true,
+    "desk_right_05": true,
+    "desk_right_06": true,
+    "door": true,
+    "test_rx_000": true,
+    "test_rx_001": true,
+    "test_rx_002": true,
+    "test_rx_003": true,
+    "test_rx_004": true,
+    "test_rx_005": true,
+    "test_rx_006": true,
+    "test_rx_007": true,
+    "test_rx_008": true,
+    "test_rx_009": true,
+    "test_rx_010": true,
+    "test_rx_011": true,
+    "test_rx_012": true,
+    "test_rx_013": true,
+    "test_rx_014": true
+  },
+  "snap_settings": {
+    "enabled": true,
+    "translation_m": 0.05,
+    "rotation_deg": 5.0,
+    "size_m": 0.05
+  },
+  "panel_sizes": {
+    "side_panel_width": 533.0
+  },
+  "last_opened_scenario": "/data/RFVisualizer/configs/sionna/scenarios/pnu_classroom_field_20260723.yaml",
+  "autosaved_at": "2026-07-23T08:51:02.846460Z",
+  "source_scenario_path": "/data/RFVisualizer/configs/sionna/scenarios/pnu_classroom_field_20260723.yaml"
+}

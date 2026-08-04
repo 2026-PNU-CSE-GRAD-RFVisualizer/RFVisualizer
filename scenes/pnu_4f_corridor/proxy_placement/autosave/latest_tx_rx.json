@@ -1,0 +1,136 @@
+{
+  "schema_version": "1.0",
+  "scene_id": "pnu_4f_corridor",
+  "coordinate_system_id": "pnu_4f_corridor",
+  "status": "draft",
+  "requirements": {
+    "transmitter_count": 1,
+    "calibration_receiver_count": 4,
+    "test_receiver_count": 6
+  },
+  "tx": [
+    {
+      "id": "tx_01",
+      "name": "TX 01",
+      "position_m": [
+        3.15,
+        0.5,
+        0.45
+      ],
+      "frequency_hz": 2400000000.0,
+      "power_dbm": 20.0
+    }
+  ],
+  "rx": [
+    {
+      "id": "cal_rx_01",
+      "point_id": "cal-01",
+      "name": "보정 RX 01",
+      "role": "calibration",
+      "position_m": [
+        3.13,
+        3.93,
+        0.45
+      ]
+    },
+    {
+      "id": "cal_rx_02",
+      "point_id": "cal-02",
+      "name": "보정 RX 02",
+      "role": "calibration",
+      "position_m": [
+        8.08,
+        3.93,
+        0.45
+      ]
+    },
+    {
+      "id": "cal_rx_03",
+      "point_id": "cal-03",
+      "name": "보정 RX 03",
+      "role": "calibration",
+      "position_m": [
+        10.56,
+        10.68,
+        0.45
+      ]
+    },
+    {
+      "id": "cal_rx_04",
+      "point_id": "cal-04",
+      "name": "보정 RX 04",
+      "role": "calibration",
+      "position_m": [
+        8.69,
+        15.010000000000002,
+        0.45
+      ]
+    },
+    {
+      "id": "test_rx_01",
+      "point_id": "test-01",
+      "name": "시험 RX 01",
+      "role": "test",
+      "position_m": [
+        0.65,
+        3.93,
+        0.45
+      ]
+    },
+    {
+      "id": "test_rx_02",
+      "point_id": "test-02",
+      "name": "시험 RX 02",
+      "role": "test",
+      "position_m": [
+        5.6,
+        3.93,
+        0.45
+      ]
+    },
+    {
+      "id": "test_rx_03",
+      "point_id": "test-03",
+      "name": "시험 RX 03",
+      "role": "test",
+      "position_m": [
+        10.56,
+        3.93,
+        0.45
+      ]
+    },
+    {
+      "id": "test_rx_04",
+      "point_id": "test-04",
+      "name": "시험 RX 04",
+      "role": "test",
+      "position_m": [
+        6.42,
+        11.2,
+        0.45
+      ]
+    },
+    {
+      "id": "test_rx_05",
+      "point_id": "test-05",
+      "name": "시험 RX 05",
+      "role": "test",
+      "position_m": [
+        6.92,
+        15.010000000000002,
+        0.45
+      ]
+    },
+    {
+      "id": "test_rx_06",
+      "point_id": "test-06",
+      "name": "시험 RX 06",
+      "role": "test",
+      "position_m": [
+        10.56,
+        15.010000000000002,
+        0.45
+      ]
+    }
+  ]
+}

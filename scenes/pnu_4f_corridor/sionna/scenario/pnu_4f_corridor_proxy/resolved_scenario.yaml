@@ -1,0 +1,409 @@
+schema_version: '1.0'
+scenario:
+  id: pnu_4f_corridor_proxy
+  status: provisional
+  physically_validated: false
+  synthetic_validation: false
+  base_scene:
+    phase2a_config: configs/sionna/pnu_4f_corridor_smoke_test.yaml
+  obstacles: []
+  resolved_positions:
+  - kind: transmitter
+    name: tx_01
+    requested_position_m:
+    - 3.15
+    - 0.5
+    - 0.45
+    resolved_position_m:
+    - 3.15
+    - 0.5
+    - 0.45
+    used_fallback: false
+    validation:
+      position_m:
+      - 3.15
+      - 0.5
+      - 0.45
+      inside_room: true
+      safe_with_clearance: true
+      floor_z_m: -0.0
+      ceiling_z_m: 2.6141115140447138
+      floor_clearance_m: 0.45
+      ceiling_clearance_m: 2.1641115140447136
+      minimum_wall_clearance_m: 0.5
+      oriented_plane_distances_m:
+      - 0.45
+      - 2.1641115140447136
+      - 0.5
+      - 8.65
+      - 15.842453098095195
+      - -2.19
+      - 7.0
+      - 3.15
+    marker_id: tx_01
+    display_name: TX 01
+    frequency_hz: 2400000000.0
+    power_dbm: 20.0
+  - kind: receiver
+    name: cal-01
+    requested_position_m:
+    - 3.13
+    - 3.93
+    - 0.45
+    resolved_position_m:
+    - 3.13
+    - 3.93
+    - 0.45
+    used_fallback: false
+    validation:
+      position_m:
+      - 3.13
+      - 3.93
+      - 0.45
+      inside_room: true
+      safe_with_clearance: true
+      floor_z_m: -0.0
+      ceiling_z_m: 2.6141115140447138
+      floor_clearance_m: 0.45
+      ceiling_clearance_m: 2.1641115140447136
+      minimum_wall_clearance_m: 3.13
+      oriented_plane_distances_m:
+      - 0.45
+      - 2.1641115140447136
+      - 3.93
+      - 8.670000000000002
+      - 12.412453098095195
+      - -2.21
+      - 3.57
+      - 3.13
+    marker_id: cal_rx_01
+    display_name: 보정 RX 01
+    point_id: cal-01
+    role: calibration
+  - kind: receiver
+    name: cal-02
+    requested_position_m:
+    - 8.08
+    - 3.93
+    - 0.45
+    resolved_position_m:
+    - 8.08
+    - 3.93
+    - 0.45
+    used_fallback: false
+    validation:
+      position_m:
+      - 8.08
+      - 3.93
+      - 0.45
+      inside_room: true
+      safe_with_clearance: true
+      floor_z_m: -0.0
+      ceiling_z_m: 2.6141115140447138
+      floor_clearance_m: 0.45
+      ceiling_clearance_m: 2.1641115140447136
+      minimum_wall_clearance_m: 3.7200000000000006
+      oriented_plane_distances_m:
+      - 0.45
+      - 2.1641115140447136
+      - 3.93
+      - 3.7200000000000006
+      - 12.412453098095195
+      - 2.74
+      - 3.57
+      - 8.08
+    marker_id: cal_rx_02
+    display_name: 보정 RX 02
+    point_id: cal-02
+    role: calibration
+  - kind: receiver
+    name: cal-03
+    requested_position_m:
+    - 10.56
+    - 10.68
+    - 0.45
+    resolved_position_m:
+    - 10.56
+    - 10.68
+    - 0.45
+    used_fallback: false
+    validation:
+      position_m:
+      - 10.56
+      - 10.68
+      - 0.45
+      inside_room: true
+      safe_with_clearance: true
+      floor_z_m: -0.0
+      ceiling_z_m: 2.6141115140447138
+      floor_clearance_m: 0.45
+      ceiling_clearance_m: 2.1641115140447136
+      minimum_wall_clearance_m: 1.2400000000000002
+      oriented_plane_distances_m:
+      - 0.45
+      - 2.1641115140447136
+      - 10.68
+      - 1.2400000000000002
+      - 5.662453098095195
+      - 5.220000000000001
+      - -3.1799999999999997
+      - 10.56
+    marker_id: cal_rx_03
+    display_name: 보정 RX 03
+    point_id: cal-03
+    role: calibration
+  - kind: receiver
+    name: cal-04
+    requested_position_m:
+    - 8.69
+    - 15.63
+    - 0.45
+    resolved_position_m:
+    - 8.69
+    - 15.63
+    - 0.45
+    used_fallback: false
+    validation:
+      position_m:
+      - 8.69
+      - 15.63
+      - 0.45
+      inside_room: true
+      safe_with_clearance: true
+      floor_z_m: -0.0
+      ceiling_z_m: 2.6141115140447138
+      floor_clearance_m: 0.45
+      ceiling_clearance_m: 2.1641115140447136
+      minimum_wall_clearance_m: 0.7124530980951942
+      oriented_plane_distances_m:
+      - 0.45
+      - 2.1641115140447136
+      - 15.63
+      - 3.110000000000001
+      - 0.7124530980951942
+      - 3.3499999999999996
+      - -8.13
+      - 8.69
+    marker_id: cal_rx_04
+    display_name: 보정 RX 04
+    point_id: cal-04
+    role: calibration
+  - kind: receiver
+    name: test-01
+    requested_position_m:
+    - 0.65
+    - 3.93
+    - 0.45
+    resolved_position_m:
+    - 0.65
+    - 3.93
+    - 0.45
+    used_fallback: false
+    validation:
+      position_m:
+      - 0.65
+      - 3.93
+      - 0.45
+      inside_room: true
+      safe_with_clearance: true
+      floor_z_m: -0.0
+      ceiling_z_m: 2.6141115140447138
+      floor_clearance_m: 0.45
+      ceiling_clearance_m: 2.1641115140447136
+      minimum_wall_clearance_m: 0.65
+      oriented_plane_distances_m:
+      - 0.45
+      - 2.1641115140447136
+      - 3.93
+      - 11.15
+      - 12.412453098095195
+      - -4.6899999999999995
+      - 3.57
+      - 0.65
+    marker_id: test_rx_01
+    display_name: 시험 RX 01
+    point_id: test-01
+    role: test
+  - kind: receiver
+    name: test-02
+    requested_position_m:
+    - 5.6
+    - 3.93
+    - 0.45
+    resolved_position_m:
+    - 5.6
+    - 3.93
+    - 0.45
+    used_fallback: false
+    validation:
+      position_m:
+      - 5.6
+      - 3.93
+      - 0.45
+      inside_room: true
+      safe_with_clearance: true
+      floor_z_m: -0.0
+      ceiling_z_m: 2.6141115140447138
+      floor_clearance_m: 0.45
+      ceiling_clearance_m: 2.1641115140447136
+      minimum_wall_clearance_m: 3.579455265819088
+      oriented_plane_distances_m:
+      - 0.45
+      - 2.1641115140447136
+      - 3.93
+      - 6.200000000000001
+      - 12.412453098095195
+      - 0.2599999999999998
+      - 3.57
+      - 5.6
+    marker_id: test_rx_02
+    display_name: 시험 RX 02
+    point_id: test-02
+    role: test
+  - kind: receiver
+    name: test-03
+    requested_position_m:
+    - 10.56
+    - 3.93
+    - 0.45
+    resolved_position_m:
+    - 10.56
+    - 3.93
+    - 0.45
+    used_fallback: false
+    validation:
+      position_m:
+      - 10.56
+      - 3.93
+      - 0.45
+      inside_room: true
+      safe_with_clearance: true
+      floor_z_m: -0.0
+      ceiling_z_m: 2.6141115140447138
+      floor_clearance_m: 0.45
+      ceiling_clearance_m: 2.1641115140447136
+      minimum_wall_clearance_m: 1.2400000000000002
+      oriented_plane_distances_m:
+      - 0.45
+      - 2.1641115140447136
+      - 3.93
+      - 1.2400000000000002
+      - 12.412453098095195
+      - 5.220000000000001
+      - 3.57
+      - 10.56
+    marker_id: test_rx_03
+    display_name: 시험 RX 03
+    point_id: test-03
+    role: test
+  - kind: receiver
+    name: test-04
+    requested_position_m:
+    - 6.92
+    - 11.2
+    - 0.45
+    resolved_position_m:
+    - 6.92
+    - 11.2
+    - 0.45
+    used_fallback: false
+    validation:
+      position_m:
+      - 6.92
+      - 11.2
+      - 0.45
+      inside_room: true
+      safe_with_clearance: true
+      floor_z_m: -0.0
+      ceiling_z_m: 2.6141115140447138
+      floor_clearance_m: 0.45
+      ceiling_clearance_m: 2.1641115140447136
+      minimum_wall_clearance_m: 1.58
+      oriented_plane_distances_m:
+      - 0.45
+      - 2.1641115140447136
+      - 11.2
+      - 4.880000000000001
+      - 5.142453098095196
+      - 1.58
+      - -3.6999999999999993
+      - 6.92
+    marker_id: test_rx_04
+    display_name: 시험 RX 04
+    point_id: test-04
+    role: test
+  - kind: receiver
+    name: test-05
+    requested_position_m:
+    - 6.92
+    - 15.63
+    - 0.45
+    resolved_position_m:
+    - 6.92
+    - 15.63
+    - 0.45
+    used_fallback: false
+    validation:
+      position_m:
+      - 6.92
+      - 15.63
+      - 0.45
+      inside_room: true
+      safe_with_clearance: true
+      floor_z_m: -0.0
+      ceiling_z_m: 2.6141115140447138
+      floor_clearance_m: 0.45
+      ceiling_clearance_m: 2.1641115140447136
+      minimum_wall_clearance_m: 0.7124530980951942
+      oriented_plane_distances_m:
+      - 0.45
+      - 2.1641115140447136
+      - 15.63
+      - 4.880000000000001
+      - 0.7124530980951942
+      - 1.58
+      - -8.13
+      - 6.92
+    marker_id: test_rx_05
+    display_name: 시험 RX 05
+    point_id: test-05
+    role: test
+  - kind: receiver
+    name: test-06
+    requested_position_m:
+    - 10.56
+    - 15.63
+    - 0.45
+    resolved_position_m:
+    - 10.56
+    - 15.63
+    - 0.45
+    used_fallback: false
+    validation:
+      position_m:
+      - 10.56
+      - 15.63
+      - 0.45
+      inside_room: true
+      safe_with_clearance: true
+      floor_z_m: -0.0
+      ceiling_z_m: 2.6141115140447138
+      floor_clearance_m: 0.45
+      ceiling_clearance_m: 2.1641115140447136
+      minimum_wall_clearance_m: 0.7124530980951942
+      oriented_plane_distances_m:
+      - 0.45
+      - 2.1641115140447136
+      - 15.63
+      - 1.2400000000000002
+      - 0.7124530980951942
+      - 5.220000000000001
+      - -8.13
+      - 10.56
+    marker_id: test_rx_06
+    display_name: 시험 RX 06
+    point_id: test-06
+    role: test
+  placement_warnings: []
+  position_source: tx_rx_marker_contract
+  marker_source_path: /data/RFVisualizer/configs/rf_experiment/pnu_4f_corridor/tx_rx.json

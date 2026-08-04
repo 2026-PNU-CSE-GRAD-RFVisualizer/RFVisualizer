@@ -1,0 +1,224 @@
+{
+  "schema_version": "1.0",
+  "scene_id": "classroom_20260723",
+  "coordinate_system_id": "pnu_classroom_field_v1",
+  "status": "draft",
+  "requirements": {
+    "transmitter_count": 1,
+    "calibration_receiver_count": 3,
+    "test_receiver_count": 15
+  },
+  "tx": [
+    {
+      "id": "ap_tx_000",
+      "name": "AP / TX",
+      "position_m": [
+        7.722213439341904,
+        5.898312947322628,
+        0.9190840220995029
+      ],
+      "frequency_hz": 2400000000.0,
+      "power_dbm": 20.0
+    }
+  ],
+  "rx": [
+    {
+      "id": "cal_rx_000",
+      "point_id": "cal-01",
+      "name": "보정 RX 1",
+      "role": "calibration",
+      "position_m": [
+        3.9732749424333735,
+        2.9724979458444354,
+        0.5960450007868423
+      ]
+    },
+    {
+      "id": "cal_rx_001",
+      "point_id": "cal-02",
+      "name": "보정 RX 2",
+      "role": "calibration",
+      "position_m": [
+        1.7999999999999996,
+        9.05,
+        1.5184397979548492
+      ]
+    },
+    {
+      "id": "cal_rx_002",
+      "point_id": "cal-03",
+      "name": "보정 RX 3",
+      "role": "calibration",
+      "position_m": [
+        11.350000000000001,
+        2.95,
+        0.6184397979548492
+      ]
+    },
+    {
+      "id": "test_rx_000",
+      "point_id": "test-00",
+      "name": "Test RX 0",
+      "role": "test",
+      "position_m": [
+        1.2000000000000002,
+        1.4000000000000001,
+        1.0184397979548492
+      ]
+    },
+    {
+      "id": "test_rx_001",
+      "point_id": "test-01",
+      "name": "Test RX 1",
+      "role": "test",
+      "position_m": [
+        5.0,
+        1.4,
+        1.0184397979548492
+      ]
+    },
+    {
+      "id": "test_rx_002",
+      "point_id": "test-02",
+      "name": "Test RX 2",
+      "role": "test",
+      "position_m": [
+        7.5,
+        1.4,
+        1.0184397979548492
+      ]
+    },
+    {
+      "id": "test_rx_003",
+      "point_id": "test-03",
+      "name": "Test RX 3",
+      "role": "test",
+      "position_m": [
+        10.0,
+        1.4,
+        1.0184397979548492
+      ]
+    },
+    {
+      "id": "test_rx_004",
+      "point_id": "test-04",
+      "name": "Test RX 4",
+      "role": "test",
+      "position_m": [
+        12.5,
+        1.4,
+        1.0184397979548492
+      ]
+    },
+    {
+      "id": "test_rx_005",
+      "point_id": "test-05",
+      "name": "Test RX 5",
+      "role": "test",
+      "position_m": [
+        1.2000000000000002,
+        6.6,
+        1.5184397979548492
+      ]
+    },
+    {
+      "id": "test_rx_006",
+      "point_id": "test-06",
+      "name": "Test RX 6",
+      "role": "test",
+      "position_m": [
+        5.0,
+        6.6,
+        1.5184397979548492
+      ]
+    },
+    {
+      "id": "test_rx_007",
+      "point_id": "test-07",
+      "name": "Test RX 7",
+      "role": "test",
+      "position_m": [
+        7.5,
+        6.6,
+        1.5184397979548492
+      ]
+    },
+    {
+      "id": "test_rx_008",
+      "point_id": "test-08",
+      "name": "Test RX 8",
+      "role": "test",
+      "position_m": [
+        10.0,
+        6.6,
+        1.5184397979548492
+      ]
+    },
+    {
+      "id": "test_rx_009",
+      "point_id": "test-09",
+      "name": "Test RX 9",
+      "role": "test",
+      "position_m": [
+        12.5,
+        6.6,
+        1.5184397979548492
+      ]
+    },
+    {
+      "id": "test_rx_010",
+      "point_id": "test-10",
+      "name": "Test RX 10",
+      "role": "test",
+      "position_m": [
+        1.2000000000000002,
+        10.35,
+        1.5184397979548492
+      ]
+    },
+    {
+      "id": "test_rx_011",
+      "point_id": "test-11",
+      "name": "Test RX 11",
+      "role": "test",
+      "position_m": [
+        5.0,
+        10.35,
+        1.5184397979548492
+      ]
+    },
+    {
+      "id": "test_rx_012",
+      "point_id": "test-12",
+      "name": "Test RX 12",
+      "role": "test",
+      "position_m": [
+        7.5,
+        10.35,
+        1.5184397979548492
+      ]
+    },
+    {
+      "id": "test_rx_013",
+      "point_id": "test-13",
+      "name": "Test RX 13",
+      "role": "test",
+      "position_m": [
+        10.0,
+        10.35,
+        1.5184397979548492
+      ]
+    },
+    {
+      "id": "test_rx_014",
+      "point_id": "test-14",
+      "name": "Test RX 14",
+      "role": "test",
+      "position_m": [
+        12.5,
+        10.35,
+        1.5184397979548492
+      ]
+    }
+  ]
+}

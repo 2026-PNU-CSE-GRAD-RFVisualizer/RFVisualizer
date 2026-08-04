@@ -20,18 +20,18 @@
 
 ```bash
 python -m tools.rf_experiment.main validate-contracts \
-  --scene configs/rf_experiment/classroom_20260723/scene.json \
-  --markers configs/rf_experiment/classroom_20260723/tx_rx.json \
-  --methods configs/rf_experiment/classroom_20260723/method_config.json
+  --scene scenes/pnu_classroom/experiments/classroom_20260723/configs/scene.json \
+  --markers scenes/pnu_classroom/experiments/classroom_20260723/configs/tx_rx.json \
+  --methods scenes/pnu_classroom/experiments/classroom_20260723/configs/method_config.json
 ```
 
 현재 명령은 구조 검증에는 성공하지만, Metric Proxy Scene과 Marker가 미완성이므로 `ready: false`와 경고를 출력하는 것이 정상이다. 현장 실행 직전에는 `--require-ready`를 추가하고 exit code 0을 확인한다.
 
 ```bash
 python -m tools.rf_experiment.main validate-contracts \
-  --scene configs/rf_experiment/classroom_20260723/scene.json \
-  --markers configs/rf_experiment/classroom_20260723/tx_rx.json \
-  --methods configs/rf_experiment/classroom_20260723/method_config.json \
+  --scene scenes/pnu_classroom/experiments/classroom_20260723/configs/scene.json \
+  --markers scenes/pnu_classroom/experiments/classroom_20260723/configs/tx_rx.json \
+  --methods scenes/pnu_classroom/experiments/classroom_20260723/configs/method_config.json \
   --require-ready
 ```
 
@@ -39,8 +39,8 @@ python -m tools.rf_experiment.main validate-contracts \
 
 ```bash
 python -m tools.rf_experiment.main build-proxy-envelope \
-  --scene configs/rf_experiment/classroom_20260723/scene.json \
-  --output outputs/rf_experiment/classroom_20260723/proxy_scene
+  --scene scenes/pnu_classroom/experiments/classroom_20260723/configs/scene.json \
+  --output scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene
 ```
 
 출력은 기존 사진 추정 Metric 장면을 덮어쓰지 않는다. 새 OBJ/JSON/Calibration과 Top/Perspective 미리보기, 남은 가정을 기록한 보고서를 별도 경로에 만든다. PGSR 참조 정렬은 기존 Room corner를 사용한 affine 근사이며 최대 약 0.25m 오차가 있으므로, 물체의 실측 좌표를 대체하지 않는다.
@@ -69,14 +69,15 @@ Raw 행은 `valid=false`일 때 RSSI 값이 비어 있어도 보존할 수 있�
 
 ```bash
 conda run -n pgsr python -m tools.proxy_placement_editor.main edit \
-  --room-obj outputs/rf_experiment/classroom_20260723/proxy_scene/room_envelope_metric.obj \
-  --room-json outputs/rf_experiment/classroom_20260723/proxy_scene/room_envelope_metric.json \
-  --calibration outputs/rf_experiment/classroom_20260723/proxy_scene/calibration.json \
-  --scenario configs/sionna/scenarios/pnu_classroom_proxy_draft.yaml \
-  --markers configs/rf_experiment/classroom_20260723/tx_rx.json \
+  --room-obj scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene/room_envelope_metric.obj \
+  --room-json scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene/room_envelope_metric.json \
+  --calibration scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene/calibration.json \
+  --scenario scenes/pnu_classroom/configs/sionna/proxy_draft.yaml \
+  --candidates scenes/pnu_classroom/configs/proxy_editor/candidates.yaml \
+  --markers scenes/pnu_classroom/experiments/classroom_20260723/configs/tx_rx.json \
   --reference-mesh PGSR/output/pnu_classroom/mesh/tsdf_fusion_post.ply \
   --reference-coordinate-space scene \
-  --output outputs/proxy_placement/classroom_20260723
+  --output scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_placement
 ```
 
 `저장` 한 번으로 Scenario YAML과 TX/RX JSON을 함께 갱신한다. 실제 좌표를 입력하기 전에는 Marker 상태를 `draft`로 유지한다. AP/TX 1개·보정 RX 4개·Test RX 15개가 모두 입력되고 검토된 뒤에만 Marker 상태를 `ready`로 바꾼다. GUI 없는 검토가 필요하면 통합 편집기의 `export-preview --markers ...`를 사용한다.
@@ -90,7 +91,7 @@ python -m tools.rf_experiment.main analyze \
   --summary experiments/classroom_20260723/processed/measurements_summary.csv \
   --sionna-points experiments/classroom_20260723/processed/sionna_points.csv \
   --sionna-grid experiments/classroom_20260723/processed/sionna_grid.csv \
-  --methods configs/rf_experiment/classroom_20260723/method_config.json \
+  --methods scenes/pnu_classroom/experiments/classroom_20260723/configs/method_config.json \
   --output experiments/classroom_20260723
 ```
 
@@ -102,9 +103,9 @@ python -m tools.rf_experiment.main analyze \
 
 ```bash
 conda run -n sionna python -m tools.rf_experiment.main run-sionna \
-  --scene configs/rf_experiment/classroom_20260723/scene.json \
-  --markers configs/rf_experiment/classroom_20260723/tx_rx.json \
-  --solver configs/rf_experiment/classroom_20260723/sionna_solver.json \
+  --scene scenes/pnu_classroom/experiments/classroom_20260723/configs/scene.json \
+  --markers scenes/pnu_classroom/experiments/classroom_20260723/configs/tx_rx.json \
+  --solver scenes/pnu_classroom/experiments/classroom_20260723/configs/sionna_solver.json \
   --output experiments/classroom_20260723/sionna
 ```
 
@@ -112,10 +113,10 @@ conda run -n sionna python -m tools.rf_experiment.main run-sionna \
 
 ```bash
 conda run -n sionna python -m tools.rf_experiment.main run-sionna \
-  --scene configs/rf_experiment/classroom_20260723/scene.json \
-  --markers configs/rf_experiment/classroom_20260723/dry_run/tx_rx_synthetic.json \
-  --solver configs/rf_experiment/classroom_20260723/sionna_solver.json \
-  --output outputs/rf_experiment/classroom_20260723/sionna_dry_run \
+  --scene scenes/pnu_classroom/experiments/classroom_20260723/configs/scene.json \
+  --markers scenes/pnu_classroom/experiments/classroom_20260723/configs/dry_run/tx_rx_synthetic.json \
+  --solver scenes/pnu_classroom/experiments/classroom_20260723/configs/sionna_solver.json \
+  --output scenes/pnu_classroom/experiments/classroom_20260723/outputs/sionna_dry_run \
   --allow-draft
 ```
 
@@ -125,8 +126,8 @@ conda run -n sionna python -m tools.rf_experiment.main run-sionna \
 
 ```bash
 python -m tools.rf_experiment.main generate-synthetic-summary \
-  --sionna-points outputs/rf_experiment/classroom_20260723/end_to_end_dry_run/sionna/processed/sionna_points.csv \
-  --output outputs/rf_experiment/classroom_20260723/end_to_end_dry_run/measurements_summary_synthetic.csv
+  --sionna-points scenes/pnu_classroom/experiments/classroom_20260723/outputs/end_to_end_dry_run/sionna/processed/sionna_points.csv \
+  --output scenes/pnu_classroom/experiments/classroom_20260723/outputs/end_to_end_dry_run/measurements_summary_synthetic.csv
 ```
 
 ## 다음 연결

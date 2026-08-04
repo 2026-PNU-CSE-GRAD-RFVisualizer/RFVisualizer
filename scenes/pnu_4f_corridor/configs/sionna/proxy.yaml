@@ -5,7 +5,7 @@ scenario:
   physically_validated: false
   synthetic_validation: false
   base_scene:
-    phase2a_config: configs/sionna/pnu_4f_corridor_smoke_test.yaml
+    phase2a_config: scenes/pnu_4f_corridor/configs/sionna/smoke_test.yaml
   obstacles:
   - id: Wall_01
     display_name: Wall

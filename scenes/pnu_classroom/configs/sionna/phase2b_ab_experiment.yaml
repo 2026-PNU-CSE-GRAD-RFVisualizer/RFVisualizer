@@ -6,10 +6,10 @@ experiment:
   physically_validated: false
 
   baseline:
-    scenario: configs/sionna/scenarios/pnu_classroom_empty.yaml
+    scenario: scenes/pnu_classroom/configs/sionna/empty.yaml
 
   variants:
-    - scenario: configs/sionna/scenarios/pnu_classroom_synthetic_blocker.yaml
+    - scenario: scenes/pnu_classroom/configs/sionna/synthetic_blocker.yaml
 
   solver:
     reuse_phase2a_settings: true

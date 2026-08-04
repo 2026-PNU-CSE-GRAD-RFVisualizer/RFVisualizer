@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "camera": {
+    "eye": [
+      0.8607064680702368,
+      -4.052265765210479,
+      4.3163972508069
+    ],
+    "forward": [
+      -0.056394416772972876,
+      0.8258223670897777,
+      -0.5611036018413107
+    ],
+    "up": [
+      -0.6440899866825857,
+      0.3993218897592467,
+      0.6524494294546552
+    ]
+  },
+  "selected_object": "desk_cluster_000",
+  "viewport_mode": "translate",
+  "axis_constraint": null,
+  "transform_space": "world",
+  "reference_point_size": 2.0,
+  "layer_visibility": {
+    "point_cloud": false,
+    "proxy_mesh": true,
+    "pgsr_output_mesh": false
+  },
+  "grid_visibility": true,
+  "show_disabled": true,
+  "object_visibility": {
+    "ap_tx_000": true,
+    "blackboard_example": true,
+    "cal_rx_000": true,
+    "desk_block_example": true,
+    "desk_cluster_000": true,
+    "door_example": true,
+    "large_metal_object_example": true
+  },
+  "snap_settings": {
+    "enabled": true,
+    "translation_m": 0.05,
+    "rotation_deg": 5.0,
+    "size_m": 0.05
+  },
+  "panel_sizes": {
+    "side_panel_width": 410.0
+  },
+  "last_opened_scenario": "/data/RFVisualizer/configs/sionna/scenarios/pnu_classroom_field_20260723.yaml",
+  "autosaved_at": "2026-07-23T00:10:30.786353Z",
+  "source_scenario_path": "/data/RFVisualizer/configs/sionna/scenarios/pnu_classroom_field_20260723.yaml"
+}

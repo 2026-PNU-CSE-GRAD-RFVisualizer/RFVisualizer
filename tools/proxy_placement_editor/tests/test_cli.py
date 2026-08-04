@@ -12,18 +12,20 @@ def test_validate_cli_headless(project_root, capsys):
             "--scenario",
             str(
                 project_root
-                / "configs/sionna/scenarios/pnu_classroom_synthetic_blocker.yaml"
+                / "scenes/pnu_classroom/configs/sionna/synthetic_blocker.yaml"
             ),
             "--room-json",
             str(
                 project_root
-                / "outputs/proxy_mesh/pnu_classroom/metric_calibration/room_envelope_metric.json"
+                / "scenes/pnu_classroom/proxy_mesh/metric_calibration/room_envelope_metric.json"
             ),
             "--calibration",
             str(
                 project_root
-                / "outputs/proxy_mesh/pnu_classroom/metric_calibration/calibration.json"
+                / "scenes/pnu_classroom/proxy_mesh/metric_calibration/calibration.json"
             ),
+            "--candidates",
+            str(project_root / "scenes/pnu_classroom/configs/proxy_editor/candidates.yaml"),
         ]
     )
     assert code == 0
@@ -60,17 +62,17 @@ def test_existing_marker_tx_is_loaded_at_its_saved_position(
         ),
         encoding="utf-8",
     )
-    room = project_root / "outputs/proxy_mesh/pnu_classroom/metric_calibration"
+    room = project_root / "scenes/pnu_classroom/proxy_mesh/metric_calibration"
     core = placement_main._create_core(
         SimpleNamespace(
             command="validate",
             scenario=project_root
-            / "configs/sionna/scenarios/pnu_classroom_empty.yaml",
+            / "scenes/pnu_classroom/configs/sionna/empty.yaml",
             room_obj=room / "room_envelope_metric.obj",
             room_json=room / "room_envelope_metric.json",
             calibration=room / "calibration.json",
             candidates=project_root
-            / "configs/proxy_editor/pnu_classroom_candidates.yaml",
+            / "scenes/pnu_classroom/configs/proxy_editor/candidates.yaml",
             markers=marker_path,
             output=tmp_path / "output",
             point_cloud=None,
@@ -98,22 +100,24 @@ def test_edit_without_display_fails_clearly(project_root, tmp_path, monkeypatch)
             "--room-obj",
             str(
                 project_root
-                / "outputs/proxy_mesh/pnu_classroom/metric_calibration/room_envelope_metric.obj"
+                / "scenes/pnu_classroom/proxy_mesh/metric_calibration/room_envelope_metric.obj"
             ),
             "--room-json",
             str(
                 project_root
-                / "outputs/proxy_mesh/pnu_classroom/metric_calibration/room_envelope_metric.json"
+                / "scenes/pnu_classroom/proxy_mesh/metric_calibration/room_envelope_metric.json"
             ),
             "--calibration",
             str(
                 project_root
-                / "outputs/proxy_mesh/pnu_classroom/metric_calibration/calibration.json"
+                / "scenes/pnu_classroom/proxy_mesh/metric_calibration/calibration.json"
             ),
             "--scenario",
             str(
-                project_root / "configs/sionna/scenarios/pnu_classroom_proxy_draft.yaml"
+                project_root / "scenes/pnu_classroom/configs/sionna/proxy_draft.yaml"
             ),
+            "--candidates",
+            str(project_root / "scenes/pnu_classroom/configs/proxy_editor/candidates.yaml"),
             "--output",
             str(tmp_path),
         ]
@@ -230,6 +234,8 @@ def test_edit_accepts_full_resolution_pgsr_mesh_flag():
             "calibration.json",
             "--scenario",
             "scenario.yaml",
+            "--candidates",
+            "candidates.yaml",
             "--pgsr-output-mesh",
             "mesh.ply",
             "--pgsr-output-mesh-full-resolution",

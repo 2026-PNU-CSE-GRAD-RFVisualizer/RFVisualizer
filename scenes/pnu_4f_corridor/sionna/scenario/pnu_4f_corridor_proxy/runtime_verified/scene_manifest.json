@@ -1,0 +1,326 @@
+{
+  "schema_version": "1.0",
+  "status": "provisional",
+  "confidence": "low",
+  "physically_validated": false,
+  "scene_name": "pnu_4f_corridor",
+  "scene_xml": "/data/RFVisualizer/outputs/sionna_scenario/pnu_4f_corridor_proxy/runtime_verified/scene/scene.xml",
+  "source_metric_obj": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/final_editor_proxy/room/room_envelope.obj",
+  "source_statistics": {
+    "vertex_count": 16,
+    "triangle_count": 28,
+    "bounds": {
+      "min": [
+        -0.0,
+        -0.0,
+        0.0
+      ],
+      "max": [
+        11.8,
+        16.3424530981,
+        2.61411151404
+      ],
+      "extent": [
+        11.8,
+        16.3424530981,
+        2.61411151404
+      ]
+    },
+    "surface_area": 520.9360491859914,
+    "signed_volume": 541.3776362507264,
+    "absolute_volume": 541.3776362507264
+  },
+  "exported_statistics": {
+    "vertex_count": 48,
+    "triangle_count": 28,
+    "bounds": {
+      "min": [
+        -0.0,
+        -0.0,
+        0.0
+      ],
+      "max": [
+        11.8,
+        16.3424530981,
+        2.61411151404
+      ],
+      "extent": [
+        11.8,
+        16.3424530981,
+        2.61411151404
+      ]
+    },
+    "surface_area": 520.9360491859914,
+    "signed_volume": 541.3776362507264,
+    "absolute_volume": 541.3776362507264
+  },
+  "objects": [
+    {
+      "object_name": "floor_000",
+      "semantic": "floor",
+      "source_material": "floor",
+      "resolved_radio_material": "itu_concrete_floor",
+      "mesh_file": "/data/RFVisualizer/outputs/sionna_scenario/pnu_4f_corridor_proxy/runtime_verified/scene/meshes/floor_000.ply",
+      "vertex_count": 8,
+      "triangle_count": 6,
+      "bounds": {
+        "min": [
+          -0.0,
+          -0.0,
+          0.0
+        ],
+        "max": [
+          11.8,
+          16.3424530981,
+          0.0
+        ],
+        "extent": [
+          11.8,
+          16.3424530981,
+          0.0
+        ]
+      }
+    },
+    {
+      "object_name": "ceiling_000",
+      "semantic": "ceiling",
+      "source_material": "ceiling",
+      "resolved_radio_material": "itu_concrete_ceiling",
+      "mesh_file": "/data/RFVisualizer/outputs/sionna_scenario/pnu_4f_corridor_proxy/runtime_verified/scene/meshes/ceiling_000.ply",
+      "vertex_count": 8,
+      "triangle_count": 6,
+      "bounds": {
+        "min": [
+          -0.0,
+          -0.0,
+          2.61411151404
+        ],
+        "max": [
+          11.8,
+          16.3424530981,
+          2.61411151404
+        ],
+        "extent": [
+          11.8,
+          16.3424530981,
+          0.0
+        ]
+      }
+    },
+    {
+      "object_name": "wall_000",
+      "semantic": "wall",
+      "source_material": "wall",
+      "resolved_radio_material": "itu_concrete_walls",
+      "mesh_file": "/data/RFVisualizer/outputs/sionna_scenario/pnu_4f_corridor_proxy/runtime_verified/scene/meshes/wall_000.ply",
+      "vertex_count": 4,
+      "triangle_count": 2,
+      "bounds": {
+        "min": [
+          -0.0,
+          -0.0,
+          0.0
+        ],
+        "max": [
+          11.8,
+          -0.0,
+          2.61411151404
+        ],
+        "extent": [
+          11.8,
+          0.0,
+          2.61411151404
+        ]
+      }
+    },
+    {
+      "object_name": "wall_001",
+      "semantic": "wall",
+      "source_material": "wall",
+      "resolved_radio_material": "itu_concrete_walls",
+      "mesh_file": "/data/RFVisualizer/outputs/sionna_scenario/pnu_4f_corridor_proxy/runtime_verified/scene/meshes/wall_001.ply",
+      "vertex_count": 4,
+      "triangle_count": 2,
+      "bounds": {
+        "min": [
+          11.8,
+          -0.0,
+          0.0
+        ],
+        "max": [
+          11.8,
+          16.3424530981,
+          2.61411151404
+        ],
+        "extent": [
+          0.0,
+          16.3424530981,
+          2.61411151404
+        ]
+      }
+    },
+    {
+      "object_name": "wall_002",
+      "semantic": "wall",
+      "source_material": "wall",
+      "resolved_radio_material": "itu_concrete_walls",
+      "mesh_file": "/data/RFVisualizer/outputs/sionna_scenario/pnu_4f_corridor_proxy/runtime_verified/scene/meshes/wall_002.ply",
+      "vertex_count": 4,
+      "triangle_count": 2,
+      "bounds": {
+        "min": [
+          0.07,
+          16.3424530981,
+          0.0
+        ],
+        "max": [
+          11.8,
+          16.3424530981,
+          2.61411151404
+        ],
+        "extent": [
+          11.73,
+          0.0,
+          2.61411151404
+        ]
+      }
+    },
+    {
+      "object_name": "wall_003",
+      "semantic": "wall",
+      "source_material": "wall",
+      "resolved_radio_material": "itu_concrete_walls",
+      "mesh_file": "/data/RFVisualizer/outputs/sionna_scenario/pnu_4f_corridor_proxy/runtime_verified/scene/meshes/wall_003.ply",
+      "vertex_count": 4,
+      "triangle_count": 2,
+      "bounds": {
+        "min": [
+          0.07,
+          13.33,
+          0.0
+        ],
+        "max": [
+          0.07,
+          16.3424530981,
+          2.61411151404
+        ],
+        "extent": [
+          0.0,
+          3.012453098099998,
+          2.61411151404
+        ]
+      }
+    },
+    {
+      "object_name": "wall_004",
+      "semantic": "wall",
+      "source_material": "wall",
+      "resolved_radio_material": "itu_concrete_walls",
+      "mesh_file": "/data/RFVisualizer/outputs/sionna_scenario/pnu_4f_corridor_proxy/runtime_verified/scene/meshes/wall_004.ply",
+      "vertex_count": 4,
+      "triangle_count": 2,
+      "bounds": {
+        "min": [
+          0.07,
+          13.33,
+          0.0
+        ],
+        "max": [
+          3.29,
+          13.33,
+          2.61411151404
+        ],
+        "extent": [
+          3.22,
+          0.0,
+          2.61411151404
+        ]
+      }
+    },
+    {
+      "object_name": "wall_005",
+      "semantic": "wall",
+      "source_material": "wall",
+      "resolved_radio_material": "itu_concrete_walls",
+      "mesh_file": "/data/RFVisualizer/outputs/sionna_scenario/pnu_4f_corridor_proxy/runtime_verified/scene/meshes/wall_005.ply",
+      "vertex_count": 4,
+      "triangle_count": 2,
+      "bounds": {
+        "min": [
+          3.29,
+          9.03,
+          0.0
+        ],
+        "max": [
+          3.29,
+          13.33,
+          2.61411151404
+        ],
+        "extent": [
+          0.0,
+          4.300000000000001,
+          2.61411151404
+        ]
+      }
+    },
+    {
+      "object_name": "wall_006",
+      "semantic": "wall",
+      "source_material": "wall",
+      "resolved_radio_material": "itu_concrete_walls",
+      "mesh_file": "/data/RFVisualizer/outputs/sionna_scenario/pnu_4f_corridor_proxy/runtime_verified/scene/meshes/wall_006.ply",
+      "vertex_count": 4,
+      "triangle_count": 2,
+      "bounds": {
+        "min": [
+          -0.0,
+          9.03,
+          0.0
+        ],
+        "max": [
+          3.29,
+          9.03,
+          2.61411151404
+        ],
+        "extent": [
+          3.29,
+          0.0,
+          2.61411151404
+        ]
+      }
+    },
+    {
+      "object_name": "wall_007",
+      "semantic": "wall",
+      "source_material": "wall",
+      "resolved_radio_material": "itu_concrete_walls",
+      "mesh_file": "/data/RFVisualizer/outputs/sionna_scenario/pnu_4f_corridor_proxy/runtime_verified/scene/meshes/wall_007.ply",
+      "vertex_count": 4,
+      "triangle_count": 2,
+      "bounds": {
+        "min": [
+          -0.0,
+          -0.0,
+          0.0
+        ],
+        "max": [
+          -0.0,
+          9.03,
+          2.61411151404
+        ],
+        "extent": [
+          0.0,
+          9.03,
+          2.61411151404
+        ]
+      }
+    }
+  ],
+  "conversion_validation": {
+    "triangle_count_match": true,
+    "bounds_match": true,
+    "surface_area_match": true,
+    "volume_match": true,
+    "success": true
+  }
+}

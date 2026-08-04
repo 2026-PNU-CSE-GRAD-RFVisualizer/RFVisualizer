@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0",
+  "status": "provisional",
+  "physically_validated": false,
+  "strict_resolution": true,
+  "fallback_policy": "none",
+  "installed_sionna_api_checked": false,
+  "materials": [],
+  "object_mapping": []
+}

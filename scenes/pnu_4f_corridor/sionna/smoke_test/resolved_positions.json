@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "status": "provisional",
+  "confidence": "low",
+  "physically_validated": false,
+  "placement_mode": "strict",
+  "clearance_m": 0.2,
+  "positions": [
+    {
+      "kind": "transmitter",
+      "name": "tx_01",
+      "requested_position_m": [
+        3.15,
+        0.5,
+        0.45
+      ],
+      "resolved_position_m": [
+        3.15,
+        0.5,
+        0.45
+      ],
+      "used_fallback": false,
+      "validation": {
+        "position_m": [
+          3.15,
+          0.5,
+          0.45
+        ],
+        "inside_room": true,
+        "safe_with_clearance": true,
+        "floor_z_m": -0.0,
+        "ceiling_z_m": 2.6141115140447138,
+        "floor_clearance_m": 0.45,
+        "ceiling_clearance_m": 2.1641115140447136,
+        "minimum_wall_clearance_m": 0.5,
+        "oriented_plane_distances_m": [
+          0.45,
+          2.1641115140447136,
+          0.5,
+          8.65,
+          15.842453098095195,
+          3.08,
+          12.83,
+          -0.14000000000000012,
+          8.53,
+          3.15
+        ]
+      }
+    },
+    {
+      "kind": "receiver",
+      "name": "cal_rx_01",
+      "requested_position_m": [
+        3.13,
+        3.93,
+        0.45
+      ],
+      "resolved_position_m": [
+        3.13,
+        3.93,
+        0.45
+      ],
+      "used_fallback": false,
+      "validation": {
+        "position_m": [
+          3.13,
+          3.93,
+          0.45
+        ],
+        "inside_room": true,
+        "safe_with_clearance": true,
+        "floor_z_m": -0.0,
+        "ceiling_z_m": 2.6141115140447138,
+        "floor_clearance_m": 0.45,
+        "ceiling_clearance_m": 2.1641115140447136,
+        "minimum_wall_clearance_m": 3.13,
+        "oriented_plane_distances_m": [
+          0.45,
+          2.1641115140447136,
+          3.93,
+          8.670000000000002,
+          12.412453098095195,
+          3.06,
+          9.4,
+          -0.16000000000000014,
+          5.1,
+          3.13
+        ]
+      }
+    }
+  ],
+  "warnings": []
+}

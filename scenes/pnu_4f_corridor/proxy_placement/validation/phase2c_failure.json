@@ -1,0 +1,7 @@
+{
+  "status": "failure",
+  "success": false,
+  "exception_type": "PlacementError",
+  "reason": "Metric metadata의 interior point 또는 bounds가 유효하지 않습니다.",
+  "reproduction_command": "/data/RFVisualizer/tools/proxy_placement_editor/main.py validate --scenario configs/sionna/scenarios/pnu_4f_corridor_proxy.yaml --markers configs/rf_experiment/pnu_4f_corridor/tx_rx.json --candidates configs/proxy_editor/pnu_4f_corridor_candidates.yaml --output outputs/proxy_placement/pnu_4f_corridor/validation"
+}

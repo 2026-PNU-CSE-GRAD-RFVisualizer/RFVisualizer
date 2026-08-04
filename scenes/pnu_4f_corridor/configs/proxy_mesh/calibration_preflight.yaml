@@ -5,8 +5,8 @@ calibration_preflight:
   confidence: low
 
   source:
-    envelope_json: outputs/proxy_mesh/pnu_classroom/room_envelope/room_envelope.json
-    envelope_obj: outputs/proxy_mesh/pnu_classroom/room_envelope/room_envelope.obj
+    envelope_json: scenes/pnu_classroom/proxy_mesh/room_envelope/room_envelope.json
+    envelope_obj: scenes/pnu_classroom/proxy_mesh/room_envelope/room_envelope.obj
 
   scale_references:
     - name: two_door_total_width

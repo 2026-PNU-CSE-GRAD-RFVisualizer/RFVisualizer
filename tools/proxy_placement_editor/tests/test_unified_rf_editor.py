@@ -25,9 +25,8 @@ def _marker_document():
     }
 
 
-def _unified_core(draft_core, tmp_path):
-    project_root = draft_core.state.source_path.parents[3]
-    room = project_root / "outputs/rf_experiment/classroom_20260723/proxy_scene"
+def _unified_core(draft_core, tmp_path, project_root):
+    room = project_root / "scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene"
     state = EditorState(
         deepcopy(draft_core.state.document),
         source_path=draft_core.state.source_path,
@@ -46,8 +45,8 @@ def _unified_core(draft_core, tmp_path):
     )
 
 
-def test_ap_tx_and_multiple_rx_share_one_editable_state(draft_core, tmp_path):
-    core = _unified_core(draft_core, tmp_path)
+def test_ap_tx_and_multiple_rx_share_one_editable_state(draft_core, tmp_path, project_root):
+    core = _unified_core(draft_core, tmp_path, project_root)
 
     access_point = core.add_candidate("ap_tx")
     calibration = core.add_receiver("calibration")
@@ -82,8 +81,8 @@ def test_ap_tx_and_multiple_rx_share_one_editable_state(draft_core, tmp_path):
     }
 
 
-def test_one_save_writes_scenario_and_marker_contract(draft_core, tmp_path):
-    core = _unified_core(draft_core, tmp_path)
+def test_one_save_writes_scenario_and_marker_contract(draft_core, tmp_path, project_root):
+    core = _unified_core(draft_core, tmp_path, project_root)
     access_point = core.add_candidate("ap_tx")
     receiver = core.add_receiver("calibration")
     core.add_receiver("test")

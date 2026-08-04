@@ -5,7 +5,7 @@ scenario:
   physically_validated: false
   synthetic_validation: false
   base_scene:
-    phase2a_config: configs/sionna/pnu_classroom_field_20260723.yaml
+    phase2a_config: scenes/pnu_classroom/experiments/classroom_20260723/configs/sionna_base.yaml
   obstacles:
   - id: desk_mid_01
     enabled: true

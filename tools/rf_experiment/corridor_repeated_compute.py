@@ -39,17 +39,17 @@ VARIANTS: Final = (
     SolverVariant(
         "doors_glass_base",
         PROJECT_ROOT
-        / "outputs/rf_experiment/pnu_4f_corridor/doors_glass_base/processed/sionna_points.csv",
+        / "scenes/pnu_4f_corridor/rf_experiment/doors_glass_base/processed/sionna_points.csv",
     ),
     SolverVariant(
         "doors_glass_diffraction",
         PROJECT_ROOT
-        / "outputs/rf_experiment/pnu_4f_corridor/doors_glass_diffraction/processed/sionna_points.csv",
+        / "scenes/pnu_4f_corridor/rf_experiment/doors_glass_diffraction/processed/sionna_points.csv",
     ),
     SolverVariant(
         PRIMARY_VARIANT,
         PROJECT_ROOT
-        / "outputs/rf_experiment/pnu_4f_corridor/doors_glass_diffraction_scattering_authored_100m_d5/processed/sionna_points.csv",
+        / "scenes/pnu_4f_corridor/rf_experiment/doors_glass_diffraction_scattering_authored_100m_d5/processed/sionna_points.csv",
     ),
 )
 

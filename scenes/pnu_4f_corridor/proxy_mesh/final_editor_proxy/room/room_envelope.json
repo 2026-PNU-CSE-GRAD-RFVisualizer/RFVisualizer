@@ -1,0 +1,1403 @@
+{
+  "schema_version": "1.0",
+  "algorithm": {
+    "name": "rfvisualizer_room_envelope_builder",
+    "version": "0.5.0"
+  },
+  "created_at": "2026-07-30T03:32:24.706718Z",
+  "source_candidate_documents": {
+    "plane_candidates": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/final_editor_proxy/metric_candidates/plane_candidates.json",
+    "wall_candidates": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/final_editor_proxy/metric_candidates/wall_candidates.json"
+  },
+  "envelope_config_path": "/data/RFVisualizer/tools/proxy_mesh_editor/configs/4f_corridor_plan_metric_envelope.yaml",
+  "envelope_config": {
+    "schema_version": "1.0",
+    "room_envelope": {
+      "enabled": true,
+      "floor": {
+        "candidate_id": "metric_floor"
+      },
+      "ceiling": {
+        "candidate_id": "metric_ceiling"
+      },
+      "ordered_walls": [
+        {
+          "candidate_id": "metric_y_min"
+        },
+        {
+          "candidate_id": "metric_x_max"
+        },
+        {
+          "candidate_id": "metric_y_max"
+        },
+        {
+          "candidate_id": "metric_x_red_outer"
+        },
+        {
+          "candidate_id": "metric_y_red_inner"
+        },
+        {
+          "candidate_id": "metric_x_blue_inner"
+        },
+        {
+          "candidate_id": "metric_y_connector_bottom"
+        },
+        {
+          "candidate_id": "metric_x_min_lower"
+        }
+      ],
+      "interior_point": null,
+      "validation": {
+        "floor_ceiling_max_angle_deg": 1e-06,
+        "wall_max_up_dot": 1e-08,
+        "adjacent_wall_min_angle_deg": 45.0,
+        "plane_residual_tolerance": 1e-08,
+        "vertex_merge_tolerance": 1e-08,
+        "intersection_max_condition_number": "1.0e6",
+        "minimum_height": 2.0,
+        "minimum_height_ratio": 0.0,
+        "require_simple_polygon": true,
+        "require_closed_manifold": true
+      },
+      "output": {
+        "normal_orientation": "outward",
+        "write_individual_objects": true,
+        "write_preview_ply": true
+      }
+    }
+  },
+  "up_vector": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "selected_candidates": {
+    "floor": "metric_floor",
+    "ceiling": "metric_ceiling",
+    "input_ordered_walls": [
+      "metric_y_min",
+      "metric_x_max",
+      "metric_y_max",
+      "metric_x_red_outer",
+      "metric_y_red_inner",
+      "metric_x_blue_inner",
+      "metric_y_connector_bottom",
+      "metric_x_min_lower"
+    ],
+    "normalized_ordered_walls": [
+      "metric_y_min",
+      "metric_x_max",
+      "metric_y_max",
+      "metric_x_red_outer",
+      "metric_y_red_inner",
+      "metric_x_blue_inner",
+      "metric_y_connector_bottom",
+      "metric_x_min_lower"
+    ]
+  },
+  "normalized_plane_equations": {
+    "floor": [
+      0.0,
+      0.0,
+      1.0,
+      -0.0
+    ],
+    "ceiling": [
+      0.0,
+      0.0,
+      1.0,
+      -2.6141115140447138
+    ],
+    "walls": [
+      [
+        0.0,
+        -1.0,
+        0.0,
+        -0.0
+      ],
+      [
+        1.0,
+        -0.0,
+        0.0,
+        -11.8
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        -16.342453098095195
+      ],
+      [
+        -1.0,
+        -0.0,
+        0.0,
+        0.07
+      ],
+      [
+        0.0,
+        -1.0,
+        0.0,
+        13.33
+      ],
+      [
+        -1.0,
+        -0.0,
+        0.0,
+        3.29
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        -9.03
+      ],
+      [
+        -1.0,
+        -0.0,
+        0.0,
+        -0.0
+      ]
+    ]
+  },
+  "interior_point": [
+    6.244190885742346,
+    7.924869419427352,
+    1.3070557570223569
+  ],
+  "bottom_corners": [
+    [
+      -0.0,
+      -0.0,
+      0.0
+    ],
+    [
+      11.8,
+      -0.0,
+      0.0
+    ],
+    [
+      11.8,
+      16.342453098095195,
+      0.0
+    ],
+    [
+      0.07,
+      16.342453098095195,
+      0.0
+    ],
+    [
+      0.07,
+      13.33,
+      0.0
+    ],
+    [
+      3.29,
+      13.33,
+      0.0
+    ],
+    [
+      3.29,
+      9.03,
+      0.0
+    ],
+    [
+      -0.0,
+      9.03,
+      0.0
+    ]
+  ],
+  "top_corners": [
+    [
+      -0.0,
+      -0.0,
+      2.6141115140447138
+    ],
+    [
+      11.8,
+      -0.0,
+      2.6141115140447138
+    ],
+    [
+      11.8,
+      16.342453098095195,
+      2.6141115140447138
+    ],
+    [
+      0.07,
+      16.342453098095195,
+      2.6141115140447138
+    ],
+    [
+      0.07,
+      13.33,
+      2.6141115140447138
+    ],
+    [
+      3.29,
+      13.33,
+      2.6141115140447138
+    ],
+    [
+      3.29,
+      9.03,
+      2.6141115140447138
+    ],
+    [
+      -0.0,
+      9.03,
+      2.6141115140447138
+    ]
+  ],
+  "polygon": {
+    "coordinates_2d": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        11.8,
+        0.0
+      ],
+      [
+        11.8,
+        16.342453098095195
+      ],
+      [
+        0.07,
+        16.342453098095195
+      ],
+      [
+        0.07,
+        13.33
+      ],
+      [
+        3.29,
+        13.33
+      ],
+      [
+        3.29,
+        9.03
+      ],
+      [
+        0.0,
+        9.03
+      ]
+    ],
+    "ceiling_coordinates_2d": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        11.8,
+        0.0
+      ],
+      [
+        11.8,
+        16.342453098095195
+      ],
+      [
+        0.07,
+        16.342453098095195
+      ],
+      [
+        0.07,
+        13.33
+      ],
+      [
+        3.29,
+        13.33
+      ],
+      [
+        3.29,
+        9.03
+      ],
+      [
+        0.0,
+        9.03
+      ]
+    ],
+    "winding": "counter_clockwise_from_up",
+    "signed_area": 178.48307484065663,
+    "edge_lengths": [
+      11.8,
+      16.342453098095195,
+      11.73,
+      3.012453098095195,
+      3.22,
+      4.300000000000001,
+      3.29,
+      9.03
+    ]
+  },
+  "floor_ceiling_height": {
+    "minimum": 2.6141115140447138,
+    "maximum": 2.6141115140447138,
+    "mean": 2.6141115140447138,
+    "required_minimum": 2.0,
+    "floor_candidate_height": 0.0,
+    "ceiling_candidate_height": 2.6141115140447138,
+    "floor_ceiling_plane_angle_deg": 0.0
+  },
+  "wall_intersection_diagnostics": [
+    {
+      "corner_index": 0,
+      "previous_wall_id": "metric_x_min_lower",
+      "current_wall_id": "metric_y_min",
+      "adjacent_wall_angle_deg": 90.0,
+      "bottom": {
+        "determinant": 1.0,
+        "condition_number": 1.0,
+        "plane_residuals": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "maximum_residual": 0.0
+      },
+      "top": {
+        "determinant": 1.0,
+        "condition_number": 1.0,
+        "plane_residuals": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "maximum_residual": 0.0
+      }
+    },
+    {
+      "corner_index": 1,
+      "previous_wall_id": "metric_y_min",
+      "current_wall_id": "metric_x_max",
+      "adjacent_wall_angle_deg": 90.0,
+      "bottom": {
+        "determinant": 1.0,
+        "condition_number": 1.0,
+        "plane_residuals": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "maximum_residual": 0.0
+      },
+      "top": {
+        "determinant": 1.0,
+        "condition_number": 1.0,
+        "plane_residuals": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "maximum_residual": 0.0
+      }
+    },
+    {
+      "corner_index": 2,
+      "previous_wall_id": "metric_x_max",
+      "current_wall_id": "metric_y_max",
+      "adjacent_wall_angle_deg": 90.0,
+      "bottom": {
+        "determinant": 1.0,
+        "condition_number": 1.0,
+        "plane_residuals": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "maximum_residual": 0.0
+      },
+      "top": {
+        "determinant": 1.0,
+        "condition_number": 1.0,
+        "plane_residuals": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "maximum_residual": 0.0
+      }
+    },
+    {
+      "corner_index": 3,
+      "previous_wall_id": "metric_y_max",
+      "current_wall_id": "metric_x_red_outer",
+      "adjacent_wall_angle_deg": 90.0,
+      "bottom": {
+        "determinant": 1.0,
+        "condition_number": 1.0,
+        "plane_residuals": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "maximum_residual": 0.0
+      },
+      "top": {
+        "determinant": 1.0,
+        "condition_number": 1.0,
+        "plane_residuals": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "maximum_residual": 0.0
+      }
+    },
+    {
+      "corner_index": 4,
+      "previous_wall_id": "metric_x_red_outer",
+      "current_wall_id": "metric_y_red_inner",
+      "adjacent_wall_angle_deg": 90.0,
+      "bottom": {
+        "determinant": 1.0,
+        "condition_number": 1.0,
+        "plane_residuals": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "maximum_residual": 0.0
+      },
+      "top": {
+        "determinant": 1.0,
+        "condition_number": 1.0,
+        "plane_residuals": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "maximum_residual": 0.0
+      }
+    },
+    {
+      "corner_index": 5,
+      "previous_wall_id": "metric_y_red_inner",
+      "current_wall_id": "metric_x_blue_inner",
+      "adjacent_wall_angle_deg": 90.0,
+      "bottom": {
+        "determinant": -1.0,
+        "condition_number": 1.0,
+        "plane_residuals": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "maximum_residual": 0.0
+      },
+      "top": {
+        "determinant": -1.0,
+        "condition_number": 1.0,
+        "plane_residuals": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "maximum_residual": 0.0
+      }
+    },
+    {
+      "corner_index": 6,
+      "previous_wall_id": "metric_x_blue_inner",
+      "current_wall_id": "metric_y_connector_bottom",
+      "adjacent_wall_angle_deg": 90.0,
+      "bottom": {
+        "determinant": -1.0,
+        "condition_number": 1.0,
+        "plane_residuals": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "maximum_residual": 0.0
+      },
+      "top": {
+        "determinant": -1.0,
+        "condition_number": 1.0,
+        "plane_residuals": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "maximum_residual": 0.0
+      }
+    },
+    {
+      "corner_index": 7,
+      "previous_wall_id": "metric_y_connector_bottom",
+      "current_wall_id": "metric_x_min_lower",
+      "adjacent_wall_angle_deg": 90.0,
+      "bottom": {
+        "determinant": 1.0,
+        "condition_number": 1.0,
+        "plane_residuals": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "maximum_residual": 0.0
+      },
+      "top": {
+        "determinant": 1.0,
+        "condition_number": 1.0,
+        "plane_residuals": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "maximum_residual": 0.0
+      }
+    }
+  ],
+  "wall_objects": [
+    {
+      "object_name": "wall_000",
+      "candidate_id": "metric_y_min",
+      "normalized_plane_equation": [
+        0.0,
+        -1.0,
+        0.0,
+        -0.0
+      ],
+      "candidate_rectangle_comparison": {
+        "wall_object_name": "wall_000",
+        "candidate_id": "metric_y_min",
+        "generated_to_candidate_center_distance": 0.0,
+        "maximum_wall_plane_residual": 0.0,
+        "generated_projected_bounds": {
+          "u_min": -5.9,
+          "u_max": 5.9,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "candidate_projected_bounds": {
+          "u_min": -5.9,
+          "u_max": 5.9,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "generated_projected_aabb_area": 30.846515865727625,
+        "candidate_projected_aabb_area": 30.846515865727625,
+        "projected_aabb_overlap_area": 30.846515865727625,
+        "generated_coverage_ratio": 1.0,
+        "candidate_coverage_ratio": 1.0
+      }
+    },
+    {
+      "object_name": "wall_001",
+      "candidate_id": "metric_x_max",
+      "normalized_plane_equation": [
+        1.0,
+        -0.0,
+        0.0,
+        -11.8
+      ],
+      "candidate_rectangle_comparison": {
+        "wall_object_name": "wall_001",
+        "candidate_id": "metric_x_max",
+        "generated_to_candidate_center_distance": 0.0,
+        "maximum_wall_plane_residual": 0.0,
+        "generated_projected_bounds": {
+          "u_min": -8.171226549047597,
+          "u_max": 8.171226549047597,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "candidate_projected_bounds": {
+          "u_min": -8.171226549047597,
+          "u_max": 8.171226549047597,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "generated_projected_aabb_area": 42.720994811466355,
+        "candidate_projected_aabb_area": 42.720994811466355,
+        "projected_aabb_overlap_area": 42.720994811466355,
+        "generated_coverage_ratio": 1.0,
+        "candidate_coverage_ratio": 1.0
+      }
+    },
+    {
+      "object_name": "wall_002",
+      "candidate_id": "metric_y_max",
+      "normalized_plane_equation": [
+        0.0,
+        1.0,
+        0.0,
+        -16.342453098095195
+      ],
+      "candidate_rectangle_comparison": {
+        "wall_object_name": "wall_002",
+        "candidate_id": "metric_y_max",
+        "generated_to_candidate_center_distance": 0.0,
+        "maximum_wall_plane_residual": 0.0,
+        "generated_projected_bounds": {
+          "u_min": -5.865,
+          "u_max": 5.865,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "candidate_projected_bounds": {
+          "u_min": -5.865,
+          "u_max": 5.865,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "generated_projected_aabb_area": 30.663528059744493,
+        "candidate_projected_aabb_area": 30.663528059744493,
+        "projected_aabb_overlap_area": 30.663528059744493,
+        "generated_coverage_ratio": 1.0,
+        "candidate_coverage_ratio": 1.0
+      }
+    },
+    {
+      "object_name": "wall_003",
+      "candidate_id": "metric_x_red_outer",
+      "normalized_plane_equation": [
+        -1.0,
+        -0.0,
+        0.0,
+        0.07
+      ],
+      "candidate_rectangle_comparison": {
+        "wall_object_name": "wall_003",
+        "candidate_id": "metric_x_red_outer",
+        "generated_to_candidate_center_distance": 0.0,
+        "maximum_wall_plane_residual": 0.0,
+        "generated_projected_bounds": {
+          "u_min": -1.5062265490475966,
+          "u_max": 1.5062265490475983,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "candidate_projected_bounds": {
+          "u_min": -1.5062265490475966,
+          "u_max": 1.5062265490475983,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "generated_projected_aabb_area": 7.874888329250319,
+        "candidate_projected_aabb_area": 7.874888329250319,
+        "projected_aabb_overlap_area": 7.874888329250319,
+        "generated_coverage_ratio": 1.0,
+        "candidate_coverage_ratio": 1.0
+      }
+    },
+    {
+      "object_name": "wall_004",
+      "candidate_id": "metric_y_red_inner",
+      "normalized_plane_equation": [
+        0.0,
+        -1.0,
+        0.0,
+        13.33
+      ],
+      "candidate_rectangle_comparison": {
+        "wall_object_name": "wall_004",
+        "candidate_id": "metric_y_red_inner",
+        "generated_to_candidate_center_distance": 2.220446049250313e-16,
+        "maximum_wall_plane_residual": 0.0,
+        "generated_projected_bounds": {
+          "u_min": -1.6099999999999999,
+          "u_max": 1.61,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "candidate_projected_bounds": {
+          "u_min": -1.6099999999999999,
+          "u_max": 1.61,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "generated_projected_aabb_area": 8.417439075223978,
+        "candidate_projected_aabb_area": 8.417439075223978,
+        "projected_aabb_overlap_area": 8.417439075223978,
+        "generated_coverage_ratio": 1.0,
+        "candidate_coverage_ratio": 1.0
+      }
+    },
+    {
+      "object_name": "wall_005",
+      "candidate_id": "metric_x_blue_inner",
+      "normalized_plane_equation": [
+        -1.0,
+        -0.0,
+        0.0,
+        3.29
+      ],
+      "candidate_rectangle_comparison": {
+        "wall_object_name": "wall_005",
+        "candidate_id": "metric_x_blue_inner",
+        "generated_to_candidate_center_distance": 0.0,
+        "maximum_wall_plane_residual": 0.0,
+        "generated_projected_bounds": {
+          "u_min": -2.1500000000000004,
+          "u_max": 2.1500000000000004,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "candidate_projected_bounds": {
+          "u_min": -2.1500000000000004,
+          "u_max": 2.1500000000000004,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "generated_projected_aabb_area": 11.24067951039227,
+        "candidate_projected_aabb_area": 11.24067951039227,
+        "projected_aabb_overlap_area": 11.24067951039227,
+        "generated_coverage_ratio": 1.0,
+        "candidate_coverage_ratio": 1.0
+      }
+    },
+    {
+      "object_name": "wall_006",
+      "candidate_id": "metric_y_connector_bottom",
+      "normalized_plane_equation": [
+        0.0,
+        1.0,
+        0.0,
+        -9.03
+      ],
+      "candidate_rectangle_comparison": {
+        "wall_object_name": "wall_006",
+        "candidate_id": "metric_y_connector_bottom",
+        "generated_to_candidate_center_distance": 0.0,
+        "maximum_wall_plane_residual": 0.0,
+        "generated_projected_bounds": {
+          "u_min": -1.645,
+          "u_max": 1.645,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "candidate_projected_bounds": {
+          "u_min": -1.645,
+          "u_max": 1.645,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "generated_projected_aabb_area": 8.600426881207108,
+        "candidate_projected_aabb_area": 8.600426881207108,
+        "projected_aabb_overlap_area": 8.600426881207108,
+        "generated_coverage_ratio": 1.0,
+        "candidate_coverage_ratio": 1.0
+      }
+    },
+    {
+      "object_name": "wall_007",
+      "candidate_id": "metric_x_min_lower",
+      "normalized_plane_equation": [
+        -1.0,
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "candidate_rectangle_comparison": {
+        "wall_object_name": "wall_007",
+        "candidate_id": "metric_x_min_lower",
+        "generated_to_candidate_center_distance": 0.0,
+        "maximum_wall_plane_residual": 0.0,
+        "generated_projected_bounds": {
+          "u_min": -4.515,
+          "u_max": 4.515,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "candidate_projected_bounds": {
+          "u_min": -4.515,
+          "u_max": 4.515,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "generated_projected_aabb_area": 23.605426971823764,
+        "candidate_projected_aabb_area": 23.605426971823764,
+        "projected_aabb_overlap_area": 23.605426971823764,
+        "generated_coverage_ratio": 1.0,
+        "candidate_coverage_ratio": 1.0
+      }
+    }
+  ],
+  "mesh_summary": {
+    "vertex_count": 16,
+    "triangle_count": 28,
+    "orientation_flip_count": 2
+  },
+  "topology_summary": {
+    "vertex_count": 16,
+    "triangle_count": 28,
+    "edge_count": 42,
+    "degenerate_triangle_count": 0,
+    "degenerate_triangle_indices": [],
+    "duplicate_face_count": 0,
+    "duplicate_vertex_count": 0,
+    "duplicate_vertex_pairs": [],
+    "boundary_edge_count": 0,
+    "boundary_edges": [],
+    "non_manifold_edge_count": 0,
+    "non_manifold_edges": [],
+    "connected_component_count": 1,
+    "signed_volume": 541.3776362515553,
+    "absolute_volume": 541.3776362515553,
+    "surface_area": 520.9360491861493,
+    "euler_characteristic": 2,
+    "inward_or_ambiguous_face_count": 0,
+    "inward_or_ambiguous_face_indices": [],
+    "closed_manifold_success": true
+  },
+  "geometry_validation": {
+    "finite_geometry": true,
+    "maximum_bottom_floor_residual": 0.0,
+    "maximum_top_ceiling_residual": 0.0,
+    "maximum_wall_plane_residual": 0.0,
+    "wall_plane_residuals": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "minimum_wall_edge_length": 2.6141115140447138,
+    "wall_edge_lengths": [
+      11.8,
+      2.6141115140447138,
+      11.8,
+      2.6141115140447138,
+      16.342453098095195,
+      2.6141115140447138,
+      16.342453098095195,
+      2.6141115140447138,
+      11.73,
+      2.6141115140447138,
+      11.73,
+      2.6141115140447138,
+      3.012453098095195,
+      2.6141115140447138,
+      3.012453098095195,
+      2.6141115140447138,
+      3.22,
+      2.6141115140447138,
+      3.22,
+      2.6141115140447138,
+      4.300000000000001,
+      2.6141115140447138,
+      4.300000000000001,
+      2.6141115140447138,
+      3.29,
+      2.6141115140447138,
+      3.29,
+      2.6141115140447138,
+      9.03,
+      2.6141115140447138,
+      9.03,
+      2.6141115140447138
+    ],
+    "wall_edge_lengths_by_wall": [
+      [
+        11.8,
+        2.6141115140447138,
+        11.8,
+        2.6141115140447138
+      ],
+      [
+        16.342453098095195,
+        2.6141115140447138,
+        16.342453098095195,
+        2.6141115140447138
+      ],
+      [
+        11.73,
+        2.6141115140447138,
+        11.73,
+        2.6141115140447138
+      ],
+      [
+        3.012453098095195,
+        2.6141115140447138,
+        3.012453098095195,
+        2.6141115140447138
+      ],
+      [
+        3.22,
+        2.6141115140447138,
+        3.22,
+        2.6141115140447138
+      ],
+      [
+        4.300000000000001,
+        2.6141115140447138,
+        4.300000000000001,
+        2.6141115140447138
+      ],
+      [
+        3.29,
+        2.6141115140447138,
+        3.29,
+        2.6141115140447138
+      ],
+      [
+        9.03,
+        2.6141115140447138,
+        9.03,
+        2.6141115140447138
+      ]
+    ],
+    "bottom_top_vertex_count_match": true,
+    "self_intersection_count": 0,
+    "self_intersections": [],
+    "bottom_self_intersection_count": 0,
+    "top_self_intersection_count": 0,
+    "height_statistics": {
+      "minimum": 2.6141115140447138,
+      "maximum": 2.6141115140447138,
+      "mean": 2.6141115140447138,
+      "required_minimum": 2.0,
+      "floor_candidate_height": 0.0,
+      "ceiling_candidate_height": 2.6141115140447138,
+      "floor_ceiling_plane_angle_deg": 0.0
+    },
+    "candidate_rectangle_diagnostics": [
+      {
+        "wall_object_name": "wall_000",
+        "candidate_id": "metric_y_min",
+        "generated_to_candidate_center_distance": 0.0,
+        "maximum_wall_plane_residual": 0.0,
+        "generated_projected_bounds": {
+          "u_min": -5.9,
+          "u_max": 5.9,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "candidate_projected_bounds": {
+          "u_min": -5.9,
+          "u_max": 5.9,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "generated_projected_aabb_area": 30.846515865727625,
+        "candidate_projected_aabb_area": 30.846515865727625,
+        "projected_aabb_overlap_area": 30.846515865727625,
+        "generated_coverage_ratio": 1.0,
+        "candidate_coverage_ratio": 1.0
+      },
+      {
+        "wall_object_name": "wall_001",
+        "candidate_id": "metric_x_max",
+        "generated_to_candidate_center_distance": 0.0,
+        "maximum_wall_plane_residual": 0.0,
+        "generated_projected_bounds": {
+          "u_min": -8.171226549047597,
+          "u_max": 8.171226549047597,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "candidate_projected_bounds": {
+          "u_min": -8.171226549047597,
+          "u_max": 8.171226549047597,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "generated_projected_aabb_area": 42.720994811466355,
+        "candidate_projected_aabb_area": 42.720994811466355,
+        "projected_aabb_overlap_area": 42.720994811466355,
+        "generated_coverage_ratio": 1.0,
+        "candidate_coverage_ratio": 1.0
+      },
+      {
+        "wall_object_name": "wall_002",
+        "candidate_id": "metric_y_max",
+        "generated_to_candidate_center_distance": 0.0,
+        "maximum_wall_plane_residual": 0.0,
+        "generated_projected_bounds": {
+          "u_min": -5.865,
+          "u_max": 5.865,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "candidate_projected_bounds": {
+          "u_min": -5.865,
+          "u_max": 5.865,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "generated_projected_aabb_area": 30.663528059744493,
+        "candidate_projected_aabb_area": 30.663528059744493,
+        "projected_aabb_overlap_area": 30.663528059744493,
+        "generated_coverage_ratio": 1.0,
+        "candidate_coverage_ratio": 1.0
+      },
+      {
+        "wall_object_name": "wall_003",
+        "candidate_id": "metric_x_red_outer",
+        "generated_to_candidate_center_distance": 0.0,
+        "maximum_wall_plane_residual": 0.0,
+        "generated_projected_bounds": {
+          "u_min": -1.5062265490475966,
+          "u_max": 1.5062265490475983,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "candidate_projected_bounds": {
+          "u_min": -1.5062265490475966,
+          "u_max": 1.5062265490475983,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "generated_projected_aabb_area": 7.874888329250319,
+        "candidate_projected_aabb_area": 7.874888329250319,
+        "projected_aabb_overlap_area": 7.874888329250319,
+        "generated_coverage_ratio": 1.0,
+        "candidate_coverage_ratio": 1.0
+      },
+      {
+        "wall_object_name": "wall_004",
+        "candidate_id": "metric_y_red_inner",
+        "generated_to_candidate_center_distance": 2.220446049250313e-16,
+        "maximum_wall_plane_residual": 0.0,
+        "generated_projected_bounds": {
+          "u_min": -1.6099999999999999,
+          "u_max": 1.61,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "candidate_projected_bounds": {
+          "u_min": -1.6099999999999999,
+          "u_max": 1.61,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "generated_projected_aabb_area": 8.417439075223978,
+        "candidate_projected_aabb_area": 8.417439075223978,
+        "projected_aabb_overlap_area": 8.417439075223978,
+        "generated_coverage_ratio": 1.0,
+        "candidate_coverage_ratio": 1.0
+      },
+      {
+        "wall_object_name": "wall_005",
+        "candidate_id": "metric_x_blue_inner",
+        "generated_to_candidate_center_distance": 0.0,
+        "maximum_wall_plane_residual": 0.0,
+        "generated_projected_bounds": {
+          "u_min": -2.1500000000000004,
+          "u_max": 2.1500000000000004,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "candidate_projected_bounds": {
+          "u_min": -2.1500000000000004,
+          "u_max": 2.1500000000000004,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "generated_projected_aabb_area": 11.24067951039227,
+        "candidate_projected_aabb_area": 11.24067951039227,
+        "projected_aabb_overlap_area": 11.24067951039227,
+        "generated_coverage_ratio": 1.0,
+        "candidate_coverage_ratio": 1.0
+      },
+      {
+        "wall_object_name": "wall_006",
+        "candidate_id": "metric_y_connector_bottom",
+        "generated_to_candidate_center_distance": 0.0,
+        "maximum_wall_plane_residual": 0.0,
+        "generated_projected_bounds": {
+          "u_min": -1.645,
+          "u_max": 1.645,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "candidate_projected_bounds": {
+          "u_min": -1.645,
+          "u_max": 1.645,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "generated_projected_aabb_area": 8.600426881207108,
+        "candidate_projected_aabb_area": 8.600426881207108,
+        "projected_aabb_overlap_area": 8.600426881207108,
+        "generated_coverage_ratio": 1.0,
+        "candidate_coverage_ratio": 1.0
+      },
+      {
+        "wall_object_name": "wall_007",
+        "candidate_id": "metric_x_min_lower",
+        "generated_to_candidate_center_distance": 0.0,
+        "maximum_wall_plane_residual": 0.0,
+        "generated_projected_bounds": {
+          "u_min": -4.515,
+          "u_max": 4.515,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "candidate_projected_bounds": {
+          "u_min": -4.515,
+          "u_max": 4.515,
+          "v_min": -1.3070557570223569,
+          "v_max": 1.3070557570223569
+        },
+        "generated_projected_aabb_area": 23.605426971823764,
+        "candidate_projected_aabb_area": 23.605426971823764,
+        "projected_aabb_overlap_area": 23.605426971823764,
+        "generated_coverage_ratio": 1.0,
+        "candidate_coverage_ratio": 1.0
+      }
+    ],
+    "geometry_success": true
+  },
+  "validation_warnings": [],
+  "output_files": {
+    "combined_obj": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/final_editor_proxy/room/room_envelope.obj",
+    "material_library": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/final_editor_proxy/room/room_envelope.mtl",
+    "preview_ply": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/final_editor_proxy/room/room_envelope.ply",
+    "object_directory": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/final_editor_proxy/room/objects",
+    "individual_objects": {
+      "floor_000": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/final_editor_proxy/room/objects/floor_000.obj",
+      "ceiling_000": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/final_editor_proxy/room/objects/ceiling_000.obj",
+      "wall_000": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/final_editor_proxy/room/objects/wall_000.obj",
+      "wall_001": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/final_editor_proxy/room/objects/wall_001.obj",
+      "wall_002": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/final_editor_proxy/room/objects/wall_002.obj",
+      "wall_003": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/final_editor_proxy/room/objects/wall_003.obj",
+      "wall_004": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/final_editor_proxy/room/objects/wall_004.obj",
+      "wall_005": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/final_editor_proxy/room/objects/wall_005.obj",
+      "wall_006": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/final_editor_proxy/room/objects/wall_006.obj",
+      "wall_007": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/final_editor_proxy/room/objects/wall_007.obj"
+    },
+    "envelope_metadata": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/final_editor_proxy/room/room_envelope.json",
+    "topology_report": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/final_editor_proxy/room/topology_report.json"
+  },
+  "status": "provisional",
+  "confidence": "medium",
+  "bounds": {
+    "min": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "max": [
+      11.8,
+      16.342453098095195,
+      2.6141115140447138
+    ],
+    "extent": [
+      11.8,
+      16.342453098095195,
+      2.6141115140447138
+    ]
+  },
+  "coordinate_system": {
+    "id": "pnu_4f_corridor",
+    "unit": "meter",
+    "origin": "green (0,0) point in IMG_2810.jpg",
+    "up_axis": "+Z",
+    "handedness": "right",
+    "T_metric_from_scene": [
+      [
+        -1.2535099457104937,
+        -0.0011672030677582178,
+        -0.795442459228661,
+        8.233303334486035
+      ],
+      [
+        0.7932955693417476,
+        0.10718796336890826,
+        -1.2502840207222694,
+        11.435846687236555
+      ],
+      [
+        0.058414107623877255,
+        -1.4807182819320122,
+        -0.08987999713329929,
+        1.5893733285710152
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "T_scene_from_metric": [
+      [
+        -0.5687387176308776,
+        0.3599316514030156,
+        0.02650347113339055,
+        0.5243512868588944
+      ],
+      [
+        -0.0005295798236330495,
+        0.048632996523489826,
+        -0.6718269924545992,
+        0.5159846023656772
+      ],
+      [
+        -0.3609057317486532,
+        -0.5672750607630127,
+        -0.040780078758198925,
+        9.52353175853523
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ]
+  },
+  "source_revision": {
+    "boundary_interpretation": "colored_strokes_are_corridor_outer_boundaries",
+    "interpretation_confirmed_by_user": true,
+    "drawing_usage": "topology_only",
+    "numeric_coordinate_source": "PGSR_vertical_surface_density_peaks",
+    "red_reverse_u_included": true,
+    "blue_elevator_connector_included": true,
+    "footprint_xy_m": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        11.8,
+        0.0
+      ],
+      [
+        11.8,
+        16.342453098095195
+      ],
+      [
+        0.07,
+        16.342453098095195
+      ],
+      [
+        0.07,
+        13.33
+      ],
+      [
+        3.29,
+        13.33
+      ],
+      [
+        3.29,
+        9.03
+      ],
+      [
+        0.0,
+        9.03
+      ]
+    ],
+    "boundary_evidence": {
+      "x_red_outer": {
+        "coordinate_m": 0.07,
+        "vertical_surface_samples_near_peak": 796,
+        "mesh_support": "strong",
+        "role": "red_reverse_u_outer_left"
+      },
+      "y_red_inner": {
+        "coordinate_m": 13.33,
+        "vertical_surface_samples_near_peak": 89,
+        "mesh_support": "secondary",
+        "role": "red_reverse_u_inner_bottom",
+        "notes": "사용자 도면이 위상을 지정하고 PGSR의 보조 수직면 피크가 좌표를 보정함"
+      },
+      "x_blue_inner": {
+        "coordinate_m": 3.29,
+        "vertical_surface_samples_near_peak": 314,
+        "mesh_support": "strong",
+        "role": "blue_elevator_connector_left"
+      },
+      "y_connector_bottom": {
+        "coordinate_m": 9.03,
+        "vertical_surface_samples_near_peak": 1666,
+        "mesh_support": "very_strong",
+        "role": "blue_connector_to_lower_corridor"
+      }
+    },
+    "confidence": "medium",
+    "limitations": [
+      "PGSR Mesh의 누락·노이즈 때문에 실제 벽선과 수 cm 이상 차이가 날 수 있음",
+      "Y=13.33 m 붉은 안쪽 경계는 사용자 도면과 약한 PGSR 보조 피크를 함께 사용함",
+      "레이저 실측으로 검증되지 않음"
+    ]
+  },
+  "transform": {
+    "alignment_type": "orthogonal_similarity_proper_rotation",
+    "T_metric_from_scene": [
+      [
+        -1.2535099457104937,
+        -0.0011672030677582178,
+        -0.795442459228661,
+        8.233303334486035
+      ],
+      [
+        0.7932955693417476,
+        0.10718796336890826,
+        -1.2502840207222694,
+        11.435846687236555
+      ],
+      [
+        0.058414107623877255,
+        -1.4807182819320122,
+        -0.08987999713329929,
+        1.5893733285710152
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "T_scene_from_metric": [
+      [
+        -0.5687387176308776,
+        0.3599316514030156,
+        0.02650347113339055,
+        0.5243512868588944
+      ],
+      [
+        -0.0005295798236330495,
+        0.048632996523489826,
+        -0.6718269924545992,
+        0.5159846023656772
+      ],
+      [
+        -0.3609057317486532,
+        -0.5672750607630127,
+        -0.040780078758198925,
+        9.52353175853523
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "linear_determinant": 3.272069235383132,
+    "orthogonal_basis_determinant": 1.0,
+    "source_x_axis": [
+      -0.8443456869440011,
+      -0.0007862106554654102,
+      -0.5357982295714201
+    ],
+    "source_y_axis": [
+      0.5343521164212516,
+      0.0722002205666996,
+      -0.8421727517714221
+    ],
+    "source_z_axis_floor_normal": [
+      0.03934687554548899,
+      -0.9973898485662089,
+      -0.06054183150419749
+    ],
+    "origin_scene_coordinate": [
+      0.5243512868588944,
+      0.5159846023656772,
+      9.52353175853523
+    ],
+    "origin_metric_coordinate": [
+      0,
+      0,
+      0
+    ]
+  }
+}

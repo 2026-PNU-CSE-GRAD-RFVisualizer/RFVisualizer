@@ -1,0 +1,191 @@
+<scene version="2.1.0">
+    <!-- PROVISIONAL RF MATERIALS -->
+    <bsdf type="itu-radio-material" id="itu_concrete_floor">
+        <string name="type" value="concrete"/>
+        <float name="thickness" value="0.1"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="itu_concrete_ceiling">
+        <string name="type" value="concrete"/>
+        <float name="thickness" value="0.1"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="itu_concrete_walls">
+        <string name="type" value="concrete"/>
+        <float name="thickness" value="0.1"/>
+    </bsdf>
+
+    <!-- Independent Phase 2-B obstacle materials -->
+    <bsdf type="itu-radio-material" id="radio_itu_concrete_Wall_01">
+        <string name="type" value="concrete"/>
+        <float name="thickness" value="1"/>
+        <float name="scattering_coefficient" value="0.1"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="radio_itu_concrete_Wall_02">
+        <string name="type" value="concrete"/>
+        <float name="thickness" value="1"/>
+        <float name="scattering_coefficient" value="0.1"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="radio_itu_concrete_Wall_03">
+        <string name="type" value="concrete"/>
+        <float name="thickness" value="1"/>
+        <float name="scattering_coefficient" value="0.1"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="radio_itu_concrete_Wall_04">
+        <string name="type" value="concrete"/>
+        <float name="thickness" value="1"/>
+        <float name="scattering_coefficient" value="0.1"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="radio_itu_metal_door_02">
+        <string name="type" value="metal"/>
+        <float name="thickness" value="0.2"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="radio_itu_metal_door_01">
+        <string name="type" value="metal"/>
+        <float name="thickness" value="0.2"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="radio_itu_metal_door_03">
+        <string name="type" value="metal"/>
+        <float name="thickness" value="0.2"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="radio_itu_metal_door_04">
+        <string name="type" value="metal"/>
+        <float name="thickness" value="0.2"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="radio_itu_glass_window_01">
+        <string name="type" value="glass"/>
+        <float name="thickness" value="0.1"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="radio_itu_glass_window_01_copy">
+        <string name="type" value="glass"/>
+        <float name="thickness" value="0.1"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="radio_itu_glass_window_01_copy_copy">
+        <string name="type" value="glass"/>
+        <float name="thickness" value="0.1"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="radio_itu_glass_window_01_copy_copy_copy">
+        <string name="type" value="glass"/>
+        <float name="thickness" value="0.1"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+
+    <!-- Metric Room Envelope shapes -->
+    <shape type="ply" id="mesh-floor_000">
+        <string name="filename" value="meshes/floor_000.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_concrete_floor" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-ceiling_000">
+        <string name="filename" value="meshes/ceiling_000.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_concrete_ceiling" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-wall_000">
+        <string name="filename" value="meshes/wall_000.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_concrete_walls" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-wall_001">
+        <string name="filename" value="meshes/wall_001.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_concrete_walls" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-wall_002">
+        <string name="filename" value="meshes/wall_002.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_concrete_walls" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-wall_003">
+        <string name="filename" value="meshes/wall_003.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_concrete_walls" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-wall_004">
+        <string name="filename" value="meshes/wall_004.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_concrete_walls" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-wall_005">
+        <string name="filename" value="meshes/wall_005.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_concrete_walls" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-wall_006">
+        <string name="filename" value="meshes/wall_006.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_concrete_walls" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-wall_007">
+        <string name="filename" value="meshes/wall_007.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_concrete_walls" name="bsdf"/>
+    </shape>
+
+    <!-- Independent Phase 2-B obstacle shapes -->
+    <shape type="ply" id="mesh-Wall_01">
+        <string name="filename" value="meshes/Wall_01.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="radio_itu_concrete_Wall_01" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-Wall_02">
+        <string name="filename" value="meshes/Wall_02.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="radio_itu_concrete_Wall_02" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-Wall_03">
+        <string name="filename" value="meshes/Wall_03.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="radio_itu_concrete_Wall_03" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-Wall_04">
+        <string name="filename" value="meshes/Wall_04.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="radio_itu_concrete_Wall_04" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-door_02">
+        <string name="filename" value="meshes/door_02.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="radio_itu_metal_door_02" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-door_01">
+        <string name="filename" value="meshes/door_01.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="radio_itu_metal_door_01" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-door_03">
+        <string name="filename" value="meshes/door_03.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="radio_itu_metal_door_03" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-door_04">
+        <string name="filename" value="meshes/door_04.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="radio_itu_metal_door_04" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-window_01">
+        <string name="filename" value="meshes/window_01.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="radio_itu_glass_window_01" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-window_01_copy">
+        <string name="filename" value="meshes/window_01_copy.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="radio_itu_glass_window_01_copy" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-window_01_copy_copy">
+        <string name="filename" value="meshes/window_01_copy_copy.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="radio_itu_glass_window_01_copy_copy" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-window_01_copy_copy_copy">
+        <string name="filename" value="meshes/window_01_copy_copy_copy.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="radio_itu_glass_window_01_copy_copy_copy" name="bsdf"/>
+    </shape>
+</scene>

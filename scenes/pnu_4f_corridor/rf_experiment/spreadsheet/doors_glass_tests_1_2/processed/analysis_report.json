@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.1",
+  "status": "provisional_real_measurements",
+  "included_runs": [
+    "Test_1_004838",
+    "Test_2_010416"
+  ],
+  "excluded_runs": [
+    "Test_3_011702"
+  ],
+  "stable_calibration_points": [
+    "cal-04"
+  ],
+  "unstable_calibration_points": [
+    "cal-01",
+    "cal-02",
+    "cal-03"
+  ],
+  "primary_variant": "doors_glass_diffraction_scattering_authored",
+  "primary_method": "global_bias_all4",
+  "primary_evaluation_scope": "repeat_mean_6",
+  "primary_mae_db": 6.758473296587524,
+  "primary_rmse_db": 7.685771403197369,
+  "primary_pearson_r": 0.9666223634922115,
+  "primary_mae_ci95_db": [
+    3.537658810428148,
+    9.438416434510305
+  ],
+  "pooled_repeated_mae_db": 7.640478087254543,
+  "calibration_repeatability_mean_absolute_difference_db": 10.25,
+  "calibration_repeatability_maximum_absolute_difference_db": 16.0,
+  "test_repeatability_mean_absolute_difference_db": 6.083333333333333,
+  "test_repeatability_maximum_absolute_difference_db": 13.0,
+  "paper_evidence_eligible": false,
+  "limitations": [
+    "Test 3은 철문 상태가 Proxy와 달라 제외했다.",
+    "Backend 좌표·역할 누락을 기존 장치 배치 계약으로 복원했다.",
+    "장치 보정 후 5 dB 이내로 반복된 Calibration 위치는 cal-04 한 곳뿐이다.",
+    "실측 TX x=3.13 m와 Sionna TX x=3.15 m 사이에 0.02 m 차이가 있다.",
+    "Test 위치는 6개뿐이며 두 반복의 평균 절대 차이는 6 dB를 넘는다.",
+    "Scene/Marker와 작성된 재질 계수는 아직 provisional이다."
+  ],
+  "source_sha256": [
+    [
+      "configs/rf_experiment/pnu_4f_corridor/tx_rx.json",
+      "2e5877540c0ce0c4e15fe97110d54e65ea20e327e64a4ec51b639a154754707c"
+    ],
+    [
+      "outputs/rf_experiment/pnu_4f_corridor/Tests/Test_1_004838/raw/measurements_raw.csv",
+      "0caa433e29f208ae69efe9df25fafb7a2c8cd0faea97e9d614806615d1d0d584"
+    ],
+    [
+      "outputs/rf_experiment/pnu_4f_corridor/Tests/Test_2_010416/raw/measurements_raw.csv",
+      "e2b47d7812e9d4a0520a093defb39264c187739493058a59f9ccefa8d8762a3d"
+    ],
+    [
+      "outputs/rf_experiment/pnu_4f_corridor/Tests/Test_1_004838/config/device_offsets.json",
+      "ba1e637e92e09c84521b161e4cc4fc5aeb5a5997e3e9aa0efa6259c83c589339"
+    ],
+    [
+      "outputs/rf_experiment/pnu_4f_corridor/Tests/Test_2_010416/config/device_offsets.json",
+      "2a1a908d1a4b274cd52e17b9781ccd356760310ba6dfefd7d0e63df8403e60a8"
+    ],
+    [
+      "outputs/rf_experiment/pnu_4f_corridor/Tests/Test_1_004838/config/tx_rx.json",
+      "3e99ec61da1cc06c00658e8d0bb8b62db0494f2e8690b697a036664acad2ae35"
+    ],
+    [
+      "outputs/rf_experiment/pnu_4f_corridor/Tests/Test_2_010416/config/tx_rx.json",
+      "3e99ec61da1cc06c00658e8d0bb8b62db0494f2e8690b697a036664acad2ae35"
+    ],
+    [
+      "outputs/rf_experiment/pnu_4f_corridor/doors_glass_base/processed/sionna_points.csv",
+      "ed77753029fb37e22429792443e59fbb1fb6c646511c05292c4c32d5426ba29d"
+    ],
+    [
+      "outputs/rf_experiment/pnu_4f_corridor/doors_glass_diffraction/processed/sionna_points.csv",
+      "50d4654f06cdac981e226b1a3b70cf01845b13981f9cb7edf9d5299a7fd38cf4"
+    ],
+    [
+      "outputs/rf_experiment/pnu_4f_corridor/doors_glass_diffraction_scattering_authored/processed/sionna_points.csv",
+      "3a407bbdf60a475a6de75dfaf4a669d2bc99624256ddbc6f7c5c267d3ca64e3d"
+    ]
+  ]
+}

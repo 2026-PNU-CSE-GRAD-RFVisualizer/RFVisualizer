@@ -50,13 +50,13 @@
         "origin_field_corner_index": 0,
         "notes_ko": "PGSR의 대각선 반대편 legacy corner 2를 문 시작점 (0, 0, 0)으로 고정한다."
       },
-      "source_room_envelope": "outputs/proxy_mesh/pnu_classroom/room_envelope/room_envelope.obj",
+      "source_room_envelope": "scenes/pnu_classroom/proxy_mesh/room_envelope/room_envelope.obj",
       "source_pgsr_reference": "PGSR/output/pnu_classroom/mesh/tsdf_fusion_post.ply",
-      "legacy_metric_scene": "outputs/proxy_mesh/pnu_classroom/metric_calibration/room_envelope_metric.obj",
+      "legacy_metric_scene": "scenes/pnu_classroom/proxy_mesh/metric_calibration/room_envelope_metric.obj",
       "legacy_scene_usage": "reference_only_until_rebuilt",
-      "metric_obj": "outputs/rf_experiment/classroom_20260723/proxy_scene/room_envelope_metric.obj",
-      "metric_json": "outputs/rf_experiment/classroom_20260723/proxy_scene/room_envelope_metric.json",
-      "calibration_json": "outputs/rf_experiment/classroom_20260723/proxy_scene/calibration.json",
+      "metric_obj": "scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene/room_envelope_metric.obj",
+      "metric_json": "scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene/room_envelope_metric.json",
+      "calibration_json": "scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene/calibration.json",
       "notes_ko": [
         "가로 15.4m, 깊이 10.8m, 높이차 약 0.75m의 양의 좌표 기본 Envelope를 생성했다.",
         "문 시작점은 legacy bottom corner 2에 대응하며 정확히 (0, 0, 0)으로 고정한다.",

@@ -1,0 +1,55 @@
+id: pnu_4f_corridor
+kind: room
+
+pgsr:
+  point_cloud: PGSR/output/pnu_4f_corridor_v2/point_cloud/iteration_30000/point_cloud.ply
+  mesh: PGSR/output/pnu_4f_corridor_v2/mesh/tsdf_fusion_post.ply
+
+tools:
+  proxy_placement_editor:
+    edit:
+      room-obj: scenes/pnu_4f_corridor/proxy_mesh/final_editor_proxy/room/room_envelope.obj
+      room-json: scenes/pnu_4f_corridor/proxy_mesh/final_editor_proxy/room/room_envelope.json
+      calibration: scenes/pnu_4f_corridor/proxy_mesh/final_editor_proxy/calibration.json
+      scenario: scenes/pnu_4f_corridor/configs/sionna/proxy.yaml
+      markers: scenes/pnu_4f_corridor/configs/rf_experiment/tx_rx.json
+      candidates: scenes/pnu_4f_corridor/configs/proxy_editor/candidates.yaml
+      editor-config: scenes/pnu_4f_corridor/configs/proxy_editor/editor.yaml
+      point-cloud: PGSR/output/pnu_4f_corridor_v2/point_cloud/iteration_30000/point_cloud.ply
+      point-cloud-coordinate-space: scene
+      pgsr-output-mesh: PGSR/output/pnu_4f_corridor_v2/mesh/tsdf_fusion_post.ply
+      pgsr-output-mesh-coordinate-space: scene
+      output: scenes/pnu_4f_corridor/proxy_placement
+    validate:
+      scenario: scenes/pnu_4f_corridor/configs/sionna/proxy.yaml
+      markers: scenes/pnu_4f_corridor/configs/rf_experiment/tx_rx.json
+      candidates: scenes/pnu_4f_corridor/configs/proxy_editor/candidates.yaml
+      room-json: scenes/pnu_4f_corridor/proxy_mesh/final_editor_proxy/room/room_envelope.json
+      calibration: scenes/pnu_4f_corridor/proxy_mesh/final_editor_proxy/calibration.json
+  rf_experiment:
+    validate-contracts:
+      scene: scenes/pnu_4f_corridor/configs/rf_experiment/scene.json
+      markers: scenes/pnu_4f_corridor/configs/rf_experiment/tx_rx.json
+      methods: scenes/pnu_4f_corridor/configs/rf_experiment/method_config.json
+    run-sionna:
+      scene: scenes/pnu_4f_corridor/configs/rf_experiment/scene.json
+      markers: scenes/pnu_4f_corridor/configs/rf_experiment/tx_rx.json
+      solver: scenes/pnu_4f_corridor/configs/rf_experiment/sionna_solver.json
+      output: scenes/pnu_4f_corridor/rf_experiment
+    analyze:
+      methods: scenes/pnu_4f_corridor/configs/rf_experiment/method_config.json
+      output: scenes/pnu_4f_corridor/rf_experiment
+  sionna_scenario:
+    validate:
+      scenario: scenes/pnu_4f_corridor/configs/sionna/proxy.yaml
+      markers: scenes/pnu_4f_corridor/configs/rf_experiment/tx_rx.json
+    build:
+      scenario: scenes/pnu_4f_corridor/configs/sionna/proxy.yaml
+      markers: scenes/pnu_4f_corridor/configs/rf_experiment/tx_rx.json
+      output: scenes/pnu_4f_corridor/sionna/scenario
+  sionna_smoke_test:
+    validate-scene:
+      config: scenes/pnu_4f_corridor/configs/sionna/smoke_test.yaml
+    run:
+      config: scenes/pnu_4f_corridor/configs/sionna/smoke_test.yaml
+      output: scenes/pnu_4f_corridor/sionna/smoke_test

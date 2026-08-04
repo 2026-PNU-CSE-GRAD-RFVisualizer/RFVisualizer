@@ -12,8 +12,8 @@ from pydantic import BaseModel, ConfigDict
 
 
 PROJECT_ROOT: Final = Path(__file__).resolve().parents[2]
-TESTS_ROOT: Final = PROJECT_ROOT / "outputs/rf_experiment/pnu_4f_corridor/Tests"
-MARKERS_PATH: Final = PROJECT_ROOT / "configs/rf_experiment/pnu_4f_corridor/tx_rx.json"
+TESTS_ROOT: Final = PROJECT_ROOT / "scenes/pnu_4f_corridor/rf_experiment/Tests"
+MARKERS_PATH: Final = PROJECT_ROOT / "scenes/pnu_4f_corridor/configs/rf_experiment/tx_rx.json"
 MOBILE_NODE: Final = "node-02"
 NODE_TO_CALIBRATION: Final = {
     "gw-01": "cal-01",

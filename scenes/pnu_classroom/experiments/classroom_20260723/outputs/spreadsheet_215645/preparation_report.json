@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "classroom_20260723_215645",
+  "status": "provisional_node02_offset_unmeasured",
+  "mapping": {
+    "calibration": {
+      "gw-01": "cal-01",
+      "node-01": "cal-02",
+      "node-03": "cal-03"
+    },
+    "test": "offset-02..offset-16 -> test-00..test-14",
+    "mobile_node": "node-02"
+  },
+  "primary_evaluation": {
+    "calibration_count": 3,
+    "test_count": 13,
+    "excluded": {
+      "test-03": "node-02 measurement missing",
+      "test-14": "8 samples, below 18-sample minimum"
+    }
+  },
+  "secondary_evaluation": {
+    "calibration_count": 3,
+    "test_count": 14,
+    "excluded": {
+      "test-03": "node-02 measurement missing"
+    },
+    "caution": {
+      "test-14": "included with only 8 samples"
+    }
+  },
+  "assumptions": [
+    "node-02 device_offset_db is unmeasured and provisionally set to 0.0 dB.",
+    "node-02 corrected_rssi therefore equals median_filtered.",
+    "No missing test value was imputed.",
+    "Fixed-node rows recorded during test sessions were not used as test measurements."
+  ],
+  "source_files": {
+    "experiment/mid-paper/classroom_20260723_215645/processed/measurements_summary.csv": "9907189c5f0ba6ccb4c91e91f87edec5f8c93a2b0bcc531ce97f8bbdc03b20ae",
+    "experiment/mid-paper/classroom_20260723_215645/raw/measurements_raw.csv": "bb1f17ab79c5d8da954bc2745b72af31952018a5af7e0629230469e727703480",
+    "configs/rf_experiment/classroom_20260723/tx_rx.json": "f1809a2968d1e8ecc61753692a56efe9a585031dca9c914f3b3609475143dca4"
+  }
+}

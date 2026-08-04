@@ -1,0 +1,370 @@
+{
+  "schema_version": "1.0",
+  "algorithm": {
+    "name": "rfvisualizer_provisional_metric_calibration",
+    "version": "0.5.0"
+  },
+  "created_at": "2026-07-30T02:16:33.038596Z",
+  "status": "provisional",
+  "confidence": "medium",
+  "is_provisional": true,
+  "warning_banner": "PROVISIONAL METRIC CALIBRATION - NOT VALIDATED BY ON-SITE MEASUREMENT",
+  "source": {
+    "envelope_json": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/floorplan_aligned/room_envelope/room_envelope.json",
+    "envelope_obj": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/floorplan_aligned/room_envelope/room_envelope.obj",
+    "config": "/data/RFVisualizer/tools/proxy_mesh_editor/configs/4f_corridor_floorplan_metric_calibration.yaml",
+    "topology_summary": {
+      "vertex_count": 12,
+      "triangle_count": 20,
+      "edge_count": 30,
+      "degenerate_triangle_count": 0,
+      "degenerate_triangle_indices": [],
+      "duplicate_face_count": 0,
+      "duplicate_vertex_count": 0,
+      "duplicate_vertex_pairs": [],
+      "boundary_edge_count": 0,
+      "boundary_edges": [],
+      "non_manifold_edge_count": 0,
+      "non_manifold_edges": [],
+      "connected_component_count": 1,
+      "signed_volume": 116.8958710595348,
+      "absolute_volume": 116.8958710595348,
+      "surface_area": 199.40223639458878,
+      "euler_characteristic": 2,
+      "inward_or_ambiguous_face_count": 0,
+      "inward_or_ambiguous_face_indices": [],
+      "closed_manifold_success": true
+    }
+  },
+  "scale": {
+    "method": "weighted_least_squares",
+    "uniform_scale_only": true,
+    "references": [
+      {
+        "name": "floorplan_bottom_corridor_length",
+        "scene_distance": 7.948304790108382,
+        "real_distance_m": 11.8,
+        "source": "IMG_2810_annotated_floorplan",
+        "confidence": "medium",
+        "weight": 2.0,
+        "notes": "도면의 (0,0)에서 오른쪽 외벽까지 표시된 11 m 80 cm.",
+        "individual_meters_per_scene_unit": 1.4845932952502061
+      },
+      {
+        "name": "floorplan_top_corridor_length",
+        "scene_distance": 4.351360080008487,
+        "real_distance_m": 6.46,
+        "source": "IMG_2810_annotated_floorplan",
+        "confidence": "medium",
+        "weight": 1.0,
+        "notes": "도면의 x=5.34 m 꺾임부터 x=11.80 m 외벽까지 표시된 6 m 46 cm.",
+        "individual_meters_per_scene_unit": 1.4845932952502061
+      },
+      {
+        "name": "floorplan_bottom_corridor_width",
+        "scene_distance": 5.051888637780751,
+        "real_distance_m": 7.5,
+        "source": "IMG_2810_annotated_floorplan",
+        "confidence": "medium",
+        "weight": 1.0,
+        "notes": "도면의 원점에서 아래 복도 위쪽 경계까지 표시된 7 m 50 cm.",
+        "individual_meters_per_scene_unit": 1.4845932952502061
+      }
+    ],
+    "individual_reference_scales": {
+      "floorplan_bottom_corridor_length": 1.4845932952502061,
+      "floorplan_top_corridor_length": 1.4845932952502061,
+      "floorplan_bottom_corridor_width": 1.4845932952502061
+    },
+    "resolved_meters_per_scene_unit": 1.4845932952502063,
+    "reference_spread": 0.0,
+    "spread_status": "pass",
+    "reference_residuals": [
+      {
+        "reference_name": "floorplan_bottom_corridor_length",
+        "predicted_metric_distance_m": 11.800000000000002,
+        "target_metric_distance_m": 11.8,
+        "signed_error_m": 1.7763568394002505e-15,
+        "absolute_error_m": 1.7763568394002505e-15,
+        "relative_error": 1.5053871520341105e-16,
+        "absolute_relative_error": 1.5053871520341105e-16
+      },
+      {
+        "reference_name": "floorplan_top_corridor_length",
+        "predicted_metric_distance_m": 6.460000000000001,
+        "target_metric_distance_m": 6.46,
+        "signed_error_m": 8.881784197001252e-16,
+        "absolute_error_m": 8.881784197001252e-16,
+        "relative_error": 1.3748891945822373e-16,
+        "absolute_relative_error": 1.3748891945822373e-16
+      },
+      {
+        "reference_name": "floorplan_bottom_corridor_width",
+        "predicted_metric_distance_m": 7.500000000000001,
+        "target_metric_distance_m": 7.5,
+        "signed_error_m": 8.881784197001252e-16,
+        "absolute_error_m": 8.881784197001252e-16,
+        "relative_error": 1.1842378929335003e-16,
+        "absolute_relative_error": 1.1842378929335003e-16
+      }
+    ]
+  },
+  "source_up_vector": [
+    0.09550108776358447,
+    -0.9916112945169672,
+    -0.0871009920859498
+  ],
+  "target_up_vector": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "transform": {
+    "resolved_meters_per_scene_unit": 1.4845932952502063,
+    "origin_corner_index": 0,
+    "origin_scene_coordinate": [
+      6.4065174184326255,
+      1.3107670670706364,
+      0.2528656842965924
+    ],
+    "origin_metric_coordinate": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "x_axis_edge_indices": [
+      3,
+      4
+    ],
+    "source_x_axis": [
+      -0.8425716078960771,
+      -0.03393313087851036,
+      -0.5375143051084328
+    ],
+    "source_y_axis": [
+      0.5300496465458604,
+      0.12472202377754478,
+      -0.8387441737391933
+    ],
+    "source_z_axis": [
+      0.09550108776358447,
+      -0.9916112945169672,
+      -0.0871009920859498
+    ],
+    "rotation_matrix": [
+      [
+        -0.8425716078960771,
+        -0.03393313087851036,
+        -0.5375143051084328
+      ],
+      [
+        0.5300496465458604,
+        0.12472202377754478,
+        -0.8387441737391933
+      ],
+      [
+        0.09550108776358447,
+        -0.9916112945169672,
+        -0.0871009920859498
+      ]
+    ],
+    "rotation_determinant": 1.0000000000000002,
+    "orthogonality_error": 2.220446049250313e-16,
+    "handedness_error": 1.1527756336890508e-16,
+    "translation_vector": [
+      8.281576607157934,
+      -4.969177522137774,
+      1.0540120964989195
+    ],
+    "T_metric_from_scene": [
+      [
+        -1.2508761598507019,
+        -0.05037689858908422,
+        -0.7979901334650531,
+        8.281576607157934
+      ],
+      [
+        0.786908151411726,
+        0.18516148027017978,
+        -1.2451939767633806,
+        -4.969177522137774
+      ],
+      [
+        0.14178027458291903,
+        -1.4721394793342673,
+        -0.12930954886044235,
+        1.0540120964989195
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "T_scene_from_metric": [
+      [
+        -0.5675437243262466,
+        0.357033571579298,
+        0.06432811468914061,
+        6.4065174184326255
+      ],
+      [
+        -0.022856853110596483,
+        0.08401090330703988,
+        -0.6679346442487103,
+        1.3107670670706364
+      ],
+      [
+        -0.3620616547495876,
+        -0.5649656215090445,
+        -0.05866993496779212,
+        0.2528656842965924
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "matrix_inverse_error": 1.1657341758564144e-15
+  },
+  "geometry": {
+    "source_bounds": {
+      "min": [
+        -6.20615447946,
+        -1.22730931575,
+        -4.1544476414
+      ],
+      "max": [
+        6.57571025626,
+        1.31076706707,
+        7.61350007942
+      ],
+      "extent": [
+        12.78186473572,
+        2.53807638282,
+        11.76794772082
+      ],
+      "diagonal": 17.55854468363548
+    },
+    "metric_bounds": {
+      "min": [
+        -3.1136113215661213e-12,
+        -16.34245309810102,
+        -1.2568618442363706
+      ],
+      "max": [
+        11.800000000004248,
+        1.911553178683967e-12,
+        2.630153839305454
+      ],
+      "extent": [
+        11.800000000007362,
+        16.342453098102933,
+        3.887015683541825
+      ],
+      "diagonal": 20.528630353434885
+    },
+    "source_surface_area": 199.40223639452827,
+    "metric_surface_area": 439.4859691611154,
+    "expected_metric_surface_area": 439.4859691611154,
+    "source_absolute_volume": 116.8958710594162,
+    "metric_absolute_volume": 382.49138343682927,
+    "expected_metric_absolute_volume": 382.49138343682927,
+    "metric_bottom_corners": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        2.098154422856796e-15,
+        -7.500000000000002,
+        -0.3964833804573655
+      ],
+      [
+        5.340000000000003,
+        -7.5,
+        -0.5742995144513917
+      ],
+      [
+        5.340000000000005,
+        -16.342453098095195,
+        -1.0417509405671903
+      ],
+      [
+        11.800000000000008,
+        -16.342453098095195,
+        -1.2568618442378667
+      ],
+      [
+        11.800000000000002,
+        4.380740499891014e-15,
+        -0.3929270376647025
+      ]
+    ],
+    "metric_top_corners": [
+      [
+        5.670342034557754e-16,
+        -3.9111016919320284e-16,
+        2.630153839305351
+      ],
+      [
+        2.1251726078363704e-15,
+        -7.500000000000001,
+        2.189499074960629
+      ],
+      [
+        5.340000000000004,
+        -7.5,
+        2.040437182689853
+      ],
+      [
+        5.340000000000007,
+        -16.3424530980952,
+        1.520907971200467
+      ],
+      [
+        11.800000000000008,
+        -16.342453098095195,
+        1.3405821614496785
+      ],
+      [
+        11.800000000000004,
+        3.0911335206686195e-15,
+        2.3007661372837864
+      ]
+    ],
+    "metric_corner_heights": [
+      2.630153839305351,
+      2.5859824554179944,
+      2.6147366971412445,
+      2.5626589117676573,
+      2.597444005687545,
+      2.693693174948489
+    ],
+    "metric_height_statistics": {
+      "minimum": 2.5626589117676573,
+      "mean": 2.6141115140447138,
+      "maximum": 2.693693174948489
+    }
+  },
+  "validation_success": true,
+  "round_trip_error": 2.673771110915334e-15,
+  "maximum_plane_residual": 3.552713678800501e-15,
+  "warnings": [
+    "PROVISIONAL METRIC CALIBRATION - NOT VALIDATED BY ON-SITE MEASUREMENT"
+  ],
+  "output_files": {
+    "metric_obj": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/floorplan_aligned/metric_calibration/room_envelope_metric.obj",
+    "metric_mtl": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/floorplan_aligned/metric_calibration/room_envelope_metric.mtl",
+    "metric_ply": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/floorplan_aligned/metric_calibration/room_envelope_metric.ply",
+    "metric_coordinate_axes_ply": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/floorplan_aligned/metric_calibration/metric_coordinate_axes.ply",
+    "metric_envelope_json": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/floorplan_aligned/metric_calibration/room_envelope_metric.json",
+    "calibration_json": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/floorplan_aligned/metric_calibration/calibration.json",
+    "calibration_report": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/floorplan_aligned/metric_calibration/calibration_report.md",
+    "calibration_validation_json": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/floorplan_aligned/metric_calibration/calibration_validation.json"
+  }
+}

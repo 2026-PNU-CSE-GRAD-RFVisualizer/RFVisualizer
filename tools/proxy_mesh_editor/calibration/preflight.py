@@ -114,7 +114,7 @@ def run_preflight(
     csv_path = output / "scale_analysis.csv"
     write_scale_analysis_csv(csv_path, scale)
     files["scale_analysis_csv"] = str(csv_path.resolve())
-    draft_path = output / "pnu_classroom_metric_calibration_draft.yaml"
+    draft_path = output / "metric_calibration_draft.yaml"
     report_path = output / "calibration_preflight_report.md"
     json_path = output / "calibration_preflight.json"
     files["metric_calibration_draft"] = str(draft_path.resolve())

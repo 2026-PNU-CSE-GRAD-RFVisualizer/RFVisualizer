@@ -36,30 +36,32 @@ Open3D 데스크톱 창에는 X11 또는 Wayland display가 필요하다. Displa
 
 ```bash
 conda run -n pgsr python -m tools.proxy_placement_editor.main edit \
-  --room-obj outputs/proxy_mesh/pnu_classroom/metric_calibration/room_envelope_metric.obj \
-  --room-json outputs/proxy_mesh/pnu_classroom/metric_calibration/room_envelope_metric.json \
-  --calibration outputs/proxy_mesh/pnu_classroom/metric_calibration/calibration.json \
-  --scenario configs/sionna/scenarios/pnu_classroom_proxy_draft.yaml \
-  --markers configs/rf_experiment/classroom_20260723/tx_rx.json \
-  --output outputs/proxy_placement/pnu_classroom
+  --room-obj scenes/pnu_classroom/proxy_mesh/metric_calibration/room_envelope_metric.obj \
+  --room-json scenes/pnu_classroom/proxy_mesh/metric_calibration/room_envelope_metric.json \
+  --calibration scenes/pnu_classroom/proxy_mesh/metric_calibration/calibration.json \
+  --scenario scenes/pnu_classroom/configs/sionna/proxy_draft.yaml \
+  --candidates scenes/pnu_classroom/configs/proxy_editor/candidates.yaml \
+  --markers scenes/pnu_classroom/experiments/classroom_20260723/configs/tx_rx.json \
+  --output scenes/pnu_classroom/proxy_placement
 ```
 
 실제 PGSR Point Cloud와 Output Mesh를 함께 표시하는 예시는 다음과 같다.
 
 ```bash
 conda run -n pgsr python -m tools.proxy_placement_editor.main edit \
-  --room-obj outputs/proxy_mesh/pnu_classroom/metric_calibration/room_envelope_metric.obj \
-  --room-json outputs/proxy_mesh/pnu_classroom/metric_calibration/room_envelope_metric.json \
-  --calibration outputs/proxy_mesh/pnu_classroom/metric_calibration/calibration.json \
-  --scenario configs/sionna/scenarios/pnu_classroom_proxy_draft.yaml \
+  --room-obj scenes/pnu_classroom/proxy_mesh/metric_calibration/room_envelope_metric.obj \
+  --room-json scenes/pnu_classroom/proxy_mesh/metric_calibration/room_envelope_metric.json \
+  --calibration scenes/pnu_classroom/proxy_mesh/metric_calibration/calibration.json \
+  --scenario scenes/pnu_classroom/configs/sionna/proxy_draft.yaml \
+  --candidates scenes/pnu_classroom/configs/proxy_editor/candidates.yaml \
   --point-cloud PGSR/output/pnu_classroom/point_cloud/iteration_30000/point_cloud.ply \
   --point-cloud-coordinate-space scene \
   --pgsr-output-mesh PGSR/output/pnu_classroom/mesh/tsdf_fusion_post.ply \
   --pgsr-output-mesh-coordinate-space scene \
-  --output outputs/proxy_placement/pnu_classroom
+  --output scenes/pnu_classroom/proxy_placement
 ```
 
-`--point-cloud`는 PGSR Gaussian PLY의 위치를 최대 50만 점으로 표시하고, `--pgsr-output-mesh`는 실제 삼각형 표면을 별도 계층으로 표시한다. `scene` 입력에는 calibration의 `T_metric_from_scene`을 동일하게 적용한다. 기본 CLI는 약 693만 삼각형의 Output Mesh를 최대 100만 삼각형 캐시로 표시한다. `--pgsr-output-mesh-full-resolution`을 지정하면 캐시를 건너뛰고 원본 Mesh를 그대로 표시한다. 프로젝트의 `run_proxy_editor.sh`는 구조 보존을 위해 이 원본 모드를 사용한다. PGSR 원본·scenario·Sionna export는 수정하지 않는다. 이전 `--reference-mesh` 인자는 호환용으로만 유지한다.
+`--point-cloud`는 PGSR Gaussian PLY의 위치를 최대 50만 점으로 표시하고, `--pgsr-output-mesh`는 실제 삼각형 표면을 별도 계층으로 표시한다. `scene` 입력에는 calibration의 `T_metric_from_scene`을 동일하게 적용한다. 기본 CLI는 약 693만 삼각형의 Output Mesh를 최대 100만 삼각형 캐시로 표시한다. `--pgsr-output-mesh-full-resolution`을 지정하면 캐시를 건너뛰고 원본 Mesh를 그대로 표시한다. 프로젝트의 `scripts/run_scene.py`는 구조 보존을 위해 이 원본 모드를 사용한다. PGSR 원본·scenario·Sionna export는 수정하지 않는다. 이전 `--reference-mesh` 인자는 호환용으로만 유지한다.
 
 ### RustDesk / Wayland GUI runtime
 
@@ -79,10 +81,11 @@ Room OBJ는 Room JSON 또는 scenario가 참조하는 Phase 2-A 설정에서 추
 
 ```bash
 conda run -n pgsr python -m tools.proxy_placement_editor.main validate \
-  --scenario configs/sionna/scenarios/pnu_classroom_synthetic_blocker.yaml \
-  --room-json outputs/proxy_mesh/pnu_classroom/metric_calibration/room_envelope_metric.json \
-  --calibration outputs/proxy_mesh/pnu_classroom/metric_calibration/calibration.json \
-  --output outputs/proxy_placement/pnu_classroom
+  --scenario scenes/pnu_classroom/configs/sionna/synthetic_blocker.yaml \
+  --candidates scenes/pnu_classroom/configs/proxy_editor/candidates.yaml \
+  --room-json scenes/pnu_classroom/proxy_mesh/metric_calibration/room_envelope_metric.json \
+  --calibration scenes/pnu_classroom/proxy_mesh/metric_calibration/calibration.json \
+  --output scenes/pnu_classroom/proxy_placement
 ```
 
 활성 obstacle에 schema 오류, null, non-positive size, NaN/Inf, room 침투, 재질 오류, 좌표 왕복 오류가 있으면 exit code 2다. 비활성 draft의 null geometry는 `DISABLED_INCOMPLETE`로 기록하고 전체 검증은 통과한다. AABB 충돌과 벽 근접은 warning이며 저장을 막지 않는다.
@@ -91,10 +94,11 @@ conda run -n pgsr python -m tools.proxy_placement_editor.main validate \
 
 ```bash
 conda run -n pgsr python -m tools.proxy_placement_editor.main export-preview \
-  --scenario configs/sionna/scenarios/pnu_classroom_synthetic_blocker.yaml \
+  --scenario scenes/pnu_classroom/configs/sionna/synthetic_blocker.yaml \
+  --candidates scenes/pnu_classroom/configs/proxy_editor/candidates.yaml \
   --point-cloud PGSR/output/pnu_classroom/point_cloud/iteration_30000/point_cloud.ply \
   --pgsr-output-mesh PGSR/output/pnu_classroom/mesh/tsdf_fusion_post.ply \
-  --output outputs/proxy_placement/pnu_classroom/preview
+  --output scenes/pnu_classroom/proxy_placement/preview
 ```
 
 `--exclude-reference`를 추가하면 PNG에서 두 PGSR 계층을 제외한다.
@@ -159,7 +163,7 @@ navigation:
 
 ## Candidate library
 
-`configs/proxy_editor/pnu_classroom_candidates.yaml`에서 다음 template를 읽는다.
+`scenes/pnu_classroom/configs/proxy_editor/candidates.yaml`에서 다음 template를 읽는다.
 
 - Desk Cluster
 - Blackboard Panel
@@ -208,7 +212,7 @@ geometry:
 
 ## Phase 2-B 연결
 
-GUI의 Validate/Build/Run A/B 버튼은 solver를 재구현하지 않고 `tools.sionna_scenario.main`을 별도 worker thread에서 실행한다. 환경은 `configs/proxy_editor/pnu_classroom_editor.yaml`에서 바꾼다.
+GUI의 Validate/Build/Run A/B 버튼은 solver를 재구현하지 않고 `tools.sionna_scenario.main`을 별도 worker thread에서 실행한다. 환경은 `scenes/pnu_classroom/configs/proxy_editor/editor.yaml`에서 바꾼다.
 
 ```yaml
 external_commands:
@@ -220,7 +224,7 @@ external_commands:
 ## 출력
 
 ```text
-outputs/proxy_placement/pnu_classroom/
+scenes/pnu_classroom/proxy_placement/
 ├─ editor_state.json
 ├─ scenario_resolved.json
 ├─ obstacles_metric.json

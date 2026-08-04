@@ -37,8 +37,6 @@ from .scene_loader import load_placement_scene
 
 LOGGER = logging.getLogger("proxy_placement_editor")
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_CANDIDATES = PROJECT_ROOT / "configs/proxy_editor/pnu_classroom_candidates.yaml"
-DEFAULT_EDITOR_CONFIG = PROJECT_ROOT / "configs/proxy_editor/pnu_classroom_editor.yaml"
 GUI_WORKER_ENV = "RFVIS_PROXY_EDITOR_GUI_WORKER"
 SOFTWARE_RENDERING_ENV = "RFVIS_PROXY_EDITOR_SOFTWARE_RENDERING"
 GUI_PYTHON_ENV = "RFVIS_PROXY_EDITOR_GUI_PYTHON"
@@ -120,9 +118,9 @@ def _create_core(args) -> EditorCore:
         marker_document=marker_document,
         marker_source_path=marker_source_path,
     )
-    candidates = load_candidate_library(getattr(args, "candidates", DEFAULT_CANDIDATES))
+    candidates = load_candidate_library(args.candidates)
     configured_output = (
-        getattr(args, "output", None) or PROJECT_ROOT / "outputs/proxy_placement"
+        getattr(args, "output", None) or PROJECT_ROOT / "scenes/_scratch/proxy_placement"
     )
     output = Path(configured_output).resolve()
     core = EditorCore(scene, state, candidates, output)
@@ -502,7 +500,7 @@ def _common_inputs(parser, require_room=False):
     parser.add_argument(
         "--candidates",
         type=Path,
-        default=DEFAULT_CANDIDATES,
+        required=True,
         help="Candidate library YAML",
     )
     parser.add_argument(
@@ -559,7 +557,7 @@ def build_parser() -> argparse.ArgumentParser:
     edit.add_argument(
         "--output", type=Path, required=True, help="Editor state/autosave/output 폴더"
     )
-    edit.add_argument("--editor-config", type=Path, default=DEFAULT_EDITOR_CONFIG)
+    edit.add_argument("--editor-config", type=Path, default=None)
     edit.add_argument(
         "--experiment", type=Path, help="GUI Run A/B 버튼에서 사용할 experiment YAML"
     )

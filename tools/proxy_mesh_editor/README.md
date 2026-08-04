@@ -52,7 +52,7 @@ conda run -n pgsr python -m tools.proxy_mesh_editor.main extract \
   --mesh PGSR/output/pnu_classroom/mesh/tsdf_fusion_post.ply \
   --reference-point-cloud PGSR/output/pnu_classroom/point_cloud/iteration_30000/point_cloud.ply \
   --config tools/proxy_mesh_editor/configs/pnu_classroom.yaml \
-  --output outputs/proxy_mesh/pnu_classroom/phase1
+  --output scenes/pnu_classroom/proxy_mesh/phase1
 ```
 
 기본 `point_source`는 `mesh_uniform`이므로 참고 점구름은 기록만 하고 평면 검출에는 쓰지 않는다. 참고 점구름을 직접 쓰려면 YAML에서 `reference_point_cloud`로 바꾼다.
@@ -87,9 +87,9 @@ selection:
 
 ```bash
 conda run -n pgsr python -m tools.proxy_mesh_editor.main export \
-  --candidates outputs/proxy_mesh/pnu_classroom/phase1/plane_candidates.json \
+  --candidates scenes/pnu_classroom/proxy_mesh/phase1/plane_candidates.json \
   --config tools/proxy_mesh_editor/configs/pnu_classroom.yaml \
-  --output outputs/proxy_mesh/pnu_classroom/phase1
+  --output scenes/pnu_classroom/proxy_mesh/phase1
 ```
 
 결과:
@@ -114,7 +114,7 @@ conda run -n pgsr python -m tools.proxy_mesh_editor.main analyze-normals \
   --mesh PGSR/output/pnu_classroom/mesh/tsdf_fusion_post.ply \
   --reference-point-cloud PGSR/output/pnu_classroom/point_cloud/iteration_30000/point_cloud.ply \
   --config tools/proxy_mesh_editor/configs/pnu_classroom.yaml \
-  --output outputs/proxy_mesh/pnu_classroom/normal_analysis
+  --output scenes/pnu_classroom/proxy_mesh/normal_analysis
 ```
 
 `abs(normal · up)`이 0에 가까울수록 벽과 같은 수직면이고, 1에 가까울수록 바닥·천장·책상 상판과 같은 수평면이다. 기준값별 PLY, 수평점 PLY, 히스토그램 CSV, 분석 JSON이 생성된다. 유효하지 않은 법선은 통계에 기록하되 미리보기에서는 제외한다.
@@ -128,7 +128,7 @@ conda run -n pgsr python -m tools.proxy_mesh_editor.main extract-walls \
   --mesh PGSR/output/pnu_classroom/mesh/tsdf_fusion_post.ply \
   --reference-point-cloud PGSR/output/pnu_classroom/point_cloud/iteration_30000/point_cloud.ply \
   --config tools/proxy_mesh_editor/configs/pnu_classroom.yaml \
-  --output outputs/proxy_mesh/pnu_classroom/wall_extraction
+  --output scenes/pnu_classroom/proxy_mesh/wall_extraction
 ```
 
 검출된 평면의 법선도 다시 검사한다. 같은 RANSAC 평면에 속한 끊어진 연결 묶음은 설정에 따라 합칠 수 있지만, 서로 다른 벽 후보끼리는 합치지 않는다. 결과는 다음과 같다.
@@ -144,10 +144,10 @@ wall_candidate_meshes/wall_000.ply ...
 
 ```bash
 conda run -n pgsr python -m tools.proxy_mesh_editor.main export \
-  --candidates outputs/proxy_mesh/pnu_classroom/phase1/plane_candidates.json \
-  --wall-candidates outputs/proxy_mesh/pnu_classroom/wall_extraction/wall_candidates.json \
+  --candidates scenes/pnu_classroom/proxy_mesh/phase1/plane_candidates.json \
+  --wall-candidates scenes/pnu_classroom/proxy_mesh/wall_extraction/wall_candidates.json \
   --config path/to/selection.yaml \
-  --output outputs/proxy_mesh/pnu_classroom/phase1_5
+  --output scenes/pnu_classroom/proxy_mesh/phase1_5
 ```
 
 기존 `--candidates`만 사용하는 방식도 그대로 동작한다.
@@ -173,10 +173,10 @@ room_envelope:
 
 ```bash
 conda run -n pgsr python -m tools.proxy_mesh_editor.main build-envelope \
-  --plane-candidates outputs/proxy_mesh/pnu_classroom/phase1/plane_candidates.json \
-  --wall-candidates outputs/proxy_mesh/pnu_classroom/wall_extraction/wall_candidates.json \
+  --plane-candidates scenes/pnu_classroom/proxy_mesh/phase1/plane_candidates.json \
+  --wall-candidates scenes/pnu_classroom/proxy_mesh/wall_extraction/wall_candidates.json \
   --envelope-config tools/proxy_mesh_editor/configs/pnu_classroom_envelope.yaml \
-  --output outputs/proxy_mesh/pnu_classroom/room_envelope
+  --output scenes/pnu_classroom/proxy_mesh/room_envelope
 ```
 
 바닥과 천장은 NumPy 기반의 결정적인 ear clipping으로 삼각분할하므로 볼록·오목 단순 다각형을 모두 지원한다. 서로 교차하는 벽 순서는 오류 처리한다. 출력은 다음과 같다.
@@ -200,10 +200,10 @@ objects/wall_000.obj ...
 
 ```bash
 conda run -n pgsr python -m tools.proxy_mesh_editor.main calibration-preflight \
-  --envelope-json outputs/proxy_mesh/pnu_classroom/room_envelope/room_envelope.json \
-  --envelope-obj outputs/proxy_mesh/pnu_classroom/room_envelope/room_envelope.obj \
+  --envelope-json scenes/pnu_classroom/proxy_mesh/room_envelope/room_envelope.json \
+  --envelope-obj scenes/pnu_classroom/proxy_mesh/room_envelope/room_envelope.obj \
   --config tools/proxy_mesh_editor/configs/pnu_classroom_calibration_preflight.yaml \
-  --output outputs/proxy_mesh/pnu_classroom/calibration_preflight
+  --output scenes/pnu_classroom/proxy_mesh/calibration_preflight
 ```
 
 주요 결과:
@@ -228,10 +228,10 @@ pnu_classroom_metric_calibration_draft.yaml
 
 ```bash
 conda run -n pgsr python -m tools.proxy_mesh_editor.main calibrate-metric \
-  --envelope-json outputs/proxy_mesh/pnu_classroom/room_envelope/room_envelope.json \
-  --envelope-obj outputs/proxy_mesh/pnu_classroom/room_envelope/room_envelope.obj \
+  --envelope-json scenes/pnu_classroom/proxy_mesh/room_envelope/room_envelope.json \
+  --envelope-obj scenes/pnu_classroom/proxy_mesh/room_envelope/room_envelope.obj \
   --config tools/proxy_mesh_editor/configs/pnu_classroom_metric_calibration.yaml \
-  --output outputs/proxy_mesh/pnu_classroom/metric_calibration
+  --output scenes/pnu_classroom/proxy_mesh/metric_calibration
 ```
 
 변환은 하나의 양수 배율 `s`, 오른손 좌표계 회전 `R`, 설정에 고정한 원점 `o`를 사용한다.

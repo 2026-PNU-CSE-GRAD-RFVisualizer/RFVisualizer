@@ -7,7 +7,7 @@ from tools.sionna_smoke_test.config import SmokeTestConfigError, validate_config
 
 
 def _config():
-    with open("configs/sionna/pnu_classroom_smoke_test.yaml", encoding="utf-8") as handle:
+    with open("scenes/pnu_classroom/configs/sionna/smoke_test.yaml", encoding="utf-8") as handle:
         return yaml.safe_load(handle)
 
 

@@ -1,0 +1,49 @@
+id: classroom_20260723
+kind: experiment_session
+parent_room: pnu_classroom
+
+# Duplicated from the parent room's scene.yaml — only one dated session exists today,
+# so no inheritance mechanism is implemented. Add one if a second session makes this painful.
+pgsr:
+  point_cloud: PGSR/output/pnu_classroom/point_cloud/iteration_30000/point_cloud.ply
+  mesh: PGSR/output/pnu_classroom/mesh/tsdf_fusion_post.ply
+
+tools:
+  rf_experiment:
+    validate-contracts:
+      scene: scenes/pnu_classroom/experiments/classroom_20260723/configs/scene.json
+      markers: scenes/pnu_classroom/experiments/classroom_20260723/configs/tx_rx.json
+      methods: scenes/pnu_classroom/experiments/classroom_20260723/configs/method_config.json
+    build-proxy-envelope:
+      scene: scenes/pnu_classroom/experiments/classroom_20260723/configs/scene.json
+      legacy-metric-json: scenes/pnu_classroom/proxy_mesh/metric_calibration/room_envelope_metric.json
+      legacy-calibration: scenes/pnu_classroom/proxy_mesh/metric_calibration/calibration.json
+      output: scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene
+    run-sionna:
+      scene: scenes/pnu_classroom/experiments/classroom_20260723/configs/scene.json
+      markers: scenes/pnu_classroom/experiments/classroom_20260723/configs/tx_rx.json
+      solver: scenes/pnu_classroom/experiments/classroom_20260723/configs/sionna_solver.json
+      output: scenes/pnu_classroom/experiments/classroom_20260723/outputs/sionna
+    analyze:
+      methods: scenes/pnu_classroom/experiments/classroom_20260723/configs/method_config.json
+      output: scenes/pnu_classroom/experiments/classroom_20260723/outputs/analysis
+  proxy_placement_editor:
+    edit:
+      room-obj: scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene/room_envelope_metric.obj
+      room-json: scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene/room_envelope_metric.json
+      calibration: scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene/calibration.json
+      scenario: scenes/pnu_classroom/experiments/classroom_20260723/configs/sionna_scenario.yaml
+      markers: scenes/pnu_classroom/experiments/classroom_20260723/configs/tx_rx.json
+      candidates: scenes/pnu_classroom/configs/proxy_editor/candidates.yaml
+      point-cloud: PGSR/output/pnu_classroom/point_cloud/iteration_30000/point_cloud.ply
+      point-cloud-coordinate-space: scene
+      pgsr-output-mesh: PGSR/output/pnu_classroom/mesh/tsdf_fusion_post.ply
+      pgsr-output-mesh-coordinate-space: scene
+      pgsr-output-mesh-full-resolution: true
+      output: scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_placement
+    validate:
+      scenario: scenes/pnu_classroom/experiments/classroom_20260723/configs/sionna_scenario.yaml
+      candidates: scenes/pnu_classroom/configs/proxy_editor/candidates.yaml
+      room-json: scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene/room_envelope_metric.json
+      calibration: scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene/calibration.json
+      output: scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_placement/validation

@@ -1,0 +1,7 @@
+point_id,test_1_corrected_rssi_dbm,test_2_corrected_rssi_dbm,difference_test_2_minus_test_1_db,absolute_difference_db
+test-01,-44.0,-39.0,5.0,5.0
+test-02,-40.0,-36.0,4.0,4.0
+test-03,-51.0,-47.0,4.0,4.0
+test-04,-56.0,-60.0,-4.0,4.0
+test-05,-73.0,-60.0,13.0,13.0
+test-06,-67.5,-61.0,6.5,6.5

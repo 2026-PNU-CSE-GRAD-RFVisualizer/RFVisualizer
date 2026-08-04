@@ -14,22 +14,23 @@ from tools.sionna_scenario.config import (
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-SCENARIO_DIR = PROJECT_ROOT / "configs" / "sionna" / "scenarios"
+SCENARIO_DIR = PROJECT_ROOT / "scenes" / "pnu_classroom" / "configs" / "sionna"
 EXPERIMENT = (
     PROJECT_ROOT
+    / "scenes"
+    / "pnu_classroom"
     / "configs"
     / "sionna"
-    / "experiments"
-    / "pnu_classroom_phase2b_ab.yaml"
+    / "phase2b_ab_experiment.yaml"
 )
 
 
 def test_checked_in_scenarios_keep_empty_synthetic_and_draft_contracts():
-    empty = load_scenario(SCENARIO_DIR / "pnu_classroom_empty.yaml")
+    empty = load_scenario(SCENARIO_DIR / "empty.yaml")
     blocker = load_scenario(
-        SCENARIO_DIR / "pnu_classroom_synthetic_blocker.yaml"
+        SCENARIO_DIR / "synthetic_blocker.yaml"
     )
-    draft = load_scenario(SCENARIO_DIR / "pnu_classroom_proxy_draft.yaml")
+    draft = load_scenario(SCENARIO_DIR / "proxy_draft.yaml")
 
     assert empty["scenario"]["obstacles"] == []
     assert empty["scenario"]["synthetic_validation"] is False
@@ -56,10 +57,10 @@ def test_checked_in_ab_experiment_resolves_common_seeded_solver_contract():
     experiment = document["experiment"]
 
     assert Path(experiment["_baseline_scenario_path"]).name == (
-        "pnu_classroom_empty.yaml"
+        "empty.yaml"
     )
     assert [Path(value).name for value in experiment["_variant_scenario_paths"]] == [
-        "pnu_classroom_synthetic_blocker.yaml"
+        "synthetic_blocker.yaml"
     ]
     assert experiment["solver"]["path_seed"] == 42
     assert experiment["solver"]["coverage_seed"] == 43
@@ -93,7 +94,7 @@ def test_checked_in_ab_experiment_resolves_common_seeded_solver_contract():
 def test_scenario_high_level_provisional_and_synthetic_markers_are_strict(
     mutation, match
 ):
-    document = load_scenario(SCENARIO_DIR / "pnu_classroom_empty.yaml")
+    document = load_scenario(SCENARIO_DIR / "empty.yaml")
     mutation(document)
     with pytest.raises(ScenarioConfigError, match=match):
         validate_scenario(document)
@@ -101,7 +102,7 @@ def test_scenario_high_level_provisional_and_synthetic_markers_are_strict(
 
 def test_duplicate_obstacle_ids_are_rejected_at_scenario_boundary():
     document = load_scenario(
-        SCENARIO_DIR / "pnu_classroom_synthetic_blocker.yaml"
+        SCENARIO_DIR / "synthetic_blocker.yaml"
     )
     duplicate = deepcopy(document["scenario"]["obstacles"][0])
     duplicate["enabled"] = False
@@ -148,7 +149,7 @@ def test_solver_numeric_fields_reject_bool_and_infinity(field, value):
 
 def test_scenario_rejects_conflicting_material_category_and_preset():
     document = load_scenario(
-        SCENARIO_DIR / "pnu_classroom_synthetic_blocker.yaml"
+        SCENARIO_DIR / "synthetic_blocker.yaml"
     )
     document["scenario"]["obstacles"][0]["material"]["preset"] = "metal"
     with pytest.raises(ScenarioConfigError, match="category와 preset"):

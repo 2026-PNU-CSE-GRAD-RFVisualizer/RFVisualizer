@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "status": "provisional",
+  "physically_validated": false,
+  "selection_reason": "설치된 Sionna RT의 공식 ITU concrete preset을 빈 방 연결 시험에 사용",
+  "materials": [
+    {
+      "sionna_material_name": "itu_concrete_floor",
+      "class": "ITURadioMaterial",
+      "itu_type": "concrete",
+      "thickness_m": 0.10000000149011612,
+      "relative_permittivity": 5.239999771118164,
+      "conductivity_s_per_m": 0.09163116663694382,
+      "scattering_coefficient": 0.0,
+      "is_used": true
+    },
+    {
+      "sionna_material_name": "itu_concrete_ceiling",
+      "class": "ITURadioMaterial",
+      "itu_type": "concrete",
+      "thickness_m": 0.10000000149011612,
+      "relative_permittivity": 5.239999771118164,
+      "conductivity_s_per_m": 0.09163116663694382,
+      "scattering_coefficient": 0.0,
+      "is_used": true
+    },
+    {
+      "sionna_material_name": "itu_concrete_walls",
+      "class": "ITURadioMaterial",
+      "itu_type": "concrete",
+      "thickness_m": 0.10000000149011612,
+      "relative_permittivity": 5.239999771118164,
+      "conductivity_s_per_m": 0.09163116663694382,
+      "scattering_coefficient": 0.0,
+      "is_used": true
+    }
+  ],
+  "object_mapping": [
+    {
+      "object_name": "floor_000",
+      "semantic": "floor",
+      "radio_material": "itu_concrete_floor"
+    },
+    {
+      "object_name": "ceiling_000",
+      "semantic": "ceiling",
+      "radio_material": "itu_concrete_ceiling"
+    },
+    {
+      "object_name": "wall_000",
+      "semantic": "wall",
+      "radio_material": "itu_concrete_walls"
+    },
+    {
+      "object_name": "wall_001",
+      "semantic": "wall",
+      "radio_material": "itu_concrete_walls"
+    },
+    {
+      "object_name": "wall_002",
+      "semantic": "wall",
+      "radio_material": "itu_concrete_walls"
+    },
+    {
+      "object_name": "wall_003",
+      "semantic": "wall",
+      "radio_material": "itu_concrete_walls"
+    },
+    {
+      "object_name": "wall_004",
+      "semantic": "wall",
+      "radio_material": "itu_concrete_walls"
+    },
+    {
+      "object_name": "wall_005",
+      "semantic": "wall",
+      "radio_material": "itu_concrete_walls"
+    },
+    {
+      "object_name": "wall_006",
+      "semantic": "wall",
+      "radio_material": "itu_concrete_walls"
+    },
+    {
+      "object_name": "wall_007",
+      "semantic": "wall",
+      "radio_material": "itu_concrete_walls"
+    }
+  ]
+}

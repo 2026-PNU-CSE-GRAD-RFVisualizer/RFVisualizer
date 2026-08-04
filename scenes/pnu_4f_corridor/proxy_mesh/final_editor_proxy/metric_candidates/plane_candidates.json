@@ -1,0 +1,444 @@
+{
+  "schema_version": "1.0",
+  "algorithm": {
+    "name": "rfvisualizer_pgsr_guided_4f_corridor_proxy",
+    "version": "2.0"
+  },
+  "created_at": "2026-07-30T03:32:23.981837Z",
+  "input": {
+    "source_floorplan": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/final_editor_proxy/source/IMG_2810.jpg",
+    "source_revision_image": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/final_editor_proxy/source/image-1.png",
+    "source_pgsr_mesh": "/data/RFVisualizer/PGSR/output/pnu_4f_corridor_v2/mesh/tsdf_fusion_post.ply",
+    "vertical_wall_diagnostic": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/diagnostics/revision2_vertical_wall_density.png"
+  },
+  "scene": {
+    "up_vector": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "bounds": {
+      "min": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max": [
+        11.8,
+        16.342453098095195,
+        2.6141115140447138
+      ],
+      "extent": [
+        11.8,
+        16.342453098095195,
+        2.6141115140447138
+      ]
+    },
+    "estimated_extent": 20.32607567316678,
+    "scale_status": "metric_pgsr_aligned"
+  },
+  "revision": {
+    "boundary_interpretation": "colored_strokes_are_corridor_outer_boundaries",
+    "drawing_usage": "topology_only",
+    "numeric_coordinate_source": "PGSR_vertical_surface_density_peaks",
+    "boundary_evidence": {
+      "x_red_outer": {
+        "coordinate_m": 0.07,
+        "vertical_surface_samples_near_peak": 796,
+        "mesh_support": "strong",
+        "role": "red_reverse_u_outer_left"
+      },
+      "y_red_inner": {
+        "coordinate_m": 13.33,
+        "vertical_surface_samples_near_peak": 89,
+        "mesh_support": "secondary",
+        "role": "red_reverse_u_inner_bottom",
+        "notes": "사용자 도면이 위상을 지정하고 PGSR의 보조 수직면 피크가 좌표를 보정함"
+      },
+      "x_blue_inner": {
+        "coordinate_m": 3.29,
+        "vertical_surface_samples_near_peak": 314,
+        "mesh_support": "strong",
+        "role": "blue_elevator_connector_left"
+      },
+      "y_connector_bottom": {
+        "coordinate_m": 9.03,
+        "vertical_surface_samples_near_peak": 1666,
+        "mesh_support": "very_strong",
+        "role": "blue_connector_to_lower_corridor"
+      }
+    }
+  },
+  "plane_candidates": [
+    {
+      "candidate_id": "metric_floor",
+      "plane_equation": [
+        0.0,
+        0.0,
+        1.0,
+        -0.0
+      ],
+      "normalized_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "centroid": [
+        6.244190885742348,
+        7.924869419427352,
+        0.0
+      ],
+      "inlier_count": 0,
+      "raw_ransac_inlier_count": 0,
+      "inlier_ratio": 0.0,
+      "remaining_inlier_ratio": 0.0,
+      "fitting_rmse": 0.0,
+      "mean_absolute_distance": 0.0,
+      "estimated_width": 11.8,
+      "estimated_height": 16.342453098095195,
+      "estimated_area": 178.48307484065663,
+      "projected_bounds": {
+        "origin": [
+          6.244190885742348,
+          7.924869419427352,
+          0.0
+        ],
+        "basis_u": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "basis_v": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "bounds_2d": {
+          "u_min": -6.244190885742348,
+          "u_max": 5.555809114257653,
+          "v_min": -7.924869419427352,
+          "v_max": 8.417583678667842
+        },
+        "corners": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            11.8,
+            0.0,
+            0.0
+          ],
+          [
+            11.8,
+            16.342453098095195,
+            0.0
+          ],
+          [
+            0.07,
+            16.342453098095195,
+            0.0
+          ],
+          [
+            0.07,
+            13.33,
+            0.0
+          ],
+          [
+            3.29,
+            13.33,
+            0.0
+          ],
+          [
+            3.29,
+            9.03,
+            0.0
+          ],
+          [
+            0.0,
+            9.03,
+            0.0
+          ]
+        ],
+        "width": 11.8,
+        "height": 16.342453098095195,
+        "area": 178.48307484065663
+      },
+      "corners_3d": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          11.8,
+          0.0,
+          0.0
+        ],
+        [
+          11.8,
+          16.342453098095195,
+          0.0
+        ],
+        [
+          0.07,
+          16.342453098095195,
+          0.0
+        ],
+        [
+          0.07,
+          13.33,
+          0.0
+        ],
+        [
+          3.29,
+          13.33,
+          0.0
+        ],
+        [
+          3.29,
+          9.03,
+          0.0
+        ],
+        [
+          0.0,
+          9.03,
+          0.0
+        ]
+      ],
+      "orientation": "horizontal",
+      "suggested_semantic": "floor",
+      "semantic_confidence": 1.0,
+      "semantic_reason": "PGSR 벽 피크로 보정한 4층 복도 metric footprint",
+      "preview_color": [
+        0.3,
+        0.6,
+        0.9
+      ],
+      "source_pass": "plane_extraction",
+      "extraction_details": {
+        "provenance": "user_topology_plus_pgsr_vertical_surface_peaks",
+        "footprint_xy_m": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            11.8,
+            0.0
+          ],
+          [
+            11.8,
+            16.342453098095195
+          ],
+          [
+            0.07,
+            16.342453098095195
+          ],
+          [
+            0.07,
+            13.33
+          ],
+          [
+            3.29,
+            13.33
+          ],
+          [
+            3.29,
+            9.03
+          ],
+          [
+            0.0,
+            9.03
+          ]
+        ]
+      }
+    },
+    {
+      "candidate_id": "metric_ceiling",
+      "plane_equation": [
+        0.0,
+        0.0,
+        1.0,
+        -2.6141115140447138
+      ],
+      "normalized_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "centroid": [
+        6.244190885742348,
+        7.924869419427352,
+        2.6141115140447138
+      ],
+      "inlier_count": 0,
+      "raw_ransac_inlier_count": 0,
+      "inlier_ratio": 0.0,
+      "remaining_inlier_ratio": 0.0,
+      "fitting_rmse": 0.0,
+      "mean_absolute_distance": 0.0,
+      "estimated_width": 11.8,
+      "estimated_height": 16.342453098095195,
+      "estimated_area": 178.48307484065663,
+      "projected_bounds": {
+        "origin": [
+          6.244190885742348,
+          7.924869419427352,
+          2.6141115140447138
+        ],
+        "basis_u": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "basis_v": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "bounds_2d": {
+          "u_min": -6.244190885742348,
+          "u_max": 5.555809114257653,
+          "v_min": -7.924869419427352,
+          "v_max": 8.417583678667842
+        },
+        "corners": [
+          [
+            0.0,
+            0.0,
+            2.6141115140447138
+          ],
+          [
+            11.8,
+            0.0,
+            2.6141115140447138
+          ],
+          [
+            11.8,
+            16.342453098095195,
+            2.6141115140447138
+          ],
+          [
+            0.07,
+            16.342453098095195,
+            2.6141115140447138
+          ],
+          [
+            0.07,
+            13.33,
+            2.6141115140447138
+          ],
+          [
+            3.29,
+            13.33,
+            2.6141115140447138
+          ],
+          [
+            3.29,
+            9.03,
+            2.6141115140447138
+          ],
+          [
+            0.0,
+            9.03,
+            2.6141115140447138
+          ]
+        ],
+        "width": 11.8,
+        "height": 16.342453098095195,
+        "area": 178.48307484065663
+      },
+      "corners_3d": [
+        [
+          0.0,
+          0.0,
+          2.6141115140447138
+        ],
+        [
+          11.8,
+          0.0,
+          2.6141115140447138
+        ],
+        [
+          11.8,
+          16.342453098095195,
+          2.6141115140447138
+        ],
+        [
+          0.07,
+          16.342453098095195,
+          2.6141115140447138
+        ],
+        [
+          0.07,
+          13.33,
+          2.6141115140447138
+        ],
+        [
+          3.29,
+          13.33,
+          2.6141115140447138
+        ],
+        [
+          3.29,
+          9.03,
+          2.6141115140447138
+        ],
+        [
+          0.0,
+          9.03,
+          2.6141115140447138
+        ]
+      ],
+      "orientation": "horizontal",
+      "suggested_semantic": "ceiling",
+      "semantic_confidence": 1.0,
+      "semantic_reason": "PGSR 벽 피크로 보정한 4층 복도 metric footprint",
+      "preview_color": [
+        0.3,
+        0.6,
+        0.9
+      ],
+      "source_pass": "plane_extraction",
+      "extraction_details": {
+        "provenance": "user_topology_plus_pgsr_vertical_surface_peaks",
+        "footprint_xy_m": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            11.8,
+            0.0
+          ],
+          [
+            11.8,
+            16.342453098095195
+          ],
+          [
+            0.07,
+            16.342453098095195
+          ],
+          [
+            0.07,
+            13.33
+          ],
+          [
+            3.29,
+            13.33
+          ],
+          [
+            3.29,
+            9.03
+          ],
+          [
+            0.0,
+            9.03
+          ]
+        ]
+      }
+    }
+  ]
+}

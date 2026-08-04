@@ -6,10 +6,10 @@ sionna_smoke_test:
   physically_validated: false
 
   input:
-    metric_obj: outputs/proxy_mesh/4f_corridor/final_editor_proxy/room/room_envelope.obj
-    metric_mtl: outputs/proxy_mesh/4f_corridor/final_editor_proxy/room/room_envelope.mtl
-    metric_json: outputs/proxy_mesh/4f_corridor/final_editor_proxy/room/room_envelope.json
-    calibration_json: outputs/proxy_mesh/4f_corridor/final_editor_proxy/calibration.json
+    metric_obj: scenes/pnu_4f_corridor/proxy_mesh/final_editor_proxy/room/room_envelope.obj
+    metric_mtl: scenes/pnu_4f_corridor/proxy_mesh/final_editor_proxy/room/room_envelope.mtl
+    metric_json: scenes/pnu_4f_corridor/proxy_mesh/final_editor_proxy/room/room_envelope.json
+    calibration_json: scenes/pnu_4f_corridor/proxy_mesh/final_editor_proxy/calibration.json
 
   scene:
     name: pnu_4f_corridor
@@ -27,7 +27,7 @@ sionna_smoke_test:
     walls:
       preset: concrete
 
-  # Editor에서는 configs/rf_experiment/pnu_4f_corridor/tx_rx.json 값으로 덮어쓴다.
+  # Editor에서는 scenes/pnu_4f_corridor/configs/rf_experiment/tx_rx.json 값으로 덮어쓴다.
   transmitter:
     name: tx_01
     position_mode: explicit

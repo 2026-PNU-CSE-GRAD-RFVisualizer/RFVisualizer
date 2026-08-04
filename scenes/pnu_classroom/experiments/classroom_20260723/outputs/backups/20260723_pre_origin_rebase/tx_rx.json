@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "scene_id": "classroom_20260723",
+  "coordinate_system_id": "pnu_classroom_field_v1",
+  "status": "draft",
+  "requirements": {
+    "transmitter_count": 1,
+    "calibration_receiver_count": 4,
+    "test_receiver_count": 15
+  },
+  "tx": [
+    {
+      "id": "ap_tx_000",
+      "name": "AP / TX",
+      "position_m": [
+        7.7,
+        7.300000000000002,
+        0.8184397979548491
+      ],
+      "frequency_hz": 2400000000.0,
+      "power_dbm": 20.0
+    }
+  ],
+  "rx": [
+    {
+      "id": "cal_rx_000",
+      "point_id": "cal-01",
+      "name": "보정 RX 1",
+      "role": "calibration",
+      "position_m": [
+        11.35,
+        8.4,
+        1.5184397979548492
+      ]
+    }
+  ]
+}

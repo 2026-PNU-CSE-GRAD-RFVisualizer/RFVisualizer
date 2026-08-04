@@ -1,0 +1,832 @@
+{
+  "schema_version": "1.0",
+  "algorithm": {
+    "name": "rfvisualizer_floorplan_aligned_corridor_walls",
+    "version": "1.0"
+  },
+  "created_at": "2026-07-30T02:14:51.252381Z",
+  "input": {
+    "source_floorplan": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/floorplan_aligned/source/IMG_2810.jpg",
+    "source_plane_candidates": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/phase1/plane_candidates.json",
+    "source_manual_basis": "/data/RFVisualizer/outputs/proxy_mesh/4f_corridor/l_shape/manual_wall_candidates.json"
+  },
+  "scene": {
+    "up_vector": [
+      0.09550108776358447,
+      -0.9916112945169672,
+      -0.0871009920859498
+    ],
+    "bounds": {
+      "min": [
+        -6.274577162162816,
+        -1.2617854250786862,
+        -4.007704005150767
+      ],
+      "max": [
+        5.973504907561505,
+        2.5124999999999997,
+        9.362609152860697
+      ],
+      "extent": [
+        12.248082069724322,
+        3.774285425078686,
+        13.370313158011465
+      ],
+      "diagonal": 18.52096160570391
+    },
+    "estimated_extent": 18.52096160570391,
+    "scale_status": "scene_unit_not_metric_calibrated"
+  },
+  "floorplan_alignment": {
+    "status": "provisional_geometry_with_measured_plan_dimensions",
+    "confidence": "medium",
+    "coordinate_system": {
+      "unit": "meter",
+      "up_axis": "+Z",
+      "handedness": "right",
+      "origin_note": "green (0,0) point in IMG_2810.jpg",
+      "x_axis_note": "green +X arrow in IMG_2810.jpg",
+      "y_axis_note": "green +Y arrow in IMG_2810.jpg"
+    },
+    "dimensions_m": {
+      "bottom_corridor_length_x": 11.8,
+      "step_x": 5.34,
+      "top_corridor_length_x": 6.46,
+      "bottom_corridor_width_y": 7.5,
+      "computed_top_outer_y": 16.342453098095195
+    },
+    "scene_similarity": {
+      "uniform_scale_m_per_scene_unit": 1.4845932952502061,
+      "scene_axis_a_for_negative_metric_x": [
+        0.8425716078960769,
+        0.033933130878510326,
+        0.5375143051084329
+      ],
+      "scene_axis_b_for_positive_metric_y": [
+        -0.5300496465458606,
+        -0.12472202377754478,
+        0.8387441737391932
+      ],
+      "scene_up": [
+        0.09550108776358447,
+        -0.9916112945169672,
+        -0.0871009920859498
+      ],
+      "scene_origin_ab": [
+        5.578347035281601,
+        -3.347164195093778
+      ]
+    },
+    "footprint_vertices_metric_xy": [
+      [
+        0,
+        0
+      ],
+      [
+        11.8,
+        0
+      ],
+      [
+        11.8,
+        16.342453098095195
+      ],
+      [
+        5.34,
+        16.342453098095195
+      ],
+      [
+        5.34,
+        7.5
+      ],
+      [
+        0,
+        7.5
+      ]
+    ],
+    "footprint_vertices_scene_ab": [
+      [
+        5.578347035281601,
+        -3.347164195093778
+      ],
+      [
+        -2.3699577548267814,
+        -3.347164195093778
+      ],
+      [
+        -2.3699577548267814,
+        7.660869554203816
+      ],
+      [
+        1.9814023251817061,
+        7.660869554203816
+      ],
+      [
+        1.9814023251817061,
+        1.704724442686973
+      ],
+      [
+        5.578347035281601,
+        1.704724442686973
+      ]
+    ],
+    "limitations": [
+      "top outer y is inferred from the detected PGSR far wall because the drawing does not label total y",
+      "floor and ceiling retain PGSR plane slope",
+      "not yet surveyed with total station or laser distance meter"
+    ]
+  },
+  "candidate_ids": [
+    "plan_y_min",
+    "plan_x_max",
+    "plan_y_max",
+    "plan_x_step",
+    "plan_y_step",
+    "plan_x_min"
+  ],
+  "wall_candidates": [
+    {
+      "candidate_id": "plan_y_min",
+      "plane_equation": [
+        -0.5300496465458606,
+        -0.12472202377754478,
+        0.8387441737391932,
+        3.347164195093778
+      ],
+      "normalized_normal": [
+        -0.5300496465458606,
+        -0.12472202377754478,
+        0.8387441737391932
+      ],
+      "centroid": [
+        3.1309895774661802,
+        0.41814095890220415,
+        -1.9498590163787248
+      ],
+      "inlier_count": 0,
+      "raw_ransac_inlier_count": 0,
+      "inlier_ratio": 0.0,
+      "remaining_inlier_ratio": 0.0,
+      "fitting_rmse": 0.0,
+      "mean_absolute_distance": 0.0,
+      "estimated_width": 8.011670915617414,
+      "estimated_height": 1.813426625441842,
+      "estimated_area": 14.528577352658639,
+      "projected_bounds": {
+        "origin": [
+          3.1309895774661802,
+          0.41814095890220415,
+          -1.9498590163787248
+        ],
+        "basis_u": [
+          -0.8452831869286966,
+          -0.0009130579922742721,
+          -0.5343177895417378
+        ],
+        "basis_v": [
+          0.06740701812329584,
+          -0.9921913036859054,
+          -0.10494146367279888
+        ],
+        "bounds_2d": {
+          "u_min": -4.005479363980133,
+          "u_max": 4.00619155163728,
+          "v_min": -0.896019451585423,
+          "v_max": 0.9174071738564192
+        },
+        "corners": [
+          [
+            6.406517418432625,
+            1.3107670670706362,
+            0.25286568429659206
+          ],
+          [
+            -0.31577478416044397,
+            1.3035057814838706,
+            -3.9964088380016682
+          ],
+          [
+            -0.14249458066500226,
+            -0.4957052110405274,
+            -4.154447641399082
+          ],
+          [
+            6.575710256257543,
+            -0.446003801905163,
+            0.09855472958925839
+          ]
+        ],
+        "width": 8.011670915617414,
+        "height": 1.813426625441842,
+        "area": 14.528577352658639
+      },
+      "corners_3d": [
+        [
+          6.406517418432625,
+          1.3107670670706362,
+          0.25286568429659206
+        ],
+        [
+          -0.31577478416044397,
+          1.3035057814838706,
+          -3.9964088380016682
+        ],
+        [
+          -0.14249458066500226,
+          -0.4957052110405274,
+          -4.154447641399082
+        ],
+        [
+          6.575710256257543,
+          -0.446003801905163,
+          0.09855472958925839
+        ]
+      ],
+      "orientation": "vertical",
+      "suggested_semantic": "wall",
+      "semantic_confidence": 0.9,
+      "semantic_reason": "PGSR wall_007 outer line; floor-plan y=0",
+      "preview_color": [
+        0.12,
+        0.47,
+        0.71
+      ],
+      "source_pass": "wall_extraction",
+      "extraction_details": {
+        "source_note": "PGSR wall_007 outer line; floor-plan y=0",
+        "axis": "B",
+        "axis_constant": -3.347164195093778,
+        "provenance": "manual_floorplan_alignment_compatible_with_envelope_loader"
+      }
+    },
+    {
+      "candidate_id": "plan_x_max",
+      "plane_equation": [
+        0.8425716078960769,
+        0.033933130878510326,
+        0.5375143051084329,
+        2.3699577548267814
+      ],
+      "normalized_normal": [
+        0.8425716078960769,
+        0.033933130878510326,
+        0.5375143051084329
+      ],
+      "centroid": [
+        -3.1758724119630983,
+        0.02202619420836459,
+        0.5677890786578474
+      ],
+      "inlier_count": 0,
+      "raw_ransac_inlier_count": 0,
+      "inlier_ratio": 0.0,
+      "remaining_inlier_ratio": 0.0,
+      "fitting_rmse": 0.0,
+      "mean_absolute_distance": 0.0,
+      "estimated_width": 11.119190006097158,
+      "estimated_height": 1.8119016766624219,
+      "estimated_area": 20.146879015175486,
+      "projected_bounds": {
+        "origin": [
+          -3.1758724119630983,
+          0.02202619420836459,
+          0.5677890786578474
+        ],
+        "basis_u": [
+          -0.5343521164212515,
+          -0.0722002205666996,
+          0.842172751771422
+        ],
+        "basis_v": [
+          0.06738620959475998,
+          -0.9968127561277002,
+          -0.04270161563160417
+        ],
+        "bounds_2d": {
+          "u_min": -5.560450635452565,
+          "u_max": 5.558739370644593,
+          "v_min": -0.8897654360011363,
+          "v_max": 0.9221362406612855
+        },
+        "corners": [
+          [
+            -0.31577478416044397,
+            1.3035057814838706,
+            -3.9964088380016682
+          ],
+          [
+            -6.206154479461718,
+            0.5076135221424853,
+            5.287202332464155
+          ],
+          [
+            -6.0390658035652285,
+            -1.2273093157523702,
+            5.134810461567985
+          ],
+          [
+            -0.14249458066500226,
+            -0.4957052110405274,
+            -4.154447641399082
+          ]
+        ],
+        "width": 11.119190006097158,
+        "height": 1.8119016766624219,
+        "area": 20.146879015175486
+      },
+      "corners_3d": [
+        [
+          -0.31577478416044397,
+          1.3035057814838706,
+          -3.9964088380016682
+        ],
+        [
+          -6.206154479461718,
+          0.5076135221424853,
+          5.287202332464155
+        ],
+        [
+          -6.0390658035652285,
+          -1.2273093157523702,
+          5.134810461567985
+        ],
+        [
+          -0.14249458066500226,
+          -0.4957052110405274,
+          -4.154447641399082
+        ]
+      ],
+      "orientation": "vertical",
+      "suggested_semantic": "wall",
+      "semantic_confidence": 0.9,
+      "semantic_reason": "mean PGSR outer corridor wall; floor-plan x=11.80 m",
+      "preview_color": [
+        1.0,
+        0.5,
+        0.05
+      ],
+      "source_pass": "wall_extraction",
+      "extraction_details": {
+        "source_note": "mean PGSR outer corridor wall; floor-plan x=11.80 m",
+        "axis": "A",
+        "axis_constant": -2.3699577548267814,
+        "provenance": "manual_floorplan_alignment_compatible_with_envelope_loader"
+      }
+    },
+    {
+      "candidate_id": "plan_y_max",
+      "plane_equation": [
+        -0.5300496465458606,
+        -0.12472202377754478,
+        0.8387441737391932,
+        -7.660869554203816
+      ],
+      "normalized_normal": [
+        -0.5300496465458606,
+        -0.12472202377754478,
+        0.8387441737391932
+      ],
+      "centroid": [
+        -4.283084487376378,
+        -0.35205173138322715,
+        6.374665480292159
+      ],
+      "inlier_count": 0,
+      "raw_ransac_inlier_count": 0,
+      "inlier_ratio": 0.0,
+      "remaining_inlier_ratio": 0.0,
+      "fitting_rmse": 0.0,
+      "mean_absolute_distance": 0.0,
+      "estimated_width": 4.411219532879128,
+      "estimated_height": 1.74863052771338,
+      "estimated_area": 7.713593139638,
+      "projected_bounds": {
+        "origin": [
+          -4.283084487376378,
+          -0.35205173138322715,
+          6.374665480292159
+        ],
+        "basis_u": [
+          0.8452831869286966,
+          0.0009130579922743159,
+          0.5343177895417378
+        ],
+        "basis_v": [
+          0.06740701812329587,
+          -0.9921913036859054,
+          -0.10494146367279886
+        ],
+        "bounds_2d": {
+          "u_min": -2.205804712721987,
+          "u_max": 2.205414820157142,
+          "v_min": -0.868460828014714,
+          "v_max": 0.8801696996986659
+        },
+        "corners": [
+          [
+            -6.206154479461718,
+            0.5076135221424853,
+            5.287202332464155
+          ],
+          [
+            -2.5259843414319527,
+            0.5115887683196471,
+            7.61350007941727
+          ],
+          [
+            -2.361133325046614,
+            -1.2000999002426709,
+            7.463149047719229
+          ],
+          [
+            -6.0390658035652285,
+            -1.2273093157523702,
+            5.134810461567985
+          ]
+        ],
+        "width": 4.411219532879128,
+        "height": 1.74863052771338,
+        "area": 7.713593139638
+      },
+      "corners_3d": [
+        [
+          -6.206154479461718,
+          0.5076135221424853,
+          5.287202332464155
+        ],
+        [
+          -2.5259843414319527,
+          0.5115887683196471,
+          7.61350007941727
+        ],
+        [
+          -2.361133325046614,
+          -1.2000999002426709,
+          7.463149047719229
+        ],
+        [
+          -6.0390658035652285,
+          -1.2273093157523702,
+          5.134810461567985
+        ]
+      ],
+      "orientation": "vertical",
+      "suggested_semantic": "wall",
+      "semantic_confidence": 0.9,
+      "semantic_reason": "mean far PGSR wall; floor-plan top outer boundary",
+      "preview_color": [
+        0.17,
+        0.63,
+        0.17
+      ],
+      "source_pass": "wall_extraction",
+      "extraction_details": {
+        "source_note": "mean far PGSR wall; floor-plan top outer boundary",
+        "axis": "B",
+        "axis_constant": 7.660869554203816,
+        "provenance": "manual_floorplan_alignment_compatible_with_envelope_loader"
+      }
+    },
+    {
+      "candidate_id": "plan_x_step",
+      "plane_equation": [
+        0.8425716078960769,
+        0.033933130878510326,
+        0.5375143051084329,
+        -1.9814023251817061
+      ],
+      "normalized_normal": [
+        0.8425716078960769,
+        0.033933130878510326,
+        0.5375143051084329
+      ],
+      "centroid": [
+        -0.8491598767586473,
+        -0.1376339701157525,
+        5.026007035997594
+      ],
+      "inlier_count": 0,
+      "raw_ransac_inlier_count": 0,
+      "inlier_ratio": 0.0,
+      "remaining_inlier_ratio": 0.0,
+      "fitting_rmse": 0.0,
+      "mean_absolute_distance": 0.0,
+      "estimated_width": 6.057439544886262,
+      "estimated_height": 1.7587919253912734,
+      "estimated_area": 10.653775760091747,
+      "projected_bounds": {
+        "origin": [
+          -0.8491598767586473,
+          -0.1376339701157525,
+          5.026007035997594
+        ],
+        "basis_u": [
+          0.5343521164212515,
+          0.0722002205666996,
+          -0.8421727517714219
+        ],
+        "basis_v": [
+          0.06738620959475998,
+          -0.9968127561277002,
+          -0.04270161563160417
+        ],
+        "bounds_2d": {
+          "u_min": -3.02825681321932,
+          "u_max": 3.0291827316669417,
+          "v_min": -0.8706384854602169,
+          "v_max": 0.8881534399310566
+        },
+        "corners": [
+          [
+            -2.5259843414319527,
+            0.5115887683196471,
+            7.61350007941727
+          ],
+          [
+            0.6611385386541855,
+            0.9422242385345497,
+            2.5903927244165255
+          ],
+          [
+            0.8293396207897922,
+            -0.804248987074536,
+            2.436986292437349
+          ],
+          [
+            -2.361133325046614,
+            -1.2000999002426709,
+            7.463149047719229
+          ]
+        ],
+        "width": 6.057439544886262,
+        "height": 1.7587919253912734,
+        "area": 10.653775760091747
+      },
+      "corners_3d": [
+        [
+          -2.5259843414319527,
+          0.5115887683196471,
+          7.61350007941727
+        ],
+        [
+          0.6611385386541855,
+          0.9422242385345497,
+          2.5903927244165255
+        ],
+        [
+          0.8293396207897922,
+          -0.804248987074536,
+          2.436986292437349
+        ],
+        [
+          -2.361133325046614,
+          -1.2000999002426709,
+          7.463149047719229
+        ]
+      ],
+      "orientation": "vertical",
+      "suggested_semantic": "wall",
+      "semantic_confidence": 0.8,
+      "semantic_reason": "floor-plan x=5.34 m projected through the uniform similarity transform",
+      "preview_color": [
+        0.84,
+        0.15,
+        0.16
+      ],
+      "source_pass": "wall_extraction",
+      "extraction_details": {
+        "source_note": "floor-plan x=5.34 m projected through the uniform similarity transform",
+        "axis": "A",
+        "axis_constant": 1.9814023251817061,
+        "provenance": "manual_floorplan_alignment_compatible_with_envelope_loader"
+      }
+    },
+    {
+      "candidate_id": "plan_y_step",
+      "plane_equation": [
+        -0.5300496465458606,
+        -0.12472202377754478,
+        0.8387441737391932,
+        -1.704724442686973
+      ],
+      "normalized_normal": [
+        -0.5300496465458606,
+        -0.12472202377754478,
+        0.8387441737391932
+      ],
+      "centroid": [
+        2.2658376854637976,
+        0.07543213398882409,
+        3.475599648472498
+      ],
+      "inlier_count": 0,
+      "raw_ransac_inlier_count": 0,
+      "inlier_ratio": 0.0,
+      "remaining_inlier_ratio": 0.0,
+      "fitting_rmse": 0.0,
+      "mean_absolute_distance": 0.0,
+      "estimated_width": 3.656908873641542,
+      "estimated_height": 1.7602721754701962,
+      "estimated_area": 6.437154938501262,
+      "projected_bounds": {
+        "origin": [
+          2.2658376854637976,
+          0.07543213398882409,
+          3.475599648472498
+        ],
+        "basis_u": [
+          0.8452831869286968,
+          0.0009130579922742268,
+          0.5343177895417378
+        ],
+        "basis_v": [
+          0.0674070181232958,
+          -0.9921913036859054,
+          -0.10494146367279893
+        ],
+        "bounds_2d": {
+          "u_min": -1.8286155843669218,
+          "u_max": 1.8282932892746198,
+          "v_min": -0.875296662441576,
+          "v_max": 0.8849755130286203
+        },
+        "corners": [
+          [
+            0.6611385386541855,
+            0.9422242385345497,
+            2.5903927244165255
+          ],
+          [
+            3.7032606032174895,
+            0.9455102779441537,
+            4.51336949976167
+          ],
+          [
+            3.869611979193724,
+            -0.7817569934488711,
+            4.3616500772744455
+          ],
+          [
+            0.8293396207897922,
+            -0.804248987074536,
+            2.436986292437349
+          ]
+        ],
+        "width": 3.656908873641542,
+        "height": 1.7602721754701962,
+        "area": 6.437154938501262
+      },
+      "corners_3d": [
+        [
+          0.6611385386541855,
+          0.9422242385345497,
+          2.5903927244165255
+        ],
+        [
+          3.7032606032174895,
+          0.9455102779441537,
+          4.51336949976167
+        ],
+        [
+          3.869611979193724,
+          -0.7817569934488711,
+          4.3616500772744455
+        ],
+        [
+          0.8293396207897922,
+          -0.804248987074536,
+          2.436986292437349
+        ]
+      ],
+      "orientation": "vertical",
+      "suggested_semantic": "wall",
+      "semantic_confidence": 0.8,
+      "semantic_reason": "floor-plan y=7.50 m projected through the uniform similarity transform",
+      "preview_color": [
+        0.58,
+        0.4,
+        0.74
+      ],
+      "source_pass": "wall_extraction",
+      "extraction_details": {
+        "source_note": "floor-plan y=7.50 m projected through the uniform similarity transform",
+        "axis": "B",
+        "axis_constant": 1.704724442686973,
+        "provenance": "manual_floorplan_alignment_compatible_with_envelope_loader"
+      }
+    },
+    {
+      "candidate_id": "plan_x_min",
+      "plane_equation": [
+        0.8425716078960769,
+        0.033933130878510326,
+        0.5375143051084329,
+        -5.578347035281601
+      ],
+      "normalized_normal": [
+        0.8425716078960769,
+        0.033933130878510326,
+        0.5375143051084329
+      ],
+      "centroid": [
+        5.138775064275346,
+        0.257129137415189,
+        2.3066099977304915
+      ],
+      "inlier_count": 0,
+      "raw_ransac_inlier_count": 0,
+      "inlier_ratio": 0.0,
+      "remaining_inlier_ratio": 0.0,
+      "fitting_rmse": 0.0,
+      "mean_absolute_distance": 0.0,
+      "estimated_width": 5.152468631485872,
+      "estimated_height": 1.769162202895882,
+      "estimated_area": 9.115552754431477,
+      "projected_bounds": {
+        "origin": [
+          5.138775064275346,
+          0.257129137415189,
+          2.3066099977304915
+        ],
+        "basis_u": [
+          0.5343521164212516,
+          0.07220022056669961,
+          -0.842172751771422
+        ],
+        "basis_v": [
+          0.06738620959475998,
+          -0.9968127561277002,
+          -0.04270161563160417
+        ],
+        "bounds_2d": {
+          "u_min": -2.5758416425627613,
+          "u_max": 2.5766269889231106,
+          "v_min": -0.8771531763532862,
+          "v_max": 0.8920090265425957
+        },
+        "corners": [
+          [
+            3.7032606032174895,
+            0.9455102779441537,
+            4.51336949976167
+          ],
+          [
+            6.406517418432625,
+            1.3107670670706362,
+            0.25286568429659206
+          ],
+          [
+            6.575710256257543,
+            -0.446003801905163,
+            0.09855472958925839
+          ],
+          [
+            3.869611979193724,
+            -0.7817569934488711,
+            4.3616500772744455
+          ]
+        ],
+        "width": 5.152468631485872,
+        "height": 1.769162202895882,
+        "area": 9.115552754431477
+      },
+      "corners_3d": [
+        [
+          3.7032606032174895,
+          0.9455102779441537,
+          4.51336949976167
+        ],
+        [
+          6.406517418432625,
+          1.3107670670706362,
+          0.25286568429659206
+        ],
+        [
+          6.575710256257543,
+          -0.446003801905163,
+          0.09855472958925839
+        ],
+        [
+          3.869611979193724,
+          -0.7817569934488711,
+          4.3616500772744455
+        ]
+      ],
+      "orientation": "vertical",
+      "suggested_semantic": "wall",
+      "semantic_confidence": 0.8,
+      "semantic_reason": "camera-path entrance cap; floor-plan x=0",
+      "preview_color": [
+        0.55,
+        0.34,
+        0.29
+      ],
+      "source_pass": "wall_extraction",
+      "extraction_details": {
+        "source_note": "camera-path entrance cap; floor-plan x=0",
+        "axis": "A",
+        "axis_constant": 5.578347035281601,
+        "provenance": "manual_floorplan_alignment_compatible_with_envelope_loader"
+      }
+    }
+  ]
+}

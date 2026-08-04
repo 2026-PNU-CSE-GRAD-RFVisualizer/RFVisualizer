@@ -1,0 +1,743 @@
+schema_version: '1.0'
+scenario:
+  id: pnu_classroom_field_20260723
+  status: provisional
+  physically_validated: false
+  synthetic_validation: false
+  base_scene:
+    phase2a_config: configs/sionna/pnu_classroom_field_20260723.yaml
+  obstacles:
+  - id: desk_mid_01
+    enabled: true
+    semantic_class: desk_cluster
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    geometry:
+      type: box
+      anchor:
+        mode: floor_at_xy
+        floor_contact_policy:
+          type: minimum_bottom_vertex_clearance
+          clearance_m: 0.005
+      position_m:
+        x: 7.571439263
+        y: 3.382553948
+      size_m:
+        x: 0.5
+        y: 4.0
+        z: 0.27
+      rotation_deg:
+        roll: 0.0
+        pitch: -0.0
+        yaw: 89.0
+    material:
+      source: sionna_preset
+      category: wood
+    display_name: Desk Cluster
+    measurement_source: unset
+    notes: Visible editor placeholder; not an on-site measurement.
+    placement_status: provisional_placeholder
+    export:
+      object_name: desk_mid_01
+  - id: desk_mid_02
+    enabled: true
+    semantic_class: desk_cluster
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    geometry:
+      type: box
+      anchor:
+        mode: floor_at_xy
+        floor_contact_policy:
+          type: minimum_bottom_vertex_clearance
+          clearance_m: 0.005
+      position_m:
+        x: 7.571439263
+        y: 4.682553948
+      size_m:
+        x: 0.5
+        y: 4.0
+        z: 0.36
+      rotation_deg:
+        roll: 0.0
+        pitch: -0.0
+        yaw: 89.0
+    material:
+      source: sionna_preset
+      category: wood
+    display_name: Desk Cluster
+    measurement_source: unset
+    notes: Visible editor placeholder; not an on-site measurement.
+    placement_status: provisional_unconfirmed
+    export:
+      object_name: desk_mid_02
+  - id: desk_mid_03
+    enabled: true
+    semantic_class: desk_cluster
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    geometry:
+      type: box
+      anchor:
+        mode: floor_at_xy
+        floor_contact_policy:
+          type: minimum_bottom_vertex_clearance
+          clearance_m: 0.005
+      position_m:
+        x: 7.571439263
+        y: 5.882553948
+      size_m:
+        x: 0.5
+        y: 4.45
+        z: 0.44
+      rotation_deg:
+        roll: 0.0
+        pitch: -0.0
+        yaw: 89.0
+    material:
+      source: sionna_preset
+      category: wood
+    display_name: Desk Cluster
+    measurement_source: unset
+    notes: Visible editor placeholder; not an on-site measurement.
+    placement_status: provisional_unconfirmed
+    export:
+      object_name: desk_mid_03
+  - id: desk_mid_04
+    enabled: true
+    semantic_class: desk_cluster
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    geometry:
+      type: box
+      anchor:
+        mode: floor_at_xy
+        floor_contact_policy:
+          type: minimum_bottom_vertex_clearance
+          clearance_m: 0.005
+      position_m:
+        x: 7.571439263
+        y: 7.082553948
+      size_m:
+        x: 0.5
+        y: 5.1
+        z: 0.55
+      rotation_deg:
+        roll: 0.0
+        pitch: -0.0
+        yaw: 89.0
+    material:
+      source: sionna_preset
+      category: wood
+    display_name: Desk Cluster
+    measurement_source: unset
+    notes: Visible editor placeholder; not an on-site measurement.
+    placement_status: provisional_unconfirmed
+    export:
+      object_name: desk_mid_04
+  - id: desk_mid_05
+    enabled: true
+    semantic_class: desk_cluster
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    geometry:
+      type: box
+      anchor:
+        mode: floor_at_xy
+        floor_contact_policy:
+          type: minimum_bottom_vertex_clearance
+          clearance_m: 0.005
+      position_m:
+        x: 7.321439263
+        y: 8.282553948
+      size_m:
+        x: 0.5
+        y: 5.4
+        z: 0.64
+      rotation_deg:
+        roll: 0.0
+        pitch: -0.0
+        yaw: 89.0
+    material:
+      source: sionna_preset
+      category: wood
+    display_name: Desk Cluster
+    measurement_source: unset
+    notes: Visible editor placeholder; not an on-site measurement.
+    placement_status: provisional_unconfirmed
+    export:
+      object_name: desk_mid_05
+  - id: door
+    enabled: true
+    semantic_class: door
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    state: closed
+    geometry:
+      type: thin_panel
+      anchor:
+        mode: floor_at_xy
+        floor_contact_policy:
+          type: minimum_bottom_vertex_clearance
+          clearance_m: 0.005
+      position_m:
+        x: 0.041439263
+        y: 1.382553948
+      size_m:
+        x: 0.05
+        y: 2.09
+        z: 2.0
+      rotation_deg:
+        roll: 0.0
+        pitch: 0.0
+        yaw: 0.0
+    material:
+      source: sionna_preset
+      category: metal
+      preset: metal
+    display_name: Door Panel
+    measurement_source: unset
+    notes: Visible editor placeholder; not an on-site measurement.
+    placement_status: provisional_placeholder
+    export:
+      object_name: door
+  - id: desk_mid_06
+    enabled: true
+    semantic_class: desk_cluster
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    geometry:
+      type: box
+      anchor:
+        mode: floor_at_xy
+        floor_contact_policy:
+          type: minimum_bottom_vertex_clearance
+          clearance_m: 0.005
+      position_m:
+        x: 7.171439263
+        y: 9.632553948
+      size_m:
+        x: 0.5
+        y: 6.3
+        z: 0.59
+      rotation_deg:
+        roll: 0.0
+        pitch: -0.0
+        yaw: 89.0
+    material:
+      source: sionna_preset
+      category: wood
+    display_name: Desk Cluster
+    measurement_source: unset
+    notes: Visible editor placeholder; not an on-site measurement.
+    placement_status: provisional_unconfirmed
+    export:
+      object_name: desk_mid_06
+  - id: desk_right_01
+    enabled: true
+    semantic_class: desk_cluster
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    geometry:
+      type: box
+      anchor:
+        mode: floor_at_xy
+        floor_contact_policy:
+          type: minimum_bottom_vertex_clearance
+          clearance_m: 0.005
+      position_m:
+        x: 11.578863047
+        y: 2.843115724
+      size_m:
+        x: 0.5
+        y: 2.7
+        z: 0.25
+      rotation_deg:
+        roll: 0.0
+        pitch: -0.0
+        yaw: 58.0
+    material:
+      source: sionna_preset
+      category: wood
+    display_name: Desk Cluster
+    measurement_source: unset
+    notes: Visible editor placeholder; not an on-site measurement.
+    placement_status: provisional_unconfirmed
+    export:
+      object_name: desk_right_01
+  - id: desk_right_02
+    enabled: true
+    semantic_class: desk_cluster
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    geometry:
+      type: box
+      anchor:
+        mode: floor_at_xy
+        floor_contact_policy:
+          type: minimum_bottom_vertex_clearance
+          clearance_m: 0.005
+      position_m:
+        x: 12.241262127
+        y: 3.903175845
+      size_m:
+        x: 0.5
+        y: 3.35
+        z: 0.35
+      rotation_deg:
+        roll: 0.0
+        pitch: -0.0
+        yaw: 58.0
+    material:
+      source: sionna_preset
+      category: wood
+    display_name: Desk Cluster
+    measurement_source: unset
+    notes: Visible editor placeholder; not an on-site measurement.
+    placement_status: provisional_unconfirmed
+    export:
+      object_name: desk_right_02
+  - id: desk_right_03
+    enabled: true
+    semantic_class: desk_cluster
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    geometry:
+      type: box
+      anchor:
+        mode: floor_at_xy
+        floor_contact_policy:
+          type: minimum_bottom_vertex_clearance
+          clearance_m: 0.005
+      position_m:
+        x: 12.553852447
+        y: 5.063902898
+      size_m:
+        x: 0.5
+        y: 3.35
+        z: 0.44
+      rotation_deg:
+        roll: 0.0
+        pitch: -0.0
+        yaw: 58.0
+    material:
+      source: sionna_preset
+      category: wood
+    display_name: Desk Cluster
+    measurement_source: unset
+    notes: Visible editor placeholder; not an on-site measurement.
+    placement_status: provisional_unconfirmed
+    export:
+      object_name: desk_right_03
+  - id: desk_right_04
+    enabled: true
+    semantic_class: desk_cluster
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    geometry:
+      type: box
+      anchor:
+        mode: floor_at_xy
+        floor_contact_policy:
+          type: minimum_bottom_vertex_clearance
+          clearance_m: 0.005
+      position_m:
+        x: 12.850536326
+        y: 6.293528319
+      size_m:
+        x: 0.5
+        y: 3.35
+        z: 0.52
+      rotation_deg:
+        roll: 0.0
+        pitch: -0.0
+        yaw: 59.0
+    material:
+      source: sionna_preset
+      category: wood
+    display_name: Desk Cluster
+    measurement_source: unset
+    notes: Visible editor placeholder; not an on-site measurement.
+    placement_status: provisional_unconfirmed
+    export:
+      object_name: desk_right_04
+  - id: desk_right_05
+    enabled: true
+    semantic_class: desk_cluster
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    geometry:
+      type: box
+      anchor:
+        mode: floor_at_xy
+        floor_contact_policy:
+          type: minimum_bottom_vertex_clearance
+          clearance_m: 0.005
+      position_m:
+        x: 12.82570654
+        y: 7.708407636
+      size_m:
+        x: 0.5
+        y: 2.85
+        z: 0.61
+      rotation_deg:
+        roll: 0.0
+        pitch: -0.0
+        yaw: 59.0
+    material:
+      source: sionna_preset
+      category: wood
+    display_name: Desk Cluster
+    measurement_source: unset
+    notes: Visible editor placeholder; not an on-site measurement.
+    placement_status: provisional_unconfirmed
+    export:
+      object_name: desk_right_05
+  - id: desk_right_06
+    enabled: true
+    semantic_class: desk_cluster
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    geometry:
+      type: box
+      anchor:
+        mode: floor_at_xy
+        floor_contact_policy:
+          type: minimum_bottom_vertex_clearance
+          clearance_m: 0.005
+      position_m:
+        x: 12.955203753
+        y: 9.088889607
+      size_m:
+        x: 0.5
+        y: 2.15
+        z: 0.71
+      rotation_deg:
+        roll: 0.0
+        pitch: -0.0
+        yaw: 59.0
+    material:
+      source: sionna_preset
+      category: wood
+    display_name: Desk Cluster
+    measurement_source: unset
+    notes: Visible editor placeholder; not an on-site measurement.
+    placement_status: provisional_unconfirmed
+    export:
+      object_name: desk_right_06
+  - id: desk_left_01
+    enabled: true
+    semantic_class: desk_cluster
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    geometry:
+      type: box
+      anchor:
+        mode: floor_at_xy
+        floor_contact_policy:
+          type: minimum_bottom_vertex_clearance
+          clearance_m: 0.005
+      position_m:
+        x: 3.918984777
+        y: 3.076306791
+      size_m:
+        x: 0.5
+        y: 1.95
+        z: 0.24
+      rotation_deg:
+        roll: 0.0
+        pitch: -0.0
+        yaw: 122.0
+    material:
+      source: sionna_preset
+      category: wood
+    display_name: Desk Cluster
+    measurement_source: unset
+    notes: Visible editor placeholder; not an on-site measurement.
+    placement_status: provisional_unconfirmed
+    export:
+      object_name: desk_left_01
+  - id: desk_left_02
+    enabled: true
+    semantic_class: desk_cluster
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    geometry:
+      type: box
+      anchor:
+        mode: floor_at_xy
+        floor_contact_policy:
+          type: minimum_bottom_vertex_clearance
+          clearance_m: 0.005
+      position_m:
+        x: 3.041419091
+        y: 3.989046403
+      size_m:
+        x: 0.5
+        y: 3.25
+        z: 0.33
+      rotation_deg:
+        roll: 0.0
+        pitch: -0.0
+        yaw: 120.0
+    material:
+      source: sionna_preset
+      category: wood
+    display_name: Desk Cluster
+    measurement_source: unset
+    notes: Visible editor placeholder; not an on-site measurement.
+    placement_status: provisional_unconfirmed
+    export:
+      object_name: desk_left_02
+  - id: desk_left_03
+    enabled: true
+    semantic_class: desk_cluster
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    geometry:
+      type: box
+      anchor:
+        mode: floor_at_xy
+        floor_contact_policy:
+          type: minimum_bottom_vertex_clearance
+          clearance_m: 0.005
+      position_m:
+        x: 2.704527983
+        y: 5.27255892
+      size_m:
+        x: 0.5
+        y: 3.25
+        z: 0.4
+      rotation_deg:
+        roll: 0.0
+        pitch: -0.0
+        yaw: 120.0
+    material:
+      source: sionna_preset
+      category: wood
+    display_name: Desk Cluster
+    measurement_source: unset
+    notes: Visible editor placeholder; not an on-site measurement.
+    placement_status: provisional_unconfirmed
+    export:
+      object_name: desk_left_03
+  - id: desk_left_04
+    enabled: true
+    semantic_class: desk_cluster
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    geometry:
+      type: box
+      anchor:
+        mode: floor_at_xy
+        floor_contact_policy:
+          type: minimum_bottom_vertex_clearance
+          clearance_m: 0.005
+      position_m:
+        x: 2.33567535
+        y: 6.491430421
+      size_m:
+        x: 0.5
+        y: 3.25
+        z: 0.49
+      rotation_deg:
+        roll: 0.0
+        pitch: -0.0
+        yaw: 120.0
+    material:
+      source: sionna_preset
+      category: wood
+    display_name: Desk Cluster
+    measurement_source: unset
+    notes: Visible editor placeholder; not an on-site measurement.
+    placement_status: provisional_unconfirmed
+    export:
+      object_name: desk_left_04
+  - id: desk_left_05
+    enabled: true
+    semantic_class: desk_cluster
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    geometry:
+      type: box
+      anchor:
+        mode: floor_at_xy
+        floor_contact_policy:
+          type: minimum_bottom_vertex_clearance
+          clearance_m: 0.005
+      position_m:
+        x: 2.11270729
+        y: 7.81762243
+      size_m:
+        x: 0.5
+        y: 2.25
+        z: 0.58
+      rotation_deg:
+        roll: 0.0
+        pitch: -0.0
+        yaw: 120.0
+    material:
+      source: sionna_preset
+      category: wood
+    display_name: Desk Cluster
+    measurement_source: unset
+    notes: Visible editor placeholder; not an on-site measurement.
+    placement_status: provisional_unconfirmed
+    export:
+      object_name: desk_left_05
+  - id: desk_left_06
+    enabled: true
+    semantic_class: desk_cluster
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    geometry:
+      type: box
+      anchor:
+        mode: floor_at_xy
+        floor_contact_policy:
+          type: minimum_bottom_vertex_clearance
+          clearance_m: 0.005
+      position_m:
+        x: 1.836796943
+        y: 9.055513168
+      size_m:
+        x: 0.5
+        y: 1.8
+        z: 0.76
+      rotation_deg:
+        roll: 0.0
+        pitch: -0.0
+        yaw: 120.0
+    material:
+      source: sionna_preset
+      category: wood
+    display_name: Desk Cluster
+    measurement_source: unset
+    notes: Visible editor placeholder; not an on-site measurement.
+    placement_status: provisional_unconfirmed
+    export:
+      object_name: desk_left_06
+  - id: ap_tx_000
+    display_name: AP / TX
+    enabled: true
+    semantic_class: access_point
+    purpose: rf_transmitter
+    physical_object: true
+    confidence: unset
+    measurement_source: unset
+    notes: TX marker for placement; excluded from obstacle mesh until physically validated.
+    placement_status: provisional_unconfirmed
+    geometry:
+      type: box
+      anchor:
+        mode: center
+      position_m:
+        x: 7.722213439
+        y: 5.898312947
+        z: 0.919084022
+      size_m:
+        x: 0.25
+        y: 0.2
+        z: 0.05
+      rotation_deg:
+        roll: 0.0
+        pitch: 0.0
+        yaw: 0.0
+    material:
+      source: sionna_preset
+      category: wood
+      preset: wood
+      thickness_m: 0.1
+      scattering_coefficient: 0.0
+    export:
+      object_name: ap_tx_000
+      group_name: access_point
+    rf_transmitter:
+      frequency_hz: 2400000000.0
+      power_dbm: 20.0
+  confidence: low
+  provenance:
+    authoring_method: interactive_proxy_placement
+    metric_calibration_status: provisional
+    on_site_measurement_complete: false
+  resolved_positions:
+  - kind: transmitter
+    name: ap_tx_000
+    requested_position_m:
+    - 7.722213439
+    - 3.378312947
+    - 0.549084022
+    resolved_position_m:
+    - 7.722213439
+    - 3.378312947
+    - 0.549084022
+    used_fallback: false
+    validation:
+      position_m:
+      - 7.722213439
+      - 3.378312947
+      - 0.549084022
+      inside_room: true
+      safe_with_clearance: true
+      floor_z_m: 0.23460506576388887
+      ceiling_z_m: 2.5914179750972295
+      floor_clearance_m: 0.3144789562361111
+      ceiling_clearance_m: 2.0423339530972298
+      minimum_wall_clearance_m: 3.378312947
+      oriented_plane_distances_m:
+      - 0.3137233956897524
+      - 2.041094646620786
+      - 3.378312947
+      - 7.6777865610000005
+      - 7.421687053000001
+      - 7.722213439
+  - kind: receiver
+    name: cal_rx_000
+    requested_position_m:
+    - 4.073274942
+    - 2.272497946
+    - 1.096045001
+    resolved_position_m:
+    - 4.073274942
+    - 2.272497946
+    - 1.096045001
+    used_fallback: false
+    validation:
+      position_m:
+      - 4.073274942
+      - 2.272497946
+      - 1.096045001
+      inside_room: true
+      safe_with_clearance: true
+      floor_z_m: 0.15781235736111113
+      ceiling_z_m: 2.5528771350727664
+      floor_clearance_m: 0.9382326436388889
+      ceiling_clearance_m: 1.4568321340727663
+      minimum_wall_clearance_m: 2.272497946
+      oriented_plane_distances_m:
+      - 0.9359784655618442
+      - 1.4559481153273943
+      - 2.272497946
+      - 11.326725058000001
+      - 8.527502054000001
+      - 4.073274942
+  placement_warnings: []

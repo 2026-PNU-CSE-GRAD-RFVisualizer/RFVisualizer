@@ -1,0 +1,440 @@
+{
+  "schema_version": "1.0",
+  "algorithm": {
+    "name": "rfvisualizer_measured_proxy_envelope",
+    "version": "1.0.0"
+  },
+  "status": "provisional",
+  "confidence": "medium",
+  "is_provisional": true,
+  "warning_banner": "MEASURED XY BOUNDS; STEPS, CEILING HEIGHT, AND OBSTACLES NOT FULLY VALIDATED",
+  "source": {
+    "experiment_scene_contract": "/data/RFVisualizer/configs/rf_experiment/classroom_20260723/scene.json",
+    "legacy_metric_metadata": "/data/RFVisualizer/outputs/proxy_mesh/pnu_classroom/metric_calibration/room_envelope_metric.json"
+  },
+  "coordinate_system": {
+    "id": "pnu_classroom_field_v1",
+    "unit": "meter",
+    "origin": "door-left-bottom floor point",
+    "up_axis": "+Z",
+    "handedness": "right",
+    "positive_bounds": true,
+    "T_metric_from_scene": [
+      [
+        -1.0876120020360582,
+        -0.09467327671952541,
+        1.1056987522276331,
+        8.193939720497792
+      ],
+      [
+        -1.1078378542438856,
+        0.021404808529855747,
+        -1.1479884545859262,
+        6.331315097875072
+      ],
+      [
+        0.0241161130410266,
+        -1.5255905376091996,
+        -0.2325196094971789,
+        1.7701145039285235
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "T_scene_from_metric": [
+      [
+        -0.4615381389069212,
+        -0.44906102462282066,
+        0.022341029162707277,
+        6.585416354222165
+      ],
+      [
+        -0.07496689543329275,
+        0.05944866386552578,
+        -0.6499975757915079,
+        1.3884561355598861
+      ],
+      [
+        0.44399816686255844,
+        -0.43662521934568704,
+        -0.033679181449474585,
+        -0.8140663643628057
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ]
+  },
+  "bottom_corners": [
+    [
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      15.4,
+      0.0,
+      0.0
+    ],
+    [
+      15.4,
+      10.8,
+      0.75
+    ],
+    [
+      0.0,
+      10.8,
+      0.75
+    ]
+  ],
+  "top_corners": [
+    [
+      0.0,
+      0.0,
+      2.47367403173857
+    ],
+    [
+      15.4,
+      0.0,
+      2.47367403173857
+    ],
+    [
+      15.4,
+      10.8,
+      2.850085160080827
+    ],
+    [
+      0.0,
+      10.8,
+      2.850085160080827
+    ]
+  ],
+  "interior_point": [
+    7.7,
+    5.4,
+    1.5184397979548492
+  ],
+  "plane_centroids": {
+    "floor": [
+      7.7,
+      5.4,
+      0.375
+    ],
+    "ceiling": [
+      7.7,
+      5.4,
+      2.6618795959096984
+    ],
+    "walls": [
+      [
+        7.7,
+        0.0,
+        1.236837015869285
+      ],
+      [
+        15.4,
+        5.4,
+        1.5184397979548492
+      ],
+      [
+        7.7,
+        10.8,
+        1.8000425800404134
+      ],
+      [
+        0.0,
+        5.4,
+        1.5184397979548492
+      ]
+    ]
+  },
+  "normalized_plane_equations": {
+    "floor": [
+      0.0,
+      -0.06927759867831113,
+      0.9975974209676802,
+      -0.0
+    ],
+    "ceiling": [
+      0.0,
+      -0.03483173321379878,
+      0.999393191072124,
+      -2.472172984251456
+    ],
+    "walls": [
+      [
+        0.0,
+        -1.0,
+        0.0,
+        -0.0
+      ],
+      [
+        1.0,
+        0.0,
+        0.0,
+        -15.4
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        -10.8
+      ],
+      [
+        -1.0,
+        -0.0,
+        0.0,
+        -0.0
+      ]
+    ]
+  },
+  "bounds": {
+    "min": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "max": [
+      15.4,
+      10.8,
+      2.850085160080827
+    ],
+    "extent": [
+      15.4,
+      10.8,
+      2.850085160080827
+    ],
+    "diagonal": 19.024273584547533
+  },
+  "surface_area_square_meters": 452.9740358856803,
+  "signed_volume_cubic_meters": 380.35381439170106,
+  "absolute_volume_cubic_meters": 380.35381439170106,
+  "floor_ceiling_height": 2.2868795959096984,
+  "height_statistics_meters": {
+    "minimum": 2.100085160080827,
+    "maximum": 2.47367403173857,
+    "mean": 2.2868795959096984,
+    "values": [
+      2.47367403173857,
+      2.47367403173857,
+      2.100085160080827,
+      2.100085160080827
+    ]
+  },
+  "polygon": {
+    "bottom_xy_coordinates_meters": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        15.4,
+        0.0
+      ],
+      [
+        15.4,
+        10.8
+      ],
+      [
+        0.0,
+        10.8
+      ]
+    ],
+    "ceiling_xy_coordinates_meters": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        15.4,
+        0.0
+      ],
+      [
+        15.4,
+        10.8
+      ],
+      [
+        0.0,
+        10.8
+      ]
+    ],
+    "bottom_projected_signed_area_square_meters": 166.32000000000002,
+    "edge_lengths_meters": [
+      15.4,
+      10.82601034545968,
+      15.4,
+      10.82601034545968
+    ],
+    "winding": "counter_clockwise_from_positive_z"
+  },
+  "mesh_summary": {
+    "vertex_count": 8,
+    "triangle_count": 12
+  },
+  "topology_summary": {
+    "vertex_count": 8,
+    "triangle_count": 12,
+    "edge_count": 18,
+    "degenerate_triangle_count": 0,
+    "degenerate_triangle_indices": [],
+    "duplicate_face_count": 0,
+    "duplicate_vertex_count": 0,
+    "duplicate_vertex_pairs": [],
+    "boundary_edge_count": 0,
+    "boundary_edges": [],
+    "non_manifold_edge_count": 0,
+    "non_manifold_edges": [],
+    "connected_component_count": 1,
+    "signed_volume": 380.35381439170106,
+    "absolute_volume": 380.35381439170106,
+    "surface_area": 452.9740358856803,
+    "euler_characteristic": 2,
+    "inward_or_ambiguous_face_count": 0,
+    "inward_or_ambiguous_face_indices": [],
+    "closed_manifold_success": true
+  },
+  "wall_objects": [
+    {
+      "object_name": "wall_000",
+      "candidate_id": null,
+      "metric_plane_equation": [
+        0.0,
+        -1.0,
+        0.0,
+        -0.0
+      ],
+      "metric_centroid": [
+        7.7,
+        0.0,
+        1.236837015869285
+      ],
+      "bottom_corner_indices": [
+        0,
+        1
+      ],
+      "top_corner_indices": [
+        0,
+        1
+      ]
+    },
+    {
+      "object_name": "wall_001",
+      "candidate_id": null,
+      "metric_plane_equation": [
+        1.0,
+        0.0,
+        0.0,
+        -15.4
+      ],
+      "metric_centroid": [
+        15.4,
+        5.4,
+        1.5184397979548492
+      ],
+      "bottom_corner_indices": [
+        1,
+        2
+      ],
+      "top_corner_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "object_name": "wall_002",
+      "candidate_id": null,
+      "metric_plane_equation": [
+        0.0,
+        1.0,
+        0.0,
+        -10.8
+      ],
+      "metric_centroid": [
+        7.7,
+        10.8,
+        1.8000425800404134
+      ],
+      "bottom_corner_indices": [
+        2,
+        3
+      ],
+      "top_corner_indices": [
+        2,
+        3
+      ]
+    },
+    {
+      "object_name": "wall_003",
+      "candidate_id": null,
+      "metric_plane_equation": [
+        -1.0,
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "metric_centroid": [
+        0.0,
+        5.4,
+        1.5184397979548492
+      ],
+      "bottom_corner_indices": [
+        3,
+        0
+      ],
+      "top_corner_indices": [
+        3,
+        0
+      ]
+    }
+  ],
+  "assumptions": {
+    "measured_values": {
+      "width_x_m": 15.4,
+      "depth_y_m": 10.8,
+      "floor_elevation_change_m": 0.75,
+      "door_width_m": 2.09,
+      "door_height_m": 2.09
+    },
+    "floor_model": "single_slope_placeholder",
+    "floor_model_ready_for_final_experiment": false,
+    "ceiling_model": "planar_front_back_clearance_from_legacy_pgsr_envelope",
+    "legacy_corner_clearances_m": [
+      2.0804095795335575,
+      2.1197607406280956,
+      2.4791585673237497,
+      2.4681894961533906
+    ],
+    "legacy_bottom_corner_order_for_field": [
+      2,
+      3,
+      0,
+      1
+    ],
+    "origin_legacy_bottom_corner_index": 2,
+    "origin_field_corner_index": 0,
+    "resolved_front_clearance_m": 2.47367403173857,
+    "resolved_back_clearance_m": 2.100085160080827,
+    "remaining_geometry": [
+      "stair_step_boundaries",
+      "door placement/material handling",
+      "major desks",
+      "access point marker"
+    ]
+  },
+  "output_files": {
+    "metric_obj": "/data/RFVisualizer/outputs/rf_experiment/classroom_20260723/proxy_scene/room_envelope_metric.obj",
+    "metric_mtl": "/data/RFVisualizer/outputs/rf_experiment/classroom_20260723/proxy_scene/room_envelope_metric.mtl",
+    "metric_envelope_json": "/data/RFVisualizer/outputs/rf_experiment/classroom_20260723/proxy_scene/room_envelope_metric.json",
+    "calibration_json": "/data/RFVisualizer/outputs/rf_experiment/classroom_20260723/proxy_scene/calibration.json",
+    "proxy_scene_report": "/data/RFVisualizer/outputs/rf_experiment/classroom_20260723/proxy_scene/PROXY_SCENE_BASE_REPORT.md",
+    "preview_top": "/data/RFVisualizer/outputs/rf_experiment/classroom_20260723/proxy_scene/preview_top.png",
+    "preview_perspective": "/data/RFVisualizer/outputs/rf_experiment/classroom_20260723/proxy_scene/preview_perspective.png"
+  }
+}

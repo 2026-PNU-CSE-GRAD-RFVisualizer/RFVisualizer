@@ -6,10 +6,10 @@ sionna_smoke_test:
   physically_validated: false
 
   input:
-    metric_obj: outputs/rf_experiment/classroom_20260723/proxy_scene/room_envelope_metric.obj
-    metric_mtl: outputs/rf_experiment/classroom_20260723/proxy_scene/room_envelope_metric.mtl
-    metric_json: outputs/rf_experiment/classroom_20260723/proxy_scene/room_envelope_metric.json
-    calibration_json: outputs/rf_experiment/classroom_20260723/proxy_scene/calibration.json
+    metric_obj: scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene/room_envelope_metric.obj
+    metric_mtl: scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene/room_envelope_metric.mtl
+    metric_json: scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene/room_envelope_metric.json
+    calibration_json: scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene/calibration.json
 
   scene:
     name: pnu_classroom_field_20260723

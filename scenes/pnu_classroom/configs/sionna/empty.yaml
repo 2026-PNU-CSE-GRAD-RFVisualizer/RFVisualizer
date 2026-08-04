@@ -7,7 +7,7 @@ scenario:
   synthetic_validation: false
 
   base_scene:
-    phase2a_config: configs/sionna/pnu_classroom_smoke_test.yaml
+    phase2a_config: scenes/pnu_classroom/configs/sionna/smoke_test.yaml
 
   obstacles: []
 

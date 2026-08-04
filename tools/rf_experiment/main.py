@@ -52,11 +52,13 @@ def build_parser() -> argparse.ArgumentParser:
     proxy.add_argument("--scene", required=True)
     proxy.add_argument(
         "--legacy-metric-json",
-        default="outputs/proxy_mesh/pnu_classroom/metric_calibration/room_envelope_metric.json",
+        required=True,
+        help="비교 참고용 기존 PGSR 기반 room_envelope_metric.json (해당 씬의 proxy_mesh 산출물)",
     )
     proxy.add_argument(
         "--legacy-calibration",
-        default="outputs/proxy_mesh/pnu_classroom/metric_calibration/calibration.json",
+        required=True,
+        help="비교 참고용 기존 PGSR 기반 calibration.json (해당 씬의 proxy_mesh 산출물)",
     )
     proxy.add_argument("--output", required=True)
 

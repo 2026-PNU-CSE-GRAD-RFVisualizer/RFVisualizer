@@ -1,0 +1,4 @@
+method,sample_count,mae_db,rmse_db,mean_error_db,median_absolute_error_db,maximum_absolute_error_db,pearson_r,mae_ci95_low_db,mae_ci95_high_db,mae_ci95_method,small_sample_warning
+raw_sionna,6,4.0,4.0,-4.0,4.0,4.0,1.0,4.0,4.0,percentile_bootstrap_10000_seed_0,True
+plain_idw,6,2.277813199672899,2.983447899482898,1.794304977276136,1.636805003206442,6.00955731853481,0.9933998127377444,0.9209460267817473,3.973248857097579,percentile_bootstrap_10000_seed_0,True
+residual_idw,6,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,percentile_bootstrap_10000_seed_0,True

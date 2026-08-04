@@ -10,7 +10,7 @@ from tools.proxy_placement_editor.scene_loader import load_placement_scene
 
 
 ROOT = Path(__file__).resolve().parents[3]
-ROOM_DIR = ROOT / "outputs/proxy_mesh/pnu_classroom/metric_calibration"
+ROOM_DIR = ROOT / "scenes/pnu_classroom/proxy_mesh/metric_calibration"
 
 
 @pytest.fixture(scope="session")
@@ -29,12 +29,12 @@ def placement_scene():
 
 @pytest.fixture
 def draft_core(tmp_path, placement_scene):
-    source = ROOT / "configs/sionna/scenarios/pnu_classroom_proxy_draft.yaml"
+    source = ROOT / "scenes/pnu_classroom/configs/sionna/proxy_draft.yaml"
     return EditorCore(
         placement_scene,
         EditorState(load_editor_scenario(source), source_path=source),
         load_candidate_library(
-            ROOT / "configs/proxy_editor/pnu_classroom_candidates.yaml"
+            ROOT / "scenes/pnu_classroom/configs/proxy_editor/candidates.yaml"
         ),
         tmp_path,
     )

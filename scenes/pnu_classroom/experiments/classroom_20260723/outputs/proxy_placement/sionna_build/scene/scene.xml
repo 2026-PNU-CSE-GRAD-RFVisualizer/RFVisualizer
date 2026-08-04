@@ -1,0 +1,241 @@
+<scene version="2.1.0">
+    <!-- PROVISIONAL RF MATERIALS -->
+    <bsdf type="itu-radio-material" id="itu_concrete_floor">
+        <string name="type" value="concrete"/>
+        <float name="thickness" value="0.1"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="itu_concrete_ceiling">
+        <string name="type" value="concrete"/>
+        <float name="thickness" value="0.1"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="itu_concrete_walls">
+        <string name="type" value="concrete"/>
+        <float name="thickness" value="0.1"/>
+    </bsdf>
+
+    <!-- Independent Phase 2-B obstacle materials -->
+    <bsdf type="itu-radio-material" id="itu_wood_desk_mid_01">
+        <string name="type" value="wood"/>
+        <float name="thickness" value="0.1"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="itu_wood_desk_mid_02">
+        <string name="type" value="wood"/>
+        <float name="thickness" value="0.1"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="itu_wood_desk_mid_03">
+        <string name="type" value="wood"/>
+        <float name="thickness" value="0.1"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="itu_wood_desk_mid_04">
+        <string name="type" value="wood"/>
+        <float name="thickness" value="0.1"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="itu_wood_desk_mid_05">
+        <string name="type" value="wood"/>
+        <float name="thickness" value="0.1"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="itu_metal_door">
+        <string name="type" value="metal"/>
+        <float name="thickness" value="0.1"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="itu_wood_desk_mid_06">
+        <string name="type" value="wood"/>
+        <float name="thickness" value="0.1"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="itu_wood_desk_right_01">
+        <string name="type" value="wood"/>
+        <float name="thickness" value="0.1"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="itu_wood_desk_right_02">
+        <string name="type" value="wood"/>
+        <float name="thickness" value="0.1"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="itu_wood_desk_right_03">
+        <string name="type" value="wood"/>
+        <float name="thickness" value="0.1"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="itu_wood_desk_right_04">
+        <string name="type" value="wood"/>
+        <float name="thickness" value="0.1"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="itu_wood_desk_right_05">
+        <string name="type" value="wood"/>
+        <float name="thickness" value="0.1"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="itu_wood_desk_right_06">
+        <string name="type" value="wood"/>
+        <float name="thickness" value="0.1"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="itu_wood_desk_left_01">
+        <string name="type" value="wood"/>
+        <float name="thickness" value="0.1"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="itu_wood_desk_left_02">
+        <string name="type" value="wood"/>
+        <float name="thickness" value="0.1"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="itu_wood_desk_left_03">
+        <string name="type" value="wood"/>
+        <float name="thickness" value="0.1"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="itu_wood_desk_left_04">
+        <string name="type" value="wood"/>
+        <float name="thickness" value="0.1"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="itu_wood_desk_left_05">
+        <string name="type" value="wood"/>
+        <float name="thickness" value="0.1"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="itu_wood_desk_left_06">
+        <string name="type" value="wood"/>
+        <float name="thickness" value="0.1"/>
+        <float name="scattering_coefficient" value="0"/>
+    </bsdf>
+
+    <!-- Metric Room Envelope shapes -->
+    <shape type="ply" id="mesh-floor_000">
+        <string name="filename" value="meshes/floor_000.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_concrete_floor" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-ceiling_000">
+        <string name="filename" value="meshes/ceiling_000.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_concrete_ceiling" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-wall_000">
+        <string name="filename" value="meshes/wall_000.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_concrete_walls" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-wall_001">
+        <string name="filename" value="meshes/wall_001.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_concrete_walls" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-wall_002">
+        <string name="filename" value="meshes/wall_002.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_concrete_walls" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-wall_003">
+        <string name="filename" value="meshes/wall_003.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_concrete_walls" name="bsdf"/>
+    </shape>
+
+    <!-- Independent Phase 2-B obstacle shapes -->
+    <shape type="ply" id="mesh-desk_mid_01">
+        <string name="filename" value="meshes/desk_mid_01.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_wood_desk_mid_01" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-desk_mid_02">
+        <string name="filename" value="meshes/desk_mid_02.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_wood_desk_mid_02" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-desk_mid_03">
+        <string name="filename" value="meshes/desk_mid_03.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_wood_desk_mid_03" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-desk_mid_04">
+        <string name="filename" value="meshes/desk_mid_04.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_wood_desk_mid_04" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-desk_mid_05">
+        <string name="filename" value="meshes/desk_mid_05.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_wood_desk_mid_05" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-door">
+        <string name="filename" value="meshes/door.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_metal_door" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-desk_mid_06">
+        <string name="filename" value="meshes/desk_mid_06.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_wood_desk_mid_06" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-desk_right_01">
+        <string name="filename" value="meshes/desk_right_01.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_wood_desk_right_01" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-desk_right_02">
+        <string name="filename" value="meshes/desk_right_02.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_wood_desk_right_02" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-desk_right_03">
+        <string name="filename" value="meshes/desk_right_03.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_wood_desk_right_03" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-desk_right_04">
+        <string name="filename" value="meshes/desk_right_04.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_wood_desk_right_04" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-desk_right_05">
+        <string name="filename" value="meshes/desk_right_05.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_wood_desk_right_05" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-desk_right_06">
+        <string name="filename" value="meshes/desk_right_06.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_wood_desk_right_06" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-desk_left_01">
+        <string name="filename" value="meshes/desk_left_01.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_wood_desk_left_01" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-desk_left_02">
+        <string name="filename" value="meshes/desk_left_02.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_wood_desk_left_02" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-desk_left_03">
+        <string name="filename" value="meshes/desk_left_03.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_wood_desk_left_03" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-desk_left_04">
+        <string name="filename" value="meshes/desk_left_04.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_wood_desk_left_04" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-desk_left_05">
+        <string name="filename" value="meshes/desk_left_05.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_wood_desk_left_05" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-desk_left_06">
+        <string name="filename" value="meshes/desk_left_06.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="itu_wood_desk_left_06" name="bsdf"/>
+    </shape>
+</scene>

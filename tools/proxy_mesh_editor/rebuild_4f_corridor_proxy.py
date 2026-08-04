@@ -253,7 +253,7 @@ def _write_candidates(repo_root: Path, output_root: Path) -> None:
         "vertical_wall_diagnostic": str(
             (
                 repo_root
-                / "outputs/proxy_mesh/4f_corridor/diagnostics/revision2_vertical_wall_density.png"
+                / "scenes/pnu_4f_corridor/proxy_mesh/diagnostics/revision2_vertical_wall_density.png"
             ).resolve()
         ),
     }
@@ -477,7 +477,7 @@ def _copy_sources(repo_root: Path, output_root: Path, revision_image: Path | Non
     source_dir.mkdir(parents=True, exist_ok=True)
     floorplan_source = (
         repo_root
-        / "outputs/proxy_mesh/4f_corridor/floorplan_aligned/source/IMG_2810.jpg"
+        / "scenes/pnu_4f_corridor/proxy_mesh/floorplan_aligned/source/IMG_2810.jpg"
     )
     floorplan_target = source_dir / "IMG_2810.jpg"
     if floorplan_source.is_file() and floorplan_source.resolve() != floorplan_target.resolve():
@@ -503,12 +503,12 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("outputs/proxy_mesh/4f_corridor/final_editor_proxy"),
+        default=Path("scenes/pnu_4f_corridor/proxy_mesh/final_editor_proxy"),
     )
     parser.add_argument(
         "--envelope-config",
         type=Path,
-        default=Path("tools/proxy_mesh_editor/configs/4f_corridor_plan_metric_envelope.yaml"),
+        default=Path("scenes/pnu_4f_corridor/configs/proxy_mesh/plan_metric_envelope.yaml"),
     )
     return parser.parse_args()
 

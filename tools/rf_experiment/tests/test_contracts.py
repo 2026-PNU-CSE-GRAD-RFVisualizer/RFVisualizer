@@ -16,7 +16,9 @@ from tools.rf_experiment.contracts import (
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-CONFIG_DIRECTORY = PROJECT_ROOT / "configs" / "rf_experiment" / "classroom_20260723"
+CONFIG_DIRECTORY = (
+    PROJECT_ROOT / "scenes" / "pnu_classroom" / "experiments" / "classroom_20260723" / "configs"
+)
 
 
 def _scene_report():

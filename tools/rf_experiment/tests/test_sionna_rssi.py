@@ -15,9 +15,11 @@ from tools.rf_experiment.sionna_rssi import (
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 SOLVER_CONFIG = (
     PROJECT_ROOT
-    / "configs"
-    / "rf_experiment"
+    / "scenes"
+    / "pnu_classroom"
+    / "experiments"
     / "classroom_20260723"
+    / "configs"
     / "sionna_solver.json"
 )
 
