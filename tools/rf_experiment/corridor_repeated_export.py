@@ -14,6 +14,7 @@ from tools.sionna_smoke_test.io_utils import atomic_write_text
 
 from .corridor_measurements import Measurement
 from .corridor_heatmap import export_global_bias_heatmaps
+from .corridor_paper_figures import export_kmms_figures
 from .corridor_repeated_compute import (
     PRIMARY_METHOD,
     PRIMARY_SCOPE,
@@ -247,4 +248,5 @@ def export_results(output: Path, bundle: ExportBundle) -> None:
     )
     _plots(output, bundle)
     export_global_bias_heatmaps(output, bundle.measurements, VARIANTS[-1].points_csv)
+    export_kmms_figures(output, bundle.measurements, bundle.predictions)
     atomic_write_text(output / "RESULTS_SUMMARY.md", _summary(bundle))

@@ -33,5 +33,8 @@ def test_corridor_analysis_uses_only_matching_environment_runs(tmp_path: Path):
         "figures/solver_comparison.png",
         "figures/raw_rf_heatmap.png",
         "figures/calibrated_rf_heatmap.png",
+        "figures/kmms_coordinate_map.png",
+        "figures/kmms_prediction_comparison.png",
+        "figures/kmms_method_maps.png",
     )
     assert all((tmp_path / relative).is_file() for relative in expected)
