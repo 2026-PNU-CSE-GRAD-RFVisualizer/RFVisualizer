@@ -1,5 +1,0 @@
-point_id,node_id,test_1_median_filtered_dbm,test_2_median_filtered_dbm,raw_absolute_difference_db,test_1_corrected_rssi_dbm,test_2_corrected_rssi_dbm,corrected_absolute_difference_db,stable_after_device_correction
-cal-01,gw-01,-23.0,-37.0,14.0,-16.0,-32.0,16.0,False
-cal-02,node-01,-42.0,-42.0,0.0,-41.0,-56.0,15.0,False
-cal-03,node-03,-56.0,-54.5,1.5,-61.0,-54.5,6.5,False
-cal-04,node-04,-40.0,-39.0,1.0,-40.0,-36.5,3.5,True

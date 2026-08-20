@@ -1,7 +1,0 @@
-{
-  "status": "failure",
-  "success": false,
-  "exception_type": "ValueError",
-  "reason": "Name 'ap_tx_000' is already used by another item of the scene",
-  "reproduction_command": "/data/RFVisualizer/tools/sionna_scenario/main.py build --scenario /data/RFVisualizer/configs/sionna/scenarios/pnu_classroom_field_20260723.yaml --output /data/RFVisualizer/outputs/proxy_placement/classroom_20260723/sionna_build"
-}

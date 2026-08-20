@@ -1,6 +1,0 @@
-﻿point_id,point_role,node_id,x,y,z,sample_count,median_raw,median_filtered,mean_filtered,std_filtered,min_filtered,max_filtered,iqr_filtered,device_offset_db,corrected_rssi
-offset-00,offset,gw-01,,,,27,-42.0,-42.0,-41.815,1.52,-45.0,-39.0,2.5,7.0,-35.0
-offset-00,offset,node-01,,,,29,-38.0,-36.0,-36.862,2.825,-42.0,-31.0,4.0,1.0,-35.0
-offset-00,offset,node-02,,,,29,-31.0,-28.0,-27.724,1.888,-31.0,-22.0,2.0,-7.0,-35.0
-offset-00,offset,node-03,,,,30,-30.5,-30.0,-29.333,3.231,-35.0,-24.0,5.5,-5.0,-35.0
-offset-00,offset,node-04,,,,29,-34.0,-35.0,-34.379,1.821,-38.0,-31.0,3.0,0.0,-35.0
