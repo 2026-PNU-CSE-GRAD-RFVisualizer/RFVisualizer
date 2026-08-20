@@ -17,7 +17,7 @@ from tools.rf_experiment.contracts import (
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 CONFIG_DIRECTORY = (
-    PROJECT_ROOT / "scenes" / "pnu_classroom" / "experiments" / "classroom_20260723" / "configs"
+    PROJECT_ROOT / "tools" / "rf_experiment" / "tests" / "fixtures" / "configs"
 )
 
 

@@ -4,7 +4,7 @@
 
 이 문서는 **실내 사진·영상 촬영 → PGSR 3차원 복원 → PGSR Mesh 생성 → 전파 계산용 Proxy Mesh 제작 → Proxy Placement Editor 배치 → 실제 RSSI 측정 → Sionna RT 계산 및 비교 결과 생성**까지 처음 사용하는 사람이 순서대로 따라 할 수 있게 정리한 실습 안내서다.
 
-> 현재 저장소의 완성도가 가장 높은 예시는 `classroom_20260723` 강의실이다. 처음에는 이 예시를 그대로 실행해 보고, 새 장소에 적용할 때 장면 이름과 설정 파일을 복사해 바꾸는 것을 권장한다.
+> 현재 RF 분석의 기준 예시는 `pnu_3f` 복도이며, 아직 PGSR 산출물만 준비된 초기 단계다. 이 문서의 명령 예시는 새 씬 이름을 `my_room`으로 두고 있다. 실제 작업할 때는 `my_room`을 그 씬의 실제 ID(예: `pnu_3f`)로 바꿔서 따라 한다. 씬마다 설정·산출물은 `scenes/<scene_id>/` 아래에 모으고 서로 섞지 않는다.
 
 ---
 
@@ -75,14 +75,14 @@ MAE·RMSE 표 + 위치별 비교 CSV + 히트맵
 이 문서의 모든 명령은 특별한 설명이 없으면 저장소 루트에서 실행한다.
 
 ```bash
-cd /data/RFVisualizer
+cd /data/RFVisualizer_Workspace/RFVisualizer
 pwd
 ```
 
 정상 출력:
 
 ```text
-/data/RFVisualizer
+/data/RFVisualizer_Workspace/RFVisualizer
 ```
 
 ### 기존 환경 확인
@@ -333,11 +333,12 @@ FFmpeg는 `MOV`, `MP4`, `M4V`, `MKV`, `AVI` 등 설치된 디코더가 지원하
 
 ### 3.3 COLMAP 작업 경로 설정
 
-이하 명령은 저장소 루트 `/data/RFVisualizer`에서 같은 터미널로 순서대로 실행한다.
+이하 명령은 앞에서 이동한 저장소 루트에서 같은 터미널로 순서대로 실행한다.
 
 ```bash
-SCENE=/data/RFVisualizer/PGSR/data/tutorial/my_room
-READY=/data/RFVisualizer/PGSR/data/tutorial/my_room_ready
+REPO_ROOT="$(pwd)"
+SCENE="$REPO_ROOT/PGSR/data/tutorial/my_room"
+READY="$REPO_ROOT/PGSR/data/tutorial/my_room_ready"
 COLMAP="$(conda run --no-capture-output -n pgsr which colmap)"
 
 mkdir -p "$SCENE/sparse_raw"
@@ -547,23 +548,35 @@ PGSR/output/my_room/
 
 수백만 삼각형의 상세 Mesh에서 바닥·천장·벽의 큰 평면을 찾아, Sionna RT가 안정적으로 사용할 수 있는 단순한 방 외곽을 만든다.
 
+### 자동 실행 (선택)
+
+PGSR output 폴더 하나만 지정하면 5.1~5.3(씬 폴더 생성, 설정 복사, 평면·벽 후보 추출)을 대신 실행하고 5.4 `pick-envelope` 명령까지 출력하는 스크립트가 있다. 이미 만든 결과가 있으면 각 단계를 건너뛴다.
+
+```bash
+conda run --no-capture-output -n pgsr \
+  python scripts/init_proxy_mesh.py PGSR/output/my_room \
+  --up-vector 0.0 0.0 1.0
+```
+
+`--up-vector`를 생략하면 자리표시자(Z-up)로 두고 직접 확인하라는 안내만 나온다. GUI가 없는 환경이면 `--skip-picker`를 붙여 5.4 명령만 출력하게 한다. `--scene-id`로 씬 이름을 PGSR 폴더 이름과 다르게 지정할 수 있고, `--force`로 이미 있는 결과를 다시 만들 수 있다. 5.4의 바닥·천장·벽 선택은 사람이 3D Viewer에서 직접 골라야 하므로 이 스크립트도 대신하지 않는다.
+
 ### 5.1 씬 폴더와 설정 복사
 
-`pnu_classroom` 설정은 현재 강의실 전용이므로 새 장소에 그대로 사용하면 안 된다. 새 씬은 `scenes/<scene_id>/`에 그 씬만의 설정과 산출물을 모아 둔다.
+`scenes/_template/`에 장소에 매이지 않은 시작용 설정을 보관한다. 새 씬은 `scenes/<scene_id>/`에 그 씬만의 설정과 산출물을 모아 둔다.
 
 ```bash
 mkdir -p scenes/my_room/configs/proxy_mesh
-cp scenes/pnu_classroom/configs/proxy_mesh/base.yaml \
+cp scenes/_template/configs/proxy_mesh/base.yaml \
   scenes/my_room/configs/proxy_mesh/base.yaml
-cp scenes/pnu_classroom/configs/proxy_mesh/envelope.yaml \
+cp scenes/_template/configs/proxy_mesh/envelope.yaml \
   scenes/my_room/configs/proxy_mesh/envelope.yaml
-cp scenes/pnu_classroom/configs/proxy_mesh/calibration_preflight.yaml \
+cp scenes/_template/configs/proxy_mesh/calibration_preflight.yaml \
   scenes/my_room/configs/proxy_mesh/calibration_preflight.yaml
-cp scenes/pnu_classroom/configs/proxy_mesh/metric_calibration.yaml \
+cp scenes/_template/configs/proxy_mesh/metric_calibration.yaml \
   scenes/my_room/configs/proxy_mesh/metric_calibration.yaml
 ```
 
-먼저 `scenes/my_room/configs/proxy_mesh/base.yaml`의 `scene.up_vector`를 장면의 실제 위쪽에 맞춘다. 기존 강의실 값은 새 장소의 정답이 아니다.
+먼저 `scenes/my_room/configs/proxy_mesh/base.yaml`의 `scene.up_vector`를 장면의 실제 위쪽에 맞춘다. 템플릿 값(Z-up 가정)은 자리표시자일 뿐 새 장소의 정답이 아니다.
 
 ### 5.2 일반 평면 후보 추출
 
@@ -605,6 +618,25 @@ conda run --no-capture-output -n pgsr \
 
 ### 5.4 바닥·천장·벽 후보 선택
 
+두 가지 방법 중 GUI 사용 가능 여부에 따라 하나를 고른다. 이 절의 예시는 벽 4개인 사각형 방을 기준으로 한다. 복도처럼 꺾이는 구간이 있는 비사각형 방은 후보 개수가 늘어나고 자동 추출이 부정확할 수 있어, 이 경우 씬별로 별도 스크립트를 작성해야 할 수 있다.
+
+#### 방법 A: 3D Viewer에서 클릭으로 선택 (권장)
+
+두 ply 파일을 따로 열어 번호를 눈으로 옮겨 적을 필요 없이, 뷰어 안에서 Floor·Ceiling·Wall을 직접 클릭해 고른다. `build-envelope`까지 한 번에 실행하므로 성공하면 5.4·5.5를 모두 마친 것이다.
+
+```bash
+conda run --no-capture-output -n pgsr \
+  python -m tools.proxy_mesh_editor.main pick-envelope \
+  --plane-candidates scenes/my_room/proxy_mesh/phase1/plane_candidates.json \
+  --wall-candidates scenes/my_room/proxy_mesh/wall_extraction/wall_candidates.json \
+  --envelope-config scenes/my_room/configs/proxy_mesh/envelope.yaml \
+  --output scenes/my_room/proxy_mesh/room_envelope
+```
+
+`--envelope-config`에는 `floor`/`ceiling`/`ordered_walls`를 비운, validation·output 설정만 담은 YAML을 넘긴다. GUI가 열리지 않으면 6절의 GUI 문제 해결(`setup-gui-runtime`, `--software-rendering`)을 먼저 시도한다. 성공했다면 아래 방법 B와 5.5는 건너뛰고 5.6으로 이동한다.
+
+#### 방법 B: 파일을 보고 YAML에 직접 적기 (GUI 없을 때)
+
 다음 두 파일을 Mesh 뷰어에서 함께 확인한다.
 
 - `scenes/my_room/proxy_mesh/phase1/plane_candidates_colored.ply`
@@ -630,6 +662,8 @@ room_envelope:
 벽은 방 둘레를 따라 이웃한 순서대로 적어야 한다. 순서가 뒤섞이면 교차된 방이 만들어지거나 검증이 실패한다.
 
 ### 5.5 닫힌 Room Envelope 생성
+
+방법 A(`pick-envelope`)를 이미 실행했다면 이 단계는 끝난 것이다. 방법 B로 YAML을 직접 채웠을 때만 아래를 실행한다.
 
 ```bash
 conda run --no-capture-output -n pgsr \
@@ -705,18 +739,22 @@ scenes/my_room/proxy_mesh/metric_calibration/
 
 `calibration.json`은 PGSR 장면 좌표와 실제 미터 좌표를 서로 변환하는 핵심 파일이다.
 
-### 현재 강의실에서 사용하는 더 직접적인 경로
+### 5.8 (선택) 실측 치수로 최종 보정하기 — 사각형 방 전용
 
-현재 `classroom_20260723` 실험은 현장에서 잰 가로·깊이·높이차를 우선해 기본 Envelope를 만든다.
+이 단계는 5.1~5.7을 건너뛰는 지름길이 아니다. 5.7까지 만든 `room_envelope_metric.json`·`calibration.json`을 `--legacy-metric-json`·`--legacy-calibration`으로 반드시 입력받아, 그 위에서 바닥 가로·깊이·높이차만 실측값으로 덮어쓴다. 즉 5.1~5.7이 먼저 끝나 있어야 하고, PGSR 결과는 천장 높이 분포·벽 순서 같은 형상 참고로 남는다.
+
+또한 벽 4개인 사각형 방에서만 쓸 수 있다. 복도처럼 꺾이는 구간이 있는 비사각형 방은 이 단계를 쓰지 않고, 5.7의 `room_envelope_metric.*`을 그대로 Proxy Placement Editor에 사용한다.
+
+사각형 방의 실측 가로·깊이·높이차가 준비됐다면 다음처럼 보정한다. `<scene_id>`와 `<session_id>`는 실제 씬·실험 세션 ID로 바꾸고, `scenes/<scene_id>/experiments/<session_id>/scene.yaml`의 `tools.rf_experiment.build-proxy-envelope`에 5.7 결과 경로(`--legacy-metric-json`, `--legacy-calibration`)를 미리 선언해 둔다.
 
 ```bash
-python scripts/run_scene.py classroom_20260723 rf_experiment build-proxy-envelope
+python scripts/run_scene.py <session_id> rf_experiment build-proxy-envelope
 ```
 
 결과는 다음 위치에 생긴다.
 
 ```text
-scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene/
+scenes/<scene_id>/experiments/<session_id>/outputs/proxy_scene/
 ├── room_envelope_metric.obj
 ├── room_envelope_metric.json
 ├── calibration.json
@@ -724,8 +762,6 @@ scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene/
 ├── preview_perspective.png
 └── PROXY_SCENE_BASE_REPORT.md
 ```
-
-이 방식은 현재 강의실처럼 실제 방 치수가 준비된 경우 권장한다. PGSR 정렬은 물체 배치 참고용이며 실제 측정 좌표를 대신하지 않는다.
 
 ---
 
@@ -735,12 +771,12 @@ scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene/
 
 미터 단위 Room 위에 전파에 큰 영향을 주는 구조와 AP/TX·RX 측정점을 배치한다.
 
-### 현재 강의실 예시 실행
+### scene.yaml이 준비된 씬 실행
 
-`scenes/<scene_id>/scene.yaml`에 이미 입력·출력 경로가 선언되어 있으므로 공용 런처로 연다.
+공용 런처는 `scenes/**/scene.yaml`을 검색한다. 방은 `scenes/<scene_id>/scene.yaml`, 날짜별 실험 세션은 `scenes/<room_id>/experiments/<session_id>/scene.yaml`에 입력·출력 경로가 선언되어 있다.
 
 ```bash
-python scripts/run_scene.py classroom_20260723 proxy_placement_editor edit
+python scripts/run_scene.py <scene_id> proxy_placement_editor edit
 ```
 
 이 명령은 다음 자료를 한 번에 연다.
@@ -765,16 +801,16 @@ conda run --no-capture-output -n pgsr \
 그다음 같은 명령을 다시 실행한다. 그래도 실패하면 뒤에 소프트웨어 렌더링 플래그를 이어 붙인다.
 
 ```bash
-python scripts/run_scene.py classroom_20260723 proxy_placement_editor edit --software-rendering
+python scripts/run_scene.py <scene_id> proxy_placement_editor edit --software-rendering
 ```
 
 ### 새 장면을 여는 기본 명령
 
-새 씬은 아직 `scene.yaml`이 없으므로 처음에는 모든 경로를 직접 지정한다. 먼저 문·책상 같은 Obstacle 후보 라이브러리도 기존 씬에서 복사해 온다.
+새 씬은 아직 `scene.yaml`이 없으므로 처음에는 모든 경로를 직접 지정한다. 먼저 문·책상 같은 Obstacle 후보 라이브러리도 템플릿에서 복사해 온다.
 
 ```bash
 mkdir -p scenes/my_room/configs/proxy_editor scenes/my_room/configs/sionna scenes/my_room/configs/rf_experiment
-cp scenes/pnu_classroom/configs/proxy_editor/candidates.yaml \
+cp scenes/_template/configs/proxy_editor/candidates.yaml \
   scenes/my_room/configs/proxy_editor/candidates.yaml
 ```
 
@@ -851,7 +887,7 @@ Candidate를 추가하면 보이는 기본 크기는 **실제 치수가 아닌 �
 ### Editor 결과
 
 ```text
-scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_placement/
+scenes/<scene_id>/experiments/<session_id>/outputs/proxy_placement/
 ├── editor_state.json
 ├── placement_validation.json
 ├── obstacles_metric.json
@@ -946,12 +982,11 @@ scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_placement/
 
 ### 7.3 CSV 만들기
 
-Backend에서 다음 두 파일을 내보낸다.
+Backend에서 다음 두 파일을 내보낸다. 현재 저장소는 이 파일들의 고정 보관 경로를 강제하지 않으므로, 아래 검증·분석 명령의 자리표시자를 실제 파일 경로로 바꾼다.
 
 ```text
-experiments/classroom_20260723/
-├── raw/measurements_raw.csv
-└── processed/measurements_summary.csv
+<measurements_raw.csv>
+<measurements_summary.csv>
 ```
 
 Raw CSV 필수 열:
@@ -976,14 +1011,17 @@ mean_filtered,std_filtered,device_offset_db,corrected_rssi
 ### CSV 검증
 
 ```bash
+RAW_CSV=/absolute/path/to/measurements_raw.csv
+SUMMARY_CSV=/absolute/path/to/measurements_summary.csv
+
 python -m tools.rf_experiment.main validate-csv \
   --kind raw \
-  --csv experiments/classroom_20260723/raw/measurements_raw.csv \
+  --csv "$RAW_CSV" \
   --require-rows
 
 python -m tools.rf_experiment.main validate-csv \
   --kind summary \
-  --csv experiments/classroom_20260723/processed/measurements_summary.csv \
+  --csv "$SUMMARY_CSV" \
   --require-rows
 ```
 
@@ -997,18 +1035,18 @@ python -m tools.rf_experiment.main validate-csv \
 
 ```bash
 python -m tools.rf_experiment.main validate-contracts \
-  --scene scenes/pnu_classroom/experiments/classroom_20260723/configs/scene.json \
-  --markers scenes/pnu_classroom/experiments/classroom_20260723/configs/tx_rx.json \
-  --methods scenes/pnu_classroom/experiments/classroom_20260723/configs/method_config.json
+  --scene scenes/<scene_id>/experiments/<session_id>/configs/scene.json \
+  --markers scenes/<scene_id>/experiments/<session_id>/configs/tx_rx.json \
+  --methods scenes/<scene_id>/experiments/<session_id>/configs/method_config.json
 ```
 
 초안 단계에서 `ready: false`와 경고가 나오는 것은 정상이다. 현장 입력을 모두 확정한 뒤에는 다음 명령이 exit code 0으로 끝나야 한다.
 
 ```bash
 python -m tools.rf_experiment.main validate-contracts \
-  --scene scenes/pnu_classroom/experiments/classroom_20260723/configs/scene.json \
-  --markers scenes/pnu_classroom/experiments/classroom_20260723/configs/tx_rx.json \
-  --methods scenes/pnu_classroom/experiments/classroom_20260723/configs/method_config.json \
+  --scene scenes/<scene_id>/experiments/<session_id>/configs/scene.json \
+  --markers scenes/<scene_id>/experiments/<session_id>/configs/tx_rx.json \
+  --methods scenes/<scene_id>/experiments/<session_id>/configs/method_config.json \
   --require-ready
 ```
 
@@ -1020,18 +1058,14 @@ Proxy Placement Editor에서 저장 후 `Build`를 눌러 `scene.xml`을 만든�
 
 ```bash
 conda run --no-capture-output -n sionna \
-  python -m tools.rf_experiment.main run-sionna \
-  --scene scenes/pnu_classroom/experiments/classroom_20260723/configs/scene.json \
-  --markers scenes/pnu_classroom/experiments/classroom_20260723/configs/tx_rx.json \
-  --solver scenes/pnu_classroom/experiments/classroom_20260723/configs/sionna_solver.json \
-  --scene-xml scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_placement/sionna_build/scene/scene.xml \
-  --output experiments/classroom_20260723/sionna
+  python scripts/run_scene.py <session_id> rf_experiment run-sionna \
+  --scene-xml scenes/<scene_id>/experiments/<session_id>/outputs/proxy_placement/sionna_build/scene/scene.xml
 ```
 
 주요 결과:
 
 ```text
-experiments/classroom_20260723/sionna/
+scenes/<scene_id>/experiments/<session_id>/outputs/sionna/
 ├── processed/
 │   ├── sionna_points.csv
 │   └── sionna_grid.csv
@@ -1060,18 +1094,18 @@ Test점 15개는 평가에만 사용하며 보정값 계산에 섞지 않는다.
 ### 분석 실행
 
 ```bash
-python -m tools.rf_experiment.main analyze \
-  --summary experiments/classroom_20260723/processed/measurements_summary.csv \
-  --sionna-points experiments/classroom_20260723/sionna/processed/sionna_points.csv \
-  --sionna-grid experiments/classroom_20260723/sionna/processed/sionna_grid.csv \
-  --methods scenes/pnu_classroom/experiments/classroom_20260723/configs/method_config.json \
-  --output experiments/classroom_20260723
+SUMMARY_CSV=/absolute/path/to/measurements_summary.csv
+
+python scripts/run_scene.py <session_id> rf_experiment analyze \
+  --summary "$SUMMARY_CSV" \
+  --sionna-points scenes/<scene_id>/experiments/<session_id>/outputs/sionna/processed/sionna_points.csv \
+  --sionna-grid scenes/<scene_id>/experiments/<session_id>/outputs/sionna/processed/sionna_grid.csv
 ```
 
 ### 확인할 결과
 
 ```text
-experiments/classroom_20260723/
+scenes/<scene_id>/experiments/<session_id>/outputs/analysis/
 ├── processed/
 │   ├── comparison_results.csv
 │   ├── metrics.csv
@@ -1137,54 +1171,49 @@ experiments/classroom_20260723/
 
 ---
 
-## 12. 현재 강의실 빠른 실행 요약
+## 12. 이어서 작업할 때의 빠른 실행 요약
 
-이미 PGSR와 기본 Proxy 결과가 있는 현재 저장소에서 이어서 작업할 때의 최소 순서다.
+이미 PGSR 학습과 5.1~5.7의 기본 Proxy 결과가 있는 씬에서 이어서 작업할 때의 최소 순서다. `<scene_id>`·`<session_id>`를 실제 값으로 바꾼다. 1번은 사각형 방(5.8 대상)에만 해당하며, 비사각형 방은 5.7 결과를 그대로 쓰고 1번을 건너뛴다.
 
 ```bash
-cd /data/RFVisualizer
+cd /data/RFVisualizer_Workspace/RFVisualizer
 
-# 1. 실측 치수 기반 기본 Room 재생성
-python -m tools.rf_experiment.main build-proxy-envelope \
-  --scene scenes/pnu_classroom/experiments/classroom_20260723/configs/scene.json \
-  --output scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene
+RAW_CSV=/absolute/path/to/measurements_raw.csv
+SUMMARY_CSV=/absolute/path/to/measurements_summary.csv
+
+# 1. (사각형 방만) 실측 치수로 기본 Room 재보정
+python scripts/run_scene.py <session_id> rf_experiment build-proxy-envelope
 
 # 2. 문·책상·AP·RX 배치
-python scripts/run_scene.py classroom_20260723 proxy_placement_editor edit
+python scripts/run_scene.py <session_id> proxy_placement_editor edit
 
 # 3. Scene/Marker/분석 설정 검사
 python -m tools.rf_experiment.main validate-contracts \
-  --scene scenes/pnu_classroom/experiments/classroom_20260723/configs/scene.json \
-  --markers scenes/pnu_classroom/experiments/classroom_20260723/configs/tx_rx.json \
-  --methods scenes/pnu_classroom/experiments/classroom_20260723/configs/method_config.json
+  --scene scenes/<scene_id>/experiments/<session_id>/configs/scene.json \
+  --markers scenes/<scene_id>/experiments/<session_id>/configs/tx_rx.json \
+  --methods scenes/<scene_id>/experiments/<session_id>/configs/method_config.json
 
 # 4. 현장 CSV 검사
 python -m tools.rf_experiment.main validate-csv \
   --kind raw \
-  --csv experiments/classroom_20260723/raw/measurements_raw.csv \
+  --csv "$RAW_CSV" \
   --require-rows
 
 python -m tools.rf_experiment.main validate-csv \
   --kind summary \
-  --csv experiments/classroom_20260723/processed/measurements_summary.csv \
+  --csv "$SUMMARY_CSV" \
   --require-rows
 
 # 5. 장애물 포함 Sionna 계산
 conda run --no-capture-output -n sionna \
-  python -m tools.rf_experiment.main run-sionna \
-  --scene scenes/pnu_classroom/experiments/classroom_20260723/configs/scene.json \
-  --markers scenes/pnu_classroom/experiments/classroom_20260723/configs/tx_rx.json \
-  --solver scenes/pnu_classroom/experiments/classroom_20260723/configs/sionna_solver.json \
-  --scene-xml scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_placement/sionna_build/scene/scene.xml \
-  --output experiments/classroom_20260723/sionna
+  python scripts/run_scene.py <session_id> rf_experiment run-sionna \
+  --scene-xml scenes/<scene_id>/experiments/<session_id>/outputs/proxy_placement/sionna_build/scene/scene.xml
 
 # 6. 세 방법 비교와 최종 그림 생성
-python -m tools.rf_experiment.main analyze \
-  --summary experiments/classroom_20260723/processed/measurements_summary.csv \
-  --sionna-points experiments/classroom_20260723/sionna/processed/sionna_points.csv \
-  --sionna-grid experiments/classroom_20260723/sionna/processed/sionna_grid.csv \
-  --methods scenes/pnu_classroom/experiments/classroom_20260723/configs/method_config.json \
-  --output experiments/classroom_20260723
+python scripts/run_scene.py <session_id> rf_experiment analyze \
+  --summary "$SUMMARY_CSV" \
+  --sionna-points scenes/<scene_id>/experiments/<session_id>/outputs/sionna/processed/sionna_points.csv \
+  --sionna-grid scenes/<scene_id>/experiments/<session_id>/outputs/sionna/processed/sionna_grid.csv
 ```
 
 ---

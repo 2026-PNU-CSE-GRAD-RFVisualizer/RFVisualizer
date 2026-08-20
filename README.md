@@ -38,8 +38,6 @@ conda create -n sionna python=3.10 -y
 conda run -n sionna python -m pip install -r tools/sionna_smoke_test/requirements-sionna.txt
 ```
 
-`tools/rf_experiment/corridor_repeated_analysis.py`는 파일 상단의 inline metadata에 별도 실행 조건을 선언한다. 이 반복 분석을 직접 실행할 때는 Python 3.10 이상과 `numpy>=2.3,<3`, `matplotlib>=3.10,<4`, `pydantic>=2.12,<3`를 준비한다. `run-sionna`와 일반 `analyze` 실행에는 이 반복 분석 모듈을 불러오지 않는다.
-
 Proxy Placement Editor의 GUI 창이 Wayland/XWayland에서 열리지 않으면 다음 명령으로 전용 Open3D 0.18 CPU runtime을 준비한다.
 
 ```bash
@@ -58,7 +56,7 @@ conda run -n pgsr python -m tools.proxy_placement_editor.main setup-gui-runtime
 | `tools/sionna_scenario/` | Sionna Scene·Obstacle schema와 Phase 2-B 실행 도구 |
 | `tools/sionna_smoke_test/` | Empty Room과 Sionna Path/Coverage smoke test |
 | `scenes/<scene_id>/` | 씬 하나의 설정과 산출물을 전부 모은 폴더. `configs/`(도구별 입력)와 각 도구의 출력(`proxy_mesh/`, `proxy_placement/`, `sionna/`, `rf_experiment/`)을 함께 담는다. `scene.yaml`이 그 씬에서 각 도구를 실행할 때 쓰는 경로를 선언한다 |
-| `scenes/<room_id>/experiments/<session_id>/` | 같은 방을 재사용하는 날짜별 현장 측정 세션(예: `classroom_20260723`). 자체 `scene.yaml`, `configs/`, `outputs/`를 가진다 |
+| `scenes/<room_id>/experiments/<session_id>/` | 같은 방을 재사용하는 날짜별 현장 측정 세션. 자체 `scene.yaml`, `configs/`, `outputs/`를 가진다 |
 | `scripts/run_scene.py` | `scenes/**/scene.yaml`을 읽어 `tools.<package>.main`을 실행하는 공용 런처. 씬별 wrapper 스크립트를 대신한다 |
 | `TUTORIAL.md` | 촬영부터 PGSR, Proxy, 실측, 분석까지의 전체 순서 |
 
@@ -67,9 +65,9 @@ conda run -n pgsr python -m tools.proxy_placement_editor.main setup-gui-runtime
 씬마다 반복되는 긴 명령은 `scripts/run_scene.py <scene_id> <package> <subcommand>`로 대신 실행한다. `scene.yaml`에 없는 값이나 일회성 값은 그 뒤에 그대로 이어 붙이면 덮어쓴다.
 
 ```bash
-conda run -n pgsr python scripts/run_scene.py pnu_4f_corridor proxy_placement_editor edit
-conda run -n pgsr python scripts/run_scene.py pnu_classroom proxy_placement_editor edit --software-rendering
-conda run -n pgsr python scripts/run_scene.py classroom_20260723 rf_experiment validate-contracts
+conda run -n pgsr python scripts/run_scene.py <scene_id> proxy_placement_editor edit
+conda run -n pgsr python scripts/run_scene.py <scene_id> proxy_placement_editor edit --software-rendering
+conda run -n pgsr python scripts/run_scene.py <session_id> rf_experiment validate-contracts
 ```
 
 ## Proxy Editor 실행
@@ -81,14 +79,14 @@ conda run -n pgsr python scripts/run_scene.py classroom_20260723 rf_experiment v
 
 ### Room Envelope 선택
 
-4층 복도 예시의 후보를 GUI에서 선택하려면 display가 있는 환경에서 실행한다.
+후보를 GUI에서 선택하려면 display가 있는 환경에서 실행한다.
 
 ```bash
 conda run -n pgsr python -m tools.proxy_mesh_editor.main pick-envelope \
-  --plane-candidates scenes/pnu_4f_corridor/proxy_mesh/phase1/plane_candidates.json \
-  --wall-candidates scenes/pnu_4f_corridor/proxy_mesh/wall_extraction/wall_candidates.json \
-  --envelope-config scenes/pnu_4f_corridor/configs/proxy_mesh/envelope.yaml \
-  --output scenes/pnu_4f_corridor/proxy_mesh/room_envelope_picked
+  --plane-candidates scenes/<scene_id>/proxy_mesh/phase1/plane_candidates.json \
+  --wall-candidates scenes/<scene_id>/proxy_mesh/wall_extraction/wall_candidates.json \
+  --envelope-config scenes/<scene_id>/configs/proxy_mesh/envelope.yaml \
+  --output scenes/<scene_id>/proxy_mesh/room_envelope_picked
 ```
 
 headless 환경에서는 후보 선택 GUI 대신 설정이 완성된 `build-envelope`를 사용한다. 자세한 입력·출력 계약은 [Proxy Mesh Editor 문서](tools/proxy_mesh_editor/README.md)를 따른다.
@@ -98,26 +96,25 @@ headless 환경에서는 후보 선택 GUI 대신 설정이 완성된 `build-env
 씬별 입력·출력 경로는 `scenes/<scene_id>/scene.yaml`에 선언되어 있으므로 `scripts/run_scene.py`로 바로 연다.
 
 ```bash
-# 강의실
-conda run -n pgsr python scripts/run_scene.py pnu_classroom proxy_placement_editor edit
+conda run -n pgsr python scripts/run_scene.py <scene_id> proxy_placement_editor edit
+```
 
-# 4층 복도
-conda run -n pgsr python scripts/run_scene.py pnu_4f_corridor proxy_placement_editor edit
+날짜별 현장 측정 세션을 열 때는 세션의 `scene.yaml`에 선언된 세션 ID를 쓴다.
 
-# 강의실 현장 측정 세션(2026-07-23)
-conda run -n pgsr python scripts/run_scene.py classroom_20260723 proxy_placement_editor edit
+```bash
+conda run -n pgsr python scripts/run_scene.py <session_id> proxy_placement_editor edit
 ```
 
 GUI에 문제가 있으면 뒤에 Mesa 소프트웨어 렌더링 플래그를 이어 붙인다.
 
 ```bash
-conda run -n pgsr python scripts/run_scene.py pnu_classroom proxy_placement_editor edit --software-rendering
+conda run -n pgsr python scripts/run_scene.py <scene_id> proxy_placement_editor edit --software-rendering
 ```
 
 GUI 없이 Scenario만 검사하거나 미리보기를 만들 때는 `edit` 대신 `validate`를 사용한다.
 
 ```bash
-conda run -n pgsr python scripts/run_scene.py classroom_20260723 proxy_placement_editor validate
+conda run -n pgsr python scripts/run_scene.py <session_id> proxy_placement_editor validate
 ```
 
 GUI 사용법과 저장 산출물은 [Proxy Placement Editor 문서](tools/proxy_placement_editor/README.md)에 있다.
@@ -131,19 +128,19 @@ RF Experiment는 `validate-contracts` → Proxy Scene/TX/RX 준비 → `run-sion
 ### 1. 계약 검증
 
 ```bash
-conda run -n pgsr python scripts/run_scene.py classroom_20260723 rf_experiment validate-contracts
+conda run -n pgsr python scripts/run_scene.py <session_id> rf_experiment validate-contracts
 ```
 
 현장 실행 전에 실제 Proxy Scene과 TX/RX를 확정한 뒤에는 `--require-ready`를 이어 붙인다.
 
 ```bash
-conda run -n pgsr python scripts/run_scene.py classroom_20260723 rf_experiment validate-contracts --require-ready
+conda run -n pgsr python scripts/run_scene.py <session_id> rf_experiment validate-contracts --require-ready
 ```
 
 ### 2. 실측 치수 기반 Proxy Envelope 생성
 
 ```bash
-conda run -n pgsr python scripts/run_scene.py classroom_20260723 rf_experiment build-proxy-envelope
+conda run -n pgsr python scripts/run_scene.py <session_id> rf_experiment build-proxy-envelope
 ```
 
 이 명령은 기존 PGSR 기반 결과를 덮어쓰지 않고 새 OBJ/JSON/Calibration을 만든다. 생성된 `room_envelope_metric.obj`와 `calibration.json`을 Proxy Placement Editor에 입력한다.
@@ -153,15 +150,15 @@ conda run -n pgsr python scripts/run_scene.py classroom_20260723 rf_experiment b
 실제 Scene과 Marker가 모두 `ready`인 경우:
 
 ```bash
-conda run -n sionna python scripts/run_scene.py classroom_20260723 rf_experiment run-sionna
+conda run -n sionna python scripts/run_scene.py <session_id> rf_experiment run-sionna
 ```
 
 연결만 확인할 때는 합성 Marker와 `--allow-draft`를 이어 붙인다. `--markers`를 다시 지정하면 `scene.yaml`의 값을 덮어쓴다. 이 결과는 논문용 실측 근거가 아니다.
 
 ```bash
-conda run -n sionna python scripts/run_scene.py classroom_20260723 rf_experiment run-sionna \
-  --markers scenes/pnu_classroom/experiments/classroom_20260723/configs/dry_run/tx_rx_synthetic.json \
-  --output scenes/pnu_classroom/experiments/classroom_20260723/outputs/sionna_dry_run \
+conda run -n sionna python scripts/run_scene.py <session_id> rf_experiment run-sionna \
+  --markers scenes/<scene_id>/experiments/<session_id>/configs/dry_run/tx_rx_synthetic.json \
+  --output scenes/<scene_id>/experiments/<session_id>/outputs/sionna_dry_run \
   --allow-draft
 ```
 
@@ -170,7 +167,7 @@ conda run -n sionna python scripts/run_scene.py classroom_20260723 rf_experiment
 Backend Summary CSV와 Sionna의 지점·격자 CSV가 준비된 뒤 실행한다.
 
 ```bash
-conda run -n pgsr python scripts/run_scene.py classroom_20260723 rf_experiment analyze \
+conda run -n pgsr python scripts/run_scene.py <session_id> rf_experiment analyze \
   --summary <measurements_summary.csv> \
   --sionna-points <sionna_points.csv> \
   --sionna-grid <sionna_grid.csv>
@@ -198,7 +195,7 @@ conda run -n pgsr python -m pytest -q --import-mode=importlib \
   tools/sionna_scenario/tests
 ```
 
-RF Experiment 전체 테스트에는 Python 3.10 이상과 `pydantic`이 필요하다. `corridor_repeated_analysis.py`의 inline metadata와 같은 의존성을 가진 환경에서 실행한다.
+RF Experiment 전체 테스트에는 Python 3.10 이상과 `pydantic`이 필요하다.
 
 ```bash
 python -m pytest -q --import-mode=importlib tools/rf_experiment/tests

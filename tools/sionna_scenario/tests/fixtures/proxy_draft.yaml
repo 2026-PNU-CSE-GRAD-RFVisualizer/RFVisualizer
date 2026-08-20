@@ -1,0 +1,79 @@
+schema_version: '1.0'
+scenario:
+  id: test_proxy_draft
+  status: provisional
+  physically_validated: false
+  synthetic_validation: false
+  base_scene:
+    phase2a_config: tools/sionna_scenario/tests/fixtures/smoke_test.yaml
+  obstacles:
+  - id: desk_block_example
+    enabled: false
+    semantic_class: desk_cluster
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    geometry:
+      type: box
+      anchor:
+        mode: floor_at_xy
+      position_m: null
+      size_m: null
+      rotation_deg: null
+    material:
+      source: sionna_preset
+      category: wood
+  - id: blackboard_example
+    enabled: false
+    semantic_class: blackboard
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    geometry:
+      type: thin_panel
+      anchor:
+        mode: center
+      position_m: null
+      size_m: null
+      rotation_deg: null
+    material:
+      source: sionna_preset
+      category: metal
+  - id: door_example
+    enabled: false
+    semantic_class: door
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    state: closed
+    geometry:
+      type: thin_panel
+      anchor:
+        mode: bottom_center
+      position_m: null
+      size_m: null
+      rotation_deg: null
+    material:
+      source: sionna_preset
+      category: wood
+  - id: large_metal_object_example
+    enabled: false
+    semantic_class: large_equipment
+    purpose: classroom_proxy
+    physical_object: true
+    confidence: unset
+    geometry:
+      type: box
+      anchor:
+        mode: floor_at_xy
+      position_m: null
+      size_m: null
+      rotation_deg: null
+    material:
+      source: sionna_preset
+      category: metal
+  confidence: low
+  provenance:
+    authoring_method: interactive_proxy_placement
+    metric_calibration_status: provisional
+    on_site_measurement_complete: false

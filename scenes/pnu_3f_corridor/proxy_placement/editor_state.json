@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "camera": {},
+  "selected_object": null,
+  "selected_objects": [],
+  "viewport_mode": "select",
+  "axis_constraint": null,
+  "transform_space": "world",
+  "reference_point_size": 2.0,
+  "layer_visibility": {
+    "point_cloud": true,
+    "proxy_mesh": true,
+    "pgsr_output_mesh": true
+  },
+  "grid_visibility": true,
+  "show_disabled": true,
+  "object_visibility": {},
+  "snap_settings": {
+    "enabled": true,
+    "translation_m": 0.05,
+    "rotation_deg": 5.0,
+    "size_m": 0.05
+  },
+  "panel_sizes": {
+    "side_panel_width": 410.0
+  },
+  "last_opened_scenario": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/configs/sionna/proxy.yaml"
+}

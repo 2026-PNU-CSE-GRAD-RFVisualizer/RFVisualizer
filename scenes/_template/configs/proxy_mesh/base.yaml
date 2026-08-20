@@ -1,0 +1,142 @@
+schema_version: "1.0"
+
+scene:
+  # TODO: 이 장면의 실제 위쪽 방향으로 바꾼다. PGSR Mesh를 뷰어에서 열어
+  # 바닥/천장 법선을 확인하고 설정한다. 아래 값은 자리표시자(Z-up 가정)다.
+  # 실제 길이 보정 전이므로 아래 거리 기준은 모두 장면 단위 또는 장면 대각선 비율이다.
+  up_vector: [0.0, 0.0, 1.0]
+  point_source: mesh_uniform
+  random_seed: 20260710
+
+preprocessing:
+  mesh_components:
+    # tsdf_fusion_post.ply는 PGSR에서 이미 연결 조각 필터를 거쳤으므로 기본값은 끈다.
+    enabled: false
+    keep_largest: 0
+    min_triangles: 1000
+    min_area_ratio: 0.0
+
+  sampling:
+    number_of_points: 500000
+
+  voxel_downsampling:
+    enabled: true
+    voxel_size: null
+    voxel_size_ratio: 0.002
+
+  statistical_outlier_removal:
+    enabled: false
+    nb_neighbors: 30
+    std_ratio: 2.5
+
+  radius_outlier_removal:
+    enabled: false
+    nb_points: 12
+    radius: null
+    radius_ratio: 0.006
+
+  normal_estimation:
+    enabled: true
+    search_radius: null
+    search_radius_ratio: 0.006
+    max_nn: 30
+
+normal_analysis:
+  thresholds: [0.25, 0.35, 0.50]
+  histogram_bins: 50
+  horizontal_min_up_dot: 0.85
+
+wall_extraction:
+  enabled: true
+
+  normal_filter:
+    enabled: true
+    # 실제 미리보기에서 0.25도 외곽 벽을 유지하면서 내부 수평 구조를 더 많이 제거했다.
+    point_normal_max_up_dot: 0.25
+
+  ransac:
+    distance_threshold: null
+    distance_threshold_ratio: 0.0010
+    ransac_n: 3
+    num_iterations: 3000
+    max_planes: 12
+    max_attempts: 60
+    min_inliers: 300
+    min_inlier_ratio: 0.002
+    plane_normal_max_up_dot: 0.25
+    max_consecutive_small_planes: 5
+
+  components:
+    enabled: true
+    eps: null
+    eps_ratio: 0.015
+    min_points: 10
+    merge_valid_components: true
+    min_vertical_span: null
+    min_vertical_span_ratio: 0.20
+
+  meshing:
+    lower_percentile: 1.0
+    upper_percentile: 99.0
+    margin_ratio: 0.02
+    min_area: null
+    min_area_ratio: 0.00075
+
+plane_extraction:
+  distance_threshold: null
+  # 장면 대각선 기준 약 0.00075이며, 현재 TSDF 격자 0.002의 약 6.5배다.
+  distance_threshold_ratio: 0.00075
+  ransac_n: 3
+  num_iterations: 2000
+  max_planes: 30
+  max_attempts: 60
+  min_inliers: 800
+  min_inlier_ratio: 0.005
+  min_area: null
+  min_area_ratio: 0.002
+  stop_remaining_ratio: 0.05
+  inlier_components:
+    # 같은 높이의 떨어진 책상 상판이 하나의 큰 사각형으로 합쳐지는 것을 막는다.
+    enabled: true
+    eps: null
+    eps_ratio: 0.015
+    min_points: 10
+    # 바닥·천장 후보는 구멍을 메우는 것이 목적이므로 떨어진 내부점도 함께 사용한다.
+    preserve_boundary_planes: true
+  orientation_limits:
+    # 수평 가구 후보가 벽 후보 검출 기회를 모두 소비하지 않도록 제한한다.
+    enabled: true
+    horizontal: 12
+    vertical: 12
+    other: 6
+
+classification:
+  horizontal_max_angle_deg: 15.0
+  vertical_max_deviation_deg: 15.0
+  boundary_height_ratio: 0.20
+  height_lower_percentile: 5.0
+  height_upper_percentile: 95.0
+
+plane_meshing:
+  lower_percentile: 1.0
+  upper_percentile: 99.0
+  margin_ratio: 0.02
+  min_extent: null
+  min_extent_ratio: 0.002
+  vertical_alignment_max_dot: 0.3
+
+preview:
+  residual_color: [0.45, 0.45, 0.45]
+  write_candidate_meshes: true
+
+# 수치와 방향을 기준으로 고른 Phase 1 기술 검증용 임시 선택안이다.
+# Blender/MeshLab에서 색상 미리보기를 확인한 뒤 최종 확정해야 한다.
+selection:
+  - candidate_id: plane_006
+    semantic: floor
+  - candidate_id: plane_005
+    semantic: ceiling
+  - candidate_id: plane_012
+    semantic: wall
+  - candidate_id: plane_013
+    semantic: wall

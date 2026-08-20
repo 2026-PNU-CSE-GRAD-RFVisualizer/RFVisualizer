@@ -4,7 +4,7 @@ Phase 2-B 도구는 Phase 2-A의 미터 단위 Room Envelope를 그대로 두고
 
 > **현재 결과의 의미**
 >
-> 이 단계의 blocker는 `purpose=validation_only`, `physical_object=false`, `confidence=synthetic`인 검증용 형상이다. 좌표 배율과 RF 재질도 `provisional`, `physically_validated=false`다. 결과는 장애물 계층과 Sionna RT A/B 파이프라인이 동작한다는 근거이지, 실제 강의실 물체 배치나 RSSI 정확도를 뜻하지 않는다.
+> 이 단계의 blocker는 `purpose=validation_only`, `physical_object=false`, `confidence=synthetic`인 검증용 형상이다. 좌표 배율과 RF 재질도 `provisional`, `physically_validated=false`다. 결과는 장애물 계층과 Sionna RT A/B 파이프라인이 동작한다는 근거이지, 실제 물체 배치나 RSSI 정확도를 뜻하지 않는다.
 
 실제 Sionna 1.2.2 실행 결과는 [PHASE2B_VALIDATION.md](PHASE2B_VALIDATION.md)에 기록한다. 기반 Empty-Room 도구와 결과는 [Phase 2-A README](../sionna_smoke_test/README.md)와 [검증 문서](../sionna_smoke_test/PHASE2A_SMOKE_TEST_VALIDATION.md)를 참고한다.
 
@@ -17,7 +17,7 @@ Phase 2-C의 대화형 배치 UI는 이 schema를 새로 만들지 않고 그대
 - Metric Calibration과 provisional scale을 다시 계산하지 않는다.
 - Empty와 variant는 같은 Room 입력, TX/RX, antenna, solver 설정, seed, coverage grid를 사용한다.
 - 실제 책상·칠판·문·대형 금속 물체 예시는 기본적으로 `enabled: false`이며 위치와 치수를 추정해 채우지 않는다.
-- 기존 `scenes/pnu_classroom/sionna/smoke_test/`를 덮어쓰지 않고 Phase 2-B 전용 출력 폴더를 사용한다.
+- 기존 `scenes/<scene_id>/sionna/smoke_test/`를 덮어쓰지 않고 Phase 2-B 전용 출력 폴더를 사용한다.
 
 ## 환경
 
@@ -37,38 +37,38 @@ Scenario schema, 미터 장면, 장애물 형상, Room containment, TX/RX 및 �
 
 ```bash
 conda run -n sionna python -m tools.sionna_scenario.main validate \
-  --scenario scenes/pnu_classroom/configs/sionna/synthetic_blocker.yaml
+  --scenario scenes/<scene_id>/configs/sionna/synthetic_blocker.yaml
 ```
 
 Room과 obstacle을 독립 PLY/Mitsuba shape로 구성하고 manifest와 좌표 변환 파일을 만든다. Path/Coverage solver는 실행하지 않지만, Sionna 환경이 사용 가능하면 장면을 실제로 load해 runtime object ID와 재질 등록을 검증한다. Sionna가 없으면 runtime 검증은 명시적으로 deferred 상태가 된다.
 
 ```bash
 conda run -n sionna python -m tools.sionna_scenario.main build \
-  --scenario scenes/pnu_classroom/configs/sionna/synthetic_blocker.yaml \
-  --output scenes/pnu_classroom/sionna/phase2b/scenarios/synthetic_blocker
+  --scenario scenes/<scene_id>/configs/sionna/synthetic_blocker.yaml \
+  --output scenes/<scene_id>/sionna/phase2b/scenarios/synthetic_blocker
 ```
 
 Empty baseline을 같은 seed로 두 번 실행한 뒤 synthetic blocker variant를 실행하고 경로와 Coverage를 비교한다.
 
 ```bash
 conda run -n sionna python -m tools.sionna_scenario.main run-ab \
-  --experiment scenes/pnu_classroom/configs/sionna/phase2b_ab_experiment.yaml \
-  --output scenes/pnu_classroom/sionna/phase2b/experiments/synthetic_blocker_ab
+  --experiment scenes/<scene_id>/configs/sionna/phase2b_ab_experiment.yaml \
+  --output scenes/<scene_id>/sionna/phase2b/experiments/synthetic_blocker_ab
 ```
 
 `--verbose`는 하위 명령 앞에 둔다.
 
 ```bash
 conda run -n sionna python -m tools.sionna_scenario.main --verbose validate \
-  --scenario scenes/pnu_classroom/configs/sionna/synthetic_blocker.yaml
+  --scenario scenes/<scene_id>/configs/sionna/synthetic_blocker.yaml
 ```
 
 기본 제공 설정은 다음 세 scenario와 한 A/B experiment다.
 
-- `scenes/pnu_classroom/configs/sionna/empty.yaml`: obstacle이 없는 Phase 2-A Room
-- `scenes/pnu_classroom/configs/sionna/synthetic_blocker.yaml`: 실제 실행용 synthetic blocker
-- `scenes/pnu_classroom/configs/sionna/proxy_draft.yaml`: 실제 물체 정보를 나중에 입력할 비활성 template
-- `scenes/pnu_classroom/configs/sionna/phase2b_ab_experiment.yaml`: Empty 대 synthetic blocker 비교
+- `scenes/<scene_id>/configs/sionna/empty.yaml`: obstacle이 없는 Phase 2-A Room
+- `scenes/<scene_id>/configs/sionna/synthetic_blocker.yaml`: 실제 실행용 synthetic blocker
+- `scenes/<scene_id>/configs/sionna/proxy_draft.yaml`: 실제 물체 정보를 나중에 입력할 비활성 template
+- `scenes/<scene_id>/configs/sionna/phase2b_ab_experiment.yaml`: Empty 대 synthetic blocker 비교
 
 ## Scenario schema
 
@@ -84,7 +84,7 @@ scenario:
   synthetic_validation: false
 
   base_scene:
-    phase2a_config: scenes/pnu_classroom/configs/sionna/smoke_test.yaml
+    phase2a_config: scenes/<scene_id>/configs/sionna/smoke_test.yaml
 
   obstacles: []
 ```
@@ -213,14 +213,14 @@ material:
 schema_version: "1.0"
 
 experiment:
-  id: pnu_classroom_phase2b_ab
+  id: example_phase2b_ab
   status: provisional
   physically_validated: false
 
   baseline:
-    scenario: scenes/pnu_classroom/configs/sionna/empty.yaml
+    scenario: scenes/<scene_id>/configs/sionna/empty.yaml
   variants:
-    - scenario: scenes/pnu_classroom/configs/sionna/synthetic_blocker.yaml
+    - scenario: scenes/<scene_id>/configs/sionna/synthetic_blocker.yaml
 
   solver:
     reuse_phase2a_settings: true
@@ -397,4 +397,4 @@ RUN_SIONNA_INTEGRATION=1 conda run -n sionna \
 
 이번 단계는 정밀 책상·의자 mesh, semantic segmentation, Room Envelope boolean/opening, 실제 물체 위치 추정, obstacle editor, 고해상도 Radio Map, ESP32 RSSI 비교, Viewer/실시간/network 기능을 구현하지 않는다.
 
-`pnu_classroom_proxy_draft.yaml`을 실제 scenario로 바꾸려면 각 물체의 Metric 위치, 크기, 방향, floor clearance, 재질 category와 신뢰도, 문 상태 같은 측정값이 필요하다. 측정 전에는 draft 항목을 활성화하지 않는다.
+`proxy_draft.yaml`을 실제 scenario로 바꾸려면 각 물체의 Metric 위치, 크기, 방향, floor clearance, 재질 category와 신뢰도, 문 상태 같은 측정값이 필요하다. 측정 전에는 draft 항목을 활성화하지 않는다.

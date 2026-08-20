@@ -12,7 +12,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
 def test_editor_config_enlarges_all_ui_by_thirty_percent():
     document = yaml.safe_load(
-        (PROJECT_ROOT / "scenes/pnu_classroom/configs/proxy_editor/editor.yaml").read_text(
+        (PROJECT_ROOT / "tools/proxy_placement_editor/tests/fixtures/configs/editor.yaml").read_text(
             encoding="utf-8"
         )
     )

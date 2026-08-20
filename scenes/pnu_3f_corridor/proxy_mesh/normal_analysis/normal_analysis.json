@@ -1,0 +1,571 @@
+{
+  "schema_version": "1.0",
+  "algorithm": {
+    "name": "rfvisualizer_normal_analysis",
+    "version": "0.5.0"
+  },
+  "created_at": "2026-08-19T05:54:24.098595Z",
+  "input": {
+    "source_mesh_path": "/data/RFVisualizer_Workspace/RFVisualizer/PGSR/output/pnu_3f_corridor/mesh/tsdf_fusion_post.ply",
+    "reference_point_cloud_path": "/data/RFVisualizer_Workspace/RFVisualizer/PGSR/output/pnu_3f_corridor/point_cloud/iteration_30000/point_cloud.ply",
+    "point_source": "mesh_uniform"
+  },
+  "scene": {
+    "up_vector": [
+      0.037015957317146915,
+      0.9954291224475995,
+      0.08803795253807915
+    ],
+    "bounds": {
+      "min": [
+        -1.6218840543952335,
+        -1.18,
+        -5.123247744779295
+      ],
+      "max": [
+        3.9055945251739628,
+        1.2204671970135434,
+        7.001152259514869
+      ],
+      "extent": [
+        5.5274785795691965,
+        2.400467197013543,
+        12.124400004294165
+      ],
+      "diagonal": 13.539436386927733
+    },
+    "estimated_extent": 13.539436386927733,
+    "scale_status": "scene_unit_not_metric_calibrated"
+  },
+  "preprocessing_settings": {
+    "mesh_components": {
+      "enabled": false,
+      "keep_largest": 0,
+      "min_triangles": 1000,
+      "min_area_ratio": 0.0
+    },
+    "sampling": {
+      "number_of_points": 500000
+    },
+    "voxel_downsampling": {
+      "enabled": true,
+      "voxel_size": null,
+      "voxel_size_ratio": 0.002
+    },
+    "statistical_outlier_removal": {
+      "enabled": false,
+      "nb_neighbors": 30,
+      "std_ratio": 2.5
+    },
+    "radius_outlier_removal": {
+      "enabled": false,
+      "nb_points": 12,
+      "radius": null,
+      "radius_ratio": 0.006
+    },
+    "normal_estimation": {
+      "enabled": true,
+      "search_radius": null,
+      "search_radius_ratio": 0.006,
+      "max_nn": 30
+    }
+  },
+  "input_stats": {
+    "original_mesh": {
+      "vertex_count": 2149251,
+      "triangle_count": 4074778,
+      "bounds": {
+        "min": [
+          -1.6218840543952335,
+          -1.18,
+          -5.123247744779295
+        ],
+        "max": [
+          3.9055945251739628,
+          1.2204671970135434,
+          7.001152259514869
+        ],
+        "extent": [
+          5.5274785795691965,
+          2.400467197013543,
+          12.124400004294165
+        ],
+        "diagonal": 13.539436386927733
+      },
+      "surface_area": 102.3455019409519
+    },
+    "filtered_mesh": {
+      "vertex_count": 2149251,
+      "triangle_count": 4074778,
+      "bounds": {
+        "min": [
+          -1.6218840543952335,
+          -1.18,
+          -5.123247744779295
+        ],
+        "max": [
+          3.9055945251739628,
+          1.2204671970135434,
+          7.001152259514869
+        ],
+        "extent": [
+          5.5274785795691965,
+          2.400467197013543,
+          12.124400004294165
+        ],
+        "diagonal": 13.539436386927733
+      },
+      "surface_area": 102.3455019409519
+    },
+    "detection_points_before_preprocessing": 500000,
+    "detection_point_bounds": {
+      "min": [
+        -1.6217546364524935,
+        -1.178812344809792,
+        -5.122299049300574
+      ],
+      "max": [
+        3.9006484007013738,
+        1.220246190484033,
+        7.001011042428906
+      ],
+      "extent": [
+        5.522403037153867,
+        2.399058535293825,
+        12.12331009172948
+      ],
+      "diagonal": 13.536139211043976
+    }
+  },
+  "mesh_component_filter": {
+    "enabled": false,
+    "before_vertices": 2149251,
+    "before_triangles": 4074778,
+    "after_vertices": 2149251,
+    "after_triangles": 4074778,
+    "removed_triangles": 0,
+    "component_count": null
+  },
+  "preprocessing_stats": {
+    "before_point_count": 500000,
+    "after_point_count": 150544,
+    "removed_point_count": 349456,
+    "bounds_after": {
+      "min": [
+        -1.619425198455778,
+        -1.178812344809792,
+        -5.122299049300574
+      ],
+      "max": [
+        3.8990475242479308,
+        1.2189859400769396,
+        7.000460050065343
+      ],
+      "extent": [
+        5.5184727227037085,
+        2.397798284886732,
+        12.122759099365918
+      ],
+      "diagonal": 13.53381934220676
+    },
+    "scene_extent": 13.539436386927733,
+    "stages": {
+      "initial": 500000,
+      "voxel_downsampling": {
+        "before": 500000,
+        "after": 150544,
+        "removed": 349456
+      },
+      "statistical_outlier_removal": {
+        "enabled": false
+      },
+      "radius_outlier_removal": {
+        "enabled": false
+      },
+      "normal_estimation": {
+        "enabled": true,
+        "point_count": 150544
+      }
+    },
+    "used_values": {
+      "voxel_size": 0.027078872773855466,
+      "radius_outlier_radius": null,
+      "normal_search_radius": 0.0812366183215664
+    }
+  },
+  "normal_analysis_settings": {
+    "thresholds": [
+      0.25,
+      0.35,
+      0.5
+    ],
+    "histogram_bins": 50,
+    "horizontal_min_up_dot": 0.85
+  },
+  "normal_analysis": {
+    "preprocessed_point_count": 150544,
+    "valid_normal_count": 150544,
+    "invalid_normal_count": 0,
+    "threshold_results": [
+      {
+        "threshold": 0.25,
+        "point_count": 53179,
+        "ratio_of_valid_normals": 0.3532455627590605,
+        "ratio_of_preprocessed_points": 0.3532455627590605,
+        "preview_path": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/proxy_mesh/normal_analysis/vertical_points_dot_0_25.ply"
+      },
+      {
+        "threshold": 0.35,
+        "point_count": 60402,
+        "ratio_of_valid_normals": 0.4012248910617494,
+        "ratio_of_preprocessed_points": 0.4012248910617494,
+        "preview_path": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/proxy_mesh/normal_analysis/vertical_points_dot_0_35.ply"
+      },
+      {
+        "threshold": 0.5,
+        "point_count": 68730,
+        "ratio_of_valid_normals": 0.45654426612817517,
+        "ratio_of_preprocessed_points": 0.45654426612817517,
+        "preview_path": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/proxy_mesh/normal_analysis/vertical_points_dot_0_50.ply"
+      }
+    ],
+    "horizontal_result": {
+      "minimum_up_dot": 0.85,
+      "point_count": 63143,
+      "ratio_of_valid_normals": 0.41943219258157083,
+      "ratio_of_preprocessed_points": 0.41943219258157083,
+      "preview_path": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/proxy_mesh/normal_analysis/horizontal_points.ply"
+    },
+    "histogram": {
+      "range": [
+        0.0,
+        1.0
+      ],
+      "bin_count": 50,
+      "sample_count": 150544,
+      "bins": [
+        {
+          "bin_start": 0.0,
+          "bin_end": 0.02,
+          "count": 13262,
+          "ratio": 0.08809384631735573
+        },
+        {
+          "bin_start": 0.02,
+          "bin_end": 0.04,
+          "count": 8372,
+          "ratio": 0.055611648421723885
+        },
+        {
+          "bin_start": 0.04,
+          "bin_end": 0.06,
+          "count": 5601,
+          "ratio": 0.03720506961419917
+        },
+        {
+          "bin_start": 0.06,
+          "bin_end": 0.08,
+          "count": 4343,
+          "ratio": 0.028848708683175683
+        },
+        {
+          "bin_start": 0.08,
+          "bin_end": 0.1,
+          "count": 3612,
+          "ratio": 0.023992985439472845
+        },
+        {
+          "bin_start": 0.1,
+          "bin_end": 0.12,
+          "count": 3204,
+          "ratio": 0.02128281432670847
+        },
+        {
+          "bin_start": 0.12,
+          "bin_end": 0.14,
+          "count": 2988,
+          "ratio": 0.019848017855244978
+        },
+        {
+          "bin_start": 0.14,
+          "bin_end": 0.16,
+          "count": 2746,
+          "ratio": 0.018240514401105325
+        },
+        {
+          "bin_start": 0.16,
+          "bin_end": 0.18,
+          "count": 2271,
+          "ratio": 0.015085290679136996
+        },
+        {
+          "bin_start": 0.18,
+          "bin_end": 0.2,
+          "count": 2120,
+          "ratio": 0.014082261664363906
+        },
+        {
+          "bin_start": 0.2,
+          "bin_end": 0.22,
+          "count": 1912,
+          "ratio": 0.012700605802954618
+        },
+        {
+          "bin_start": 0.22,
+          "bin_end": 0.24,
+          "count": 1879,
+          "ratio": 0.012481400786481028
+        },
+        {
+          "bin_start": 0.24,
+          "bin_end": 0.26,
+          "count": 1685,
+          "ratio": 0.011192740992666596
+        },
+        {
+          "bin_start": 0.26,
+          "bin_end": 0.28,
+          "count": 1557,
+          "ratio": 0.01034249123179934
+        },
+        {
+          "bin_start": 0.28,
+          "bin_end": 0.3,
+          "count": 1407,
+          "ratio": 0.009346104793283027
+        },
+        {
+          "bin_start": 0.3,
+          "bin_end": 0.32,
+          "count": 1454,
+          "ratio": 0.009658305877351472
+        },
+        {
+          "bin_start": 0.32,
+          "bin_end": 0.34,
+          "count": 1380,
+          "ratio": 0.00916675523435009
+        },
+        {
+          "bin_start": 0.34,
+          "bin_end": 0.36,
+          "count": 1225,
+          "ratio": 0.0081371559145499
+        },
+        {
+          "bin_start": 0.36,
+          "bin_end": 0.38,
+          "count": 1208,
+          "ratio": 0.008024232118184716
+        },
+        {
+          "bin_start": 0.38,
+          "bin_end": 0.4,
+          "count": 1186,
+          "ratio": 0.007878095440535658
+        },
+        {
+          "bin_start": 0.4,
+          "bin_end": 0.42,
+          "count": 1059,
+          "ratio": 0.007034488255925178
+        },
+        {
+          "bin_start": 0.42,
+          "bin_end": 0.44,
+          "count": 1130,
+          "ratio": 0.007506111170156233
+        },
+        {
+          "bin_start": 0.44,
+          "bin_end": 0.46,
+          "count": 1066,
+          "ratio": 0.007080986289722606
+        },
+        {
+          "bin_start": 0.46,
+          "bin_end": 0.48,
+          "count": 1054,
+          "ratio": 0.007001275374641301
+        },
+        {
+          "bin_start": 0.48,
+          "bin_end": 0.5,
+          "count": 1009,
+          "ratio": 0.006702359443086407
+        },
+        {
+          "bin_start": 0.5,
+          "bin_end": 0.52,
+          "count": 1037,
+          "ratio": 0.006888351578276119
+        },
+        {
+          "bin_start": 0.52,
+          "bin_end": 0.54,
+          "count": 964,
+          "ratio": 0.0064034435115315124
+        },
+        {
+          "bin_start": 0.54,
+          "bin_end": 0.56,
+          "count": 949,
+          "ratio": 0.006303804867679881
+        },
+        {
+          "bin_start": 0.56,
+          "bin_end": 0.58,
+          "count": 930,
+          "ratio": 0.006177595918801148
+        },
+        {
+          "bin_start": 0.58,
+          "bin_end": 0.6,
+          "count": 939,
+          "ratio": 0.006237379105112127
+        },
+        {
+          "bin_start": 0.6,
+          "bin_end": 0.62,
+          "count": 979,
+          "ratio": 0.006503082155383144
+        },
+        {
+          "bin_start": 0.62,
+          "bin_end": 0.64,
+          "count": 938,
+          "ratio": 0.006230736528855352
+        },
+        {
+          "bin_start": 0.64,
+          "bin_end": 0.66,
+          "count": 979,
+          "ratio": 0.006503082155383144
+        },
+        {
+          "bin_start": 0.66,
+          "bin_end": 0.68,
+          "count": 981,
+          "ratio": 0.006516367307896695
+        },
+        {
+          "bin_start": 0.68,
+          "bin_end": 0.7000000000000001,
+          "count": 1035,
+          "ratio": 0.0068750664257625676
+        },
+        {
+          "bin_start": 0.7000000000000001,
+          "bin_end": 0.72,
+          "count": 1067,
+          "ratio": 0.007087628865979381
+        },
+        {
+          "bin_start": 0.72,
+          "bin_end": 0.74,
+          "count": 1164,
+          "ratio": 0.007731958762886598
+        },
+        {
+          "bin_start": 0.74,
+          "bin_end": 0.76,
+          "count": 1095,
+          "ratio": 0.0072736210011690935
+        },
+        {
+          "bin_start": 0.76,
+          "bin_end": 0.78,
+          "count": 1164,
+          "ratio": 0.007731958762886598
+        },
+        {
+          "bin_start": 0.78,
+          "bin_end": 0.8,
+          "count": 1146,
+          "ratio": 0.00761239239026464
+        },
+        {
+          "bin_start": 0.8,
+          "bin_end": 0.8200000000000001,
+          "count": 1295,
+          "ratio": 0.008602136252524178
+        },
+        {
+          "bin_start": 0.8200000000000001,
+          "bin_end": 0.84,
+          "count": 1316,
+          "ratio": 0.008741630353916462
+        },
+        {
+          "bin_start": 0.84,
+          "bin_end": 0.86,
+          "count": 1402,
+          "ratio": 0.00931289191199915
+        },
+        {
+          "bin_start": 0.86,
+          "bin_end": 0.88,
+          "count": 1578,
+          "ratio": 0.010481985333191625
+        },
+        {
+          "bin_start": 0.88,
+          "bin_end": 0.9,
+          "count": 1806,
+          "ratio": 0.011996492719736422
+        },
+        {
+          "bin_start": 0.9,
+          "bin_end": 0.92,
+          "count": 2153,
+          "ratio": 0.014301466680837496
+        },
+        {
+          "bin_start": 0.92,
+          "bin_end": 0.9400000000000001,
+          "count": 2768,
+          "ratio": 0.018386651078754385
+        },
+        {
+          "bin_start": 0.9400000000000001,
+          "bin_end": 0.96,
+          "count": 3624,
+          "ratio": 0.02407269635455415
+        },
+        {
+          "bin_start": 0.96,
+          "bin_end": 0.98,
+          "count": 6126,
+          "ratio": 0.04069242214900627
+        },
+        {
+          "bin_start": 0.98,
+          "bin_end": 1.0,
+          "count": 44379,
+          "ratio": 0.29479089169943673
+        }
+      ],
+      "csv_path": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/proxy_mesh/normal_analysis/normal_up_dot_histogram.csv"
+    },
+    "files": {
+      "histogram_csv": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/proxy_mesh/normal_analysis/normal_up_dot_histogram.csv",
+      "vertical_previews": {
+        "0_25": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/proxy_mesh/normal_analysis/vertical_points_dot_0_25.ply",
+        "0_35": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/proxy_mesh/normal_analysis/vertical_points_dot_0_35.ply",
+        "0_50": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/proxy_mesh/normal_analysis/vertical_points_dot_0_50.ply"
+      },
+      "horizontal_preview": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/proxy_mesh/normal_analysis/horizontal_points.ply",
+      "analysis_json": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/proxy_mesh/normal_analysis/normal_analysis.json"
+    }
+  },
+  "files": {
+    "histogram_csv": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/proxy_mesh/normal_analysis/normal_up_dot_histogram.csv",
+    "vertical_previews": {
+      "0_25": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/proxy_mesh/normal_analysis/vertical_points_dot_0_25.ply",
+      "0_35": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/proxy_mesh/normal_analysis/vertical_points_dot_0_35.ply",
+      "0_50": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/proxy_mesh/normal_analysis/vertical_points_dot_0_50.ply"
+    },
+    "horizontal_preview": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/proxy_mesh/normal_analysis/horizontal_points.ply",
+    "analysis_json": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/proxy_mesh/normal_analysis/normal_analysis.json"
+  }
+}

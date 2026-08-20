@@ -12,20 +12,20 @@ def test_validate_cli_headless(project_root, capsys):
             "--scenario",
             str(
                 project_root
-                / "scenes/pnu_classroom/configs/sionna/synthetic_blocker.yaml"
+                / "tools/proxy_placement_editor/tests/fixtures/configs/synthetic_blocker.yaml"
             ),
             "--room-json",
             str(
                 project_root
-                / "scenes/pnu_classroom/proxy_mesh/metric_calibration/room_envelope_metric.json"
+                / "tools/proxy_placement_editor/tests/fixtures/room/room_envelope_metric.json"
             ),
             "--calibration",
             str(
                 project_root
-                / "scenes/pnu_classroom/proxy_mesh/metric_calibration/calibration.json"
+                / "tools/proxy_placement_editor/tests/fixtures/room/calibration.json"
             ),
             "--candidates",
-            str(project_root / "scenes/pnu_classroom/configs/proxy_editor/candidates.yaml"),
+            str(project_root / "tools/proxy_placement_editor/tests/fixtures/configs/candidates.yaml"),
         ]
     )
     assert code == 0
@@ -62,17 +62,17 @@ def test_existing_marker_tx_is_loaded_at_its_saved_position(
         ),
         encoding="utf-8",
     )
-    room = project_root / "scenes/pnu_classroom/proxy_mesh/metric_calibration"
+    room = project_root / "tools/proxy_placement_editor/tests/fixtures/room"
     core = placement_main._create_core(
         SimpleNamespace(
             command="validate",
             scenario=project_root
-            / "scenes/pnu_classroom/configs/sionna/empty.yaml",
+            / "tools/proxy_placement_editor/tests/fixtures/configs/empty.yaml",
             room_obj=room / "room_envelope_metric.obj",
             room_json=room / "room_envelope_metric.json",
             calibration=room / "calibration.json",
             candidates=project_root
-            / "scenes/pnu_classroom/configs/proxy_editor/candidates.yaml",
+            / "tools/proxy_placement_editor/tests/fixtures/configs/candidates.yaml",
             markers=marker_path,
             output=tmp_path / "output",
             point_cloud=None,
@@ -100,24 +100,24 @@ def test_edit_without_display_fails_clearly(project_root, tmp_path, monkeypatch)
             "--room-obj",
             str(
                 project_root
-                / "scenes/pnu_classroom/proxy_mesh/metric_calibration/room_envelope_metric.obj"
+                / "tools/proxy_placement_editor/tests/fixtures/room/room_envelope_metric.obj"
             ),
             "--room-json",
             str(
                 project_root
-                / "scenes/pnu_classroom/proxy_mesh/metric_calibration/room_envelope_metric.json"
+                / "tools/proxy_placement_editor/tests/fixtures/room/room_envelope_metric.json"
             ),
             "--calibration",
             str(
                 project_root
-                / "scenes/pnu_classroom/proxy_mesh/metric_calibration/calibration.json"
+                / "tools/proxy_placement_editor/tests/fixtures/room/calibration.json"
             ),
             "--scenario",
             str(
-                project_root / "scenes/pnu_classroom/configs/sionna/proxy_draft.yaml"
+                project_root / "tools/proxy_placement_editor/tests/fixtures/configs/proxy_draft.yaml"
             ),
             "--candidates",
-            str(project_root / "scenes/pnu_classroom/configs/proxy_editor/candidates.yaml"),
+            str(project_root / "tools/proxy_placement_editor/tests/fixtures/configs/candidates.yaml"),
             "--output",
             str(tmp_path),
         ]

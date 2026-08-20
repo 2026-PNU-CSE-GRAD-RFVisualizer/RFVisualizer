@@ -10,7 +10,7 @@ from tools.proxy_placement_editor.candidate_library import (
 
 def test_required_templates_exist(project_root):
     values = load_candidate_library(
-        project_root / "scenes/pnu_classroom/configs/proxy_editor/candidates.yaml"
+        project_root / "tools/proxy_placement_editor/tests/fixtures/configs/candidates.yaml"
     )
     assert [value.label for value in values] == [
         "Desk Cluster",
@@ -26,7 +26,7 @@ def test_required_templates_exist(project_root):
 
 def test_candidate_add_is_disabled_and_unconfirmed(project_root, placement_scene):
     template = load_candidate_library(
-        project_root / "scenes/pnu_classroom/configs/proxy_editor/candidates.yaml"
+        project_root / "tools/proxy_placement_editor/tests/fixtures/configs/candidates.yaml"
     )[0]
     value = instantiate_candidate(
         template, "desk_cluster_000", placement_scene.containment
@@ -49,7 +49,7 @@ def test_candidate_add_is_disabled_and_unconfirmed(project_root, placement_scene
 def test_bad_candidate_schema_is_rejected(tmp_path, project_root, change):
     source = yaml.safe_load(
         (
-            project_root / "scenes/pnu_classroom/configs/proxy_editor/candidates.yaml"
+            project_root / "tools/proxy_placement_editor/tests/fixtures/configs/candidates.yaml"
         ).read_text()
     )
     change(source)

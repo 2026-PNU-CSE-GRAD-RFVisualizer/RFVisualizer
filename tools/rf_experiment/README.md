@@ -6,11 +6,12 @@
 
 ## 현재 상태
 
-- 좌표계는 출입문 왼쪽 아래 바닥점을 원점으로 하는 `+X/+Y/+Z`, meter, 오른손 좌표계로 동결했다.
-- 강의실 가로 15.4m, 깊이 10.8m, 바닥 높이차 약 0.75m, 문 2.09m × 2.09m를 기록했다.
-- 실측 가로·깊이·전체 높이차를 반영한 양의 좌표 기본 Envelope를 생성했다.
-- 바닥은 단일 경사면 placeholder이며 계단·문·책상·AP 배치가 남아 있어 Scene은 아직 `draft`다.
-- TX 1개, 보정 RX 4개, Test RX 15개의 실제 좌표가 비어 있어 Marker 계약은 `draft`다.
+씬마다 아래 항목을 확정해야 Scene/Marker 계약이 `draft`에서 `ready`로 바뀐다.
+
+- 좌표계: 출입문 왼쪽 아래 바닥점을 원점으로 하는 `+X/+Y/+Z`, meter, 오른손 좌표계 (예시 기준. 씬마다 원점·축은 TUTORIAL.md 7.1을 따라 새로 정한다)
+- 실측 가로·깊이·바닥 높이차를 반영한 양의 좌표 기본 Envelope
+- 계단·문·책상·AP 등 실측 장애물 배치 (미완성이면 Scene은 `draft`)
+- TX 1개, 보정 RX 4개, Test RX 15개의 실제 좌표 (비어 있으면 Marker 계약은 `draft`)
 
 ## 접근 방식
 
@@ -20,18 +21,18 @@
 
 ```bash
 python -m tools.rf_experiment.main validate-contracts \
-  --scene scenes/pnu_classroom/experiments/classroom_20260723/configs/scene.json \
-  --markers scenes/pnu_classroom/experiments/classroom_20260723/configs/tx_rx.json \
-  --methods scenes/pnu_classroom/experiments/classroom_20260723/configs/method_config.json
+  --scene scenes/<scene_id>/experiments/<session_id>/configs/scene.json \
+  --markers scenes/<scene_id>/experiments/<session_id>/configs/tx_rx.json \
+  --methods scenes/<scene_id>/experiments/<session_id>/configs/method_config.json
 ```
 
 현재 명령은 구조 검증에는 성공하지만, Metric Proxy Scene과 Marker가 미완성이므로 `ready: false`와 경고를 출력하는 것이 정상이다. 현장 실행 직전에는 `--require-ready`를 추가하고 exit code 0을 확인한다.
 
 ```bash
 python -m tools.rf_experiment.main validate-contracts \
-  --scene scenes/pnu_classroom/experiments/classroom_20260723/configs/scene.json \
-  --markers scenes/pnu_classroom/experiments/classroom_20260723/configs/tx_rx.json \
-  --methods scenes/pnu_classroom/experiments/classroom_20260723/configs/method_config.json \
+  --scene scenes/<scene_id>/experiments/<session_id>/configs/scene.json \
+  --markers scenes/<scene_id>/experiments/<session_id>/configs/tx_rx.json \
+  --methods scenes/<scene_id>/experiments/<session_id>/configs/method_config.json \
   --require-ready
 ```
 
@@ -39,8 +40,8 @@ python -m tools.rf_experiment.main validate-contracts \
 
 ```bash
 python -m tools.rf_experiment.main build-proxy-envelope \
-  --scene scenes/pnu_classroom/experiments/classroom_20260723/configs/scene.json \
-  --output scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene
+  --scene scenes/<scene_id>/experiments/<session_id>/configs/scene.json \
+  --output scenes/<scene_id>/experiments/<session_id>/outputs/proxy_scene
 ```
 
 출력은 기존 사진 추정 Metric 장면을 덮어쓰지 않는다. 새 OBJ/JSON/Calibration과 Top/Perspective 미리보기, 남은 가정을 기록한 보고서를 별도 경로에 만든다. PGSR 참조 정렬은 기존 Room corner를 사용한 affine 근사이며 최대 약 0.25m 오차가 있으므로, 물체의 실측 좌표를 대체하지 않는다.
@@ -52,12 +53,12 @@ Backend 출력은 계획 문서와 동일한 열 이름을 사용한다.
 ```bash
 python -m tools.rf_experiment.main validate-csv \
   --kind raw \
-  --csv experiments/classroom_20260723/raw/measurements_raw.csv \
+  --csv scenes/<scene_id>/experiments/<session_id>/raw/measurements_raw.csv \
   --require-rows
 
 python -m tools.rf_experiment.main validate-csv \
   --kind summary \
-  --csv experiments/classroom_20260723/processed/measurements_summary.csv \
+  --csv scenes/<scene_id>/experiments/<session_id>/processed/measurements_summary.csv \
   --require-rows
 ```
 
@@ -69,15 +70,15 @@ Raw 행은 `valid=false`일 때 RSSI 값이 비어 있어도 보존할 수 있�
 
 ```bash
 conda run -n pgsr python -m tools.proxy_placement_editor.main edit \
-  --room-obj scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene/room_envelope_metric.obj \
-  --room-json scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene/room_envelope_metric.json \
-  --calibration scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene/calibration.json \
-  --scenario scenes/pnu_classroom/configs/sionna/proxy_draft.yaml \
-  --candidates scenes/pnu_classroom/configs/proxy_editor/candidates.yaml \
-  --markers scenes/pnu_classroom/experiments/classroom_20260723/configs/tx_rx.json \
-  --reference-mesh PGSR/output/pnu_classroom/mesh/tsdf_fusion_post.ply \
+  --room-obj scenes/<scene_id>/experiments/<session_id>/outputs/proxy_scene/room_envelope_metric.obj \
+  --room-json scenes/<scene_id>/experiments/<session_id>/outputs/proxy_scene/room_envelope_metric.json \
+  --calibration scenes/<scene_id>/experiments/<session_id>/outputs/proxy_scene/calibration.json \
+  --scenario scenes/<scene_id>/configs/sionna/proxy_draft.yaml \
+  --candidates scenes/<scene_id>/configs/proxy_editor/candidates.yaml \
+  --markers scenes/<scene_id>/experiments/<session_id>/configs/tx_rx.json \
+  --reference-mesh PGSR/output/<scene_id>/mesh/tsdf_fusion_post.ply \
   --reference-coordinate-space scene \
-  --output scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_placement
+  --output scenes/<scene_id>/experiments/<session_id>/outputs/proxy_placement
 ```
 
 `저장` 한 번으로 Scenario YAML과 TX/RX JSON을 함께 갱신한다. 실제 좌표를 입력하기 전에는 Marker 상태를 `draft`로 유지한다. AP/TX 1개·보정 RX 4개·Test RX 15개가 모두 입력되고 검토된 뒤에만 Marker 상태를 `ready`로 바꾼다. GUI 없는 검토가 필요하면 통합 편집기의 `export-preview --markers ...`를 사용한다.
@@ -88,11 +89,11 @@ Backend Summary CSV, 위치별 Sionna 예측, 2D Grid Sionna 예측이 준비되
 
 ```bash
 python -m tools.rf_experiment.main analyze \
-  --summary experiments/classroom_20260723/processed/measurements_summary.csv \
-  --sionna-points experiments/classroom_20260723/processed/sionna_points.csv \
-  --sionna-grid experiments/classroom_20260723/processed/sionna_grid.csv \
-  --methods scenes/pnu_classroom/experiments/classroom_20260723/configs/method_config.json \
-  --output experiments/classroom_20260723
+  --summary scenes/<scene_id>/experiments/<session_id>/processed/measurements_summary.csv \
+  --sionna-points scenes/<scene_id>/experiments/<session_id>/processed/sionna_points.csv \
+  --sionna-grid scenes/<scene_id>/experiments/<session_id>/processed/sionna_grid.csv \
+  --methods scenes/<scene_id>/experiments/<session_id>/configs/method_config.json \
+  --output scenes/<scene_id>/experiments/<session_id>
 ```
 
 예측값 fitting에는 `calibration` 행만 사용하고, `test` 행은 MAE·RMSE 평가에만 사용한다. 출력에는 방법별 비교 CSV, 지표 CSV, 측정점 그림, 예측-실측 산점도, 동일한 색상 범위를 쓰는 히트맵 3장이 포함된다.
@@ -103,20 +104,20 @@ python -m tools.rf_experiment.main analyze \
 
 ```bash
 conda run -n sionna python -m tools.rf_experiment.main run-sionna \
-  --scene scenes/pnu_classroom/experiments/classroom_20260723/configs/scene.json \
-  --markers scenes/pnu_classroom/experiments/classroom_20260723/configs/tx_rx.json \
-  --solver scenes/pnu_classroom/experiments/classroom_20260723/configs/sionna_solver.json \
-  --output experiments/classroom_20260723/sionna
+  --scene scenes/<scene_id>/experiments/<session_id>/configs/scene.json \
+  --markers scenes/<scene_id>/experiments/<session_id>/configs/tx_rx.json \
+  --solver scenes/<scene_id>/experiments/<session_id>/configs/sionna_solver.json \
+  --output scenes/<scene_id>/experiments/<session_id>/sionna
 ```
 
 위 명령은 Scene과 Marker가 모두 `ready`가 아니면 중단한다. 파이프라인 연결만 확인할 때는 실제 파일과 구분된 합성 Marker에 `--allow-draft`를 명시한다.
 
 ```bash
 conda run -n sionna python -m tools.rf_experiment.main run-sionna \
-  --scene scenes/pnu_classroom/experiments/classroom_20260723/configs/scene.json \
-  --markers scenes/pnu_classroom/experiments/classroom_20260723/configs/dry_run/tx_rx_synthetic.json \
-  --solver scenes/pnu_classroom/experiments/classroom_20260723/configs/sionna_solver.json \
-  --output scenes/pnu_classroom/experiments/classroom_20260723/outputs/sionna_dry_run \
+  --scene scenes/<scene_id>/experiments/<session_id>/configs/scene.json \
+  --markers scenes/<scene_id>/experiments/<session_id>/configs/dry_run/tx_rx_synthetic.json \
+  --solver scenes/<scene_id>/experiments/<session_id>/configs/sionna_solver.json \
+  --output scenes/<scene_id>/experiments/<session_id>/outputs/sionna_dry_run \
   --allow-draft
 ```
 
@@ -126,8 +127,8 @@ conda run -n sionna python -m tools.rf_experiment.main run-sionna \
 
 ```bash
 python -m tools.rf_experiment.main generate-synthetic-summary \
-  --sionna-points scenes/pnu_classroom/experiments/classroom_20260723/outputs/end_to_end_dry_run/sionna/processed/sionna_points.csv \
-  --output scenes/pnu_classroom/experiments/classroom_20260723/outputs/end_to_end_dry_run/measurements_summary_synthetic.csv
+  --sionna-points scenes/<scene_id>/experiments/<session_id>/outputs/end_to_end_dry_run/sionna/processed/sionna_points.csv \
+  --output scenes/<scene_id>/experiments/<session_id>/outputs/end_to_end_dry_run/measurements_summary_synthetic.csv
 ```
 
 ## 다음 연결

@@ -4,7 +4,7 @@ Metric Room Envelope와 선택적 PGSR 참조 형상을 보면서 문·계단·�
 
 > **PROVISIONAL GEOMETRY**
 >
-> 현재 Metric scale과 proxy 배치는 현장 실측으로 검증되지 않았다. Candidate 기본 크기는 UI 편의용 placeholder이며 실제 강의실 치수가 아니다. 이 장면의 Sionna 결과를 실제 RSSI 정확도로 해석하면 안 된다.
+> 현재 Metric scale과 proxy 배치는 현장 실측으로 검증되지 않았다. Candidate 기본 크기는 UI 편의용 placeholder이며 실측 치수가 아니다. 이 장면의 Sionna 결과를 실제 RSSI 정확도로 해석하면 안 된다.
 
 실제 구현 검증 결과와 수동 UI 미확인 항목은 [PHASE2C_VALIDATION.md](PHASE2C_VALIDATION.md)에 기록한다.
 
@@ -36,29 +36,29 @@ Open3D 데스크톱 창에는 X11 또는 Wayland display가 필요하다. Displa
 
 ```bash
 conda run -n pgsr python -m tools.proxy_placement_editor.main edit \
-  --room-obj scenes/pnu_classroom/proxy_mesh/metric_calibration/room_envelope_metric.obj \
-  --room-json scenes/pnu_classroom/proxy_mesh/metric_calibration/room_envelope_metric.json \
-  --calibration scenes/pnu_classroom/proxy_mesh/metric_calibration/calibration.json \
-  --scenario scenes/pnu_classroom/configs/sionna/proxy_draft.yaml \
-  --candidates scenes/pnu_classroom/configs/proxy_editor/candidates.yaml \
-  --markers scenes/pnu_classroom/experiments/classroom_20260723/configs/tx_rx.json \
-  --output scenes/pnu_classroom/proxy_placement
+  --room-obj scenes/<scene_id>/proxy_mesh/metric_calibration/room_envelope_metric.obj \
+  --room-json scenes/<scene_id>/proxy_mesh/metric_calibration/room_envelope_metric.json \
+  --calibration scenes/<scene_id>/proxy_mesh/metric_calibration/calibration.json \
+  --scenario scenes/<scene_id>/configs/sionna/proxy_draft.yaml \
+  --candidates scenes/<scene_id>/configs/proxy_editor/candidates.yaml \
+  --markers scenes/<scene_id>/experiments/<session_id>/configs/tx_rx.json \
+  --output scenes/<scene_id>/proxy_placement
 ```
 
 실제 PGSR Point Cloud와 Output Mesh를 함께 표시하는 예시는 다음과 같다.
 
 ```bash
 conda run -n pgsr python -m tools.proxy_placement_editor.main edit \
-  --room-obj scenes/pnu_classroom/proxy_mesh/metric_calibration/room_envelope_metric.obj \
-  --room-json scenes/pnu_classroom/proxy_mesh/metric_calibration/room_envelope_metric.json \
-  --calibration scenes/pnu_classroom/proxy_mesh/metric_calibration/calibration.json \
-  --scenario scenes/pnu_classroom/configs/sionna/proxy_draft.yaml \
-  --candidates scenes/pnu_classroom/configs/proxy_editor/candidates.yaml \
-  --point-cloud PGSR/output/pnu_classroom/point_cloud/iteration_30000/point_cloud.ply \
+  --room-obj scenes/<scene_id>/proxy_mesh/metric_calibration/room_envelope_metric.obj \
+  --room-json scenes/<scene_id>/proxy_mesh/metric_calibration/room_envelope_metric.json \
+  --calibration scenes/<scene_id>/proxy_mesh/metric_calibration/calibration.json \
+  --scenario scenes/<scene_id>/configs/sionna/proxy_draft.yaml \
+  --candidates scenes/<scene_id>/configs/proxy_editor/candidates.yaml \
+  --point-cloud PGSR/output/<scene_id>/point_cloud/iteration_30000/point_cloud.ply \
   --point-cloud-coordinate-space scene \
-  --pgsr-output-mesh PGSR/output/pnu_classroom/mesh/tsdf_fusion_post.ply \
+  --pgsr-output-mesh PGSR/output/<scene_id>/mesh/tsdf_fusion_post.ply \
   --pgsr-output-mesh-coordinate-space scene \
-  --output scenes/pnu_classroom/proxy_placement
+  --output scenes/<scene_id>/proxy_placement
 ```
 
 `--point-cloud`는 PGSR Gaussian PLY의 위치를 최대 50만 점으로 표시하고, `--pgsr-output-mesh`는 실제 삼각형 표면을 별도 계층으로 표시한다. `scene` 입력에는 calibration의 `T_metric_from_scene`을 동일하게 적용한다. 기본 CLI는 약 693만 삼각형의 Output Mesh를 최대 100만 삼각형 캐시로 표시한다. `--pgsr-output-mesh-full-resolution`을 지정하면 캐시를 건너뛰고 원본 Mesh를 그대로 표시한다. 프로젝트의 `scripts/run_scene.py`는 구조 보존을 위해 이 원본 모드를 사용한다. PGSR 원본·scenario·Sionna export는 수정하지 않는다. 이전 `--reference-mesh` 인자는 호환용으로만 유지한다.
@@ -81,11 +81,11 @@ Room OBJ는 Room JSON 또는 scenario가 참조하는 Phase 2-A 설정에서 추
 
 ```bash
 conda run -n pgsr python -m tools.proxy_placement_editor.main validate \
-  --scenario scenes/pnu_classroom/configs/sionna/synthetic_blocker.yaml \
-  --candidates scenes/pnu_classroom/configs/proxy_editor/candidates.yaml \
-  --room-json scenes/pnu_classroom/proxy_mesh/metric_calibration/room_envelope_metric.json \
-  --calibration scenes/pnu_classroom/proxy_mesh/metric_calibration/calibration.json \
-  --output scenes/pnu_classroom/proxy_placement
+  --scenario scenes/<scene_id>/configs/sionna/synthetic_blocker.yaml \
+  --candidates scenes/<scene_id>/configs/proxy_editor/candidates.yaml \
+  --room-json scenes/<scene_id>/proxy_mesh/metric_calibration/room_envelope_metric.json \
+  --calibration scenes/<scene_id>/proxy_mesh/metric_calibration/calibration.json \
+  --output scenes/<scene_id>/proxy_placement
 ```
 
 활성 obstacle에 schema 오류, null, non-positive size, NaN/Inf, room 침투, 재질 오류, 좌표 왕복 오류가 있으면 exit code 2다. 비활성 draft의 null geometry는 `DISABLED_INCOMPLETE`로 기록하고 전체 검증은 통과한다. AABB 충돌과 벽 근접은 warning이며 저장을 막지 않는다.
@@ -94,11 +94,11 @@ conda run -n pgsr python -m tools.proxy_placement_editor.main validate \
 
 ```bash
 conda run -n pgsr python -m tools.proxy_placement_editor.main export-preview \
-  --scenario scenes/pnu_classroom/configs/sionna/synthetic_blocker.yaml \
-  --candidates scenes/pnu_classroom/configs/proxy_editor/candidates.yaml \
-  --point-cloud PGSR/output/pnu_classroom/point_cloud/iteration_30000/point_cloud.ply \
-  --pgsr-output-mesh PGSR/output/pnu_classroom/mesh/tsdf_fusion_post.ply \
-  --output scenes/pnu_classroom/proxy_placement/preview
+  --scenario scenes/<scene_id>/configs/sionna/synthetic_blocker.yaml \
+  --candidates scenes/<scene_id>/configs/proxy_editor/candidates.yaml \
+  --point-cloud PGSR/output/<scene_id>/point_cloud/iteration_30000/point_cloud.ply \
+  --pgsr-output-mesh PGSR/output/<scene_id>/mesh/tsdf_fusion_post.ply \
+  --output scenes/<scene_id>/proxy_placement/preview
 ```
 
 `--exclude-reference`를 추가하면 PNG에서 두 PGSR 계층을 제외한다.
@@ -131,7 +131,7 @@ conda run -n pgsr python -m tools.proxy_placement_editor.main export-preview \
 
 Toolbar 기본 snap은 translation 0.05m, rotation 5도, size 0.05m다. 지원 단위는 코어에서 임의 양수로 검증되며 World/Local, 배경 모드, 점 크기를 포함한 UI 설정은 scenario가 아니라 editor state에 저장된다. 여러 객체를 선택하면 결합 경계상자 중심에 World 축 gizmo 하나를 표시한다. 이동은 같은 변위를 적용하고, 회전·크기 조절은 각 객체 자체 변형과 그룹 중심으로부터의 위치 변화를 함께 적용한다. 이때 RX 점도 그룹 내 위치 변환에는 참여한다. 마우스 drag 중에는 선택 객체와 gizmo만 다시 만들고, 전체 장면 검증과 다른 객체 갱신은 mouse-up에 한 번만 수행한다. Mouse-up에는 선택 개수와 무관하게 명령 하나만 쌓인다. Gizmo handle은 화면 기준 22px 범위에서 선택하고, 그 바깥 34px까지는 좁게 빗나간 클릭이 다른 객체 선택이나 카메라 조작으로 전달되지 않게 막는다. 이동·크기는 화면에 투영된 축 방향의 mouse 이동을 실제 거리로 환산하고, 회전은 선택한 링의 화면상 접선 방향 이동을 각도로 환산한다. Gizmo drag 중에는 SceneWidget을 `PICK_POINTS` 제어로 전환해 mouse capture는 유지하면서 카메라 회전은 막고, mouse-up에 `ROTATE_CAMERA`로 복구한다.
 
-일반 편집 단축키는 Viewport에만 연결한다. 따라서 TextEdit/NumberEdit에 포커스가 있을 때 화살표, Backspace, Delete 등의 편집 키는 입력창이 직접 처리한다. Open3D 0.18은 ImGui 입력창이 활성화된 동안 Window와 SceneWidget key callback을 모두 건너뛰므로, Linux/X11·XWayland에서는 우클릭 FPS 중 로컬 키보드의 `XQueryKeymap` 상태와 XInput2 raw key event를 함께 읽는다. RustDesk 1.4.9가 키를 누른 상태 대신 즉시 Press/Release 펄스로 반복 전송하면, 120ms 유지 창을 반복 Press로 갱신해 연속 입력으로 복원한다. FPS 중에는 활성 속성 입력을 잠그고 우클릭을 놓을 때 상태 값으로 다시 표시해, 이동 키가 기존 입력값에 섞이지 않게 한다. XInput2를 사용할 수 없으면 로컬 keymap polling을 유지하고, X11 poller도 사용할 수 없는 환경에서는 기존 Window/Viewport callback을 fallback으로 유지한다. 우클릭 DRAG 이벤트의 버튼 bit가 비어 있어도 이동 상태를 유지하고 실제 `BUTTON_UP`에서만 종료한다. Ctrl+왼쪽 drag도 객체 선택보다 먼저 Open3D에 넘겨 카메라 평행 이동을 보존한다.
+일반 편집 단축키는 Viewport에만 연결한다. 따라서 TextEdit/NumberEdit에 포커스가 있을 때 화살표, Backspace, Delete 등의 편집 키는 입력창이 직접 처리한다. Open3D 0.18은 ImGui 입력창이 활성화된 동안 Window와 SceneWidget key callback을 모두 건너뛰므로, Linux/X11·XWayland에서는 우클릭 FPS 중 로컬 키보드의 `XQueryKeymap` 상태와 XInput2 raw key event를 함께 읽는다. RustDesk 1.4.9가 키를 누른 상태 대신 즉시 Press/Release 펄스로 반복 전송하면, 실측 반복 간격보다 긴 180ms 유지 창을 반복 Press로 갱신해 연속 입력으로 복원한다. FPS 중에는 활성 속성 입력을 잠그고 우클릭을 놓을 때 상태 값으로 다시 표시해, 이동 키가 기존 입력값에 섞이지 않게 한다. XInput2를 사용할 수 없으면 로컬 keymap polling을 유지하고, X11 poller도 사용할 수 없는 환경에서는 기존 Window/Viewport callback을 fallback으로 유지한다. 우클릭 DRAG 이벤트의 버튼 bit가 비어 있어도 이동 상태를 유지하고 실제 `BUTTON_UP`에서만 종료한다. Ctrl+왼쪽 drag도 객체 선택보다 먼저 Open3D에 넘겨 카메라 평행 이동을 보존한다.
 
 오른쪽 섹션의 구분선은 box-drawing 문자를 쓰지 않는다. Open3D fallback font에서 `?`로 표시되지 않도록 2px 높이의 배경색 layout으로 그린다.
 
@@ -163,7 +163,7 @@ navigation:
 
 ## Candidate library
 
-`scenes/pnu_classroom/configs/proxy_editor/candidates.yaml`에서 다음 template를 읽는다.
+`scenes/<scene_id>/configs/proxy_editor/candidates.yaml`에서 다음 template를 읽는다.
 
 - Desk Cluster
 - Blackboard Panel
@@ -212,7 +212,7 @@ geometry:
 
 ## Phase 2-B 연결
 
-GUI의 Validate/Build/Run A/B 버튼은 solver를 재구현하지 않고 `tools.sionna_scenario.main`을 별도 worker thread에서 실행한다. 환경은 `scenes/pnu_classroom/configs/proxy_editor/editor.yaml`에서 바꾼다.
+GUI의 Validate/Build/Run A/B 버튼은 solver를 재구현하지 않고 `tools.sionna_scenario.main`을 별도 worker thread에서 실행한다. 환경은 `scenes/<scene_id>/configs/proxy_editor/editor.yaml`에서 바꾼다.
 
 ```yaml
 external_commands:
@@ -224,7 +224,7 @@ external_commands:
 ## 출력
 
 ```text
-scenes/pnu_classroom/proxy_placement/
+scenes/<scene_id>/proxy_placement/
 ├─ editor_state.json
 ├─ scenario_resolved.json
 ├─ obstacles_metric.json

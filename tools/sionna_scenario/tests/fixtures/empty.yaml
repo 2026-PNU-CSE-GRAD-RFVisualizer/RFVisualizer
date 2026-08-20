@@ -1,0 +1,13 @@
+schema_version: "1.0"
+
+scenario:
+  id: pnu_classroom_empty
+  status: provisional
+  physically_validated: false
+  synthetic_validation: false
+
+  base_scene:
+    phase2a_config: tools/sionna_scenario/tests/fixtures/smoke_test.yaml
+
+  obstacles: []
+

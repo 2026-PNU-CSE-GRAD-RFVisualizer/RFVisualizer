@@ -26,7 +26,7 @@ def _marker_document():
 
 
 def _unified_core(draft_core, tmp_path, project_root):
-    room = project_root / "scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene"
+    room = project_root / "tools/proxy_placement_editor/tests/fixtures/room"
     state = EditorState(
         deepcopy(draft_core.state.document),
         source_path=draft_core.state.source_path,

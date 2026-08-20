@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "source_path": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/proxy_mesh/complex_envelope/pgsr_mesh_metric.ply",
+  "source_size_bytes": 184024121,
+  "source_mtime_ns": 1787129402505126543,
+  "maximum_triangles": 1000000,
+  "preview_path": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/proxy_placement/cache/pgsr_output_mesh_preview.ply",
+  "source_vertices": 3568224,
+  "source_triangles": 6744754,
+  "preview_vertices": 695846,
+  "preview_triangles": 999999,
+  "cache_reused": false
+}

@@ -49,10 +49,10 @@ python -m pip install -r tools/proxy_mesh_editor/requirements.txt
 
 ```bash
 conda run -n pgsr python -m tools.proxy_mesh_editor.main extract \
-  --mesh PGSR/output/pnu_classroom/mesh/tsdf_fusion_post.ply \
-  --reference-point-cloud PGSR/output/pnu_classroom/point_cloud/iteration_30000/point_cloud.ply \
-  --config tools/proxy_mesh_editor/configs/pnu_classroom.yaml \
-  --output scenes/pnu_classroom/proxy_mesh/phase1
+  --mesh PGSR/output/<scene_id>/mesh/tsdf_fusion_post.ply \
+  --reference-point-cloud PGSR/output/<scene_id>/point_cloud/iteration_30000/point_cloud.ply \
+  --config scenes/<scene_id>/configs/proxy_mesh/base.yaml \
+  --output scenes/<scene_id>/proxy_mesh/phase1
 ```
 
 기본 `point_source`는 `mesh_uniform`이므로 참고 점구름은 기록만 하고 평면 검출에는 쓰지 않는다. 참고 점구름을 직접 쓰려면 YAML에서 `reference_point_cloud`로 바꾼다.
@@ -87,9 +87,9 @@ selection:
 
 ```bash
 conda run -n pgsr python -m tools.proxy_mesh_editor.main export \
-  --candidates scenes/pnu_classroom/proxy_mesh/phase1/plane_candidates.json \
-  --config tools/proxy_mesh_editor/configs/pnu_classroom.yaml \
-  --output scenes/pnu_classroom/proxy_mesh/phase1
+  --candidates scenes/<scene_id>/proxy_mesh/phase1/plane_candidates.json \
+  --config scenes/<scene_id>/configs/proxy_mesh/base.yaml \
+  --output scenes/<scene_id>/proxy_mesh/phase1
 ```
 
 결과:
@@ -111,10 +111,10 @@ objects/wall_000.obj
 
 ```bash
 conda run -n pgsr python -m tools.proxy_mesh_editor.main analyze-normals \
-  --mesh PGSR/output/pnu_classroom/mesh/tsdf_fusion_post.ply \
-  --reference-point-cloud PGSR/output/pnu_classroom/point_cloud/iteration_30000/point_cloud.ply \
-  --config tools/proxy_mesh_editor/configs/pnu_classroom.yaml \
-  --output scenes/pnu_classroom/proxy_mesh/normal_analysis
+  --mesh PGSR/output/<scene_id>/mesh/tsdf_fusion_post.ply \
+  --reference-point-cloud PGSR/output/<scene_id>/point_cloud/iteration_30000/point_cloud.ply \
+  --config scenes/<scene_id>/configs/proxy_mesh/base.yaml \
+  --output scenes/<scene_id>/proxy_mesh/normal_analysis
 ```
 
 `abs(normal · up)`이 0에 가까울수록 벽과 같은 수직면이고, 1에 가까울수록 바닥·천장·책상 상판과 같은 수평면이다. 기준값별 PLY, 수평점 PLY, 히스토그램 CSV, 분석 JSON이 생성된다. 유효하지 않은 법선은 통계에 기록하되 미리보기에서는 제외한다.
@@ -125,10 +125,10 @@ conda run -n pgsr python -m tools.proxy_mesh_editor.main analyze-normals \
 
 ```bash
 conda run -n pgsr python -m tools.proxy_mesh_editor.main extract-walls \
-  --mesh PGSR/output/pnu_classroom/mesh/tsdf_fusion_post.ply \
-  --reference-point-cloud PGSR/output/pnu_classroom/point_cloud/iteration_30000/point_cloud.ply \
-  --config tools/proxy_mesh_editor/configs/pnu_classroom.yaml \
-  --output scenes/pnu_classroom/proxy_mesh/wall_extraction
+  --mesh PGSR/output/<scene_id>/mesh/tsdf_fusion_post.ply \
+  --reference-point-cloud PGSR/output/<scene_id>/point_cloud/iteration_30000/point_cloud.ply \
+  --config scenes/<scene_id>/configs/proxy_mesh/base.yaml \
+  --output scenes/<scene_id>/proxy_mesh/wall_extraction
 ```
 
 검출된 평면의 법선도 다시 검사한다. 같은 RANSAC 평면에 속한 끊어진 연결 묶음은 설정에 따라 합칠 수 있지만, 서로 다른 벽 후보끼리는 합치지 않는다. 결과는 다음과 같다.
@@ -144,10 +144,10 @@ wall_candidate_meshes/wall_000.ply ...
 
 ```bash
 conda run -n pgsr python -m tools.proxy_mesh_editor.main export \
-  --candidates scenes/pnu_classroom/proxy_mesh/phase1/plane_candidates.json \
-  --wall-candidates scenes/pnu_classroom/proxy_mesh/wall_extraction/wall_candidates.json \
+  --candidates scenes/<scene_id>/proxy_mesh/phase1/plane_candidates.json \
+  --wall-candidates scenes/<scene_id>/proxy_mesh/wall_extraction/wall_candidates.json \
   --config path/to/selection.yaml \
-  --output scenes/pnu_classroom/proxy_mesh/phase1_5
+  --output scenes/<scene_id>/proxy_mesh/phase1_5
 ```
 
 기존 `--candidates`만 사용하는 방식도 그대로 동작한다.
@@ -173,10 +173,10 @@ room_envelope:
 
 ```bash
 conda run -n pgsr python -m tools.proxy_mesh_editor.main build-envelope \
-  --plane-candidates scenes/pnu_classroom/proxy_mesh/phase1/plane_candidates.json \
-  --wall-candidates scenes/pnu_classroom/proxy_mesh/wall_extraction/wall_candidates.json \
-  --envelope-config tools/proxy_mesh_editor/configs/pnu_classroom_envelope.yaml \
-  --output scenes/pnu_classroom/proxy_mesh/room_envelope
+  --plane-candidates scenes/<scene_id>/proxy_mesh/phase1/plane_candidates.json \
+  --wall-candidates scenes/<scene_id>/proxy_mesh/wall_extraction/wall_candidates.json \
+  --envelope-config scenes/<scene_id>/configs/proxy_mesh/envelope.yaml \
+  --output scenes/<scene_id>/proxy_mesh/room_envelope
 ```
 
 바닥과 천장은 NumPy 기반의 결정적인 ear clipping으로 삼각분할하므로 볼록·오목 단순 다각형을 모두 지원한다. 서로 교차하는 벽 순서는 오류 처리한다. 출력은 다음과 같다.
@@ -200,10 +200,10 @@ objects/wall_000.obj ...
 
 ```bash
 conda run -n pgsr python -m tools.proxy_mesh_editor.main calibration-preflight \
-  --envelope-json scenes/pnu_classroom/proxy_mesh/room_envelope/room_envelope.json \
-  --envelope-obj scenes/pnu_classroom/proxy_mesh/room_envelope/room_envelope.obj \
-  --config tools/proxy_mesh_editor/configs/pnu_classroom_calibration_preflight.yaml \
-  --output scenes/pnu_classroom/proxy_mesh/calibration_preflight
+  --envelope-json scenes/<scene_id>/proxy_mesh/room_envelope/room_envelope.json \
+  --envelope-obj scenes/<scene_id>/proxy_mesh/room_envelope/room_envelope.obj \
+  --config scenes/<scene_id>/configs/proxy_mesh/calibration_preflight.yaml \
+  --output scenes/<scene_id>/proxy_mesh/calibration_preflight
 ```
 
 주요 결과:
@@ -215,10 +215,10 @@ scale_analysis.csv
 room_envelope_up_aligned.obj
 room_envelope_up_aligned.ply
 coordinate_axes.ply
-pnu_classroom_metric_calibration_draft.yaml
+<scene_id>_metric_calibration_draft.yaml
 ```
 
-`room_envelope_up_aligned.*`에는 위쪽 정렬 회전만 적용된다. 실제 배율, 원점 이동, 바닥 평탄화는 적용하지 않는다. 배율 기준값은 모두 양수여야 하며, 두 기준의 상대 차이가 5%를 넘으면 경고하고 20%를 넘으면 사전 진단을 실패 처리한다. 현재 강의실 기준값은 사진 기반 추정치이므로 생성된 설정 초안도 `provisional` 상태다.
+`room_envelope_up_aligned.*`에는 위쪽 정렬 회전만 적용된다. 실제 배율, 원점 이동, 바닥 평탄화는 적용하지 않는다. 배율 기준값은 모두 양수여야 하며, 두 기준의 상대 차이가 5%를 넘으면 경고하고 20%를 넘으면 사전 진단을 실패 처리한다. 현재 예시 기준값은 사진 기반 추정치이므로 생성된 설정 초안도 `provisional` 상태다.
 
 좌표축 PLY의 색은 X축 빨강, Y축 초록, Z축 파랑, 원래 장면 위쪽 노랑, 목표 위쪽 청록, 바닥점 어두운색, 천장점 밝은 분홍색이다. 실제 결과와 수치는 [Phase 1.5-C 사전 진단 결과](PHASE1_5C_PREFLIGHT_VALIDATION.md)에 기록했다.
 
@@ -228,10 +228,10 @@ pnu_classroom_metric_calibration_draft.yaml
 
 ```bash
 conda run -n pgsr python -m tools.proxy_mesh_editor.main calibrate-metric \
-  --envelope-json scenes/pnu_classroom/proxy_mesh/room_envelope/room_envelope.json \
-  --envelope-obj scenes/pnu_classroom/proxy_mesh/room_envelope/room_envelope.obj \
-  --config tools/proxy_mesh_editor/configs/pnu_classroom_metric_calibration.yaml \
-  --output scenes/pnu_classroom/proxy_mesh/metric_calibration
+  --envelope-json scenes/<scene_id>/proxy_mesh/room_envelope/room_envelope.json \
+  --envelope-obj scenes/<scene_id>/proxy_mesh/room_envelope/room_envelope.obj \
+  --config scenes/<scene_id>/configs/proxy_mesh/metric_calibration.yaml \
+  --output scenes/<scene_id>/proxy_mesh/metric_calibration
 ```
 
 변환은 하나의 양수 배율 `s`, 오른손 좌표계 회전 `R`, 설정에 고정한 원점 `o`를 사용한다.
@@ -240,7 +240,7 @@ conda run -n pgsr python -m tools.proxy_mesh_editor.main calibrate-metric \
 p_metric = s · R · (p_scene - o)
 ```
 
-현재 강의실 설정은 바닥점 `0`을 원점, 바닥 모서리 `2→3`의 위쪽 성분을 제거한 방향을 `+X`, 기존 `scene.up_vector`를 `+Z`로 사용한다. 실제 모서리 자체의 높이 차이는 그대로 보존되므로 변환된 모서리에 작은 Z 성분이 있을 수 있지만, 그 수평 투영은 정확히 `+X`다.
+이 예시 설정은 바닥점 `0`을 원점, 바닥 모서리 `2→3`의 위쪽 성분을 제거한 방향을 `+X`, 기존 `scene.up_vector`를 `+Z`로 사용한다. 실제 모서리 자체의 높이 차이는 그대로 보존되므로 변환된 모서리에 작은 Z 성분이 있을 수 있지만, 그 수평 투영은 정확히 `+X`다.
 
 주요 결과:
 
@@ -286,7 +286,7 @@ metric_coordinate_axes.ply
 | `metric_calibration.coordinate_frame.x_axis` | 수평 투영을 `+X`로 사용할 방향성 바닥 모서리 |
 | `metric_calibration.validation.*` | 기준 길이 오차, 회전, 왕복 변환, 평면, 위상 허용 조건 |
 
-`pnu_classroom.yaml`은 넓은 바닥 후보의 법선과 카메라 높이 변화가 가장 작아지는 방향을 함께 확인해, `-Y`에서 약 7도 기울어진 방향을 위쪽으로 설정했다. 이는 장면별 설정이며 다른 장소에 그대로 적용하면 안 된다.
+`scene.up_vector`는 넓은 바닥 후보의 법선과 카메라 높이 변화가 가장 작아지는 방향을 함께 확인해 정한다. 이는 장면별 설정이며 다른 장소에 그대로 적용하면 안 된다.
 
 ## 현재 한계
 
@@ -297,7 +297,7 @@ metric_coordinate_axes.ply
 - `floor`, `wall`, `ceiling`은 법선과 장면 높이만 사용한 제안이다.
 - 사각형은 의도적으로 구멍을 막으므로, 문처럼 실제로 통과 가능한 구간은 이후 편집 단계에서 별도 처리해야 한다.
 - 일반 추출·Room Envelope·사전 진단 결과는 원본 장면 단위를 유지한다. 미터 단위 결과는 `calibrate-metric`의 별도 출력만 사용한다.
-- 현재 실제 크기 결과는 사진 기반 문 규격을 사용한 임시값이다. 현장 실측 뒤 `pnu_classroom_metric_calibration.yaml`의 기준 길이만 바꾸고 다시 실행해야 한다.
+- 현재 실제 크기 결과는 사진 기반 추정치를 사용한 임시값이다. 현장 실측 뒤 `metric_calibration.yaml`의 기준 길이만 바꾸고 다시 실행해야 한다.
 
 ## 테스트
 

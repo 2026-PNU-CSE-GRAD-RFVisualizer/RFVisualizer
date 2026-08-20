@@ -8,7 +8,7 @@ def test_synthetic_blocker_round_trip_preserves_geometry_material_and_unknown_me
     tmp_path, project_root
 ):
     source = (
-        project_root / "scenes/pnu_classroom/configs/sionna/synthetic_blocker.yaml"
+        project_root / "tools/proxy_placement_editor/tests/fixtures/configs/synthetic_blocker.yaml"
     )
     original = load_editor_scenario(source)
     original["scenario"]["custom_unknown"] = {"keep": True}
@@ -27,7 +27,7 @@ def test_synthetic_blocker_round_trip_preserves_geometry_material_and_unknown_me
 
 
 def test_draft_null_geometry_round_trip(tmp_path, project_root):
-    source = project_root / "scenes/pnu_classroom/configs/sionna/proxy_draft.yaml"
+    source = project_root / "tools/proxy_placement_editor/tests/fixtures/configs/proxy_draft.yaml"
     original = load_editor_scenario(source)
     destination = tmp_path / "draft.yaml"
     save_editor_scenario(original, destination)

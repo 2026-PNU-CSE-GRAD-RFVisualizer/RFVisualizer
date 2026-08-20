@@ -10,7 +10,7 @@ def test_legacy_anchor_point_keeps_phase2b_synthetic_result(
     project_root, placement_scene
 ):
     document = load_editor_scenario(
-        project_root / "scenes/pnu_classroom/configs/sionna/synthetic_blocker.yaml"
+        project_root / "tools/proxy_placement_editor/tests/fixtures/configs/synthetic_blocker.yaml"
     )
     report = floor_contact_report(
         document["scenario"]["obstacles"][0], placement_scene.containment
@@ -23,7 +23,7 @@ def test_minimum_bottom_vertex_policy_hits_configured_clearance(
     project_root, placement_scene
 ):
     document = load_editor_scenario(
-        project_root / "scenes/pnu_classroom/configs/sionna/synthetic_blocker.yaml"
+        project_root / "tools/proxy_placement_editor/tests/fixtures/configs/synthetic_blocker.yaml"
     )
     value = deepcopy(document["scenario"]["obstacles"][0])
     value["purpose"] = "classroom_proxy"

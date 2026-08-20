@@ -1,0 +1,34 @@
+schema_version: "1.0"
+
+room_envelope:
+  enabled: true
+
+  # floor/ceiling/ordered_walls는 비워둔다. 5.4 pick-envelope가 3D Viewer
+  # 선택으로 채우거나, 수작업(방법 B)일 때 직접 candidate_id를 적는다.
+  # 예시 형식:
+  #   floor:
+  #     candidate_id: plane_006
+  #   ceiling:
+  #     candidate_id: plane_005
+  #   ordered_walls:
+  #     - candidate_id: wall_008
+  #     - candidate_id: wall_000
+
+  interior_point: null
+
+  validation:
+    floor_ceiling_max_angle_deg: 10.0
+    wall_max_up_dot: 0.25
+    adjacent_wall_min_angle_deg: 10.0
+    plane_residual_tolerance: 1.0e-6
+    vertex_merge_tolerance: 1.0e-6
+    intersection_max_condition_number: 1.0e12
+    minimum_height: null
+    minimum_height_ratio: 0.05
+    require_simple_polygon: true
+    require_closed_manifold: true
+
+  output:
+    normal_orientation: outward
+    write_individual_objects: true
+    write_preview_ply: true

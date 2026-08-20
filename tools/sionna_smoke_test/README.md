@@ -40,15 +40,15 @@ conda run -n sionna python -m tools.sionna_smoke_test.main check-environment
 
 ```bash
 conda run -n sionna python -m tools.sionna_smoke_test.main validate-scene \
-  --config scenes/pnu_classroom/configs/sionna/smoke_test.yaml
+  --config scenes/<scene_id>/configs/sionna/smoke_test.yaml
 ```
 
 전체 실행:
 
 ```bash
 conda run -n sionna python -m tools.sionna_smoke_test.main run \
-  --config scenes/pnu_classroom/configs/sionna/smoke_test.yaml \
-  --output scenes/pnu_classroom/sionna/smoke_test
+  --config scenes/<scene_id>/configs/sionna/smoke_test.yaml \
+  --output scenes/<scene_id>/sionna/smoke_test
 ```
 
 ## 처리 방식

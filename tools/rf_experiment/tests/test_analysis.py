@@ -21,10 +21,10 @@ from tools.rf_experiment.contracts import SUMMARY_REQUIRED_COLUMNS
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 METHOD_CONFIG = (
     PROJECT_ROOT
-    / "scenes"
-    / "pnu_classroom"
-    / "experiments"
-    / "classroom_20260723"
+    / "tools"
+    / "rf_experiment"
+    / "tests"
+    / "fixtures"
     / "configs"
     / "method_config.json"
 )

@@ -545,6 +545,16 @@ class ProxyPlacementApp:
             gui.Widget.EventCallbackResult.IGNORED,
         )
         right_down = event.is_button_down(gui.MouseButton.RIGHT)
+        if self._drag is not None:
+            if event.type == gui.MouseEvent.Type.BUTTON_UP:
+                if event.is_button_down(gui.MouseButton.LEFT):
+                    return consumed
+            elif event.type != gui.MouseEvent.Type.DRAG or (
+                right_down
+                or event.is_button_down(gui.MouseButton.MIDDLE)
+                or event.is_modifier_down(gui.KeyModifier.ALT)
+            ):
+                return consumed
         if event.type == gui.MouseEvent.Type.BUTTON_DOWN and right_down:
             if not self._start_fps_navigation():
                 return ignored
@@ -552,6 +562,8 @@ class ProxyPlacementApp:
             return handled
         if self.fps_camera.active:
             if event.type == gui.MouseEvent.Type.BUTTON_UP:
+                if right_down:
+                    return consumed
                 self._end_fps_navigation()
                 return consumed
             if event.type == gui.MouseEvent.Type.DRAG:
@@ -862,7 +874,7 @@ class ProxyPlacementApp:
                     self._refresh_drag_preview(
                         drag["object_ids"], drag["center"]
                     )
-            except ValueError:
+            except (OverflowError, ValueError):
                 pass
             return consumed
         if event.type == gui.MouseEvent.Type.BUTTON_UP and self._drag is not None:
@@ -880,15 +892,20 @@ class ProxyPlacementApp:
 
     def _on_viewport_key(self, event):
         gui = self.gui
-        if self.fps_camera.active or self._fps_exit_pending:
-            self._on_key(event)
-            return gui.Widget.EventCallbackResult.CONSUMED
-        elif event.key in (
+        modifier_keys = (
             gui.KeyName.LEFT_CONTROL,
             gui.KeyName.RIGHT_CONTROL,
             gui.KeyName.LEFT_SHIFT,
             gui.KeyName.RIGHT_SHIFT,
-        ):
+        )
+        if self._drag is not None:
+            if event.key in modifier_keys:
+                self._on_key(event)
+            return gui.Widget.EventCallbackResult.CONSUMED
+        if self.fps_camera.active or self._fps_exit_pending:
+            self._on_key(event)
+            return gui.Widget.EventCallbackResult.CONSUMED
+        elif event.key in modifier_keys:
             self._on_key(event)
             return gui.Widget.EventCallbackResult.HANDLED
         return (
@@ -898,14 +915,19 @@ class ProxyPlacementApp:
         )
 
     def _on_window_key(self, event):
-        if self.fps_camera.active or self._fps_exit_pending:
-            return bool(self._on_key(event))
-        if event.key in (
+        modifier_keys = (
             self.gui.KeyName.LEFT_CONTROL,
             self.gui.KeyName.RIGHT_CONTROL,
             self.gui.KeyName.LEFT_SHIFT,
             self.gui.KeyName.RIGHT_SHIFT,
-        ):
+        )
+        if self._drag is not None:
+            if event.key in modifier_keys:
+                self._on_key(event)
+            return True
+        if self.fps_camera.active or self._fps_exit_pending:
+            return bool(self._on_key(event))
+        if event.key in modifier_keys:
             self._on_key(event)
         return False
 

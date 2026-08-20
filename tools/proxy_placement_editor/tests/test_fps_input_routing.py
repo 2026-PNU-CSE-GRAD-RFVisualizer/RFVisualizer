@@ -142,6 +142,14 @@ def test_right_mouse_routes_wasd_to_fps_and_restores_scale(monkeypatch):
     assert value.fps_camera.pressed_keys == {"s"}
     assert value.core.state.viewport_mode == "select"
 
+    # Releasing another mouse button while right is still held must not end
+    # the FPS gesture or restore the orbit controller early.
+    assert (
+        value._on_mouse(MouseEvent(FakeGui.MouseEvent.Type.BUTTON_UP, right=True))
+        == EventResults.CONSUMED
+    )
+    assert value.fps_camera.active is True
+
     # Open3D 0.18/0.19 may omit the held-button bit on DRAG events. FPS must
     # end on BUTTON_UP, not on that transient bit.
     assert (
@@ -266,3 +274,24 @@ def test_ctrl_modifier_is_observed_but_passed_to_native_pan():
     result = value._on_viewport_key(KeyEvent(FakeGui.KeyName.LEFT_CONTROL))
     assert result == EventResults.HANDLED
     assert value._keys["ctrl"] is True
+
+
+def test_active_gizmo_drag_consumes_camera_and_mode_shortcuts():
+    value = make_app()
+    value._drag = {"active": True}
+    value.viewport.frame_room = lambda: (_ for _ in ()).throw(
+        AssertionError("camera changed during gizmo drag")
+    )
+
+    assert (
+        value._on_viewport_key(KeyEvent(FakeGui.KeyName.HOME))
+        == EventResults.CONSUMED
+    )
+    assert value._on_window_key(KeyEvent(FakeGui.KeyName.HOME)) is True
+    assert value.core.state.viewport_mode == "select"
+
+    assert (
+        value._on_viewport_key(KeyEvent(FakeGui.KeyName.LEFT_SHIFT))
+        == EventResults.CONSUMED
+    )
+    assert value._keys["shift"] is True

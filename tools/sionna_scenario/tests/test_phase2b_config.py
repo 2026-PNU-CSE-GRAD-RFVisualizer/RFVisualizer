@@ -14,13 +14,13 @@ from tools.sionna_scenario.config import (
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-SCENARIO_DIR = PROJECT_ROOT / "scenes" / "pnu_classroom" / "configs" / "sionna"
+SCENARIO_DIR = PROJECT_ROOT / "tools" / "sionna_scenario" / "tests" / "fixtures"
 EXPERIMENT = (
     PROJECT_ROOT
-    / "scenes"
-    / "pnu_classroom"
-    / "configs"
-    / "sionna"
+    / "tools"
+    / "sionna_scenario"
+    / "tests"
+    / "fixtures"
     / "phase2b_ab_experiment.yaml"
 )
 

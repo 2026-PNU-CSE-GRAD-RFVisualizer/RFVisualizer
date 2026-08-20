@@ -62,8 +62,8 @@ def post_process_mesh(mesh, cluster_to_keep=1):
     print("num vertices post {}".format(len(mesh_0.vertices)))
     return mesh_0
 
-def render_set(model_path, name, iteration, views, scene, gaussians, pipeline, background, 
-               app_model=None, max_depth=5.0, volume=None, use_depth_filter=False):
+def render_set(model_path, name, iteration, views, scene, gaussians, pipeline, background,
+               app_model=None, max_depth=5.0, volume=None, use_depth_filter=False, exclude_images=set()):
     gts_path = os.path.join(model_path, name, "ours_{}".format(iteration), "gt")
     render_path = os.path.join(model_path, name, "ours_{}".format(iteration), "renders")
     render_depth_path = os.path.join(model_path, name, "ours_{}".format(iteration), "renders_depth")
@@ -74,7 +74,6 @@ def render_set(model_path, name, iteration, views, scene, gaussians, pipeline, b
     makedirs(render_depth_path, exist_ok=True)
     makedirs(render_normal_path, exist_ok=True)
 
-    depths_tsdf_fusion = []
     for idx, view in enumerate(tqdm(views, desc="Rendering progress")):
         gt, _ = view.get_image()
         out = render(view, gaussians, pipeline, background, app_model=app_model)
@@ -110,18 +109,14 @@ def render_set(model_path, name, iteration, views, scene, gaussians, pipeline, b
             angle = torch.acos(dot)
             mask = angle > (80.0 / 180 * 3.14159)
             depth_tsdf[mask] = 0
-        depths_tsdf_fusion.append(depth_tsdf.squeeze().cpu())
-        
-    if volume is not None:
-        depths_tsdf_fusion = torch.stack(depths_tsdf_fusion, dim=0)
-        for idx, view in enumerate(tqdm(views, desc="TSDF Fusion progress")):
-            ref_depth = depths_tsdf_fusion[idx].cuda()
 
+        if volume is not None and view.image_name not in exclude_images:
+            ref_depth = depth_tsdf.squeeze()
             if view.mask is not None:
                 ref_depth[view.mask.squeeze() < 0.5] = 0
             ref_depth[ref_depth>max_depth] = 0
             ref_depth = ref_depth.detach().cpu().numpy()
-            
+
             pose = np.identity(4)
             pose[:3,:3] = view.R.transpose(-1,-2)
             pose[:3, 3] = view.T
@@ -135,7 +130,7 @@ def render_set(model_path, name, iteration, views, scene, gaussians, pipeline, b
                 pose)
 
 def render_sets(dataset : ModelParams, iteration : int, pipeline : PipelineParams, skip_train : bool, skip_test : bool,
-                 max_depth : float, voxel_size : float, num_cluster: int, use_depth_filter : bool):
+                 max_depth : float, voxel_size : float, num_cluster: int, use_depth_filter : bool, exclude_images=set()):
     with torch.no_grad():
         gaussians = GaussianModel(dataset.sh_degree)
         scene = Scene(dataset, gaussians, load_iteration=iteration, shuffle=False)
@@ -152,8 +147,8 @@ def render_sets(dataset : ModelParams, iteration : int, pipeline : PipelineParam
             color_type=o3d.pipelines.integration.TSDFVolumeColorType.RGB8)
 
         if not skip_train:
-            render_set(dataset.model_path, "train", scene.loaded_iter, scene.getTrainCameras(), scene, gaussians, pipeline, background, 
-                       max_depth=max_depth, volume=volume, use_depth_filter=use_depth_filter)
+            render_set(dataset.model_path, "train", scene.loaded_iter, scene.getTrainCameras(), scene, gaussians, pipeline, background,
+                       max_depth=max_depth, volume=volume, use_depth_filter=use_depth_filter, exclude_images=exclude_images)
             print(f"extract_triangle_mesh")
             mesh = volume.extract_triangle_mesh()
 
@@ -184,6 +179,8 @@ if __name__ == "__main__":
     parser.add_argument("--voxel_size", default=0.002, type=float)
     parser.add_argument("--num_cluster", default=1, type=int)
     parser.add_argument("--use_depth_filter", action="store_true")
+    parser.add_argument("--exclude_images", default="", type=str,
+                         help="comma-separated image names to skip during TSDF fusion (bad COLMAP poses)")
 
     args = get_combined_args(parser)
     print("Rendering " + args.model_path)
@@ -191,4 +188,6 @@ if __name__ == "__main__":
     # Initialize system state (RNG)
     safe_state(args.quiet)
     print(f"multi_view_num {model.multi_view_num}")
-    render_sets(model.extract(args), args.iteration, pipeline.extract(args), args.skip_train, args.skip_test, args.max_depth, args.voxel_size, args.num_cluster, args.use_depth_filter)
+    exclude_images = {n.strip() for n in args.exclude_images.split(",") if n.strip()}
+    print(f"excluding {len(exclude_images)} images from TSDF fusion: {exclude_images}")
+    render_sets(model.extract(args), args.iteration, pipeline.extract(args), args.skip_train, args.skip_test, args.max_depth, args.voxel_size, args.num_cluster, args.use_depth_filter, exclude_images=exclude_images)

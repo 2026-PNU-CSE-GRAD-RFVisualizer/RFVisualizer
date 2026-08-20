@@ -1,0 +1,61 @@
+schema_version: "1.0"
+
+metric_calibration:
+  status: provisional
+  confidence: low
+
+  source:
+    envelope_json: scenes/my_room/proxy_mesh/room_envelope/room_envelope.json
+    envelope_obj: scenes/my_room/proxy_mesh/room_envelope/room_envelope.obj
+
+  scale:
+    method: weighted_least_squares
+    uniform_scale_only: true
+    references:
+      - name: two_door_total_width
+        scene_distance: 1.351458
+        real_distance_m: 2.0
+        source: estimated_from_photo
+        confidence: low
+        weight: 1.0
+        notes: "현장 실측 후 문틀과 중앙 간격 포함 범위를 동일하게 측정해야 함."
+      - name: door_height
+        scene_distance: 1.370173
+        real_distance_m: 2.2
+        source: estimated_from_photo
+        confidence: low
+        weight: 1.0
+        notes: "현장 실측 후 바닥부터 어느 상단 지점까지인지 동일하게 정의해야 함."
+
+  coordinate_frame:
+    source_up:
+      type: envelope_scene_up_vector
+    target_up: [0.0, 0.0, 1.0]
+    origin:
+      type: envelope_bottom_corner
+      corner_index: 0
+    x_axis:
+      type: envelope_bottom_edge
+      start_corner: 2
+      end_corner: 3
+      remove_up_component: true
+    handedness: right
+    require_proper_rotation: true
+
+  validation:
+    maximum_reference_relative_error: 0.10
+    maximum_reference_spread_warning: 0.05
+    maximum_reference_spread_failure: 0.20
+    maximum_rotation_determinant_error: 1.0e-8
+    maximum_orthogonality_error: 1.0e-8
+    maximum_axis_alignment_error: 1.0e-8
+    maximum_origin_error: 1.0e-8
+    maximum_round_trip_error: 1.0e-8
+    maximum_plane_residual: 1.0e-7
+    topology_must_match_source: true
+
+  output:
+    write_obj: true
+    write_ply: true
+    write_metric_metadata: true
+    write_axis_preview: true

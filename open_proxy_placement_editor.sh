@@ -1,0 +1,1 @@
+conda run --no-capture-output -n pgsr python scripts/run_scene.py pnu_3f_corridor proxy_placement_editor edit

@@ -53,6 +53,19 @@ class DragEvent(Event):
         return self.type != Gui.MouseEvent.Type.BUTTON_UP and button == Gui.MouseButton.LEFT
 
 
+class CameraGestureEvent(DragEvent):
+    def __init__(self, event_type, x, y, buttons=(), modifiers=()):
+        super().__init__(event_type, x, y)
+        self.buttons = set(buttons)
+        self.modifiers = set(modifiers)
+
+    def is_button_down(self, button):
+        return button in self.buttons
+
+    def is_modifier_down(self, modifier):
+        return modifier in self.modifiers
+
+
 class Viewport:
     obstacle_meshes = []
     gizmo_frame = None
@@ -128,6 +141,59 @@ def test_gizmo_mouse_down_keeps_scene_capture_without_camera_rotation():
     assert value._on_mouse(Event()) == Results.HANDLED
     assert value._drag["axis"] == "x"
     assert value.viewport.interactions == [True]
+
+
+def test_active_gizmo_drag_owns_mouse_until_left_button_is_released():
+    value = _app()
+    value._drag = {"active": True}
+    value._start_fps_navigation = lambda: (_ for _ in ()).throw(
+        AssertionError("FPS camera started during gizmo drag")
+    )
+    value.viewport.ray = lambda x, y: (_ for _ in ()).throw(
+        AssertionError("gizmo drag advanced during a camera gesture")
+    )
+
+    assert value._on_mouse(
+        CameraGestureEvent(
+            Gui.MouseEvent.Type.BUTTON_DOWN,
+            100,
+            100,
+            buttons=(Gui.MouseButton.LEFT, Gui.MouseButton.RIGHT),
+        )
+    ) == Results.CONSUMED
+    assert value._on_mouse(
+        CameraGestureEvent(
+            Gui.MouseEvent.Type.DRAG,
+            110,
+            100,
+            buttons=(Gui.MouseButton.LEFT, Gui.MouseButton.MIDDLE),
+        )
+    ) == Results.CONSUMED
+    assert value._on_mouse(
+        CameraGestureEvent(
+            Gui.MouseEvent.Type.DRAG,
+            110,
+            100,
+            buttons=(Gui.MouseButton.LEFT,),
+            modifiers=(Gui.KeyModifier.ALT,),
+        )
+    ) == Results.CONSUMED
+    assert value._drag == {"active": True}
+
+
+def test_other_button_release_does_not_finish_active_gizmo_drag():
+    value = _app()
+    value._drag = {"active": True}
+
+    assert value._on_mouse(
+        CameraGestureEvent(
+            Gui.MouseEvent.Type.BUTTON_UP,
+            100,
+            100,
+            buttons=(Gui.MouseButton.LEFT,),
+        )
+    ) == Results.CONSUMED
+    assert value._drag == {"active": True}
 
 
 def test_screen_axis_drag_converts_pixels_to_world_distance():
@@ -232,15 +298,17 @@ def test_rotation_gizmo_drag_changes_object_yaw(draft_core):
 
 
 def _center_anchor_ids(core):
-    identifiers = []
-    for obstacle in core.state.obstacles:
-        anchor = obstacle.get("geometry", {}).get("anchor", {})
-        mode = anchor if isinstance(anchor, str) else anchor.get("mode", "center")
-        if mode == "center":
-            identifiers.append(str(obstacle["id"]))
-        if len(identifiers) == 2:
-            return identifiers
-    raise AssertionError("그룹 변환 테스트에는 center anchor 객체 두 개가 필요합니다.")
+    """draft_core의 4개 예시는 모두 null geometry라 미리보기가 불가능하므로,
+    center anchor 후보 두 개를 직접 추가해 그룹 변환 대상으로 쓴다.
+    add_candidate는 size_m을 리스트로 남기므로 무변화 resize로 dict 형태로 정규화하고,
+    이 준비 과정에서 쌓인 undo 기록은 그룹 변환 테스트에 영향이 없도록 비운다."""
+    first = core.add_candidate("blackboard_panel")
+    second = core.add_candidate("custom_thin_panel")
+    core.resize(first["id"], 1.0)
+    core.resize(second["id"], 1.0)
+    core.commands._undo.clear()
+    core.commands._redo.clear()
+    return [str(first["id"]), str(second["id"])]
 
 
 def _mesh_center(core, object_id):
@@ -364,4 +432,25 @@ def test_group_scale_resizes_objects_and_their_offsets_from_center(draft_core):
         assert np.isclose(
             draft_core.state.get_object(object_id)["geometry"]["size_m"]["x"],
             before_sizes[object_id] * factor,
+        )
+
+
+def test_extreme_scale_drag_is_ignored_instead_of_raising(draft_core):
+    value, object_ids, _, _ = _group_drag_app(draft_core, "scale")
+    before_sizes = {
+        object_id: float(
+            draft_core.state.get_object(object_id)["geometry"]["size_m"]["x"]
+        )
+        for object_id in object_ids
+    }
+    value._on_mouse(DragEvent(Gui.MouseEvent.Type.BUTTON_DOWN, 100, 100))
+
+    assert (
+        value._on_mouse(DragEvent(Gui.MouseEvent.Type.DRAG, 1.0e9, 100))
+        == Results.CONSUMED
+    )
+    for object_id in object_ids:
+        assert np.isclose(
+            draft_core.state.get_object(object_id)["geometry"]["size_m"]["x"],
+            before_sizes[object_id],
         )

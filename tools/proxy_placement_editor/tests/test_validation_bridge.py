@@ -6,7 +6,7 @@ from tools.proxy_placement_editor.validation_bridge import validate_document
 
 def test_draft_incomplete_disabled_objects_do_not_fail(project_root, placement_scene):
     document = load_editor_scenario(
-        project_root / "scenes/pnu_classroom/configs/sionna/proxy_draft.yaml"
+        project_root / "tools/proxy_placement_editor/tests/fixtures/configs/proxy_draft.yaml"
     )
     report = validate_document(document, placement_scene)
     assert report["success"]
@@ -16,7 +16,7 @@ def test_draft_incomplete_disabled_objects_do_not_fail(project_root, placement_s
 
 def test_synthetic_result_matches_phase2b_checks(project_root, placement_scene):
     document = load_editor_scenario(
-        project_root / "scenes/pnu_classroom/configs/sionna/synthetic_blocker.yaml"
+        project_root / "tools/proxy_placement_editor/tests/fixtures/configs/synthetic_blocker.yaml"
     )
     record = validate_document(document, placement_scene)["objects"][0]
     assert record["status"] == "VALID"

@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "algorithm": {
+    "name": "rfvisualizer_complex_proxy_calibration",
+    "version": "0.1.0"
+  },
+  "created_at": "2026-08-19T08:50:01.527984Z",
+  "status": "provisional",
+  "confidence": "low",
+  "is_provisional": true,
+  "warning_banner": "PROVISIONAL GEOMETRY - DERIVED FROM PGSR MESH, NOT ON-SITE MEASUREMENT",
+  "scale": {
+    "method": "assumed_ceiling_height",
+    "uniform_scale_only": true,
+    "resolved_meters_per_scene_unit": 3.827247669840339,
+    "references": [
+      {
+        "name": "assumed_ceiling_height",
+        "scene_distance": 0.7054678016467735,
+        "real_distance_m": 2.7,
+        "source": "assumption_not_measured",
+        "confidence": "low"
+      }
+    ]
+  },
+  "transform": {
+    "resolved_meters_per_scene_unit": 3.827247669840339,
+    "T_metric_from_scene": [
+      [
+        -0.0,
+        3.8138862238226974,
+        0.31952558275316717,
+        18.26319512858679
+      ],
+      [
+        -3.826850882366938,
+        0.004600924108152821,
+        -0.05491704583320673,
+        14.110030254413047
+      ],
+      [
+        -0.05510944044077667,
+        -0.3194924561411461,
+        3.813490821588733,
+        1.5158671535176416
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "T_scene_from_metric": [
+      [
+        -0.0,
+        -0.261257282488936,
+        -0.0037622951851570617,
+        3.6920512997976402
+      ],
+      [
+        0.2603721914405045,
+        0.0003141028920077428,
+        -0.02181159742903928,
+        -4.726596655536486
+      ],
+      [
+        0.02181385896702462,
+        -0.0037491604971631154,
+        0.26034519751878893,
+        -0.7401387282734162
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ]
+  },
+  "source_up_vector": [
+    -0.01439923548064389,
+    -0.0834783854357861,
+    0.9964055505579078
+  ],
+  "target_up_vector": [
+    0.0,
+    0.0,
+    1.0
+  ]
+}

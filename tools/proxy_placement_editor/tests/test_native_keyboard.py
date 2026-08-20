@@ -24,15 +24,23 @@ def test_native_keys_map_to_fps_keys():
 
 
 def test_rustdesk_immediate_release_pulses_are_treated_as_held():
-    tracker = KeyPulseTracker(hold_seconds=0.12, immediate_release_max_ms=5)
+    tracker = KeyPulseTracker()
     tracker.press("w", event_time_ms=1000, now=1.0)
     tracker.release("w", event_time_ms=1000)
-    assert tracker.pressed(1.10) == {"w"}
-
-    tracker.press("w", event_time_ms=1040, now=1.04)
-    tracker.release("w", event_time_ms=1040)
     assert tracker.pressed(1.15) == {"w"}
-    assert tracker.pressed(1.17) == set()
+
+    tracker.press("w", event_time_ms=1150, now=1.15)
+    tracker.release("w", event_time_ms=1150)
+    assert tracker.pressed(1.32) == {"w"}
+    assert tracker.pressed(1.34) == set()
+
+
+def test_rustdesk_short_tap_expires_without_sticky_movement():
+    tracker = KeyPulseTracker()
+    tracker.press("shift_left", event_time_ms=1000, now=1.0)
+    tracker.release("shift_left", event_time_ms=1000)
+
+    assert tracker.pressed(1.20) == set()
 
 
 def test_normal_keyboard_release_stops_pulse_fallback_immediately():

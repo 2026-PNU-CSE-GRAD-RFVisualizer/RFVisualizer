@@ -1,0 +1,19 @@
+schema_version: "1.0"
+
+scenario:
+  id: pnu_3f_corridor_proxy
+  status: provisional
+  physically_validated: false
+  synthetic_validation: false
+
+  base_scene:
+    phase2a_config: scenes/pnu_3f_corridor/configs/sionna/smoke_test.yaml
+
+  # 문·책상 등은 Editor에서 배치한 뒤 Ctrl+S로 여기에 저장된다.
+  obstacles: []
+
+  confidence: low
+  provenance:
+    authoring_method: interactive_proxy_placement
+    metric_calibration_status: provisional
+    on_site_measurement_complete: false

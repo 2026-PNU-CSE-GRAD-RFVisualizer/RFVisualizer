@@ -1,0 +1,41 @@
+id: pnu_3f_corridor
+kind: room
+
+pgsr:
+  point_cloud: PGSR/output/pnu_3f_corridor/point_cloud/iteration_30000/point_cloud.ply
+  mesh: PGSR/output/pnu_3f_corridor/mesh/3f_corridor_blend.ply
+
+# Room Envelope는 scripts/build_complex_proxy.py가 만든다.
+# ㅁ자 링 + 곁가지라 build-envelope/pick-envelope로는 만들 수 없다.
+tools:
+  proxy_placement_editor:
+    edit:
+      room-obj: scenes/pnu_3f_corridor/proxy_mesh/complex_envelope/room_envelope_metric.obj
+      room-json: scenes/pnu_3f_corridor/proxy_mesh/complex_envelope/room_envelope_metric.json
+      calibration: scenes/pnu_3f_corridor/proxy_mesh/complex_envelope/calibration.json
+      scenario: scenes/pnu_3f_corridor/configs/sionna/proxy.yaml
+      candidates: scenes/pnu_3f_corridor/configs/proxy_editor/candidates.yaml
+      # build_complex_proxy.py가 만든 미터 좌표 사본을 쓴다. 원본 파일은 축이
+      # 서로 달라(blend는 원본 대비 X축 -90도) scene 좌표로 넘기면 어긋난다.
+      point-cloud: scenes/pnu_3f_corridor/proxy_mesh/complex_envelope/pgsr_point_cloud_metric.ply
+      point-cloud-coordinate-space: metric
+      pgsr-output-mesh: scenes/pnu_3f_corridor/proxy_mesh/complex_envelope/pgsr_mesh_metric.ply
+      pgsr-output-mesh-coordinate-space: metric
+      # PGSR Mesh는 UV 텍스처가 아니라 정점 색을 쓴다. 기본값은 표시용으로
+      # 100만 삼각형까지 감축하는데 그러면 정점이 80% 사라져 색이 뭉개진다.
+      # 원본 그대로 띄운다(6.7M 삼각형이라 첫 로딩이 느리다).
+      pgsr-output-mesh-full-resolution: true
+      output: scenes/pnu_3f_corridor/proxy_placement
+    validate:
+      scenario: scenes/pnu_3f_corridor/configs/sionna/proxy.yaml
+      candidates: scenes/pnu_3f_corridor/configs/proxy_editor/candidates.yaml
+      room-obj: scenes/pnu_3f_corridor/proxy_mesh/complex_envelope/room_envelope_metric.obj
+      room-json: scenes/pnu_3f_corridor/proxy_mesh/complex_envelope/room_envelope_metric.json
+      calibration: scenes/pnu_3f_corridor/proxy_mesh/complex_envelope/calibration.json
+      output: scenes/pnu_3f_corridor/proxy_placement
+  sionna_smoke_test:
+    validate-scene:
+      config: scenes/pnu_3f_corridor/configs/sionna/smoke_test.yaml
+    run:
+      config: scenes/pnu_3f_corridor/configs/sionna/smoke_test.yaml
+      output: scenes/pnu_3f_corridor/sionna/smoke_test

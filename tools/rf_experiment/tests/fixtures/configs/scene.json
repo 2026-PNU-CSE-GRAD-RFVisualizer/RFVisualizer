@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "scene": {
+    "id": "classroom_20260723",
+    "status": "draft",
+    "coordinate_system": {
+      "id": "pnu_classroom_field_v1",
+      "locked": true,
+      "units": "meters",
+      "handedness": "right",
+      "up_axis": "+Z",
+      "origin_m": [0.0, 0.0, 0.0],
+      "origin_description_ko": "문 밖에서 강의실 안을 볼 때 출입문 왼쪽 아래 바닥점",
+      "axes": {
+        "x": {
+          "sign": "+X",
+          "positive_direction_ko": "문 밖에서 안을 볼 때 오른쪽 벽 방향"
+        },
+        "y": {
+          "sign": "+Y",
+          "positive_direction_ko": "출입문에서 강의실 안쪽 깊이 방향"
+        },
+        "z": {
+          "sign": "+Z",
+          "positive_direction_ko": "중력 반대쪽 위 방향"
+        }
+      }
+    },
+    "dimensions_m": {
+      "width_x": 15.4,
+      "depth_y": 10.8,
+      "floor_elevation_change": 0.75,
+      "door": {
+        "width": 2.09,
+        "height": 2.09
+      }
+    },
+    "dimension_sources": {
+      "width_x": "on_site_measurement",
+      "depth_y": "on_site_slope_distance_approximated_as_horizontal",
+      "floor_elevation_change": "on_site_estimate",
+      "door": "on_site_measurement"
+    },
+    "proxy_scene": {
+      "status": "pending_obstacle_placement",
+      "reference_alignment": {
+        "method": "anchored_affine_corner_fit",
+        "legacy_bottom_corner_order_for_field": [2, 3, 0, 1],
+        "origin_legacy_bottom_corner_index": 2,
+        "origin_field_corner_index": 0,
+        "notes_ko": "PGSR의 대각선 반대편 legacy corner 2를 문 시작점 (0, 0, 0)으로 고정한다."
+      },
+      "source_room_envelope": "scenes/pnu_classroom/proxy_mesh/room_envelope/room_envelope.obj",
+      "source_pgsr_reference": "PGSR/output/pnu_classroom/mesh/tsdf_fusion_post.ply",
+      "legacy_metric_scene": "scenes/pnu_classroom/proxy_mesh/metric_calibration/room_envelope_metric.obj",
+      "legacy_scene_usage": "reference_only_until_rebuilt",
+      "metric_obj": "scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene/room_envelope_metric.obj",
+      "metric_json": "scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene/room_envelope_metric.json",
+      "calibration_json": "scenes/pnu_classroom/experiments/classroom_20260723/outputs/proxy_scene/calibration.json",
+      "notes_ko": [
+        "가로 15.4m, 깊이 10.8m, 높이차 약 0.75m의 양의 좌표 기본 Envelope를 생성했다.",
+        "문 시작점은 legacy bottom corner 2에 대응하며 정확히 (0, 0, 0)으로 고정한다.",
+        "바닥은 계단 경계 입력 전까지 단일 경사면 placeholder다.",
+        "PGSR 표시 정렬은 문 시작점은 정확히 고정하지만 나머지 corner는 최대 약 0.38m 오차가 있는 affine 근사이므로 좌표 근거로 사용하지 않는다.",
+        "계단, 문, 주요 책상, AP 배치를 검증한 뒤 ready로 바꾼다."
+      ]
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "status": "failure",
+  "success": false,
+  "exception_type": "RuntimeError",
+  "reason": "Open3D GUI를 열 display server가 없습니다. headless validate/export-preview를 사용하세요.",
+  "reproduction_command": "/data/RFVisualizer_Workspace/RFVisualizer/tools/proxy_placement_editor/main.py edit --room-obj scenes/pnu_3f_corridor/proxy_mesh/complex_envelope/room_envelope_metric.obj --room-json scenes/pnu_3f_corridor/proxy_mesh/complex_envelope/room_envelope_metric.json --calibration scenes/pnu_3f_corridor/proxy_mesh/complex_envelope/calibration.json --scenario scenes/pnu_3f_corridor/configs/sionna/proxy.yaml --candidates scenes/pnu_3f_corridor/configs/proxy_editor/candidates.yaml --point-cloud scenes/pnu_3f_corridor/proxy_mesh/complex_envelope/pgsr_point_cloud_metric.ply --point-cloud-coordinate-space metric --pgsr-output-mesh scenes/pnu_3f_corridor/proxy_mesh/complex_envelope/pgsr_mesh_metric.ply --pgsr-output-mesh-coordinate-space metric --pgsr-output-mesh-full-resolution --output scenes/pnu_3f_corridor/proxy_placement"
+}

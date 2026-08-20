@@ -5,9 +5,9 @@
     python scripts/run_scene.py <scene_id> <package> <subcommand> [-- 추가 인자...]
 
 예:
-    python scripts/run_scene.py pnu_4f_corridor proxy_placement_editor edit --software-rendering
-    python scripts/run_scene.py classroom_20260723 proxy_placement_editor validate
-    python scripts/run_scene.py pnu_4f_corridor rf_experiment validate-contracts
+    python scripts/run_scene.py <scene_id> proxy_placement_editor edit --software-rendering
+    python scripts/run_scene.py <session_id> proxy_placement_editor validate
+    python scripts/run_scene.py <scene_id> rf_experiment validate-contracts
 
 scene.yaml의 tools.<package>.<subcommand> 아래 각 키는 그대로 --key 플래그가 된다
 (값이 true인 항목은 store_true 플래그로, false/생략은 플래그 자체를 뺀다).
