@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "status": "provisional",
+  "positions": [
+    {
+      "kind": "transmitter",
+      "name": "tx_test",
+      "metric_position_m": [
+        21.37,
+        17.83,
+        0.8
+      ],
+      "original_scene_position": [
+        -0.5030531648356297,
+        0.2704777613978777,
+        -0.1933070150450802
+      ]
+    },
+    {
+      "kind": "receiver",
+      "name": "rx_los",
+      "metric_position_m": [
+        12.57,
+        17.83,
+        0.45
+      ],
+      "original_scene_position": [
+        -0.5018680418523052,
+        -1.7847993416207713,
+        -0.4480815152823337
+      ]
+    },
+    {
+      "kind": "receiver",
+      "name": "rx_reflection",
+      "metric_position_m": [
+        30.1,
+        17.83,
+        0.45
+      ],
+      "original_scene_position": [
+        -0.5018680418523052,
+        2.323092722736069,
+        -0.1039242623595863
+      ]
+    },
+    {
+      "kind": "receiver",
+      "name": "rx_nlos",
+      "metric_position_m": [
+        20.04,
+        5.31,
+        0.45
+      ],
+      "original_scene_position": [
+        2.441979017233026,
+        -0.03785640995340245,
+        -0.2591814009649932
+      ]
+    }
+  ],
+  "coordinate_bridge_validation": {
+    "metric_to_scene_to_metric_max_error": 5.0246025171135074e-15,
+    "scene_to_metric_to_scene_max_error": 3.5596458096434965e-15,
+    "maximum_error": 5.0246025171135074e-15,
+    "success": true
+  }
+}

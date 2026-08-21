@@ -1,0 +1,130 @@
+schema_version: '1.0'
+sionna_smoke_test:
+  status: provisional
+  confidence: low
+  physically_validated: false
+  input:
+    metric_obj: scenes/pnu_3f_corridor/proxy_mesh/complex_envelope/room_envelope_metric.obj
+    metric_mtl: scenes/pnu_3f_corridor/proxy_mesh/complex_envelope/room_envelope_metric.mtl
+    metric_json: scenes/pnu_3f_corridor/proxy_mesh/complex_envelope/room_envelope_metric.json
+    calibration_json: scenes/pnu_3f_corridor/proxy_mesh/complex_envelope/calibration.json
+  scene:
+    name: pnu_3f_corridor_empty
+    carrier_frequency_hz: 2400000000.0
+    coordinate_system:
+      up_axis: +Z
+      units: meters
+  materials:
+    floor:
+      preset: concrete
+      scattering_coefficient: 0.3
+    ceiling:
+      preset: concrete
+      scattering_coefficient: 0.3
+    walls:
+      preset: concrete
+      scattering_coefficient: 0.3
+  transmitter:
+    name: tx_test
+    position_mode: explicit
+    position_m:
+    - 21.37
+    - 17.83
+    - 0.8
+    power_dbm: 20.0
+  receivers:
+  - name: rx_los
+    position_m:
+    - 12.57
+    - 17.83
+    - 0.45
+  - name: rx_reflection
+    position_m:
+    - 30.1
+    - 17.83
+    - 0.45
+  - name: rx_nlos
+    position_m:
+    - 20.04
+    - 5.31
+    - 0.45
+  placement:
+    mode: resolved
+    clearance_m: 0.2
+    minimum_device_separation_m: 0.5
+  antenna:
+    pattern: iso
+    polarization: V
+  path_test:
+    max_depth: 5
+    samples_per_src: 200000
+    max_num_paths_per_src: 4000000
+    seed: 42
+    enable_los: true
+    enable_reflection: true
+    enable_refraction: false
+    enable_diffraction: true
+    enable_scattering: true
+    synthetic_array: true
+  coverage:
+    enabled: true
+    z_height_m: 0.45
+    region_mode: metric_bounds_with_margin
+    margin_m: 0.5
+    cell_size_m: 1.0
+    max_cells: 10000
+    samples_per_tx: 200000
+    seed: 43
+    max_depth: 5
+    enable_los: true
+    enable_reflection: true
+    enable_refraction: false
+    enable_diffraction: true
+    enable_scattering: true
+  validation:
+    require_tx_inside_room: true
+    require_rx_inside_room: true
+    require_tx_above_floor: true
+    require_rx_above_floor: true
+    require_tx_below_ceiling: true
+    require_rx_below_ceiling: true
+    minimum_path_count_los_case: 1
+    maximum_los_distance_error_m: 0.0001
+    require_finite_coverage_values: true
+    minimum_valid_coverage_ratio: 0.1
+  output:
+    save_scene: true
+    save_paths: true
+    save_coverage_numpy: true
+    save_coverage_csv: true
+    save_coverage_png: true
+    save_scene_preview: true
+  resolved_positions:
+  - kind: transmitter
+    name: tx_test
+    position_m:
+    - 21.37
+    - 17.83
+    - 0.8
+    used_fallback: false
+  - kind: receiver
+    name: rx_los
+    position_m:
+    - 12.57
+    - 17.83
+    - 0.45
+    used_fallback: false
+  - kind: receiver
+    name: rx_reflection
+    position_m:
+    - 30.1
+    - 17.83
+    - 0.45
+    used_fallback: false
+  - kind: receiver
+    name: rx_nlos
+    position_m:
+    - 20.04
+    - 5.31
+    - 0.45
+    used_fallback: false

@@ -68,8 +68,15 @@ def read_ascii_ply(path: Path) -> Tuple[np.ndarray, np.ndarray]:
     return vertices, faces
 
 
+# Sionna는 id가 "itu_"/"itu-"로 시작하는 BSDF를 XML 단계에서 다시 쓰면서
+# type/thickness/color만 남기고 scattering_coefficient 같은 나머지 property를 버린다
+# (sionna/rt/scene_utils.py). Phase 2-B material_resolver와 같은 "radio_itu_" 접두사를 쓴다.
+MATERIAL_ID_PREFIX = "radio_itu"
+
+
 def _material_id(semantic: str) -> str:
-    return "itu_concrete_{}".format("walls" if semantic == "wall" else semantic)
+    return "{}_concrete_{}".format(
+        MATERIAL_ID_PREFIX, "walls" if semantic == "wall" else semantic)
 
 
 def export_scene(
@@ -84,16 +91,23 @@ def export_scene(
     object_records: List[Dict[str, Any]] = []
     xml = ["<scene version=\"2.1.0\">\n", "    <!-- PROVISIONAL RF MATERIALS -->\n"]
     for semantic in ("floor", "ceiling", "walls"):
-        preset = settings["materials"][semantic]["preset"]
-        material_id = "itu_{}_{}".format(preset, semantic)
+        material = settings["materials"][semantic]
+        preset = material["preset"]
+        material_id = "{}_{}_{}".format(MATERIAL_ID_PREFIX, preset, semantic)
         xml.extend(
             [
                 "    <bsdf type=\"itu-radio-material\" id=\"{}\">\n".format(material_id),
                 "        <string name=\"type\" value=\"{}\"/>\n".format(preset),
                 "        <float name=\"thickness\" value=\"0.1\"/>\n",
-                "    </bsdf>\n",
             ]
         )
+        # Sionna는 두 계수를 XML property로 읽는다. 적지 않으면 0.0이고,
+        # scattering_coefficient가 0이면 diffuse_reflection을 켜도 확산 경로가 없다.
+        for key in ("scattering_coefficient", "xpd_coefficient"):
+            if key in material:
+                xml.append("        <float name=\"{}\" value=\"{}\"/>\n".format(
+                    key, float(material[key])))
+        xml.append("    </bsdf>\n")
     xml.append("\n    <!-- Metric Room Envelope shapes -->\n")
     exported_vertices = []
     exported_faces_global = []
@@ -103,7 +117,8 @@ def export_scene(
         path = mesh_directory / "{}.ply".format(obj.name)
         write_ascii_ply(path, local_vertices, local_faces)
         semantic_key = "walls" if obj.semantic == "wall" else obj.semantic
-        material_id = "itu_{}_{}".format(settings["materials"][semantic_key]["preset"], semantic_key)
+        material_id = "{}_{}_{}".format(
+            MATERIAL_ID_PREFIX, settings["materials"][semantic_key]["preset"], semantic_key)
         xml.extend(
             [
                 "    <shape type=\"ply\" id=\"mesh-{}\">\n".format(obj.name),

@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0",
+  "status": "provisional",
+  "confidence": "low",
+  "physically_validated": false,
+  "scene_name": "corridor3f_20260820",
+  "scene_xml": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/experiments/corridor3f_20260820/scene/scene.xml",
+  "source_metric_obj": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/proxy_mesh/complex_envelope/room_envelope_metric.obj",
+  "source_statistics": {
+    "vertex_count": 816,
+    "triangle_count": 1640,
+    "bounds": {
+      "min": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max": [
+        44.906373,
+        20.922287,
+        3.0
+      ],
+      "extent": [
+        44.906373,
+        20.922287,
+        3.0
+      ]
+    },
+    "surface_area": 1720.744057002346,
+    "signed_volume": 1442.1271965035182,
+    "absolute_volume": 1442.1271965035182
+  },
+  "exported_statistics": {
+    "vertex_count": 1248,
+    "triangle_count": 1640,
+    "bounds": {
+      "min": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max": [
+        44.906373,
+        20.922287,
+        3.0
+      ],
+      "extent": [
+        44.906373,
+        20.922287,
+        3.0
+      ]
+    },
+    "surface_area": 1720.744057002346,
+    "signed_volume": 1442.1271965035182,
+    "absolute_volume": 1442.1271965035182
+  },
+  "objects": [
+    {
+      "object_name": "floor_000",
+      "semantic": "floor",
+      "source_material": "floor",
+      "resolved_radio_material": "radio_itu_concrete_floor",
+      "mesh_file": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/experiments/corridor3f_20260820/scene/meshes/floor_000.ply",
+      "vertex_count": 408,
+      "triangle_count": 604,
+      "bounds": {
+        "min": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "max": [
+          44.906373,
+          20.922287,
+          0.0
+        ],
+        "extent": [
+          44.906373,
+          20.922287,
+          0.0
+        ]
+      }
+    },
+    {
+      "object_name": "ceiling_000",
+      "semantic": "ceiling",
+      "source_material": "ceiling",
+      "resolved_radio_material": "radio_itu_concrete_ceiling",
+      "mesh_file": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/experiments/corridor3f_20260820/scene/meshes/ceiling_000.ply",
+      "vertex_count": 408,
+      "triangle_count": 604,
+      "bounds": {
+        "min": [
+          0.0,
+          0.0,
+          3.0
+        ],
+        "max": [
+          44.906373,
+          20.922287,
+          3.0
+        ],
+        "extent": [
+          44.906373,
+          20.922287,
+          0.0
+        ]
+      }
+    },
+    {
+      "object_name": "wall_000",
+      "semantic": "wall",
+      "source_material": "wall",
+      "resolved_radio_material": "radio_itu_concrete_walls",
+      "mesh_file": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/experiments/corridor3f_20260820/scene/meshes/wall_000.ply",
+      "vertex_count": 432,
+      "triangle_count": 432,
+      "bounds": {
+        "min": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "max": [
+          44.906373,
+          20.922287,
+          3.0
+        ],
+        "extent": [
+          44.906373,
+          20.922287,
+          3.0
+        ]
+      }
+    }
+  ],
+  "conversion_validation": {
+    "triangle_count_match": true,
+    "bounds_match": true,
+    "surface_area_match": true,
+    "volume_match": true,
+    "success": true
+  }
+}

@@ -1,0 +1,35 @@
+<scene version="2.1.0">
+    <!-- PROVISIONAL RF MATERIALS -->
+    <bsdf type="itu-radio-material" id="radio_itu_concrete_floor">
+        <string name="type" value="concrete"/>
+        <float name="thickness" value="0.1"/>
+        <float name="scattering_coefficient" value="0.3"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="radio_itu_concrete_ceiling">
+        <string name="type" value="concrete"/>
+        <float name="thickness" value="0.1"/>
+        <float name="scattering_coefficient" value="0.3"/>
+    </bsdf>
+    <bsdf type="itu-radio-material" id="radio_itu_concrete_walls">
+        <string name="type" value="concrete"/>
+        <float name="thickness" value="0.1"/>
+        <float name="scattering_coefficient" value="0.3"/>
+    </bsdf>
+
+    <!-- Metric Room Envelope shapes -->
+    <shape type="ply" id="mesh-floor_000">
+        <string name="filename" value="meshes/floor_000.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="radio_itu_concrete_floor" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-ceiling_000">
+        <string name="filename" value="meshes/ceiling_000.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="radio_itu_concrete_ceiling" name="bsdf"/>
+    </shape>
+    <shape type="ply" id="mesh-wall_000">
+        <string name="filename" value="meshes/wall_000.ply"/>
+        <boolean name="face_normals" value="true"/>
+        <ref id="radio_itu_concrete_walls" name="bsdf"/>
+    </shape>
+</scene>

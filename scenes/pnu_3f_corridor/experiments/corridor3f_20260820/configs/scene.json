@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0",
+  "scene": {
+    "id": "corridor3f_20260820",
+    "status": "draft",
+    "coordinate_system": {
+      "id": "pnu_3f_corridor_metric_v1",
+      "locked": true,
+      "units": "meters",
+      "handedness": "right",
+      "up_axis": "+Z",
+      "origin_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "origin_description_ko": "Proxy Mesh(complex_envelope) 점유 격자의 최소 모서리. 도면에서는 링 복도 오른쪽 위(계단실 반대편 끝) 바깥 모서리에 해당하며, 바닥면 z=0이다. 현장 말뚝이 아니라 Mesh에서유도한 수학적 원점이므로, 현장 배치는 원점이 아니라 references/floorplan_tx_calib_test_grid.png의도면 위치와 벽 기준 거리로 재현한다.",
+      "axes": {
+        "x": {
+          "sign": "+X",
+          "positive_direction_ko": "도면에서 왼쪽 방향. 복도가 길게 뻗는 방향이며 계단실 쪽이 X가 크다"
+        },
+        "y": {
+          "sign": "+Y",
+          "positive_direction_ko": "도면에서 아래쪽 방향. 좁은 복도(작은 Y)에서 넓은 개방 복도(큰 Y) 쪽"
+        },
+        "z": {
+          "sign": "+Z",
+          "positive_direction_ko": "중력 반대쪽 위 방향. 바닥 z=0, 천장 z=3.0"
+        }
+      }
+    },
+    "dimensions_m": {
+      "width_x": 44.906372659459976,
+      "depth_y": 20.92228726179385,
+      "floor_elevation_change": 0.0,
+      "door": {
+        "width": 0.9,
+        "height": 2.1
+      }
+    },
+    "dimension_sources": {
+      "width_x": "proxy_mesh_bounding_box_scaled_by_assumed_ceiling_height",
+      "depth_y": "proxy_mesh_bounding_box_scaled_by_assumed_ceiling_height",
+      "floor_elevation_change": "proxy_envelope_uses_flat_floor_plane",
+      "door": "assumed_standard_not_measured",
+      "ceiling_height": "user_provided_3.0m_floor_to_ceiling_not_tape_verified"
+    },
+    "proxy_scene": {
+      "status": "pending_obstacle_placement",
+      "metric_obj": "scenes/pnu_3f_corridor/proxy_mesh/complex_envelope/room_envelope_metric.obj",
+      "metric_json": "scenes/pnu_3f_corridor/proxy_mesh/complex_envelope/room_envelope_metric.json",
+      "calibration_json": "scenes/pnu_3f_corridor/proxy_mesh/complex_envelope/calibration.json",
+      "source_pgsr_reference": "PGSR/output/pnu_3f_corridor/mesh/3f_corridor_blend.ply",
+      "meters_per_scene_unit": 4.252497410933709,
+      "floorplan_registration": {
+        "reference_png": "scenes/pnu_3f_corridor/references/floorplan_tx_calib_test_loop.png",
+        "method": "binary_mask_similarity_fit_uniform_scale_no_rotation",
+        "meters_per_pixel": 0.03975,
+        "x_m": "56.6115 - 0.03975 * image_x",
+        "y_m": "-6.4145 + 0.03975 * image_row",
+        "intersection_over_union": 0.741,
+        "notes_ko": [
+          "도면과 Mesh 점유영역의 겹침 IoU는 0.74다. 남은 차이는 촬영이 닿지 않은 넓은 복도 바깥쪽 약 1.2m와 코어 주변 벽면이다.",
+          "따라서 개별 좌표의 실제 오차는 약 ±0.5m로 본다."
+        ]
+      },
+      "notes_ko": [
+        "링 복도 + 중앙 코어 구멍 구조라 build-envelope/pick-envelope 대신 scripts/build_complex_proxy.py로 만들었다.",
+        "미터 배율은 층고 3.0m 값 하나에만 의존한다. 실측 길이 하나를 얻으면 --ceiling-height-m만 바꿔 다시 만든다.",
+        "문·계단·금속문 등 장애물은 아직 배치하지 않았다."
+      ]
+    }
+  }
+}

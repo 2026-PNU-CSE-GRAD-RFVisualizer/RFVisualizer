@@ -120,6 +120,11 @@ def validate_solver_document(document: Mapping[str, Any]) -> Dict[str, Any]:
         value = materials.get(semantic)
         if not isinstance(value, Mapping) or not str(value.get("preset", "")).strip():
             raise SionnaRssiError("materials.{}.preset이 비어 있습니다.".format(semantic))
+        # scattering_coefficient가 0이면 enable_scattering을 켜도 확산 경로가 생기지 않는다.
+        for key in ("scattering_coefficient", "xpd_coefficient"):
+            if key in value and not 0.0 <= float(value[key]) <= 1.0:
+                raise SionnaRssiError(
+                    "materials.{}.{}는 0과 1 사이여야 합니다.".format(semantic, key))
     antenna = config.get("antenna")
     if not isinstance(antenna, Mapping):
         raise SionnaRssiError("antenna 설정이 필요합니다.")
@@ -188,8 +193,12 @@ def validate_solver_document(document: Mapping[str, Any]) -> Dict[str, Any]:
 
 
 def _sha256(path: Path) -> str:
+    # hashlib.file_digest는 Python 3.11+이고 sionna 환경은 3.10이라 직접 읽는다.
+    digest = hashlib.sha256()
     with Path(path).open("rb") as handle:
-        return hashlib.file_digest(handle, "sha256").hexdigest()
+        for chunk in iter(lambda: handle.read(1 << 20), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def _write_csv(path: Path, fields: Sequence[str], rows: Sequence[Mapping[str, Any]]) -> None:
@@ -335,6 +344,9 @@ def _solve_points(
         scene=scene,
         max_depth=int(options["max_depth"]),
         samples_per_src=int(options["samples_per_src"]),
+        # 후보 경로가 이 한도를 넘으면 잘려나가고, 약한 RX의 경로가 통째로 사라진다.
+        # samples_per_src를 올릴 때 함께 올려야 한다.
+        max_num_paths_per_src=int(options.get("max_num_paths_per_src", 1000000)),
         synthetic_array=bool(options["synthetic_array"]),
         los=bool(options["enable_los"]),
         specular_reflection=bool(options["enable_reflection"]),

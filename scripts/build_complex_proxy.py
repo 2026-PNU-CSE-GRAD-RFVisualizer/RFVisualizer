@@ -448,17 +448,38 @@ def keyhole_polygon(outer, holes):
     return polygon
 
 
-def write_obj(path, vertices, faces, inside_counts):
+def write_obj(path, vertices, faces, inside_counts, floor_z=0.0, ceil_z=None):
+    """Phase 2-A loader가 요구하는 floor/ceiling/wall semantic group으로 나눠 쓴다.
+
+    면은 세 정점 z가 모두 바닥/천장 높이면 바닥/천장, 나머지는 벽이다.
+    """
+    z = np.asarray(vertices)[:, 2]
+    groups = {"floor": [], "ceiling": [], "wall": []}
+    for f in faces:
+        zs = z[list(f)]
+        if np.all(np.abs(zs - floor_z) < 1e-6):
+            groups["floor"].append(f)
+        elif ceil_z is not None and np.all(np.abs(zs - ceil_z) < 1e-6):
+            groups["ceiling"].append(f)
+        else:
+            groups["wall"].append(f)
     lines = ["# RFVisualizer complex proxy room envelope", "mtllib room_envelope_metric.mtl"]
     for v in vertices:
         lines.append("v {:.6f} {:.6f} {:.6f}".format(*v))
-    lines.append("o room_envelope")
-    lines.append("usemtl wall")
-    for f in faces:
-        lines.append("f {} {} {}".format(f[0] + 1, f[1] + 1, f[2] + 1))
+    for semantic in ("floor", "ceiling", "wall"):
+        if not groups[semantic]:
+            continue
+        lines.append("o {}_000".format(semantic))
+        lines.append("g {}".format(semantic))
+        lines.append("usemtl {}".format(semantic))
+        for f in groups[semantic]:
+            lines.append("f {} {} {}".format(f[0] + 1, f[1] + 1, f[2] + 1))
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
     (path.parent / "room_envelope_metric.mtl").write_text(
-        "newmtl wall\nKa 0.2 0.2 0.2\nKd 0.72 0.74 0.78\nKs 0.0 0.0 0.0\nd 1.0\nillum 1\n",
+        "".join(
+            "newmtl {}\nKa 0.2 0.2 0.2\nKd 0.72 0.74 0.78\nKs 0.0 0.0 0.0\nd 1.0\nillum 1\n".format(name)
+            for name in ("floor", "ceiling", "wall")
+        ),
         encoding="utf-8",
     )
 
@@ -635,7 +656,7 @@ def main(argv):
         raise SystemExit(f"오류: calibration 행렬이 서로 역행렬이 아닙니다(오차 {round_trip}).")
 
     obj_path = output / "room_envelope_metric.obj"
-    write_obj(obj_path, vertices, faces, int(inside.sum()))
+    write_obj(obj_path, vertices, faces, int(inside.sum()), floor_z, ceil_z)
 
     metadata = {
         "schema_version": "1.0",

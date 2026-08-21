@@ -67,8 +67,18 @@ def validate_config(config: Dict[str, Any]) -> Dict[str, Any]:
     if coordinate.get("up_axis") != "+Z" or coordinate.get("units") != "meters":
         raise SmokeTestConfigError("Sionna 장면은 meter 단위의 +Z up이어야 합니다.")
     for semantic in ("floor", "ceiling", "walls"):
-        if not str(settings["materials"][semantic].get("preset", "")).strip():
+        material = settings["materials"][semantic]
+        if not str(material.get("preset", "")).strip():
             raise SmokeTestConfigError("{} material preset이 비어 있습니다.".format(semantic))
+        # 확산 반사(enable_scattering)는 scattering_coefficient가 0이면 경로를 만들지 않는다.
+        # 값을 적지 않으면 Sionna 기본값 0.0이며 정반사만 계산된다.
+        for key in ("scattering_coefficient", "xpd_coefficient"):
+            if key in material:
+                value = _finite(material[key], "materials.{}.{}".format(semantic, key))
+                if not 0.0 <= value <= 1.0:
+                    raise SmokeTestConfigError(
+                        "materials.{}.{}는 0과 1 사이여야 합니다.".format(semantic, key))
+                material[key] = value
     _position(settings["transmitter"]["position_m"], "transmitter.position_m")
     receivers = settings.get("receivers")
     if not isinstance(receivers, list) or not receivers:

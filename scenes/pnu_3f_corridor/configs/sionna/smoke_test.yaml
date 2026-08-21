@@ -18,25 +18,38 @@ sionna_smoke_test:
       up_axis: "+Z"
       units: meters
 
+  # 코어 뒤 NLOS 지점은 회절·산란이 없으면 경로가 0개다. 두 효과를 기본으로 켠다.
+  # scattering_coefficient는 실측이 아니라 거친 콘크리트 문헌값 범위(0.2~0.5)의 중간값이다.
+  # Sionna 기본값 0.0을 그대로 두면 enable_scattering을 켜도 확산 경로가 생기지 않는다.
   materials:
     floor:
       preset: concrete
+      scattering_coefficient: 0.3
     ceiling:
       preset: concrete
+      scattering_coefficient: 0.3
     walls:
       preset: concrete
+      scattering_coefficient: 0.3
 
+  # 층고 3.0m 재보정(2026-08-20) 이후의 실제 실험 배치 좌표를 사용한다.
+  # experiments/corridor3f_20260820/configs/tx_rx.json과 같은 점이다.
   transmitter:
     name: tx_test
     position_mode: explicit
-    position_m: [2.0, 4.5, 1.5]
+    position_m: [21.37, 17.83, 0.8]
     power_dbm: 20.0
 
+  # rx_los는 LoS 검사(max_depth=0), rx_reflection은 정반사 검사(max_depth=5)에 쓰인다.
+  # 둘 다 넓은 복도에 두어야 정반사 경로가 잡힌다. 코어 뒤 NLOS 지점(T6)은
+  # 정반사만으로는 경로가 없으므로 rx_nlos로 따로 두고 회절·산란 동작을 확인한다.
   receivers:
     - name: rx_los
-      position_m: [2.0, 13.0, 1.2]
+      position_m: [12.57, 17.83, 0.45]
     - name: rx_reflection
-      position_m: [9.0, 17.0, 1.2]
+      position_m: [30.10, 17.83, 0.45]
+    - name: rx_nlos
+      position_m: [20.04, 5.31, 0.45]
 
   placement:
     mode: resolved
@@ -48,31 +61,34 @@ sionna_smoke_test:
     polarization: V
 
   path_test:
-    max_depth: 2
+    max_depth: 5
+    # smoke test는 경로를 CSV로 전부 기록하므로 샘플을 크게 올리지 않는다.
+    # 후보 경로가 max_num_paths_per_src를 넘으면 약한 RX의 경로부터 잘려 나간다.
     samples_per_src: 200000
+    max_num_paths_per_src: 4000000
     seed: 42
     enable_los: true
     enable_reflection: true
     enable_refraction: false
-    enable_diffraction: false
-    enable_scattering: false
+    enable_diffraction: true
+    enable_scattering: true
     synthetic_array: true
 
   coverage:
     enabled: true
-    z_height_m: 1.5
+    z_height_m: 0.45
     region_mode: metric_bounds_with_margin
     margin_m: 0.5
     cell_size_m: 1.0
     max_cells: 10000
     samples_per_tx: 200000
     seed: 43
-    max_depth: 2
+    max_depth: 5
     enable_los: true
     enable_reflection: true
     enable_refraction: false
-    enable_diffraction: false
-    enable_scattering: false
+    enable_diffraction: true
+    enable_scattering: true
 
   validation:
     require_tx_inside_room: true

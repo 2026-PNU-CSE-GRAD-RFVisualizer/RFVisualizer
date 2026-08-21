@@ -211,6 +211,8 @@ def run_path_tests(scene, settings: Dict[str, Any], positions: List[Dict[str, An
     common = {
         "scene": scene,
         "samples_per_src": int(options["samples_per_src"]),
+        # 후보 경로 한도. 넘으면 약한 RX의 경로부터 잘려 나간다.
+        "max_num_paths_per_src": int(options.get("max_num_paths_per_src", 1000000)),
         "synthetic_array": bool(options["synthetic_array"]),
         "los": bool(options["enable_los"]),
         "specular_reflection": bool(options["enable_reflection"]),

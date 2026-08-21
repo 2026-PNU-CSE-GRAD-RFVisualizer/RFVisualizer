@@ -1,0 +1,2 @@
+path_index,transmitter,receiver,path_type,interaction_count,distance_m,delay_s,theta_t_rad,phi_t_rad,theta_r_rad,phi_r_rad,amplitude_real,amplitude_imag,amplitude_magnitude,interaction_types,interaction_object_ids,interaction_points_m
+0,tx_test,rx_los,los,0,8.806957889178989,2.9376849397522165e-08,1.6105481386184692,3.1415927410125732,1.531044602394104,0.0,0.0011286872904747725,0.0,0.0011286872904747725,[],[],[]

@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "status": "provisional",
+  "physically_validated": false,
+  "selection_reason": "설치된 Sionna RT의 공식 ITU concrete preset을 빈 방 연결 시험에 사용",
+  "materials": [
+    {
+      "sionna_material_name": "radio_itu_concrete_floor",
+      "class": "ITURadioMaterial",
+      "itu_type": "concrete",
+      "thickness_m": 0.10000000149011612,
+      "relative_permittivity": 5.239999771118164,
+      "conductivity_s_per_m": 0.09163116663694382,
+      "scattering_coefficient": 0.30000001192092896,
+      "is_used": true
+    },
+    {
+      "sionna_material_name": "radio_itu_concrete_ceiling",
+      "class": "ITURadioMaterial",
+      "itu_type": "concrete",
+      "thickness_m": 0.10000000149011612,
+      "relative_permittivity": 5.239999771118164,
+      "conductivity_s_per_m": 0.09163116663694382,
+      "scattering_coefficient": 0.30000001192092896,
+      "is_used": true
+    },
+    {
+      "sionna_material_name": "radio_itu_concrete_walls",
+      "class": "ITURadioMaterial",
+      "itu_type": "concrete",
+      "thickness_m": 0.10000000149011612,
+      "relative_permittivity": 5.239999771118164,
+      "conductivity_s_per_m": 0.09163116663694382,
+      "scattering_coefficient": 0.30000001192092896,
+      "is_used": true
+    }
+  ],
+  "object_mapping": [
+    {
+      "object_name": "floor_000",
+      "semantic": "floor",
+      "radio_material": "radio_itu_concrete_floor"
+    },
+    {
+      "object_name": "ceiling_000",
+      "semantic": "ceiling",
+      "radio_material": "radio_itu_concrete_ceiling"
+    },
+    {
+      "object_name": "wall_000",
+      "semantic": "wall",
+      "radio_material": "radio_itu_concrete_walls"
+    }
+  ]
+}

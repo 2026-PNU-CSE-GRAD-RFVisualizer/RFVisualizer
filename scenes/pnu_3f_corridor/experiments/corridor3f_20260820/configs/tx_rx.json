@@ -1,0 +1,237 @@
+{
+  "schema_version": "1.0",
+  "scene_id": "corridor3f_20260820",
+  "coordinate_system_id": "pnu_3f_corridor_metric_v1",
+  "status": "ready",
+  "requirements": {
+    "transmitter_count": 1,
+    "calibration_receiver_count": 4,
+    "test_receiver_count": 10
+  },
+  "tx": [
+    {
+      "id": "ap_tx_000",
+      "name": "고정 AP / TX",
+      "position_m": [
+        21.37,
+        17.83,
+        0.8
+      ],
+      "node_id": "ap-01",
+      "frequency_hz": 2400000000.0,
+      "power_dbm": 20.0
+    }
+  ],
+  "rx": [
+    {
+      "id": "cal_rx_000",
+      "point_id": "cal-01",
+      "name": "보정 RX 1 node-01 (넓은 복도 왼쪽, LOS)",
+      "role": "calibration",
+      "position_m": [
+        34.9,
+        18.7,
+        0.45
+      ],
+      "plan_label": "C1",
+      "node_id": "node-01",
+      "wall_clearance_m": 2.25,
+      "tx_line_of_sight": true
+    },
+    {
+      "id": "cal_rx_001",
+      "point_id": "cal-02",
+      "name": "보정 RX 2 node-03 (좁은 복도 중앙, 그림자)",
+      "role": "calibration",
+      "position_m": [
+        24.02,
+        6.31,
+        0.45
+      ],
+      "plan_label": "C2",
+      "node_id": "node-03",
+      "wall_clearance_m": 0.85,
+      "tx_line_of_sight": false
+    },
+    {
+      "id": "cal_rx_002",
+      "point_id": "cal-03",
+      "name": "보정 RX 3 node-04 (좁은 복도, 코어 통로 부근)",
+      "role": "calibration",
+      "position_m": [
+        16.07,
+        6.31,
+        0.45
+      ],
+      "plan_label": "C3",
+      "node_id": "node-04",
+      "wall_clearance_m": 1.75,
+      "tx_line_of_sight": false
+    },
+    {
+      "id": "cal_rx_003",
+      "point_id": "cal-04",
+      "name": "보정 RX 4 gw-01 (넓은 복도 오른쪽, LOS)",
+      "role": "calibration",
+      "position_m": [
+        5.86,
+        18.56,
+        0.45
+      ],
+      "plan_label": "C4",
+      "node_id": "gw-01",
+      "wall_clearance_m": 2.35,
+      "tx_line_of_sight": true
+    },
+    {
+      "id": "test_rx_000",
+      "point_id": "test-01",
+      "name": "Test RX 1",
+      "role": "test",
+      "position_m": [
+        12.57,
+        17.83,
+        0.45
+      ],
+      "plan_label": "T1",
+      "node_id": "node-02",
+      "wall_clearance_m": 3.1,
+      "tx_line_of_sight": true
+    },
+    {
+      "id": "test_rx_001",
+      "point_id": "test-02",
+      "name": "Test RX 2",
+      "role": "test",
+      "position_m": [
+        1.8,
+        17.8,
+        0.45
+      ],
+      "plan_label": "T2",
+      "node_id": "node-02",
+      "wall_clearance_m": 3.1,
+      "tx_line_of_sight": true
+    },
+    {
+      "id": "test_rx_002",
+      "point_id": "test-03",
+      "name": "Test RX 3",
+      "role": "test",
+      "position_m": [
+        1.76,
+        6.9,
+        0.45
+      ],
+      "plan_label": "T3",
+      "node_id": "node-02",
+      "wall_clearance_m": 0.84,
+      "tx_line_of_sight": false
+    },
+    {
+      "id": "test_rx_003",
+      "point_id": "test-04",
+      "name": "Test RX 4",
+      "role": "test",
+      "position_m": [
+        5.17,
+        5.31,
+        0.45
+      ],
+      "plan_label": "T4",
+      "node_id": "node-02",
+      "wall_clearance_m": 0.75,
+      "tx_line_of_sight": false
+    },
+    {
+      "id": "test_rx_004",
+      "point_id": "test-05",
+      "name": "Test RX 5",
+      "role": "test",
+      "position_m": [
+        10.9,
+        5.31,
+        0.45
+      ],
+      "plan_label": "T5",
+      "node_id": "node-02",
+      "wall_clearance_m": 0.75,
+      "tx_line_of_sight": false
+    },
+    {
+      "id": "test_rx_005",
+      "point_id": "test-06",
+      "name": "Test RX 6",
+      "role": "test",
+      "position_m": [
+        20.04,
+        5.31,
+        0.45
+      ],
+      "plan_label": "T6",
+      "node_id": "node-02",
+      "wall_clearance_m": 0.75,
+      "tx_line_of_sight": false
+    },
+    {
+      "id": "test_rx_006",
+      "point_id": "test-07",
+      "name": "Test RX 7",
+      "role": "test",
+      "position_m": [
+        31.57,
+        5.31,
+        0.45
+      ],
+      "plan_label": "T7",
+      "node_id": "node-02",
+      "wall_clearance_m": 0.75,
+      "tx_line_of_sight": false
+    },
+    {
+      "id": "test_rx_007",
+      "point_id": "test-08",
+      "name": "Test RX 8",
+      "role": "test",
+      "position_m": [
+        37.93,
+        6.9,
+        0.45
+      ],
+      "plan_label": "T8",
+      "node_id": "node-02",
+      "wall_clearance_m": 1.43,
+      "tx_line_of_sight": false
+    },
+    {
+      "id": "test_rx_008",
+      "point_id": "test-09",
+      "name": "Test RX 9",
+      "role": "test",
+      "position_m": [
+        37.93,
+        16.88,
+        0.45
+      ],
+      "plan_label": "T9",
+      "node_id": "node-02",
+      "wall_clearance_m": 1.75,
+      "tx_line_of_sight": true
+    },
+    {
+      "id": "test_rx_009",
+      "point_id": "test-10",
+      "name": "Test RX 10",
+      "role": "test",
+      "position_m": [
+        30.1,
+        17.83,
+        0.45
+      ],
+      "plan_label": "T10",
+      "node_id": "node-02",
+      "wall_clearance_m": 3.1,
+      "tx_line_of_sight": true
+    }
+  ]
+}
