@@ -47,6 +47,10 @@ NODE_IDS = {
     "C4": "gw-01",
 }
 
+# TX: ipTIME N602SR, 펌웨어가 고정한 채널 6
+TX_FREQUENCY_HZ = 2.437e9
+TX_EIRP_DBM = 20.0
+
 MARKERS = {
     "TX": (21.37, 17.83, "고정 AP / TX"),
     # 보정 RX: 넓은 복도 양끝 2개(LOS) + 좁은 복도 2개(NLOS).
@@ -157,8 +161,13 @@ def write_markers(report):
             "name": name,
             "position_m": [x, y, TX_Z],
             "node_id": NODE_IDS["TX"],
-            "frequency_hz": 2.4e9,
-            "power_dbm": 20.0,
+            # ipTIME N602SR (2.4GHz 전용, 802.11b/g/n, 2x2 MIMO, 5dBi 외장 안테나 2개).
+            # 주파수는 펌웨어가 고정한 채널 6(2437MHz)이다. 2400MHz 와의 FSPL 차이는 0.13dB.
+            "frequency_hz": TX_FREQUENCY_HZ,
+            # 등가 등방 복사 전력(EIRP) 기준값. 제조사가 출력을 공개하지 않아
+            # 국내 2.4GHz 상한(10mW/MHz -> 20MHz 채널 200mW = 23dBm)보다 3dB 낮게 잡았다.
+            # 현장에서 LOS 기준점 1개를 재면 확정된다: EIRP = 측정RSSI + FSPL(거리).
+            "power_dbm": TX_EIRP_DBM,
         }],
         "rx": [],
     }

@@ -12,12 +12,16 @@
       "power": 2.0,
       "distance_space": "xyz_meters",
       "epsilon_distance_power": 1e-12,
-      "exact_match_tolerance_m": 1e-9,
+      "exact_match_tolerance_m": 1e-09,
       "power_selection": {
         "default": "fixed",
         "fixed_value": 2.0,
         "fallback_if_needed": "calibration_leave_one_out_only",
-        "fallback_candidates": [1.0, 2.0, 3.0]
+        "fallback_candidates": [
+          1.0,
+          2.0,
+          3.0
+        ]
       }
     },
     "data_split_policy": {
@@ -27,7 +31,23 @@
     },
     "evaluation": {
       "target_column": "corrected_rssi",
-      "metrics": ["mae", "rmse"]
+      "metrics": [
+        "mae",
+        "rmse"
+      ],
+      "missing_measurement_policy": {
+        "rule": "exclude_and_report",
+        "imputation": "none",
+        "receiver_sensitivity_floor_dbm": -100.0,
+        "report_field": "input_provenance.segments_without_test_measurement",
+        "note_ko": [
+          "유효 표본이 0건인 Test 위치(미수신)는 MAE/RMSE에서 제외하고, 제외한 Segment를 보고서에 남긴다.",
+          "감도 한계값 등으로 값을 대입(imputation)하지 않는다. 대입값이 지표를 좌우하기 때문이다.",
+          "수집 경로의 유효 하한은 -110 dBm으로 내렸으나 ESP32 실제 감도(약 -95~-100 dBm)는 그대로다.",
+          "감도 부근에서는 약한 표본이 잘려 중앙값이 위로 치우칠 수 있다(절단 편향). 논문에 한계로 기록한다.",
+          "Calibration 미수신은 제외 대상이 아니다. 보정을 할 수 없으므로 계획서 §8의 예비 좌표로 옮긴다."
+        ]
+      }
     },
     "heatmap": {
       "shared_color_scale": true,

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import math
-from typing import Any, Dict, Mapping, Sequence
+from typing import Any, Dict, List, Mapping, Sequence
 
 import numpy as np
 
@@ -142,6 +142,196 @@ def compare_methods(
             "evaluation_roles": ["test"],
             "calibration_count": len(calibration),
             "test_count": len(test),
+            "test_values_used_in_fitting": False,
+            "success": True,
+        },
+    }
+
+
+def _sionna_value(
+    sionna_points: Mapping[str, Mapping[str, Any]],
+    point_id: str,
+    position: np.ndarray,
+    coordinate_tolerance_m: float,
+) -> float:
+    source = sionna_points.get(point_id)
+    if source is None:
+        raise AnalysisError("Sionna point 예측이 없는 위치가 있습니다: {}".format(point_id))
+    error = float(np.linalg.norm(np.asarray(position, dtype=float) - source["position"]))
+    if error > coordinate_tolerance_m:
+        raise AnalysisError(
+            "{}의 측정/Sionna 좌표가 다릅니다: {:.6g}m. "
+            "현장에서 좌표를 옮겼다면 tx_rx.json 갱신 후 run-sionna 를 다시 실행하십시오.".format(
+                point_id, error
+            )
+        )
+    return float(source["sionna_rssi_dbm"])
+
+
+def compare_methods_by_segment(
+    segments: Sequence[Mapping[str, Any]],
+    sionna_points: Mapping[str, Mapping[str, Any]],
+    sionna_grid: Sequence[Mapping[str, Any]],
+    idw_settings: Mapping[str, float],
+    coordinate_tolerance_m: float = 1.0e-6,
+) -> Dict[str, Any]:
+    """TestSegment 단위 비교.
+
+    Segment 하나마다 **그 시간창의 Calibration 만** 으로 Plain IDW 와 Residual IDW 를
+    구성하고 Test 1점을 평가한다. 정방향·역방향은 합치지 않고 `direction` 별 지표를
+    따로 산출한다(계획서 §7 데이터 사용 규칙).
+    """
+
+    if not segments:
+        raise AnalysisError("평가할 TestSegment 가 없습니다.")
+
+    test_rows: List[Dict[str, Any]] = []
+    actual_values: List[float] = []
+    raw_values: List[float] = []
+    plain_values: List[float] = []
+    residual_values: List[float] = []
+    calibration_samples: Dict[str, Dict[str, Any]] = {}
+    calibration_counts: List[int] = []
+
+    for segment in segments:
+        calibration = segment["calibration"]
+        calibration_counts.append(len(calibration))
+        positions = np.asarray([entry["position"] for entry in calibration], dtype=float)
+        measured = np.asarray(
+            [entry["actual_rssi_dbm"] for entry in calibration], dtype=float
+        )
+        predicted = np.asarray(
+            [
+                _sionna_value(
+                    sionna_points, entry["point_id"], entry["position"], coordinate_tolerance_m
+                )
+                for entry in calibration
+            ],
+            dtype=float,
+        )
+        for entry in calibration:
+            bucket = calibration_samples.setdefault(
+                entry["point_id"],
+                {
+                    "point_id": entry["point_id"],
+                    "node_id": entry["node_id"],
+                    "position": np.asarray(entry["position"], dtype=float),
+                    "values": [],
+                },
+            )
+            bucket["values"].append(entry["actual_rssi_dbm"])
+
+        query = np.asarray([segment["position"]], dtype=float)
+        raw = _sionna_value(
+            sionna_points, segment["point_id"], segment["position"], coordinate_tolerance_m
+        )
+        plain = float(idw_predict(positions, measured, query, **idw_settings)[0])
+        residual = raw + float(
+            idw_predict(positions, measured - predicted, query, **idw_settings)[0]
+        )
+
+        actual_values.append(float(segment["actual_rssi_dbm"]))
+        raw_values.append(raw)
+        plain_values.append(plain)
+        residual_values.append(residual)
+        test_rows.append(
+            {
+                "run_id": segment["run_id"],
+                "direction": segment["direction"],
+                "segment_id": segment["segment_id"],
+                "attempt_index": segment["attempt_index"],
+                "point_id": segment["point_id"],
+                "node_id": segment["node_id"],
+                "position": np.asarray(segment["position"], dtype=float),
+                "actual_rssi_dbm": float(segment["actual_rssi_dbm"]),
+                "calibration_node_count": len(calibration),
+            }
+        )
+
+    test_actual = np.asarray(actual_values, dtype=float)
+    predictions = {
+        "raw_sionna": np.asarray(raw_values, dtype=float),
+        "plain_idw": np.asarray(plain_values, dtype=float),
+        "residual_idw": np.asarray(residual_values, dtype=float),
+    }
+    metrics = {
+        name: regression_metrics(test_actual, values)
+        for name, values in predictions.items()
+    }
+
+    metrics_by_direction: Dict[str, Dict[str, Any]] = {}
+    for direction in sorted({row["direction"] for row in test_rows}):
+        mask = np.asarray([row["direction"] == direction for row in test_rows])
+        metrics_by_direction[direction] = {
+            name: regression_metrics(test_actual[mask], values[mask])
+            for name, values in predictions.items()
+        }
+
+    # Heatmap 용 Calibration 스냅샷: 지점별로 모든 시간창의 평균을 쓴다.
+    # 평가(MAE/RMSE)는 위에서 Segment 별로 끝났고, 여기서 만든 값은 그림 전용이다.
+    calibration = [
+        {
+            "point_id": entry["point_id"],
+            "node_id": entry["node_id"],
+            "position": entry["position"],
+            "actual_rssi_dbm": float(np.mean(entry["values"])),
+            "window_count": len(entry["values"]),
+        }
+        for entry in sorted(calibration_samples.values(), key=lambda item: item["point_id"])
+    ]
+    calibration_positions = np.asarray([row["position"] for row in calibration], dtype=float)
+    calibration_actual = np.asarray([row["actual_rssi_dbm"] for row in calibration], dtype=float)
+    calibration_sionna = np.asarray(
+        [
+            _sionna_value(sionna_points, row["point_id"], row["position"], coordinate_tolerance_m)
+            for row in calibration
+        ],
+        dtype=float,
+    )
+    calibration_residuals = calibration_actual - calibration_sionna
+
+    grid_positions = np.asarray([row["position"] for row in sionna_grid])
+    raw_grid = np.asarray([row["sionna_rssi_dbm"] for row in sionna_grid])
+    plain_grid = idw_predict(
+        calibration_positions, calibration_actual, grid_positions, **idw_settings
+    )
+    residual_grid = raw_grid + idw_predict(
+        calibration_positions, calibration_residuals, grid_positions, **idw_settings
+    )
+
+    directions: Dict[str, int] = {}
+    for row in test_rows:
+        directions[row["direction"]] = directions.get(row["direction"], 0) + 1
+
+    return {
+        "calibration": calibration,
+        "test": test_rows,
+        "test_actual": test_actual,
+        "test_predictions": predictions,
+        "calibration_residuals": calibration_residuals,
+        "grid_positions": grid_positions,
+        "grid_ids": [row["grid_id"] for row in sionna_grid],
+        "grid_rows": [int(row["row"]) for row in sionna_grid],
+        "grid_columns": [int(row["column"]) for row in sionna_grid],
+        "grid_predictions": {
+            "raw_sionna": raw_grid,
+            "plain_idw": plain_grid,
+            "residual_idw": residual_grid,
+        },
+        "metrics": metrics,
+        "metrics_by_direction": metrics_by_direction,
+        "heatmap_calibration_source": "mean_of_test_segment_windows",
+        "data_split_validation": {
+            "fit_roles": ["calibration"],
+            "evaluation_roles": ["test"],
+            "evaluation_mode": "per_test_segment_window",
+            "segment_count": len(test_rows),
+            "calibration_count": len(calibration),
+            "test_count": len(test_rows),
+            "calibration_nodes_per_segment_min": min(calibration_counts),
+            "calibration_nodes_per_segment_max": max(calibration_counts),
+            "runs": sorted({row["run_id"] for row in test_rows}),
+            "segments_by_direction": directions,
             "test_values_used_in_fitting": False,
             "success": True,
         },

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "sionna_rssi": {
-    "id": "corridor3f_diffraction_scattering_d5_v1",
+    "id": "corridor3f_ring_depth12_v2",
     "status": "provisional",
     "scene_source": {
       "default_mode": "metric_proxy_export",
@@ -31,7 +31,7 @@
       "polarization": "V"
     },
     "path_solver": {
-      "max_depth": 5,
+      "max_depth": 12,
       "samples_per_src": 8000000,
       "seed": 42,
       "synthetic_array": true,
@@ -40,16 +40,17 @@
       "enable_refraction": false,
       "enable_diffraction": true,
       "enable_scattering": true,
-      "max_num_paths_per_src": 40000000
+      "max_num_paths_per_src": 5000000,
+      "receivers_per_batch": 1
     },
     "radio_map": {
       "z_height_m": 0.45,
       "margin_m": 0.25,
       "cell_size_m": 0.75,
       "max_cells": 4000,
-      "samples_per_tx": 512000000,
+      "samples_per_tx": 128000000,
       "seed": 43,
-      "max_depth": 5,
+      "max_depth": 12,
       "enable_los": true,
       "enable_reflection": true,
       "enable_refraction": false,
@@ -63,12 +64,15 @@
       "rss_consistency_tolerance_db": 0.0001
     },
     "notes_ko": [
-      "회절과 확산 반사를 기본으로 켠다. 코어 뒤 NLOS 지점은 정반사만으로는 경로가 0개다.",
-      "scattering_coefficient 0.3은 거친 콘크리트 문헌값 범위의 중간값이며 실측이 아니다. 0이면 enable_scattering이 무의미하다.",
-      "max_num_paths_per_src는 samples_per_src와 함께 올려야 한다. 후보 경로가 한도를 넘으면 약한 RX의 경로가 통째로 잘려 유효 경로 0개가 된다.",
-      "샘플 수렴 확인(2026-08-20): LOS 지점은 0.1 dB 이내, 코어 뒤 깊은 그림자 지점은 8M 샘플에서도 약 3.5 dB 흔들린다.",
-      "radio_map samples_per_tx 512M에서 실내 셀 837개 중 791개에 값이 생긴다(8M이면 670개). GPU에서 0.85초다.",
-      "128M과 512M 사이의 셀 값 차이는 중앙값 0.03 dB지만 상위 5%는 16 dB다. 밝은 영역은 수렴했고 깊은 그림자 셀은 아직 아니다."
+      "max_depth 12: ㅁ자 링 복도를 돌아오는 경로는 벽 반사가 여러 번 필요해 depth 5로는 잡히지 않는다.",
+      "2026-08-21 현장 측정(좁은 복도 안쪽 raw RSSI -79~-80 dBm)이 depth 5 예측(-105대)을 반증했다.",
+      "깊이 스윕 결과 depth 12에서 값이 안정되고 16/20 은 추가 이득이 없다(1 dB 이내).",
+      "max_num_paths_per_src 를 40M 로 두면 8M 샘플에서 GPU 메모리가 터진다. 5M + receivers_per_batch 1 조합이 한계선이다.",
+      "receivers_per_batch: RX 를 나눠 풀어 메모리를 낮춘다. 0이면 기존처럼 한 번에 푼다.",
+      "샘플 수렴 확인(2026-08-21): 깊은 그림자 지점도 4M와 8M 차이가 1 dB 이내다.",
+      "enable_refraction 은 계속 false 다. 켜면 cal-02 가 -96 -> -57 로 23 dB 과대평가된다(벽 두께·재질 미보정).",
+      "재질 보정 단계에서 벽 두께와 투과 손실을 실측해 refraction 을 다시 검토한다.",
+      "scattering_coefficient 0.3은 거친 콘크리트 문헌값 중간값이며 실측이 아니다."
     ]
   }
 }

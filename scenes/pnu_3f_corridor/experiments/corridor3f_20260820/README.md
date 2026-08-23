@@ -234,7 +234,40 @@ LOS 지점은 완전히 수렴했고, 코어 뒤 깊은 그림자 지점은 8M �
 Radio map도 같다. samples_per_tx 128M과 512M의 셀 값 차이는 중앙값 0.03 dB지만
 상위 5%는 16 dB다. 밝은 영역은 믿을 수 있고 깊은 그림자 셀은 아직 아니다.
 
-### 예측값과 수신 감도 문제 (측정 전 검토 필요)
+### 현장 실측으로 뒤집힌 예측 (2026-08-21) — 아래 절은 기록으로만 남긴다
+
+**좁은 복도 안쪽에서 raw RSSI 약 -79 ~ -80 dBm이 실측됐다.** depth 5 예측(-105 dBm대)보다
+25 dB 높다. 원인은 재질이 아니라 **경로 깊이**였다.
+
+ㅁ자 링 복도에서는 신호가 코어를 뚫지 않고 **링을 빙 돌아온다.** TX에서 좁은 복도 안쪽까지
+링을 따라 35~46 m이고, 자유공간 기준 -51~-53 dBm에 코너 2회 손실 약 27 dB를 더하면
+-79 dBm으로 실측과 맞는다. 40 m 복도를 따라가려면 벽 반사가 5회로는 어림도 없다.
+
+`max_depth`를 12로 올린 결과(다른 조건 동일):
+
+| 지점 | depth 5 | **depth 12** | 변화 |
+| --- | ---: | ---: | ---: |
+| cal-02 | -106.7 | **-96.2** | +10.5 |
+| cal-03 | -105.3 | **-97.6** | +7.7 |
+| test-05 | -101.1 | **-84.6** | +16.5 |
+| test-06 | -106.7 | **-94.3** | +12.4 |
+| test-07 | -97.7 | **-81.4** | +16.3 |
+| LOS 6개 | | | -1.4 ~ -3.1 |
+
+유효 경로 수는 깊은 그림자 지점에서 약 1,000개 → 약 190,000개로 늘었다.
+depth 16·20은 추가 이득이 없다(1 dB 이내). 샘플도 4M과 8M 차이가 1 dB 이내로 수렴했다.
+
+**LOS 지점이 1~3 dB 내려간 것에 주의한다.** 이전 문서의 "LOS는 0.1 dB 이내로 수렴"은
+depth 5 고정에서 샘플만 늘렸을 때의 이야기다. 깊이를 바꾸면 경로가 늘어 간섭 합이 달라진다.
+현장 LOS 기준점 실측으로 확인한다.
+
+`enable_refraction`(벽 투과)은 계속 끈다. 켜보면 cal-02가 -96 → -57로 **23 dB 과대평가**된다.
+벽 두께·투과 손실을 실측하기 전에는 쓸 수 없다. 재질 보정 단계의 과제다.
+
+수신 감도 걱정은 사라졌다. -79 dBm은 ESP32 감도(-95 ~ -100)보다 15 dB 이상 여유가 있어
+**15개 지점 모두 측정 가능**하다. 7절 예비 좌표는 보험으로만 유지한다.
+
+### (기록) 이전 예측값과 수신 감도 문제
 
 현재 조건으로 계산한 15개 지점 예측값이다 (`processed/sionna_points.csv`).
 
@@ -255,6 +288,36 @@ Radio map도 같다. samples_per_tx 128M과 512M의 셀 값 차이는 중앙값 
 **결정(2026-08-20): 계획 좌표 그대로 측정하고 현장에서 확인한다.** 예비 좌표와
 현장 절차는 7절에 있다. cal-02와 cal-03이 둘 다 미수신이면 보정이 NLOS 2개를 잃고
 6절의 LOS/NLOS 혼합 원칙이 깨지므로, 그때는 반드시 예비 좌표로 옮긴다.
+
+## 9-1. 측정 후 분석 방법 (2026-08-21 확정)
+
+Backend Export 가 나오면 **Segment 단위**로 분석한다. 각 Test 를 같은 `segment_id`
+(= 같은 2분 기록창)의 C1~C4 로만 예측하고, 정방향·역방향 지표를 따로 낸다.
+
+```bash
+python -m tools.rf_experiment.main analyze \
+  --test-points        <export>/processed/test_points.csv \
+  --calibration-window <export>/processed/calibration_by_test_window.csv \
+  --sionna-points      scenes/pnu_3f_corridor/experiments/corridor3f_20260820/processed/sionna_points.csv \
+  --sionna-grid        scenes/pnu_3f_corridor/experiments/corridor3f_20260820/processed/sionna_grid.csv \
+  --methods            scenes/pnu_3f_corridor/experiments/corridor3f_20260820/configs/method_config.json \
+  --output             scenes/pnu_3f_corridor/experiments/corridor3f_20260820
+```
+
+`--summary measurements_summary.csv` 경로는 실험 전체를 뭉갠 집계라 정·역방향이 합쳐진다.
+진단용으로만 쓰고 논문 수치로 쓰지 않는다.
+
+미수신 처리는 `configs/method_config.json` 의 `evaluation.missing_measurement_policy` 에
+동결했다: **제외 후 보고(`exclude_and_report`), 값 대입 없음(`imputation: none`).**
+제외한 Segment 는 `analysis_report.json` 의
+`input_provenance.segments_without_test_measurement` 에 남는다.
+Calibration 미수신은 제외 대상이 아니다 — 7절 예비 좌표로 옮긴다.
+
+히트맵의 calibration 값은 지점별 전체 시간창 평균이다
+(`heatmap_calibration_source = mean_of_test_segment_windows`). **그림 전용이며 MAE/RMSE 에 쓰이지 않는다.**
+
+측정 좌표와 Sionna 예측 좌표가 1 µm 이상 다르면 분석이 즉시 멈춘다.
+현장에서 예비 좌표를 썼다면 `make_markers.py` → `run-sionna` 를 다시 돌린 뒤 분석한다.
 
 ## 10. GUI에서 확인하려면
 

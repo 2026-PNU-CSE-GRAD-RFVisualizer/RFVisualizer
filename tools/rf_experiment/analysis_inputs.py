@@ -153,3 +153,155 @@ def _method_settings(method_document: Mapping[str, Any]) -> Dict[str, float]:
         "epsilon_distance_power": float(idw["epsilon_distance_power"]),
         "exact_match_tolerance_m": float(idw["exact_match_tolerance_m"]),
     }
+
+
+TEST_POINT_COLUMNS = (
+    "run_id",
+    "direction",
+    "segment_id",
+    "point_id",
+    "attempt_index",
+    "node_id",
+    "x",
+    "y",
+    "z",
+    "corrected_rssi",
+)
+CALIBRATION_WINDOW_COLUMNS = (
+    "run_id",
+    "direction",
+    "segment_id",
+    "test_point_id",
+    "calibration_point_id",
+    "node_id",
+    "x",
+    "y",
+    "z",
+    "corrected_rssi",
+)
+
+
+def _row_position(row: Mapping[str, str], label: str) -> np.ndarray:
+    return np.asarray(
+        [
+            _number(row, "x", label),
+            _number(row, "y", label),
+            _number(row, "z", label),
+        ],
+        dtype=float,
+    )
+
+
+def load_segments(
+    test_points_path: Any, calibration_window_path: Any
+) -> tuple[List[Dict[str, Any]], List[str]]:
+    """TestSegment 단위 평가 입력.
+
+    각 Test 를 **같은 `segment_id`(= 같은 기록 시간창)** 의 Calibration 과 짝짓는다.
+    Run 전체 평균을 모든 Test 에 공통 적용하지 않기 위한 입력이며,
+    정방향·역방향은 `run_id`/`direction` 으로 분리된 채 유지된다.
+
+    반환값은 (Segment 목록, Test 대표값이 없는 Segment id 목록)이다.
+    두 번째 값은 실패가 아니라 **Test 미수신 기록**이다. 해당 위치에서 유효 표본이
+    하나도 없으면 Backend Export 가 test_points 행을 만들지 않기 때문이다.
+    """
+
+    test_rows = _read_rows(test_points_path, TEST_POINT_COLUMNS, "Test point CSV")
+    window_rows = _read_rows(
+        calibration_window_path, CALIBRATION_WINDOW_COLUMNS, "Calibration window CSV"
+    )
+
+    windows: Dict[str, List[Dict[str, Any]]] = {}
+    for index, row in enumerate(window_rows, start=2):
+        label = "Calibration window {}행".format(index)
+        segment_id = str(row["segment_id"]).strip()
+        if not segment_id:
+            raise AnalysisError("{} segment_id가 비어 있습니다.".format(label))
+        point_id = str(row["calibration_point_id"]).strip()
+        if not point_id:
+            raise AnalysisError("{} calibration_point_id가 비어 있습니다.".format(label))
+        bucket = windows.setdefault(segment_id, [])
+        if any(entry["point_id"] == point_id for entry in bucket):
+            raise AnalysisError(
+                "Segment {}에 calibration {}가 중복됩니다.".format(segment_id, point_id)
+            )
+        bucket.append(
+            {
+                "point_id": point_id,
+                "node_id": str(row["node_id"]).strip(),
+                "position": _row_position(row, label),
+                "actual_rssi_dbm": _number(row, "corrected_rssi", label),
+            }
+        )
+
+    segments: List[Dict[str, Any]] = []
+    seen: set = set()
+    for index, row in enumerate(test_rows, start=2):
+        label = "Test point {}행".format(index)
+        segment_id = str(row["segment_id"]).strip()
+        if not segment_id:
+            raise AnalysisError("{} segment_id가 비어 있습니다.".format(label))
+        if segment_id in seen:
+            raise AnalysisError("Test point CSV segment_id가 중복됩니다: {}".format(segment_id))
+        seen.add(segment_id)
+        calibration = windows.get(segment_id)
+        if not calibration:
+            raise AnalysisError(
+                "Segment {}에 같은 시간창의 calibration 행이 없습니다. "
+                "Backend Export 의 calibration_by_test_window.csv 를 확인하십시오.".format(segment_id)
+            )
+        point_id = str(row["point_id"]).strip()
+        if not point_id:
+            raise AnalysisError("{} point_id가 비어 있습니다.".format(label))
+        segments.append(
+            {
+                "segment_id": segment_id,
+                "run_id": str(row["run_id"]).strip(),
+                "direction": str(row["direction"]).strip() or "unknown",
+                "attempt_index": int(_number(row, "attempt_index", label)),
+                "point_id": point_id,
+                "node_id": str(row["node_id"]).strip(),
+                "position": _row_position(row, label),
+                "actual_rssi_dbm": _number(row, "corrected_rssi", label),
+                "calibration": calibration,
+            }
+        )
+
+    # Test 대표값이 없는 Segment = 그 위치에서 유효 표본 0건(미수신). 결과로 보고한다.
+    unmatched = sorted(set(windows) - seen)
+    return segments, unmatched
+
+
+SUPPORTED_MISSING_MEASUREMENT_RULES = ("exclude_and_report",)
+
+
+def _evaluation_policy(method_document: Mapping[str, Any]) -> Dict[str, Any]:
+    """평가 규칙(미수신 처리 포함)을 읽고 구현된 규칙인지 확인한다.
+
+    미수신 지점을 임의 값으로 대입(imputation)하면 그 값이 MAE 를 좌우하므로
+    구현하지 않는다. 설정이 대입을 요구하면 조용히 무시하지 않고 실패시킨다.
+    """
+
+    evaluation = dict(method_document["method_config"]["evaluation"])
+    policy = dict(evaluation.get("missing_measurement_policy") or {})
+    rule = str(policy.get("rule", "exclude_and_report"))
+    if rule not in SUPPORTED_MISSING_MEASUREMENT_RULES:
+        raise AnalysisError(
+            "구현되지 않은 미수신 처리 규칙입니다: {} (지원: {})".format(
+                rule, ", ".join(SUPPORTED_MISSING_MEASUREMENT_RULES)
+            )
+        )
+    imputation = str(policy.get("imputation", "none"))
+    if imputation != "none":
+        raise AnalysisError(
+            "미수신 지점의 값 대입(imputation={})은 구현하지 않았습니다. "
+            "대입값이 MAE 를 좌우하므로 제외 후 보고만 지원합니다.".format(imputation)
+        )
+    return {
+        "target_column": evaluation.get("target_column"),
+        "metrics": evaluation.get("metrics"),
+        "missing_measurement_rule": rule,
+        "imputation": imputation,
+        "receiver_sensitivity_floor_dbm": policy.get("receiver_sensitivity_floor_dbm"),
+        "note_ko": policy.get("note_ko"),
+    }

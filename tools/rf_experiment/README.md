@@ -85,7 +85,33 @@ conda run -n pgsr python -m tools.proxy_placement_editor.main edit \
 
 ## 세 방법 비교 분석
 
-Backend Summary CSV, 위치별 Sionna 예측, 2D Grid Sionna 예측이 준비되면 같은 명령으로 지표와 그림을 다시 만든다.
+입력은 두 가지다. **최종 실험에는 Segment 단위(아래 권장 경로)를 쓴다.**
+
+### 권장: TestSegment 단위 (계획서 §7 규칙)
+
+각 Test를 **같은 `segment_id`(= 같은 기록 시간창)의 C1~C4**로만 예측하고, 정방향·역방향 지표를 따로 낸다.
+
+```bash
+python -m tools.rf_experiment.main analyze \
+  --test-points scenes/<scene_id>/experiments/<session_id>/processed/test_points.csv \
+  --calibration-window scenes/<scene_id>/experiments/<session_id>/processed/calibration_by_test_window.csv \
+  --sionna-points scenes/<scene_id>/experiments/<session_id>/processed/sionna_points.csv \
+  --sionna-grid scenes/<scene_id>/experiments/<session_id>/processed/sionna_grid.csv \
+  --methods scenes/<scene_id>/experiments/<session_id>/configs/method_config.json \
+  --output scenes/<scene_id>/experiments/<session_id>
+```
+
+두 CSV는 Backend Export가 만드는 파일을 그대로 쓴다. 정방향·역방향과 재측정(`attempt_index`)은 합치지 않고 별도 행으로 남는다. 추가 출력은 다음과 같다.
+
+- `processed/metrics_by_direction.csv` — 방향별 MAE·RMSE
+- `processed/comparison_results.csv` — `run_id`, `direction`, `segment_id`, `attempt_index` 열 포함
+- `analysis_report.json`의 `evaluation_mode = per_test_segment_window`
+
+Test 대표값이 없는 Segment(그 위치에서 유효 표본 0건 = 미수신)는 실패가 아니라 `input_provenance.segments_without_test_measurement`에 기록된다.
+
+히트맵은 지점별로 모든 시간창의 평균 calibration을 쓴다(`heatmap_calibration_source = mean_of_test_segment_windows`). **그림 전용이며 위 지표 계산에는 쓰이지 않는다.**
+
+### 호환: 실험 전체 집계 (진단용)
 
 ```bash
 python -m tools.rf_experiment.main analyze \
@@ -96,7 +122,9 @@ python -m tools.rf_experiment.main analyze \
   --output scenes/<scene_id>/experiments/<session_id>
 ```
 
-예측값 fitting에는 `calibration` 행만 사용하고, `test` 행은 MAE·RMSE 평가에만 사용한다. 출력에는 방법별 비교 CSV, 지표 CSV, 측정점 그림, 예측-실측 산점도, 동일한 색상 범위를 쓰는 히트맵 3장이 포함된다.
+`measurements_summary.csv`는 실험 전체를 `(point_id, node_id)`로 묶은 집계라 **정방향과 역방향이 한 행으로 합쳐진다.** 논문 수치가 아니라 진단용으로만 쓴다.
+
+두 경로 모두 예측값 fitting에는 `calibration` 행만 사용하고, `test` 행은 MAE·RMSE 평가에만 사용한다. 출력에는 방법별 비교 CSV, 지표 CSV, 측정점 그림, 예측-실측 산점도, 동일한 색상 범위를 쓰는 히트맵 3장이 포함된다.
 
 ## Sionna 지점·격자 RSSI
 

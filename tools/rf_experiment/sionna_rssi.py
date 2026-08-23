@@ -560,12 +560,40 @@ def run_sionna_rssi(
             raise SionnaRssiError("Sionna scene XML을 찾을 수 없습니다: {}".format(scene_xml))
         manifest = None
         scene_mode = "prebuilt_scene_xml_override"
-    scene, scene_load_seconds = configure_sionna_scene(
-        str(scene_xml), settings, positions
-    )
-    point_rows, point_report = _solve_points(
-        scene, settings, point_metadata, float(transmitter["power_dbm"])
-    )
+    # RX 를 한 번에 풀면 메모리가 RX 수에 비례해 늘어난다. 깊은 max_depth 에서는
+    # 그것이 유일한 병목이라 RX 를 나눠 풀 수 있게 한다(Scene 재구성은 0.03초 수준).
+    # receivers_per_batch 를 주지 않으면 기존과 동일하게 한 번에 푼다.
+    batch_size = int(settings["path_test"].get("receivers_per_batch") or 0)
+    if batch_size <= 0:
+        batch_size = len(point_metadata)
+    transmitter_positions = [p for p in positions if p["kind"] != "receiver"]
+    receiver_positions = [p for p in positions if p["kind"] == "receiver"]
+    point_rows: List[Dict[str, Any]] = []
+    batch_reports: List[Dict[str, Any]] = []
+    scene_load_seconds = 0.0
+    scene = None
+    for start in range(0, len(point_metadata), batch_size):
+        chunk_metadata = point_metadata[start : start + batch_size]
+        chunk_positions = transmitter_positions + receiver_positions[start : start + batch_size]
+        scene, batch_load_seconds = configure_sionna_scene(
+            str(scene_xml), settings, chunk_positions
+        )
+        scene_load_seconds += batch_load_seconds
+        rows, report = _solve_points(
+            scene, settings, chunk_metadata, float(transmitter["power_dbm"])
+        )
+        point_rows.extend(rows)
+        batch_reports.append(report)
+    point_report = {
+        "solve_time_seconds": sum(r["solve_time_seconds"] for r in batch_reports),
+        "receiver_count": sum(r["receiver_count"] for r in batch_reports),
+        "receiver_batch_size": batch_size,
+        "receiver_batch_count": len(batch_reports),
+        "aggregation": batch_reports[0]["aggregation"],
+        "gain_unit": batch_reports[0]["gain_unit"],
+        "minimum_valid_path_count": min(r["minimum_valid_path_count"] for r in batch_reports),
+        "maximum_valid_path_count": max(r["maximum_valid_path_count"] for r in batch_reports),
+    }
     coverage = run_coverage_solver(scene, settings, room, positions)
     grid_rows, grid_rssi, consistency = _radio_map_rows(
         coverage,

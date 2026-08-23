@@ -10,7 +10,7 @@ from tools.sionna_smoke_test.coverage_test import CoverageTestError
 from tools.sionna_smoke_test.metric_scene_loader import MetricSceneError
 from tools.sionna_smoke_test.scene_exporter import SceneExportError
 
-from .analysis import AnalysisError, run_analysis
+from .analysis import AnalysisError, run_analysis, run_segment_analysis
 from .contracts import (
     ContractError,
     validate_contract_bundle,
@@ -66,7 +66,12 @@ def build_parser() -> argparse.ArgumentParser:
         "analyze",
         help="Raw Sionna, Plain IDW, Residual IDW의 수치·표·히트맵을 생성합니다.",
     )
-    analysis.add_argument("--summary", required=True)
+    # 입력은 둘 중 하나다.
+    #   권장) --test-points + --calibration-window : Segment 단위(계획서 §7 규칙)
+    #   호환) --summary                            : 실험 전체 집계(진단용)
+    analysis.add_argument("--summary")
+    analysis.add_argument("--test-points")
+    analysis.add_argument("--calibration-window")
     analysis.add_argument("--sionna-points", required=True)
     analysis.add_argument("--sionna-grid", required=True)
     analysis.add_argument("--methods", required=True)
@@ -120,13 +125,32 @@ def main(argv: List[str] = None) -> int:
                 args.output,
             )
         elif args.command == "analyze":
-            report = run_analysis(
-                args.summary,
-                args.sionna_points,
-                args.sionna_grid,
-                args.methods,
-                args.output,
-            )
+            if args.test_points or args.calibration_window:
+                if not (args.test_points and args.calibration_window):
+                    raise AnalysisError(
+                        "--test-points 와 --calibration-window 는 함께 지정해야 합니다."
+                    )
+                report = run_segment_analysis(
+                    args.test_points,
+                    args.calibration_window,
+                    args.sionna_points,
+                    args.sionna_grid,
+                    args.methods,
+                    args.output,
+                )
+            elif args.summary:
+                report = run_analysis(
+                    args.summary,
+                    args.sionna_points,
+                    args.sionna_grid,
+                    args.methods,
+                    args.output,
+                )
+            else:
+                raise AnalysisError(
+                    "--test-points 와 --calibration-window(권장) 또는 --summary 중 "
+                    "하나를 지정해야 합니다."
+                )
         elif args.command == "run-sionna":
             report = run_sionna_rssi(
                 args.scene,
