@@ -212,3 +212,6 @@ poetry.toml
 
 # LSP config files
 pyrightconfig.json
+
+# Generated PGSR mesh (exceeds GitHub's file-size limit)
+scenes/pnu_3f_corridor/proxy_mesh/complex_envelope/pgsr_mesh_metric.ply
