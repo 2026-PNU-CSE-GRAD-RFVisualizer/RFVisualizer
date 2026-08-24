@@ -50,6 +50,23 @@ namespace sibr {
 	{
 		_currentCamera = cam;
 		_hasBeenInitialized = true;
+		// 수평 기준 축은 씬마다 다르다(이 Fork의 PGSR 씬은 -Y가 위다). 처음 카메라의 up을
+		// 가장 가까운 좌표축으로 스냅해서 쓴다. 그래야 마우스로 계속 돌려도 화면이 기울지 않는다.
+		// **딱 한 번만 정한다.** fromCamera 는 Mode 전환 등으로 나중에도 불리는데, 그때 카메라가
+		// 위나 아래를 많이 보고 있으면 up 의 주축이 바뀌어 기준이 통째로 뒤집힌다.
+		if (_worldUpResolved) {
+			return;
+		}
+		_worldUpResolved = true;
+		const sibr::Vector3f up = cam.up();
+		int axis = 0;
+		for (int index = 1; index < 3; ++index) {
+			if (std::abs(up[index]) > std::abs(up[axis])) {
+				axis = index;
+			}
+		}
+		_worldUp = sibr::Vector3f(0.f, 0.f, 0.f);
+		_worldUp[axis] = (up[axis] >= 0.f) ? 1.f : -1.f;
 	}
 
 	void FPSCamera::update(const sibr::Input & input, float deltaTime) {
@@ -57,7 +74,10 @@ namespace sibr {
 		if (!_hasBeenInitialized) { return; }
 		// Read input and update camera.
 		moveUsingWASD(input, deltaTime);
-		moveUsingMousePan(input, deltaTime);
+		// 오른쪽 버튼을 잡고 있는 동안은 마우스가 시점 회전이고, 그 외에는 기존 Pan이다.
+		if (!lookUsingMouse()) {
+			moveUsingMousePan(input, deltaTime);
+		}
 	}
 
 	void FPSCamera::snap(const std::vector<InputCamera::Ptr> & cams){
@@ -75,6 +95,9 @@ namespace sibr {
 
 	void FPSCamera::update(const sibr::Input & input, const float deltaTime, const Viewport & viewport)
 	{
+		if (!viewport.isEmpty()) {
+			_viewport = viewport;
+		}
 		update(input, deltaTime);
 	}
 
@@ -187,6 +210,57 @@ namespace sibr {
 		}
 
 		_currentCamera.rotate(pivot, _currentCamera.transform());
+	}
+
+	bool FPSCamera::lookUsingMouse()
+	{
+		// sibr::Input의 마우스 상태는 커서가 ImGui 창 위에 있으면 비워진다. 그런데 렌더 화면
+		// 자체가 ImGui 창 안에 그려지므로, 여기서는 ImGui의 원본 마우스 상태를 직접 읽는다.
+		const ImGuiIO& io = ImGui::GetIO();
+		if (!io.MouseDown[1]) {
+			_looking = false;
+			return false;
+		}
+		if (!_looking) {
+			// 드래그를 이 View 안에서 시작했을 때만 받는다. 한 번 시작하면 커서가 밖으로
+			// 나가도 버튼을 뗄 때까지 계속 돌린다.
+			if (!_viewport.isEmpty() && !_viewport.contains(io.MousePos.x, io.MousePos.y)) {
+				return false;
+			}
+			_looking = true;
+			return true;   // 누른 첫 Frame의 delta는 튀므로 쓰지 않는다.
+		}
+		// 휠로 이동 속도를 바꾼다. Unity Scene View와 같은 조작이다.
+		if (io.MouseWheel != 0.0f) {
+			_speedFpsCam = sibr::clamp(_speedFpsCam * std::pow(1.2f, io.MouseWheel), 0.01f, 100.f);
+		}
+		if (io.MouseDelta.x == 0.0f && io.MouseDelta.y == 0.0f) {
+			return true;
+		}
+		// 커서가 창 밖으로 나갔다 다른 자리로 되돌아오면 ImGui가 그 간격을 한 Frame의 이동량으로
+		// 준다. 그대로 쓰면 화면이 확 튄다. 사람 손으로 한 Frame에 나올 수 있는 크기로 자른다.
+		const float maxDelta = 150.f;
+		const float deltaX = sibr::clamp(io.MouseDelta.x, -maxDelta, maxDelta);
+		const float deltaY = sibr::clamp(io.MouseDelta.y, -maxDelta, maxDelta);
+		const float yaw = -deltaX * _mouseLookSpeed * float(M_PI) / 180.f;
+		const float pitch = -deltaY * _mouseLookSpeed * float(M_PI) / 180.f;
+
+		// Yaw는 world up 기준, Pitch는 **카메라 자신의 오른쪽 축** 기준으로 돌린다.
+		// 이 조합이라야 계속 돌려도 roll(수평 기울어짐)이 새로 쌓이지 않는다.
+		//
+		// lookAt으로 자세를 통째로 다시 만들지 않는 이유: 원래 카메라가 조금 기울어져 있으면
+		// (손으로 찍은 입력 카메라는 대개 기울어져 있다) 마우스를 1픽셀 움직인 순간 수평이
+		// 강제로 맞춰지면서 화면이 확 튄다. 증분 회전은 지금 자세를 그대로 이어받는다.
+		const sibr::Vector3f direction = _currentCamera.dir().normalized();
+		const sibr::Vector3f right = _currentCamera.right().normalized();
+
+		// 천장·바닥을 지나 뒤집히지 않도록 수직 근처에서는 Pitch를 버린다.
+		const sibr::Vector3f pitched = Eigen::AngleAxisf(pitch, right) * direction;
+		if (std::abs(pitched.normalized().dot(_worldUp)) < 0.995f) {
+			_currentCamera.rotate(sibr::Quaternionf(Eigen::AngleAxisf(pitch, right)));
+		}
+		_currentCamera.rotate(sibr::Quaternionf(Eigen::AngleAxisf(yaw, _worldUp)));
+		return true;
 	}
 
 	void FPSCamera::moveUsingMousePan( const sibr::Input& input, float deltaTime )

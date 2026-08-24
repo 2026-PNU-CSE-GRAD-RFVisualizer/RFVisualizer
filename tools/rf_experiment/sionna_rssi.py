@@ -457,6 +457,64 @@ def _radio_map_rows(
     return rows, rssi, consistency
 
 
+def _solve_volume_layers(
+    scene,
+    settings: Mapping[str, Any],
+    room,
+    positions: Sequence[Mapping[str, Any]],
+    solver_document: Mapping[str, Any],
+    processed: Path,
+    tx_power_dbm: float,
+    tolerance_db: float,
+) -> Optional[Dict[str, Any]]:
+    """volume_z_heights_m가 있으면 같은 Scene·TX·Seed로 높이별 Radio Map을 더 푼다.
+
+    XY Grid는 Room 경계와 cell_size로만 정해지므로 높이를 바꿔도 그대로다.
+    z=0.45m 2D 결과는 그대로 두고 Viewer Volume용 배열만 따로 저장한다.
+    """
+
+    from .volume import VolumeError, stack_layers, volume_heights
+
+    if not settings["coverage"].get("volume_z_heights_m"):
+        return None
+    heights = volume_heights(solver_document)
+    layers = []
+    solve_seconds = 0.0
+    for height in heights:
+        layer_settings = {
+            **settings,
+            "coverage": {**settings["coverage"], "z_height_m": height},
+        }
+        layer = run_coverage_solver(scene, layer_settings, room, positions)
+        _rows, rssi, _consistency = _radio_map_rows(layer, tx_power_dbm, tolerance_db)
+        solve_seconds += float(layer["metadata"]["solve_time_seconds"])
+        layers.append(
+            {
+                "z_height_m": height,
+                "centers": layer["centers"],
+                "rssi_dbm": rssi,
+                "valid_mask": layer["valid_mask"],
+            }
+        )
+    try:
+        stack = stack_layers(layers)
+    except VolumeError as exc:
+        raise SionnaRssiError("높이별 Radio Map을 쌓을 수 없습니다: {}".format(exc)) from exc
+    np.save(processed / "sionna_volume_rssi_dbm.npy", stack["rssi_dbm"])
+    np.save(processed / "sionna_volume_valid_mask.npy", stack["valid_mask"])
+    np.save(processed / "sionna_volume_centers_xy.npy", stack["centers_xy"])
+    return {
+        "z_heights_m": heights,
+        "shape_zyx": stack["shape_zyx"],
+        "origin_m": stack["origin_m"],
+        "spacing_m": stack["spacing_m"],
+        "valid_voxel_count": int(np.count_nonzero(stack["valid_mask"])),
+        "solve_time_seconds": solve_seconds,
+        "vertical_extrapolation": True,
+        "paper_evidence_eligible": False,
+    }
+
+
 def _plot_radio_map(path: Path, centers: np.ndarray, rssi: np.ndarray, positions) -> None:
     import matplotlib
 
@@ -620,6 +678,16 @@ def run_sionna_rssi(
     np.save(processed / "sionna_grid_rssi_dbm.npy", grid_rssi)
     preview_path = figures / "raw_sionna_rssi_map.png"
     _plot_radio_map(preview_path, coverage["centers"], grid_rssi, positions)
+    volume_report = _solve_volume_layers(
+        scene,
+        settings,
+        room,
+        positions,
+        solver_document,
+        processed,
+        float(transmitter["power_dbm"]),
+        float(validation["rss_consistency_tolerance_db"]),
+    )
     warnings = list(scene_report["warnings"]) + list(marker_report["warnings"])
     if not ready:
         warnings.insert(0, "DRY RUN ONLY — draft Scene/Marker 결과는 논문 수치로 사용하지 않습니다.")
@@ -652,6 +720,7 @@ def run_sionna_rssi(
             "exported_valid_grid_point_count": len(grid_rows),
             "rssi_conversion_validation": consistency,
         },
+        "volume": volume_report,
         "performance": {
             "scene_load_seconds": scene_load_seconds,
             "point_solve_seconds": point_report["solve_time_seconds"],
@@ -675,6 +744,21 @@ def run_sionna_rssi(
             ),
             "grid_rssi_dbm_npy": str(
                 (processed / "sionna_grid_rssi_dbm.npy").resolve()
+            ),
+            **(
+                {
+                    "volume_rssi_dbm_npy": str(
+                        (processed / "sionna_volume_rssi_dbm.npy").resolve()
+                    ),
+                    "volume_valid_mask_npy": str(
+                        (processed / "sionna_volume_valid_mask.npy").resolve()
+                    ),
+                    "volume_centers_xy_npy": str(
+                        (processed / "sionna_volume_centers_xy.npy").resolve()
+                    ),
+                }
+                if volume_report
+                else {}
             ),
             "radio_map_png": str(preview_path.resolve()),
             "environment_json": str((output / "environment.json").resolve()),

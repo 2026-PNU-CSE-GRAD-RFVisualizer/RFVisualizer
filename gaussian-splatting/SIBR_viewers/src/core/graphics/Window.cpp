@@ -95,7 +95,10 @@ namespace sibr
 		if (!ImGui::GetIO().WantCaptureMouse) {
 			sibr::Input::global().mousePosition(Vector2i((int)x, (int)y));
 		} else {
-			sibr::Input::global() = sibr::Input();
+			// 마우스 상태만 비운다. 예전에는 Input 전체를 지워서, 커서가 ImGui 패널 위를
+			// 지나가기만 해도 눌러 두고 있던 WASD 키가 풀려 이동이 뚝뚝 끊겼다.
+			sibr::Input::global().mouseButton() = sibr::Input::MouseButton();
+			sibr::Input::global().mouseScroll(0.0);
 		}
 		
 	}

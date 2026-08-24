@@ -514,7 +514,7 @@ namespace sibr {
 					_fpsCamera.setGoalAltitude(-1.f);
 				}
 
-				_fpsCamera.update(input, deltaTime);
+				_fpsCamera.update(input, deltaTime, _viewport);
 				if (_shouldSnap) {
 					_fpsCamera.snap(_interpPath);
 				}

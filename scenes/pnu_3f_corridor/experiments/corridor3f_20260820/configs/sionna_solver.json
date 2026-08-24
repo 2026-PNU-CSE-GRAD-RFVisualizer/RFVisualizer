@@ -45,6 +45,14 @@
     },
     "radio_map": {
       "z_height_m": 0.45,
+      "volume_z_heights_m": [
+        0.25,
+        0.75,
+        1.25,
+        1.75,
+        2.25,
+        2.75
+      ],
       "margin_m": 0.25,
       "cell_size_m": 0.75,
       "max_cells": 4000,
@@ -72,7 +80,9 @@
       "샘플 수렴 확인(2026-08-21): 깊은 그림자 지점도 4M와 8M 차이가 1 dB 이내다.",
       "enable_refraction 은 계속 false 다. 켜면 cal-02 가 -96 -> -57 로 23 dB 과대평가된다(벽 두께·재질 미보정).",
       "재질 보정 단계에서 벽 두께와 투과 손실을 실측해 refraction 을 다시 검토한다.",
-      "scattering_coefficient 0.3은 거친 콘크리트 문헌값 중간값이며 실측이 아니다."
+      "scattering_coefficient 0.3은 거친 콘크리트 문헌값 중간값이며 실측이 아니다.",
+      "volume_z_heights_m: SIBR Viewer 3D Volume 전용이다. z=0.45m 2D 결과와 XY Grid가 같고 같은 seed 를 쓴다.",
+      "실측은 0.45m 한 층뿐이라 다른 높이의 Residual 은 XYZ IDW 외삽이다. 논문 근거로 쓰지 않는다."
     ]
   }
 }

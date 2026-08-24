@@ -37,14 +37,14 @@
     "power_dbm": 20.0
   },
   "point_prediction": {
-    "solve_time_seconds": 1.1598733499995433,
+    "solve_time_seconds": 1.1959674290847033,
     "receiver_count": 14,
     "receiver_batch_size": 1,
     "receiver_batch_count": 14,
     "aggregation": "sum_abs_squared_complex_path_amplitudes",
     "gain_unit": "unitless_linear",
-    "minimum_valid_path_count": 180205,
-    "maximum_valid_path_count": 4139882
+    "minimum_valid_path_count": 180209,
+    "maximum_valid_path_count": 4139954
   },
   "radio_map": {
     "schema_version": "1.0",
@@ -80,11 +80,11 @@
     "inf_count": 0,
     "zero_or_negative_count": 656,
     "value_min_linear": 6.540475355320402e-14,
-    "value_mean_linear": 4.408075133080192e-06,
-    "value_max_linear": 0.0003905814664904028,
+    "value_mean_linear": 4.40807523038148e-06,
+    "value_max_linear": 0.00039058152469806373,
     "value_min_db": -131.84390686432562,
-    "value_mean_db": -74.30441389022674,
-    "value_max_db": -34.08288368298324,
+    "value_mean_db": -74.30441390244785,
+    "value_max_db": -34.082883035761945,
     "solver_options": {
       "samples_per_tx": 128000000,
       "max_depth": 12,
@@ -95,27 +95,56 @@
       "diffuse_reflection": true,
       "seed": 43
     },
-    "solve_time_seconds": 0.5325693629856687,
+    "solve_time_seconds": 0.41938957798993215,
     "success": true,
     "exported_valid_grid_point_count": 837,
     "rssi_conversion_validation": {
       "radio_map_rss_property_available": true,
       "formula": "tx_power_dbm + 10*log10(path_gain_linear)",
       "rss_property_unit": "W",
-      "maximum_absolute_difference_db": 3.1042429071703737e-07,
+      "maximum_absolute_difference_db": 3.099028589303998e-07,
       "tolerance_db": 0.0001,
       "success": true
     }
   },
+  "volume": {
+    "z_heights_m": [
+      0.25,
+      0.75,
+      1.25,
+      1.75,
+      2.25,
+      2.75
+    ],
+    "shape_zyx": [
+      6,
+      28,
+      60
+    ],
+    "origin_m": [
+      0.625,
+      0.625,
+      0.25
+    ],
+    "spacing_m": [
+      0.75,
+      0.75,
+      0.5
+    ],
+    "valid_voxel_count": 5022,
+    "solve_time_seconds": 3.3286609409260564,
+    "vertical_extrapolation": true,
+    "paper_evidence_eligible": false
+  },
   "performance": {
-    "scene_load_seconds": 0.061452060035662726,
-    "point_solve_seconds": 1.1598733499995433,
-    "radio_map_solve_seconds": 0.5325693629856687
+    "scene_load_seconds": 0.06257351412205026,
+    "point_solve_seconds": 1.1959674290847033,
+    "radio_map_solve_seconds": 0.41938957798993215
   },
   "input_sha256": {
     "scene_json": "c811a7da23d1230e6ecd7331b2b3df350ff8f6ef510ac3271fb7f459907af308",
     "markers_json": "bc66fc34f9aff0bd13d53a431da6acfc49dad6884277ef77bce0fc8b7222ac72",
-    "solver_json": "e7c250b23f5d0da4e8f6388b19f1815cad75fb1f6d0213fe83cc7660a4715ee1",
+    "solver_json": "f5d8b20fa2b652ebf24b33c503773b39f10801115e6f387165780b765f16ea23",
     "scene_xml": "dc969dee07d1f9506d55f5c6c9bfd0cd934fc54f0abec8208905cfb5b13cbe90"
   },
   "warnings": [
@@ -128,6 +157,9 @@
     "grid_path_gain_npy": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/experiments/corridor3f_20260820/processed/sionna_grid_path_gain_linear.npy",
     "grid_valid_mask_npy": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/experiments/corridor3f_20260820/processed/sionna_grid_valid_mask.npy",
     "grid_rssi_dbm_npy": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/experiments/corridor3f_20260820/processed/sionna_grid_rssi_dbm.npy",
+    "volume_rssi_dbm_npy": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/experiments/corridor3f_20260820/processed/sionna_volume_rssi_dbm.npy",
+    "volume_valid_mask_npy": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/experiments/corridor3f_20260820/processed/sionna_volume_valid_mask.npy",
+    "volume_centers_xy_npy": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/experiments/corridor3f_20260820/processed/sionna_volume_centers_xy.npy",
     "radio_map_png": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/experiments/corridor3f_20260820/figures/raw_sionna_rssi_map.png",
     "environment_json": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/experiments/corridor3f_20260820/environment.json",
     "report_json": "/data/RFVisualizer_Workspace/RFVisualizer/scenes/pnu_3f_corridor/experiments/corridor3f_20260820/sionna_rssi_report.json",

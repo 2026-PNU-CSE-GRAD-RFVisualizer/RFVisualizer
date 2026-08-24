@@ -20,6 +20,7 @@ from .contracts import (
 from .dry_run import DryRunError, generate_synthetic_summary
 from .proxy_scene import ProxySceneError, export_proxy_envelope
 from .sionna_rssi import SionnaRssiError, run_sionna_rssi
+from .volume import VolumeError, export_viewer_volume
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -95,6 +96,30 @@ def build_parser() -> argparse.ArgumentParser:
         help="초안 Scene/Marker로 Dry Run만 허용합니다.",
     )
 
+    viewer_volume = subparsers.add_parser(
+        "export-viewer-volume",
+        help="높이별 Sionna 결과와 실측 Calibration으로 SIBR Viewer용 Volume Bundle을 만듭니다.",
+    )
+    viewer_volume.add_argument(
+        "--sionna-output",
+        required=True,
+        help="run-sionna 출력 디렉터리 (processed/sionna_volume_*.npy 를 포함)",
+    )
+    viewer_volume.add_argument("--calibration", required=True)
+    viewer_volume.add_argument("--sionna-points", required=True)
+    viewer_volume.add_argument("--methods", required=True)
+    viewer_volume.add_argument(
+        "--transform", required=True, help="Proxy Mesh calibration.json"
+    )
+    viewer_volume.add_argument("--scene", required=True)
+    viewer_volume.add_argument(
+        "--occlusion-mesh",
+        action="append",
+        required=True,
+        help="Depth-only Pass에 쓸 Proxy Mesh (여러 번 지정 가능)",
+    )
+    viewer_volume.add_argument("--output", required=True)
+
     synthetic = subparsers.add_parser(
         "generate-synthetic-summary",
         help="Sionna 출력으로 분석 연결용 합성 Summary를 만듭니다.",
@@ -160,6 +185,17 @@ def main(argv: List[str] = None) -> int:
                 allow_draft=args.allow_draft,
                 scene_xml_override=args.scene_xml,
             )
+        elif args.command == "export-viewer-volume":
+            report = export_viewer_volume(
+                args.sionna_output,
+                args.calibration,
+                args.sionna_points,
+                args.methods,
+                args.transform,
+                args.scene,
+                args.output,
+                args.occlusion_mesh,
+            )
         else:
             report = generate_synthetic_summary(
                 args.sionna_points,
@@ -175,6 +211,7 @@ def main(argv: List[str] = None) -> int:
         DryRunError,
         SceneExportError,
         SionnaRssiError,
+        VolumeError,
     ) as exc:
         print("계약 검증 실패: {}".format(exc), file=sys.stderr)
         return 2

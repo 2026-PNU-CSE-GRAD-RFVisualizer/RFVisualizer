@@ -90,6 +90,11 @@ namespace sibr {
 		sibr::InputCamera _currentCamera; ///< Current camera.
 		bool _useAcceleration; ///< Should the camera accelerate the longer keys are pressed.
 		float _goalAltitude;
+		float _mouseLookSpeed = 0.15f;    ///< 마우스 1 px 당 회전 각도(도).
+		bool _looking = false;            ///< 오른쪽 버튼 드래그로 시점을 돌리는 중인지.
+		sibr::Viewport _viewport;         ///< 이 카메라가 그려지는 화면 영역.
+		bool _worldUpResolved = false;    ///< world up 을 이미 정했는지.
+		sibr::Vector3f _worldUp = sibr::Vector3f(0.f, 1.f, 0.f); ///< 수평을 유지할 기준 축.
 
 		/** Update camera pose based on keys. 
 		\param input user input
@@ -102,6 +107,11 @@ namespace sibr {
 		\param deltaTime elapsed time
 		*/
 		void moveUsingMousePan( const sibr::Input& input, float deltaTime);
+
+		/** 오른쪽 버튼 드래그로 시점을 돌린다(Unity Scene View 방식).
+		\param input user input
+		\return 이번 Frame에 시점을 돌렸으면 true */
+		bool lookUsingMouse();
 	
 	};
 

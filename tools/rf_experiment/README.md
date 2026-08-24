@@ -159,6 +159,45 @@ python -m tools.rf_experiment.main generate-synthetic-summary \
   --output scenes/<scene_id>/experiments/<session_id>/outputs/end_to_end_dry_run/measurements_summary_synthetic.csv
 ```
 
+## SIBR Viewer용 3D Volume Bundle
+
+`sionna_solver.json`의 `radio_map.volume_z_heights_m`에 높이 목록을 넣으면 `run-sionna`가
+**같은 XY Grid·같은 Seed·같은 Scene**으로 높이별 Radio Map을 더 풀어
+`processed/sionna_volume_*.npy`로 남긴다. 기존 `z_height_m` 2D 결과와 분석 경로는 그대로다.
+
+```json
+"radio_map": { "z_height_m": 0.45, "volume_z_heights_m": [0.25, 0.75, 1.25, 1.75, 2.25, 2.75] }
+```
+
+그 뒤 실측 Calibration 평균과 기존 XYZ IDW 규칙으로 Viewer Bundle을 만든다.
+
+```bash
+python -m tools.rf_experiment.main export-viewer-volume \
+  --sionna-output   scenes/<scene_id>/experiments/<session_id> \
+  --calibration     <experiment>/processed/calibration_points.csv \
+  --sionna-points   scenes/<scene_id>/experiments/<session_id>/processed/sionna_points.csv \
+  --methods         scenes/<scene_id>/experiments/<session_id>/configs/method_config.json \
+  --transform       scenes/<scene_id>/proxy_mesh/complex_envelope/calibration.json \
+  --scene           scenes/<scene_id>/experiments/<session_id>/configs/scene.json \
+  --occlusion-mesh  scenes/<scene_id>/proxy_mesh/complex_envelope/room_envelope_metric.obj \
+  --occlusion-mesh  <session>/outputs/proxy_placement/preview/proxy_objects_metric.obj \
+  --output          <experiment>/analysis/viewer_volume
+```
+
+출력은 `manifest.json`, `volume_rgba_f32.bin`, `occlusion_meshes/` 세 가지다.
+
+- 채널은 Raw Sionna, Plain IDW, Residual IDW, Valid Mask 순서이고 `zyx`로 저장한다.
+- dBm 세 채널은 **Valid Mask로 미리 곱해 둔다.** Shader가 GL_LINEAR로 읽은 뒤 Alpha로
+  나누면 유효 voxel만의 가중평균이 되어 경계에서 빈 칸 값이 섞이지 않는다.
+  유효 voxel에는 dBm 값이 그대로, invalid voxel에는 네 채널 모두 0이 들어 있다.
+- `T_scene_from_metric`은 **SIBR Gaussian 좌표계 기준**이다. `calibration.json` 원본 행렬은
+  Blender로 내보낸 mesh 좌표계라, 여기서 `(x,y,z)->(x,-z,y)` 축 교환을 한 번 더 곱한다.
+- 실측이 `z=0.45 m` 한 층뿐이므로 다른 높이의 Residual은 검증되지 않은 외삽이다.
+  manifest에 `vertical_extrapolation=true`, `paper_evidence_eligible=false`로 남으며
+  논문 수치로 승격하지 않는다. Test 측정값은 여기서도 쓰지 않는다.
+
+산출물은 실험 Output에 두고 Git에 Commit하지 않는다.
+
 ## 다음 연결
 
 1. Proxy Placement Editor에서 기본 Envelope 위에 계단·문·주요 책상을 배치한다.
