@@ -2,6 +2,8 @@ extlibs/
 build/
 install/
 src/projects/*
+!src/projects/gaussianviewer/
+!src/projects/gaussianviewer/**
 cmake-gui.exe.stackdump
 __pycache__/
 
