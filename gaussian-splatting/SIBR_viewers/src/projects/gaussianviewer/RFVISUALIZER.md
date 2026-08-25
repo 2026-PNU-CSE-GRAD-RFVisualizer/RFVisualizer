@@ -1,12 +1,13 @@
 # RFVisualizer 확장 (SIBR Gaussian Viewer)
 
-공식 SIBR Gaussian Viewer에 두 가지를 더했다. 둘 다 **인자를 주지 않으면 꺼져 있고**,
+공식 SIBR Gaussian Viewer에 세 가지를 더했다. 셋 다 **인자를 주지 않으면 꺼져 있고**,
 껐을 때의 출력은 기존 Gaussian 결과와 byte 단위로 같다.
 
 1. `RFVolumeRenderer` — RF dBm Volume을 반투명하게 합성한다.
 2. `JpegStreamer` — 렌더 결과를 JPEG로 인코딩해 Network `image_relay`(TCP 9101)로 보낸다.
+3. `HandheldControlClient` — Backend WebSocket `/handheld/control`을 구독해 Camera를 움직인다.
 
-기존 `GaussianView`에는 연결 코드만 있고, 두 기능은 각각 독립 파일이다.
+기존 `GaussianView`에는 연결 코드만 있고, 세 기능은 각각 독립 파일이다.
 
 ## 1. Build
 
@@ -27,6 +28,13 @@ cp embree-3.13.5.x86_64.linux/lib/libembree3.so.3 embree-3.13.5.x86_64.linux/lib
 새 `.cpp`를 추가하면 CMake가 `file(GLOB ...)`로 소스를 모으므로 **반드시 configure를 다시**
 돌려야 한다. 안 그러면 조용히 예전 목록으로 빌드된다.
 
+Test는 CTest로 돈다. GL도 CUDA도 필요 없다.
+
+```bash
+cmake --build build-rfviewer --target SIBR_handheld_control_test -j2
+ctest --test-dir build-rfviewer -R handheld_control --output-on-failure
+```
+
 ## 2. 실행 인자
 
 | 인자 | 기본값 | 설명 |
@@ -40,6 +48,8 @@ cp embree-3.13.5.x86_64.linux/lib/libembree3.so.3 embree-3.13.5.x86_64.linux/lib
 | `--jpeg-quality <1-100>` | `80` | JPEG 품질 |
 | `--run-seconds <n>` | `0` | 0은 종료 전까지 실행 |
 | `--metrics-json <path>` | 없음 | 종료 시 송신 측정값을 남긴다 |
+| `--handheld-host <host>` | 없음 | Backend WebSocket host. 없으면 Handheld 비활성 |
+| `--handheld-port <port>` | `8000` | Backend WebSocket port |
 
 ```bash
 ./install/bin/SIBR_gaussianViewer_app \
@@ -51,6 +61,9 @@ cp embree-3.13.5.x86_64.linux/lib/libembree3.so.3 embree-3.13.5.x86_64.linux/lib
 ```
 
 로컬 ImGui에는 방식 선택, 표시 On/Off, 투명도, 공통 dBm 범위, Z 절단만 추가했다.
+
+`--handheld-host`는 `--rf-volume`이 있어야 쓸 수 있다. Position Update를 검증·변환할
+manifest의 `frameId`와 `T_scene_from_metric`이 없으면 시작 오류로 멈춘다.
 
 ## 3. RFVolumeRenderer
 
@@ -88,7 +101,62 @@ Worker Thread : 범례 그리기 -> OpenCV JPEG -> RFJF Header + Payload 송신
 - JPEG가 8 MiB를 넘으면 그 Frame만 버리고 `dropped_oversize` 로 센다.
 - `--metrics-json` 은 송신측 통계다. 종단 지연과 수신 FPS는 받는 쪽에서 재야 한다.
 
-## 5. 좌표계 주의
+## 5. HandheldControlClient
+
+Path는 `/handheld/control` 고정이고 plain `ws://`만 쓴다. Graphics는 아무것도 보내지 않는다.
+Backend 계약은 `INTERFACE.md` §11.6이며 여기서 바꾸지 않는다.
+
+```text
+Worker Thread : DNS/connect/handshake/read (Boost.Beast)
+                계약 검증 -> Session/Sample/Event 방어 -> Mailbox
+Mailbox       : Mutex 하나 아래 최신 Pose 1개 + Event Edge 최대 16개
+                + Position 짝 대기 최대 16개 (가득 차면 가장 오래된 것부터 버린다)
+Render Thread : drain -> stale/timeout -> Event 적용 -> Camera pose
+                -> fromTransform(..., false, false) -> onUpdate -> render
+```
+
+WebSocket은 순서·중복·재연결을 보장하지 않는다. 방어는 전부 Graphics 쪽에 있다.
+
+- 새 sample은 `0 < (seq - prev) mod 2^32 < 2^31`일 때만 Camera에 반영한다. uint32 wrap은 정상이다.
+- `stale=true`는 같은 `sample_seq`여도 먼저 처리해 즉시 FPS로 되돌린다.
+- Session이 바뀌면 이전 Session을 물러나게 하고, 늦게 온 옛 Packet은 영구 거부한다.
+- Recenter와 Position은 종류별로 `event_seq`를 따로 기억한다. 버튼 3회 반복, stale snapshot,
+  재접속 snapshot에서 **최대 한 번만** 적용한다.
+- 재접속만으로 Session/Sample/Event 상태를 초기화하지 않는다.
+
+Camera는 다음 식으로만 움직인다. 논리축은 `+X=right`, `+Y=up`, `-Z=forward`다.
+
+```text
+q_camera = q_camera_anchor * inverse(q_device_anchor) * normalize(q_device)
+```
+
+첫 유효 자세와 Recenter에서 기준(anchor) 두 개를 다시 잡는다. **그 Frame에서는 돌리지 않으므로
+화면이 튀지 않는다.** 실제 센서 장착 보정 `q_mount`는 Embedded 책임이라 여기엔 없다.
+
+Position은 `position_update` 응답과 `position_update_event=true` state가 같은 연결 안에서
+`(connection_epoch, device_id, event_seq)`로 짝지어지고, `accepted=true`이고 숫자가 finite이며
+`position.frame_id`가 manifest의 `frameId`와 정확히 같을 때만 적용한다. 도착 순서는 어느 쪽이든
+지원한다. 적용할 때 translation만 바꾸고 rotation은 보존한다.
+
+```text
+scene_position = T_scene_from_metric * [x, y, z, 1]
+```
+
+Handheld가 Camera를 잡는 동안 Handler는 `NONE`이다. 아니면 FPS Handler가 매 Frame 외부 자세를
+덮어쓴다. 다음 경우에는 마지막 Camera transform을 그대로 둔 채 `FPS`로 돌아간다.
+
+- `--handheld-host` 없음, 연결 전, WebSocket 단절
+- Backend `stale=true`
+- 마지막 유효 자세 이후 750 ms 경과
+
+### 제한
+
+- 연결이 끊긴 순간 놓친 Position은 **복구할 수 없다.** Backend가 `position_update`를
+  cache/replay하지 않기 때문이다. 가짜 복구 로직을 만들지 않았다.
+- 실제 BNO085 축은 **미검증**이다. Yaw·Pitch·Roll 90도 실물 시험으로 확정해야 한다.
+- 현재 Embedded 버튼 송신은 미구현이라 Recenter/Position은 Fake Backend로만 확인했다.
+
+## 6. 좌표계 주의
 
 `calibration.json` 의 `T_scene_from_metric` 이 가리키는 "scene" 은 **SIBR Gaussian 좌표계가
 아니다.** Proxy를 만든 `3f_corridor_blend.ply` 가 Blender로 Z-up 변환된 사본이기 때문이다.
@@ -97,7 +165,7 @@ Bundle의 `T_scene_from_metric` 에는 이 교환까지 곱한 행렬이 들어 
 그대로 쓰면 된다. 확인 방법은 `cameras.json` 을 metric으로 옮겨 z 중앙값이 사람 키
 높이(약 1.6 m)인지 보는 것이다.
 
-## 6. 회귀 확인
+## 7. 회귀 확인
 
 고정 Camera 기준 이미지는
 `scenes/pnu_3f_corridor/experiments/corridor3f_20260820/outputs/viewer_baseline/` 에 있다.
