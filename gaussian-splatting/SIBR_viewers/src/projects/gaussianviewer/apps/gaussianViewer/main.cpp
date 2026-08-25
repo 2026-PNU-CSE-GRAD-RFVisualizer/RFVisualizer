@@ -16,6 +16,7 @@
 #include <core/view/MultiViewManager.hpp>
 #include <core/system/String.hpp>
 #include "projects/gaussianviewer/renderer/GaussianView.hpp"
+#include "projects/gaussianviewer/renderer/HandheldControlClient.hpp"
 
 #include <core/renderer/DepthRenderer.hpp>
 #include <core/raycaster/Raycaster.hpp>
@@ -216,9 +217,10 @@ int main(int ac, char** av)
 	GaussianView::Ptr	gaussianView(new GaussianView(scene, sceneResWidth, sceneResHeight, plyfile.c_str(), &messageRead, sh_degree, white_background, !myArgs.noInterop, device));
 
 	// RFVisualizer: RF Volume 합성과 JPEG 송신은 인자를 준 경우에만 켜진다.
+	sibr::RFVolumeRenderer::Ptr rfVolume;
 	if (myArgs.rfVolume.get() != "")
 	{
-		auto rfVolume = std::make_shared<sibr::RFVolumeRenderer>(
+		rfVolume = std::make_shared<sibr::RFVolumeRenderer>(
 			myArgs.rfVolume.get(), sceneResWidth, sceneResHeight);
 		rfVolume->method(myArgs.rfMethod);
 		rfVolume->enabled(!myArgs.rfHeatmapOff);
@@ -249,6 +251,30 @@ int main(int ac, char** av)
 	// Smoothing은 꺼 둔다. 켜져 있으면 입력이 한 박자 늦게 따라와 조작감이 뭉개진다.
 	generalCamera->switchMode(sibr::InteractiveCameraHandler::InteractionMode::FPS);
 	generalCamera->switchSmoothing();
+
+	// RFVisualizer: Handheld는 Position을 Scene 좌표로 옮길 manifest가 있어야 켤 수 있다.
+	sibr::HandheldControlClient::Ptr handheld;
+	if (myArgs.handheldHost.get() != "")
+	{
+		if (!rfVolume)
+		{
+			SIBR_ERR << "--handheld-host를 쓰려면 --rf-volume도 함께 줘야 합니다. "
+				"Position Update를 검증·변환할 manifest가 없습니다.";
+		}
+		sibr::HandheldControlClient::Options handheldOptions;
+		handheldOptions.host = myArgs.handheldHost.get();
+		handheldOptions.port = myArgs.handheldPort;
+		handheldOptions.frameId = rfVolume->manifest().frameId;
+		const sibr::Matrix4f& sceneFromMetric = rfVolume->manifest().sceneFromMetric;
+		for (int row = 0; row < 4; ++row) {
+			for (int column = 0; column < 4; ++column) {
+				handheldOptions.sceneFromMetric[row * 4 + column] = double(sceneFromMetric(row, column));
+			}
+		}
+		handheld = std::make_shared<sibr::HandheldControlClient>(handheldOptions);
+		SIBR_LOG << "[Handheld] ws://" << handheldOptions.host << ":" << handheldOptions.port
+			<< "/handheld/control 을 구독합니다 (frame_id " << handheldOptions.frameId << ")." << std::endl;
+	}
 
 	// Add views to mvm.
 	MultiViewManager        multiViewManager(window, false);
@@ -284,6 +310,47 @@ int main(int ac, char** av)
 		window.makeContextCurrent();
 		if (sibr::Input::global().key().isPressed(sibr::Key::Escape)) {
 			window.close();
+		}
+
+		// RFVisualizer: Camera는 Render Thread만 만진다. Worker는 mailbox만 채운다.
+		if (handheld)
+		{
+			const sibr::Quaternionf& cameraQuat = generalCamera->getCamera().rotation();
+			sibr::HandheldQuat cameraRotation;
+			cameraRotation.x = cameraQuat.x();
+			cameraRotation.y = cameraQuat.y();
+			cameraRotation.z = cameraQuat.z();
+			cameraRotation.w = cameraQuat.w();
+
+			const sibr::HandheldControlClient::Frame handheldFrame =
+				handheld->poll(sibr::HandheldControlClient::nowMs(), cameraRotation);
+
+			// 활성 중에 FPS handler를 두면 외부 자세를 매 Frame 덮어쓴다.
+			const sibr::InteractiveCameraHandler::InteractionMode wanted = handheldFrame.active
+				? sibr::InteractiveCameraHandler::InteractionMode::NONE
+				: sibr::InteractiveCameraHandler::InteractionMode::FPS;
+			if (generalCamera->getMode() != wanted)
+			{
+				// 마지막 transform을 그대로 둔 채 handler만 바꾸므로 화면이 튀지 않는다.
+				generalCamera->switchMode(wanted);
+			}
+
+			if (handheldFrame.hasRotation || handheldFrame.hasPosition)
+			{
+				sibr::Transform3f transform = generalCamera->getCamera().transform();
+				if (handheldFrame.hasRotation)
+				{
+					transform.rotation(sibr::Quaternionf(
+						float(handheldFrame.rotation.w), float(handheldFrame.rotation.x),
+						float(handheldFrame.rotation.y), float(handheldFrame.rotation.z)));
+				}
+				if (handheldFrame.hasPosition)
+				{
+					transform.position(sibr::Vector3f(
+						handheldFrame.position[0], handheldFrame.position[1], handheldFrame.position[2]));
+				}
+				generalCamera->fromTransform(transform, false, false);
+			}
 		}
 
 		multiViewManager.onUpdate(sibr::Input::global());

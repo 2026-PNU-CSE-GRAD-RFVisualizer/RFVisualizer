@@ -61,6 +61,8 @@ namespace sibr {
 		Arg<int> jpegQuality = { "jpeg-quality", 80, "JPEG 품질 (1-100)" };
 		Arg<int> runSeconds = { "run-seconds", 0, "이 시간이 지나면 종료한다. 0은 종료 전까지 실행" };
 		Arg<std::string> metricsJson = { "metrics-json", "", "송신 측정값을 쓸 JSON 경로" };
+		Arg<std::string> handheldHost = { "handheld-host", "", "Backend WebSocket host (없으면 Handheld 비활성, --rf-volume 필요)" };
+		Arg<int> handheldPort = { "handheld-port", 8000, "Backend WebSocket port" };
 	};
 
 }
