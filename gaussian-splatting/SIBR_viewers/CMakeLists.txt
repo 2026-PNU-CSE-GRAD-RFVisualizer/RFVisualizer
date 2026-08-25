@@ -191,6 +191,8 @@ if ("${SIBR_PROGRAMARGS}" STREQUAL "")
   endif()
 endif()
 
+enable_testing()
+
 add_custom_target(PREBUILD ALL)
 
 ## Include all projects

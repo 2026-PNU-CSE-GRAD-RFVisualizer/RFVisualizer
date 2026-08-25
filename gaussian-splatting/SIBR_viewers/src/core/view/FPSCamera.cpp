@@ -72,6 +72,7 @@ namespace sibr {
 	void FPSCamera::update(const sibr::Input & input, float deltaTime) {
 	
 		if (!_hasBeenInitialized) { return; }
+		_lastInput = input;   // onGUI의 키 상태 표시에 쓴다.
 		// Read input and update camera.
 		moveUsingWASD(input, deltaTime);
 		// 오른쪽 버튼을 잡고 있는 동안은 마우스가 시점 회전이고, 그 외에는 기존 Pan이다.
@@ -132,15 +133,53 @@ namespace sibr {
 			}
 			ImGui::InputFloat("Rot. speed", &_speedRotFpsCam, 0.1f, 0.5f);
 			ImGui::PopItemWidth();
+
+			// 원격 데스크톱처럼 입력 경로가 의심스러울 때, 키가 앱까지 오는지 바로 보이게 한다.
+			const ImGuiIO& io = ImGui::GetIO();
+			std::string pressed;
+			const std::pair<sibr::Key::Code, const char*> watched[] = {
+				{ sibr::Key::W, "W" }, { sibr::Key::A, "A" }, { sibr::Key::S, "S" },
+				{ sibr::Key::D, "D" }, { sibr::Key::Q, "Q" }, { sibr::Key::E, "E" },
+				{ sibr::Key::LeftControl, "Ctrl" },
+			};
+			for (const auto& entry : watched) {
+				const bool viaSibr = _lastInput.key().isActivated(entry.first);
+				const bool viaImGui = io.KeysDown[int(entry.first)];
+				if (viaSibr || viaImGui) {
+					pressed += std::string(entry.second) + (viaSibr ? "" : "(imgui)") + " ";
+				}
+			}
+			ImGui::Text("keys: %s", pressed.empty() ? "-" : pressed.c_str());
+			ImGui::Text("mouse R: %s   look: %s   focus-free keys: on",
+				io.MouseDown[1] ? "down" : "up", _looking ? "yes" : "no");
 		}
 		ImGui::End();
 	}
 
 
+	bool FPSCamera::keyHeld(const sibr::Input& input, sibr::Key::Code code) const
+	{
+		if (input.key().isActivated(code)) {
+			return true;
+		}
+		// 렌더 화면은 ImGui 창 안에 그려지는데, ImGui는 **왼쪽 클릭에만** 창에 Focus를 준다.
+		// Focus가 없으면 MultiViewBase가 이 View에 빈 Input을 넘겨서 이동 키가 전부 죽는다.
+		// 그래서 ImGui의 원본 키 상태에서도 한 번 더 본다. 글자를 입력 중일 때는 넘긴다.
+		const ImGuiIO& io = ImGui::GetIO();
+		if (io.WantTextInput) {
+			return false;
+		}
+		const int index = int(code);
+		return index >= 0 && index < IM_ARRAYSIZE(io.KeysDown) && io.KeysDown[index];
+	}
+
 	void FPSCamera::moveUsingWASD(const sibr::Input& input, float deltaTime)
 	{
 
 
+		// 여기는 keyHeld를 쓰지 않는다. keyHeld는 이동을 **켜는** 쪽으로만 써야 한다.
+		// 원격 데스크톱(RustDesk 등)에서는 Ctrl이 눌린 채로 남는 일이 있는데, 그 상태를
+		// 여기서 받아들이면 이동이 통째로 죽어 버린다.
 		if (input.key().isActivated(sibr::Key::LeftControl)) { return; }
 
 		float camSpeed = 2.f * deltaTime		* IBRVIEW_CAMSPEED;
@@ -153,12 +192,12 @@ namespace sibr {
 
 		sibr::Vector3f move(0, 0, 0);
 
-		move.x() -= input.key().isActivated(sibr::Key::A) ? camSpeed : 0.f;
-		move.x() += input.key().isActivated(sibr::Key::D) ? camSpeed : 0.f;
-		move.z() -= input.key().isActivated(sibr::Key::W) ? camSpeed : 0.f;
-		move.z() += input.key().isActivated(sibr::Key::S) ? camSpeed : 0.f;
-		move.y() -= input.key().isActivated(sibr::Key::Q) ? camSpeed : 0.f;
-		move.y() += input.key().isActivated(sibr::Key::E) ? camSpeed : 0.f;
+		move.x() -= keyHeld(input, sibr::Key::A) ? camSpeed : 0.f;
+		move.x() += keyHeld(input, sibr::Key::D) ? camSpeed : 0.f;
+		move.z() -= keyHeld(input, sibr::Key::W) ? camSpeed : 0.f;
+		move.z() += keyHeld(input, sibr::Key::S) ? camSpeed : 0.f;
+		move.y() -= keyHeld(input, sibr::Key::Q) ? camSpeed : 0.f;
+		move.y() += keyHeld(input, sibr::Key::E) ? camSpeed : 0.f;
 
 		// If the acceleration effect is enabled, we alter the speed along a move.
 		if(_useAcceleration) {
@@ -173,12 +212,12 @@ namespace sibr {
 		sibr::Vector3f pivot(0, 0, 0);
 
 		camRotSpeed *= _speedRotFpsCam;
-		pivot[1] += input.key().isActivated(sibr::Key::J) ? camRotSpeed : 0.f;
-		pivot[1] -= input.key().isActivated(sibr::Key::L) ? camRotSpeed : 0.f;
-		pivot[0] -= input.key().isActivated(sibr::Key::K) ? camRotSpeed : 0.f;
-		pivot[0] += input.key().isActivated(sibr::Key::I) ? camRotSpeed : 0.f;
-		pivot[2] -= input.key().isActivated(sibr::Key::O) ? camRotSpeed : 0.f;
-		pivot[2] += input.key().isActivated(sibr::Key::U) ? camRotSpeed : 0.f;
+		pivot[1] += keyHeld(input, sibr::Key::J) ? camRotSpeed : 0.f;
+		pivot[1] -= keyHeld(input, sibr::Key::L) ? camRotSpeed : 0.f;
+		pivot[0] -= keyHeld(input, sibr::Key::K) ? camRotSpeed : 0.f;
+		pivot[0] += keyHeld(input, sibr::Key::I) ? camRotSpeed : 0.f;
+		pivot[2] -= keyHeld(input, sibr::Key::O) ? camRotSpeed : 0.f;
+		pivot[2] += keyHeld(input, sibr::Key::U) ? camRotSpeed : 0.f;
 
 		if (_currentCamera.ortho()) {
 			if (input.key().isActivated(sibr::Key::Z)) {

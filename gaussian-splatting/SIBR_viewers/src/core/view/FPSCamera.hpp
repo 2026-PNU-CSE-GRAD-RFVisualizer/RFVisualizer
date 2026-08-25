@@ -19,6 +19,7 @@
 #include "core/graphics/Shader.hpp"
 #include "core/assets/InputCamera.hpp"
 #include "ICameraHandler.hpp"
+#include "core/graphics/Input.hpp"
 
 
 namespace sibr {
@@ -94,6 +95,7 @@ namespace sibr {
 		bool _looking = false;            ///< 오른쪽 버튼 드래그로 시점을 돌리는 중인지.
 		sibr::Viewport _viewport;         ///< 이 카메라가 그려지는 화면 영역.
 		bool _worldUpResolved = false;    ///< world up 을 이미 정했는지.
+		sibr::Input _lastInput;           ///< onGUI에서 키 상태를 보여주기 위한 마지막 Input.
 		sibr::Vector3f _worldUp = sibr::Vector3f(0.f, 1.f, 0.f); ///< 수평을 유지할 기준 축.
 
 		/** Update camera pose based on keys. 
@@ -101,6 +103,12 @@ namespace sibr {
 		\param deltaTime elapsed time
 		*/
 		void moveUsingWASD( const sibr::Input& input, float deltaTime);
+
+		/** 키가 눌려 있는지. sibr::Input과 ImGui 중 어느 쪽이든 눌렸다고 하면 눌린 것으로 본다.
+		\param input user input
+		\param code 확인할 키
+		\return 눌려 있으면 true */
+		bool keyHeld( const sibr::Input& input, sibr::Key::Code code ) const;
 
 		/** Update camera pose based on mouse.
 		\param input user input
