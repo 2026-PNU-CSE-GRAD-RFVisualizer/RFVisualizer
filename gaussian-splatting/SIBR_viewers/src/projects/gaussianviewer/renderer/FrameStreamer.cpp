@@ -1,4 +1,4 @@
-#include "JpegStreamer.hpp"
+#include "FrameStreamer.hpp"
 
 #include <core/system/String.hpp>
 
@@ -15,12 +15,6 @@ namespace sibr {
 
 	namespace {
 
-		constexpr uint32_t RFJF_MAGIC = 0x52464A46u;   // 'RFJF'
-		constexpr uint8_t RFJF_VERSION = 1;
-		constexpr uint8_t RFJF_FLAGS_JPEG = 0;
-		constexpr size_t RFJF_HEADER_BYTES = 22;
-		constexpr size_t RFJF_MAX_PAYLOAD = 8u * 1024u * 1024u;
-
 		double nowSeconds()
 		{
 			using namespace std::chrono;
@@ -33,32 +27,18 @@ namespace sibr {
 			return uint64_t(duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count());
 		}
 
-		void putBigEndian(uint8_t* target, uint64_t value, int bytes)
-		{
-			for (int index = bytes - 1; index >= 0; --index) {
-				target[index] = uint8_t(value & 0xFFu);
-				value >>= 8;
-			}
-		}
-
-		/** 22-byte RFJF Header. INTERFACE.md §12의 공통 계약이다. */
-		void packHeader(uint8_t* header, uint32_t sequence, uint64_t timestampMs, uint32_t length)
-		{
-			putBigEndian(header + 0, RFJF_MAGIC, 4);
-			header[4] = RFJF_VERSION;
-			header[5] = RFJF_FLAGS_JPEG;
-			putBigEndian(header + 6, sequence, 4);
-			putBigEndian(header + 10, timestampMs, 8);
-			putBigEndian(header + 18, length, 4);
-		}
-
 	} // namespace
 
-	JpegStreamer::JpegStreamer(const Options& options, uint width, uint height)
+	FrameStreamer::FrameStreamer(const Options& options, uint width, uint height)
 		: _options(options), _width(width), _height(height)
 	{
 		if (_options.host.empty()) {
 			return;
+		}
+		// RGB332은 Handheld가 그대로 그리는 고정 크기라 시작 전에 막는다.
+		const std::string optionError = streamOptionError(_options.format, width, height);
+		if (!optionError.empty()) {
+			SIBR_ERR << "[FrameStreamer] " << optionError;
 		}
 		_frameBytes = size_t(width) * height * 3;
 		glGenBuffers(2, _pbo);
@@ -71,13 +51,15 @@ namespace sibr {
 
 		_active = true;
 		_startSeconds = nowSeconds();
-		_worker = std::thread(&JpegStreamer::workerLoop, this);
-		SIBR_LOG << "[JpegStreamer] " << width << "x" << height << " -> " << _options.host
-			<< ":" << _options.port << " at " << _options.fps << " fps, quality "
-			<< _options.quality << std::endl;
+		_worker = std::thread(&FrameStreamer::workerLoop, this);
+		SIBR_LOG << "[FrameStreamer] " << width << "x" << height << " -> " << _options.host
+			<< ":" << _options.port << " at " << _options.fps << " fps, format "
+			<< streamFormatName(_options.format)
+			<< (_options.format == StreamFormat::Jpeg ? sibr::sprint(", quality %d", _options.quality) : std::string())
+			<< std::endl;
 	}
 
-	JpegStreamer::~JpegStreamer()
+	FrameStreamer::~FrameStreamer()
 	{
 		if (!_active) {
 			return;
@@ -99,7 +81,7 @@ namespace sibr {
 		glDeleteBuffers(2, _pbo);
 	}
 
-	void JpegStreamer::overlay(const std::string& methodName, float dbmMin, float dbmMax, bool heatmapOn)
+	void FrameStreamer::overlay(const std::string& methodName, float dbmMin, float dbmMax, bool heatmapOn)
 	{
 		std::lock_guard<std::mutex> lock(_overlayMutex);
 		_methodName = methodName;
@@ -108,7 +90,7 @@ namespace sibr {
 		_heatmapOn = heatmapOn;
 	}
 
-	void JpegStreamer::capture(IRenderTarget& source)
+	void FrameStreamer::capture(IRenderTarget& source)
 	{
 		if (!_active) {
 			return;
@@ -126,7 +108,7 @@ namespace sibr {
 			_nextCaptureSeconds = std::max(_nextCaptureSeconds + period, now - period);
 		}
 		if (source.w() != _width || source.h() != _height) {
-			SIBR_WRG << "[JpegStreamer] rendertarget이 " << source.w() << "x" << source.h()
+			SIBR_WRG << "[FrameStreamer] rendertarget이 " << source.w() << "x" << source.h()
 				<< "라 송신 크기 " << _width << "x" << _height << "와 다릅니다. 이 Frame은 건너뜁니다."
 				<< std::endl;
 			return;
@@ -185,7 +167,7 @@ namespace sibr {
 		_slot = other;
 	}
 
-	void JpegStreamer::drawOverlay(void* bgrMat) const
+	void FrameStreamer::drawOverlay(void* bgrMat) const
 	{
 		cv::Mat& image = *reinterpret_cast<cv::Mat*>(bgrMat);
 		std::string method;
@@ -232,7 +214,7 @@ namespace sibr {
 		label("PROVISIONAL", left, 22, 0.5);
 	}
 
-	bool JpegStreamer::connect()
+	bool FrameStreamer::connect()
 	{
 		try {
 			_socket.reset(new boost::asio::ip::tcp::socket(_io));
@@ -245,24 +227,24 @@ namespace sibr {
 			return true;
 		} catch (const std::exception& error) {
 			_socket.reset();
-			SIBR_WRG << "[JpegStreamer] Relay 연결 실패, 1초 뒤 다시 시도합니다: " << error.what() << std::endl;
+			SIBR_WRG << "[FrameStreamer] Relay 연결 실패, 1초 뒤 다시 시도합니다: " << error.what() << std::endl;
 			return false;
 		}
 	}
 
-	bool JpegStreamer::sendFrame(const std::vector<uint8_t>& jpeg, uint64_t timestampMs, uint32_t sequence)
+	bool FrameStreamer::sendFrame(const std::vector<uint8_t>& payload, uint64_t timestampMs, uint32_t sequence)
 	{
-		uint8_t header[RFJF_HEADER_BYTES];
-		packHeader(header, sequence, timestampMs, uint32_t(jpeg.size()));
+		uint8_t header[rfjf::HEADER_BYTES];
+		packHeader(header, streamFormatFlags(_options.format), sequence, timestampMs, uint32_t(payload.size()));
 		try {
 			std::array<boost::asio::const_buffer, 2> buffers = {
-				boost::asio::buffer(header, RFJF_HEADER_BYTES),
-				boost::asio::buffer(jpeg.data(), jpeg.size())
+				boost::asio::buffer(header, rfjf::HEADER_BYTES),
+				boost::asio::buffer(payload.data(), payload.size())
 			};
 			boost::asio::write(*_socket, buffers);
 			return true;
 		} catch (const std::exception& error) {
-			SIBR_WRG << "[JpegStreamer] 송신 실패, 재연결합니다: " << error.what() << std::endl;
+			SIBR_WRG << "[FrameStreamer] 송신 실패, 재연결합니다: " << error.what() << std::endl;
 			boost::system::error_code ignored;
 			_socket->close(ignored);
 			_socket.reset();
@@ -270,11 +252,48 @@ namespace sibr {
 		}
 	}
 
-	void JpegStreamer::workerLoop()
+	/** 상하 반전과 Overlay까지 끝난 BGR Mat을 형식에 맞는 Payload로 만든다. */
+	bool FrameStreamer::encode(void* bgrMat, std::vector<uint8_t>& payload)
 	{
-		const std::vector<int> encodeParameters = { cv::IMWRITE_JPEG_QUALITY, _options.quality };
-		std::vector<uint8_t> jpeg;
+		cv::Mat& image = *reinterpret_cast<cv::Mat*>(bgrMat);
+		if (_options.format == StreamFormat::Jpeg) {
+			const std::vector<int> parameters = { cv::IMWRITE_JPEG_QUALITY, _options.quality };
+			payload.clear();
+			return cv::imencode(".jpg", image, payload, parameters);
+		}
+		// cv::Mat은 row마다 padding을 둘 수 있으므로 연속 Buffer임을 확인하고 옮긴다.
+		if (!image.isContinuous()) {
+			image = image.clone();
+		}
+		bgrToRgb332(image.data, size_t(image.rows) * image.cols, _rgb332);
+		return zlibCompress(_rgb332, payload);
+	}
 
+	/** 5초마다 최근 Frame과 누계를 한 줄로 남긴다. */
+	void FrameStreamer::logProgress()
+	{
+		const double now = nowSeconds();
+		if (_nextLogSeconds <= 0.0) {
+			_nextLogSeconds = now + 5.0;
+			return;
+		}
+		if (now < _nextLogSeconds) {
+			return;
+		}
+		_nextLogSeconds = now + 5.0;
+		const Metrics values = metrics();
+		SIBR_LOG << "[FrameStreamer] seq " << values.sequenceLast
+			<< " " << streamFormatName(_options.format)
+			<< " in " << values.inputBytes << "B -> payload " << values.payloadBytesLast << "B"
+			<< sibr::sprint(" encode %.1fms send %.1fms", values.encodeMillisecondsMean, values.sendMillisecondsMean)
+			<< " sent " << values.sent
+			<< " drop(stale/encode/oversize/offline) " << values.droppedStale
+			<< "/" << values.droppedEncode << "/" << values.droppedOversize << "/" << values.droppedOffline
+			<< " connects " << values.reconnects << std::endl;
+	}
+
+	void FrameStreamer::workerLoop()
+	{
 		while (!_stop) {
 			std::unique_ptr<Frame> frame;
 			{
@@ -302,35 +321,53 @@ namespace sibr {
 			cv::Mat image(int(_height), int(_width), CV_8UC3, frame->bgr.data());
 			cv::flip(image, image, 0);   // OpenGL은 아래에서 위로 읽힌다.
 			drawOverlay(&image);
-			jpeg.clear();
-			cv::imencode(".jpg", image, jpeg, encodeParameters);
+			const bool encoded = encode(&image, _payload);
 			const double encodeMilliseconds = 1000.0 * (nowSeconds() - encodeStart);
 
-			if (jpeg.size() > RFJF_MAX_PAYLOAD) {
+			// 인코딩 실패와 과대 Payload는 그 Frame만 버리고 렌더링은 계속한다.
+			if (!encoded) {
+				SIBR_WRG << "[FrameStreamer] seq " << frame->sequence << " 인코딩 실패, 이 Frame은 버립니다."
+					<< std::endl;
+				std::lock_guard<std::mutex> lock(_metricsMutex);
+				++_metrics.droppedEncode;
+				continue;
+			}
+			if (_payload.size() > rfjf::MAX_PAYLOAD) {
 				std::lock_guard<std::mutex> lock(_metricsMutex);
 				++_metrics.droppedOversize;
 				continue;
 			}
-			const bool ok = sendFrame(jpeg, frame->timestampMs, frame->sequence);
-			std::lock_guard<std::mutex> lock(_metricsMutex);
-			_encodeMillisecondsTotal += encodeMilliseconds;
-			_metrics.jpegBytesMax = std::max(_metrics.jpegBytesMax, jpeg.size());
-			if (ok) {
-				++_metrics.sent;
-				_latencies.push_back(double(nowMilliseconds() - frame->timestampMs));
-			} else {
-				++_metrics.droppedOffline;
+
+			const double sendStart = nowSeconds();
+			const bool ok = sendFrame(_payload, frame->timestampMs, frame->sequence);
+			const double sendMilliseconds = 1000.0 * (nowSeconds() - sendStart);
+			{
+				std::lock_guard<std::mutex> lock(_metricsMutex);
+				_encodeMillisecondsTotal += encodeMilliseconds;
+				_sendMillisecondsTotal += sendMilliseconds;
+				_metrics.inputBytes = _frameBytes;
+				_metrics.payloadBytesLast = _payload.size();
+				_metrics.payloadBytesMax = std::max(_metrics.payloadBytesMax, _payload.size());
+				_metrics.sequenceLast = frame->sequence;
+				if (ok) {
+					++_metrics.sent;
+					_latencies.push_back(double(nowMilliseconds() - frame->timestampMs));
+				} else {
+					++_metrics.droppedOffline;
+				}
 			}
+			logProgress();
 		}
 	}
 
-	JpegStreamer::Metrics JpegStreamer::metrics() const
+	FrameStreamer::Metrics FrameStreamer::metrics() const
 	{
 		std::lock_guard<std::mutex> lock(_metricsMutex);
 		Metrics result = _metrics;
 		result.elapsedSeconds = nowSeconds() - _startSeconds;
-		const uint64_t encoded = result.sent + result.droppedOversize;
-		result.encodeMillisecondsMean = encoded ? (_encodeMillisecondsTotal / double(encoded)) : 0.0;
+		const uint64_t attempted = result.sent + result.droppedOffline;
+		result.encodeMillisecondsMean = attempted ? (_encodeMillisecondsTotal / double(attempted)) : 0.0;
+		result.sendMillisecondsMean = attempted ? (_sendMillisecondsTotal / double(attempted)) : 0.0;
 		if (!_latencies.empty()) {
 			std::vector<double> sorted = _latencies;
 			std::sort(sorted.begin(), sorted.end());
@@ -342,17 +379,19 @@ namespace sibr {
 		return result;
 	}
 
-	void JpegStreamer::writeMetrics(const std::string& path) const
+	void FrameStreamer::writeMetrics(const std::string& path) const
 	{
 		const Metrics values = metrics();
 		std::ofstream stream(path);
 		if (!stream.good()) {
-			SIBR_WRG << "[JpegStreamer] 측정값을 쓸 수 없습니다: " << path << std::endl;
+			SIBR_WRG << "[FrameStreamer] 측정값을 쓸 수 없습니다: " << path << std::endl;
 			return;
 		}
 		const double sentFps = values.elapsedSeconds > 0.0 ? double(values.sent) / values.elapsedSeconds : 0.0;
 		stream << "{\n"
-			<< "  \"schema_version\": \"1.0\",\n"
+			<< "  \"schema_version\": \"2.0\",\n"
+			<< "  \"format\": \"" << streamFormatName(_options.format) << "\",\n"
+			<< "  \"rfjf_flags\": " << int(streamFormatFlags(_options.format)) << ",\n"
 			<< "  \"width\": " << _width << ",\n"
 			<< "  \"height\": " << _height << ",\n"
 			<< "  \"target_fps\": " << _options.fps << ",\n"
@@ -362,12 +401,16 @@ namespace sibr {
 			<< "  \"frames_sent\": " << values.sent << ",\n"
 			<< "  \"sent_fps\": " << sentFps << ",\n"
 			<< "  \"dropped_stale\": " << values.droppedStale << ",\n"
+			<< "  \"dropped_encode\": " << values.droppedEncode << ",\n"
 			<< "  \"dropped_oversize\": " << values.droppedOversize << ",\n"
 			<< "  \"dropped_offline\": " << values.droppedOffline << ",\n"
 			<< "  \"connect_successes\": " << values.reconnects << ",\n"
 			<< "  \"queue_depth_max\": " << values.queueDepthMax << ",\n"
-			<< "  \"jpeg_bytes_max\": " << values.jpegBytesMax << ",\n"
+			<< "  \"input_bytes\": " << values.inputBytes << ",\n"
+			<< "  \"payload_bytes_last\": " << values.payloadBytesLast << ",\n"
+			<< "  \"payload_bytes_max\": " << values.payloadBytesMax << ",\n"
 			<< "  \"encode_ms_mean\": " << values.encodeMillisecondsMean << ",\n"
+			<< "  \"send_ms_mean\": " << values.sendMillisecondsMean << ",\n"
 			<< "  \"capture_to_send_ms_mean\": " << values.captureToSendMillisecondsMean << ",\n"
 			<< "  \"capture_to_send_ms_p95\": " << values.captureToSendMillisecondsP95 << "\n"
 			<< "}\n";

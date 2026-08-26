@@ -226,15 +226,27 @@ int main(int ac, char** av)
 		rfVolume->enabled(!myArgs.rfHeatmapOff);
 		gaussianView->setRFVolume(rfVolume);
 	}
-	sibr::JpegStreamer::Ptr streamer;
+	sibr::FrameStreamer::Ptr streamer;
 	if (myArgs.streamHost.get() != "")
 	{
-		sibr::JpegStreamer::Options streamOptions;
+		sibr::FrameStreamer::Options streamOptions;
 		streamOptions.host = myArgs.streamHost.get();
 		streamOptions.port = myArgs.streamPort;
 		streamOptions.fps = myArgs.streamFps;
 		streamOptions.quality = myArgs.jpegQuality;
-		streamer = std::make_shared<sibr::JpegStreamer>(streamOptions, sceneResWidth, sceneResHeight);
+		// 형식과 해상도는 렌더를 시작하기 전에 확정한다. 잘못된 조합은 여기서 끝낸다.
+		if (!sibr::parseStreamFormat(myArgs.streamFormat.get(), streamOptions.format))
+		{
+			SIBR_ERR << "--stream-format은 rgb332-zlib 또는 jpeg여야 합니다. 받은 값: '"
+				<< myArgs.streamFormat.get() << "'";
+		}
+		const std::string streamError =
+			sibr::streamOptionError(streamOptions.format, sceneResWidth, sceneResHeight);
+		if (!streamError.empty())
+		{
+			SIBR_ERR << streamError;
+		}
+		streamer = std::make_shared<sibr::FrameStreamer>(streamOptions, sceneResWidth, sceneResHeight);
 		gaussianView->setStreamer(streamer);
 	}
 

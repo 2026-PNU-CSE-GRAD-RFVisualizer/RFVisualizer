@@ -26,7 +26,7 @@
 #include <functional>
 # include "GaussianSurfaceRenderer.hpp"
 # include "RFVolumeRenderer.hpp"
-# include "JpegStreamer.hpp"
+# include "FrameStreamer.hpp"
 
 namespace CudaRasterizer
 {
@@ -82,7 +82,7 @@ namespace sibr {
 		void setRFVolume(const RFVolumeRenderer::Ptr& renderer) { _rfVolume = renderer; }
 
 		/** 렌더 결과를 JPEG로 내보낸다. nullptr면 송신하지 않는다. */
-		void setStreamer(const JpegStreamer::Ptr& streamer) { _streamer = streamer; }
+		void setStreamer(const FrameStreamer::Ptr& streamer) { _streamer = streamer; }
 
 		/** \return a reference to the scene */
 		const std::shared_ptr<sibr::BasicIBRScene> & getScene() const { return _scene; }
@@ -137,7 +137,7 @@ namespace sibr {
 		BufferCopyRenderer* _copyRenderer;
 		GaussianSurfaceRenderer* _gaussianRenderer;
 		RFVolumeRenderer::Ptr _rfVolume;
-		JpegStreamer::Ptr _streamer;
+		FrameStreamer::Ptr _streamer;
 	};
 
 } /*namespace sibr*/

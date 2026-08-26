@@ -1,7 +1,7 @@
 """image_relay(기본 9102)에서 RFJF Frame을 받아 저장하거나 종단 성능을 잰다.
 
-표준 라이브러리만으로 헤더를 읽으므로 Network 저장소가 없어도 돌아간다.
-JPEG 디코드 검사와 --save-dir 저장은 Pillow가 있을 때만 한다.
+표준 라이브러리만으로 헤더를 읽고 flags=1(RGB332+zlib)은 표준 zlib으로 해제하므로
+Network 저장소가 없어도 돌아간다. 그림 저장과 JPEG 디코드 검사는 Pillow가 있을 때만 한다.
 
     # 받은 그림을 폴더에 저장
     python measure_stream.py --save-dir /tmp/rf_frames
@@ -20,10 +20,25 @@ import statistics
 import struct
 import sys
 import time
+import zlib
 
 HEADER = struct.Struct(">IBBIQI")   # magic, version, flags, seq, ts_ms, length
 MAGIC, VERSION = 0x52464A46, 1      # 'RFJF'
 MAX_PAYLOAD = 8 * 1024 * 1024
+FLAGS_JPEG, FLAGS_RGB332_ZLIB = 0, 1
+RGB332_SIZE = (800, 480)
+RGB332_BYTES = RGB332_SIZE[0] * RGB332_SIZE[1]   # 384000, 픽셀당 1byte
+
+
+def rgb332_palette() -> bytes:
+    """RRRGGGBB 한 byte를 그대로 색인으로 쓰는 256색 팔레트."""
+
+    palette = bytearray()
+    for value in range(256):
+        palette.append((value >> 5) * 255 // 7)
+        palette.append(((value >> 2) & 7) * 255 // 7)
+        palette.append((value & 3) * 255 // 3)
+    return bytes(palette)
 
 
 def _read_exactly(sock: socket.socket, count: int) -> bytes:
@@ -37,12 +52,12 @@ def _read_exactly(sock: socket.socket, count: int) -> bytes:
 
 
 def read_frame(sock: socket.socket):
-    """Frame 하나를 읽어 (seq, ts_ms, payload)로 돌려준다. 정상 종료면 None."""
+    """Frame 하나를 읽어 (flags, seq, ts_ms, payload)로 돌려준다. 정상 종료면 None."""
 
     header = _read_exactly(sock, HEADER.size)
     if not header:
         return None
-    magic, version, _flags, seq, ts_ms, length = HEADER.unpack(header)
+    magic, version, flags, seq, ts_ms, length = HEADER.unpack(header)
     if magic != MAGIC:
         raise ValueError("magic 불일치: 0x{:08X}".format(magic))
     if version != VERSION:
@@ -52,7 +67,7 @@ def read_frame(sock: socket.socket):
     payload = _read_exactly(sock, length) if length else b""
     if length and not payload:
         return None
-    return seq, ts_ms, payload
+    return flags, seq, ts_ms, payload
 
 
 def main() -> int:
@@ -61,24 +76,28 @@ def main() -> int:
     parser.add_argument("--port", type=int, default=9102)
     parser.add_argument("--warmup", type=float, default=0.0, help="측정에서 뺄 앞부분(초)")
     parser.add_argument("--measure", type=float, default=0.0, help="0이면 Ctrl+C까지 계속")
-    parser.add_argument("--save-dir", default="", help="받은 JPEG를 저장할 폴더")
+    parser.add_argument("--save-dir", default="", help="받은 그림을 저장할 폴더")
     parser.add_argument("--out", default="", help="측정 결과 JSON 경로")
     args = parser.parse_args()
 
     if args.save_dir:
         os.makedirs(args.save_dir, exist_ok=True)
 
-    decode = None
+    open_image = None
     try:
-        from PIL import Image  # noqa: F401
+        from PIL import Image
         import io as _io
 
-        def decode(payload: bytes):
-            image = Image.open(_io.BytesIO(payload))
+        def open_image(flags: int, pixels: bytes):
+            if flags == FLAGS_RGB332_ZLIB:
+                image = Image.frombytes("P", RGB332_SIZE, pixels)
+                image.putpalette(rgb332_palette())
+                return image.convert("RGB")
+            image = Image.open(_io.BytesIO(pixels))
             image.load()
-            return image.size
+            return image
     except ImportError:
-        print("[알림] Pillow가 없어 JPEG 디코드 검사는 건너뜁니다.", file=sys.stderr)
+        print("[알림] Pillow가 없어 그림 디코드·저장은 건너뜁니다.", file=sys.stderr)
 
     sock = socket.create_connection((args.host, args.port), timeout=30.0)
     print("[수신] {}:{} 연결됨".format(args.host, args.port))
@@ -86,9 +105,11 @@ def main() -> int:
     start_measure = time.time() + args.warmup
     deadline = (start_measure + args.measure) if args.measure > 0 else float("inf")
     latencies, seqs, sizes = [], [], []
-    decoded = decode_failed = 0
+    decoded = decode_failed = inflate_failed = wrong_size = 0
+    flags_seen = set()
     first = last = None
     size = None
+    inflated_bytes = None
 
     try:
         while time.time() < deadline:
@@ -96,11 +117,25 @@ def main() -> int:
             if frame is None:
                 print("[수신] 서버가 연결을 닫았습니다.")
                 break
-            seq, ts_ms, payload = frame
-            if args.save_dir:
-                name = os.path.join(args.save_dir, "frame_{:06d}.jpg".format(seq))
-                with open(name, "wb") as handle:
-                    handle.write(payload)
+            flags, seq, ts_ms, payload = frame
+            flags_seen.add(flags)
+
+            # flags=1이면 여기서 표준 zlib으로 풀고 정확히 384,000byte인지 본다.
+            pixels = payload
+            if flags == FLAGS_RGB332_ZLIB:
+                try:
+                    pixels = zlib.decompress(payload)
+                except zlib.error as error:
+                    inflate_failed += 1
+                    print("[수신] seq {} zlib 해제 실패: {}".format(seq, error), file=sys.stderr)
+                    continue
+                inflated_bytes = len(pixels)
+                if inflated_bytes != RGB332_BYTES:
+                    wrong_size += 1
+                    print("[수신] seq {} 해제 크기 {}B 가 {}B 아님".format(
+                        seq, inflated_bytes, RGB332_BYTES), file=sys.stderr)
+                    continue
+
             if time.time() < start_measure:
                 continue
             now = time.time()
@@ -109,12 +144,19 @@ def main() -> int:
             latencies.append(now * 1000.0 - ts_ms)
             seqs.append(seq)
             sizes.append(len(payload))
-            if decode is not None:
+            if open_image is not None:
                 try:
-                    size = decode(payload)
+                    image = open_image(flags, pixels)
+                    size = image.size
                     decoded += 1
-                except Exception:
+                    if args.save_dir:
+                        image.save(os.path.join(args.save_dir, "frame_{:06d}.png".format(seq)))
+                except Exception as error:
                     decode_failed += 1
+                    print("[수신] seq {} 디코드 실패: {}".format(seq, error), file=sys.stderr)
+            elif args.save_dir:
+                with open(os.path.join(args.save_dir, "frame_{:06d}.bin".format(seq)), "wb") as handle:
+                    handle.write(pixels)
     except KeyboardInterrupt:
         pass
     finally:
@@ -128,9 +170,10 @@ def main() -> int:
     expected = seqs[-1] - seqs[0] + 1
     latencies.sort()
     report = {
-        "schema_version": "1.0",
+        "schema_version": "2.0",
         "host": args.host,
         "port": args.port,
+        "flags_seen": sorted(flags_seen),
         "measured_seconds": span,
         "frames_received": len(seqs),
         "received_fps": len(seqs) / span,
@@ -140,10 +183,13 @@ def main() -> int:
         "latency_ms_mean": statistics.fmean(latencies),
         "latency_ms_p95": latencies[min(len(latencies) - 1, int(0.95 * len(latencies)))],
         "latency_ms_max": latencies[-1],
-        "jpeg_bytes_mean": statistics.fmean(sizes),
-        "jpeg_bytes_max": max(sizes),
-        "jpeg_decoded": decoded,
-        "jpeg_decode_failed": decode_failed,
+        "payload_bytes_mean": statistics.fmean(sizes),
+        "payload_bytes_max": max(sizes),
+        "inflated_bytes": inflated_bytes,
+        "frames_decoded": decoded,
+        "frames_decode_failed": decode_failed,
+        "frames_inflate_failed": inflate_failed,
+        "frames_wrong_inflated_size": wrong_size,
         "image_size": list(size) if size else None,
     }
     text = json.dumps(report, ensure_ascii=False, indent=2)

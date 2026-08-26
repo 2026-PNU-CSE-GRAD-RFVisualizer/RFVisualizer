@@ -4,7 +4,8 @@
 껐을 때의 출력은 기존 Gaussian 결과와 byte 단위로 같다.
 
 1. `RFVolumeRenderer` — RF dBm Volume을 반투명하게 합성한다.
-2. `JpegStreamer` — 렌더 결과를 JPEG로 인코딩해 Network `image_relay`(TCP 9101)로 보낸다.
+2. `FrameStreamer` — 렌더 결과를 인코딩해 Network `image_relay`(TCP 9101)로 보낸다.
+   기본은 RGB332+zlib(`flags=1`), 예비는 JPEG(`flags=0`)이다.
 3. `HandheldControlClient` — Backend WebSocket `/handheld/control`을 구독해 Camera를 움직인다.
 
 기존 `GaussianView`에는 연결 코드만 있고, 세 기능은 각각 독립 파일이다.
@@ -31,8 +32,8 @@ cp embree-3.13.5.x86_64.linux/lib/libembree3.so.3 embree-3.13.5.x86_64.linux/lib
 Test는 CTest로 돈다. GL도 CUDA도 필요 없다.
 
 ```bash
-cmake --build build-rfviewer --target SIBR_handheld_control_test -j2
-ctest --test-dir build-rfviewer -R handheld_control --output-on-failure
+cmake --build build-rfviewer --target SIBR_handheld_control_test SIBR_frame_codec_test -j2
+ctest --test-dir build-rfviewer --output-on-failure
 ```
 
 ## 2. 실행 인자
@@ -44,8 +45,9 @@ ctest --test-dir build-rfviewer -R handheld_control --output-on-failure
 | `--rf-heatmap-off` | 꺼짐 | heatmap을 끈 상태로 시작 |
 | `--stream-host <host>` | 없음 | 없으면 송신 비활성 |
 | `--stream-port <port>` | `9101` | image_relay ingest |
-| `--stream-fps <fps>` | `12` | 송신 목표 FPS |
-| `--jpeg-quality <1-100>` | `80` | JPEG 품질 |
+| `--stream-fps <fps>` | `10` | 송신 목표 FPS |
+| `--stream-format <fmt>` | `rgb332-zlib` | `rgb332-zlib` 또는 `jpeg` |
+| `--jpeg-quality <1-100>` | `80` | `--stream-format jpeg`일 때만 쓴다 |
 | `--run-seconds <n>` | `0` | 0은 종료 전까지 실행 |
 | `--metrics-json <path>` | 없음 | 종료 시 송신 측정값을 남긴다 |
 | `--handheld-host <host>` | 없음 | Backend WebSocket host. 없으면 Handheld 비활성 |
@@ -56,11 +58,15 @@ ctest --test-dir build-rfviewer -R handheld_control --output-on-failure
   -m PGSR/output/pnu_3f_corridor \
   --rendering-size 800 480 --force-aspect-ratio \
   --rf-volume <experiment>/analysis/viewer_volume/manifest.json \
-  --stream-host 127.0.0.1 --stream-port 9101 --stream-fps 12 --jpeg-quality 80 \
+  --stream-host 127.0.0.1 --stream-port 9101 --stream-fps 10 \
+  --stream-format rgb332-zlib \
   --run-seconds 330 --metrics-json /tmp/stream_metrics.json
 ```
 
 로컬 ImGui에는 방식 선택, 표시 On/Off, 투명도, 공통 dBm 범위, Z 절단만 추가했다.
+
+`--stream-format rgb332-zlib`은 렌더 해상도가 정확히 800×480이어야 한다. 다르면
+Frame을 조용히 버리지 않고 **시작 오류로 멈춘다**. 다른 해상도로 보려면 `--stream-format jpeg`을 쓴다.
 
 `--handheld-host`는 `--rf-volume`이 있어야 쓸 수 있다. Position Update를 검증·변환할
 manifest의 `frameId`와 `T_scene_from_metric`이 없으면 시작 오류로 멈춘다.
@@ -82,7 +88,7 @@ Bundle은 `tools/rf_experiment` 의 `export-viewer-volume` 이 만든다. Render
 - 투명도는 voxel당이 아니라 **1 m당 흡수 계수**다(`1 - exp(-k * step)`).
   Sampling step을 바꿔도 밝기가 변하지 않는다.
 
-## 4. JpegStreamer
+## 4. FrameStreamer
 
 Render Thread는 GPU를 기다리지 않는다.
 
@@ -90,16 +96,28 @@ Render Thread는 GPU를 기다리지 않는다.
 Render Thread : glGetTextureImage -> PBO[i] -> glFenceSync
                 (지난 Frame의 Fence가 끝났으면 그것만 CPU로 복사)
 CPU Queue     : 항상 최신 Frame 1개 (오래된 Frame은 버린다)
-Worker Thread : 범례 그리기 -> OpenCV JPEG -> RFJF Header + Payload 송신
+Worker Thread : 상하 반전 -> 범례 그리기 -> 형식별 인코딩
+                -> RFJF Header + Payload 송신
 ```
 
-- RFJF Header는 `INTERFACE.md` §12의 공통 계약(22 byte, big-endian, `flags=0`)이며 바꾸지 않는다.
+형식 변환과 Header packing은 `FrameCodec.hpp` 하나에 있다. GL·OpenCV에 의존하지 않으므로
+`SIBR_frame_codec_test`가 이 Header만 들고 컴파일한다.
+
+- RFJF Header는 `INTERFACE.md` §12의 공통 계약(22 byte, big-endian)이며 바꾸지 않는다.
+  `flags`만 형식을 따라 `0`(JPEG) 또는 `1`(RGB332+zlib)이 된다.
+- `rgb332-zlib`: Readback Buffer는 BGR 순서라 Red는 offset 2, Blue는 offset 0이다.
+  픽셀당 1 byte `RRRGGGBB` 384,000 byte로 옮긴 뒤 표준 `zlib`(`Z_BEST_SPEED`)으로 압축한다.
+  Handheld가 10 fps마다 inflate해야 하므로 압축률보다 속도를 택했다.
 - 범례는 Worker Thread가 OpenCV로 그린다. Viridis 색상 막대, dBm 양 끝값, 방식 이름,
-  렌더 FPS, `PROVISIONAL` 표시.
+  렌더 FPS, `PROVISIONAL` 표시. 범례는 인코딩 전에 그리므로 두 형식에 똑같이 들어간다.
 - Relay가 끊기면 렌더링은 계속하고 1초마다 다시 붙는다. 다시 붙으면 **최신 Frame부터**
   보내고 밀린 Frame은 보내지 않는다.
-- JPEG가 8 MiB를 넘으면 그 Frame만 버리고 `dropped_oversize` 로 센다.
-- `--metrics-json` 은 송신측 통계다. 종단 지연과 수신 FPS는 받는 쪽에서 재야 한다.
+- 인코딩에 실패하거나 Payload가 8 MiB를 넘으면 그 Frame만 버리고 `dropped_encode`,
+  `dropped_oversize` 로 센다. 렌더링은 멈추지 않는다.
+- 5초마다 최근 `seq`, 입력·Payload 크기, encode/send 시간, drop/reconnect 누계를 한 줄로 남긴다.
+- `--metrics-json` 은 송신측 통계(schema `2.0`)다. 종단 지연과 수신 FPS는 받는 쪽에서 재야 한다.
+  받는 쪽은 `measure_stream.py`가 `flags`를 그대로 보고하고, `flags=1`이면 표준 `zlib`로 풀어
+  정확히 384,000 byte인지 확인한 뒤 `--save-dir`에 PNG로 남긴다.
 
 ## 5. HandheldControlClient
 

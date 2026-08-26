@@ -16,6 +16,8 @@ sibr_gitlibrary(TARGET CudaRasterizer
 )
 
 find_package(CUDAToolkit REQUIRED)
+# RFVisualizer: RGB332 Payload 압축. 시스템에 이미 있는 zlib만 쓴다.
+find_package(ZLIB REQUIRED)
 
 file(GLOB SOURCES "*.cpp" "*.h" "*.hpp")
 source_group("Source Files" FILES ${SOURCES})
@@ -44,6 +46,7 @@ target_link_libraries(${PROJECT_NAME}
 	sibr_basic
 	CUDA::cudart
 	CudaRasterizer
+	ZLIB::ZLIB
 )
 else()
 target_link_libraries(${PROJECT_NAME}
@@ -60,6 +63,7 @@ target_link_libraries(${PROJECT_NAME}
 	sibr_basic
 	CUDA::cudart
 	CudaRasterizer
+	ZLIB::ZLIB
 )
 endif()
 
