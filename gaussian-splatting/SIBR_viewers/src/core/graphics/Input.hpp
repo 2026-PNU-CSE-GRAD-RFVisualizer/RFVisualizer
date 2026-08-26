@@ -264,12 +264,22 @@ namespace sibr
 		*/
 		void	press( TEnum code ) {
 			_currentStates[(size_t)code] = true;
+			_pressedThisFrame[(size_t)code] = true;
+			_releaseDeferred[(size_t)code] = false;   // 다시 눌렸으면 미뤄둔 뗌은 취소한다.
 		}
 
 		/** Declare an item as released at this frame.
 		\param code the item code (Key or Mouse).
 		*/
 		void	release( TEnum code ) {
+			// 이번 프레임에 눌린 항목을 같은 프레임에 떼면, 프레임이 한 번도 보지 못한 채
+			// 사라진다. 원격 데스크톱(RustDesk 등)은 키 반복을 눌린 시간 0 ms인 탭으로
+			// 보내므로 그대로 두면 W/A/S/D가 통째로 죽는다. 뗌을 다음 swapStates까지
+			// 미뤄서 최소 한 프레임은 눌린 것으로 관측되게 한다.
+			if (_pressedThisFrame[(size_t)code]) {
+				_releaseDeferred[(size_t)code] = true;
+				return;
+			}
 			_currentStates[(size_t)code] = false;
 			_lastStates[(size_t)code] = true;
 		}
@@ -280,6 +290,8 @@ namespace sibr
 		void	silent( TEnum code ) {
 			_currentStates[(size_t)code] = \
 				_lastStates[(size_t)code] = false;
+			_pressedThisFrame[(size_t)code] = false;
+			_releaseDeferred[(size_t)code] = false;
 		}
 
 		/** Reset all items state.
@@ -287,11 +299,22 @@ namespace sibr
 		void	clearStates( void ) {
 			std::fill(_currentStates.begin(), _currentStates.end(), false);
 			std::fill(_lastStates.begin(), _lastStates.end(), false);
+			std::fill(_pressedThisFrame.begin(), _pressedThisFrame.end(), false);
+			std::fill(_releaseDeferred.begin(), _releaseDeferred.end(), false);
 		}
 
 		/** Update previous frame states with the current frame ones. */
 		void	swapStates( void ) {
 			_lastStates = _currentStates;
+			// 한 프레임 살려 둔 탭을 이제 뗀다. lastStates가 먼저 복사됐으므로 이번
+			// 프레임에 isReleased가 정확히 한 번 뜬다.
+			for (int index = 0; index < TNbState; ++index) {
+				if (_releaseDeferred[index]) {
+					_currentStates[index] = false;
+				}
+			}
+			std::fill(_releaseDeferred.begin(), _releaseDeferred.end(), false);
+			std::fill(_pressedThisFrame.begin(), _pressedThisFrame.end(), false);
 		}
 
 		/** \return the number of keys currently activated. */
@@ -304,8 +327,10 @@ namespace sibr
 		}
 
 	private:
-		std::array<bool, TNbState>			_currentStates; ///< Current frame state.
-		std::array<bool, TNbState>			_lastStates; ///< Last frame state.
+		std::array<bool, TNbState>			_currentStates = {}; ///< Current frame state.
+		std::array<bool, TNbState>			_lastStates = {}; ///< Last frame state.
+		std::array<bool, TNbState>			_pressedThisFrame = {}; ///< 이번 프레임에 눌린 항목.
+		std::array<bool, TNbState>			_releaseDeferred = {};  ///< 다음 swapStates에서 뗄 항목.
 	};
 
 	/** Maintain the complete state of user interactions (mouse, keyboard) for a given view or window.

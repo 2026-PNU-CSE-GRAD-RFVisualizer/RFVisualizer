@@ -1,14 +1,16 @@
 # RFVisualizer 확장 (SIBR Gaussian Viewer)
 
-공식 SIBR Gaussian Viewer에 세 가지를 더했다. 셋 다 **인자를 주지 않으면 꺼져 있고**,
+공식 SIBR Gaussian Viewer에 다섯 가지를 더했다. 모두 **인자를 주지 않으면 꺼져 있고**,
 껐을 때의 출력은 기존 Gaussian 결과와 byte 단위로 같다.
 
 1. `RFVolumeRenderer` — RF dBm Volume을 반투명하게 합성한다.
 2. `FrameStreamer` — 렌더 결과를 인코딩해 Network `image_relay`(TCP 9101)로 보낸다.
    기본은 RGB332+zlib(`flags=1`), 예비는 JPEG(`flags=0`)이다.
 3. `HandheldControlClient` — Backend WebSocket `/handheld/control`을 구독해 Camera를 움직인다.
+4. `GroundedFPSController` — `--grounded-fps`에서만 FPS Camera를 바닥에 세우고 벽에 막는다.
+5. `ArcTeleportController` + `TeleportOverlayRenderer` — 같은 Mode에서 `R` 포물선 텔레포트.
 
-기존 `GaussianView`에는 연결 코드만 있고, 세 기능은 각각 독립 파일이다.
+기존 `GaussianView`에는 연결 코드만 있고, 다섯 기능은 각각 독립 파일이다.
 
 ## 1. Build
 
@@ -29,10 +31,12 @@ cp embree-3.13.5.x86_64.linux/lib/libembree3.so.3 embree-3.13.5.x86_64.linux/lib
 새 `.cpp`를 추가하면 CMake가 `file(GLOB ...)`로 소스를 모으므로 **반드시 configure를 다시**
 돌려야 한다. 안 그러면 조용히 예전 목록으로 빌드된다.
 
-Test는 CTest로 돈다. GL도 CUDA도 필요 없다.
+Test는 CTest로 돈다. CUDA는 필요 없다. `grounded_camera`만 실제 `FPSCamera`를 돌리려고
+`sibr_view`를 링크하지만 Window도 GL Context도 만들지 않는다.
 
 ```bash
-cmake --build build-rfviewer --target SIBR_handheld_control_test SIBR_frame_codec_test -j2
+cmake --build build-rfviewer --target SIBR_handheld_control_test SIBR_frame_codec_test \
+  SIBR_grounded_motion_test SIBR_grounded_camera_test SIBR_arc_teleport_test -j2
 ctest --test-dir build-rfviewer --output-on-failure
 ```
 
@@ -52,6 +56,7 @@ ctest --test-dir build-rfviewer --output-on-failure
 | `--metrics-json <path>` | 없음 | 종료 시 송신 측정값을 남긴다 |
 | `--handheld-host <host>` | 없음 | Backend WebSocket host. 없으면 Handheld 비활성 |
 | `--handheld-port <port>` | `8000` | Backend WebSocket port |
+| `--grounded-fps` | 꺼짐 | 바닥을 걷는 FPS + `R` 텔레포트. `--rf-volume` 필요 |
 
 ```bash
 ./install/bin/SIBR_gaussianViewer_app \
@@ -174,7 +179,114 @@ Handheld가 Camera를 잡는 동안 Handler는 `NONE`이다. 아니면 FPS Handl
 - 실제 BNO085 축은 **미검증**이다. Yaw·Pitch·Roll 90도 실물 시험으로 확정해야 한다.
 - 현재 Embedded 버튼 송신은 미구현이라 Recenter/Position은 Fake Backend로만 확인했다.
 
-## 6. 좌표계 주의
+## 6. GroundedFPSController (`--grounded-fps`)
+
+인자를 주지 않으면 기존 자유 비행(noclip) 그대로다. Mesh를 읽지도, Camera에 손대지도 않는다.
+
+켜면 FPS Camera에 **위치 제약 callback 하나만** 걸린다. 새 Camera Class도, 범용 Character
+Controller도, 물리 엔진도 없다.
+
+| 조작 | Grounded |
+|---|---|
+| `W`/`A`/`S`/`D` | 시점의 수평면 이동. 위를 보든 아래를 보든 속도가 같다 |
+| `Q`/`E` | **무시한다** (수직 이동 없음) |
+| 왼쪽·가운데 버튼 Pan | **무시한다** |
+| 오른쪽 버튼 드래그 | 그대로 시점 회전 (Pitch 제한 유지) |
+| 오른쪽 버튼 + 휠 | 그대로 이동 속도 조절 |
+| `I`/`J`/`K`/`L`/`U`/`O` | 그대로 시점 회전 |
+
+- 눈높이는 metric `z = 1.7 m` 고정, 몸체는 반경 `0.25 m` 원이다.
+- 충돌은 metric XY 평면의 2D로만 푼다. 이동을 최대 `0.125 m` 씩(반경보다 작게) 쪼개
+  얇은 벽도 지나치지 않는다.
+- 정면으로 부딪히면 벽 앞 `0.25 m` 에서 멈추고, 비스듬히 부딪히면 법선 성분만 지워
+  접선 방향으로 미끄러진다.
+- 모서리에서 수렴하지 않거나, 한 Frame에 `8 m` 를 넘거나, 좌표가 NaN이면 **마지막 안전
+  위치에 남는다.** 어떤 경우에도 벽을 통과하거나 NaN pose를 만들지 않는다.
+
+Navigation Mesh는 Bundle의 `occlusion_meshes` 중 **파일명이 정확히
+`room_envelope_metric.obj`인 하나**다. manifest 순서에 기대지 않고, 0개거나 2개 이상이면
+시작 오류다. AP/측정점 marker(`proxy_objects_metric.obj`)는 장애물이 **아니다.**
+
+그 Mesh에서 `|normal.z| <= 0.1` 인 수직면 중 Z 범위가 `[0, 1.7]` 과 겹치는 것만 벽으로 쓰고,
+`|normal.z| >= 0.9` 이면서 모든 vertex가 `|z| <= 0.05` 인 면만 바닥으로 쓴다. 천장과 찌그러진
+삼각형은 빠진다.
+
+```bash
+./install/bin/SIBR_gaussianViewer_app \
+  -m PGSR/output/pnu_3f_corridor \
+  --rendering-size 800 480 --force-aspect-ratio \
+  --rf-volume <experiment>/analysis/viewer_volume/manifest.json \
+  --grounded-fps
+```
+
+`--grounded-fps`는 `--rf-volume` 이 있어야 쓸 수 있다. 바닥·벽 Mesh와
+`T_scene_from_metric` 이 그 manifest에 있기 때문이다. 다음은 모두 **noclip으로 되돌아가지
+않고 시작 오류로 멈춘다**: `--rf-volume` 없음, room envelope 없음/중복, 벽이나 바닥이
+하나도 안 나옴, 좌표 변환이 특이하거나 왕복 오차가 `1e-4 m` 초과.
+
+### 시작 위치
+
+시작 Camera는 가장 가까운 입력 카메라라 복도 밖이거나 벽에 붙어 있을 수 있다. 그때는
+**멈추지 않고 가장 가까운 유효 위치로 옮긴다.** 유효 위치는 바닥 삼각형 안이면서 모든
+벽에서 `0.25 m` 이상 떨어진 지점이다. 옮겼으면 시작 Log에 이렇게 남는다.
+
+```
+[Grounded] 시작 Camera가 바닥 밖이거나 벽에 박혀 있어 가장 가까운 유효 위치로
+옮겼습니다: metric XY (-500, -500) -> (0.25, 4.8427).
+```
+
+바닥 삼각형마다 "그 삼각형에서 시작점에 가장 가까운 점"을 구하고, 벽에 너무 붙었으면
+무게중심 쪽으로 당겨 몸이 들어가는 첫 지점을 찾는다. 그중 시작점에 가장 가까운 것을 쓴다.
+실제 corridor Bundle(바닥 604장, 벽 864개)에서 `0.1 ms` 미만이고 시작할 때 한 번만 돈다.
+
+**주의: "가장 가까운"은 직선 거리다.** 시작점이 건물 밖이면 원래 있어야 할 방이 아니라
+벽 하나 너머의 다른 공간으로 옮겨질 수 있다. 바닥 어디에도 반경 `0.25 m` 가 들어갈 자리가
+없을 때만 시작 오류로 멈춘다.
+
+### 포물선 텔레포트 (`R`)
+
+Grounded FPS를 켜면 **자동으로 함께 켜진다.** 별도 인자는 없다.
+
+| 조작 | 동작 |
+|---|---|
+| `R` 누름 | 조준 시작. 카메라 정면으로 포물선이 나타난다 |
+| `R` 유지 | 마우스로 조준. 포물선이 시선을 따라온다 |
+| `R` 유지 중 `W`/`A`/`S`/`D` | **막힌다.** 조준하는 동안 위치는 고정이다 |
+| `R` 유지 중 우클릭 드래그 | 그대로 시점 회전 |
+| `R` 해제 | 유효하면 이동, 무효하면 **아무 일도 없다** |
+
+- **초록 포물선 + 고리**: 유효한 착지점. 고리는 몸 반경 `0.25 m` 그대로다.
+- **빨강 포물선 + X**: 무효. 벽·장애물에 막혔거나, 바닥 밖이거나, 벽에서 `0.25 m` 이내다.
+
+유효한 착지는 **위치만** 바꾼다. 시선 방향과 FOV는 그대로 유지되고 눈높이는 다시 `1.7 m`다.
+무효한 지점에서 손을 떼도 **가까운 바닥으로 몰래 옮기지 않는다.** 그냥 취소된다.
+
+포물선은 metric 좌표에서 `p(t) = origin + v·t + ½·g·t²` 로 계산한다. 속도 `8 m/s`,
+중력 `9.81 m/s²`, 최대 `1.5` 초를 65개 점으로 샘플링하고 누적 길이 `8 m` 에서 자른다.
+첫 벽·proxy 충돌이나 내려가면서 만나는 `z = 0` 지점에서 끝난다. 벽은 room envelope,
+장애물은 기존 Raycaster의 proxy mesh다.
+
+수평으로 조준하면 사거리는 약 `4.7 m` 다. **위로 15도쯤을 넘게 조준하면 착지점이
+사라진다** — 8 m 길이 상한에 먼저 걸리기 때문이다. 이때는 빨강 X만 보인다.
+
+조준은 다음 경우 즉시 취소된다: Handheld가 카메라를 가져갈 때, FPS mode가 아닐 때,
+카메라 경로를 재생 중일 때, ImGui에 글자를 입력 중일 때. 취소된 뒤에는 `R`을 **다시
+눌러야** 시작한다.
+
+포물선은 Gaussian → RF Volume **다음, 송신 캡처 앞**에 그린다. 그래서 로컬 화면과
+`--stream-host` 로 보내는 영상에 똑같이 나타난다.
+
+임베디드 버튼은 **아직 연결되어 있지 않다.** 내부에는 입력원과 무관한
+`TeleportAction {pressed, active, released}` 만 있고, 지금은 키보드 `R` 이 그 값을 채운다.
+후속 작업에서 버튼이 같은 값을 채우면 상태기계는 그대로 쓴다.
+
+### 제한
+
+바닥이 metric `z = 0` 인 **평지**라고 가정한다. 계단·경사·중력·점프·웅크리기·움직이는
+장애물은 다루지 않는다. 벽은 정적 Mesh 하나뿐이다. 텔레포트에도 화면 페이드나 시점 회전은
+없고, 착지 지점을 자동으로 보정하지 않는다.
+
+## 7. 좌표계 주의
 
 `calibration.json` 의 `T_scene_from_metric` 이 가리키는 "scene" 은 **SIBR Gaussian 좌표계가
 아니다.** Proxy를 만든 `3f_corridor_blend.ply` 가 Blender로 Z-up 변환된 사본이기 때문이다.
@@ -183,7 +295,7 @@ Bundle의 `T_scene_from_metric` 에는 이 교환까지 곱한 행렬이 들어 
 그대로 쓰면 된다. 확인 방법은 `cameras.json` 을 metric으로 옮겨 z 중앙값이 사람 키
 높이(약 1.6 m)인지 보는 것이다.
 
-## 7. 회귀 확인
+## 8. 회귀 확인
 
 고정 Camera 기준 이미지는
 `scenes/pnu_3f_corridor/experiments/corridor3f_20260820/outputs/viewer_baseline/` 에 있다.
@@ -197,3 +309,6 @@ sha256sum /tmp/regress/00000000.png <...>/viewer_baseline/baseline_out/00000000.
 
 `--rf-volume` 없이, 또는 `--rf-volume ... --rf-heatmap-off` 로 돌린 결과는 기준 이미지와
 **byte 단위로 같아야 한다.**
+
+`--grounded-fps` 를 주지 않으면 Camera 경로도 기존과 같다. 이 기준 이미지 비교는 고정
+Camera 경로를 쓰므로 grounded 여부와 무관하게 통과해야 한다.

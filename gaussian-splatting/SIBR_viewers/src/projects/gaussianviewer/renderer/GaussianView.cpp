@@ -551,6 +551,12 @@ void sibr::GaussianView::onRenderIBR(sibr::IRenderTarget & dst, const sibr::Came
 	{
 		_rfVolume->process(dst, eye);
 	}
+	// 텔레포트 포물선은 RF 다음, 송신 캡처 **앞**이다. 그래야 로컬 화면과 스트리밍 영상에
+	// 똑같이 보인다. 조준 중이 아니면 process()가 바로 돌아온다.
+	if (_teleportOverlay)
+	{
+		_teleportOverlay->process(_teleportPreview, eye, dst);
+	}
 	if (_streamer)
 	{
 		if (_rfVolume)

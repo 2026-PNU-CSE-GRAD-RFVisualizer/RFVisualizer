@@ -12,6 +12,7 @@
 
 #pragma once
 
+#include <functional>
 #include <memory>
 #include <fstream>
 
@@ -84,6 +85,18 @@ namespace sibr {
 
 		void setGoalAltitude(const float& goalAltitude);
 
+		/** Grounded mode에서 후보 위치를 확정 위치로 바꾸는 함수.
+		\param current 이번 Frame 시작 위치(이미 유효한 위치)
+		\param candidate 키 입력이 만든 후보 위치
+		\return 실제로 쓸 위치 */
+		using PositionConstraint = std::function<sibr::Vector3f(
+			const sibr::Vector3f& current, const sibr::Vector3f& candidate)>;
+
+		/** 위치 제약을 건다. 비어 있으면(기본) 기존 자유비행·Q/E·Pan을 그대로 쓴다.
+		 * 걸려 있으면 W/A/S/D만 수평 이동에 쓰고 Q/E와 left/middle pan은 무시한다.
+		\param constraint 제약 함수 (비우면 해제) */
+		void setPositionConstraint(const PositionConstraint& constraint) { _positionConstraint = constraint; }
+
 	private:
 
 		float _speedFpsCam, _speedRotFpsCam; ///< Camera speeds.
@@ -97,12 +110,19 @@ namespace sibr {
 		bool _worldUpResolved = false;    ///< world up 을 이미 정했는지.
 		sibr::Input _lastInput;           ///< onGUI에서 키 상태를 보여주기 위한 마지막 Input.
 		sibr::Vector3f _worldUp = sibr::Vector3f(0.f, 1.f, 0.f); ///< 수평을 유지할 기준 축.
+		PositionConstraint _positionConstraint; ///< 비어 있으면 grounded mode가 아니다.
 
 		/** Update camera pose based on keys. 
 		\param input user input
 		\param deltaTime elapsed time
 		*/
 		void moveUsingWASD( const sibr::Input& input, float deltaTime);
+
+		/** Grounded mode의 이동. W/A/S/D를 _worldUp 평면에서만 쓰고 위치는 제약을 통과시킨다.
+		\param input user input
+		\param camSpeed 이번 Frame의 기본 이동량
+		\param camRotSpeed 이번 Frame의 기본 회전량 */
+		void moveGrounded( const sibr::Input& input, float camSpeed, float camRotSpeed);
 
 		/** 키가 눌려 있는지. sibr::Input과 ImGui 중 어느 쪽이든 눌렸다고 하면 눌린 것으로 본다.
 		\param input user input

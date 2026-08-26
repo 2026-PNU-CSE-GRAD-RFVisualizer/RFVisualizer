@@ -158,6 +158,13 @@ namespace sibr {
 		*/
 		void setFPSCameraSpeed(const float speed);
 
+		/** FPS Camera에 위치 제약을 건다(--grounded-fps). 비우면 기존 자유비행으로 돌아간다.
+		 * FPS mode에서만 쓰이므로 trackball/orbit/interpolation/NONE에는 영향이 없다.
+		\param constraint 제약 함수 */
+		void setFPSPositionConstraint(const FPSCamera::PositionConstraint& constraint) {
+			_fpsCamera.setPositionConstraint(constraint);
+		}
+
 		/// ICameraHandler interface.
 		/** Update function, call at every tick.
 		\param input the input object for the current view.

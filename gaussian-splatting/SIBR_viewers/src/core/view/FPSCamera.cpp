@@ -76,7 +76,8 @@ namespace sibr {
 		// Read input and update camera.
 		moveUsingWASD(input, deltaTime);
 		// 오른쪽 버튼을 잡고 있는 동안은 마우스가 시점 회전이고, 그 외에는 기존 Pan이다.
-		if (!lookUsingMouse()) {
+		// Grounded mode에서는 Pan이 바닥을 벗어나게 하므로 시점 회전만 남긴다.
+		if (!lookUsingMouse() && !_positionConstraint) {
 			moveUsingMousePan(input, deltaTime);
 		}
 	}
@@ -173,6 +174,54 @@ namespace sibr {
 		return index >= 0 && index < IM_ARRAYSIZE(io.KeysDown) && io.KeysDown[index];
 	}
 
+	void FPSCamera::moveGrounded(const sibr::Input& input, float camSpeed, float camRotSpeed)
+	{
+		// _worldUp 평면 위의 forward/right basis. Camera는 right=+X, up=+Y, dir=-Z 규약이라
+		// up x right = dir 이다. right는 항상 dir과 수직이므로 위/아래를 똑바로 봐도(그때는
+		// dir이 _worldUp과 나란해진다) right가 수평으로 남아 basis가 무너지지 않는다.
+		sibr::Vector3f right = _currentCamera.right();
+		right -= right.dot(_worldUp) * _worldUp;
+		sibr::Vector3f forward;
+		if (right.squaredNorm() > 1e-8f) {
+			right.normalize();
+			forward = _worldUp.cross(right);
+		} else {
+			// Camera가 90도 굴러 right가 _worldUp과 나란한 예외. 이때는 dir이 수평이다.
+			forward = _currentCamera.dir();
+			forward -= forward.dot(_worldUp) * _worldUp;
+			if (!(forward.squaredNorm() > 1e-8f)) {
+				return;                       // basis를 만들 수 없다. 이번 Frame은 움직이지 않는다.
+			}
+			forward.normalize();
+			right = forward.cross(_worldUp);
+		}
+
+		// Q/E(수직 이동)는 읽지 않는다. 바닥을 걷는 모드이기 때문이다.
+		const float strafe = (keyHeld(input, sibr::Key::D) ? 1.f : 0.f)
+			- (keyHeld(input, sibr::Key::A) ? 1.f : 0.f);
+		const float advance = (keyHeld(input, sibr::Key::W) ? 1.f : 0.f)
+			- (keyHeld(input, sibr::Key::S) ? 1.f : 0.f);
+		if (strafe != 0.f || advance != 0.f) {
+			const sibr::Vector3f current = _currentCamera.position();
+			const sibr::Vector3f candidate = current
+				+ (camSpeed * _speedFpsCam) * (advance * forward + strafe * right);
+			const sibr::Vector3f settled = _positionConstraint(current, candidate);
+			if (settled.allFinite()) {
+				_currentCamera.position(settled);
+			}
+		}
+
+		// 시점 회전 키(I/J/K/L/U/O)는 grounded에서도 그대로 둔다.
+		sibr::Vector3f pivot(0, 0, 0);
+		pivot[1] += keyHeld(input, sibr::Key::J) ? camRotSpeed : 0.f;
+		pivot[1] -= keyHeld(input, sibr::Key::L) ? camRotSpeed : 0.f;
+		pivot[0] -= keyHeld(input, sibr::Key::K) ? camRotSpeed : 0.f;
+		pivot[0] += keyHeld(input, sibr::Key::I) ? camRotSpeed : 0.f;
+		pivot[2] -= keyHeld(input, sibr::Key::O) ? camRotSpeed : 0.f;
+		pivot[2] += keyHeld(input, sibr::Key::U) ? camRotSpeed : 0.f;
+		_currentCamera.rotate(pivot, _currentCamera.transform());
+	}
+
 	void FPSCamera::moveUsingWASD(const sibr::Input& input, float deltaTime)
 	{
 
@@ -189,6 +238,11 @@ namespace sibr {
 		float camRotSpeed = 30.f * deltaTime	* IBRVIEW_CAMSPEED;
 		//float camSpeed = 0.1f;
 		//float camRotSpeed = 1.f;
+
+		if (_positionConstraint) {
+			moveGrounded(input, camSpeed, camRotSpeed * _speedRotFpsCam);
+			return;
+		}
 
 		sibr::Vector3f move(0, 0, 0);
 

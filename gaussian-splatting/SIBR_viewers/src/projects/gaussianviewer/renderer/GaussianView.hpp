@@ -26,6 +26,7 @@
 #include <functional>
 # include "GaussianSurfaceRenderer.hpp"
 # include "RFVolumeRenderer.hpp"
+# include "TeleportOverlayRenderer.hpp"
 # include "FrameStreamer.hpp"
 
 namespace CudaRasterizer
@@ -84,6 +85,16 @@ namespace sibr {
 		/** 렌더 결과를 JPEG로 내보낸다. nullptr면 송신하지 않는다. */
 		void setStreamer(const FrameStreamer::Ptr& streamer) { _streamer = streamer; }
 
+		/** 텔레포트 포물선을 그린다. --grounded-fps일 때만 설정된다. */
+		void setTeleportOverlay(const std::shared_ptr<TeleportOverlayRenderer>& overlay)
+		{
+			_teleportOverlay = overlay;
+		}
+
+		/** 이번 Frame에 그릴 포물선. main이 Camera를 갱신한 뒤 매 Frame 넣는다.
+		 * 조준 중이 아니면 aiming=false인 값이 들어와 아무것도 그리지 않는다. */
+		void setTeleportPreview(const TeleportPreview& preview) { _teleportPreview = preview; }
+
 		/** \return a reference to the scene */
 		const std::shared_ptr<sibr::BasicIBRScene> & getScene() const { return _scene; }
 
@@ -138,6 +149,8 @@ namespace sibr {
 		GaussianSurfaceRenderer* _gaussianRenderer;
 		RFVolumeRenderer::Ptr _rfVolume;
 		FrameStreamer::Ptr _streamer;
+		std::shared_ptr<TeleportOverlayRenderer> _teleportOverlay;
+		TeleportPreview _teleportPreview;
 	};
 
 } /*namespace sibr*/
