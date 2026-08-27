@@ -41,6 +41,14 @@ namespace sibr {
 			SIBR_ERR << "[FrameStreamer] " << optionError;
 		}
 		_frameBytes = size_t(width) * height * 3;
+		if (_options.format == StreamFormat::Palette256Zlib) {
+			// 워밍업 동안에는 RGB332와 같은 256색을 쓴다. Frame 0부터 형식상 유효하고
+			// 화면도 flags=1과 같아 보인다. 표본이 다 모이면 한 번만 갈아탄다.
+			uint8_t rgb888[rfjf::PALETTE_ENTRIES * 3];
+			defaultRgb332Palette(rgb888);
+			packPalette565(rgb888, _palette565);
+			buildPaletteLut(rgb888, _paletteLut);
+		}
 		glGenBuffers(2, _pbo);
 		for (int slot = 0; slot < 2; ++slot) {
 			glBindBuffer(GL_PIXEL_PACK_BUFFER, _pbo[slot]);
@@ -57,7 +65,9 @@ namespace sibr {
 			<< streamFormatName(_options.format)
 			<< (_options.format == StreamFormat::Jpeg
 				? sibr::sprint(", quality %d", _options.quality)
-				: sibr::sprint(", dither %.2f", _options.dither))
+				: _options.format == StreamFormat::Palette256Zlib
+					? sibr::sprint(", palette warm-up %d frames", _options.paletteFrames)
+					: sibr::sprint(", dither %.2f", _options.dither))
 			<< std::endl;
 	}
 
@@ -254,6 +264,40 @@ namespace sibr {
 		}
 	}
 
+	void FrameStreamer::updatePalette(const uint8_t* bgr, unsigned width, unsigned height)
+	{
+		if (_paletteReady) {
+			return;
+		}
+		// 표본이 많을수록 kmeans가 느려지고 그만큼 Worker가 한 번에 멈춘다.
+		appendPaletteSamples(bgr, width, height,
+			paletteSampleStep(width, height, _options.paletteFrames), _paletteSamples);
+		if (++_paletteFrameCount < std::max(_options.paletteFrames, 1)) {
+			return;
+		}
+
+		uint8_t rgb888[rfjf::PALETTE_ENTRIES * 3];
+		const double start = nowSeconds();
+		if (choosePalette(_paletteSamples, rgb888)) {
+			packPalette565(rgb888, _palette565);
+			buildPaletteLut(rgb888, _paletteLut);
+			SIBR_LOG << "[FrameStreamer] 장면 팔레트 256색 확정 ("
+				<< (_paletteSamples.size() / 3) << " 표본, "
+				<< sibr::sprint("%.0f ms", 1000.0 * (nowSeconds() - start)) << ")." << std::endl;
+		} else {
+			// 실패해도 화면은 죽지 않는다. 기본 RGB332 팔레트로 계속 간다.
+			SIBR_WRG << "[FrameStreamer] 팔레트 선정 실패. 기본 RGB332 256색을 유지합니다."
+				<< std::endl;
+		}
+		_paletteReady = true;
+		_paletteSamples.clear();
+		_paletteSamples.shrink_to_fit();
+		{
+			std::lock_guard<std::mutex> lock(_metricsMutex);
+			_metrics.paletteReady = true;
+		}
+	}
+
 	/** 상하 반전과 Overlay까지 끝난 BGR Mat을 형식에 맞는 Payload로 만든다. */
 	bool FrameStreamer::encode(void* bgrMat, std::vector<uint8_t>& payload)
 	{
@@ -267,7 +311,13 @@ namespace sibr {
 		if (!image.isContinuous()) {
 			image = image.clone();
 		}
-		bgrToRgb332(image.data, unsigned(image.cols), unsigned(image.rows), _rgb332, _options.dither);
+		if (_options.format == StreamFormat::Palette256Zlib) {
+			updatePalette(image.data, unsigned(image.cols), unsigned(image.rows));
+			encodePalette256(image.data, unsigned(image.cols), unsigned(image.rows),
+				_palette565, _paletteLut, _rgb332);
+		} else {
+			bgrToRgb332(image.data, unsigned(image.cols), unsigned(image.rows), _rgb332, _options.dither);
+		}
 		return zlibCompress(_rgb332, payload);
 	}
 
@@ -399,6 +449,8 @@ namespace sibr {
 			<< "  \"target_fps\": " << _options.fps << ",\n"
 			<< "  \"jpeg_quality\": " << _options.quality << ",\n"
 			<< "  \"dither\": " << _options.dither << ",\n"
+			<< "  \"palette_warmup_frames\": " << _options.paletteFrames << ",\n"
+			<< "  \"palette_ready\": " << (values.paletteReady ? "true" : "false") << ",\n"
 			<< "  \"elapsed_seconds\": " << values.elapsedSeconds << ",\n"
 			<< "  \"frames_captured\": " << values.captured << ",\n"
 			<< "  \"frames_sent\": " << values.sent << ",\n"

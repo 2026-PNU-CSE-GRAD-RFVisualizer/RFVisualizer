@@ -8,6 +8,7 @@
 
 # include "Config.hpp"
 # include "FrameCodec.hpp"
+# include "PaletteChooser.hpp"
 # include <core/graphics/RenderTarget.hpp>
 
 # include <boost/asio.hpp>
@@ -43,6 +44,7 @@ namespace sibr {
 			float fps = 10.0f;
 			StreamFormat format = StreamFormat::Rgb332Zlib;
 			float dither = rfjf::DITHER_DEFAULT;   ///< RGB332일 때만 쓴다. 0이면 끈다.
+			int paletteFrames = 20;                ///< 팔레트256일 때 표본을 모을 Frame 수.
 			int quality = 80;                      ///< JPEG일 때만 쓴다.
 		};
 
@@ -65,6 +67,7 @@ namespace sibr {
 			size_t payloadBytesMax = 0;
 			size_t payloadBytesLast = 0;
 			uint32_t sequenceLast = 0;
+			bool paletteReady = false;     ///< 장면 팔레트로 바뀌었는지(팔레트256 전용)
 		};
 
 		/** Worker Thread와 연결을 시작한다. host가 비면 아무것도 하지 않는다. */
@@ -93,6 +96,8 @@ namespace sibr {
 		void workerLoop();
 		bool connect();
 		bool encode(void* bgrMat, std::vector<uint8_t>& payload);
+		/** 팔레트256 워밍업. 표본을 모으고 다 모이면 한 번 계산해 고정한다. */
+		void updatePalette(const uint8_t* bgr, unsigned width, unsigned height);
 		bool sendFrame(const std::vector<uint8_t>& payload, uint64_t timestampMs, uint32_t sequence);
 		void drawOverlay(void* bgrMat) const;
 		void logProgress();
@@ -120,6 +125,13 @@ namespace sibr {
 
 		std::vector<uint8_t> _rgb332;      ///< Worker 전용 재사용 Buffer
 		std::vector<uint8_t> _payload;     ///< Worker 전용 재사용 Buffer
+
+		// 팔레트256 상태. 전부 Worker Thread만 만진다.
+		uint8_t _palette565[rfjf::PALETTE_BYTES] = { 0 };
+		std::vector<uint8_t> _paletteLut;
+		std::vector<uint8_t> _paletteSamples;
+		int _paletteFrameCount = 0;
+		bool _paletteReady = false;
 
 		mutable std::mutex _metricsMutex;
 		Metrics _metrics;

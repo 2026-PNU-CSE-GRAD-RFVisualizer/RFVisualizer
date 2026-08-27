@@ -257,6 +257,12 @@ int main(int ac, char** av)
 		streamOptions.fps = myArgs.streamFps;
 		streamOptions.quality = myArgs.jpegQuality;
 		streamOptions.dither = myArgs.streamDither;
+		streamOptions.paletteFrames = myArgs.streamPaletteFrames;
+		if (streamOptions.paletteFrames < 1)
+		{
+			SIBR_ERR << "--stream-palette-frames는 1 이상이어야 합니다. 받은 값: "
+				<< streamOptions.paletteFrames;
+		}
 		if (!(streamOptions.dither >= 0.0f && streamOptions.dither <= 1.0f))
 		{
 			SIBR_ERR << "--stream-dither는 0.0에서 1.0 사이여야 합니다. 받은 값: "

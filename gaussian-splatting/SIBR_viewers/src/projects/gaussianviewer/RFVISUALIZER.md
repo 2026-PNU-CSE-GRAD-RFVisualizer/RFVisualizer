@@ -50,8 +50,9 @@ ctest --test-dir build-rfviewer --output-on-failure
 | `--stream-host <host>` | 없음 | 없으면 송신 비활성 |
 | `--stream-port <port>` | `9101` | image_relay ingest |
 | `--stream-fps <fps>` | `10` | 송신 목표 FPS |
-| `--stream-format <fmt>` | `rgb332-zlib` | `rgb332-zlib` 또는 `jpeg` |
+| `--stream-format <fmt>` | `rgb332-zlib` | `rgb332-zlib`, `palette256-zlib`, `jpeg` |
 | `--stream-dither <0-1>` | `0.4` | RGB332 Bayer 디더링 강도. `0`이면 끔 |
+| `--stream-palette-frames <n>` | `20` | `palette256-zlib`에서 팔레트 표본을 모을 Frame 수 |
 | `--jpeg-quality <1-100>` | `80` | `--stream-format jpeg`일 때만 쓴다 |
 | `--run-seconds <n>` | `0` | 0은 종료 전까지 실행 |
 | `--metrics-json <path>` | 없음 | 종료 시 송신 측정값을 남긴다 |
@@ -71,7 +72,7 @@ ctest --test-dir build-rfviewer --output-on-failure
 
 로컬 ImGui에는 방식 선택, 표시 On/Off, 투명도, 공통 dBm 범위, Z 절단만 추가했다.
 
-`--stream-format rgb332-zlib`은 렌더 해상도가 정확히 800×480이어야 한다. 다르면
+`--stream-format`의 `rgb332-zlib`과 `palette256-zlib`은 렌더 해상도가 정확히 800×480이어야 한다. 다르면
 Frame을 조용히 버리지 않고 **시작 오류로 멈춘다**. 다른 해상도로 보려면 `--stream-format jpeg`을 쓴다.
 
 `--handheld-host`는 `--rf-volume`이 있어야 쓸 수 있다. Position Update를 검증·변환할
@@ -107,7 +108,19 @@ Worker Thread : 상하 반전 -> 범례 그리기 -> 형식별 인코딩
 ```
 
 형식 변환과 Header packing은 `FrameCodec.hpp` 하나에 있다. GL·OpenCV에 의존하지 않으므로
-`SIBR_frame_codec_test`가 이 Header만 들고 컴파일한다.
+`SIBR_frame_codec_test`가 이 Header만 들고 컴파일한다. 팔레트 **선정**만 OpenCV가 필요해
+`PaletteChooser.cpp`로 갈라 두었고, 이것도 GL 없이 테스트한다.
+
+실측(pnu_3f_corridor 렌더 8장, 800×480):
+
+| 형식 | 평균 payload | 인코딩 |
+|---|---|---|
+| RGB332 | 47.6 KB | 1.94 ms |
+| RGB332 + dither 0.4 | 78.3 KB | 2.76 ms |
+| 팔레트256 | 105.3 KB | 2.32 ms |
+
+팔레트256의 워밍업 1회 비용은 kmeans 약 105 ms + LUT 약 7 ms다. Worker Thread에서만
+일어나므로 렌더는 멈추지 않고, 그동안 송신만 잠깐 끊긴다.
 
 - RFJF Header는 `INTERFACE.md` §12의 공통 계약(22 byte, big-endian)이며 바꾸지 않는다.
   `flags`만 형식을 따라 `0`(JPEG) 또는 `1`(RGB332+zlib)이 된다.
@@ -120,7 +133,18 @@ Worker Thread : 상하 반전 -> 범례 그리기 -> 형식별 인코딩
   강도는 **반올림 경계 근처에서만** 작동한다. 밴딩이 생기는 지점이 정확히 거기라서
   0.4로도 색 띠가 풀리고, 평평한 면에는 불필요한 잡음이 끼지 않는다.
 - 디더링은 **Wire 형식을 바꾸지 않는다.** 여전히 `flags=1`, 384,000 byte라 Relay와
-  Embedded는 고칠 것이 없다.
+  Embedded는 고칠 것이 없다. `--stream-dither`는 RGB332에만 적용된다.
+- `palette256-zlib`(`flags=2`)은 장면에서 고른 256색을 쓴다. 계약은 `INTERFACE.md` §12.3이다.
+  Payload는 512 byte 팔레트(RGB565 big-endian) + 384,000 byte 인덱스 = 384,512 byte다.
+  - 픽셀 매핑은 32×32×32 색 큐브 LUT 조회 한 번이다. 픽셀마다 256색을 뒤지면 10 fps를
+    못 맞춘다. LUT는 팔레트가 정해질 때 한 번만 만든다(약 7 ms).
+  - 시작 후 `--stream-palette-frames` 동안 표본을 모아 `cv::kmeans`로 **한 번** 고르고
+    세션 내내 고정한다. Frame마다 다시 계산하면 정지 화면에서도 색이 일렁인다.
+  - 워밍업 동안에는 **RGB332와 같은 256색**을 실어 보낸다. Frame 0부터 형식상 유효하고
+    화면도 `flags=1`과 같아 보인다. 색이 바뀌는 순간은 시작 직후 한 번뿐이다.
+  - 팔레트 선정이 실패해도 기본 팔레트로 계속 돈다. 화면이 죽지 않는다.
+  - 팔레트 선정은 `PaletteChooser`(OpenCV만 사용, GL 없음)에 있어
+    `SIBR_palette_chooser_test`로 Viewer 없이 검증한다.
 - 범례는 Worker Thread가 OpenCV로 그린다. Viridis 색상 막대, dBm 양 끝값, 방식 이름,
   렌더 FPS, `PROVISIONAL` 표시. 범례는 인코딩 전에 그리므로 두 형식에 똑같이 들어간다.
 - Relay가 끊기면 렌더링은 계속하고 1초마다 다시 붙는다. 다시 붙으면 **최신 Frame부터**
