@@ -68,6 +68,7 @@ namespace sibr {
 			size_t payloadBytesLast = 0;
 			uint32_t sequenceLast = 0;
 			bool paletteReady = false;     ///< 장면 팔레트로 바뀌었는지(팔레트256 전용)
+			uint64_t paletteRebuilds = 0;  ///< 장면이 바뀌어 다시 고른 횟수
 		};
 
 		/** Worker Thread와 연결을 시작한다. host가 비면 아무것도 하지 않는다. */
@@ -100,6 +101,8 @@ namespace sibr {
 		void updatePalette(const uint8_t* bgr, unsigned width, unsigned height);
 		bool sendFrame(const std::vector<uint8_t>& payload, uint64_t timestampMs, uint32_t sequence);
 		void drawOverlay(void* bgrMat) const;
+		/** 팔레트 선정 조건이 되는 현재 장면 상태(Overlay Mutex 아래에서 읽는다). */
+		PaletteScene currentScene() const;
 		void logProgress();
 
 		Options _options;
@@ -132,6 +135,7 @@ namespace sibr {
 		std::vector<uint8_t> _paletteSamples;
 		int _paletteFrameCount = 0;
 		bool _paletteReady = false;
+		PaletteScene _paletteScene;        ///< 지금 팔레트를 고를 때의 장면 조건
 
 		mutable std::mutex _metricsMutex;
 		Metrics _metrics;

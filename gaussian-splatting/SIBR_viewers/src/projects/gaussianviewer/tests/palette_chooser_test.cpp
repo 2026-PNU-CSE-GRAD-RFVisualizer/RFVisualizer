@@ -150,6 +150,34 @@ namespace {
 			"같은 표본에 같은 팔레트 (색 일렁임 방지)");
 	}
 
+	void testSceneChange()
+	{
+		sibr::PaletteScene base;
+		base.method = "Residual IDW";
+		base.dbmMin = -110.0f;
+		base.dbmMax = -30.0f;
+		base.heatmapOn = true;
+
+		check(!sibr::paletteSceneChanged(base, base), "같은 장면이면 다시 고르지 않는다");
+
+		sibr::PaletteScene off = base;
+		off.heatmapOn = false;
+		check(sibr::paletteSceneChanged(base, off), "heatmap을 끄면 다시 고른다");
+
+		sibr::PaletteScene method = base;
+		method.method = "Plain IDW";
+		check(sibr::paletteSceneChanged(base, method), "방식을 바꾸면 다시 고른다");
+
+		sibr::PaletteScene range = base;
+		range.dbmMax = -20.0f;
+		check(sibr::paletteSceneChanged(base, range), "dBm 범위를 바꾸면 다시 고른다");
+
+		// UI 슬라이더 값의 미세한 흔들림으로 매번 다시 고르면 안 된다.
+		sibr::PaletteScene jitter = base;
+		jitter.dbmMin = base.dbmMin + 0.001f;
+		check(!sibr::paletteSceneChanged(base, jitter), "미세한 dBm 차이는 무시한다");
+	}
+
 } // namespace
 
 int main()
@@ -159,6 +187,7 @@ int main()
 	testCapturesSceneColors();
 	testBeatsRgb332OnGradient();
 	testDeterministic();
+	testSceneChange();
 
 	if (g_failures > 0) {
 		std::cerr << g_failures << " check(s) failed." << std::endl;

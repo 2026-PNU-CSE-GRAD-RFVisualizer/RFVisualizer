@@ -7,10 +7,35 @@
  */
 #pragma once
 
+# include <cmath>
 # include <cstdint>
+# include <string>
 # include <vector>
 
 namespace sibr {
+
+	/**
+	 * 팔레트를 고를 때의 장면 조건.
+	 *
+	 * 히트맵을 켜거나 dBm 범위를 바꾸면 화면에 없던 색이 갑자기 등장한다. 그때 이전
+	 * 팔레트를 그대로 쓰면 그 색을 표현할 칸이 없다. 실측에서 히트맵을 나중에 켰을 때
+	 * 히트맵 영역의 평균 색오차가 dE 1.87에서 12.02로 뛰었다.
+	 */
+	struct PaletteScene
+	{
+		std::string method;
+		float dbmMin = 0.0f, dbmMax = 0.0f;
+		bool heatmapOn = false;
+	};
+
+	/** 팔레트를 다시 골라야 하는 변화인지. dBm은 UI 조작이라 미세한 차이는 무시한다. */
+	inline bool paletteSceneChanged(const PaletteScene& chosen, const PaletteScene& current)
+	{
+		return chosen.heatmapOn != current.heatmapOn
+			|| chosen.method != current.method
+			|| std::fabs(chosen.dbmMin - current.dbmMin) > 0.01f
+			|| std::fabs(chosen.dbmMax - current.dbmMax) > 0.01f;
+	}
 
 	/** kmeans에 넣기 전 최소 표본 수. 256개 군집을 나누려면 이보다는 많아야 한다. */
 	constexpr size_t PALETTE_MIN_SAMPLES = 4096;

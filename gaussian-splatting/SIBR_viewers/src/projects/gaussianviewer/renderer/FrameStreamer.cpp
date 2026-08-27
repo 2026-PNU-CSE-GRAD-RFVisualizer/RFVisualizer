@@ -264,8 +264,33 @@ namespace sibr {
 		}
 	}
 
+	PaletteScene FrameStreamer::currentScene() const
+	{
+		std::lock_guard<std::mutex> lock(_overlayMutex);
+		PaletteScene scene;
+		scene.method = _methodName;
+		scene.dbmMin = _dbmMin;
+		scene.dbmMax = _dbmMax;
+		scene.heatmapOn = _heatmapOn;
+		return scene;
+	}
+
 	void FrameStreamer::updatePalette(const uint8_t* bgr, unsigned width, unsigned height)
 	{
+		const PaletteScene scene = currentScene();
+		if (_paletteReady && paletteSceneChanged(_paletteScene, scene)) {
+			// 히트맵을 켜거나 dBm 범위를 바꾸면 화면에 없던 색이 등장한다.
+			// 표본을 다시 모으는 동안에도 **직전 팔레트를 그대로 쓴다**. 기본 팔레트로
+			// 되돌리면 화면이 한 번 더 튄다.
+			SIBR_LOG << "[FrameStreamer] 장면이 바뀌어 팔레트를 다시 고릅니다 (heatmap "
+				<< (scene.heatmapOn ? "on" : "off") << ", " << scene.method
+				<< sibr::sprint(", %.0f~%.0f dBm", scene.dbmMin, scene.dbmMax) << ")." << std::endl;
+			_paletteReady = false;
+			_paletteFrameCount = 0;
+			_paletteSamples.clear();
+			std::lock_guard<std::mutex> lock(_metricsMutex);
+			++_metrics.paletteRebuilds;
+		}
 		if (_paletteReady) {
 			return;
 		}
@@ -290,6 +315,7 @@ namespace sibr {
 				<< std::endl;
 		}
 		_paletteReady = true;
+		_paletteScene = scene;
 		_paletteSamples.clear();
 		_paletteSamples.shrink_to_fit();
 		{
@@ -451,6 +477,7 @@ namespace sibr {
 			<< "  \"dither\": " << _options.dither << ",\n"
 			<< "  \"palette_warmup_frames\": " << _options.paletteFrames << ",\n"
 			<< "  \"palette_ready\": " << (values.paletteReady ? "true" : "false") << ",\n"
+			<< "  \"palette_rebuilds\": " << values.paletteRebuilds << ",\n"
 			<< "  \"elapsed_seconds\": " << values.elapsedSeconds << ",\n"
 			<< "  \"frames_captured\": " << values.captured << ",\n"
 			<< "  \"frames_sent\": " << values.sent << ",\n"
