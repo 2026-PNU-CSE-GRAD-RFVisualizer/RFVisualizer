@@ -99,3 +99,14 @@ if(UNIX)
 	set_tests_properties(arc_teleport PROPERTIES ENVIRONMENT
 		"LD_LIBRARY_PATH=$<TARGET_FILE_DIR:sibr_raycaster>:$<TARGET_FILE_DIR:sibr_graphics>:$<TARGET_FILE_DIR:sibr_system>:$<TARGET_FILE_DIR:sibr_assets>:$<TARGET_FILE_DIR:sibr_imgproc>:$<TARGET_FILE_DIR:sibr_video>:$<TARGET_FILE_DIR:xatlas>:${CMAKE_SOURCE_DIR}/embree-3.13.5.x86_64.linux/lib")
 endif()
+
+# RFVisualizer: 팔레트 선정. OpenCV만 링크하고 GL은 쓰지 않는다.
+add_executable(SIBR_palette_chooser_test
+	palette_chooser_test.cpp
+	${CMAKE_CURRENT_LIST_DIR}/../renderer/PaletteChooser.cpp
+)
+target_include_directories(SIBR_palette_chooser_test PRIVATE ${CMAKE_CURRENT_LIST_DIR}/../../..)
+target_link_libraries(SIBR_palette_chooser_test ${OpenCV_LIBRARIES} ZLIB::ZLIB)
+set_target_properties(SIBR_palette_chooser_test PROPERTIES FOLDER "projects/gaussian/tests")
+
+add_test(NAME palette_chooser COMMAND SIBR_palette_chooser_test)
