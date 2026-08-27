@@ -19,6 +19,9 @@ Graphics 장비나 Display 없이 Relay와 Handheld LCD만 먼저 검증할 때 
     # 단색 한 판. 여기서도 점이 튀면 무늬 계산과 무관한 전송·DMA·신호 문제다
     python send_test_pattern.py --host 100.85.80.106 --pattern solid --color 128,128,128
 
+    # 팔레트256(flags=2). 수신 측이 팔레트를 안 읽으면 색이 대놓고 틀어진다
+    python send_test_pattern.py --host 100.85.80.106 --format palette256-zlib
+
     # 예비 경로 확인(Pillow 필요)
     python send_test_pattern.py --host 100.85.80.106 --format jpeg --seconds 30
 """
@@ -35,9 +38,47 @@ import zlib
 
 HEADER = struct.Struct(">IBBIQI")   # magic, version, flags, seq, ts_ms, length
 MAGIC, VERSION = 0x52464A46, 1      # 'RFJF'
-FLAGS_JPEG, FLAGS_RGB332_ZLIB = 0, 1
+FLAGS_JPEG, FLAGS_RGB332_ZLIB, FLAGS_PALETTE256_ZLIB = 0, 1, 2
 WIDTH, HEIGHT = 800, 480
 MARKER = 40
+PALETTE_BYTES = 512                       # 256 entry x uint16 RGB565 big-endian
+PALETTE_PAYLOAD = PALETTE_BYTES + WIDTH * HEIGHT   # 384,512
+
+
+# 시험 무늬가 쓰는 색을 그대로 담은 팔레트. 인덱스를 RGB332 값과 일부러 다르게 두어,
+# 수신 측이 팔레트를 읽지 않고 RGB332 계산식을 쓰면 색이 눈에 띄게 틀어지게 한다.
+PATTERN_COLORS = [
+    (255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 255),
+    (0, 0, 0), (255, 255, 0), (0, 255, 255), (255, 0, 255), (64, 64, 64),
+]
+PATTERN_BASE_INDEX = 17
+
+
+def pattern_palette():
+    """(색 -> 인덱스, 256 entry RGB888) 한 쌍을 만든다."""
+
+    rgb = [(0, 0, 0)] * 256
+    index_of = {}
+    for offset, color in enumerate(PATTERN_COLORS):
+        index = PATTERN_BASE_INDEX + offset
+        rgb[index] = color
+        index_of[color] = index
+    # 남는 칸은 회색 램프로 채운다. 인덱스가 한 칸 밀리면 바로 드러난다.
+    for index in range(256):
+        if rgb[index] == (0, 0, 0) and index != index_of[(0, 0, 0)]:
+            value = index
+            rgb[index] = (value, value, value)
+    return index_of, rgb
+
+
+def pack_palette565(rgb) -> bytes:
+    """256 entry를 uint16 RGB565 big-endian으로 편다. INTERFACE.md 12.3."""
+
+    out = bytearray()
+    for red, green, blue in rgb:
+        value = ((red >> 3) << 11) | ((green >> 2) << 5) | (blue >> 3)
+        out += struct.pack(">H", value)
+    return bytes(out)
 
 
 def rgb332(red: int, green: int, blue: int) -> int:
@@ -53,18 +94,24 @@ def quantized(red: int, green: int, blue: int):
     return (value >> 5) * 255 // 7, ((value >> 2) & 7) * 255 // 7, (value & 3) * 255 // 3
 
 
-def base_pattern(solid=None) -> bytearray:
-    """Frame마다 바뀌지 않는 부분을 한 번만 그린다."""
+def base_pattern(to_byte=None, solid=None) -> bytearray:
+    """Frame마다 바뀌지 않는 부분을 한 번만 그린다.
 
+    to_byte는 (r, g, b)를 픽셀 한 byte로 바꾸는 함수다. RGB332면 비트 패킹,
+    팔레트256이면 인덱스 조회가 들어온다.
+    """
+
+    if to_byte is None:
+        to_byte = rgb332
     if solid is not None:
-        return bytearray([rgb332(*solid)]) * (WIDTH * HEIGHT)
+        return bytearray([to_byte(*solid)]) * (WIDTH * HEIGHT)
 
     bars = [(255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 255),
             (0, 0, 0), (255, 255, 0), (0, 255, 255), (255, 0, 255)]
-    top = rgb332(255, 0, 0)        # 위 = 빨강
-    bottom = rgb332(0, 0, 255)     # 아래 = 파랑
-    grid = rgb332(255, 255, 255)
-    background = rgb332(64, 64, 64)
+    top = to_byte(255, 0, 0)        # 위 = 빨강
+    bottom = to_byte(0, 0, 255)     # 아래 = 파랑
+    grid = to_byte(255, 255, 255)
+    background = to_byte(64, 64, 64)
 
     pixels = bytearray(WIDTH * HEIGHT)
     for row in range(HEIGHT):
@@ -82,7 +129,7 @@ def base_pattern(solid=None) -> bytearray:
                 pixels[offset + column] = value
             continue
         for column in range(WIDTH):
-            pixels[offset + column] = rgb332(*bars[column * len(bars) // WIDTH])
+            pixels[offset + column] = to_byte(*bars[column * len(bars) // WIDTH])
 
     # 사선 격자는 배경 구간에만 그린다.
     for row in range(140, HEIGHT - 40):
@@ -92,19 +139,33 @@ def base_pattern(solid=None) -> bytearray:
     return pixels
 
 
-def rgb332_frame(base: bytearray, sequence: int, marker: bool = True) -> bytes:
-    """흰 사각형만 옮겨 그린 뒤 표준 zlib으로 압축한다."""
+def indexed_pixels(base: bytearray, sequence: int, white: int, marker: bool) -> bytes:
+    """흰 사각형만 옮겨 그린 픽셀 384,000 byte."""
 
     if not marker:
-        return zlib.compress(bytes(base), 1)
+        return bytes(base)
     pixels = bytearray(base)
     left = (sequence * 20) % (WIDTH - MARKER)
     top = HEIGHT // 2 - MARKER // 2
-    white = rgb332(255, 255, 255)
     for row in range(top, top + MARKER):
         offset = row * WIDTH + left
         pixels[offset:offset + MARKER] = bytes([white]) * MARKER
-    return zlib.compress(bytes(pixels), 1)
+    return bytes(pixels)
+
+
+def rgb332_frame(base: bytearray, sequence: int, marker: bool = True) -> bytes:
+    """RGB332 384,000 byte를 표준 zlib으로 압축한다."""
+
+    return zlib.compress(indexed_pixels(base, sequence, rgb332(255, 255, 255), marker), 1)
+
+
+def palette256_frame(base: bytearray, sequence: int, palette: bytes,
+                     white: int, marker: bool = True) -> bytes:
+    """팔레트 512 byte + 인덱스 384,000 byte를 이어 붙여 압축한다."""
+
+    payload = palette + indexed_pixels(base, sequence, white, marker)
+    assert len(payload) == PALETTE_PAYLOAD, len(payload)
+    return zlib.compress(payload, 1)
 
 
 def jpeg_encoder(marker: bool):
@@ -140,18 +201,37 @@ def main() -> int:
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=9101, help="image_relay ingest")
     parser.add_argument("--fps", type=float, default=10.0)
-    parser.add_argument("--format", default="rgb332-zlib", choices=["rgb332-zlib", "jpeg"])
+    parser.add_argument("--format", default="rgb332-zlib",
+                        choices=["rgb332-zlib", "palette256-zlib", "jpeg"])
     parser.add_argument("--pattern", default="bars", choices=["bars", "static", "solid"],
                         help="bars=움직이는 표식, static=완전히 같은 Frame 반복, solid=단색 한 판")
     parser.add_argument("--color", default="128,128,128", help="--pattern solid의 R,G,B")
     parser.add_argument("--seconds", type=float, default=0.0, help="0이면 Ctrl+C까지 계속")
     args = parser.parse_args()
 
-    flags = FLAGS_RGB332_ZLIB if args.format == "rgb332-zlib" else FLAGS_JPEG
+    flags = {"rgb332-zlib": FLAGS_RGB332_ZLIB,
+             "palette256-zlib": FLAGS_PALETTE256_ZLIB,
+             "jpeg": FLAGS_JPEG}[args.format]
     marker = args.pattern == "bars"
+
+    to_byte = rgb332
     if flags == FLAGS_RGB332_ZLIB:
         def encode(base, sequence):
             return rgb332_frame(base, sequence, marker)
+    elif flags == FLAGS_PALETTE256_ZLIB:
+        index_of, palette_rgb = pattern_palette()
+        palette = pack_palette565(palette_rgb)
+
+        def to_byte(red, green, blue):
+            if (red, green, blue) in index_of:
+                return index_of[(red, green, blue)]
+            # 팔레트에 없는 색(--pattern solid)은 회색 램프 칸에서 가장 가까운 것을 쓴다.
+            return max(0, min(255, (red + green + blue) // 3))
+
+        white = to_byte(255, 255, 255)
+
+        def encode(base, sequence):
+            return palette256_frame(base, sequence, palette, white, marker)
     else:
         encode = jpeg_encoder(marker)
 
@@ -165,13 +245,13 @@ def main() -> int:
             print("--color는 0-255 범위의 R,G,B 여야 합니다. 예: --color 128,128,128", file=sys.stderr)
             return 2
     if solid is not None:
-        actual = quantized(*solid)
+        actual = quantized(*solid) if flags != FLAGS_PALETTE256_ZLIB else solid
         if actual != solid:
             print("[송신] --color {} 는 RGB332로 표현할 수 없어 {} 로 나갑니다. "
                   "화면의 이 색조는 정상입니다.".format(
                       ",".join(str(part) for part in solid),
                       ",".join(str(part) for part in actual)))
-    base = base_pattern(solid)
+    base = base_pattern(to_byte, solid)
     period = 1.0 / args.fps if args.fps > 0 else 0.0
     deadline = time.time() + args.seconds if args.seconds > 0 else float("inf")
 

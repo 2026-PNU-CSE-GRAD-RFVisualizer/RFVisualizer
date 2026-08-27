@@ -1,6 +1,7 @@
 """image_relay(기본 9102)에서 RFJF Frame을 받아 저장하거나 종단 성능을 잰다.
 
-표준 라이브러리만으로 헤더를 읽고 flags=1(RGB332+zlib)은 표준 zlib으로 해제하므로
+표준 라이브러리만으로 헤더를 읽고 flags=1(RGB332+zlib)·flags=2(팔레트256+zlib)는
+표준 zlib으로 해제하므로
 Network 저장소가 없어도 돌아간다. 그림 저장과 JPEG 디코드 검사는 Pillow가 있을 때만 한다.
 
     # 받은 그림을 폴더에 저장
@@ -25,9 +26,23 @@ import zlib
 HEADER = struct.Struct(">IBBIQI")   # magic, version, flags, seq, ts_ms, length
 MAGIC, VERSION = 0x52464A46, 1      # 'RFJF'
 MAX_PAYLOAD = 8 * 1024 * 1024
-FLAGS_JPEG, FLAGS_RGB332_ZLIB = 0, 1
+FLAGS_JPEG, FLAGS_RGB332_ZLIB, FLAGS_PALETTE256_ZLIB = 0, 1, 2
 RGB332_SIZE = (800, 480)
 RGB332_BYTES = RGB332_SIZE[0] * RGB332_SIZE[1]   # 384000, 픽셀당 1byte
+PALETTE_BYTES = 512                              # 256 entry x uint16 RGB565 big-endian
+PALETTE_PAYLOAD_BYTES = PALETTE_BYTES + RGB332_BYTES   # 384512
+
+
+def palette565_to_rgb(packed: bytes) -> bytes:
+    """앞 512 byte(RGB565 big-endian)를 Pillow가 쓰는 256 x RGB888로 편다."""
+
+    out = bytearray()
+    for index in range(256):
+        value = struct.unpack_from(">H", packed, index * 2)[0]
+        out.append(((value >> 11) & 0x1F) * 255 // 31)
+        out.append(((value >> 5) & 0x3F) * 255 // 63)
+        out.append((value & 0x1F) * 255 // 31)
+    return bytes(out)
 
 
 def rgb332_palette() -> bytes:
@@ -89,6 +104,11 @@ def main() -> int:
         import io as _io
 
         def open_image(flags: int, pixels: bytes):
+            if flags == FLAGS_PALETTE256_ZLIB:
+                # 팔레트는 Frame마다 실린다. 매번 다시 읽는다.
+                image = Image.frombytes("P", RGB332_SIZE, pixels[PALETTE_BYTES:])
+                image.putpalette(palette565_to_rgb(pixels[:PALETTE_BYTES]))
+                return image.convert("RGB")
             if flags == FLAGS_RGB332_ZLIB:
                 image = Image.frombytes("P", RGB332_SIZE, pixels)
                 image.putpalette(rgb332_palette())
@@ -120,9 +140,11 @@ def main() -> int:
             flags, seq, ts_ms, payload = frame
             flags_seen.add(flags)
 
-            # flags=1이면 여기서 표준 zlib으로 풀고 정확히 384,000byte인지 본다.
+            # zlib 형식이면 여기서 풀고 형식별 기대 크기와 맞는지 본다.
             pixels = payload
-            if flags == FLAGS_RGB332_ZLIB:
+            expected = {FLAGS_RGB332_ZLIB: RGB332_BYTES,
+                        FLAGS_PALETTE256_ZLIB: PALETTE_PAYLOAD_BYTES}.get(flags)
+            if expected is not None:
                 try:
                     pixels = zlib.decompress(payload)
                 except zlib.error as error:
@@ -130,10 +152,10 @@ def main() -> int:
                     print("[수신] seq {} zlib 해제 실패: {}".format(seq, error), file=sys.stderr)
                     continue
                 inflated_bytes = len(pixels)
-                if inflated_bytes != RGB332_BYTES:
+                if inflated_bytes != expected:
                     wrong_size += 1
                     print("[수신] seq {} 해제 크기 {}B 가 {}B 아님".format(
-                        seq, inflated_bytes, RGB332_BYTES), file=sys.stderr)
+                        seq, inflated_bytes, expected), file=sys.stderr)
                     continue
 
             if time.time() < start_measure:
