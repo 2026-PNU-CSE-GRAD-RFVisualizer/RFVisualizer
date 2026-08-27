@@ -37,6 +37,17 @@ namespace sibr {
 			|| std::fabs(chosen.dbmMax - current.dbmMax) > 0.01f;
 	}
 
+	/**
+	 * 팔레트를 다시 골라야 한다고 볼 적합도 오차(RGB 거리 평균).
+	 *
+	 * 실측: 팔레트를 고른 그 화면 2.7, 살짝 이동 5.5, 중간 이동 24.2, 많이 이동 54.0.
+	 * 12는 정상 범위와 충분히 떨어져 있으면서 실제 드리프트는 확실히 잡는 값이다.
+	 */
+	constexpr float PALETTE_REFIT_ERROR = 12.0f;
+
+	/** 다시 고르는 최소 간격(초). 걸어 다녀도 이보다 자주 돌지 않는다. */
+	constexpr double PALETTE_REFIT_INTERVAL = 3.0;
+
 	/** kmeans에 넣기 전 최소 표본 수. 256개 군집을 나누려면 이보다는 많아야 한다. */
 	constexpr size_t PALETTE_MIN_SAMPLES = 4096;
 

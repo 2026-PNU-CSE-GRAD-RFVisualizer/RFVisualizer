@@ -15,6 +15,7 @@
 
 # include <atomic>
 # include <condition_variable>
+# include <future>
 # include <cstdint>
 # include <deque>
 # include <memory>
@@ -68,7 +69,8 @@ namespace sibr {
 			size_t payloadBytesLast = 0;
 			uint32_t sequenceLast = 0;
 			bool paletteReady = false;     ///< 장면 팔레트로 바뀌었는지(팔레트256 전용)
-			uint64_t paletteRebuilds = 0;  ///< 장면이 바뀌어 다시 고른 횟수
+			uint64_t paletteRebuilds = 0;  ///< 다시 고른 횟수
+			float paletteErrorLast = 0.0f; ///< 최근 팔레트 적합도(RGB 거리 평균)
 		};
 
 		/** Worker Thread와 연결을 시작한다. host가 비면 아무것도 하지 않는다. */
@@ -133,8 +135,22 @@ namespace sibr {
 		uint8_t _palette565[rfjf::PALETTE_BYTES] = { 0 };
 		std::vector<uint8_t> _paletteLut;
 		std::vector<uint8_t> _paletteSamples;
+		/** 팔레트 계산은 Worker를 멈추지 않게 별도 Thread에서 돈다. */
+		struct PaletteResult
+		{
+			bool ok = false;
+			uint8_t rgb888[rfjf::PALETTE_ENTRIES * 3] = { 0 };
+			uint8_t packed[rfjf::PALETTE_BYTES] = { 0 };
+			std::vector<uint8_t> lut;
+		};
+		enum class PaletteState { Collecting, Computing, Ready };
+
+		uint8_t _paletteRgb888[rfjf::PALETTE_ENTRIES * 3] = { 0 };
+		PaletteState _paletteState = PaletteState::Collecting;
+		std::future<PaletteResult> _paletteJob;
 		int _paletteFrameCount = 0;
-		bool _paletteReady = false;
+		double _paletteAppliedSeconds = 0.0;
+		float _paletteError = 0.0f;
 		PaletteScene _paletteScene;        ///< 지금 팔레트를 고를 때의 장면 조건
 
 		mutable std::mutex _metricsMutex;

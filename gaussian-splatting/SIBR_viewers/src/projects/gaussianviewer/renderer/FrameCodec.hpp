@@ -10,6 +10,7 @@
 
 # include <cstdint>
 # include <cstddef>
+# include <cmath>
 # include <cstring>
 # include <string>
 # include <vector>
@@ -256,6 +257,30 @@ namespace sibr {
 				|  size_t(bgr[index * 3 + 0] >> 3);         // blue
 			indices[index] = lut[cell];
 		}
+	}
+
+	/**
+	 * 고른 팔레트 색과 실제 색이 얼마나 떨어져 있는지, 표본 픽셀의 평균 RGB 거리로 잰다.
+	 *
+	 * 팔레트가 화면에 맞는 동안에는 작게 유지되다가, 카메라가 움직여 화면 색 구성이
+	 * 바뀌면 커진다. 히트맵이 안개처럼 깔리는 경우 dBm 설정은 그대로여도 시야에 들어오는
+	 * 값이 달라지므로 이벤트만으로는 잡히지 않는다. 그때 이 값이 신호가 된다.
+	 */
+	inline float paletteFitError(const uint8_t* bgr, size_t pixels, const uint8_t* indices,
+		const uint8_t rgb888[rfjf::PALETTE_ENTRIES * 3], unsigned step)
+	{
+		const size_t stride = step < 1 ? 1 : step;
+		double total = 0.0;
+		size_t count = 0;
+		for (size_t index = 0; index < pixels; index += stride) {
+			const uint8_t* chosen = rgb888 + size_t(indices[index]) * 3;
+			const double dr = double(bgr[index * 3 + 2]) - chosen[0];
+			const double dg = double(bgr[index * 3 + 1]) - chosen[1];
+			const double db = double(bgr[index * 3 + 0]) - chosen[2];
+			total += std::sqrt(dr * dr + dg * dg + db * db);
+			++count;
+		}
+		return count ? float(total / double(count)) : 0.0f;
 	}
 
 	/** 표준 zlib Stream으로 압축한다. out은 재사용 Buffer라 capacity를 유지한다. */

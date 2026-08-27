@@ -5,6 +5,7 @@
  * FrameCodec.hpp는 GL·OpenCV에 의존하지 않으므로 Header 하나만 들고 컴파일한다.
  */
 #include "projects/gaussianviewer/renderer/FrameCodec.hpp"
+#include "projects/gaussianviewer/renderer/PaletteChooser.hpp"
 
 #include <cmath>
 #include <cstring>
@@ -305,6 +306,56 @@ namespace {
 			"palette256은 1200x800 거부");
 	}
 
+	void testPaletteFitError()
+	{
+		const unsigned width = 200, height = 120;
+		const size_t pixels = size_t(width) * height;
+
+		uint8_t palette[768];
+		sibr::defaultRgb332Palette(palette);
+		std::vector<uint8_t> lut;
+		sibr::buildPaletteLut(palette, lut);
+
+		// 팔레트에 정확히 있는 색만 쓴 화면이면 오차가 0이어야 한다.
+		std::vector<uint8_t> exact(pixels * 3);
+		for (size_t index = 0; index < pixels; ++index) {
+			const uint8_t entry = uint8_t(index % 256);
+			exact[index * 3 + 2] = palette[entry * 3 + 0];
+			exact[index * 3 + 1] = palette[entry * 3 + 1];
+			exact[index * 3 + 0] = palette[entry * 3 + 2];
+		}
+		uint8_t packed[sibr::rfjf::PALETTE_BYTES];
+		sibr::packPalette565(palette, packed);
+		std::vector<uint8_t> payload;
+		sibr::encodePalette256(exact.data(), width, height, packed, lut, payload);
+		const uint8_t* indices = payload.data() + sibr::rfjf::PALETTE_BYTES;
+		const float zero = sibr::paletteFitError(exact.data(), pixels, indices, palette, 7);
+		check(zero < 0.5f, "팔레트에 있는 색만 쓰면 적합도 오차가 0에 가깝다");
+
+		// 팔레트가 담지 못하는 색으로 화면을 채우면 오차가 임계값을 넘어야 한다.
+		uint8_t narrow[768];
+		for (int index = 0; index < 256; ++index) {   // 어두운 회색만 담은 팔레트
+			narrow[index * 3 + 0] = uint8_t(index / 8);
+			narrow[index * 3 + 1] = uint8_t(index / 8);
+			narrow[index * 3 + 2] = uint8_t(index / 8);
+		}
+		std::vector<uint8_t> narrowLut;
+		sibr::buildPaletteLut(narrow, narrowLut);
+		uint8_t narrowPacked[sibr::rfjf::PALETTE_BYTES];
+		sibr::packPalette565(narrow, narrowPacked);
+		std::vector<uint8_t> bright(pixels * 3);
+		for (size_t index = 0; index < pixels; ++index) {
+			bright[index * 3 + 0] = 20;    // blue
+			bright[index * 3 + 1] = 200;   // green
+			bright[index * 3 + 2] = 240;   // red
+		}
+		sibr::encodePalette256(bright.data(), width, height, narrowPacked, narrowLut, payload);
+		const float wide = sibr::paletteFitError(bright.data(), pixels,
+			payload.data() + sibr::rfjf::PALETTE_BYTES, narrow, 7);
+		check(wide > sibr::PALETTE_REFIT_ERROR,
+			"팔레트가 못 담는 화면이면 재계산 임계값을 넘는다");
+	}
+
 } // namespace
 
 int main()
@@ -315,6 +366,7 @@ int main()
 	testOptionValidation();
 	testDithering();
 	testPalette256();
+	testPaletteFitError();
 
 	if (g_failures > 0) {
 		std::cerr << g_failures << " check(s) failed." << std::endl;

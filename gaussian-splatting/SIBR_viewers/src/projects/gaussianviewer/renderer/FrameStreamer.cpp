@@ -44,10 +44,9 @@ namespace sibr {
 		if (_options.format == StreamFormat::Palette256Zlib) {
 			// 워밍업 동안에는 RGB332와 같은 256색을 쓴다. Frame 0부터 형식상 유효하고
 			// 화면도 flags=1과 같아 보인다. 표본이 다 모이면 한 번만 갈아탄다.
-			uint8_t rgb888[rfjf::PALETTE_ENTRIES * 3];
-			defaultRgb332Palette(rgb888);
-			packPalette565(rgb888, _palette565);
-			buildPaletteLut(rgb888, _paletteLut);
+			defaultRgb332Palette(_paletteRgb888);
+			packPalette565(_paletteRgb888, _palette565);
+			buildPaletteLut(_paletteRgb888, _paletteLut);
 		}
 		glGenBuffers(2, _pbo);
 		for (int slot = 0; slot < 2; ++slot) {
@@ -277,51 +276,73 @@ namespace sibr {
 
 	void FrameStreamer::updatePalette(const uint8_t* bgr, unsigned width, unsigned height)
 	{
-		const PaletteScene scene = currentScene();
-		if (_paletteReady && paletteSceneChanged(_paletteScene, scene)) {
-			// 히트맵을 켜거나 dBm 범위를 바꾸면 화면에 없던 색이 등장한다.
-			// 표본을 다시 모으는 동안에도 **직전 팔레트를 그대로 쓴다**. 기본 팔레트로
-			// 되돌리면 화면이 한 번 더 튄다.
-			SIBR_LOG << "[FrameStreamer] 장면이 바뀌어 팔레트를 다시 고릅니다 (heatmap "
-				<< (scene.heatmapOn ? "on" : "off") << ", " << scene.method
-				<< sibr::sprint(", %.0f~%.0f dBm", scene.dbmMin, scene.dbmMax) << ")." << std::endl;
-			_paletteReady = false;
-			_paletteFrameCount = 0;
-			_paletteSamples.clear();
+		const double now = nowSeconds();
+
+		// 1) 뒷 Thread에서 돌던 계산이 끝났으면 갈아끼운다. 그동안 송신은 멈추지 않았다.
+		if (_paletteState == PaletteState::Computing) {
+			if (_paletteJob.wait_for(std::chrono::seconds(0)) != std::future_status::ready) {
+				return;
+			}
+			const PaletteResult result = _paletteJob.get();
+			if (result.ok) {
+				std::memcpy(_paletteRgb888, result.rgb888, sizeof(_paletteRgb888));
+				std::memcpy(_palette565, result.packed, sizeof(_palette565));
+				_paletteLut = result.lut;
+				SIBR_LOG << "[FrameStreamer] 팔레트 256색 갱신 (누적 "
+					<< (_metrics.paletteRebuilds + 1) << "회)." << std::endl;
+			} else {
+				// 실패해도 화면은 죽지 않는다. 쓰던 팔레트를 그대로 둔다.
+				SIBR_WRG << "[FrameStreamer] 팔레트 선정 실패. 쓰던 팔레트를 유지합니다." << std::endl;
+			}
+			_paletteScene = currentScene();
+			_paletteAppliedSeconds = now;
+			_paletteError = 0.0f;
+			_paletteState = PaletteState::Ready;
 			std::lock_guard<std::mutex> lock(_metricsMutex);
+			_metrics.paletteReady = true;
 			++_metrics.paletteRebuilds;
-		}
-		if (_paletteReady) {
-			return;
-		}
-		// 표본이 많을수록 kmeans가 느려지고 그만큼 Worker가 한 번에 멈춘다.
-		appendPaletteSamples(bgr, width, height,
-			paletteSampleStep(width, height, _options.paletteFrames), _paletteSamples);
-		if (++_paletteFrameCount < std::max(_options.paletteFrames, 1)) {
 			return;
 		}
 
-		uint8_t rgb888[rfjf::PALETTE_ENTRIES * 3];
-		const double start = nowSeconds();
-		if (choosePalette(_paletteSamples, rgb888)) {
-			packPalette565(rgb888, _palette565);
-			buildPaletteLut(rgb888, _paletteLut);
-			SIBR_LOG << "[FrameStreamer] 장면 팔레트 256색 확정 ("
-				<< (_paletteSamples.size() / 3) << " 표본, "
-				<< sibr::sprint("%.0f ms", 1000.0 * (nowSeconds() - start)) << ")." << std::endl;
-		} else {
-			// 실패해도 화면은 죽지 않는다. 기본 RGB332 팔레트로 계속 간다.
-			SIBR_WRG << "[FrameStreamer] 팔레트 선정 실패. 기본 RGB332 256색을 유지합니다."
-				<< std::endl;
+		// 2) 표본을 모으는 중이면 채우고, 다 차면 계산을 걸어 둔다.
+		if (_paletteState == PaletteState::Collecting) {
+			appendPaletteSamples(bgr, width, height,
+				paletteSampleStep(width, height, _options.paletteFrames), _paletteSamples);
+			if (++_paletteFrameCount < std::max(_options.paletteFrames, 1)) {
+				return;
+			}
+			_paletteJob = std::async(std::launch::async,
+				[samples = std::move(_paletteSamples)]() {
+					PaletteResult result;
+					result.ok = choosePalette(samples, result.rgb888);
+					if (result.ok) {
+						packPalette565(result.rgb888, result.packed);
+						buildPaletteLut(result.rgb888, result.lut);
+					}
+					return result;
+				});
+			_paletteSamples.clear();
+			_paletteFrameCount = 0;
+			_paletteState = PaletteState::Computing;
+			return;
 		}
-		_paletteReady = true;
-		_paletteScene = scene;
+
+		// 3) 쓰던 팔레트가 화면에 안 맞게 됐는지 본다.
+		const PaletteScene scene = currentScene();
+		const bool sceneChanged = paletteSceneChanged(_paletteScene, scene);
+		const bool drifted = _paletteError > PALETTE_REFIT_ERROR
+			&& (now - _paletteAppliedSeconds) >= PALETTE_REFIT_INTERVAL;
+		if (!sceneChanged && !drifted) {
+			return;
+		}
+		SIBR_LOG << "[FrameStreamer] 팔레트를 다시 고릅니다 ("
+			<< (sceneChanged ? "장면 설정 변경" : sibr::sprint("적합도 %.1f > %.1f",
+				_paletteError, PALETTE_REFIT_ERROR))
+			<< ")." << std::endl;
+		// 표본을 다시 모으는 동안에도 직전 팔레트를 계속 쓴다. 화면이 한 번 더 튀지 않는다.
+		_paletteState = PaletteState::Collecting;
+		_paletteFrameCount = 0;
 		_paletteSamples.clear();
-		_paletteSamples.shrink_to_fit();
-		{
-			std::lock_guard<std::mutex> lock(_metricsMutex);
-			_metrics.paletteReady = true;
-		}
 	}
 
 	/** 상하 반전과 Overlay까지 끝난 BGR Mat을 형식에 맞는 Payload로 만든다. */
@@ -341,6 +362,16 @@ namespace sibr {
 			updatePalette(image.data, unsigned(image.cols), unsigned(image.rows));
 			encodePalette256(image.data, unsigned(image.cols), unsigned(image.rows),
 				_palette565, _paletteLut, _rgb332);
+			// 표본 100픽셀당 1개. LUT 결과를 이미 들고 있어 비교만 하면 된다.
+			const float fit = paletteFitError(image.data,
+				size_t(image.cols) * image.rows, _rgb332.data() + rfjf::PALETTE_BYTES,
+				_paletteRgb888, 97);
+			// 한 Frame의 튐으로 재계산이 돌지 않게 완만하게 따라가게 한다.
+			_paletteError = (_paletteError <= 0.0f) ? fit : (0.8f * _paletteError + 0.2f * fit);
+			{
+				std::lock_guard<std::mutex> lock(_metricsMutex);
+				_metrics.paletteErrorLast = _paletteError;
+			}
 		} else {
 			bgrToRgb332(image.data, unsigned(image.cols), unsigned(image.rows), _rgb332, _options.dither);
 		}
@@ -478,6 +509,7 @@ namespace sibr {
 			<< "  \"palette_warmup_frames\": " << _options.paletteFrames << ",\n"
 			<< "  \"palette_ready\": " << (values.paletteReady ? "true" : "false") << ",\n"
 			<< "  \"palette_rebuilds\": " << values.paletteRebuilds << ",\n"
+			<< "  \"palette_fit_error\": " << values.paletteErrorLast << ",\n"
 			<< "  \"elapsed_seconds\": " << values.elapsedSeconds << ",\n"
 			<< "  \"frames_captured\": " << values.captured << ",\n"
 			<< "  \"frames_sent\": " << values.sent << ",\n"
