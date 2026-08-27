@@ -10,13 +10,14 @@
 
 # include <cstdint>
 # include <cstddef>
+# include <cstring>
 # include <string>
 # include <vector>
 
 namespace sibr {
 
 	/** 송신 Payload 형식. rgb332-zlib이 기본, jpeg는 예비 경로다. */
-	enum class StreamFormat { Rgb332Zlib, Jpeg };
+	enum class StreamFormat { Rgb332Zlib, Palette256Zlib, Jpeg };
 
 	namespace rfjf {
 
@@ -24,12 +25,21 @@ namespace sibr {
 		constexpr uint8_t VERSION = 1;
 		constexpr uint8_t FLAGS_JPEG = 0;
 		constexpr uint8_t FLAGS_RGB332_ZLIB = 1;
+		constexpr uint8_t FLAGS_PALETTE256_ZLIB = 2;
 		constexpr size_t HEADER_BYTES = 22;
 		constexpr size_t MAX_PAYLOAD = 8u * 1024u * 1024u;
 
 		/** Handheld LCD가 그대로 그리는 고정 크기. */
 		constexpr unsigned RGB332_WIDTH = 800;
 		constexpr unsigned RGB332_HEIGHT = 480;
+
+		/** 팔레트256 형식. INTERFACE.md §12.3. */
+		constexpr size_t PALETTE_ENTRIES = 256;
+		constexpr size_t PALETTE_BYTES = PALETTE_ENTRIES * 2;   // entry당 uint16 RGB565
+		constexpr size_t PALETTE_INDEX_BYTES = size_t(RGB332_WIDTH) * RGB332_HEIGHT;
+		constexpr size_t PALETTE_PAYLOAD_BYTES = PALETTE_BYTES + PALETTE_INDEX_BYTES;
+		/** 최근접 팔레트 색을 미리 구해 두는 색 큐브의 한 축 길이. */
+		constexpr unsigned PALETTE_CUBE = 32;
 
 		/** Bayer Ordered Dithering 기본 강도. 0이면 끈다. */
 		constexpr float DITHER_DEFAULT = 0.4f;
@@ -73,17 +83,32 @@ namespace sibr {
 
 	inline uint8_t streamFormatFlags(StreamFormat format)
 	{
-		return format == StreamFormat::Rgb332Zlib ? rfjf::FLAGS_RGB332_ZLIB : rfjf::FLAGS_JPEG;
+		switch (format) {
+			case StreamFormat::Rgb332Zlib: return rfjf::FLAGS_RGB332_ZLIB;
+			case StreamFormat::Palette256Zlib: return rfjf::FLAGS_PALETTE256_ZLIB;
+			default: return rfjf::FLAGS_JPEG;
+		}
 	}
 
 	inline const char* streamFormatName(StreamFormat format)
 	{
-		return format == StreamFormat::Rgb332Zlib ? "rgb332-zlib" : "jpeg";
+		switch (format) {
+			case StreamFormat::Rgb332Zlib: return "rgb332-zlib";
+			case StreamFormat::Palette256Zlib: return "palette256-zlib";
+			default: return "jpeg";
+		}
+	}
+
+	/** 픽셀당 1 byte라 LCD 고정 크기를 요구하는 형식인지. */
+	inline bool isIndexedFormat(StreamFormat format)
+	{
+		return format == StreamFormat::Rgb332Zlib || format == StreamFormat::Palette256Zlib;
 	}
 
 	inline bool parseStreamFormat(const std::string& name, StreamFormat& format)
 	{
 		if (name == "rgb332-zlib") { format = StreamFormat::Rgb332Zlib; return true; }
+		if (name == "palette256-zlib") { format = StreamFormat::Palette256Zlib; return true; }
 		if (name == "jpeg") { format = StreamFormat::Jpeg; return true; }
 		return false;
 	}
@@ -91,9 +116,10 @@ namespace sibr {
 	/** 시작 전에 막아야 할 조합이면 사람이 읽을 이유를, 문제없으면 빈 문자열을 준다. */
 	inline std::string streamOptionError(StreamFormat format, unsigned width, unsigned height)
 	{
-		if (format == StreamFormat::Rgb332Zlib
+		if (isIndexedFormat(format)
 			&& (width != rfjf::RGB332_WIDTH || height != rfjf::RGB332_HEIGHT)) {
-			return "--stream-format rgb332-zlib은 렌더 해상도가 정확히 "
+			return std::string("--stream-format ") + streamFormatName(format)
+				+ "은 렌더 해상도가 정확히 "
 				+ std::to_string(rfjf::RGB332_WIDTH) + "x" + std::to_string(rfjf::RGB332_HEIGHT)
 				+ "여야 합니다. 지금은 " + std::to_string(width) + "x" + std::to_string(height)
 				+ "입니다. --rendering-size 800 480을 주거나 --stream-format jpeg을 쓰세요.";
@@ -145,6 +171,90 @@ namespace sibr {
 					| (quantizeChannel(float(green), 8, offset) << 2)
 					|  quantizeChannel(float(blue), 4, offset * rfjf::DITHER_BLUE_SCALE));
 			}
+		}
+	}
+
+	// ------------------------------------------------------------ 팔레트 256색
+
+	/**
+	 * RGB332와 똑같은 256색을 담은 팔레트. 워밍업 동안 이걸 실어 보내면
+	 * 화면이 `flags=1`과 같아 보이고, 팔레트 계산이 실패해도 이 값으로 계속 돈다.
+	 */
+	inline void defaultRgb332Palette(uint8_t rgb888[rfjf::PALETTE_ENTRIES * 3])
+	{
+		for (size_t index = 0; index < rfjf::PALETTE_ENTRIES; ++index) {
+			rgb888[index * 3 + 0] = uint8_t((index >> 5) * 255 / 7);
+			rgb888[index * 3 + 1] = uint8_t(((index >> 2) & 7) * 255 / 7);
+			rgb888[index * 3 + 2] = uint8_t((index & 3) * 255 / 3);
+		}
+	}
+
+	/** 팔레트를 Wire 형식(entry당 uint16 RGB565 big-endian)으로 편다. */
+	inline void packPalette565(const uint8_t rgb888[rfjf::PALETTE_ENTRIES * 3],
+		uint8_t out[rfjf::PALETTE_BYTES])
+	{
+		for (size_t index = 0; index < rfjf::PALETTE_ENTRIES; ++index) {
+			const uint16_t value = uint16_t(
+				  ((rgb888[index * 3 + 0] >> 3) << 11)
+				| ((rgb888[index * 3 + 1] >> 2) << 5)
+				|  (rgb888[index * 3 + 2] >> 3));
+			out[index * 2 + 0] = uint8_t(value >> 8);
+			out[index * 2 + 1] = uint8_t(value & 0xFF);
+		}
+	}
+
+	/**
+	 * 32x32x32 색 큐브의 각 칸에 가장 가까운 팔레트 번호를 미리 채운다.
+	 *
+	 * 픽셀마다 256색을 뒤지면 10 fps를 못 맞춘다. 시작 시 32768칸을 한 번 채워 두면
+	 * 그 뒤로는 픽셀당 테이블 조회 한 번이다.
+	 */
+	inline void buildPaletteLut(const uint8_t rgb888[rfjf::PALETTE_ENTRIES * 3],
+		std::vector<uint8_t>& lut)
+	{
+		const unsigned cube = rfjf::PALETTE_CUBE;
+		lut.resize(size_t(cube) * cube * cube);
+		for (unsigned r = 0; r < cube; ++r) {
+			for (unsigned g = 0; g < cube; ++g) {
+				for (unsigned b = 0; b < cube; ++b) {
+					const int red = int(r * 255 / (cube - 1));
+					const int green = int(g * 255 / (cube - 1));
+					const int blue = int(b * 255 / (cube - 1));
+					int best = 0, bestDistance = 1 << 30;
+					for (size_t index = 0; index < rfjf::PALETTE_ENTRIES; ++index) {
+						const int dr = red - rgb888[index * 3 + 0];
+						const int dg = green - rgb888[index * 3 + 1];
+						const int db = blue - rgb888[index * 3 + 2];
+						const int distance = dr * dr + dg * dg + db * db;
+						if (distance < bestDistance) {
+							bestDistance = distance;
+							best = int(index);
+						}
+					}
+					lut[(size_t(r) << 10) | (size_t(g) << 5) | b] = uint8_t(best);
+				}
+			}
+		}
+	}
+
+	/**
+	 * BGR Readback을 [512 byte 팔레트][384,000 byte 인덱스] payload로 만든다.
+	 * INTERFACE.md §12.3. 팔레트는 Frame마다 들어간다.
+	 */
+	inline void encodePalette256(const uint8_t* bgr, unsigned width, unsigned height,
+		const uint8_t palette565[rfjf::PALETTE_BYTES], const std::vector<uint8_t>& lut,
+		std::vector<uint8_t>& out)
+	{
+		const size_t pixels = size_t(width) * height;
+		out.resize(rfjf::PALETTE_BYTES + pixels);
+		std::memcpy(out.data(), palette565, rfjf::PALETTE_BYTES);
+		uint8_t* indices = out.data() + rfjf::PALETTE_BYTES;
+		for (size_t index = 0; index < pixels; ++index) {
+			const size_t cell =
+				  (size_t(bgr[index * 3 + 2] >> 3) << 10)   // red
+				| (size_t(bgr[index * 3 + 1] >> 3) << 5)    // green
+				|  size_t(bgr[index * 3 + 0] >> 3);         // blue
+			indices[index] = lut[cell];
 		}
 	}
 

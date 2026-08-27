@@ -209,6 +209,102 @@ namespace {
 		check(sibr::zlibCompress(full, payload), "dither on: zlib 압축 성공");
 	}
 
+	uint16_t readBigEndian16(const uint8_t* source)
+	{
+		return uint16_t((uint16_t(source[0]) << 8) | source[1]);
+	}
+
+	void testPalette256()
+	{
+		const unsigned width = sibr::rfjf::RGB332_WIDTH, height = sibr::rfjf::RGB332_HEIGHT;
+
+		check(sibr::rfjf::PALETTE_BYTES == 512, "팔레트는 512 bytes");
+		check(sibr::rfjf::PALETTE_PAYLOAD_BYTES == 384512, "압축 전 payload는 384512 bytes");
+		check(sibr::rfjf::FLAGS_PALETTE256_ZLIB == 2, "flags는 2");
+
+		// 기본 팔레트는 RGB332와 같은 256색이어야 한다. 워밍업 동안 화면이 그대로 유지된다.
+		uint8_t palette[768];
+		sibr::defaultRgb332Palette(palette);
+		bool matchesRgb332 = true;
+		for (int index = 0; index < 256; ++index) {
+			const uint8_t red = uint8_t((index >> 5) * 255 / 7);
+			const uint8_t green = uint8_t(((index >> 2) & 7) * 255 / 7);
+			const uint8_t blue = uint8_t((index & 3) * 255 / 3);
+			matchesRgb332 = matchesRgb332
+				&& palette[index * 3 + 0] == red
+				&& palette[index * 3 + 1] == green
+				&& palette[index * 3 + 2] == blue;
+		}
+		check(matchesRgb332, "기본 팔레트 256칸이 RGB332 색과 일치한다");
+
+		// RGB565 big-endian 왕복.
+		uint8_t packed[sibr::rfjf::PALETTE_BYTES];
+		sibr::packPalette565(palette, packed);
+		const uint16_t white = readBigEndian16(packed + 255 * 2);
+		check(white == 0xFFFF, "흰색 entry는 0xFFFF");
+		check(readBigEndian16(packed + 0) == 0x0000, "검정 entry는 0x0000");
+		const uint16_t pureRed = readBigEndian16(packed + 224 * 2);   // index 0xE0
+		check((pureRed >> 11) == 0x1F && ((pureRed >> 5) & 0x3F) == 0 && (pureRed & 0x1F) == 0,
+			"순수 Red entry는 r5=31 g6=0 b5=0");
+
+		// LUT는 팔레트에 있는 색을 자기 자신으로 되돌려야 한다.
+		std::vector<uint8_t> lut;
+		sibr::buildPaletteLut(palette, lut);
+		check(lut.size() == 32 * 32 * 32, "LUT는 32^3 칸");
+		int exact = 0;
+		for (int index = 0; index < 256; ++index) {
+			const uint8_t red = palette[index * 3 + 0];
+			const uint8_t green = palette[index * 3 + 1];
+			const uint8_t blue = palette[index * 3 + 2];
+			const size_t cell = (size_t(red >> 3) << 10) | (size_t(green >> 3) << 5) | (blue >> 3);
+			if (lut[cell] == index) {
+				++exact;
+			}
+		}
+		check(exact == 256, "팔레트의 모든 색이 자기 자신으로 매핑된다");
+
+		// 전체 Frame 인코딩. row-major와 크기를 함께 본다.
+		std::vector<uint8_t> bgr(size_t(width) * height * 3);
+		for (size_t row = 0; row < height; ++row) {
+			for (size_t column = 0; column < width; ++column) {
+				uint8_t* pixel = bgr.data() + (row * width + column) * 3;
+				pixel[0] = uint8_t(column);
+				pixel[1] = uint8_t(row);
+				pixel[2] = uint8_t(row + column);
+			}
+		}
+		std::vector<uint8_t> payload;
+		sibr::encodePalette256(bgr.data(), width, height, packed, lut, payload);
+		check(payload.size() == 384512, "인코딩 결과가 정확히 384512 bytes");
+		check(std::memcmp(payload.data(), packed, sibr::rfjf::PALETTE_BYTES) == 0,
+			"앞 512 bytes가 팔레트 그대로다");
+
+		// 인덱스가 가리키는 색이 원본에 가까워야 한다(RGB332 기본 팔레트 기준).
+		const uint8_t* indices = payload.data() + sibr::rfjf::PALETTE_BYTES;
+		const uint8_t firstIndex = indices[0];
+		check(firstIndex == 0x00, "좌상단 검정 픽셀은 index 0");
+		check(indices[size_t(width) * height - 1] != firstIndex, "우하단은 다른 index");
+
+		std::vector<uint8_t> compressed;
+		check(sibr::zlibCompress(payload, compressed), "zlib 압축 성공");
+		std::vector<uint8_t> restored(384512 + 16, 0xAA);
+		uLongf restoredSize = uLongf(restored.size());
+		check(uncompress(restored.data(), &restoredSize, compressed.data(), uLong(compressed.size())) == Z_OK,
+			"zlib 해제 성공");
+		check(restoredSize == 384512, "해제 크기가 정확히 384512 bytes");
+		check(std::memcmp(restored.data(), payload.data(), payload.size()) == 0, "왕복이 무손실");
+
+		// 형식 파싱과 해상도 검증도 rgb332와 같은 규칙을 따른다.
+		sibr::StreamFormat format = sibr::StreamFormat::Jpeg;
+		check(sibr::parseStreamFormat("palette256-zlib", format)
+			&& format == sibr::StreamFormat::Palette256Zlib, "palette256-zlib 파싱");
+		check(sibr::streamFormatFlags(sibr::StreamFormat::Palette256Zlib) == 2, "flags 매핑");
+		check(sibr::streamOptionError(sibr::StreamFormat::Palette256Zlib, 800, 480).empty(),
+			"palette256은 800x480 허용");
+		check(!sibr::streamOptionError(sibr::StreamFormat::Palette256Zlib, 1200, 800).empty(),
+			"palette256은 1200x800 거부");
+	}
+
 } // namespace
 
 int main()
@@ -218,6 +314,7 @@ int main()
 	testHeader();
 	testOptionValidation();
 	testDithering();
+	testPalette256();
 
 	if (g_failures > 0) {
 		std::cerr << g_failures << " check(s) failed." << std::endl;
