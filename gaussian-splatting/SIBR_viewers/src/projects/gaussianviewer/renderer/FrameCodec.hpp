@@ -31,6 +31,24 @@ namespace sibr {
 		constexpr unsigned RGB332_WIDTH = 800;
 		constexpr unsigned RGB332_HEIGHT = 480;
 
+		/** Bayer Ordered Dithering 기본 강도. 0이면 끈다. */
+		constexpr float DITHER_DEFAULT = 0.4f;
+		/**
+		 * Blue는 2bit(4단계)라 같은 강도를 주면 계단이 커서 패턴이 도드라진다.
+		 * 0.75배로 약하게 줘 기본 0.4에서 실효 0.3이 되게 한다.
+		 *
+		 * ponytail: 패널마다 따로 맞춰야 하면 그때 인자로 뺀다. 지금은 한 값으로 충분하다.
+		 */
+		constexpr float DITHER_BLUE_SCALE = 0.75f;
+
+		/** 4x4 Bayer 행렬. 좌표는 최종 화면 x,y에 고정하고 Frame마다 바꾸지 않는다. */
+		constexpr int BAYER4[16] = {
+			 0,  8,  2, 10,
+			12,  4, 14,  6,
+			 3, 11,  1,  9,
+			15,  7, 13,  5
+		};
+
 	} // namespace rfjf
 
 	inline void putBigEndian(uint8_t* target, uint64_t value, int bytes)
@@ -83,18 +101,50 @@ namespace sibr {
 		return std::string();
 	}
 
-	/**
-	 * OpenGL Readback Buffer(BGR 3byte/pixel)를 픽셀당 1byte RRRGGGBB로 옮긴다.
-	 * Buffer는 BGR 순서이므로 Red는 offset 2, Blue는 offset 0이다.
-	 */
-	inline void bgrToRgb332(const uint8_t* bgr, size_t pixels, std::vector<uint8_t>& out)
+	/** 한 채널을 levels 단계로 반올림한다. offset은 단계 단위 디더링 값이다. */
+	inline uint8_t quantizeChannel(float value, int levels, float offset)
 	{
-		out.resize(pixels);
-		for (size_t index = 0; index < pixels; ++index) {
-			const uint8_t blue = bgr[index * 3 + 0];
-			const uint8_t green = bgr[index * 3 + 1];
-			const uint8_t red = bgr[index * 3 + 2];
-			out[index] = uint8_t((red & 0xE0) | ((green & 0xE0) >> 3) | (blue >> 6));
+		const float top = float(levels - 1);
+		float scaled = value * top / 255.0f + offset;
+		if (scaled < 0.0f) {
+			scaled = 0.0f;
+		} else if (scaled > top) {
+			scaled = top;
+		}
+		return uint8_t(scaled + 0.5f);   // 여기서는 scaled >= 0이라 잘라도 반올림이다
+	}
+
+	/**
+	 * Readback Buffer(BGR 3byte/pixel)를 픽셀당 1byte RRRGGGBB로 옮긴다.
+	 * Buffer는 BGR 순서이므로 Red는 offset 2, Blue는 offset 0이다.
+	 *
+	 * dither가 0보다 크면 고정 4x4 Bayer Ordered Dithering을 건다. 위아래 반전이
+	 * 끝난 최종 화면에 적용해야 Bayer 좌표가 LCD의 x,y와 일치한다. Frame마다
+	 * 패턴을 바꾸지 않으므로 움직여도 반짝이지 않는다.
+	 */
+	inline void bgrToRgb332(const uint8_t* bgr, unsigned width, unsigned height,
+		std::vector<uint8_t>& out, float dither = 0.0f)
+	{
+		out.resize(size_t(width) * height);
+		for (unsigned row = 0; row < height; ++row) {
+			for (unsigned column = 0; column < width; ++column) {
+				const size_t index = size_t(row) * width + column;
+				const uint8_t blue = bgr[index * 3 + 0];
+				const uint8_t green = bgr[index * 3 + 1];
+				const uint8_t red = bgr[index * 3 + 2];
+
+				float offset = 0.0f;
+				if (dither > 0.0f) {
+					// 평균이 0이 되게 중심을 맞춘다. 안 그러면 화면 전체가 어두워진다.
+					const float cell =
+						(float(rfjf::BAYER4[(row & 3u) * 4 + (column & 3u)]) + 0.5f) / 16.0f - 0.5f;
+					offset = cell * dither;
+				}
+				out[index] = uint8_t(
+					  (quantizeChannel(float(red), 8, offset) << 5)
+					| (quantizeChannel(float(green), 8, offset) << 2)
+					|  quantizeChannel(float(blue), 4, offset * rfjf::DITHER_BLUE_SCALE));
+			}
 		}
 	}
 

@@ -256,6 +256,12 @@ int main(int ac, char** av)
 		streamOptions.port = myArgs.streamPort;
 		streamOptions.fps = myArgs.streamFps;
 		streamOptions.quality = myArgs.jpegQuality;
+		streamOptions.dither = myArgs.streamDither;
+		if (!(streamOptions.dither >= 0.0f && streamOptions.dither <= 1.0f))
+		{
+			SIBR_ERR << "--stream-dither는 0.0에서 1.0 사이여야 합니다. 받은 값: "
+				<< streamOptions.dither;
+		}
 		// 형식과 해상도는 렌더를 시작하기 전에 확정한다. 잘못된 조합은 여기서 끝낸다.
 		if (!sibr::parseStreamFormat(myArgs.streamFormat.get(), streamOptions.format))
 		{

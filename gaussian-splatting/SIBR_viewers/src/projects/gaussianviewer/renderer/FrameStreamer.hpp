@@ -42,7 +42,8 @@ namespace sibr {
 			int port = 9101;
 			float fps = 10.0f;
 			StreamFormat format = StreamFormat::Rgb332Zlib;
-			int quality = 80;          ///< JPEG일 때만 쓴다.
+			float dither = rfjf::DITHER_DEFAULT;   ///< RGB332일 때만 쓴다. 0이면 끈다.
+			int quality = 80;                      ///< JPEG일 때만 쓴다.
 		};
 
 		struct Metrics

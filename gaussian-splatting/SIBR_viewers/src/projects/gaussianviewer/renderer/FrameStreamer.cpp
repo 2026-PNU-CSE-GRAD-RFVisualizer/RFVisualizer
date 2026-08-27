@@ -55,7 +55,9 @@ namespace sibr {
 		SIBR_LOG << "[FrameStreamer] " << width << "x" << height << " -> " << _options.host
 			<< ":" << _options.port << " at " << _options.fps << " fps, format "
 			<< streamFormatName(_options.format)
-			<< (_options.format == StreamFormat::Jpeg ? sibr::sprint(", quality %d", _options.quality) : std::string())
+			<< (_options.format == StreamFormat::Jpeg
+				? sibr::sprint(", quality %d", _options.quality)
+				: sibr::sprint(", dither %.2f", _options.dither))
 			<< std::endl;
 	}
 
@@ -265,7 +267,7 @@ namespace sibr {
 		if (!image.isContinuous()) {
 			image = image.clone();
 		}
-		bgrToRgb332(image.data, size_t(image.rows) * image.cols, _rgb332);
+		bgrToRgb332(image.data, unsigned(image.cols), unsigned(image.rows), _rgb332, _options.dither);
 		return zlibCompress(_rgb332, payload);
 	}
 
@@ -396,6 +398,7 @@ namespace sibr {
 			<< "  \"height\": " << _height << ",\n"
 			<< "  \"target_fps\": " << _options.fps << ",\n"
 			<< "  \"jpeg_quality\": " << _options.quality << ",\n"
+			<< "  \"dither\": " << _options.dither << ",\n"
 			<< "  \"elapsed_seconds\": " << values.elapsedSeconds << ",\n"
 			<< "  \"frames_captured\": " << values.captured << ",\n"
 			<< "  \"frames_sent\": " << values.sent << ",\n"

@@ -51,6 +51,7 @@ ctest --test-dir build-rfviewer --output-on-failure
 | `--stream-port <port>` | `9101` | image_relay ingest |
 | `--stream-fps <fps>` | `10` | 송신 목표 FPS |
 | `--stream-format <fmt>` | `rgb332-zlib` | `rgb332-zlib` 또는 `jpeg` |
+| `--stream-dither <0-1>` | `0.4` | RGB332 Bayer 디더링 강도. `0`이면 끔 |
 | `--jpeg-quality <1-100>` | `80` | `--stream-format jpeg`일 때만 쓴다 |
 | `--run-seconds <n>` | `0` | 0은 종료 전까지 실행 |
 | `--metrics-json <path>` | 없음 | 종료 시 송신 측정값을 남긴다 |
@@ -113,6 +114,13 @@ Worker Thread : 상하 반전 -> 범례 그리기 -> 형식별 인코딩
 - `rgb332-zlib`: Readback Buffer는 BGR 순서라 Red는 offset 2, Blue는 offset 0이다.
   픽셀당 1 byte `RRRGGGBB` 384,000 byte로 옮긴 뒤 표준 `zlib`(`Z_BEST_SPEED`)으로 압축한다.
   Handheld가 10 fps마다 inflate해야 하므로 압축률보다 속도를 택했다.
+- 디더링은 고정 4×4 Bayer Ordered Dithering이다. **상하 반전과 범례가 끝난 최종 화면**에
+  걸므로 Bayer 좌표가 LCD의 `x, y`와 일치하고, Frame마다 패턴을 바꾸지 않으므로 움직여도
+  반짝이지 않는다. Blue는 2 bit라 계단이 커서 `DITHER_BLUE_SCALE`(0.75)로 약하게 준다.
+  강도는 **반올림 경계 근처에서만** 작동한다. 밴딩이 생기는 지점이 정확히 거기라서
+  0.4로도 색 띠가 풀리고, 평평한 면에는 불필요한 잡음이 끼지 않는다.
+- 디더링은 **Wire 형식을 바꾸지 않는다.** 여전히 `flags=1`, 384,000 byte라 Relay와
+  Embedded는 고칠 것이 없다.
 - 범례는 Worker Thread가 OpenCV로 그린다. Viridis 색상 막대, dBm 양 끝값, 방식 이름,
   렌더 FPS, `PROVISIONAL` 표시. 범례는 인코딩 전에 그리므로 두 형식에 똑같이 들어간다.
 - Relay가 끊기면 렌더링은 계속하고 1초마다 다시 붙는다. 다시 붙으면 **최신 Frame부터**

@@ -59,6 +59,7 @@ namespace sibr {
 		Arg<int> streamPort = { "stream-port", 9101, "image_relay ingest port" };
 		Arg<float> streamFps = { "stream-fps", 10.0f, "송신 목표 FPS" };
 		Arg<std::string> streamFormat = { "stream-format", "rgb332-zlib", "송신 형식: rgb332-zlib(기본) 또는 jpeg" };
+		Arg<float> streamDither = { "stream-dither", 0.4f, "RGB332 Bayer 디더링 강도 0.0-1.0 (0이면 끔)" };
 		Arg<int> jpegQuality = { "jpeg-quality", 80, "JPEG 품질 (1-100). --stream-format jpeg일 때만 쓴다" };
 		Arg<int> runSeconds = { "run-seconds", 0, "이 시간이 지나면 종료한다. 0은 종료 전까지 실행" };
 		Arg<std::string> metricsJson = { "metrics-json", "", "송신 측정값을 쓸 JSON 경로" };
