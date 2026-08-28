@@ -38,7 +38,7 @@ Submodule은 최신 `main`보다 오래될 수 있으므로 Commit 상태를 확
 - `corrected_rssi` 사용 방식 변경
 - TX/RX 형식 변경
 - WebSocket Frame 또는 PositionEstimate 사용
-- Handheld 제어 또는 JPEG Streaming 연결
+- Handheld 제어 또는 RFJF Streaming 연결
 - 다른 저장소도 함께 수정해야 하는 변경
 
 문서는 관련 제목과 주변 절만 읽는다. 작업과 무관한 보고서·회의록·과거 계획서는 열지 않는다.
@@ -64,7 +64,7 @@ Submodule은 최신 `main`보다 오래될 수 있으므로 Commit 상태를 확
 - Proxy Obstacle와 Material
 - Sionna RT Scene, Path, Coverage, Radio Map
 - Backend Export 기반 RSSI 분석
-- 향후 SIBR Heatmap Viewer와 영상 출력
+- SIBR RF Volume Viewer와 RFJF 영상 출력
 
 임베디드 펌웨어, MQTT 수집 Backend, 실험 DB는 중복 구현하지 않는다.
 
@@ -107,7 +107,7 @@ corrected_rssi = median_filtered + device_offset_db
 - Offscreen 800×480 Rendering
 - IMU Pose
 - Position Update
-- JPEG Encoding/Streaming
+- RFJF Encoding/Streaming (palette256/RGB332/JPEG)
 
 계획, 부분 구현, 검증 완료를 구분한다.
 
