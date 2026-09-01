@@ -43,31 +43,17 @@ namespace {
 		}
 	}
 
-	const char* FRAME_ID = "pnu_3f_corridor_metric_v1";
-
-	/** experiments/0821_lounge_201729/analysis/viewer_volume/manifest.json 의 T_scene_from_metric. */
-	const double SCENE_FROM_METRIC[16] = {
-		 0.0,                  -0.23513155424004245, -0.003386065666641356,  3.6920512997976402,
-		-0.01963247307032216,   0.0033742444474468046, -0.23431067776691009,  0.7401387282734162,
-		 0.23433497229645409,   0.0002826926028069686, -0.019630437686135354, -4.726596655536486,
-		 0.0,                   0.0,                   0.0,                   1.0
-	};
-
 	HandheldControlClient::Options makeOptions()
 	{
 		HandheldControlClient::Options options;
 		options.host = "";                 // Worker Thread 없이 Reducer만 쓴다.
-		options.frameId = FRAME_ID;
-		for (int index = 0; index < 16; ++index) {
-			options.sceneFromMetric[index] = SCENE_FROM_METRIC[index];
-		}
 		return options;
 	}
 
 	std::string boolText(bool value) { return value ? "true" : "false"; }
 
-	std::string stateJson(uint32_t session, uint32_t sample, uint32_t event,
-		bool orientationValid, bool recenter, bool position, bool stale,
+	std::string stateJson(uint32_t session, uint32_t sample,
+		bool orientationValid, bool teleportHeld, bool heightCycleHeld, bool stale,
 		double x, double y, double z, double w,
 		const std::string& device = "handheld-01")
 	{
@@ -76,34 +62,13 @@ namespace {
 		out << "{\"type\":\"handheld_state\",\"device_id\":\"" << device
 			<< "\",\"session_id\":" << session
 			<< ",\"sample_seq\":" << sample
-			<< ",\"event_seq\":" << event
 			<< ",\"server_timestamp_ms\":1700000000000"
 			<< ",\"orientation_valid\":" << boolText(orientationValid)
-			<< ",\"recenter_event\":" << boolText(recenter)
-			<< ",\"position_update_event\":" << boolText(position)
+			<< ",\"teleport_button_held\":" << boolText(teleportHeld)
+			<< ",\"height_cycle_button_held\":" << boolText(heightCycleHeld)
 			<< ",\"stale\":" << boolText(stale)
 			<< ",\"quaternion\":{\"x\":" << x << ",\"y\":" << y
 			<< ",\"z\":" << z << ",\"w\":" << w << "}}";
-		return out.str();
-	}
-
-	std::string acceptedJson(uint32_t event, double x, double y, double z,
-		const std::string& frameId = FRAME_ID)
-	{
-		std::ostringstream out;
-		out.precision(17);
-		out << "{\"type\":\"position_update\",\"device_id\":\"handheld-01\",\"event_seq\":" << event
-			<< ",\"accepted\":true,\"position\":{\"frame_id\":\"" << frameId
-			<< "\",\"x\":" << x << ",\"y\":" << y << ",\"z\":" << z
-			<< ",\"confidence\":0.9,\"source\":\"configured\"}}";
-		return out.str();
-	}
-
-	std::string rejectedJson(uint32_t event)
-	{
-		std::ostringstream out;
-		out << "{\"type\":\"position_update\",\"device_id\":\"handheld-01\",\"event_seq\":" << event
-			<< ",\"accepted\":false,\"position\":null,\"reason\":\"stale_position\"}";
 		return out.str();
 	}
 
@@ -123,7 +88,7 @@ namespace {
 	/** 활성 상태로 만들고 기준을 identity로 잡는다. */
 	void activate(HandheldControlClient& client, uint32_t session, uint32_t sample, uint64_t timeMs)
 	{
-		client.onMessage(stateJson(session, sample, 0, true, false, false, false, 0, 0, 0, 1), timeMs);
+		client.onMessage(stateJson(session, sample, true, false, false, false, 0, 0, 0, 1), timeMs);
 		const HandheldControlClient::Frame frame = client.poll(timeMs, IDENTITY);
 		check(frame.active && !frame.hasRotation, "첫 유효 자세는 활성만 하고 회전하지 않는다");
 	}
@@ -138,29 +103,31 @@ namespace {
 		client.onMessage("{\"type\":\"who_knows\"}", 0);
 		// session_id가 음수라 uint32가 아니다.
 		client.onMessage("{\"type\":\"handheld_state\",\"device_id\":\"handheld-01\",\"session_id\":-1,"
-			"\"sample_seq\":1,\"event_seq\":0,\"server_timestamp_ms\":0,\"orientation_valid\":true,"
-			"\"recenter_event\":false,\"position_update_event\":false,\"stale\":false,"
+			"\"sample_seq\":1,\"server_timestamp_ms\":0,\"orientation_valid\":true,"
+			"\"teleport_button_held\":false,\"height_cycle_button_held\":false,\"stale\":false,"
 			"\"quaternion\":{\"x\":0,\"y\":0,\"z\":0,\"w\":1}}", 0);
 		// stale이 boolean이 아니다.
 		client.onMessage("{\"type\":\"handheld_state\",\"device_id\":\"handheld-01\",\"session_id\":1,"
-			"\"sample_seq\":1,\"event_seq\":0,\"server_timestamp_ms\":0,\"orientation_valid\":true,"
-			"\"recenter_event\":false,\"position_update_event\":false,\"stale\":\"no\","
+			"\"sample_seq\":1,\"server_timestamp_ms\":0,\"orientation_valid\":true,"
+			"\"teleport_button_held\":false,\"height_cycle_button_held\":false,\"stale\":\"no\","
 			"\"quaternion\":{\"x\":0,\"y\":0,\"z\":0,\"w\":1}}", 0);
 		// quaternion 성분이 없다.
 		client.onMessage("{\"type\":\"handheld_state\",\"device_id\":\"handheld-01\",\"session_id\":1,"
-			"\"sample_seq\":1,\"event_seq\":0,\"server_timestamp_ms\":0,\"orientation_valid\":true,"
-			"\"recenter_event\":false,\"position_update_event\":false,\"stale\":false,"
+			"\"sample_seq\":1,\"server_timestamp_ms\":0,\"orientation_valid\":true,"
+			"\"teleport_button_held\":false,\"height_cycle_button_held\":false,\"stale\":false,"
 			"\"quaternion\":{\"x\":0,\"y\":0,\"z\":0}}", 0);
-		check(client.stats().malformed == 6, "잘못된 Message 6개를 모두 폐기한다");
+		// 예전 계약(position_update)은 이제 모르는 type이다.
+		client.onMessage("{\"type\":\"position_update\",\"device_id\":\"handheld-01\",\"accepted\":true}", 0);
+		check(client.stats().malformed == 7, "잘못된 Message 7개를 모두 폐기한다");
 		check(!client.poll(0, IDENTITY).active, "잘못된 Message만으로는 활성화되지 않는다");
 
 		// 다른 장치는 조용히 무시한다.
-		client.onMessage(stateJson(1, 1, 0, true, false, false, false, 0, 0, 0, 1, "handheld-02"), 0);
+		client.onMessage(stateJson(1, 1, true, false, false, false, 0, 0, 0, 1, "handheld-02"), 0);
 		check(client.stats().foreignDevice == 1 && client.stats().poseUpdates == 0,
 			"허용하지 않는 device_id는 무시한다");
 
 		// 그 뒤 정상 Message는 그대로 동작한다.
-		client.onMessage(stateJson(1, 1, 0, true, false, false, false, 0, 0, 0, 1), 0);
+		client.onMessage(stateJson(1, 1, true, false, false, false, 0, 0, 0, 1), 0);
 		check(client.stats().poseUpdates == 1, "잘못된 Message 뒤에도 정상 Message는 반영된다");
 	}
 
@@ -170,21 +137,21 @@ namespace {
 		activate(client, 1, 1, 1000);
 		// 길이 3인 90도 Z 회전.
 		const double half = std::sqrt(0.5);
-		client.onMessage(stateJson(1, 2, 0, true, false, false, false, 0, 0, 3.0 * half, 3.0 * half), 1000);
+		client.onMessage(stateJson(1, 2, true, false, false, false, 0, 0, 3.0 * half, 3.0 * half), 1000);
 		const HandheldControlClient::Frame frame = client.poll(1000, IDENTITY);
 		check(frame.hasRotation && nearQuat(frame.rotation, quat(0, 0, half, half), 1e-9),
 			"Quaternion을 정규화해 적용한다");
 
-		client.onMessage(stateJson(1, 3, 0, true, false, false, false, 0, 0, 0, 0), 1000);
+		client.onMessage(stateJson(1, 3, true, false, false, false, 0, 0, 0, 0), 1000);
 		check(client.stats().malformed == 1, "길이 0 Quaternion은 폐기한다");
 	}
 
 	void testSampleOrdering()
 	{
 		HandheldControlClient client(makeOptions());
-		client.onMessage(stateJson(1, 10, 0, true, false, false, false, 0, 0, 0, 1), 1000);
-		client.onMessage(stateJson(1, 10, 0, true, false, false, false, 0, 0, 1, 0), 1000);
-		client.onMessage(stateJson(1, 9, 0, true, false, false, false, 0, 0, 1, 0), 1000);
+		client.onMessage(stateJson(1, 10, true, false, false, false, 0, 0, 0, 1), 1000);
+		client.onMessage(stateJson(1, 10, true, false, false, false, 0, 0, 1, 0), 1000);
+		client.onMessage(stateJson(1, 9, true, false, false, false, 0, 0, 1, 0), 1000);
 		const HandheldControlClient::Stats stats = client.stats();
 		check(stats.duplicateSample == 1 && stats.outOfOrderSample == 1 && stats.poseUpdates == 1,
 			"duplicate와 out-of-order sample은 Camera에 반영하지 않는다");
@@ -193,8 +160,8 @@ namespace {
 	void testSampleWrap()
 	{
 		HandheldControlClient client(makeOptions());
-		client.onMessage(stateJson(1, 0xFFFFFFFFu, 0, true, false, false, false, 0, 0, 0, 1), 1000);
-		client.onMessage(stateJson(1, 0u, 0, true, false, false, false, 0, 0, 0, 1), 1000);
+		client.onMessage(stateJson(1, 0xFFFFFFFFu, true, false, false, false, 0, 0, 0, 1), 1000);
+		client.onMessage(stateJson(1, 0u, true, false, false, false, 0, 0, 0, 1), 1000);
 		check(client.stats().poseUpdates == 2 && client.stats().outOfOrderSample == 0,
 			"uint32 wrap은 정상 진행으로 본다");
 	}
@@ -202,136 +169,72 @@ namespace {
 	void testSessionSwitch()
 	{
 		HandheldControlClient client(makeOptions());
-		client.onMessage(stateJson(1, 100, 0, true, false, false, false, 0, 0, 0, 1), 1000);
-		client.onMessage(stateJson(2, 5, 0, true, false, false, false, 0, 0, 0, 1), 1000);
+		client.onMessage(stateJson(1, 100, true, false, false, false, 0, 0, 0, 1), 1000);
+		client.onMessage(stateJson(2, 5, true, false, false, false, 0, 0, 0, 1), 1000);
 		check(client.stats().poseUpdates == 2, "새 session은 sample 상태를 초기화하고 채택한다");
-		client.onMessage(stateJson(1, 101, 0, true, false, false, false, 0, 0, 0, 1), 1000);
+		client.onMessage(stateJson(1, 101, true, false, false, false, 0, 0, 0, 1), 1000);
 		check(client.stats().retiredSession == 1 && client.stats().poseUpdates == 2,
 			"물러난 session의 늦은 packet은 영구 거부한다");
 	}
 
-	void testRecenterDedup()
+	// ------------------------------------------------------------------ 버튼 (레벨 상태)
+
+	void testTeleportButtonLevel()
 	{
 		HandheldControlClient client(makeOptions());
 		activate(client, 1, 1, 1000);
-		for (uint32_t sample = 2; sample <= 4; ++sample) {
-			client.onMessage(stateJson(1, sample, 7, true, true, false, false, 0, 0, 0, 1), 1000);
-		}
-		check(client.stats().recenterEdges == 1, "같은 event_seq의 Recenter 3회 반복은 1번만 적용한다");
 
-		// stale snapshot이 같은 Event를 다시 노출해도 한 번뿐이다.
-		client.onMessage(stateJson(1, 5, 7, true, true, false, true, 0, 0, 0, 1), 1000);
-		check(client.stats().recenterEdges == 1, "stale snapshot의 Event replay를 막는다");
+		client.onMessage(stateJson(1, 2, true, true, false, false, 0, 0, 0, 1), 1000);
+		check(client.poll(1000, IDENTITY).teleportButtonHeld,
+			"텔레포트 버튼이 눌리면 그 순간 값을 그대로 돌려준다");
 
-		// 새 Event는 다시 적용한다.
-		client.onMessage(stateJson(1, 6, 8, true, true, false, false, 0, 0, 0, 1), 1000);
-		check(client.stats().recenterEdges == 2, "새 event_seq의 Recenter는 적용한다");
+		client.onMessage(stateJson(1, 3, true, true, false, false, 0, 0, 0, 1), 1000);
+		check(client.poll(1000, IDENTITY).teleportButtonHeld,
+			"계속 누르고 있으면(dedup 없이) 계속 held다");
+
+		client.onMessage(stateJson(1, 4, true, false, false, false, 0, 0, 0, 1), 1000);
+		check(!client.poll(1000, IDENTITY).teleportButtonHeld,
+			"떼면 바로 false로 돌아온다");
 	}
 
-	void testRecenterKeepsOrientation()
+	void testHeightCycleButtonLevel()
 	{
 		HandheldControlClient client(makeOptions());
 		activate(client, 1, 1, 1000);
-		const double half = std::sqrt(0.5);
-		const HandheldQuat moved = quat(0, 0, half, half);
-		client.onMessage(stateJson(1, 2, 0, true, false, false, false, 0, 0, half, half), 1000);
-		const HandheldControlClient::Frame turned = client.poll(1000, IDENTITY);
-		check(nearQuat(turned.rotation, moved, 1e-9), "기준 대비 회전을 그대로 Camera에 준다");
 
-		// 지금 Camera는 turned.rotation이고 장치는 moved다. 여기서 Recenter한다.
-		client.onMessage(stateJson(1, 3, 1, true, true, false, false, 0, 0, half, half), 1000);
-		const HandheldControlClient::Frame recentered = client.poll(1000, turned.rotation);
-		check(recentered.recentered && nearQuat(recentered.rotation, turned.rotation, 1e-9),
-			"Recenter Frame에서 화면이 튀지 않는다");
+		client.onMessage(stateJson(1, 2, true, false, true, false, 0, 0, 0, 1), 1000);
+		const HandheldControlClient::Frame pressed = client.poll(1000, IDENTITY);
+		check(pressed.heightCycleButtonHeld && !pressed.teleportButtonHeld,
+			"두 버튼은 서로 독립적인 레벨 상태다");
+	}
 
-		// 그 다음 움직임부터 새 기준을 쓴다.
-		client.onMessage(stateJson(1, 4, 1, true, false, false, false, 0, 0, 0, 1), 1000);
-		const HandheldControlClient::Frame afterwards = client.poll(1000, recentered.rotation);
-		check(nearQuat(afterwards.rotation, IDENTITY, 1e-9), "Recenter 뒤에는 새 기준으로 회전한다");
+	void testButtonsFalseWhenInactive()
+	{
+		HandheldControlClient client(makeOptions());
+		activate(client, 1, 1, 1000);
+		client.onMessage(stateJson(1, 2, true, true, true, false, 0, 0, 0, 1), 1000);
+		check(client.poll(1000, IDENTITY).teleportButtonHeld, "활성 중에는 눌림이 반영된다");
+
+		// stale=true는 즉시 비활성으로 처리한다 — 버튼 상태도 같이 꺼진다고 봐야 한다.
+		client.onMessage(stateJson(1, 3, true, true, true, true, 0, 0, 0, 1), 1000);
+		const HandheldControlClient::Frame frame = client.poll(1000, IDENTITY);
+		check(!frame.active && !frame.teleportButtonHeld && !frame.heightCycleButtonHeld,
+			"stale이면 버튼도 눌리지 않은 것으로 취급한다");
 	}
 
 	void testFallback()
 	{
 		HandheldControlClient client(makeOptions());
 		activate(client, 1, 1, 1000);
-		client.onMessage(stateJson(1, 2, 0, true, false, false, false, 0, 0, 0, 1), 1000);
+		client.onMessage(stateJson(1, 2, true, false, false, false, 0, 0, 0, 1), 1000);
 		check(client.poll(1750, IDENTITY).active, "750 ms까지는 Handheld가 Camera를 잡는다");
 		check(!client.poll(1751, IDENTITY).active, "750 ms를 넘기면 FPS로 돌아간다");
 
 		// 같은 sample_seq여도 stale은 즉시 처리한다.
-		client.onMessage(stateJson(1, 3, 0, true, false, false, false, 0, 0, 0, 1), 2000);
+		client.onMessage(stateJson(1, 3, true, false, false, false, 0, 0, 0, 1), 2000);
 		check(client.poll(2000, IDENTITY).active, "새 자세로 다시 활성화된다");
-		client.onMessage(stateJson(1, 3, 0, true, false, false, true, 0, 0, 0, 1), 2000);
+		client.onMessage(stateJson(1, 3, true, false, false, true, 0, 0, 0, 1), 2000);
 		check(!client.poll(2000, IDENTITY).active, "같은 sample_seq의 stale=true도 즉시 반영한다");
-	}
-
-	// ------------------------------------------------------------------ Position
-
-	bool nearScene(const HandheldControlClient::Frame& frame)
-	{
-		return frame.hasPosition
-			&& std::fabs(frame.position[0] - (-0.498708071)) < 1e-5
-			&& std::fabs(frame.position[1] - (0.005168271)) < 1e-5
-			&& std::fabs(frame.position[2] - (0.261794980)) < 1e-5;
-	}
-
-	void testPositionResponseFirst()
-	{
-		HandheldControlClient client(makeOptions());
-		client.onConnected();
-		activate(client, 1, 1, 1000);
-		client.onMessage(acceptedJson(3, 21.4, 17.8, 1.6), 1000);
-		check(!client.poll(1000, IDENTITY).hasPosition, "응답만으로는 Position을 적용하지 않는다");
-		client.onMessage(stateJson(1, 2, 3, true, false, true, false, 0, 0, 0, 1), 1000);
-		check(nearScene(client.poll(1000, IDENTITY)), "응답→state 순서에서 Position을 Scene 좌표로 적용한다");
-		check(client.stats().positionEdges == 1, "Position은 한 번만 적용한다");
-
-		// 같은 Event가 반복돼도 한 번뿐이다.
-		client.onMessage(stateJson(1, 3, 3, true, false, true, false, 0, 0, 0, 1), 1000);
-		client.onMessage(stateJson(1, 4, 3, true, false, true, false, 0, 0, 0, 1), 1000);
-		check(client.stats().positionEdges == 1, "반복 Position Event는 무시한다");
-	}
-
-	void testPositionStateFirst()
-	{
-		HandheldControlClient client(makeOptions());
-		client.onConnected();
-		activate(client, 1, 1, 1000);
-		client.onMessage(stateJson(1, 2, 3, true, false, true, false, 0, 0, 0, 1), 1000);
-		check(!client.poll(1000, IDENTITY).hasPosition, "state만으로는 Position을 적용하지 않는다");
-		client.onMessage(acceptedJson(3, 21.4, 17.8, 1.6), 1000);
-		const HandheldControlClient::Frame frame = client.poll(1000, IDENTITY);
-		check(nearScene(frame), "state→응답 순서에서도 Position을 적용한다");
-		check(!frame.hasRotation || nearQuat(frame.rotation, IDENTITY, 1e-9),
-			"Position은 rotation을 바꾸지 않는다");
-	}
-
-	void testPositionRejected()
-	{
-		HandheldControlClient client(makeOptions());
-		client.onConnected();
-		activate(client, 1, 1, 1000);
-		client.onMessage(rejectedJson(3), 1000);
-		client.onMessage(stateJson(1, 2, 3, true, false, true, false, 0, 0, 0, 1), 1000);
-		check(!client.poll(1000, IDENTITY).hasPosition, "거부된 Position은 적용하지 않는다");
-
-		client.onMessage(acceptedJson(4, 21.4, 17.8, 1.6, "other_frame_v9"), 1000);
-		client.onMessage(stateJson(1, 3, 4, true, false, true, false, 0, 0, 0, 1), 1000);
-		check(!client.poll(1000, IDENTITY).hasPosition, "frame_id가 다른 Position은 적용하지 않는다");
-		check(client.stats().positionEdges == 0, "적용된 Position이 없다");
-	}
-
-	void testPositionDroppedOnDisconnect()
-	{
-		HandheldControlClient client(makeOptions());
-		client.onConnected();
-		activate(client, 1, 1, 1000);
-		client.onMessage(acceptedJson(3, 21.4, 17.8, 1.6), 1000);
-		client.onDisconnected();
-		client.onConnected();
-		client.onMessage(stateJson(1, 2, 3, true, false, true, false, 0, 0, 0, 1), 1000);
-		check(!client.poll(1000, IDENTITY).hasPosition,
-			"연결이 끊기면 완성되지 않은 Position join은 버린다");
 	}
 
 	// ------------------------------------------------------------------ Fake Backend
@@ -412,15 +315,13 @@ namespace {
 			if (index == 0) {
 				messages.push_back("{ this is not json");
 				messages.push_back("{\"type\":\"weather_report\"}");
-				messages.push_back(acceptedJson(7, 21.4, 17.8, 1.6));
-				messages.push_back(stateJson(9, 0xFFFFFFFEu, 0, true, false, false, false, 0, 0, 0, 1));
-				messages.push_back(stateJson(9, 0xFFFFFFFFu, 7, true, true, true, false, 0, 0, 0, 1));
-				messages.push_back(stateJson(9, 0u, 7, true, true, true, false, 0, 0, 0, 1));
+				messages.push_back(stateJson(9, 0xFFFFFFFEu, true, false, false, false, 0, 0, 0, 1));
+				messages.push_back(stateJson(9, 0xFFFFFFFFu, true, true, false, false, 0, 0, 0, 1));
+				messages.push_back(stateJson(9, 0u, true, false, true, false, 0, 0, 0, 1));
 			} else {
-				// 재접속 뒤 Backend가 같은 snapshot을 다시 노출해도 다시 적용하면 안 된다.
 				const uint32_t base = uint32_t(index) * 10u;
-				messages.push_back(stateJson(9, base, 7, true, true, true, false, 0, 0, 0, 1));
-				messages.push_back(stateJson(9, base + 1u, 7, true, false, false, false, 0, 0, 0, 1));
+				messages.push_back(stateJson(9, base, true, true, false, false, 0, 0, 0, 1));
+				messages.push_back(stateJson(9, base + 1u, true, false, false, false, 0, 0, 0, 1));
 			}
 			return messages;
 		}
@@ -459,8 +360,6 @@ namespace {
 		check(stats.malformed >= 2, "잘못된 Message를 받아도 연결을 끊지 않는다");
 		check(stats.poseUpdates >= 3, "재접속 뒤에도 자세를 계속 받는다");
 		check(stats.outOfOrderSample == 0, "sample wrap을 out-of-order로 오해하지 않는다");
-		check(stats.recenterEdges == 1, "재접속 snapshot의 Recenter를 다시 적용하지 않는다");
-		check(stats.positionEdges == 1, "재접속 snapshot의 Position을 다시 적용하지 않는다");
 
 		const std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
 		{
@@ -504,13 +403,10 @@ int main()
 	testSampleOrdering();
 	testSampleWrap();
 	testSessionSwitch();
-	testRecenterDedup();
-	testRecenterKeepsOrientation();
+	testTeleportButtonLevel();
+	testHeightCycleButtonLevel();
+	testButtonsFalseWhenInactive();
 	testFallback();
-	testPositionResponseFirst();
-	testPositionStateFirst();
-	testPositionRejected();
-	testPositionDroppedOnDisconnect();
 	testWebSocketRoundTrip();
 	testShutdownWhileConnected();
 

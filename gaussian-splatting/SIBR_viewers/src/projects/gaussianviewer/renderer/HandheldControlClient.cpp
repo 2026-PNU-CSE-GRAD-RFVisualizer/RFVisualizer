@@ -18,8 +18,6 @@ namespace sibr {
 
 	namespace {
 
-		const size_t MAX_EDGES = 16;
-		const size_t MAX_JOINS = 16;
 		const uint32_t HALF_SPAN = 0x80000000u;
 
 		const picojson::value* member(const picojson::object& object, const char* name)
@@ -182,8 +180,6 @@ namespace sibr {
 		}
 		if (type == "handheld_state") {
 			handleState(object, nowMs);
-		} else if (type == "position_update") {
-			handlePositionUpdate(object);
 		} else {
 			++_stats.malformed;
 			warnOnce(_warnedMalformed, "모르는 Message type이 왔습니다: " + type);
@@ -193,8 +189,8 @@ namespace sibr {
 	void HandheldControlClient::handleState(const picojson::object& object, uint64_t nowMs)
 	{
 		std::string deviceId;
-		uint32_t session = 0, sample = 0, event = 0;
-		bool orientationValid = false, recenter = false, positionEvent = false, stale = false;
+		uint32_t session = 0, sample = 0;
+		bool orientationValid = false, teleportHeld = false, heightCycleHeld = false, stale = false;
 		const picojson::value* quaternion = member(object, "quaternion");
 		double qx = 0.0, qy = 0.0, qz = 0.0, qw = 0.0;
 
@@ -202,11 +198,10 @@ namespace sibr {
 			readString(object, "device_id", deviceId)
 			&& readUint32(object, "session_id", session)
 			&& readUint32(object, "sample_seq", sample)
-			&& readUint32(object, "event_seq", event)
 			&& readInteger(object, "server_timestamp_ms")
 			&& readBool(object, "orientation_valid", orientationValid)
-			&& readBool(object, "recenter_event", recenter)
-			&& readBool(object, "position_update_event", positionEvent)
+			&& readBool(object, "teleport_button_held", teleportHeld)
+			&& readBool(object, "height_cycle_button_held", heightCycleHeld)
 			&& readBool(object, "stale", stale)
 			&& quaternion != nullptr && quaternion->is<picojson::object>()
 			&& readFinite(quaternion->get<picojson::object>(), "x", qx)
@@ -245,6 +240,9 @@ namespace sibr {
 		_lastSample = sample;
 		_haveSample = true;
 		_stale = stale;
+		// 레벨 상태다 — 값이 뭐든 그대로 저장한다. dedup·edge 판정은 poll() 호출자가 한다.
+		_teleportHeld = teleportHeld;
+		_heightCycleHeld = heightCycleHeld;
 
 		HandheldQuat sampleQuat;
 		sampleQuat.x = qx; sampleQuat.y = qy; sampleQuat.z = qz; sampleQuat.w = qw;
@@ -261,86 +259,6 @@ namespace sibr {
 				warnOnce(_warnedMalformed, "Quaternion 길이가 0에 가깝습니다. 폐기합니다.");
 			}
 		}
-
-		if (recenter && newerEvent(EVENT_RECENTER, event)) {
-			// 기준으로 쓸 자세가 없으면 소비하지 않는다. 반복 Packet에서 다시 시도한다.
-			const bool haveAnchor = usableQuat || _havePose;
-			if (haveAnchor) {
-				_lastEvent[EVENT_RECENTER] = event;
-				_haveEvent[EVENT_RECENTER] = true;
-				EventEdge edge;
-				edge.kind = EVENT_RECENTER;
-				edge.quat = usableQuat ? sampleQuat : _pose;
-				pushEdge(edge);
-				++_stats.recenterEdges;
-			}
-		}
-
-		if (positionEvent && newerEvent(EVENT_POSITION, event)) {
-			const size_t index = findJoin(event);
-			_joins[index].sessionId = _session;
-			_joins[index].haveState = true;
-			completeJoin(index);
-		}
-	}
-
-	void HandheldControlClient::handlePositionUpdate(const picojson::object& object)
-	{
-		std::string deviceId;
-		uint32_t event = 0;
-		bool accepted = false;
-		if (!readString(object, "device_id", deviceId)
-			|| !readUint32(object, "event_seq", event)
-			|| !readBool(object, "accepted", accepted)) {
-			++_stats.malformed;
-			warnOnce(_warnedMalformed, "position_update의 필드가 계약과 다릅니다. 폐기합니다.");
-			return;
-		}
-		if (deviceId != _options.deviceId) {
-			++_stats.foreignDevice;
-			return;
-		}
-
-		bool usable = false;
-		double metric[3] = { 0.0, 0.0, 0.0 };
-		if (accepted) {
-			const picojson::value* position = member(object, "position");
-			std::string frameId, source;
-			double confidence = 0.0;
-			if (position == nullptr || !position->is<picojson::object>()) {
-				++_stats.malformed;
-				warnOnce(_warnedMalformed, "accepted position_update에 position이 없습니다. 폐기합니다.");
-				return;
-			}
-			const picojson::object& node = position->get<picojson::object>();
-			if (!readString(node, "frame_id", frameId)
-				|| !readFinite(node, "x", metric[0])
-				|| !readFinite(node, "y", metric[1])
-				|| !readFinite(node, "z", metric[2])
-				|| !readFinite(node, "confidence", confidence)
-				|| !readString(node, "source", source)) {
-				++_stats.malformed;
-				warnOnce(_warnedMalformed, "position 필드가 계약과 다릅니다. 폐기합니다.");
-				return;
-			}
-			// Scene이 다른 좌표계면 그대로 쓰면 안 된다.
-			usable = (frameId == _options.frameId);
-		} else {
-			std::string reason;
-			if (!readString(object, "reason", reason)) {
-				++_stats.malformed;
-				warnOnce(_warnedMalformed, "거부된 position_update에 reason이 없습니다. 폐기합니다.");
-				return;
-			}
-		}
-
-		const size_t index = findJoin(event);
-		_joins[index].haveResponse = true;
-		_joins[index].usable = usable;
-		_joins[index].metric[0] = metric[0];
-		_joins[index].metric[1] = metric[1];
-		_joins[index].metric[2] = metric[2];
-		completeJoin(index);
 	}
 
 	bool HandheldControlClient::adoptSession(uint32_t sessionId)
@@ -353,7 +271,7 @@ namespace sibr {
 			return true;
 		}
 		if (!_haveSession) {
-			// 처음 본 session이다. 먼저 도착한 position_update 응답까지 버릴 이유는 없다.
+			// 처음 본 session이다.
 			_session = sessionId;
 			_haveSession = true;
 			return true;
@@ -361,104 +279,20 @@ namespace sibr {
 		_retired.insert(_session);
 		_session = sessionId;
 		_haveSample = false;
-		_haveEvent[EVENT_RECENTER] = false;
-		_haveEvent[EVENT_POSITION] = false;
 		_havePose = false;
 		_stale = true;
-		_edges.clear();
-		_joins.clear();
 		return true;
-	}
-
-	bool HandheldControlClient::newerEvent(int kind, uint32_t eventSeq)
-	{
-		if (!_haveEvent[kind]) {
-			return true;
-		}
-		const uint32_t delta = eventSeq - _lastEvent[kind];
-		return delta != 0 && delta < HALF_SPAN;
-	}
-
-	void HandheldControlClient::pushEdge(const EventEdge& edge)
-	{
-		if (_edges.size() >= MAX_EDGES) {
-			_edges.pop_front();
-			++_stats.droppedEdges;
-			warnOnce(_warnedEdgeQueue, "Event Queue가 가득 차 가장 오래된 Event를 버렸습니다.");
-		}
-		_edges.push_back(edge);
-	}
-
-	size_t HandheldControlClient::findJoin(uint32_t eventSeq)
-	{
-		for (size_t index = 0; index < _joins.size(); ++index) {
-			if (_joins[index].epoch == _epoch && _joins[index].eventSeq == eventSeq) {
-				return index;
-			}
-		}
-		if (_joins.size() >= MAX_JOINS) {
-			_joins.pop_front();
-			++_stats.droppedJoins;
-			warnOnce(_warnedJoinQueue, "Position Queue가 가득 차 가장 오래된 대기를 버렸습니다.");
-		}
-		PositionJoin join;
-		join.epoch = _epoch;
-		join.eventSeq = eventSeq;
-		join.sessionId = _session;
-		_joins.push_back(join);
-		return _joins.size() - 1;
-	}
-
-	void HandheldControlClient::completeJoin(size_t index)
-	{
-		PositionJoin join = _joins[index];
-		if (!join.haveState || !join.haveResponse) {
-			return;
-		}
-		_joins.erase(_joins.begin() + index);
-		if (join.sessionId != _session || join.epoch != _epoch) {
-			++_stats.retiredSession;
-			return;
-		}
-		if (!newerEvent(EVENT_POSITION, join.eventSeq)) {
-			return;
-		}
-		_lastEvent[EVENT_POSITION] = join.eventSeq;
-		_haveEvent[EVENT_POSITION] = true;
-		if (!join.usable) {
-			return;
-		}
-		EventEdge edge;
-		edge.kind = EVENT_POSITION;
-		sceneFromMetric(join.metric, edge.position);
-		pushEdge(edge);
-		++_stats.positionEdges;
-	}
-
-	void HandheldControlClient::sceneFromMetric(const double metric[3], double scene[3]) const
-	{
-		const double* m = _options.sceneFromMetric;
-		for (int row = 0; row < 3; ++row) {
-			scene[row] = m[row * 4 + 0] * metric[0]
-				+ m[row * 4 + 1] * metric[1]
-				+ m[row * 4 + 2] * metric[2]
-				+ m[row * 4 + 3];
-		}
 	}
 
 	void HandheldControlClient::onConnected()
 	{
 		std::lock_guard<std::mutex> lock(_mutex);
-		++_epoch;
-		_joins.clear();
 		++_stats.connects;
 	}
 
 	void HandheldControlClient::onDisconnected()
 	{
 		std::lock_guard<std::mutex> lock(_mutex);
-		// Backend는 position_update를 다시 보내주지 않는다. 완성 못 한 join은 복구 불가다.
-		_joins.clear();
 		++_stats.disconnects;
 	}
 
@@ -473,39 +307,29 @@ namespace sibr {
 	HandheldControlClient::Frame HandheldControlClient::poll(uint64_t nowMs, const HandheldQuat& cameraRotation)
 	{
 		Frame frame;
-		std::deque<EventEdge> edges;
-		bool havePose = false, stale = true;
+		bool havePose = false, stale = true, teleportHeld = false, heightCycleHeld = false;
 		HandheldQuat pose;
 		uint64_t poseMs = 0;
 		{
 			std::lock_guard<std::mutex> lock(_mutex);
-			edges.swap(_edges);
 			havePose = _havePose;
 			pose = _pose;
 			poseMs = _poseMs;
 			stale = _stale;
-		}
-
-		bool recenter = false;
-		HandheldQuat recenterQuat;
-		for (size_t index = 0; index < edges.size(); ++index) {
-			if (edges[index].kind == EVENT_POSITION) {
-				frame.hasPosition = true;
-				frame.position[0] = float(edges[index].position[0]);
-				frame.position[1] = float(edges[index].position[1]);
-				frame.position[2] = float(edges[index].position[2]);
-			} else {
-				recenter = true;
-				recenterQuat = edges[index].quat;
-			}
+			teleportHeld = _teleportHeld;
+			heightCycleHeld = _heightCycleHeld;
 		}
 
 		const uint64_t age = nowMs > poseMs ? nowMs - poseMs : 0;
 		frame.active = havePose && !stale && age <= _options.orientationTimeoutMs;
 		if (!frame.active) {
+			// 비활성(연결 전/끊김/stale/timeout)이면 버튼도 안 눌린 것으로 본다 —
+			// 눌림이 이어졌다고 오판하지 않는다.
 			_active = false;
 			return frame;
 		}
+		frame.teleportButtonHeld = teleportHeld;
+		frame.heightCycleButtonHeld = heightCycleHeld;
 
 		if (!_active) {
 			// 첫 유효 자세다. 이번 Frame에는 돌리지 않고 기준만 잡는다.
@@ -513,11 +337,6 @@ namespace sibr {
 			_cameraAnchor = cameraRotation;
 			_deviceAnchor = pose;
 			return frame;
-		}
-		if (recenter) {
-			_cameraAnchor = cameraRotation;
-			_deviceAnchor = recenterQuat;
-			frame.recentered = true;
 		}
 		frame.rotation = multiply(multiply(_cameraAnchor, inverseUnit(_deviceAnchor)), pose);
 		normalize(frame.rotation);

@@ -67,6 +67,12 @@ namespace sibr {
 		const RFVolumeManifest& manifest() const { return _manifest; }
 		const sibr::Vector2f& dbmRange() const { return _dbmRange; }
 
+		/** Height-cycle 버튼 press edge에서 부른다. manifest의 층(nz)을 순서대로 돌다가
+		 * 한 바퀴 끝나면 전체 범위(Z 절단 없음)로 돌아간다. */
+		void cycleHeightPreset();
+		/** 지금 프리셋 층 index, -1이면 전체 범위. UI·로그용. */
+		int heightPresetIndex() const { return _heightPresetIndex; }
+
 	private:
 		void uploadVolume(const std::string& binaryPath, size_t expectedBytes);
 		void loadMeshes();
@@ -92,6 +98,7 @@ namespace sibr {
 		float _stepM = 0.25f;
 		sibr::Vector2f _dbmRange;
 		sibr::Vector2f _zCut;
+		int _heightPresetIndex = -1;   ///< -1이면 전체 범위. 0..nz-1이면 그 층만.
 	};
 
 } /*namespace sibr*/

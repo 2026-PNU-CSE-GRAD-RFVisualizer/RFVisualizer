@@ -306,6 +306,22 @@ namespace sibr {
 		return names[std::min(std::max(_methodIndex, 0), 2)];
 	}
 
+	void RFVolumeRenderer::cycleHeightPreset()
+	{
+		++_heightPresetIndex;
+		if (_heightPresetIndex >= _manifest.nz) {
+			_heightPresetIndex = -1;
+		}
+		if (_heightPresetIndex < 0) {
+			// 전체 범위로 돌아간다.
+			_zCut = sibr::Vector2f(_manifest.boxMinM.z(), _manifest.boxMaxM.z());
+			return;
+		}
+		const float centerZ = _manifest.originM.z() + float(_heightPresetIndex) * _manifest.spacingM.z();
+		const float halfBand = 0.5f * _manifest.spacingM.z();
+		_zCut = sibr::Vector2f(centerZ - halfBand, centerZ + halfBand);
+	}
+
 	void RFVolumeRenderer::onGUI()
 	{
 		if (!ImGui::CollapsingHeader("RF Volume", ImGuiTreeNodeFlags_DefaultOpen)) {

@@ -360,28 +360,21 @@ int main(int ac, char** av)
 			<< std::endl;
 	}
 
-	// RFVisualizer: Handheld는 Position을 Scene 좌표로 옮길 manifest가 있어야 켤 수 있다.
+	// RFVisualizer: Handheld의 Height-cycle 버튼이 순환할 RF Volume이 있어야 켤 수 있다.
 	sibr::HandheldControlClient::Ptr handheld;
 	if (myArgs.handheldHost.get() != "")
 	{
 		if (!rfVolume)
 		{
 			SIBR_ERR << "--handheld-host를 쓰려면 --rf-volume도 함께 줘야 합니다. "
-				"Position Update를 검증·변환할 manifest가 없습니다.";
+				"Height-cycle 버튼이 순환할 RF Volume이 없습니다.";
 		}
 		sibr::HandheldControlClient::Options handheldOptions;
 		handheldOptions.host = myArgs.handheldHost.get();
 		handheldOptions.port = myArgs.handheldPort;
-		handheldOptions.frameId = rfVolume->manifest().frameId;
-		const sibr::Matrix4f& sceneFromMetric = rfVolume->manifest().sceneFromMetric;
-		for (int row = 0; row < 4; ++row) {
-			for (int column = 0; column < 4; ++column) {
-				handheldOptions.sceneFromMetric[row * 4 + column] = double(sceneFromMetric(row, column));
-			}
-		}
 		handheld = std::make_shared<sibr::HandheldControlClient>(handheldOptions);
 		SIBR_LOG << "[Handheld] ws://" << handheldOptions.host << ":" << handheldOptions.port
-			<< "/handheld/control 을 구독합니다 (frame_id " << handheldOptions.frameId << ")." << std::endl;
+			<< "/handheld/control 을 구독합니다." << std::endl;
 	}
 
 	// Add views to mvm.
@@ -410,7 +403,8 @@ int main(int ac, char** av)
 	}
 
 	// Main looooooop.
-	bool teleportHeld = false;      ///< 지난 Frame에 R이 눌려 있었는지(edge 판정용).
+	bool teleportHeld = false;       ///< 지난 Frame에 텔레포트 입력(키보드 R 또는 Handheld 버튼)이 눌려 있었는지.
+	bool heightCycleHeld = false;    ///< 지난 Frame에 Height-cycle 입력(키보드 H 또는 Handheld 버튼)이 눌려 있었는지.
 	bool handheldActive = false;    ///< Handheld가 Camera를 몰고 있는지.
 	const auto startTime = std::chrono::steady_clock::now();
 	const int runSeconds = myArgs.runSeconds;
@@ -424,6 +418,8 @@ int main(int ac, char** av)
 
 		// RFVisualizer: Camera는 Render Thread만 만진다. Worker는 mailbox만 채운다.
 		handheldActive = false;
+		bool handheldTeleportHeld = false;
+		bool handheldHeightCycleHeld = false;
 		if (handheld)
 		{
 			const sibr::Quaternionf& cameraQuat = generalCamera->getCamera().rotation();
@@ -437,6 +433,8 @@ int main(int ac, char** av)
 				handheld->poll(sibr::HandheldControlClient::nowMs(), cameraRotation);
 
 			handheldActive = handheldFrame.active;
+			handheldTeleportHeld = handheldFrame.teleportButtonHeld;
+			handheldHeightCycleHeld = handheldFrame.heightCycleButtonHeld;
 			// 활성 중에 FPS handler를 두면 외부 자세를 매 Frame 덮어쓴다.
 			const sibr::InteractiveCameraHandler::InteractionMode wanted = handheldFrame.active
 				? sibr::InteractiveCameraHandler::InteractionMode::NONE
@@ -447,36 +445,28 @@ int main(int ac, char** av)
 				generalCamera->switchMode(wanted);
 			}
 
-			if (handheldFrame.hasRotation || handheldFrame.hasPosition)
+			if (handheldFrame.hasRotation)
 			{
 				sibr::Transform3f transform = generalCamera->getCamera().transform();
-				if (handheldFrame.hasRotation)
-				{
-					transform.rotation(sibr::Quaternionf(
-						float(handheldFrame.rotation.w), float(handheldFrame.rotation.x),
-						float(handheldFrame.rotation.y), float(handheldFrame.rotation.z)));
-				}
-				if (handheldFrame.hasPosition)
-				{
-					transform.position(sibr::Vector3f(
-						handheldFrame.position[0], handheldFrame.position[1], handheldFrame.position[2]));
-				}
+				transform.rotation(sibr::Quaternionf(
+					float(handheldFrame.rotation.w), float(handheldFrame.rotation.x),
+					float(handheldFrame.rotation.y), float(handheldFrame.rotation.z)));
 				generalCamera->fromTransform(transform, false, false);
 			}
 		}
 
 		// RFVisualizer: 텔레포트. 순서를 고정한다 —
-		// 입력 -> handheld 소유권 -> 조준 시작/취소 -> Camera 갱신 -> 포물선 재계산 ->
+		// 입력 -> 자격 판정 -> 조준 시작/취소 -> Camera 갱신 -> 포물선 재계산 ->
 		// commit -> overlay 전달 -> 렌더/캡처.
 		sibr::TeleportAction teleportAction;
 		bool teleportEligible = false;
 		if (arcTeleport)
 		{
 			const bool textInput = ImGui::GetIO().WantTextInput;
-			// Camera를 남이 몰고 있으면 조준하지 않는다.
+			// Handheld가 Camera를 몰고 있어도 조준은 된다 — 조준 방향은 이미 handheld가
+			// 돌리고 있는 camera.dir()을 그대로 쓴다. 키보드로 몰 때만 FPS mode를 요구한다.
 			teleportEligible =
-				generalCamera->getMode() == sibr::InteractiveCameraHandler::InteractionMode::FPS
-				&& !(handheld && handheldActive)
+				(handheldActive || generalCamera->getMode() == sibr::InteractiveCameraHandler::InteractionMode::FPS)
 				&& !generalCamera->getCameraRecorder().isPlaying()
 				&& !textInput;
 
@@ -484,14 +474,32 @@ int main(int ac, char** av)
 			const bool viaSibr = globalInput.key().isActivated(sibr::Key::R);
 			const ImGuiIO& io = ImGui::GetIO();
 			const bool viaImGui = !textInput && io.KeysDown[int(sibr::Key::R)];
-			// 키보드 R을 입력원과 무관한 동작 값으로 바꾼다. 후속 작업에서 임베디드 버튼이
-			// 같은 값을 채우면 아래 상태기계를 그대로 쓴다.
-			teleportAction.active = viaSibr || viaImGui;
+			const bool viaHandheld = handheldActive && handheldTeleportHeld;
+			// 키보드 R·Handheld 버튼을 입력원과 무관한 동작 값으로 바꾼다.
+			teleportAction.active = viaSibr || viaImGui || viaHandheld;
 			teleportAction.pressed = teleportAction.active && !teleportHeld;
 			teleportAction.released = !teleportAction.active && teleportHeld;
 			teleportHeld = teleportAction.active;
 
 			arcTeleport->beginFrame(teleportAction, teleportEligible);
+		}
+
+		// RFVisualizer: Height-cycle. 키보드 H 또는 Handheld 버튼의 press edge에서
+		// 한 칸 순환한다. 텔레포트 조준 여부와 무관하게 항상 판정한다.
+		if (rfVolume)
+		{
+			const bool textInput = ImGui::GetIO().WantTextInput;
+			const sibr::Input& globalInput = sibr::Input::global();
+			const bool viaSibr = globalInput.key().isActivated(sibr::Key::H);
+			const ImGuiIO& io = ImGui::GetIO();
+			const bool viaImGui = !textInput && io.KeysDown[int(sibr::Key::H)];
+			const bool viaHandheld = handheldActive && handheldHeightCycleHeld;
+			const bool active = viaSibr || viaImGui || viaHandheld;
+			if (active && !heightCycleHeld)
+			{
+				rfVolume->cycleHeightPreset();
+			}
+			heightCycleHeld = active;
 		}
 
 		multiViewManager.onUpdate(sibr::Input::global());
